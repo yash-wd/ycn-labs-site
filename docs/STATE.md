@@ -3,6 +3,7 @@
 **Timestamp:** 2026-10-12
 **Active Branch:** `main` (public development repository)  
 **Historical Private Checkpoint:** `11468f4b36b3fdf451cd0bf04e5f2ee2868b45a5` (retained in `yash-wd/ycnlabs`)  
+**Initial Public Snapshot Commit:** `2bce139af7865a0458af4b22518d07721c0c3e12`  
 **Live HEAD Verification:** Run `git rev-parse HEAD` locally — do not trust static documentation.  
 **Upstream Synchronization:** Ensure `git fetch && git status --porcelain` is clean and `HEAD == origin/main`.  
 **Local Vault Isolation:** Backups, business records, and proof frames remain strictly local in a private vault outside GitHub.
@@ -32,6 +33,7 @@ Before modifying any source code, run `git fetch && git status --porcelain` to v
 
 ## Last Session
 - **Date:** 2026-10-12
-- **HEAD:** 2bce139af7865a0458af4b22518d07721c0c3e12
-- **Done:** first public snapshot
+- **Initial Public Snapshot Commit:** 2bce139af7865a0458af4b22518d07721c0c3e12
+- **Starting HEAD:** 3a792e0103427bf3dcf4362de6cd21e70cefc25f
+- **Done:** first public snapshot published & verified on GitHub
 - **Next:** YCN-NAV-ORIGINAL-STYLE-01 — pending Owner A/B and test-amendment approval

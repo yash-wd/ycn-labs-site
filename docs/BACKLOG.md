@@ -13,9 +13,9 @@
 
 ## Gate 1: Public Development Repository Initialization (Tier 1 — Separate Authorization)
 *Note: A commit is NEVER Tier 0 (Tier 0 is strictly read-only inspection; staging/committing requires Tier 1/2 authorization).*
-- [ ] **`PUBLISH-01A`:** Final public snapshot corrections & audit (pending Owner push approval).
-- [ ] **First Public Push:** Initialize Git on `main`, push to `yash-wd/ycn-labs-site` under personal SSH key after Owner approval.
-- [ ] **Automated Day Close:** Install `tools/close-day.sh` to record actual Git facts and test logs at each session close.
+- [x] **`PUBLISH-01A`:** Clean source snapshot exported, context layer installed, audited for secrets and oversized objects.
+- [x] **First Public Push:** Initialized Git on `main`, pushed to `yash-wd/ycn-labs-site` under personal SSH key with GitHub no-reply committer identity (`3a792e0`).
+- [ ] **Automated Day Close:** Install hardened `tools/close-day.sh` (v3) to record actual Git facts at each session close.
 
 ---
 
@@ -31,6 +31,7 @@
 - [ ] **Service & Capability Pages:** Tighten engineering scope, exclusions, and conversion calls-to-action.
 - [ ] **Enquiry Pipeline:** End-to-end integration test of contact form, email dispatch, rate-limiting, and error handling.
 - [ ] **Compliance & Trust:** Privacy policy, terms, UK metadata, and security header hardening.
+- [ ] **Asset Replacement:** Replace generic stock video clips with authentic YCN studio footage before production release (per `public/media/SOURCES.md`).
 
 ---
 

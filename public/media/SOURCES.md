@@ -1,7 +1,8 @@
 # V4 Photoreal Prototype Reference Assets — Sources & Licences
 
-All assets in this directory are gathered **strictly for prototype evaluation outside Git**.
-None of these assets are committed to the YCN codebase or deployed to production.
+All assets in this directory are included as design prototypes and development placeholders within the public development repository under their respective free licences (CC0, CC BY 2.0, Mixkit Free Licence).
+
+> **Pre-Release Milestone:** All generic stock video clips (`clip1`, `clip2`, `clip3`) and placeholder stock photography must be replaced with authentic, proprietary YCN studio footage and photography prior to commercial production release and deployment.
 
 ---
 
