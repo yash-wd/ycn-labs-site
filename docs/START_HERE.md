@@ -5,9 +5,11 @@ Open this file on branch `main`. Before any work run `git fetch && git status --
 > "Websites and software. Built around your business. We turn business problems into digital products that help customers act, teams work clearly, and the business keep moving."  
 > — *docs/YCN_CONTENT_SPEC.md:28-31 (Ratified DECISION-040, docs/YCN_DECISIONS.md:136-137)*
 
-**Active Branch:** `main` (public development repository)  
-**Historical Private Checkpoint:** `11468f4b36b3fdf451cd0bf04e5f2ee2868b45a5` (full history retained in `yash-wd/ycnlabs`)  
-**Local Vault Isolation:** Backups, business records, and raw proof frames remain in a local private vault outside GitHub.
+**Active Development Repository:** `https://github.com/yash-wd/ycn-labs-site`  
+**Active Development Branch:** `main` (Verified starting HEAD: `5dbab54fbbba7317efe7b8f5616ae250ce16b0f5`)  
+**Historical Private Reference:** `11468f4b36b3fdf451cd0bf04e5f2ee2868b45a5` (retained in `yash-wd/ycnlabs` on `site-v2`; preserved strictly for historical/recovery records)  
+**Local Vault Isolation:** Backups, business records, and raw proof frames remain in a local private vault outside GitHub.  
+**Production Deployment:** NO production deployment is authorized during active development.
 
 ---
 
@@ -21,7 +23,14 @@ Open this file on branch `main`. Before any work run `git fetch && git status --
 
 ---
 
-## 2. Frozen Systems (Do Not Alter Without Written Approval)
+## 2. Active Homepage Rendering Path
+- **Canonical Route Entry:** `app/page.tsx`
+- **Component Chain:** `app/page.tsx` → `components/CinematicHomepage.tsx` → `components/homepage/vnext/HomepageVNextPhase1.tsx`
+- **Component Status Notice:** Older homepage components in `components/` are NOT current simply because they exist in the repository tree. Retain them pending verified import analysis.
+
+---
+
+## 3. Frozen Systems (Do Not Alter Without Written Approval)
 - **Entrance:** VF19 + INPUT-GATE-01 (Natural scroll cue & skip controller)
 - **Navigation:** NAV-07 structure (Navbar original glow restoration pending)
 - **Typography:** POLISH-TYPE-01 (Semantic scale, Space Grotesk / Inter)
@@ -29,7 +38,7 @@ Open this file on branch `main`. Before any work run `git fetch && git status --
 
 ---
 
-## 3. Historical Owner Decisions (9 Oct Handoff §6) & Current Dispositions
+## 4. Historical Owner Decisions (9 Oct Handoff §6) & Current Dispositions
 | Item | Topic | Status | Disposition |
 | :---: | :--- | :--- | :--- |
 | **1** | Capability-03 pilot | OPEN | Defect verified (table 446px in 352px container); visual verdict pending. |
@@ -44,7 +53,7 @@ Open this file on branch `main`. Before any work run `git fetch && git status --
 
 ---
 
-## 4. The Four Roles (Owner + Three AI Seats)
+## 5. The Four Roles (Owner + Three AI Seats)
 - **Owner:** Final authority, sole visual verdict, commercial and release approval.
 - **GPT Strategy:** Strategic planning, task scoping, drafts exactly ONE instruction at a time.
 - **Claude Review:** Pre-execution audit, exception verification against raw outputs, technical gatekeeper.
@@ -52,5 +61,11 @@ Open this file on branch `main`. Before any work run `git fetch && git status --
 
 ---
 
-## 5. Next Immediate Workstream
+## 6. Source Publishing & Code Workflow
+- Every approved code change must undergo explicit code commit and push following quality gate validation (`lint`, `check-types`, `test`, `build`).
+- Do NOT treat the state-only `tools/close-day.sh` script as a substitute for committing and publishing source code changes.
+
+---
+
+## 7. Next Immediate Workstream
 Pending Owner decision on Navbar (Option A vs B) and bounded test update approval (`__tests__/navbar-polish-04.test.tsx`), execute `YCN-NAV-ORIGINAL-STYLE-01`.

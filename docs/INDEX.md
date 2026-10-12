@@ -3,8 +3,9 @@
 **Project:** YCN Labs Official Website  
 **Revision:** 1.2 (Canonical System)  
 **Current Stage:** Post-A0V / M0 Documentation Migration (Uncommitted, pending Owner review)  
-**Target Candidate:** `site-v2 @ ddbca970e98b7992c9a2410087a3a7ec64c6d29b`  
-**Hosting Provider:** Vercel (Independent verification via response headers)
+**Active Development Target:** `main @ 5dbab54fbbba7317efe7b8f5616ae250ce16b0f5` (`https://github.com/yash-wd/ycn-labs-site`)  
+**Historical Private Reference:** `site-v2 @ ddbca970e98b7992c9a2410087a3a7ec64c6d29b` (private monorepo checkpoint, preserved for historical recovery only)  
+**Hosting Provider:** Vercel (No production deployment authorized during active development)
 
 ---
 

@@ -1,5 +1,15 @@
 # YCN LABS PROJECT HANDOFF — resume mid-workflow (prior chat contexts full)
 
+> [!WARNING]
+> **HISTORICAL NOTICE (2026-10-12):**  
+> The instructions below regarding `/home/ycn-labs/Desktop/Web Dev - 2026/Practice/ycnlabs` and branch `site-v2` (`git push origin refs/heads/site-v2:refs/heads/site-v2`) are **SUPERSEDED HISTORICAL RECORDS** from the previous private monorepo setup.  
+> **Active Development Authority:**  
+> - **Repository:** Public `ycn-labs-site` (`https://github.com/yash-wd/ycn-labs-site`)  
+> - **Branch:** `main` (Starting HEAD: `5dbab54fbbba7317efe7b8f5616ae250ce16b0f5`)  
+> - **Local Working Copy:** `/home/ycn-labs/Desktop/ycn-labs-site`  
+> - **Push Rule:** Push to `origin main` only with explicit Owner approval. Do not attempt to push to `refs/heads/site-v2`.  
+> All original notes below are preserved intact for historical reference and auditability.
+
 ROLES: Owner (me, final approver, reviews rendered site in browser) |
 GPT = strategy seat | Claude = challenge/review seat | AGY = execution
 agent on my machine. I paste messages between the three chats.

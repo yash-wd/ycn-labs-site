@@ -1,4 +1,7 @@
-> Public repo, branch main: read docs/START_HERE.md first.
+> **Active Development Repository:** Public `ycn-labs-site` (`https://github.com/yash-wd/ycn-labs-site`) on branch `main`. Read `docs/START_HERE.md` first.  
+> **Historical Reference Notice:** The former private repository (`yash-wd/ycnlabs`) and branch `site-v2` are preserved for historical record.  
+> **Current Homepage Architecture:** `app/page.tsx` → `components/CinematicHomepage.tsx` → `components/homepage/vnext/HomepageVNextPhase1.tsx`. Older homepage components in `components/` are not current simply because they exist; retain them pending verified import analysis.  
+> **Deployment Constraint:** No production deployment is authorized.
 
 # YCN Labs — AI Agent Operating Instructions
 
