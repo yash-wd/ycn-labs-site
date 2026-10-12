@@ -1,0 +1,7 @@
+allowBuilds:
+  '@sentry/cli': true
+  sharp: true
+
+overrides:
+  sharp: '>=0.35.4'
+  postcss: '>=8.5.28'

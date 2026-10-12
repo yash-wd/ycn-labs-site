@@ -1,0 +1,357 @@
+YCN LABS — ARCHIVE THE OLD WORK; START THE NEXT BUILD CLEANLY
+Prepared: 17 September 2026
+
+PACKAGE SCOPE
+This package contains the four conversation exports supplied in this chat,
+an archive instruction, and a proposed fresh-build brief. It does NOT contain
+the workstation repositories, actual logo files, videos, or v4-upload.zip.
+References to images/videos in the conversations are not the media files.
+The old local repository archive must still be created by AGY on the owner's
+machine using Part 1 below. Do not describe this context package as that backup.
+
+CURRENT OWNER REQUEST
+Stop the old YCN development cycle. Gather the work into one archive root,
+keep different versions separate, preserve the original files, and make ZIPs.
+Use the retained business/visual direction to start a fresh website project.
+The owner's delivery target is within one week, not another open-ended redesign.
+
+Only PART 1 is the task for the current AGY session.
+PART 2 is the proposed brief for the NEW project after archival; it is not
+permission to create or deploy the new site during the archive task.
+
+============================================================
+PART 1 — AGY: EXECUTE THE ARCHIVE TASK NOW
+============================================================
+
+This replaces the previous merge/consolidation preflight task.
+This is FILE ARCHIVAL, NOT A GIT MERGE and NOT a source-code repair task.
+Complete discovery, copying, verification and ZIP creation in this task.
+Do not stop merely to ask which listed versions to keep: keep all of them.
+
+BOUNDARIES
+- Copy originals. Do not move, overwrite, delete, merge or clean old projects.
+- No source edits, old-ledger reconciliation, commits, pushes, deployments,
+  branch switching, reset, rebase, amend, stash or worktree removal.
+- Leave the live website, domain, databases, email and deployment settings alone.
+- No dependency installation, builds, design work, licence procurement or new
+  asset generation is needed for this archive.
+- Do not read or print environment-file values, tokens, credentials or keys.
+- Save detailed command output privately; return a short completion report.
+
+A. CREATE ONE ARCHIVE ROOT
+Known base:
+/home/ycn-labs/Desktop/Web Dev - 2026/Practice
+
+Create a NEW directory, outside every source Git worktree:
+YCN_ARCHIVE_2026-09-17
+
+If that name already exists, add a timestamp suffix. Never overwrite it.
+Use restrictive local permissions (for example umask 077).
+
+Structure:
+YCN_ARCHIVE_2026-09-17/
+  PRIVATE_FULL/
+    00_INDEX/
+    01_PROJECT_VERSIONS/
+    02_GIT_RECOVERY/
+    03_PROTOTYPES_AND_DESIGN_VERSIONS/
+    04_BRAND_AND_MEDIA/
+    05_EVIDENCE_AND_REPORTS/
+    06_DOCUMENTS_AND_CONVERSATIONS/
+  SHAREABLE_HANDOFF/
+  EXPORTS/
+
+B. FIND AND COPY ALL YCN MATERIAL WITHIN THE KNOWN PROJECT SCOPE
+Start with these known folders; include other clearly related YCN versions
+found beside them or explicitly referenced by the project's files:
+- ycnlabs
+- ycn-r05-fresh
+- ycnlabs-baseline
+- ycnlabs-r0-temp
+- ycn-evidence
+- ycn-brand-masters
+- assets-raw
+- ycn-redesign-2026-09
+- ycn-archive-2026-08
+
+Use git worktree list --porcelain and git rev-parse to identify every registered
+worktree and each distinct Git common directory. Do not assume that every
+folder is a separate repository, or that there is only one repository.
+Record actual paths and actual hashes; do not invent an eight-character hash
+by extending a seven-character value from the chat.
+
+Give each project a separate version folder, using its real origin and hash:
+  01_main_ycnlabs_<actual-short-sha>/
+  02_r05_fresh_<actual-short-sha>/
+  03_baseline_<actual-short-sha>/
+  04_r0_temp_<actual-short-sha>/
+  05_other_<origin-and-hash>/ as needed.
+
+Copy complete source trees, including hidden project files, root package and
+workspace configuration, lockfiles, shared packages, tests, scripts, public
+assets, tracked edits and untracked work. The source reference must not be
+limited to apps/web. In PRIVATE_FULL include project-local private files by
+byte-copying them without displaying their contents.
+
+Exclude only regenerable dependency/build/cache directories, such as
+node_modules, .next, .turbo and genuine tool caches. Record the exclusions.
+Do NOT exclude all ignored files, all logs, all ZIPs or all media. Evidence,
+manual work and original assets must survive. Do not flatten conflicting names.
+Do not use rsync --delete. Exclude the new archive root and its exports from
+all discovery/copy operations to prevent recursive self-copying.
+
+Preserve the main worktree's Group D edits and Scene4RouteMotion.tsx exactly
+as found. Preserve the R-05 uncommitted ledger entry. Preserve both intro MP4s,
+including unsuitable/watermarked versions, as historical media, not approved
+production assets. No acceptance/rejection decision is required to archive them.
+
+C. PRESERVE GIT RECOVERY DATA AS WELL AS SOURCE FILES
+For each distinct repository, create and verify a Git bundle of its refs.
+Also preserve a stable copy of its actual common Git directory and relevant
+per-worktree metadata, including HEAD/index/reflogs/config, privately.
+A bundle alone is not the backup of dirty worktrees or every local Git state.
+
+Exclude .git files/directories from the plain source snapshots; retain their
+original bytes and path mapping in 02_GIT_RECOVERY. Linked-worktree .git files
+can point back to the old working directory and must not be mistaken for a
+portable independent repository.
+
+Ensure every recorded worktree HEAD, including detached heads, can be recovered
+from the saved Git data. Capture staged and unstaged binary-capable patches,
+status with individual untracked paths, branch/ref inventory and commit logs.
+Do not print token-bearing remote URLs. Preserve Git LFS objects, submodule
+repositories and external object dependencies when present and available;
+record any missing dependencies rather than claiming complete recovery.
+
+Do not copy Git metadata while another process is writing it. Capture stable
+before/after state and compare the copied data. If stability cannot be obtained,
+finish the safe copies and report precisely which recovery portion is incomplete.
+Do not change original refs merely to make archival easier.
+
+D. KEEP PROTOTYPES, MEDIA, DOCUMENTS AND CONVERSATIONS AS VERSIONS
+Include V1/V2/V3 prototype HTML, CSS/JS/assets, ZIP packages, V4 reference assets,
+SOURCES.md files, original logo variants, generated films, storyboards, reference
+captures, engineering evidence, old planning documents and supplied conversations.
+Known references include ycn-3d-prototype-v2.html, prototype index.html,
+customer-first-package, YCN_review_evidence.json and v4-upload.zip.
+
+Only search known YCN folders and explicitly related export locations. Do not
+sweep unrelated projects, browser profiles, credential stores or every HTML/ZIP
+on the machine. Include project-specific AGY reports/scripts when identifiable;
+do not copy the whole AGY account/profile.
+
+Preserve same-named but different files in separate origin/version directories.
+Keep original media unchanged in PRIVATE_FULL. Use 'unclassified' when a version
+cannot be identified; do not guess that it is the final approved version.
+
+Include this context package and all four conversation files unchanged.
+If a chat export or media file is not accessible on disk, list it as missing.
+Do not invent files from transcript placeholders. Archived AI advice is not
+an owner approval, an observed result, or permission to reuse third-party media.
+Record existing licence labels and unresolved source mismatches as found.
+Archiving a file does not clear it for commercial publication.
+
+E. MAKE A SEPARATE SHAREABLE HANDOFF
+Build SHAREABLE_HANDOFF from explicitly selected, reviewed copies; do not ZIP
+the entire private directory and call it upload-safe.
+
+Include the distinct project source versions, documents, conversations,
+prototypes, selected web-size brand/media assets and their provenance. Add a
+short START_HERE document with:
+- The fresh-build brief in Part 2, identified as the current proposed direction.
+- An index of all archived versions and which one is the latest reported source.
+- 'Old project stopped. These files are historical references, not an active
+  task queue. Do not resume R-series tasks or inherit old approval loops.'
+- A clear distinction between owner requests and historical AI suggestions.
+- Missing/withheld files and whether the production SHA is observed now or only
+  last reported. Do not assert 6a017e0 is currently deployed without a fresh check.
+
+Exclude Git history/bundles/metadata, .env files, credentials, auth configuration,
+private keys, database exports and private customer data. Provide a variable-NAME
+only environment template if needed. Inspect eligible text with local redacted
+secret scanning; no secret values in reports. Check nested archives too, or
+exclude them and include vetted extracted files instead. Do not follow symlinks
+outside the approved content roots. Uncertain content stays private and is listed
+as withheld. Do not claim a scanner proves the pack contains no sensitive data.
+
+Keep historical agent-instruction files as text references in the shareable pack
+(e.g. AGENTS.historical.txt), with the original name/path in the index, so they do
+not become active instructions through normal agent-file discovery. Preserve
+unaltered originals in PRIVATE_FULL. Do not copy old AGENTS.md into a new app root.
+
+Aim for a convenient core upload size around 25 MB, not an assumed platform limit.
+Never discard unique work just to reach that size. If needed, keep a small core
+handoff and put larger historical source/media references in separately named,
+independently extractable companion ZIPs. Index all companions and omissions.
+PRIVATE_FULL has no artificial size cap. Do not degrade original media to shrink it.
+
+F. ZIP AND VERIFY — FINISH THE TASK
+Write exports outside the directories being zipped:
+  EXPORTS/YCN_FULL_PRIVATE_2026-09-17.zip
+  EXPORTS/YCN_HANDOFF_2026-09-17.zip
+  optional independently extractable companion ZIPs if necessary.
+
+The FULL_PRIVATE ZIP can contain secrets and private Git history. Keep it local
+and access-restricted. Do not upload it to a chat or cloud service. An ordinary
+ZIP is not encryption. Further off-machine storage needs the owner's secure
+backup method; do not ask for or print a password in chat.
+
+Create a manifest mapping source paths to archive paths, byte sizes and SHA-256
+hashes; include explicit exclusions, missing files and copy/verification failures.
+Verify source-to-copy matches, ZIP integrity, and fresh extraction against the
+manifest. Verify Git bundles and confirm every recorded worktree commit exists
+in a disposable recovery copy that does not depend on the original working tree.
+Record the recovery procedure and any original-path dependency. No application
+build or old visual evidence rerun is required.
+
+After a successful archive, gracefully stop only local YCN preview servers whose
+PID and working directory you positively identify. Do not use killall/pkill node;
+leave unrelated processes, editor sessions and all production services untouched.
+If a PID cannot be attributed safely, leave it and report it.
+
+RETURN ONLY:
+1. Absolute archive root and export paths.
+2. Each ZIP's byte size and SHA-256.
+3. Counts of project versions and archived files.
+4. Verification outcome, missing/withheld content and any failure.
+5. Which ZIP(s) to upload; clearly mark FULL_PRIVATE as DO NOT UPLOAD.
+6. Confirmation of whether original source/Git state and production were untouched,
+   and which identified local preview servers were stopped, if any.
+
+Save raw logs inside PRIVATE_FULL/00_INDEX instead of flooding the chat.
+Do not fabricate success. Do not start the fresh build in this archive session.
+
+============================================================
+PART 2 — PROPOSED BRIEF FOR THE NEW CLAUDE + AGY CHATS
+============================================================
+
+STATUS: Proposed new-project execution approach, not a claim of implementation
+or an owner approval of every suggestion below. The owner has already requested
+archival and a fresh build within a week. This is the direction to use rather
+than resuming the old task queue.
+
+PURPOSE
+A non-technical business owner should understand what YCN can help them do by
+looking and interacting, without studying technical paragraphs. The owner's
+Zomato/Swiggy/PhonePe examples express an aspiration for understandable visual
+choices and completion states, not permission to copy their brands or interfaces.
+
+YCN is not intended to remain web-development-only. Apps, SaaS, software and
+future digital/security/education ambitions belong to the broader brand. Do not
+advertise a future ambition as an available or proven service.
+
+RETAIN FROM THE LATEST OWNER DIRECTION
+- Official YCN logo/artwork and neutral/blue/cyan identity; Geist/Geist Mono.
+  Older AI suggestions for green branding, Inter/Sora or another logo are
+  historical proposals, not instructions to rebrand now.
+- H1: Websites and software. Built around your business.
+- Support: Help customers find you, make it easier to enquire or book, and
+  connect the work behind the scenes.
+- Primary action: Tell us what you need. Secondary: Explore what we build.
+- Reassurance: You don't need a technical brief to start.
+- Photoreal people, real workspaces, real devices, short real footage, restrained
+  depth and functional HTML interface screens within the scenes. Minimal text.
+- Not a cartoon 3D world, grey slabs, glowing tubes, a technical diagram as hero,
+  a generic card-grid page, or an AI-style effects reel.
+- No industry-name segmentation. Use these six universal actions:
+  Find me and see what I offer / Ask a question / Choose a time / Order or buy /
+  Ask for a price / Keep my team organised.
+- Fictional demonstrations stay labelled as examples. They do not send data,
+  take money, create bookings or call the real contact API.
+- Stock/concept people are illustrative, not YCN employees, customers or proof.
+
+HOMEPAGE — SIX SECTIONS, ONE CLEAR CUSTOMER-TO-BUSINESS STORY
+1. Offer plus real-scene phone/business-device demonstration and direct contact.
+2. Six visual customer actions; selecting one reveals a recognisable UI example.
+3. How it connects: same sample request moves from customer screen to business
+   inbox and a next action. One purposeful cinematic sequence, not six engines.
+4. What we build: four clear pathways with screen previews — websites/digital
+   experiences; web applications/workflows; business systems/integrations;
+   product discovery/SaaS planning. Deeper capabilities remain qualified.
+5. How we work: Understand, Design, Build, Test, Launch/support as scoped.
+   Link to honest engineering/work evidence rather than filling the homepage.
+6. Short buyer FAQ and a clear invitation to contact. No technical brief required.
+
+ENTRANCE FILM
+Retain the owner's target: a roughly 10-second business-to-digital-to-logo film,
+complete official main logo, no extra caption/tagline, appropriate music.
+Use a rights-cleared clean export; do not pretend a watermarked draft is final.
+Proposed web adaptation: optional play/replay, user-enabled sound, accessible
+skip/stop, complete site available without playback, with a clean static fallback.
+This adapts the old no-controls/autoplay-sound idea; it is not an assertion that
+that old behavior works in all browsers. Resolve film suitability early, not
+through repeated late regeneration. Do not silently drop the visual ambition.
+
+BUILD METHOD
+- Claude: one primary design/review lead. AGY: one implementation owner.
+  The owner approves the visual direction and production release. Do not use
+  two AIs as competing daily approvers.
+- One new directory and one new Git project, e.g. ycnlabs-v2, created only after
+  archival. If it already exists, report it; do not overwrite or spawn v3/v4.
+- One short PROJECT.md for scope, approved choices, current milestone and next
+  action. Keep necessary setup, licence records and tests, but no parallel master
+  plans or historic task queues. Do not copy the archive into the new app tree.
+- Build the first visual preview in the actual new application, not an HTML
+  prototype that must later be rebuilt. Refine that same code after review.
+- Keep the implementation simple. Choose technology after proving the desired
+  visual, not from a shopping list of renderers. Real footage, HTML interfaces
+  and CSS depth may do much of the work; actual 3D is a bounded candidate, not
+  a mandatory full-site runtime or a forbidden possibility.
+- A fresh presentation is not a reason to casually reconstruct working security.
+  Map and reuse the contact subsystem with its imports, validation, persistence,
+  rate limiting, email behavior, environment names and tests where compatible.
+  Copying only a form and route is not a complete migration. Do not run migrations
+  against production or send real test leads without explicit test authorization.
+- Preserve existing public destinations or implement deliberate redirect mappings.
+  Do not let a reduced page count silently break links, legal pages or contact.
+- Local milestone commits in the NEW repository may be pre-authorized by the
+  owner in its opening instruction; that does not authorize commits in the old
+  repository. No push, remote creation or deployment without the required owner
+  instruction. No credentials are placed in Git or review packs.
+
+SEVEN-DAY DELIVERY TARGET (NOT A COMPLETION GUARANTEE)
+17 Sep — archive; brand/assets ready; first actual desktop and mobile composition.
+18 Sep — entire six-section homepage preview; one consolidated direction review.
+19 Sep — refine approved composition; finish meaningful interactions/fallbacks.
+20 Sep — required supporting routes and complete contact-subsystem migration.
+21 Sep — full end-to-end website; labels, metadata, route map, media provenance.
+22 Sep — real-device/keyboard/zoom/reduced-motion checks, security and form tests,
+         production-build measurements; brief uncoached business-owner feedback.
+23 Sep — fix release blockers; final owner review; deploy only when authorized.
+24 Sep — outer one-week target for any remaining release verification, not a
+         reason to disguise unfinished safety or usability work as complete.
+
+QA starts with each slice, not only on 22 Sep. Scope and visual direction should
+settle by the end of 18 Sep; genuine defects and accessibility fixes remain allowed.
+If the first full preview is late, simplify unfinished features instead of extending
+planning. Never remove critical protections to preserve the target date.
+
+MINIMUM DONE CRITERIA
+- Complete coherent mobile/desktop site with the intended visual story, not only
+  a hero screenshot, and no broken primary paths or deceptive service/work claims.
+- Keyboard focus, useful static/no-JS content, reduced-motion support, readable
+  contrast, narrow-screen layout and zoom checks completed and honestly reported.
+- Lint, types, relevant existing/new tests and production build pass. No fabricated
+  PASS markers. Use next start for production-like measurement, not next dev.
+- Contact success, invalid input, error handling and abuse-protection behavior
+  checked in an authorized test environment; a UI success message is not proof
+  of stored lead or email delivery.
+- Performance measured on the final build; repeat suspected anomalies. Do not
+  claim field performance or full accessibility from a single Lighthouse score.
+- A few non-technical people can explain the offer and find the next step without
+  coaching. Record their actual confusion; this is a diagnostic, not a conversion
+  statistic or a population-wide guarantee.
+- Owner-approved release, preserved rollback path, known deployed commit and
+  post-deployment checks. A pending approval is pending, not 'live'.
+
+OWNER REVIEW RHYTHM
+One working preview, one short consolidated feedback list, one next action.
+Three useful owner decisions: visual direction, complete-site review, release.
+Do not ask for a decision about every command, spacing change or commit hash.
+Do not reopen settled brand/story decisions because a different AI prefers them.
+
+TECHNICAL REFERENCES CHECKED 17 SEPTEMBER 2026
+Git bundle: https://git-scm.com/docs/git-bundle
+Git worktree: https://git-scm.com/docs/git-worktree
+Next.js production checklist: https://nextjs.org/docs/app/guides/production-checklist
+MDN autoplay: https://developer.mozilla.org/en-US/docs/Web/Media/Guides/Autoplay
