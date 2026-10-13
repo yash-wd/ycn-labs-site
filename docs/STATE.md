@@ -1,6 +1,6 @@
 # YCN Labs — Verified Project State
 
-**Timestamp:** 2026-10-12  
+**Timestamp:** 2026-10-13  
 **Active Development Repository:** `https://github.com/yash-wd/ycn-labs-site`  
 **Active Branch:** `main`  
 **Verified Starting HEAD:** `5dbab54fbbba7317efe7b8f5616ae250ce16b0f5`  
@@ -27,7 +27,7 @@
 ## 2. In-Flight Workstreams & Defects
 - **`YCN-NAV-ORIGINAL-STYLE-01`:** Option A navbar glow restoration (80 px/s lap average via rAF) and bounded test update for `__tests__/navbar-polish-04.test.tsx:155-160` (PENDING OWNER APPROVAL: Option A vs B, test amendment yes/no).
 - **`HOME-02-CAP-03-1024`:** Capability-03 table width clipping (446px table inside 352px container) awaiting responsive styling.
-- **`BRAND-FIND-01`:** Discovery sweep complete (all 962 name-matched candidates exist inside master; 278 unique groups, 7 contact sheets sealed); Owner brand selection pending.
+- **`BRAND-FIND-01`:** [SUPERSEDED] Replaced by Owner RULING-01. Authoritative master ratified (`Main_YCN_LABS_logo_black_8K__6675x5195.png`). Brand library established on GitHub (`ycn-labs-brand-library`). Next Brand workstream: RULING-02a/b approval, then BRAND-EXPORT-05.
 
 ---
 
@@ -37,7 +37,11 @@ Before modifying any source code, run `git fetch && git status --porcelain` to v
 ---
 
 ## Last Session
-- **Date:** 2026-10-12
-- **Verified Starting HEAD:** 5dbab54fbbba7317efe7b8f5616ae250ce16b0f5
-- **Done:** RUN-VERIFY-01 passed; canonical working copy switched to Desktop/ycn-labs-site; documentation aligned (YCN-DEV-RESUME-01)
-- **Next:** YCN-NAV-ORIGINAL-STYLE-01 — pending Owner A/B and test-amendment approval
+- **Date:** 2026-10-13
+- **Website HEAD:** 43f334513a0f1e1ec371947526f6168d3436c22f
+- **Brand Library HEAD:** c447837d27ad39647a793876e4f75f2055bc5e3e
+- **Done:** YCN-CLOSE-PROTOCOL-01 established; canonical docs/CLOSE_PROTOCOL.md installed; tools/close-preflight.sh created; Downloads reconciled (4 unique 12 Oct files to vault _INTAKE/2026-10-12/, duplicates purged); brand library continuity synchronized.
+- **Next Authorized Tasks (Exactly ONE per workstream):**
+  - **Website Workstream:** `YCN-NAV-ORIGINAL-STYLE-01` (Option A navbar glow restoration — pending Owner words 'A' and 'yes')
+  - **Brand Workstream:** `RULING-02a/b approval, then BRAND-EXPORT-05`
+- **Pending Owner Decisions:** RULING-02a (dark transparent master), RULING-02b (light transparent master), Navbar Option A vs B.

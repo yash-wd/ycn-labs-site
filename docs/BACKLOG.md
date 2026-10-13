@@ -7,7 +7,7 @@
 
 ## Gate 0: Inventory & Publication Readiness (Tier 0 — Read-Only)
 - [x] **`REPO-READINESS-00`:** Verified repository privacy, outgoing single commit, limited keyword scan 0 matches, drafted canonical context files.
-- [x] **`BRAND-FIND-01`:** Discovery complete (all 962 name-matched candidates exist inside master, 278 unique groups, 7 contact sheets sealed); Owner selection pending.
+- [x] **`BRAND-FIND-01`:** [SUPERSEDED] Replaced by Owner RULING-01. Authoritative 6675px master ratified; brand library established (`ycn-labs-brand-library`). Brand Next: RULING-02a/b approval, then BRAND-EXPORT-05.
 
 ---
 
@@ -15,7 +15,8 @@
 *Note: A commit is NEVER Tier 0 (Tier 0 is strictly read-only inspection; staging/committing requires Tier 1/2 authorization).*
 - [x] **`PUBLISH-01A`:** Clean source snapshot exported, context layer installed, audited for secrets and oversized objects.
 - [x] **First Public Push:** Initialized Git on `main`, pushed to `yash-wd/ycn-labs-site` under personal SSH key with GitHub no-reply committer identity (`3a792e0`).
-- [ ] **Automated Day Close:** Install hardened `tools/close-day.sh` (v3) to record actual Git facts at each session close.
+- [x] **Permanent Close Protocol (`YCN-CLOSE-PROTOCOL-01`):** Installed canonical `docs/CLOSE_PROTOCOL.md` and read-only `tools/close-preflight.sh`. Cross-project reconciliation and cold-resume standard ratified.
+- [ ] **State Script Integration:** Review and test proposed closer integration without overwriting existing `tools/close-day.sh`.
 
 ---
 

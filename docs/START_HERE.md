@@ -20,6 +20,7 @@ Open this file on branch `main`. Before any work run `git fetch && git status --
 4. `docs/YCN_CONTENT_SPEC.md` (Authoritative copy, hierarchy, narrative architecture)
 5. `docs/YCN_DESIGN_SYSTEM.md` (Tokens, layout, typography, motion standards)
 6. `docs/vnext/*` (VNext homepage and component specifications)
+7. `docs/CLOSE_PROTOCOL.md` (Permanent close, consolidation, and cold-resume protocol)
 
 ---
 
@@ -64,6 +65,7 @@ Open this file on branch `main`. Before any work run `git fetch && git status --
 ## 6. Source Publishing & Code Workflow
 - Every approved code change must undergo explicit code commit and push following quality gate validation (`lint`, `check-types`, `test`, `build`).
 - Do NOT treat the state-only `tools/close-day.sh` script as a substitute for committing and publishing source code changes.
+- **Permanent Close Protocol:** End-of-day closing across both repositories and the vault is governed by [`docs/CLOSE_PROTOCOL.md`](CLOSE_PROTOCOL.md). The preflight check is available at `tools/close-preflight.sh`.
 
 ---
 

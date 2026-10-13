@@ -23,6 +23,7 @@ Before proposing or making any change, read these files in order:
 5. **[`docs/YCN_DECISIONS.md`](docs/YCN_DECISIONS.md)** — Binding Owner architecture & scope decisions.
 6. **[`docs/YCN_CLAIMS_AND_PROOF.md`](docs/YCN_CLAIMS_AND_PROOF.md)** — Evidentiary rules for marketing claims.
 7. **[`docs/YCN_RISKS_AND_TECH_DEBT.md`](docs/YCN_RISKS_AND_TECH_DEBT.md)** — Active risks, controls, and technical debt.
+8. **[`docs/CLOSE_PROTOCOL.md`](docs/CLOSE_PROTOCOL.md)** — Permanent close, consolidation, and cold-resume protocol (`YCN-CLOSE-PROTOCOL-01`).
 
 Current YCN site direction: [`docs/vnext/00_START_HERE.md`](docs/vnext/00_START_HERE.md). This direction is subordinate to YCN_DECISIONS, YCN_CLAIMS_AND_PROOF and YCN_CONTENT_SPEC.
 
@@ -111,7 +112,7 @@ Start of every chat: git fetch; git status --porcelain; git rev-parse HEAD and o
 Tasks: only from the Owner's message, one at a time, stop at the STOP line, no extra work. Owner words: A/B, yes/no, seen, push. A recommendation is not an approval. Unclear → ask: "Sir, I have a question."
 Evidence: raw command output and exit codes; file hashes from sha256sum, never typed; never rewrite a log, never delete your output and rerun silently; on any failure stop and report. Report format: task ID, HEAD before/after, commands + output, changed files, what was NOT done, blockers.
 Forbidden without explicit words: rm -rf outside scratch, git reset --hard, git clean, git push --force, --amend on pushed commits, git add -A (use explicit paths). Never print .env values (names only), never read shell history, never paste tokens.
-Code: before any code commit run pnpm run lint, check-types, test, build and paste exit codes. One task = one commit with the task ID in the message. Push only after Claude's verdict and the Owner's "push". Frozen systems stay frozen: VF19, INPUT-GATE-01, NAV-07, POLISH-TYPE-01, HOME-01C.
+Code: before any code commit run pnpm run lint, check-types, test, build and paste exit codes. One task = one commit with the task ID in the message. Push only after Claude's verdict and the Owner's "push". Exception: CLOSE commits per docs/CLOSE_PROTOCOL.md are pushed on the Owner's word CLOSE. Frozen systems stay frozen: VF19, INPUT-GATE-01, NAV-07, POLISH-TYPE-01, HOME-01C.
 Visual work: before/after screenshots at 375/768/1024/1280/1440, both themes, reduced motion; save to the vault under proof/<task-id>/ and give paths.
 Dev server: pnpm run dev on port 3005 for development; stop it at day end; pnpm start only to verify a build.
 Skills/MCP: use the installed skills and MCP servers where they fit (design, UI/UX, browser, testing); name which one you used in each report; never claim a skill you do not actually have.
