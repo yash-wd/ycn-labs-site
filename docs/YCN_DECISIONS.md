@@ -168,3 +168,12 @@ This file distinguishes owner-final facts from the development baseline. Do not 
 
 Append unique IDs only after checking the active log. Never reuse an ID for a different topic. Supersede; do not silently rewrite historical meaning.
 
+### DECISION-051: YCN Labs is a business system, not only a website (Owner, 13 Oct 2026)
+Status: Owner-stated strategic direction; does not by itself expand v1.0 scope.
+1. YCN Labs is built as the foundation of a scalable business: website → lead capture → client communication → quotations/invoices → integrations → future SaaS.
+2. Consent first, from v1.0: each lead stores purpose-specific consent (enquiry handling; separately and optionally, updates about YCN products), the notice version shown, timestamp, source and withdrawal state. Enquiry consent is never reused for marketing. Design to the DPDP Act 2023 and DPDP Rules 2025 now (core notice, consent, security and breach duties apply 18 months after the Rules' publication, i.e. mid-May 2027); legal review before launch.
+3. Buy before build: quotations, invoices and CRM start on off-the-shelf GST-compliant tools with YCN templates; own modules only when client volume and revenue justify them.
+4. Architecture: one HLD plus a lead/consent LLD (task 11a) precede backend work; module boundaries leave room for CRM, billing and SaaS without building them early.
+5. Quality bar: senior-level content from Owner-supplied facts with professional editorial review; a complete design system (colour, type, spacing, motion tokens); accessibility, security and operations to production standard.
+6. Every new capability passes its own requirements, design, build and verification gates, justified by customer value, cost, revenue and maintainability.
+7. Experience: the public site must feel visionary, modern and product-led — conceptual storytelling of a technology company, never a template or AI-generated look. Governed by Master Plan §7 and the vNext specifications; content and visuals pass Owner acceptance.

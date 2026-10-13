@@ -36,7 +36,8 @@
 - [ ] **`09 YCN-HOME-FINAL-01`:** Review and correct verified remaining homepage/entrance/phone/laptop/flow/FAQ defects only; keep ratified copy and frozen systems.
 - [ ] **`10 YCN-PAGES-CONTENT-01`:** Route-by-route content, clear services/contact, jurisdiction/currency and claims reconciliation, correct metadata (blocked on O-01..O-06).
 - [ ] **`11 YCN-BRAND-MEDIA-01`:** Approve 02a/02b or explicit existing-asset interim; integrate only approved releases, validate source/license and video rights; replace generic stock video clips with authentic YCN studio footage before production release per `public/media/SOURCES.md` (carried forward requirement; blocked on O-07).
-- [ ] **`12 YCN-LEAD-STAGING-01`:** Validated staging env with real Postgres/Upstash/Resend, failure/retry/dedupe tests; confirm lead operator ownership (blocked on O-03/O-06/O-10).
+- [ ] **`11a YCN-SYSTEM-ARCH-01`:** HLD, lead/consent LLD, DPDP/legal compliance map; docs only; reason: DECISION-051.
+- [ ] **`12 YCN-LEAD-STAGING-01`:** Validated staging env with real Postgres/Upstash/Resend, failure/retry/dedupe tests; confirm lead operator ownership (blocked on O-03/O-06/O-10 and 11a).
 - [ ] **`13 YCN-QUALITY-GATE-01`:** Full lint/types/test/build on exact RC; Playwright browsers; accessibility, security/CSP report-only, performance/SEO audits.
 - [ ] **`14 YCN-COMPREHENSION-01`:** Observe at least five representative nontechnical users performing find/understand/contact tasks.
 - [ ] **`15 YCN-RELEASE-RC-01`:** Freeze SHA, staged smoke, domain/DNS/SSL, required env names, backup, rollback, privacy-respecting analytics live, and incident owner.
