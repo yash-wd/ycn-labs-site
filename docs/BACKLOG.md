@@ -25,14 +25,14 @@
 *Target Launch: 10 November 2026 (Conditional management target; see §14.6)*
 
 - [x] **`00 YCN-PLAN-ADOPT-01`:** [PUBLISHED at `df13f17`] Appended reviewed Section 14 to existing master plan; added §12/vNext pointers; aligned BACKLOG/STATE; documentation adopted.
-- [ ] **`01 YCN-DEV-GENERATION-01`:** **[IN PROGRESS / VERIFIED LOCALLY]** Configure `agentRules: false` in `next.config.mjs`, ignore and untrack `next-env.d.ts`, prevent dirty worktree on `next dev` startup.
-- [ ] **`02 YCN-INCIDENT-RECON-01`:** Accept DEV-VIEW-01 corrected report; assess cause and no-silent-restore rule without replay/destruction.
-- [ ] **`03 YCN-VAULT-BACKUP-01`:** Exact approved destination; encrypted copy and checksum/restore verification; no deletes.
-- [ ] **`04 YCN-DEPLOY-LIVE-CLAIMS-01`:** Map live Vercel/domain branch; enumerate unverified live promises; if live site deploys from private `ycnlabs` repo, name that repo explicitly; separate narrow hotfix if approved.
-- [ ] **`05 YCN-LOCAL-BASELINE-01`:** Local gaps only, clean preflight, env names only, port status, existing proof paths and capability dimensions.
-- [ ] **`06 YCN-CI-GUARDS-01`:** Add minimal GitHub Actions PR jobs for lint/types/tests/build; CI must generate Next types (next typegen or build) before tsc, since next-env.d.ts is untracked; verify real Vercel mapping; protect main when checks exist; no unintended production auto-deploy.
-- [ ] **`07 YCN-NAV-ORIGINAL-STYLE-01`:** Restore original cyan glow with fading tail at 80 physical px/s (Option A) with bounded test update to `__tests__/navbar-polish-04.test.tsx` (Two-round visual rule applies).
-- [ ] **`08 HOME-02-CAP-03-1024`:** Fix existing table overflow at 1024px breakpoint in Capability-03 without changing approved content/other chapters.
+- [x] **`01 YCN-DEV-GENERATION-01`:** [PUBLISHED at `b3a1884`] Configure `agentRules: false` in `next.config.mjs`, ignore and untrack `next-env.d.ts`, prevent dirty worktree on `next dev` startup.
+- [x] **`02 YCN-INCIDENT-RECON-01`:** [ACCEPTED by Owner] Accept DEV-VIEW-01 corrected report; assess cause and no-silent-restore rule without replay/destruction.
+- [ ] **`03 YCN-VAULT-BACKUP-01`:** Exact approved destination; encrypted copy and checksum/restore verification; no deletes (retains outstanding Owner dependency: destination selection).
+- [ ] **`04 YCN-DEPLOY-LIVE-CLAIMS-01`:** Map live Vercel/domain branch; enumerate unverified live promises; if live site deploys from private `ycnlabs` repo, name that repo explicitly; separate narrow hotfix if approved (retains outstanding Owner dependency: live verification).
+- [-] **`05 YCN-LOCAL-BASELINE-01`:** [FOLDED into 07/08 by Owner] Local gaps only, clean preflight, env names only, port status, existing proof paths and capability dimensions.
+- [ ] **`06 YCN-CI-GUARDS-01`:** [WORKFLOW COMMITTED, AWAITING FIRST GITHUB RUN] Add minimal GitHub Actions CI jobs for lint/types/tests/build; CI generates Next types before tsc since next-env.d.ts is untracked; verified clean in local scratch simulation without `.env.local`; awaiting first GitHub PR/push run. Finding: eslint config coverage to review.
+- [ ] **`07 YCN-NAV-ORIGINAL-STYLE-01`:** Restore original cyan glow with fading tail at 80 physical px/s (Option A) with bounded test update to `__tests__/navbar-polish-04.test.tsx` (Two-round visual rule applies). Must measure existing Menu border speed before modifying.
+- [ ] **`08 HOME-02-CAP-03-1024`:** Fix existing table overflow at 1024px breakpoint in Capability-03 without changing approved content/other chapters. Must record baseline 1024px table dimensions before modifying.
 - [ ] **`09 YCN-HOME-FINAL-01`:** Review and correct verified remaining homepage/entrance/phone/laptop/flow/FAQ defects only; keep ratified copy and frozen systems.
 - [ ] **`10 YCN-PAGES-CONTENT-01`:** Route-by-route content, clear services/contact, jurisdiction/currency and claims reconciliation, correct metadata (blocked on O-01..O-06).
 - [ ] **`11 YCN-BRAND-MEDIA-01`:** Approve 02a/02b or explicit existing-asset interim; integrate only approved releases, validate source/license and video rights; replace generic stock video clips with authentic YCN studio footage before production release per `public/media/SOURCES.md` (carried forward requirement; blocked on O-07).
