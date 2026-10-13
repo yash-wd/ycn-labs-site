@@ -25,9 +25,9 @@
 ---
 
 ## 2. In-Flight Workstreams & Execution Queue
-- **Governing Plan:** `docs/YCN_MASTER_PLAN.md` §14 (Locally Committed Amendment Awaiting Owner-Approved Publication, 13 Oct 2026).
-- **Adoption Status:** `00 YCN-PLAN-ADOPT-01` — Committed locally (amended), awaiting Owner-approved push to `origin/main`. Section 14 launch execution framework integrated, §12 and vNext pointers established, BACKLOG and STATE aligned.
-- **Single Next Authorized Task:** `01 YCN-DEV-GENERATION-01` (Next in queue: verify Next.js `agentRules` behavior with `agentRules: false` recommended, untrack generated `next-env.d.ts` cleanly, prevent dirty worktree on `next dev` startup; awaiting Owner mitigation choice and task authorization).
+- **Governing Plan:** `docs/YCN_MASTER_PLAN.md` §14 (Published Launch Execution Roadmap at `df13f17`, 13 Oct 2026).
+- **Adoption Status:** `00 YCN-PLAN-ADOPT-01` — Published to GitHub `origin/main` at `df13f17c6b927142aa0a1439f6f2148dfce23518`. Master Plan §14 live.
+- **Active Task:** `01 YCN-DEV-GENERATION-01` — Option A implemented (`agentRules: false` in `next.config.mjs`, `next-env.d.ts` untracked and ignored). CI type generation requirement noted for task 06.
 - **Brand Workstream:** `RULING-02a/b approval, then BRAND-EXPORT-05`.
 - **Pending Owner Business Decisions:** O-01 through O-10 (scheduled in single decision session by 16 Oct 2026 per §14.5).
 - **Charter & Operating Governance:** Existing AGENTS charter remains controlling. Review-by-risk tier and CLOSE deletion/push exceptions are proposed rulings pending explicit Owner ratification (O-08 / charter decision).
@@ -41,11 +41,10 @@ Before modifying any source code, run `git fetch && git status --porcelain` to v
 
 ## Last Session
 - **Date:** 2026-10-13
-- **Website HEAD:** a23dfdbfef407e56ed7e412e7ae7a5dd1984d57f (published baseline)
-- **Local Adoption Commit:** 5dfd3ea (to be amended with final consistency corrections before push)
+- **Website HEAD:** df13f17c6b927142aa0a1439f6f2148dfce23518 (published on `origin/main`)
 - **Brand Library HEAD:** 063e6249d34179491a342fcdc140fd0dd1336624
-- **Done:** `YCN-PLAN-ADOPT-01` final local correction. Master Launch Execution Plan Section 14 adopted into `docs/YCN_MASTER_PLAN.md` with Claude corrections C1–C8 and final documentation consistency corrections incorporated. Single execution queue established.
+- **Done:** `YCN-PLAN-ADOPT-01` published to GitHub `origin/main` (`df13f17`). Master Plan §14 live. `YCN-DEV-GENERATION-01` executed locally: `agentRules: false` configured in `next.config.mjs`, `next-env.d.ts` ignored in `.gitignore` and untracked from Git while preserved locally; CI requirement noted for task 06.
 - **Next Task in Queue:**
-  - **Website Workstream:** `01 YCN-DEV-GENERATION-01` (Resolve Next.js 16 dev file generation in `AGENTS.md` and `next-env.d.ts`; awaiting Owner mitigation choice and task authorization)
+  - **Website Workstream:** `02 YCN-INCIDENT-RECON-01` (Accept DEV-VIEW-01 corrected report; assess cause and no-silent-restore rule without replay/destruction)
   - **Brand Workstream:** `RULING-02a/b approval, then BRAND-EXPORT-05`
 - **Pending Owner Decisions:** Decisions O-01 through O-10 (Decision session scheduled by 16 Oct 2026), RULING-02a, RULING-02b, Decision O-08 (`CLOSE_PROTOCOL.md` authority).
