@@ -18,16 +18,19 @@
 - **Type Checking:** 0 errors (`tsc --noEmit`).
 - **Lint:** 0 errors / 0 warnings (`eslint .`).
 - **Production Build:** 18/18 routes generated cleanly (`next build --webpack`).
-- **Local Environment:** `.env.local` contains only `NEXT_PUBLIC_IMAGEKIT_URL_ENDPOINT` (operating in staging/noindex mode; `NEXT_PUBLIC_SITE_ENV` absent).
+- **Local Environment:** `.env.local` contains only `NEXT_PUBLIC_IMAGEKIT_URL_ENDPOINT` (operating in staging/noindex mode; `NEXT_PUBLIC_SITE_ENV` absent). Note: database, Redis, and email credentials have not yet been configured locally; O-10 access is an active dependency for staging verification.
 - **Owner Identity Gate:** Owner confirmed v2 identity on localhost 12 Oct. (Note: Full-site visual acceptance and production readiness are pending and not claimed).
 - **Git Hooks & Signing:** Zero active Git hooks; `core.hooksPath` unset; `commit.gpgsign` unset.
 
 ---
 
-## 2. In-Flight Workstreams & Defects
-- **`YCN-NAV-ORIGINAL-STYLE-01`:** Restore original cyan glow with fading tail at 80 px/s (Option A) with bounded test update to `__tests__/navbar-polish-04.test.tsx` (PENDING OWNER APPROVAL).
-- **`HOME-02-CAP-03-1024`:** Capability-03 table width clipping (446px table inside 352px container) awaiting responsive styling.
-- **`BRAND-FIND-01`:** [SUPERSEDED] Replaced by Owner RULING-01. Authoritative master ratified (`Main_YCN_LABS_logo_black_8K__6675x5195.png`). Brand library established on GitHub (`ycn-labs-brand-library`). Next Brand workstream: RULING-02a/b approval, then BRAND-EXPORT-05.
+## 2. In-Flight Workstreams & Execution Queue
+- **Governing Plan:** `docs/YCN_MASTER_PLAN.md` §14 (Locally Committed Amendment Awaiting Owner-Approved Publication, 13 Oct 2026).
+- **Adoption Status:** `00 YCN-PLAN-ADOPT-01` — Committed locally (amended), awaiting Owner-approved push to `origin/main`. Section 14 launch execution framework integrated, §12 and vNext pointers established, BACKLOG and STATE aligned.
+- **Single Next Authorized Task:** `01 YCN-DEV-GENERATION-01` (Next in queue: verify Next.js `agentRules` behavior with `agentRules: false` recommended, untrack generated `next-env.d.ts` cleanly, prevent dirty worktree on `next dev` startup; awaiting Owner mitigation choice and task authorization).
+- **Brand Workstream:** `RULING-02a/b approval, then BRAND-EXPORT-05`.
+- **Pending Owner Business Decisions:** O-01 through O-10 (scheduled in single decision session by 16 Oct 2026 per §14.5).
+- **Charter & Operating Governance:** Existing AGENTS charter remains controlling. Review-by-risk tier and CLOSE deletion/push exceptions are proposed rulings pending explicit Owner ratification (O-08 / charter decision).
 
 ---
 
@@ -38,10 +41,11 @@ Before modifying any source code, run `git fetch && git status --porcelain` to v
 
 ## Last Session
 - **Date:** 2026-10-13
-- **Website HEAD (HEAD before this close):** 770c034f98bef10cfbbad8b83dfdda8eb15ba69e
-- **Brand Library HEAD (HEAD before this close):** ddf066483aeaa068343f59d49d3a4f3aa5e10f5c
-- **Done:** YCN-CLOSE-PROTOCOL-01 established; canonical docs/CLOSE_PROTOCOL.md installed; tools/close-preflight.sh created; Downloads reconciled (4 unique 12 Oct files to vault _INTAKE/2026-10-12/, duplicates purged); brand library continuity synchronized.
-- **Next Authorized Tasks (Exactly ONE per workstream):**
-  - **Website Workstream:** `YCN-NAV-ORIGINAL-STYLE-01` (Restore original cyan glow with fading tail at 80 px/s (Option A) with bounded test update to `__tests__/navbar-polish-04.test.tsx` (PENDING OWNER APPROVAL))
+- **Website HEAD:** a23dfdbfef407e56ed7e412e7ae7a5dd1984d57f (published baseline)
+- **Local Adoption Commit:** 5dfd3ea (to be amended with final consistency corrections before push)
+- **Brand Library HEAD:** 063e6249d34179491a342fcdc140fd0dd1336624
+- **Done:** `YCN-PLAN-ADOPT-01` final local correction. Master Launch Execution Plan Section 14 adopted into `docs/YCN_MASTER_PLAN.md` with Claude corrections C1–C8 and final documentation consistency corrections incorporated. Single execution queue established.
+- **Next Task in Queue:**
+  - **Website Workstream:** `01 YCN-DEV-GENERATION-01` (Resolve Next.js 16 dev file generation in `AGENTS.md` and `next-env.d.ts`; awaiting Owner mitigation choice and task authorization)
   - **Brand Workstream:** `RULING-02a/b approval, then BRAND-EXPORT-05`
-- **Pending Owner Decisions:** RULING-02a (dark transparent master), RULING-02b (light transparent master), Navbar Option A vs B.
+- **Pending Owner Decisions:** Decisions O-01 through O-10 (Decision session scheduled by 16 Oct 2026), RULING-02a, RULING-02b, Decision O-08 (`CLOSE_PROTOCOL.md` authority).

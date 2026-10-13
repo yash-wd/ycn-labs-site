@@ -1,5 +1,7 @@
 # YCN Labs vNext — Implementation Roadmap to Release
 
+> **Execution Order Notice (13 Oct 2026):** Execution order from 13 Oct 2026: Master Plan §14.7. vNext phases define scope; §14.7 defines order.
+
 ---
 
 ## PHASE 0 — Adopt vNext docs and reconcile repo

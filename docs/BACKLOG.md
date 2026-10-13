@@ -2,41 +2,43 @@
 
 **Strategy:** Ship customer-facing functionality and verify real enquiry workflows under risk-tiered gates.  
 **Operating Principle:** Raw command evidence strictly outranks narrative summaries.
+**Governing Execution Order:** Master Plan §14.7 (`docs/YCN_MASTER_PLAN.md`).
 
 ---
 
-## Gate 0: Inventory & Publication Readiness (Tier 0 — Read-Only)
+## Completed Foundations
 - [x] **`REPO-READINESS-00`:** Verified repository privacy, outgoing single commit, limited keyword scan 0 matches, drafted canonical context files.
-- [x] **`BRAND-FIND-01`:** [SUPERSEDED] Replaced by Owner RULING-01. Authoritative 6675px master ratified; brand library established (`ycn-labs-brand-library`). Brand Next: RULING-02a/b approval, then BRAND-EXPORT-05.
-
----
-
-## Gate 1: Public Development Repository Initialization (Tier 1 — Separate Authorization)
-*Note: A commit is NEVER Tier 0 (Tier 0 is strictly read-only inspection; staging/committing requires Tier 1/2 authorization).*
+- [x] **`BRAND-FIND-01`:** [SUPERSEDED] Replaced by Owner RULING-01. Authoritative 6675px master ratified; brand library established (`ycn-labs-brand-library`).
 - [x] **`PUBLISH-01A`:** Clean source snapshot exported, context layer installed, audited for secrets and oversized objects.
 - [x] **First Public Push:** Initialized Git on `main`, pushed to `yash-wd/ycn-labs-site` under personal SSH key with GitHub no-reply committer identity (`3a792e0`).
 - [x] **Permanent Close Protocol (`YCN-CLOSE-PROTOCOL-01`):** Installed canonical `docs/CLOSE_PROTOCOL.md` and read-only `tools/close-preflight.sh`. Cross-project reconciliation and cold-resume standard ratified.
-- [ ] **State Script Integration:** Review and test proposed closer integration without overwriting existing `tools/close-day.sh`.
 
 ---
 
-## Gate 2: High-Impact Website Defects (Tier 1 — Source Edits)
-- [ ] **`YCN-NAV-ORIGINAL-STYLE-01`:** Restore original cyan glow with fading tail at 80 px/s (Option A) with bounded test update to `__tests__/navbar-polish-04.test.tsx` (PENDING OWNER APPROVAL).
-- [ ] **`HOME-02-CAP-03-1024`:** Fix responsive table overflow at 1024px breakpoint in Capability-03.
-- [ ] **Owner Visual Review:** Present before/after frames for Owner visual verdicts.
+## Operational Tooling & Maintenance (Carried Forward)
+- [ ] **State Script Integration:** Review and test proposed closer integration without overwriting existing `tools/close-day.sh` (carried forward; pending separate tooling review).
 
 ---
 
-## Gate 3: Minimum Viable Business Website (Tier 1)
-- [ ] **Homepage Finalization:** Complete remaining chapters (01, 02, 04, 05) with verified claims and assets.
-- [ ] **Service & Capability Pages:** Tighten engineering scope, exclusions, and conversion calls-to-action.
-- [ ] **Enquiry Pipeline:** End-to-end integration test of contact form, email dispatch, rate-limiting, and error handling.
-- [ ] **Compliance & Trust:** Privacy policy, terms, UK metadata, and security header hardening.
-- [ ] **Asset Replacement:** Replace generic stock video clips with authentic YCN studio footage before production release (per `public/media/SOURCES.md`).
+## Master Launch Execution Queue (Master Plan §14.7)
 
----
+*Target Launch: 10 November 2026 (Conditional management target; see §14.6)*
 
-## Gate 4: Production Release & Operations (Tier 2)
-- [ ] **Release Gates:** Full TypeScript check, 280+ tests passing, production build, Lighthouse/a11y audit.
-- [ ] **Deployment Audit:** Deploy to production with rollback verification and live domain sanity check.
-- [ ] **Owner Sign-off:** Final commercial and public release approval.
+- [ ] **`00 YCN-PLAN-ADOPT-01`:** [COMMITTED LOCALLY — PENDING PUSH] Append reviewed Section 14 to existing master plan; add §12/vNext pointers; align BACKLOG/STATE; no code changes.
+- [ ] **`01 YCN-DEV-GENERATION-01`:** **[NEXT IN QUEUE — AWAITING MITIGATION CHOICE & TASK AUTHORIZATION]** Verify Next.js `agentRules` behavior and choose documented mitigation (`agentRules: false` recommended); reconcile `next-env.d.ts`, untrack via `.gitignore` if confirmed generated; commit Next managed block or set `agentRules: false` (Owner picks); prevent dirty worktree on `next dev` startup.
+- [ ] **`02 YCN-INCIDENT-RECON-01`:** Accept DEV-VIEW-01 corrected report; assess cause and no-silent-restore rule without replay/destruction.
+- [ ] **`03 YCN-VAULT-BACKUP-01`:** Exact approved destination; encrypted copy and checksum/restore verification; no deletes.
+- [ ] **`04 YCN-DEPLOY-LIVE-CLAIMS-01`:** Map live Vercel/domain branch; enumerate unverified live promises; if live site deploys from private `ycnlabs` repo, name that repo explicitly; separate narrow hotfix if approved.
+- [ ] **`05 YCN-LOCAL-BASELINE-01`:** Local gaps only, clean preflight, env names only, port status, existing proof paths and capability dimensions.
+- [ ] **`06 YCN-CI-GUARDS-01`:** Add minimal GitHub Actions PR jobs for lint/types/tests/build; verify real Vercel mapping; protect main when checks exist; no unintended production auto-deploy.
+- [ ] **`07 YCN-NAV-ORIGINAL-STYLE-01`:** Restore original cyan glow with fading tail at 80 physical px/s (Option A) with bounded test update to `__tests__/navbar-polish-04.test.tsx` (Two-round visual rule applies).
+- [ ] **`08 HOME-02-CAP-03-1024`:** Fix existing table overflow at 1024px breakpoint in Capability-03 without changing approved content/other chapters.
+- [ ] **`09 YCN-HOME-FINAL-01`:** Review and correct verified remaining homepage/entrance/phone/laptop/flow/FAQ defects only; keep ratified copy and frozen systems.
+- [ ] **`10 YCN-PAGES-CONTENT-01`:** Route-by-route content, clear services/contact, jurisdiction/currency and claims reconciliation, correct metadata (blocked on O-01..O-06).
+- [ ] **`11 YCN-BRAND-MEDIA-01`:** Approve 02a/02b or explicit existing-asset interim; integrate only approved releases, validate source/license and video rights; replace generic stock video clips with authentic YCN studio footage before production release per `public/media/SOURCES.md` (carried forward requirement; blocked on O-07).
+- [ ] **`12 YCN-LEAD-STAGING-01`:** Validated staging env with real Postgres/Upstash/Resend, failure/retry/dedupe tests; confirm lead operator ownership (blocked on O-03/O-06/O-10).
+- [ ] **`13 YCN-QUALITY-GATE-01`:** Full lint/types/test/build on exact RC; Playwright browsers; accessibility, security/CSP report-only, performance/SEO audits.
+- [ ] **`14 YCN-COMPREHENSION-01`:** Observe at least five representative nontechnical users performing find/understand/contact tasks.
+- [ ] **`15 YCN-RELEASE-RC-01`:** Freeze SHA, staged smoke, domain/DNS/SSL, required env names, backup, rollback, privacy-respecting analytics live, and incident owner.
+- [ ] **`16 YCN-PRODUCTION-LAUNCH-01`:** Separate authorized deploy of exact approved SHA, no incidental source changes.
+- [ ] **`17 YCN-POSTLAUNCH-01`:** Operations and measurement after launch: lead SLA/response tracking, uptime/alerts, proposal funnel data from live analytics, incident playbook, maintenance backlog.
