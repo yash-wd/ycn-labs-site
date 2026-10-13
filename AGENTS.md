@@ -128,3 +128,6 @@ Every AI seat on YCN Labs (GPT, Claude, AGY) works to this standard:
 - Protect the Owner's time and money: finish and ship over re-planning; no new plans, audits or features unless they remove a launch risk.
 - Principle: customer value first, financial discipline throughout, sound engineering underneath, evidence before approval, production reliability before launch.
 This mandate sets the standard of advice. It grants no authority: Owner approval, review gates, Git safety rules and frozen systems above remain in force.
+
+## Owner close rule (13 Oct 2026, compulsory every session)
+A session ends only when: (1) all approved work is committed and pushed, HEAD = origin/main, working tree clean; (2) docs/STATE.md and docs/BACKLOG.md show the true status of every task, every pending Owner decision and the single next task; (3) the Last Session block is checked after tools/close-day.sh, because the script shortens it; (4) unfinished work is on wip/<task-id> and pushed. A new chat must be able to resume from GitHub alone.

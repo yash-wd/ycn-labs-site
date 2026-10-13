@@ -27,19 +27,12 @@
 
 ## 2. In-Flight Workstreams & Execution Queue
 - **Governing Plan:** `docs/YCN_MASTER_PLAN.md` §14 (Published Launch Execution Roadmap at `df13f17`, 13 Oct 2026).
-- **Adoption Status:** `00 YCN-PLAN-ADOPT-01` — Published to GitHub `origin/main` at `df13f17c6b927142aa0a1439f6f2148dfce23518`. Master Plan §14 live.
-- **Task 01 Status:** `01 YCN-DEV-GENERATION-01` — Completed and published at `b3a1884a1bdc7aeb8c82a416ebb92708a0402c7e`.
-- **Task 02 Status:** `02 YCN-INCIDENT-RECON-01` — Accepted by Owner (`accept 02`).
-- **Task 03 Status:** `03 YCN-VAULT-BACKUP-01` — Retains outstanding Owner dependency (destination selection).
-- **Task 04 Status:** `04 YCN-DEPLOY-LIVE-CLAIMS-01` — Retains outstanding Owner dependency (Vercel Git mapping and live claims verification).
-- **Task 05 Status:** `05 YCN-LOCAL-BASELINE-01` — Folded into Tasks 07/08 per Owner directive (`fold 05`).
-- **Parallel Workstreams:** Approved by Owner (`parallel: yes`).
-- **Active Task (Task 06):** `06 YCN-CI-GUARDS-01` — Workflow committed locally (`.github/workflows/ci.yml`), awaiting first GitHub run. Verified in clean scratch clone simulation without `.env.local` (all 6 quality commands exit 0).
-- **Next Engineering Tasks:**
-  - `07 YCN-NAV-ORIGINAL-STYLE-01` — Must measure existing Menu border speed before modifying.
-  - `08 HOME-02-CAP-03-1024` — Must record baseline 1024px table dimensions before modifying.
+- **Task Status:** 00, 01, 02, 06 done; 05 folded.
+- **Mandate & Vision:** `YCN-MANDATE-01` published (`82de0a2`); `YCN-VISION-01` / `DECISION-051` + task 11a published (`633c05e`).
+- **Next Engineering Task:** `07 YCN-NAV-ORIGINAL-STYLE-01` (blocked on Owner recording).
+- **Parallel Workstream:** `11a YCN-SYSTEM-ARCH-01` (GPT drafts).
+- **Pending Owner Decisions:** O-01..O-10 by 16 Oct (incl. O-08 CLOSE deletion), vault drive destination, Vercel check.
 - **Brand Workstream:** `RULING-02a/b approval, then BRAND-EXPORT-05`.
-- **Pending Owner Business Decisions:** O-01 through O-10 (scheduled in single decision session by 16 Oct 2026 per §14.5).
 - **Charter & Operating Governance:** Existing AGENTS charter remains controlling. Review-by-risk tier and CLOSE deletion/push exceptions are proposed rulings pending explicit Owner ratification (O-08 / charter decision).
 
 ---
@@ -51,7 +44,7 @@ Before modifying any source code, run `git fetch && git status --porcelain` to v
 
 ## Last Session
 - **Date:** 2026-10-13
-- **Starting HEAD:** 633c05e93b386527b736d8b80453b612f4475824
-- **Last Test Result:** NOT RUN
-- **Uncommitted count:** 0
-- **Summary & Next:** mandate, CI green, DECISION-051 + task 11a recorded; next: Owner CTA recording → 07 navbar, 11a architecture in parallel
+- **Completed:** 00, 01, 02, 06 done; 05 folded; YCN-MANDATE-01 published (82de0a2); YCN-VISION-01 / DECISION-051 + task 11a published (633c05e).
+- **Next Engineering:** 07 YCN-NAV-ORIGINAL-STYLE-01 (blocked on Owner recording).
+- **Parallel:** 11a YCN-SYSTEM-ARCH-01 (GPT drafts).
+- **Owner Pending:** O-01..O-10 by 16 Oct (incl. O-08 CLOSE deletion), vault drive, Vercel check.
