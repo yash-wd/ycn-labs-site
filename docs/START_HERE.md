@@ -21,6 +21,7 @@ Open this file on branch `main`. Before any work run `git fetch && git status --
 5. `docs/YCN_DESIGN_SYSTEM.md` (Tokens, layout, typography, motion standards)
 6. `docs/vnext/*` (VNext homepage and component specifications)
 7. `docs/CLOSE_PROTOCOL.md` (Permanent close, consolidation, and cold-resume protocol)
+8. [`docs/YCN_LABS_OWNER_WORKING_ROUTINE.md`](https://github.com/yash-wd/ycn-labs-site/blob/main/docs/YCN_LABS_OWNER_WORKING_ROUTINE.md) (Owner's complete two-repository working routine)
 
 ---
 
