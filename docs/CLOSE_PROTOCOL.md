@@ -1,5 +1,7 @@
 # YCN Labs — Permanent Close, Consolidation & Cold-Resume Protocol
 
+> **Superseded in part by DECISION-052 O-08 (14 Oct 2026):** no automatic deletion, move or overwrite; plan-first CLOSE with an Owner-approved exact manifest; never push unapproved brand work to brand main.
+
 **Protocol Identifier:** `YCN-CLOSE-PROTOCOL-01`  
 **Document ID:** `docs/CLOSE_PROTOCOL.md` (Canonical Specification)  
 **Effective Date:** 2026-10-13  
