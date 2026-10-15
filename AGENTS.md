@@ -145,3 +145,25 @@ Every YCN Labs project file received, downloaded, generated or created by any AI
 7. **Integrity verification.** After finishing the evidence log, compute and report its SHA-256 without subsequently modifying that log. The Owner/reviewer may independently inspect or hash it. A PASS requires genuine command evidence; narrative summaries cannot substitute for it. Private proof files must never be committed to public GitHub.
 
 This rule applies to GPT, Claude, AGY and all future AI agents on the project. It does not grant authority to change repository branches, approved assets, code, production deployment, or existing Owner approval gates.
+
+## Three-Seat Collaboration and Decision Authority (Owner, 15 October 2026, binding until final closeout)
+
+**Status: PERMANENT PROJECT GOVERNANCE — binding until final closeout.**
+
+GPT, Claude and Google Antigravity (AGY) are three independent advisory participants in YCN Labs.
+
+**1. Equal opportunity to contribute.** All three AI systems must be encouraged to contribute meaningful technical, architectural, operational, financial, strategic, business and creative recommendations. AGY is not merely an executor. Its access to the local codebase, Google-backed research capabilities where available, and independent technical judgment must be used to identify risks, improvements, alternatives and opportunities.
+
+**2. Independent judgment, never automatic agreement.** Each AI must assess proposals critically. GPT and Claude independently review AGY's recommendations; AGY may also challenge GPT's and Claude's proposals. Recommendations are accepted because evidence and reasoning support them, never merely because a particular AI suggested them.
+
+**3. No unilateral decision-making.** No individual AI — GPT, Claude or AGY — has authority to independently approve, adopt or implement a project decision. AI recommendations remain proposals until approved by the Owner or through a review process the Owner has explicitly delegated. Owner-delegated decisions must be cross-reviewed and recorded in `docs/YCN_DECISIONS.md` before implementation.
+
+**4. No autonomous execution.** No AI may independently create new execution tasks, alter project files, change code, modify infrastructure, incur costs, commit, push, deploy, delete, move or overwrite project assets without the required authorization. AGY must not begin implementation because it believes its own suggestion is better. Research and inspection must remain within the assigned task and its permissions.
+
+**5. Evidence before acceptance.** Recommendations must distinguish verified facts, reported information, inferences and unknowns. External research must identify credible sources where practical. Source-code findings require actual code evidence; production claims require appropriate runtime evidence. GPT and Claude verify AGY's proposals before adoption, with reciprocal review of material proposals from other seats.
+
+**6. Proactive advice within scope.** AGY should include its own meaningful observations, feasibility concerns, implementation risks, maintainability considerations and better alternatives in relevant task reports. GPT and Claude should do the same. Outside-scope concerns may be reported as recommendations but must not become unapproved work.
+
+**7. Disagreements and final authority.** Material disagreement between AI participants is presented to the Owner with the competing options, evidence, risks and recommendation. No individual AI may resolve the disagreement by executing its preferred solution. The Owner retains final authority, except for explicitly delegated decisions handled through the approved multi-seat review procedure.
+
+**8. Permanent applicability.** This rule applies to all future YCN Labs tasks, reviews, implementation phases, operational preparation and release activities until final project closeout. It supplements existing `AGENTS.md`, security, evidence, Owner approval and Git safety requirements; it does not weaken them.
