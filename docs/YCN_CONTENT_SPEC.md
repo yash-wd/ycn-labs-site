@@ -46,7 +46,7 @@ Do not make factual promises unless `YCN_CLAIMS_AND_PROOF.md` allows publication
 - **Help customers find my business** — Build a clear digital presence people can understand and act on.
 - **Make enquiries, bookings or orders easier** — Give customers a simpler path from interest to action.
 - **Reduce repetitive work** — Connect information and remove avoidable manual steps where it makes sense.
-- **Build a product** — Turn an idea or business process into a web, mobile or SaaS product.
+- **Build a product** — Turn a defined idea or business workflow into a useful web application.
 - **Not sure yet?** Tell us what happens today.
 
 ### THE PRODUCT AS PROTAGONIST — FOUR CHAPTER CLUSTER
@@ -134,7 +134,7 @@ Talk → Understand → Plan → Design → Build → Test → Launch → Improv
 
 ### Need 4 — I have a product idea
 **Capability:** Software products  
-**Plain explanation:** Web apps, mobile products and SaaS built from a useful first version outward.
+**Plain explanation:** Selected web applications designed around a clearly agreed first version.
 
 ### Need 5 — I need something specific
 **Capability:** Custom software  
