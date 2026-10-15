@@ -132,6 +132,8 @@ This mandate sets the standard of advice. It grants no authority: Owner approval
 ## Owner close rule (13 Oct 2026, compulsory every session)
 A session ends only when: (1) all approved work is committed and pushed, HEAD = origin/main, working tree clean; (2) docs/STATE.md and docs/BACKLOG.md show the true status of every task, every pending Owner decision and the single next task; (3) the Last Session block is checked after tools/close-day.sh, because the script shortens it; (4) unfinished work is on wip/<task-id> and pushed. A new chat must be able to resume from GitHub alone.
 
+Addendum (Owner, 15 Oct 2026): A session closes only on the Owner's word `close`; no seat runs close-day, writes a close commit or declares the day closed without it. No partial or unauthorized commits at any time: every commit is either a reviewed task commit or the Owner-authorized close commit. At `close`: every approved commit pushed; local main = origin/main; working tree clean; nothing unpushed in the website, brand or historical repositories; docs/STATE.md Last Session lists in this order: published commits with SHAs, completed, not done, tomorrow's first task, Owner pending, deviations, paused; BACKLOG mirrors it. The test is that a new chat resumes from GitHub alone without ambiguity.
+
 ## Project file intake and evidence integrity rule (Owner, 15 October 2026 — binding until final closeout)
 
 Every YCN Labs project file received, downloaded, generated or created by any AI seat or manually must have one recognized home. `~/Downloads` is an arrival location, never permanent project storage.
