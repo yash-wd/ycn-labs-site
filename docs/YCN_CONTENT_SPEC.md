@@ -181,7 +181,11 @@ Do not pre-fill real project names/statuses unless the register verifies them.
 
 **H1:** Simple for the user. Deliberate underneath.
 
-Intro: Technical choices should follow the actual problem. This page explains the practices we use and the evidence available for this website/project; it must not turn targets into claims.
+**Public intro:**
+
+Technical choices follow the actual problem. Here we explain how we choose technology, the practices behind this website, and how we check them before release.
+
+**Internal publication rule:** Every definite technical claim must be supported by matching evidence in `docs/YCN_CLAIMS_AND_PROOF.md`. Unverified targets remain targets; never represent unverified performance, accessibility conformance, security or production reliability as achieved facts.
 
 Sections:
 
@@ -202,6 +206,10 @@ Only publish measured numbers/certification/conformance when the Claims register
 
 YCN Labs starts with the business problem, then chooses the digital solution that fits. We are building the company to serve businesses taking a first step online and teams that have outgrown the way they work today.
 
+**Operating-location line (public copy; Owner-stated):** Based in Hyderabad, India, working with businesses across India.
+
+**Identity restriction (internal):** This is an operating-location statement, not evidence of a registered office, completed entity registration, verified overseas operations or legal clearance. Final legal identity and related publication wording remain subject to DECISION-052 O-01 and CA/legal review.
+
 We care about clarity on the surface and engineering discipline underneath. We do not present concepts as client work or future capabilities as services already proven.
 
 Do not invent team size, years in business, client count, awards, offices, partnerships or founder history without verified facts.
@@ -211,6 +219,10 @@ Do not invent team size, years in business, client count, awards, offices, partn
 **H1:** Tell us what you’re trying to improve.
 
 **Sub:** You don’t need to know whether you need a website, app, automation or custom software. Tell us what happens today and what you want to change.
+
+**First-step reassurance (public copy; DECISION-054):** Tell us what is slow, lost or difficult in your business today. We'll tell you plainly what could help and what it would cost, before you commit to anything.
+
+This is a quotation/discovery commitment, not a guarantee of a specific software solution or fixed price.
 
 ### Guided flow
 
@@ -225,6 +237,10 @@ Do not invent team size, years in business, client count, awards, offices, partn
 5. **Optional planning information**  
    Budget/timeline/project type may be offered as optional fields.
 
+**V1 Contact defaults (DECISION-054):** India-first customer quotations and commercial communications use INR, not GBP as their default currency. No preset monetary budget bands are authorized in V1. An optional free-text budget estimate may be offered with "Not sure yet" as its default. Project type must default to "Not sure yet — need guidance on the right digital format", never a silently selected website category. Keep the two distinct questions "What happens today?" and "What would you like to change?" as the approved problem-first journey. Their separate DTO fields and server-side handling are reserved for Task 12 and its architecture review.
+
+Do not invent INR pricing thresholds.
+
 ### Submission states
 
 - **Submitting:** Sending your request…
@@ -233,6 +249,12 @@ Do not invent team size, years in business, client count, awards, offices, partn
 - **Temporary failure:** We could not accept your request safely. Your message has not been confirmed—please try again or use the listed contact route.
 
 Never show success when only an email attempt occurred without durable acceptance.
+
+**Acceptance contract (internal):** Visitor success requires durable acceptance and the accepted response contract (`data.accepted === true`), not merely HTTP 200, an email attempt, or a honeypot response marked `accepted: false`. A stable receipt reference may be shown when actually returned. Backend correctness, concurrent deduplication, failure recovery and DTO implementation remain governed by Architecture v1.0 and Task 12.
+
+**B2B/under-18 line (public-copy candidate; legal review required):** YCN Labs works with businesses. Our services are not directed at people under 18.
+
+**Legal/privacy publication requirements (internal):** V1 has no approved age-verification system or automatic data purge. Before publication, counsel must review the actual legal operator and applicable jurisdiction, purposes and processing basis, versioned notices and processing evidence, collected data, necessary service providers, security claims, analytics disclosures, appropriate rights procedures, verified privacy contact, retention schedule and exceptions, separate optional marketing permission, and response to inadvertently received children's data. India-first/DPDP is the primary design framework, subject to current applicability and any other relevant law. No unreviewed mandatory enquiry-consent checkbox is authorized. Existing Privacy Policy and Terms remain legally uncleared until competent review.
 
 ## 10. FAQ
 
@@ -249,7 +271,7 @@ Never show success when only an email attempt occurred without durable acceptanc
 5. **How are cost and scope decided?**  
    Scope, technical complexity, risk, and ongoing support determine price. Scope and pricing are agreed before work begins. Changes are discussed before they affect cost.
 6. **Who owns the finished work?**  
-   Ownership and licensing terms are clearly specified in our written agreement before any work begins. You will always know exactly what code and assets belong to you.
+   Ownership and licensing terms are clearly specified in our written agreement before any work begins. Before work starts, the agreement sets out plainly what you own and what is licensed.
 7. **What happens after launch?**  
    Post-launch support depends on the agreed scope. We make the support arrangement clear before launch.
 8. **What information should I bring to our first conversation?**  
