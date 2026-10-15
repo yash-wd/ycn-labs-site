@@ -2,6 +2,8 @@
 
 > **Superseded in part by DECISION-052 O-08 (14 Oct 2026):** no automatic deletion, move or overwrite; plan-first CLOSE with an Owner-approved exact manifest; never push unapproved brand work to brand main.
 
+**Permanent file intake and evidence rule:** `AGENTS.md` — Project file intake and evidence integrity rule (Owner, 15 October 2026). Apply during every project task and CLOSE. The rule requires controlled intake, original preservation, exact Owner-approved manifests for file movement/deletion, and independently verifiable raw task logs. DECISION-052 O-08 controls over conflicting historical automatic-cleanup or push-exception wording.
+
 **Protocol Identifier:** `YCN-CLOSE-PROTOCOL-01`  
 **Document ID:** `docs/CLOSE_PROTOCOL.md` (Canonical Specification)  
 **Effective Date:** 2026-10-13  
