@@ -87,6 +87,12 @@ Use `clamp()` for responsive scaling. Baseline:
 
 Body line-height about 1.5–1.65; headings about 1.05–1.2. Support 200% zoom and 400% reflow testing.
 
+### Type-role allocation — cinematic vs content (Owner decision, 14 October 2026)
+
+- **Cinematic display role:** Reserved for the homepage Hero and the designated product-story chapter headings. These moments may use the larger editorial sizing direction in `docs/vnext/06_DESIGN_SYSTEM_AND_ART_DIRECTION.md` §3, subject to the existing approved composition and responsive/visual checks. This is **not** a global `h1`/`h2` enlargement rule.
+- **Standard content role:** Supporting pages (What We Solve, Work, How We Work, About, Engineering, Contact and legal), navigation, forms, FAQs, ordinary section headings and functional UI retain the established §3 H1/H2/H3/body/caption scale. They must not inherit cinematic sizes just because they contain a heading.
+- **No implicit retokenization:** The vNext cinematic numeric ranges are design guidance for eligible scenes; this decision approves **where** cinematic typography belongs, not an unreviewed change to numeric CSS values, font families, existing ratified copy or frozen page geometry. Any later size adjustment requires viewport evidence and the Owner visual gate. Mobile/zoom/reduced-motion variants must retain readable hierarchy without overflow.
+
 ## 4. Spacing and grid
 
 4px base scale: `4 8 12 16 24 32 48 64 80 96 128 160 192`.
@@ -136,6 +142,32 @@ Allowed meanings: entering, connecting, transforming, progressing, receiving, se
 
 Natural scrolling by default. No scroll-jacking. “Skip experience” should bypass optional choreography. Reduced motion provides static composed frames with full meaningful-content parity.
 
+### Signature perimeter signal — controlled opt-in motion (Owner decision, 14 October 2026)
+
+**Visual meaning:** One luminous signal node with a short, softly fading tail travels along the **actual rounded-rectangle/capsule perimeter** of an eligible control. This extends the single-node-following-a-path motif in §6. The existing **Start a Project** border is an optical reference for the highlight/tail, **not** a calibrated speed reference. Do not replace the path with a fixed-time rotating conic gradient or illuminate all controls by default.
+
+**Documented design tokens (implementation mapping is a later coding task):**
+
+| Token | Owner-approved contract |
+|---|---|
+| `motion.signatureBorder.speed` | **80 CSS pixels of perimeter travel per second** in each steady state, collapsed and expanded; measured tolerance **±5%**. This is distance along the rendered border path, **not** a fixed lap duration or device-hardware pixels per second. |
+| `motion.signatureBorder.trail` | A short, tapered, smoothly fading cyan/blue-white signal tail consistent with the existing CTA appearance; final optical details follow Owner browser acceptance. Use existing semantic brand/signal roles, not new arbitrary hex colors. |
+| `motion.signatureBorder.phase` | A continuous distance-based position driven by elapsed monotonic time and measured path geometry. Changing dimensions must not restart the orbit or visibly jump its position. Lap duration naturally changes with perimeter length. |
+| `motion.signatureBorder.scheduler` | **One shared requestAnimationFrame-based ticker/clock** for the border family, not one timer or animation loop per instance. Coordinate with existing site/GSAP motion ownership; avoid competing animation owners or per-frame layout reads. |
+| `motion.signatureBorder.visibility` | Pause work while the document is hidden, the control is off-screen, or its decorative effect is intentionally suppressed by the visibility-priority rule. Resume smoothly without a phase jump. Measure geometry on size changes, not every frame. |
+| `motion.signatureBorder.reducedMotion` | Static, deliberately composed border presentation under `prefers-reduced-motion: reduce`; no traveling node, and no loss of focus visibility, contrast, label readability or keyboard operation. |
+| `motion.signatureBorder.eligibility` | Only the **four existing placements**: Menu, header CTA, mobile-menu CTA and Hero CTA. No new animated inputs, cards, dividers, footers, buttons or sections are authorized. |
+
+**Simultaneous visibility and priority:** No more than **two conspicuous perimeter signals** should animate on screen at once. On the homepage, **while the Hero's Start a Project CTA is visible, pause only the header CTA's decorative signal**; the Hero CTA keeps its signal. Once the Hero CTA is no longer visible, the header CTA signal may resume. The header button itself remains interactive and keyboard-accessible throughout. When a mobile navigation overlay is open, do not keep a visibly obscured background signal running behind it; verify the two-signal budget in the real composition. Use an explicit visibility/priority rule, **not** an arbitrary silent global cap that unpredictably disables a primary action. This priority behavior is part of the **later CTA migration (Task 07b)**, not the Menu-only pilot or this documentation change.
+
+**Implementation boundaries and acceptance:**
+
+1. **Task 07 (Menu pilot):** Implement the new distance-based engine for `YcnSignalBorder`'s `continuous` mode only. Keep `accent` mode behavior byte-identical; do not change the header/mobile/Hero CTAs. The Hero is frozen under HOME-01C.
+2. **Task 07b (separate Owner authorization):** Migrate all three existing `accent` CTA placements together, including only a specifically approved **border-only** change to the frozen Hero CTA. Apply the header/Hero priority and simultaneous-visibility rule then; add no new border instances.
+3. **Geometry:** Derive accurate path length from the rounded shape; remeasure on width/height/radius changes. Do not map one 5-second normalized lap to differently sized Menu states. Do not reset progress when Menu expands or collapses.
+4. **Proof:** Measure **80 CSS px/s ±5%** in both steady Menu states, confirm continuous position during the morph, check light/dark and reduced-motion variants, keyboard/focus/hover, desktop/mobile breakpoints, page-hidden/off-screen suspension, and the homepage first-screen two-signal behavior in Task 07b. Retain raw reports and visual proof **only in the private vault** (`proof/YCN-NAV-07/`), with the two-round Owner visual review.
+5. **Change gate:** These are approved **design rules**, not authorization for frontend code edits, global reanimation, changes to the frozen HOME-01C scene, or a push. Coding resumes only after foundation Gate E and a separate approved scoped task.
+
 ## 8. 3D / WebGL
 
 Default: HTML + CSS + SVG.
@@ -176,6 +208,10 @@ Signature:
 - LayerStack
 
 Do not build a generic 100-component library before the product needs it.
+
+### Signature border — component scope
+
+`YcnSignalBorder` is an **opt-in enhancement**, not a universal button/input/card style. Its existing `continuous` (Menu) and `accent` (three CTAs) modes have **separate implementation approvals**; the Menu pilot must not silently modify any CTA or the frozen HOME-01C Hero. A paused signal never removes the underlying button, semantic label, visible keyboard focus, hover/active feedback or reduced-motion/static affordance. Eligibility and visibility priority are governed by §7.
 
 ## 10. States
 
