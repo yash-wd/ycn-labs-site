@@ -71,7 +71,7 @@ Roles are governed by [`AGENTS.md`](https://github.com/yash-wd/ycn-labs-site/blo
 
 | Role | Responsibility | Must never assume |
 |---|---|---|
-| **You — Owner** | Decide priorities, approve scope, visually judge logo/site changes, authorize releases, commits, pushes, deployments, and exceptional operations. | That an AI's “PASS” automatically means you approved the artwork or code. |
+| **You — Owner** | Decide priorities, approve scope, visually judge logo/site changes, authorize releases, commits, pushes, deployments, and exceptional operations. Monthly: review the `leads` table and remove enquiries inactive for 12 months; record date and outcome in `proof/RETENTION/`. First execution not yet performed. | That an AI's “PASS” automatically means you approved the artwork or code. |
 | **Three AI Seats (GPT, Claude, AGY)** | Think across the entire project: business, architecture, code, design, cost, risk, and testing. Submit independent written positions before synthesis. | That an old chat summary or generated narrative supersedes verified repository truth. |
 | **Accountable Task Lead (GPT, Claude, or AGY)** | Nominated per task based on domain evidence and Owner confirmation. Synthesizes positions into one bounded instruction with clear acceptance criteria. | That leadership grants unilateral authority over protected decisions. |
 | **AGY — Local Linux Execution Seat** | Sole seat operating the local Linux machine: inspects code, runs builds/tests/linters, creates files, captures raw evidence in `/proof/<task-id>/`, commits only when authorized. | That it may autonomously redesign assets, delete history, deploy, or skip failed verification gates. |
