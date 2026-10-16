@@ -67,14 +67,16 @@ Both active repositories are currently **public**. Never put credentials, securi
 
 ## 3. Project responsibilities — who does what?
 
+Roles are governed by [`AGENTS.md`](https://github.com/yash-wd/ycn-labs-site/blob/main/AGENTS.md) › Shared ownership and task leadership. Strategy, challenge, research, architecture, review and execution are functions any seat may perform; AGY is the only local execution seat.
+
 | Role | Responsibility | Must never assume |
 |---|---|---|
-| **You — Owner** | Decide priorities, approve scope, visually judge logo/site changes, authorize releases and exceptional operations. | That an AI's “PASS” automatically means you approved the artwork. |
-| **GPT — strategy/task designer** | Read active state, explain options, prepare one clear bounded AGY task with acceptance criteria. | That an old conversation or a generated preview supersedes repository decisions. |
-| **Claude — independent reviewer** | Check proposed work, inspect real commands/diffs/metrics, identify risks, issue **PASS / HOLD**. | That an AGY narrative summary proves every claim without evidence. |
-| **AGY — Linux execution seat** | Read current rules, run approved commands, create/verify files, commit under the charter, publish when permitted, report paths/hashes and stop. | That it may silently redesign the logo, delete protected history, deploy, or skip a failed gate. |
+| **You — Owner** | Decide priorities, approve scope, visually judge logo/site changes, authorize releases, commits, pushes, deployments, and exceptional operations. | That an AI's “PASS” automatically means you approved the artwork or code. |
+| **Three AI Seats (GPT, Claude, AGY)** | Think across the entire project: business, architecture, code, design, cost, risk, and testing. Submit independent written positions before synthesis. | That an old chat summary or generated narrative supersedes verified repository truth. |
+| **Accountable Task Lead (GPT, Claude, or AGY)** | Nominated per task based on domain evidence and Owner confirmation. Synthesizes positions into one bounded instruction with clear acceptance criteria. | That leadership grants unilateral authority over protected decisions. |
+| **AGY — Local Linux Execution Seat** | Sole seat operating the local Linux machine: inspects code, runs builds/tests/linters, creates files, captures raw evidence in `/proof/<task-id>/`, commits only when authorized. | That it may autonomously redesign assets, delete history, deploy, or skip failed verification gates. |
 
-**Normal work sequence:** **Owner chooses → GPT scopes → Claude reviews → Owner authorizes → AGY executes → Claude verifies → Owner accepts → approved code/assets are committed and pushed.**
+**Normal work sequence:** **Owner brief → independent GPT, Claude and AGY positions (same brief, same time) → Owner-confirmed task lead synthesizes → substantive peer review → Owner authorizes → AGY executes locally → independent evidence verification → Owner accepts → approved code/assets are committed and pushed.**
 
 **CLOSE exception:** The standing [`docs/CLOSE_PROTOCOL.md`](https://github.com/yash-wd/ycn-labs-site/blob/main/docs/CLOSE_PROTOCOL.md) allows your word **CLOSE** to authorize **safe housekeeping/status pushes**, once its required checks pass. This does **not** authorize unreviewed production code or unapproved logo artwork on `main`. Such work remains blocked or follows the permitted `wip/<task-id>` flow, with public-repository safety checks.
 
@@ -82,11 +84,12 @@ Both active repositories are currently **public**. Never put credentials, securi
 
 ## 4. Exactly what to say at the START of every working session
 
-Open a **new** GPT or Claude chat and paste this message. You do not need to attach yesterday's chat or upload the logo again.
+Open a **new** chat with any AI seat (GPT, Claude, or AGY) and paste this message. Every seat must follow the Cold-Start Verification Gate in `docs/CLOSE_PROTOCOL.md` §3. You do not need to attach yesterday's chat or upload the logo again.
 
 ```text
 RESUME YCN LABS.
 
+Follow the Cold-Start Verification Gate in docs/CLOSE_PROTOCOL.md §3.
 Read the LATEST files from BOTH repositories, not cached chat summaries:
 
 WEBSITE:
@@ -122,34 +125,38 @@ Do NOT start implementing. Wait for me to select LOGO or WEBSITE.
 
 Say **“WORK ON LOGO”** or **“WORK ON WEBSITE.”** Choosing a workstream is **not** blanket approval for modifications. AGY should name the proposed task and ask for the necessary authorization.
 
-### Step 2 — Request one bounded task from GPT
+### Step 2 — Request task synthesis from the Owner-confirmed Task Lead
+
+After reviewing independent positions from the three seats, have the confirmed Task Lead (GPT, Claude, or AGY based on domain expertise) synthesize one bounded instruction.
 
 Example:
 
 ```text
-Using the verified current repository state, prepare ONE AGY task for
-[WORK ON LOGO / WORK ON WEBSITE]. Include exact scope, approved sources,
-file paths, safety boundaries, evidence to return, tests, expected outputs,
+Using the verified current repository state and the three independent positions,
+synthesize ONE bounded task for [WORK ON LOGO / WORK ON WEBSITE]. Include exact scope,
+approved sources, file paths, safety boundaries, evidence to return, tests, expected outputs,
 and an explicit STOP point. Do not execute or include unrelated tasks.
 ```
 
-### Step 3 — Have Claude review before AGY runs it
+### Step 3 — Have peer seats review before execution
+
+Have the non-leading AI seats independently review the synthesized task instruction.
 
 ```text
-Review this single AGY task against the latest AGENTS.md, Owner decisions,
-source authority, repository status, and CLOSE protocol. Give PASS or HOLD,
+Review this single task instruction against the latest AGENTS.md, Owner decisions,
+source authority, repository status, and CLOSE protocol. Give POSITION, PASS, or HOLD,
 with exact corrections. Do not execute it.
 ```
 
 ### Step 4 — Authorize and execute with AGY
 
-If Claude says PASS and you agree, give AGY the reviewed task. AGY must report its starting commit, touched paths, real commands and exit codes, generated evidence, changes, known limitations and STOP status.
+If peer reviews pass and you agree, authorize AGY to execute the bounded task. AGY must report its starting commit, touched paths, real commands and exit codes, generated evidence in `/proof/<task-id>/`, changes, known limitations and STOP status.
 
 ### Step 5 — Approve the result, not just the tool's report
 
 - **Logo:** Inspect side-by-side artwork/overlays and file-specific version/hash. Approve or reject each candidate explicitly.
 - **Website:** Inspect actual page screenshots/behavior and test results at relevant viewports and both themes; request fixes before approval.
-- **Code or release:** Claude checks diff and evidence. Follow the applicable gate before any main-branch push or deployment.
+- **Code or release:** Peer seats independently verify diff and saved proof files (`proof/<task-id>/log.txt` and git blobs). Follow the applicable gate before any main-branch push or deployment.
 
 ### Step 6 — Save significant work as it happens
 
@@ -215,7 +222,7 @@ The **binding technical specification** is [`ycn-labs-site/docs/CLOSE_PROTOCOL.m
 1. **Preflight:** Check both local repos and remotes; run the read-only `tools/close-preflight.sh` and capture the full candidate inventory.
 2. **Collect project files:** Check registered Downloads, Desktop top level, both repo working trees, and project-specific AGY scratch. Include files generated during the session; do not scan or move unrelated personal data indiscriminately.
 3. **Classify and copy:** Route brand files to the brand library, website files to the site repo, confidential/large/history material to the protected vault. Preserve original bytes, version collisions safely, and report anything unresolved.
-4. **Clean duplicates safely:** Delete only eligible files in designated temporary locations **after exact SHA-256 and canonical-copy checks**. Do not delete originals, repo files or vault records. Protected Desktop logo is never removed.
+4. **Clean duplicates safely:** Delete only eligible files in designated temporary locations **under an Owner-approved exact per-file manifest after exact SHA-256 and canonical-copy checks**. Never delete or move files automatically without explicit manifest approval. Do not delete originals, repo files or vault records. Protected Desktop logo is never removed.
 5. **Refresh active truth:** Update `site/docs/STATE.md`, `site/docs/BACKLOG.md`, brand `14_CONTINUITY/RESUME_HERE.md`, asset index, approval status and checksums. Mark superseded items; record **one next task per workstream** and all blockers.
 6. **Validate:** Brand `sha256sum -c`; website test suite if code changed; check file sizes, staged secret scan and any task-specific QA. Never claim a pass without supporting output.
 7. **Review and synchronize:** Use explicit Git paths, correct branches and permissions; publish only permitted housekeeping/approved work. Never send unreviewed code or sensitive files to public `main`. Check remote HEAD and worktree cleanliness in both repos.

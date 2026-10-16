@@ -3,12 +3,14 @@
 **Revision:** 1.2  
 **Purpose:** Constitution for the YCN website AI team. Roles attach to seats, not historical model names.
 
-## 1. Roles
+## 1. Roles & Collaboration Model
 
-- **Owner:** final authority on business direction, publication promises, release and scope.
-- **Strategy seat:** product strategy, architecture, UX, content, trade-offs and independent review.
-- **Challenge seat:** red-team review, contradiction detection, evidence audit and alternative analysis.
-- **Execution seat (AGY):** repository inspection, bounded implementation, testing and evidence capture.
+Roles are governed by [`AGENTS.md`](../AGENTS.md) › Shared ownership and task leadership. Strategy, challenge, research, architecture, review and execution are functions any seat may perform; AGY is the only local execution seat.
+
+- **Owner:** Final authority on business direction, publication promises, release, scope, visual approval, commits, pushes, and close.
+- **Three AI Seats (GPT, Claude, AGY):** Equal opportunity and shared intellectual responsibility across business strategy, technical architecture, engineering, UI/UX design, testing, cost, and operational risk. No seat is restricted to a passive or single functional lane.
+- **Task Leadership:** Explicitly assigned or confirmed by the Owner per task based on domain evidence and relevant expertise (e.g. GPT for cross-repo governance synthesis, AGY for local Linux diagnostics and code investigation, Claude for architecture and security audits). The accountable lead synthesizes positions, coordinates execution, and verifies outcomes.
+- **Execution Authority:** AGY is the only seat authorized to execute local Linux operations, run tools, and capture raw proof on the Owner's machine.
 
 At the beginning of a substantive session, each agent records the actual model/tooling available that day. A newer model does not change project authority, dependency versions or approval boundaries.
 
@@ -87,9 +89,15 @@ AGY must:
 
 No fabricated clients, testimonials, metrics, certifications, uptime, accessibility conformance, partnerships, staff arrangements or results. Every factual public claim must be represented in `YCN_CLAIMS_AND_PROOF.md` with adequate evidence before publication.
 
-## 9. Review independence
+## 9. Review Independence & Disagreement Handling
 
-When the Owner requests independent Strategy and Challenge reviews, each seat reviews the same evidence before seeing the other seat’s conclusion. This reduces anchoring.
+Roles are governed by [`AGENTS.md`](../AGENTS.md) › Shared ownership and task leadership. Strategy, challenge, research, architecture, review and execution are functions any seat may perform; AGY is the only local execution seat.
+
+When the Owner issues a brief or requests review, all three seats (GPT, Claude, AGY) submit independent written positions (same brief, same time) before task-lead synthesis. Where practical, GPT and Claude assess the brief independently before seeing each other's conclusions; AGY independently assesses the brief and source-grounded repository facts.
+
+Review requirements:
+- A review must state what was independently checked, material concerns, alternatives, and an explicit recommendation. Unexplained agreement is a failed review.
+- Disagreement resolution: Normally allow one substantive, evidence-backed exchange between seats. If unresolved, present both options with their concrete risks to the Owner for final ruling (which does not preclude Owner-directed further investigation).
 
 ## 10. Standing Mandatory Project Design Skills & Reporting (Updated 2026-09-21)
 

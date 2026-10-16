@@ -43,6 +43,9 @@ The YCN Labs project operates across three tightly bounded locations:
 
 ## 2. Mandatory Pre-Close Procedure (Step-by-Step)
 
+> [!IMPORTANT]
+> **Precedence Clause (Owner, 16 Oct 2026):** Where Steps A–D conflict with the Project file intake and evidence integrity rule in `AGENTS.md` (15 Oct 2026), that rule strictly governs: inspection occurs only within registered project paths; no session transcript or personal file searches; no file movements or deletions without an Owner-approved exact per-file manifest. `tools/close-preflight.sh` is a read-only inventory tool; it must not be run in its current form until a separately reviewed correction confines it to the approved inspection boundaries, and its output is an inventory, never an action.
+
 When **CLOSE** is issued, execute the following steps in sequence:
 
 ### Step A: Inventory Candidate Files
@@ -127,11 +130,27 @@ Update the authoritative continuity records in both repositories:
 
 ---
 
-## 3. Cold-Resume Guarantee
+## 3. Cold-Start Verification Gate
 
-When an AI agent (GPT, Claude, or AGY) starts a session weeks or years later, it must execute the following cold-start sequence:
-1. Open `https://github.com/yash-wd/ycn-labs-site/blob/main/docs/START_HERE.md` and `docs/STATE.md`.
-2. Open `https://github.com/yash-wd/ycn-labs-brand-library/blob/main/14_CONTINUITY/RESUME_HERE.md`.
-3. Check the last close timestamp, the one authorized next task per workstream, and pending Owner decisions.
-4. Ignore any task marked `SUPERSEDED`.
-5. Do not invent approvals or execute historical backlog items without explicit Owner instruction.
+Every working session and every new AI chat (GPT, Claude, or AGY) must execute this Cold-Start Verification Gate before proposing or executing work:
+
+1. **Verify Baseline & Alignment:**
+   - Confirm exact repository, branch, and published commit on GitHub (`yash-wd/ycn-labs-site @ main`).
+   - For AGY (with local Linux terminal): Run `git fetch && git status --porcelain` and verify `HEAD == origin/main`. For GPT and Claude (without terminal): Inspect published GitHub files and state that local worktree cleanliness requires AGY verification.
+2. **Read Authoritative State:**
+   - Read `docs/START_HERE.md`, `docs/STATE.md` (§2 in-flight queue), `docs/BACKLOG.md`, and controlling decisions in `docs/YCN_DECISIONS.md`.
+   - When Brand Library work is selected: Open and verify `https://github.com/yash-wd/ycn-labs-brand-library/blob/main/14_CONTINUITY/RESUME_HERE.md` and its controlling governance before proposing brand actions.
+   - Never rely on conversational memory, cached chat summaries, or previous chat transcripts.
+3. **Report Cold-Start Acknowledgment:**
+   Every seat's initial response must report the standardized cold-start fields:
+   - **Repository, Branch & Verified Commit:** Exact published commit hash.
+   - **Worktree State:** Cleanliness and upstream parity (or state AGY verification required).
+   - **Controlling Governance:** Relevant recent decisions and active guidelines.
+   - **Current Priority:** Single authorized task from `docs/STATE.md` §2.
+   - **Work Status:** Completed foundations vs outstanding/paused tasks (e.g. Tasks 07–09 paused until Gate E).
+   - **Pending Owner Approvals & Blockers:** Open items requiring Owner ruling.
+   - **Private Proof Dependencies:** Any proof or logs needed from `/proof/<task-id>/`.
+   - **Identified Conflicts / Superseded Docs:** Any stale guidance identified.
+   - **Independent Advice & Risks:** Specific observations from that seat's review.
+   - **Status Line:** Conclude with one status line (`POSITION`, `PASS`, `HOLD`, `EXECUTED-STOPPED`, or `BLOCKED`) and concise reason.
+4. **Discrepancy Rule:** If verified facts disagree with previous expectations, STOP and request Owner direction. Do not guess or silently repair.

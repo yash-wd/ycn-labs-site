@@ -5,11 +5,11 @@ Open this file on branch `main`. Before any work run `git fetch && git status --
 > "Websites and software. Built around your business. We turn business problems into digital products that help customers act, teams work clearly, and the business keep moving."  
 > — *docs/YCN_CONTENT_SPEC.md:28-31 (Ratified DECISION-040, docs/YCN_DECISIONS.md:136-137)*
 
-**Active Development Repository:** `https://github.com/yash-wd/ycn-labs-site`  
-**Active Development Branch:** `main` (Verified starting HEAD: `5dbab54fbbba7317efe7b8f5616ae250ce16b0f5`)  
-**Historical Private Reference:** `11468f4b36b3fdf451cd0bf04e5f2ee2868b45a5` (retained in `yash-wd/ycnlabs` on `site-v2`; preserved strictly for historical/recovery records)  
-**Local Vault Isolation:** Backups, business records, and raw proof frames remain in a local private vault outside GitHub.  
-**Production Deployment:** NO production deployment is authorized during active development.
+- **Active Development Repository:** `https://github.com/yash-wd/ycn-labs-site`
+- **Active Development Branch:** `main` (Current commit: verify with `git rev-parse HEAD` and check `docs/STATE.md`)
+- **Historical Private Reference:** `11468f4b36b3fdf451cd0bf04e5f2ee2868b45a5` (preserved on remote branch `site-v2` in `yash-wd/ycnlabs`; preserved strictly for historical/recovery records)
+- **Local Vault Isolation:** Backups, business records, and raw proof frames remain in a local private vault outside GitHub (`/home/ycn-labs/Desktop/YCN_LABS_MASTER/proof/`).
+- **Production Deployment:** NO production deployment is authorized during active development for `ycn-labs-site`. The historical `yash-wd/ycnlabs` live site may receive only Owner-authorized, preview-first hotfixes under isolated tasks.
 
 ---
 
@@ -43,23 +43,24 @@ Open this file on branch `main`. Before any work run `git fetch && git status --
 ## 4. Historical Owner Decisions (9 Oct Handoff §6) & Current Dispositions
 | Item | Topic | Status | Disposition |
 | :---: | :--- | :--- | :--- |
-| **1** | Capability-03 pilot | OPEN | Defect verified (table 446px in 352px container); visual verdict pending. |
-| **2** | Navbar border and scroll cue | PENDING OWNER | Option A recommended (80 px/s lap average); test update pending. |
-| **3** | Interim commit on `site-v2` | **RESOLVED (12 Oct)** | Committed locally (`11468f4b…`); historical private checkpoint. |
-| **4** | Rulebook update | PENDING | DECISION-051+, CONTENT_SPEC §3, INDEX.md scheduled. |
-| **5** | Homepage structure (7 vs 6 chapters) | PENDING OWNER | 7 vs 6 chapters and results section review pending. |
-| **6** | UK metadata (GB metadata) | PENDING OWNER | Scheduled for business review gate. |
-| **7** | Staging credentials and lead retention | PENDING OWNER | Staging environment credentials and retention policy pending. |
-| **8** | Replacement wording for two form lines | PENDING OWNER | Copy review for two form lines pending. |
+| **1** | Capability-03 pilot | OPEN | Defect verified (table 446px in 352px container); visual verdict pending Gate E. |
+| **2** | Navbar border and scroll cue | PENDING GATE E | Option A (80 px/s lap average) ratified in `docs/YCN_DESIGN_SYSTEM.md`; coding paused until Gate E. |
+| **3** | Interim commit on `site-v2` | **RESOLVED (12 Oct)** | Committed locally and pushed to remote `site-v2` (`11468f4b…`); historical private checkpoint. |
+| **4** | Rulebook update | **RESOLVED** | DECISION-051+ ratified; CONTENT_SPEC §3 aligned. |
+| **5** | Homepage structure (7 vs 6 chapters) | PENDING GATE E | DECISION-053/054 copy ratified; chapter implementation H-03 / W-06 layout pending Gate E. |
+| **6** | UK metadata (GB metadata) | PENDING IMPLEMENTATION | India-first/INR policy approved (DECISION-052 O-01 / DECISION-054); metadata cleanup and route implementation pending. |
+| **7** | Staging credentials and lead retention | PENDING IMPLEMENTATION & LEGAL | 12-month retention policy approved (DECISION-052 O-06 / ARCH-V1-01); staging credentials (O-10) and legal clearance pending. |
+| **8** | Replacement wording for two form lines | RESOLVED IN SPEC | DECISION-053 ratified exact lines in CONTENT_SPEC; application implementation pending. |
 | **9** | Carried items (Esc, scope, export, kicker) | PENDING GATES | Esc key handler, brand scope, Hero kicker in delivery backlog. |
 
 ---
 
-## 5. The Four Roles (Owner + Three AI Seats)
-- **Owner:** Final authority, sole visual verdict, commercial and release approval.
-- **GPT Strategy:** Strategic planning, task scoping, drafts exactly ONE instruction at a time.
-- **Claude Review:** Pre-execution audit, exception verification against raw outputs, technical gatekeeper.
-- **AGY Execution:** Local Linux seat, reports raw output, strictly enforces checkpoints, never commits unapproved.
+## 5. Roles & Operating Model
+Roles are governed by [`AGENTS.md`](../AGENTS.md) › Shared ownership and task leadership. Strategy, challenge, research, architecture, review and execution are functions any seat may perform; AGY is the only local execution seat.
+
+- **Owner:** Final authority on business direction, priorities, scope, legal wording, visual verdicts, releases, commits, pushes, deployments, and close.
+- **Three Collaborative AI Seats (GPT, Claude, AGY):** Proactive intellectual contributors across business, architecture, code, design, cost, risk, and testing. Independent written assessments precede task synthesis; task leadership is assigned or confirmed by the Owner per task based on domain evidence.
+- **AGY Execution Authority:** AGY is the sole seat authorized to operate the local Linux filesystem, execute shell commands, and generate raw proof artifacts under the file intake and evidence rules.
 
 ---
 
@@ -71,4 +72,4 @@ Open this file on branch `main`. Before any work run `git fetch && git status --
 ---
 
 ## 7. Next Immediate Workstream
-Pending Owner decision on Navbar (Option A vs B) and bounded test update approval (`__tests__/navbar-polish-04.test.tsx`), execute `YCN-NAV-ORIGINAL-STYLE-01`.
+Current priorities and the single next operational task are governed dynamically by [`docs/STATE.md`](STATE.md) §2 and [`docs/BACKLOG.md`](BACKLOG.md). UI and backend coding (including Navbar Task 07 and Capability-03 Task 08) remain PAUSED until Gate E readiness and explicit Owner approval.

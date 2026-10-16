@@ -1,7 +1,7 @@
 > **Active Development Repository:** Public `ycn-labs-site` (`https://github.com/yash-wd/ycn-labs-site`) on branch `main`. Read `docs/START_HERE.md` first.  
 > **Historical Reference Notice:** The former private repository (`yash-wd/ycnlabs`) and branch `site-v2` are preserved for historical record.  
 > **Current Homepage Architecture:** `app/page.tsx` → `components/CinematicHomepage.tsx` → `components/homepage/vnext/HomepageVNextPhase1.tsx`. Older homepage components in `components/` are not current simply because they exist; retain them pending verified import analysis.  
-> **Deployment Constraint:** No production deployment is authorized.
+> **Deployment Constraint:** No production deployment is authorized for `ycn-labs-site`. The historical `yash-wd/ycnlabs` live site may receive only Owner-authorized, preview-first hotfixes under isolated tasks.
 
 # YCN Labs — AI Agent Operating Instructions
 
@@ -10,20 +10,21 @@ This is an active commercial project operating under strict governance and safet
 
 ---
 
-## 1. Mandatory Reading Order (Cold Start)
+## 1. Reference Reading Order (Subordinate to Cold-Start Verification Gate)
 
-Before proposing or making any change, read these files in order:
+Reference navigation only; the mandatory cold-start sequence is `docs/CLOSE_PROTOCOL.md` §3.
 
-1. **[`docs/INDEX.md`](docs/INDEX.md)** — Master documentation index and authority map.
-2. **[`docs/YCN_AGENT_OPERATING_PROTOCOL.md`](docs/YCN_AGENT_OPERATING_PROTOCOL.md)** — Operating boundaries, zero-loss rules, shop-owner sentence test.
-3. **Relevant Specs:**
+1. **[`docs/START_HERE.md`](docs/START_HERE.md)** — Canonical entry point and context.
+2. **[`docs/STATE.md`](docs/STATE.md)** & **[`docs/BACKLOG.md`](docs/BACKLOG.md)** — Single source of truth for repository state, in-flight queue, and roadmap.
+3. **[`docs/INDEX.md`](docs/INDEX.md)** — Master documentation index and document registry.
+4. **[`docs/YCN_AGENT_OPERATING_PROTOCOL.md`](docs/YCN_AGENT_OPERATING_PROTOCOL.md)** — Operating boundaries, zero-loss rules, shop-owner sentence test.
+5. **Relevant Specs:**
    - For UI/Text: [`docs/YCN_CONTENT_SPEC.md`](docs/YCN_CONTENT_SPEC.md) & [`docs/YCN_DESIGN_SYSTEM.md`](docs/YCN_DESIGN_SYSTEM.md)
    - For Logic: [`docs/YCN_REQUIREMENTS.md`](docs/YCN_REQUIREMENTS.md) & [`docs/YCN_MASTER_PLAN.md`](docs/YCN_MASTER_PLAN.md)
-4. **[`docs/YCN_AGY_TASKS.md`](docs/YCN_AGY_TASKS.md)** — Current authorized task queue.
-5. **[`docs/YCN_DECISIONS.md`](docs/YCN_DECISIONS.md)** — Binding Owner architecture & scope decisions.
-6. **[`docs/YCN_CLAIMS_AND_PROOF.md`](docs/YCN_CLAIMS_AND_PROOF.md)** — Evidentiary rules for marketing claims.
-7. **[`docs/YCN_RISKS_AND_TECH_DEBT.md`](docs/YCN_RISKS_AND_TECH_DEBT.md)** — Active risks, controls, and technical debt.
-8. **[`docs/CLOSE_PROTOCOL.md`](docs/CLOSE_PROTOCOL.md)** — Permanent close, consolidation, and cold-resume protocol (`YCN-CLOSE-PROTOCOL-01`).
+6. **[`docs/YCN_DECISIONS.md`](docs/YCN_DECISIONS.md)** — Binding Owner architecture & scope decisions.
+7. **[`docs/YCN_CLAIMS_AND_PROOF.md`](docs/YCN_CLAIMS_AND_PROOF.md)** — Evidentiary rules for marketing claims.
+8. **[`docs/YCN_RISKS_AND_TECH_DEBT.md`](docs/YCN_RISKS_AND_TECH_DEBT.md)** — Active risks, controls, and technical debt.
+9. **[`docs/CLOSE_PROTOCOL.md`](docs/CLOSE_PROTOCOL.md)** — Permanent close, consolidation, and cold-resume protocol (`YCN-CLOSE-PROTOCOL-01`).
 
 Current YCN site direction: [`docs/vnext/00_START_HERE.md`](docs/vnext/00_START_HERE.md). This direction is subordinate to YCN_DECISIONS, YCN_CLAIMS_AND_PROOF and YCN_CONTENT_SPEC.
 
@@ -108,7 +109,7 @@ You have direct access to two specialized design and component MCP servers:
 ## Standing operating rules (13 Oct 2026)
 
 Identity: public repo https://github.com/yash-wd/ycn-labs-site, branch main, working copy /home/ycn-labs/Desktop/ycn-labs-site. The private repo ycnlabs and YCN_LABS_MASTER are read-only archives; never modify them unless a task names them.
-Start of every chat: git fetch; git status --porcelain; git rev-parse HEAD and origin/main (must match); read docs/START_HERE.md, docs/STATE.md, docs/BACKLOG.md; state HEAD before any work.
+Start of every chat: follow the Cold-Start Verification Gate in docs/CLOSE_PROTOCOL.md §3, which defines the reading order and the acknowledgment; git fetch; git status --porcelain; git rev-parse HEAD and origin/main (must match); read docs/START_HERE.md, docs/STATE.md, docs/BACKLOG.md; state HEAD before any work (GPT and Claude inspect published GitHub files and note that worktree cleanliness requires AGY verification).
 Tasks: only from the Owner's message, one at a time, stop at the STOP line, no extra work. Owner words: A/B, yes/no, seen, push. A recommendation is not an approval. Unclear → ask: "Sir, I have a question."
 Evidence: raw command output and exit codes; file hashes from sha256sum, never typed; never rewrite a log, never delete your output and rerun silently; on any failure stop and report. Report format: task ID, HEAD before/after, commands + output, changed files, what was NOT done, blockers.
 Forbidden without explicit words: rm -rf outside scratch, git reset --hard, git clean, git push --force, --amend on pushed commits, git add -A (use explicit paths). Never print .env values (names only), never read shell history, never paste tokens.
@@ -116,7 +117,7 @@ Code: before any code commit run pnpm run lint, check-types, test, build and pas
 Visual work: before/after screenshots at 375/768/1024/1280/1440, both themes, reduced motion; save to the vault under proof/<task-id>/ and give paths.
 Dev server: pnpm run dev on port 3005 for development; stop it at day end; pnpm start only to verify a build.
 Skills/MCP: use the installed skills and MCP servers where they fit (design, UI/UX, browser, testing); name which one you used in each report; never claim a skill you do not actually have.
-End of day, always: every approved green change committed and pushed to main; unfinished work committed to branch wip/<task-id> and pushed (nothing lives only on this laptop); then ./tools/close-day.sh "<done>; <next>" → STATE.md pushed; paste git log -1 and git status; state explicitly if anything remains unpushed.
+End of day: closing occurs ONLY when the Owner gives the explicit word CLOSE, governed strictly by docs/CLOSE_PROTOCOL.md and the Owner close rule below. Never run tools/close-day.sh automatically or declare a session closed without the Owner's explicit instruction. Every approved green change committed and pushed to main; unfinished work committed to branch wip/<task-id> and pushed (nothing lives only on this laptop); state explicitly if anything remains unpushed.
 
 ## Owner's standing advisory mandate (13 Oct 2026, binding until final closeout)
 Every AI seat on YCN Labs (GPT, Claude, AGY) works to this standard:
@@ -147,6 +148,17 @@ Every YCN Labs project file received, downloaded, generated or created by any AI
 7. **Integrity verification.** After finishing the evidence log, compute and report its SHA-256 without subsequently modifying that log. The Owner/reviewer may independently inspect or hash it. A PASS requires genuine command evidence; narrative summaries cannot substitute for it. Private proof files must never be committed to public GitHub.
 
 This rule applies to GPT, Claude, AGY and all future AI agents on the project. It does not grant authority to change repository branches, approved assets, code, production deployment, or existing Owner approval gates.
+
+## Shared ownership and task leadership (Owner, 16 Oct 2026 — binding until final closeout)
+1. Every seat — GPT, Claude, AGY — thinks about the whole project: business, architecture, code, design, cost, risk, testing. No seat is limited to strategy, review or execution.
+2. Independent first, together second. For each brief, each seat writes its own position before reading the others'. Positions are inputs; they are never executed separately. One task has one lead, one synthesized instruction, one execution, one reviewed commit.
+3. The lead is named in the task instruction and confirmed by the Owner's authorization; any seat may lead. The lead synthesizes the positions, makes ordinary technical choices inside the approved scope, coordinates and verifies. Protected decisions — scope, money, legal wording, commits, pushes, deployment, close — stay with the Owner.
+4. A review states what was checked, what is wrong or missing, and what the reviewer would do instead. "Agree" alone is a failed review.
+5. Disagreement: one evidence-backed exchange between seats; if unresolved, both options with their risks go to the Owner, who may order further investigation.
+6. Evidence: native Git output, blobs, saved proof files and hashes are authoritative. Chat pastes are reports, not proof.
+7. AGY alone executes on the Owner's machine, logged under the file-intake and evidence rule.
+8. Every seat's reply ends with one status line — POSITION, PASS, HOLD, EXECUTED-STOPPED or BLOCKED — with the reason, so the Owner can scan three replies in seconds.
+9. Every new chat starts with the Cold-Start Verification Gate in docs/CLOSE_PROTOCOL.md; published GitHub facts override any chat memory.
 
 ## Three-Seat Collaboration and Decision Authority (Owner, 15 October 2026, binding until final closeout)
 
