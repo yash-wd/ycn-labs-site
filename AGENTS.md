@@ -42,6 +42,68 @@ Current YCN site direction: [`docs/vnext/00_START_HERE.md`](docs/vnext/00_START_
 
 ---
 
+# MANDATORY PROJECT RULE: Project-Wide Checklist & Continuity Tracking System
+
+> **CRITICAL BINDING INSTRUCTION FOR ALL AI AGENTS (GPT, CLAUDE, AGY) & PAIR PROGRAMMERS**  
+> Effective Date: 17 October 2026  
+> Authority: Standing Owner Directive (Owner alone authorizes; AI seats advise and review)
+
+### 1. Mandatory Checklist Tracking Discipline
+1. **Universal Tracking:** Every project requirement, architectural decision, development task, design token, test, bug fix, migration step, and Owner instruction must be recorded as a checklist item in the canonical files before any work begins:
+   - [`docs/BACKLOG.md`](docs/BACKLOG.md) — Authoritative task checkboxes and acceptance status.
+   - [`docs/STATE.md`](docs/STATE.md) — Current verified project state, single next task, blockers, and daily handoff.
+   - [`docs/YCN_READINESS_CHECKLIST.md`](docs/YCN_READINESS_CHECKLIST.md) — Master 143-point readiness tracker (Foundation, Design-to-Code Contract, Brand/Logo, Migration, External Infrastructure, and QA).
+2. **Standard Checkbox Format:** Use standard GitHub markdown task checkboxes (`- [ ]` and `- [x]`) followed by explicit status tags:
+   - `- [x] **[VERIFIED]**` — All completion criteria met with verifiable evidence (Git commit SHA, CI run exit 0, or preserved proof hash).
+   - `- [ ] **[LOCAL-WIP]**` — Implemented locally; technical review passed; awaiting Owner visual sign-off or remote publication.
+   - `- [ ] **[PENDING]**` — Defined with clear scope and dependencies; awaiting turn in execution queue.
+   - `- [ ] **[OWNER-GATE]**` — Blocked on an explicit Owner decision, credential, or visual sitting.
+3. **No Unverified Claims:** A checklist item is checked `- [x]` ONLY when all required gates have passed. No narrative summary or conversational memory can substitute for raw command evidence.
+4. **Owner Instructions Protocol:** When the Owner provides new instructions, directions, or feedback, the agent must immediately capture the task, requirements, dependencies, completion criteria, evidence, and next action in the checklist before execution.
+5. **Proactive Advice & Superior Solutions:** All AI seats (AGY, GPT, Claude) are explicitly authorized and encouraged to propose better ideas, identify gaps, and suggest superior technical or architectural implementations. However, proposals remain suggestions until the Owner explicitly authorizes execution.
+6. **WIP Routing & Branch Isolation:** Unreviewed work, local drafts, and in-progress tasks route strictly to dedicated `wip/<task-id>` branches, NEVER to `main` (even at CLOSE). Only reviewed, Owner-authorized work may land on `main`.
+
+### 2. Mandatory Daily Synchronization Commands (Branch-Aware)
+To guarantee that GPT, Claude, AGY, and future sessions resume from the exact same published baseline:
+1. **At Cold-Start (Start of Every Session, before any work):**
+   Execute across all three registered repositories (`ycn-labs-site`, `ycn-labs-brand-library`, `ycnlabs` historical):
+   ```bash
+   git fetch && git status --porcelain && git branch -vv && echo "origin/main: $(git rev-parse origin/main)"
+   ```
+   Compare each local branch against its own tracking upstream (`git branch -vv`); record `origin/main` separately. Valid WIP branches will differ from `main` and must never be treated as errors. Any unexpected divergence, uncommitted drift, or missing upstream = **STOP and report**. Never silently rebase, reset, or overwrite work.
+2. **At Close (Owner-Authorized CLOSE):**
+   Execute the start-of-day commands plus:
+   ```bash
+   git ls-remote origin
+   ```
+   Reconcile published commits, CI, WIP branches, unresolved files, decisions, deviations, and tomorrow's task. If synchronization cannot safely complete, report **`CLOSE BLOCKED`** rather than claiming success.
+
+### 3. Established Technical Corrections (Binding Standards)
+- **PostgreSQL Durable Deduplication:** Atomic deduplication must be enforced by PostgreSQL transactions and unique constraints, NOT Redis. (Redis is restricted to rate limiting and ephemeral cache).
+- **Signature Perimeter Motion Scope:** The 80 px/s continuous motion rule applies strictly to the Navigation Menu capsule (Task 07) and the three CTA buttons (Task 07b). It does NOT apply to every decorative animation across the website.
+- **Design Proposals vs Approved System:** Draft proposals (e.g., 1280px max-width, proposed token names, typography tweaks) are NOT approved replacements for `docs/YCN_DESIGN_SYSTEM.md`. They must be reconciled through the formal audit.
+- **Selective Legacy Migration:** Historical repository (`yash-wd/ycnlabs`) is NEVER git-merged into `ycn-labs-site`. Migration is strictly selective carry-over with 301 redirects in `next.config.mjs` and SHA-256 asset intake.
+- **Rollback & Historical DB Status:** The 30-day / 60-second rollback and historical lead database retention are plans, NOT verified operational facts.
+- **Logo Derivatives:** Only the 8K Master (`Main_YCN_LABS_logo_black_8K__6675x5195.png`, Owner RULING-01) is approved. Derivatives on `wip/brand-export-05` are unapproved candidates until Owner's 30-minute visual review sitting.
+- **Frozen Systems Protection:** The 5 frozen systems (`VF19`, `INPUT-GATE-01`, `NAV-07`, `POLISH-TYPE-01`, `HOME-01C`) cannot be altered without explicit Owner ruling.
+
+### 4. Task-by-Task Working Checklist Protocol (Owner Standing Rule, 17 Oct 2026)
+1. **Scope & Initiation:** For every authorized task, the active seat must maintain a small, focused, task-specific working checklist (`CHECKLIST.md`) located in the task's private proof vault directory: `/home/ycn-labs/Desktop/YCN_LABS_MASTER/proof/<task-id>/CHECKLIST.md`. Working checklists do NOT belong in the public repository.
+2. **Standard Working Checklist Structure:**
+   - **Task ID, Scope & Owner Authorization:** Exact outcome requested and authorization reference.
+   - **Governing Specs & Research:** Focused research proportional to task risk and unknowns.
+   - **Dependencies & File Boundaries:** Exact list of files permitted to be touched.
+   - **Step-by-Step Implementation Checkpoints:** Granular, sequential execution steps.
+   - **Automated Tests & Evidence:** Test commands, raw outputs, hashes, and exit codes.
+   - **Independent Multi-Seat Review:** Findings and verdict (`POSITION`, `PASS`, `HOLD`, `BLOCKED`).
+   - **Owner Sign-off & Publication:** Final Owner approval, commit SHA, and remote sync record.
+3. **Evidence-Gated Completion:** Checkpoints are checked only when reproducible evidence exists.
+4. **Lifecycle & Archival:** When the task completes, final results and commit hashes are recorded in the permanent canonical files (`docs/BACKLOG.md`, `docs/STATE.md`, and `docs/YCN_READINESS_CHECKLIST.md`). The temporary checklist is marked DONE and preserved with task proof files; physical deletion requires an Owner-approved manifest under the file-custody rule.
+5. **Universal Execution Order:** Every seat executes in the same sequence:
+   **understand → research → plan → implement → test → independent review → Owner approval → publish → record.**
+
+---
+
 # MANDATORY PROJECT RULE: Always Use Installed Design Skills & MCP Servers
 
 > **CRITICAL BINDING INSTRUCTION FOR ALL AI AGENTS & PAIR PROGRAMMERS**  
@@ -116,7 +178,7 @@ You have direct access to two specialized design and component MCP servers:
 ## Standing operating rules (13 Oct 2026)
 
 Identity: public repo https://github.com/yash-wd/ycn-labs-site, branch main, working copy /home/ycn-labs/Desktop/ycn-labs-site. The private repo ycnlabs and YCN_LABS_MASTER are read-only archives; never modify them unless a task names them.
-Start of every chat: follow the Cold-Start Verification Gate in docs/CLOSE_PROTOCOL.md §3, which defines the reading order and the acknowledgment; git fetch; git status --porcelain; git rev-parse HEAD and origin/main (must match); read docs/START_HERE.md, docs/STATE.md, docs/BACKLOG.md; state HEAD before any work (GPT and Claude inspect published GitHub files and note that worktree cleanliness requires AGY verification).
+Start of every chat: follow the Cold-Start Verification Gate in docs/CLOSE_PROTOCOL.md §3, which defines the reading order and the acknowledgment; git fetch; git status --porcelain; git rev-parse HEAD and origin/main (must match on main; on wip/* compare to the branch's own tracking upstream); read docs/START_HERE.md, docs/STATE.md, docs/BACKLOG.md; state HEAD before any work (GPT and Claude inspect published GitHub files and note that worktree cleanliness requires AGY verification).
 Tasks: only from the Owner's message, one at a time, stop at the STOP line, no extra work. Owner words: A/B, yes/no, seen, push. A recommendation is not an approval. Unclear → ask: "Sir, I have a question."
 Evidence: raw command output and exit codes; file hashes from sha256sum, never typed; never rewrite a log, never delete your output and rerun silently; on any failure stop and report. Report format: task ID, HEAD before/after, commands + output, changed files, what was NOT done, blockers.
 Forbidden without explicit words: rm -rf outside scratch, git reset --hard, git clean, git push --force, --amend on pushed commits, git add -A (use explicit paths). Never print .env values (names only), never read shell history, never paste tokens.
@@ -138,7 +200,7 @@ Every AI seat on YCN Labs (GPT, Claude, AGY) works to this standard:
 This mandate sets the standard of advice. It grants no authority: Owner approval, review gates, Git safety rules and frozen systems above remain in force.
 
 ## Owner close rule (13 Oct 2026, compulsory every session)
-A session ends only when: (1) all approved work is committed and pushed, HEAD = origin/main, working tree clean; (2) docs/STATE.md and docs/BACKLOG.md show the true status of every task, every pending Owner decision and the single next task; (3) the Last Session block is checked after tools/close-day.sh, because the script shortens it; (4) unfinished work is on wip/<task-id> and pushed. A new chat must be able to resume from GitHub alone.
+A session ends only when: (1) all approved work is committed and pushed, HEAD = origin/main on main (or pushed to tracking upstream on wip/*), working tree clean; (2) docs/STATE.md and docs/BACKLOG.md show the true status of every task, every pending Owner decision and the single next task; (3) the Last Session block is checked after tools/close-day.sh, because the script shortens it; (4) unfinished work is on wip/<task-id> and pushed. A new chat must be able to resume from GitHub alone.
 
 Addendum (Owner, 15 Oct 2026): A session closes only on the Owner's word `close`; no seat runs close-day, writes a close commit or declares the day closed without it. No partial or unauthorized commits at any time: every commit is either a reviewed task commit or the Owner-authorized close commit. At `close`: every approved commit pushed; local main = origin/main; working tree clean; nothing unpushed in the website, brand or historical repositories; docs/STATE.md Last Session lists in this order: published commits with SHAs, completed, not done, tomorrow's first task, Owner pending, deviations, paused; BACKLOG mirrors it. The test is that a new chat resumes from GitHub alone without ambiguity.
 

@@ -16,10 +16,11 @@ For any human engineer, contributor, or AI agent (GPT, Claude, AGY), read in thi
 1. **Entry Point ([`docs/START_HERE.md`](START_HERE.md))** — Canonical repository entry point and context. Open this first.
 2. **Current State ([`docs/STATE.md`](STATE.md))** — Single source of truth for repository state, in-flight work, and recent decisions.
 3. **Backlog & Execution Queue ([`docs/BACKLOG.md`](BACKLOG.md))** — Master launch execution queue and active backlog authority.
-4. **Agent Governance ([`AGENTS.md`](../AGENTS.md))** — Permanent rules: Three-Seat Shared Ownership, evidence law, and Cold-Start Verification Gate.
-5. **This Index ([`docs/INDEX.md`](INDEX.md))** — Understand the active authority and document registry.
-6. **Operating Protocol ([`docs/YCN_AGENT_OPERATING_PROTOCOL.md`](YCN_AGENT_OPERATING_PROTOCOL.md))** — Core operational rules and review procedures.
-7. **Living Ledgers:**
+4. **Readiness Checklist ([`docs/YCN_READINESS_CHECKLIST.md`](YCN_READINESS_CHECKLIST.md))** — Master 143-point project control and evidence readiness ledger.
+5. **Agent Governance ([`AGENTS.md`](../AGENTS.md))** — Permanent rules: Three-Seat Shared Ownership, evidence law, and Cold-Start Verification Gate.
+6. **This Index ([`docs/INDEX.md`](INDEX.md))** — Understand the active authority and document registry.
+7. **Operating Protocol ([`docs/YCN_AGENT_OPERATING_PROTOCOL.md`](YCN_AGENT_OPERATING_PROTOCOL.md))** — Core operational rules and review procedures.
+8. **Living Ledgers:**
    - **[Decisions](YCN_DECISIONS.md)** — Binding owner architectural, scope, and vNext decisions (DECISION-001 through DECISION-054).
    - **[Claims & Proof](YCN_CLAIMS_AND_PROOF.md)** — Evidentiary backing for all public marketing claims.
    - **[Content Spec](YCN_CONTENT_SPEC.md)** — Canonical approved public copy and candidate copy under review.
@@ -43,7 +44,9 @@ These files constitute the **single active documentation authority** for the rep
 | **Requirements** | [`docs/YCN_REQUIREMENTS.md`](YCN_REQUIREMENTS.md) | Product Owner | Business requirements, user journeys, acceptance criteria | Scope revision |
 | **Content Spec** | [`docs/YCN_CONTENT_SPEC.md`](YCN_CONTENT_SPEC.md) | Product Owner | Authoritative copy, shop-owner vocabulary, translation tables | Copy revision |
 | **Design System** | [`docs/YCN_DESIGN_SYSTEM.md`](YCN_DESIGN_SYSTEM.md) | Design Lead | Semantic tokens, color rules, type scale, motion limits | Token/style change |
+| **Design-to-Code Contract** | [`docs/YCN_DESIGN_TO_CODE_CONTRACT.md`](YCN_DESIGN_TO_CODE_CONTRACT.md) | Design & QA Leads | Token mapping, hardcoded hex audit, 5-viewport screenshot matrix | Foundation alignment |
 | **Active Execution Queue** | [`docs/BACKLOG.md`](BACKLOG.md) / [`docs/STATE.md`](STATE.md) | Product Owner | Primary active launch execution queue and in-flight status | Task milestone / Close |
+| **Readiness Checklist** | [`docs/YCN_READINESS_CHECKLIST.md`](YCN_READINESS_CHECKLIST.md) | Quality Lead / All Seats | 143-point Project Control & Evidence Readiness Checklist | Daily Sync / Task Gate |
 | **Historical Task Reference** | [`docs/YCN_AGY_TASKS.md`](YCN_AGY_TASKS.md) | Lead Engineer | Subordinate execution phases aligned with vNext roadmap | Reference only |
 | **Test Checklist** | [`docs/YCN_TEST_CHECKLIST.md`](YCN_TEST_CHECKLIST.md) | QA Lead | Regression tests, accessibility audit, fail-closed validation | Test plan update |
 | **Decisions Log** | [`docs/YCN_DECISIONS.md`](YCN_DECISIONS.md) | Owner | Binding decision records (DECISION-001 through DECISION-054) | Major decision |

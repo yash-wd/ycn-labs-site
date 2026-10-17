@@ -1,6 +1,6 @@
 # YCN Labs — Canonical Project Entry & Context
 
-Open this file on branch `main`. Before any work run `git fetch && git status --porcelain` to verify a clean working tree aligned with `origin/main`.
+Open this file on branch `main`. Before any work run `git fetch && git status --porcelain && git branch -vv` to verify a clean working tree aligned with `origin/main` (or with tracking upstream if on an authorized `wip/*` branch).
 
 > "Websites and software. Built around your business. We turn business problems into digital products that help customers act, teams work clearly, and the business keep moving."  
 > — *docs/YCN_CONTENT_SPEC.md:28-31 (Ratified DECISION-040, docs/YCN_DECISIONS.md:136-137)*
