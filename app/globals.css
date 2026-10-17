@@ -318,8 +318,11 @@ p {
   to   { stroke-dashoffset: -100; }
 }
 
+/* YCN-NAV-07 continuous perimeter orbit.
+   GSAP ticker is the sole owner of stroke motion at 80 px/s (±5%) with monotonic distance-based phase.
+   Filter provides the cyan optical signal glow.
+   Fallback SSR baseline: animation: ycn-navbar-full-orbit 5s linear infinite */
 .ycn-navbar-perimeter-orbit {
-  animation: ycn-navbar-full-orbit 5s linear infinite;
   filter: drop-shadow(0 0 2px var(--signal-cyan));
 }
 
