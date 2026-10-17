@@ -1,0 +1,6 @@
+[allowlist]
+paths = [
+  "^\\.next/",
+  "^node_modules/",
+  "^\\.git/",
+]

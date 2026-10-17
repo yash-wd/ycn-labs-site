@@ -9,7 +9,8 @@
     "start": "next start --port 3005",
     "lint": "eslint .",
     "check-types": "tsc --noEmit",
-    "test": "vitest run"
+    "test": "vitest run",
+    "gitleaks": "gitleaks detect --source . -v && gitleaks dir . -v --config=.gitleaks.toml"
   },
   "dependencies": {
     "@hookform/resolvers": "^5.4.0",
@@ -40,6 +41,7 @@
     "postcss": "^8.5.28",
     "tailwindcss": "^4.3.2",
     "typescript": "5.9.2",
+    "typescript-eslint": "^8.71.2",
     "vitest": "^4.1.10"
   }
 }

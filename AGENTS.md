@@ -83,6 +83,13 @@ For every frontend, UI/UX, styling, animation, component, layout, or page task, 
 8. **Companion Suite**  
    - `brand`, `design-system`, `ui-styling` (shadcn/Radix/Tailwind), `banner-design`, `slides`, `threejs-webgl`, `spline-interactive`, `lottie-animations`.
 
+9. **`chaiui` & `chaiui-review`** (Owner Design Directive, 17 Oct 2026)  
+   - Source: `https://ui.chaicode.com` (Installed globally to `~/.agents/skills/chaiui` and `~/.agents/skills/chaiui-review`).
+   - `chaiui`: Supporting shadcn component registry resource (`@chaiui/*` via shadcn CLI) and component design reference (asymmetric button corners, sharp hairline borders, subtle micro-interactions).
+   - `chaiui-review`: Automated inspection tool to check UI code, CSS tokens, and component files against ChaiUI design rules.
+   - **Subordinate Design Authority:** `docs/YCN_DESIGN_SYSTEM.md` remains strictly authoritative and unchanged. ChaiUI components must be restyled with YCN design tokens, colors, and typography (Space Grotesk / Inter). ChaiUI's full visual theme is never imported to override YCN's approved design.
+   - **Instruction Audit (17 Oct 2026):** Verified clean: contains no malicious agent instructions, telemetry, or security bypasses.
+
 ---
 
 ## 2. MANDATORY MCP SERVERS UTILIZATION
