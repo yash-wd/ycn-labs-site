@@ -40,6 +40,7 @@ These files constitute the **single active documentation authority** for the rep
 | **vNext Manifest** | [`docs/vnext/MANIFEST.md`](vnext/MANIFEST.md) | Lead Architect | Inventory of 17 vNext specs + prototypes | vNext doc update |
 | **Master Index** | [`docs/INDEX.md`](INDEX.md) | Lead Architect | Documentation homepage, authority map, and navigation guide | Adding/deprecating docs |
 | **Operating Protocol** | [`docs/YCN_AGENT_OPERATING_PROTOCOL.md`](YCN_AGENT_OPERATING_PROTOCOL.md) | Owner | Operational rules, boundaries, and safe execution constraints | Protocol amendment |
+| **Owner Instructions Register** | [`docs/YCN_OWNER_INSTRUCTIONS_REGISTER.md`](YCN_OWNER_INSTRUCTIONS_REGISTER.md) | Owner | Permanent register of standing directives, rules, and deviations (OI-01 to OI-17) | Direct Owner instruction |
 | **Master Plan** | [`docs/YCN_MASTER_PLAN.md`](YCN_MASTER_PLAN.md) | Lead Architect | High-level system architecture, site topology, and milestones | Major milestone |
 | **Requirements** | [`docs/YCN_REQUIREMENTS.md`](YCN_REQUIREMENTS.md) | Product Owner | Business requirements, user journeys, acceptance criteria | Scope revision |
 | **Content Spec** | [`docs/YCN_CONTENT_SPEC.md`](YCN_CONTENT_SPEC.md) | Product Owner | Authoritative copy, shop-owner vocabulary, translation tables | Copy revision |

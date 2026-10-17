@@ -252,3 +252,19 @@ GPT, Claude and Google Antigravity (AGY) are three independent advisory particip
 **7. Disagreements and final authority.** Material disagreement between AI participants is presented to the Owner with the competing options, evidence, risks and recommendation. No individual AI may resolve the disagreement by executing its preferred solution. The Owner retains final authority, except for explicitly delegated decisions handled through the approved multi-seat review procedure.
 
 **8. Permanent applicability.** This rule applies to all future YCN Labs tasks, reviews, implementation phases, operational preparation and release activities until final project closeout. It supplements existing `AGENTS.md`, security, evidence, Owner approval and Git safety requirements; it does not weaken them.
+
+## Permanent Artifact Intake & Cross-Seat Handoff Protocol (Owner, 17 Oct 2026 — binding until final closeout)
+
+> **STANDING INSTRUCTION (OI-16):** Every artifact generated, downloaded, created, shared, or mentioned in any chat or workspace MUST be identified, handed to AGY, stored in its canonical project folder, and published to GitHub if project-necessary. All AI seats are jointly responsible for immediate notification and custody tracking.
+
+1. **Mandatory Notification at Creation:** Whenever any AI seat (GPT, Claude, AGY) generates a downloadable file, checklist, architectural draft, code snippet, or analysis dataset, it MUST explicitly announce:
+   - Artifact Title & Filename
+   - Exact byte size and SHA-256 hash (or explicit text saying "in-chat text / hash pending download")
+   - Target custody location (repository path or private vault `proof/`)
+   - Purpose and governing task ID
+2. **Intake Execution by AGY:** AGY must identify the artifact, verify its hash against the announcement, move it from arrival (`~/Downloads` or temporary buffer) to its permanent canonical directory under an exact file manifest, and log it in `proof/INTAKE_YYYY-MM-DD/`.
+3. **No Phantom Artifacts:** An artifact is never assumed to have transferred automatically. If raw bytes are unavailable locally, AGY records `SOURCE UNAVAILABLE — OWNER TRANSFER NEEDED` and prompts the Owner.
+4. **Public vs Private Classification:**
+   - Public (GitHub): Project canonical documentation, specifications, schemas, reviewed code. Published strictly under the Owner-authorized review process.
+   - Private (Local Vault Only): Raw execution logs, Playwright screenshot captures, penetration/security scans, environment manifests, chat transcripts. Stored under `/home/ycn-labs/Desktop/YCN_LABS_MASTER/proof/`.
+5. **Zero Silent Loss & Permanent Register:** Every direct instruction, rule, or architectural constraint given by the Owner is permanently recorded in [`docs/YCN_OWNER_INSTRUCTIONS_REGISTER.md`](docs/YCN_OWNER_INSTRUCTIONS_REGISTER.md). This register is read by all AI seats at every cold start.
