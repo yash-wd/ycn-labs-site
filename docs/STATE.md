@@ -106,3 +106,40 @@ Before modifying any source code, run `git fetch && git status --porcelain` to v
 - **Single Entry Point:** Created `YCN_LABS_MASTER/00_START_HERE/PROJECT_HOME.md` outside Git as the logical umbrella index.
 - **Deviation Recorded:** DEV-21 logged in `docs/YCN_OWNER_INSTRUCTIONS_REGISTER.md`.
 - **Dev Server:** Task 07 dev server active on `http://localhost:3005` (Task ID `task-612`) for Owner visual review.
+
+---
+
+## Last Session — 18 Oct 2026 (closed)
+- main 4ca9232: PR #1 merged; DECISION-055 ADOPTED; V2_PARKING_LOT; credential rule; DEV-21..23. Tag v1-scope-freeze -> 4ca9232.
+- Open: PR #2 Task 12, wip/YCN-LEAD-12 @ ed07c03. CI green, 282 tests. Claude code review PASS. NOT merged: merge after Vercel
+  auto-deploy check. Migration 0002 must run on any DB this code deploys to, before deploy. No migration run anywhere.
+- Held: ced939d (never merge; evidence). wip/YCN-NAV-07 @ f6152e0 (Task 07 verdict pending). Hotfix 5b0d971 (promote/hold pending).
+- Decided: logo = 8K master only. Missing idempotency key = no dedupe, rate limit applies.
+- Security: PAT revoked by Owner; ~/.git-credentials removed; gh logged in as yash-wd. GitHub CLI OAuth revoke+relogin optional.
+- Backup: encrypted 7z tested OK. USB + cloud copy: UNCONFIRMED. Local close evidence: see LAST_CLOSE.txt.
+
+## Next Session — 19 Oct 2026 (in this order; nothing else)
+0. AGY cold start: fetch/status/branch -vv/ls-remote, 3 repos; compare with LAST_CLOSE.txt; STOP on mismatch.
+1. Owner, 5 min, Vercel: is ycn-labs-site connected to a project; does main auto-deploy anywhere with a database? yes/no.
+2. If yes: Owner runs lib/db/migrations/0002_add_idempotency_key.sql in that Neon SQL editor. Then Owner merges PR #2 (or `merge 2`).
+3. Owner, 20 min: create staging Neon project, Resend (+ domain DNS), Upstash; enter env vars in Vercel himself.
+   AGY prepares staging schema SQL as a file; Owner runs it. AGY never opens .env*.
+4. AGY: Task 08 PR — Capability-03 overflow at 1024 and 375 px; screenshots 375/768/1024/1440, both themes. Claude reviews. Owner merges.
+5. Owner: Task 07, 10 min at localhost:3005 (AGY starts on request): `visual pass` → PR → review → merge; `drop` → nothing.
+6. Owner: old site — Vercel Preview of 5b0d971 → Promote (one click) or hold.
+7. Owner: backup 7z to USB + cloud if not done; list 30 business contacts; send first 3 messages.
+8. Owner says `close`; AGY repeats tonight's close steps.
+
+## Launch plan (DECISION-055) — target 15 Nov, fallback 30 Nov
+- 19–25 Oct: PR #2 merged; Task 08; Task 07 verdict; staging live; five Task 12 scenarios run on a Preview; test lead from a phone.
+- 26 Oct–1 Nov: Task 10 (INR options, en_IN/IN metadata, "Not sure yet", privacy notice, founder on About, Work page one honest entry);
+  Task 09 real-phone + Lighthouse ruling; compress /public.
+- 2–8 Nov: Task 11 web logo sizes from 8K master; Task 13 QA (real phones, keyboard, both themes, reduced motion); Task 14 show 3 people.
+- 9–15 Nov: Task 15 release candidate (Vercel plan, prod env, Resend domain + SPF/DKIM/DMARC, hello@/privacy@, one Sentry rule,
+  analytics, uptime, /api/health checks DB, prod migrations by Owner, rollback rehearsed). Task 16: Owner `deploy` on exact SHA,
+  DNS cutover, old site retired, tag v1.0-launch, live lead from a phone.
+- After: Task 17, ≤3 h/week. Business: 10 messages/week, first pilot at cost, CA before first invoice. Parking lot closed until June 2027.
+
+## Rules for every seat
+- AGY: branch → PR → STOP. Claude reviews the diff (GPT second opinion only on safety conflicts). Owner merges or says `merge N`.
+- Edit by patch, never whole-file rewrite. Red check = stop and report. Never read, print or use credentials. No new plans or documents.
