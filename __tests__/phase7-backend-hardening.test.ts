@@ -42,13 +42,9 @@ vi.mock("@/lib/db/db", () => ({
 
 // Mock Security & Ratelimit
 const mockCheckRateLimit = vi.fn();
-const mockIsDuplicateSubmission = vi.fn();
-const mockReserveDuplicateKey = vi.fn();
 
 vi.mock("@/lib/security/ratelimit", () => ({
   checkRateLimit: (...args: any[]) => mockCheckRateLimit(...args),
-  isDuplicateSubmission: (...args: any[]) => mockIsDuplicateSubmission(...args),
-  reserveDuplicateKey: (...args: any[]) => mockReserveDuplicateKey(...args),
   hashClientIp: (req: Request) => "mock_hashed_ip_123",
 }));
 
@@ -89,8 +85,6 @@ describe("Phase 7: Contact / Enquiry Backend Hardening", () => {
       remaining: 4,
       resetSeconds: 3600,
     });
-    mockIsDuplicateSubmission.mockResolvedValue(false);
-    mockReserveDuplicateKey.mockResolvedValue(undefined);
     mockInsertReturning.mockResolvedValue([{ id: 1, leadId: "lead_test_phase7" }]);
     mockInsertValues.mockReturnValue({ onConflictDoNothing: mockOnConflictDoNothing, returning: mockInsertReturning });
     mockUpdateWhere.mockResolvedValue({ rowCount: 1 });
@@ -243,8 +237,6 @@ describe("Phase 7: Contact / Enquiry Backend Hardening", () => {
       expect(json.error.message).toBe(
         "We could not accept your request safely. Your message has not been confirmed—please try again or use the listed contact route."
       );
-      // Dedupe key MUST NOT be reserved, allowing retry
-      expect(mockReserveDuplicateKey).not.toHaveBeenCalled();
       // Operator notification MUST NOT be called
       expect(mockSendEmail).not.toHaveBeenCalled();
     });
@@ -430,7 +422,7 @@ describe("Phase 7: Contact / Enquiry Backend Hardening", () => {
   describe("5. Deduplication & Idempotency", () => {
     it("recognizes duplicate submission and returns 200 without duplicate DB insert", async () => {
       mockInsertReturning.mockResolvedValueOnce([]);
-      mockLimit.mockResolvedValueOnce([{ id: 42, leadId: "lead_orig_dup" }]);
+      mockLimit.mockResolvedValueOnce([{ id: 42, leadId: "lead_orig_dup", email: "sarah@acme-logistics.co.uk" }]);
 
       const req = new Request("http://localhost:3000/api/contact", {
         method: "POST",

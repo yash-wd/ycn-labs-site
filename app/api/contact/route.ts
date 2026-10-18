@@ -129,62 +129,34 @@ export async function POST(request: Request) {
 
     const normalizedEmail = email.trim().toLowerCase();
     const trimmedMessage = message.trim();
+
+    // Missing key contract: Clients without an idempotency key are not deduplicated; rate limiting still applies.
     const idempotencyKey = result.data.idempotencyKey?.trim() || crypto.randomUUID();
 
     // 8. Atomic Lead Acceptance Boundary (PostgreSQL ON CONFLICT DO NOTHING)
     let leadId = "lead_" + crypto.randomUUID();
-    let isConflict = false;
+    let insertedRows: { id: number; leadId: string }[] = [];
 
     try {
-      const insertQuery = db.insert(leads).values({
-        leadId,
-        idempotencyKey,
-        name: name.trim(),
-        email: normalizedEmail,
-        company: company?.trim() || null,
-        projectType: projectType.trim(),
-        budget: budget?.trim() || null,
-        timeline: timeline?.trim() || null,
-        preferredContactMethod: preferredContactMethod?.trim() || null,
-        message: trimmedMessage,
-        status: "accepted",
-        notificationStatus: "pending",
-        notificationAttempts: 0,
-      });
-
-      let insertedRows: any[] = [];
-      if (typeof (insertQuery as any).onConflictDoNothing === "function") {
-        const conflictQuery = (insertQuery as any).onConflictDoNothing({ target: leads.idempotencyKey });
-        if (typeof conflictQuery.returning === "function") {
-          insertedRows = await conflictQuery.returning({ id: leads.id, leadId: leads.leadId });
-        } else {
-          await conflictQuery;
-          insertedRows = [{ id: 1, leadId }];
-        }
-      } else if (typeof (insertQuery as any).returning === "function") {
-        insertedRows = await (insertQuery as any).returning({ id: leads.id, leadId: leads.leadId });
-      } else {
-        await insertQuery;
-        insertedRows = [{ id: 1, leadId }];
-      }
-
-      if (insertedRows && insertedRows.length > 0) {
-        if (insertedRows[0]?.leadId) {
-          leadId = insertedRows[0].leadId;
-        }
-      } else {
-        // Conflict on idempotency_key: retrieve existing lead ID
-        const existing = await db
-          .select({ id: leads.id, leadId: leads.leadId })
-          .from(leads)
-          .where(eq(leads.idempotencyKey, idempotencyKey))
-          .limit(1);
-
-        if (existing && existing.length > 0 && existing[0]?.leadId) {
-          leadId = existing[0].leadId;
-        }
-        isConflict = true;
-      }
+      insertedRows = await db
+        .insert(leads)
+        .values({
+          leadId,
+          idempotencyKey,
+          name: name.trim(),
+          email: normalizedEmail,
+          company: company?.trim() || null,
+          projectType: projectType.trim(),
+          budget: budget?.trim() || null,
+          timeline: timeline?.trim() || null,
+          preferredContactMethod: preferredContactMethod?.trim() || null,
+          message: trimmedMessage,
+          status: "accepted",
+          notificationStatus: "pending",
+          notificationAttempts: 0,
+        })
+        .onConflictDoNothing({ target: leads.idempotencyKey })
+        .returning({ id: leads.id, leadId: leads.leadId });
     } catch (dbError) {
       logAudit(requestId, "/api/contact", 503, startTime, "STORAGE_FAILURE");
       Sentry.captureException(dbError, {
@@ -200,13 +172,67 @@ export async function POST(request: Request) {
       );
     }
 
-    // 9. On Conflict: Return 200 { accepted: true, leadId } and NO second email
-    if (isConflict) {
-      logAudit(requestId, "/api/contact", 200, startTime, "DUPLICATE_IDEMPOTENT", leadId);
+    // 9. Conflict Path Inspection
+    if (!insertedRows || insertedRows.length === 0) {
+      let existingRows: { id: number; leadId: string; email: string }[] = [];
+      try {
+        existingRows = await db
+          .select({ id: leads.id, leadId: leads.leadId, email: leads.email })
+          .from(leads)
+          .where(eq(leads.idempotencyKey, idempotencyKey))
+          .limit(1);
+      } catch (lookupError) {
+        logAudit(requestId, "/api/contact", 503, startTime, "IDEMPOTENCY_LOOKUP_ERROR");
+        Sentry.captureException(lookupError, {
+          tags: { route: "/api/contact", stage: "idempotency_lookup" },
+          extra: { requestId, idempotencyKey },
+        });
+        return createErrorResponse(
+          "SERVICE_UNAVAILABLE",
+          "We could not accept your request safely. Your message has not been confirmed—please try again or use the listed contact route.",
+          requestId,
+          503
+        );
+      }
+
+      // (c) No row found despite conflict → 503 honest failure, Sentry (never return accepted:true with generated ID)
+      if (!existingRows || existingRows.length === 0) {
+        logAudit(requestId, "/api/contact", 503, startTime, "IDEMPOTENCY_RECORD_NOT_FOUND");
+        Sentry.captureException(
+          new Error(`Idempotency conflict detected for key ${idempotencyKey} but existing record could not be found`),
+          { tags: { route: "/api/contact", stage: "idempotency_lookup" }, extra: { requestId, idempotencyKey } }
+        );
+        return createErrorResponse(
+          "SERVICE_UNAVAILABLE",
+          "We could not accept your request safely. Your message has not been confirmed—please try again or use the listed contact route.",
+          requestId,
+          503
+        );
+      }
+
+      const existingLead = existingRows[0];
+
+      // (b) Row found, but email differs → 409 code "IDEMPOTENCY_CONFLICT", generic message, no leadId
+      if (existingLead.email !== normalizedEmail) {
+        logAudit(requestId, "/api/contact", 409, startTime, "IDEMPOTENCY_CONFLICT");
+        Sentry.captureException(
+          new Error("Idempotency key reused with mismatched email address"),
+          { tags: { route: "/api/contact", stage: "idempotency_validation" }, extra: { requestId, idempotencyKey } }
+        );
+        return createErrorResponse(
+          "IDEMPOTENCY_CONFLICT",
+          "This submission request conflicts with a previous submission. Please refresh and try again.",
+          requestId,
+          409
+        );
+      }
+
+      // (a) Row found and existing.email === normalizedEmail → 200 { accepted:true, leadId: existing.leadId, duplicate:true }, no second email
+      logAudit(requestId, "/api/contact", 200, startTime, "DUPLICATE_IDEMPOTENT", existingLead.leadId);
       return createSuccessResponse(
         {
           message: "We received your request.",
-          leadId,
+          leadId: existingLead.leadId,
           accepted: true,
           duplicate: true,
           acknowledgementSent: false,
@@ -215,6 +241,9 @@ export async function POST(request: Request) {
         200
       );
     }
+
+    // Normal insertion succeeded: set leadId from inserted row
+    leadId = insertedRows[0].leadId;
 
     // 10. Post-Commit Operator Notification (isolated from acceptance boundary)
     let acknowledgementSent = false;

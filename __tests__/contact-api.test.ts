@@ -86,7 +86,7 @@ describe("Contact API Route Handler (/api/contact) - Task 12 Scenarios", () => {
     budget: "£5,000 – £15,000",
     timeline: "1 – 3 months",
     message: "We need a custom dispatch tool for our field engineers.",
-    idempotencyKey: "11111111-2222-3333-4444-555555555555",
+    idempotencyKey: "11111111-1111-4111-8111-111111111111",
   };
 
   // Scenario 1: valid lead stored + email attempted
@@ -167,7 +167,7 @@ describe("Contact API Route Handler (/api/contact) - Task 12 Scenarios", () => {
 
   // Scenario 4: same key twice → one row, same leadId, one email
   it("Scenario 4: same key twice results in one row, same leadId, and exactly one email", async () => {
-    const fixedIdempotencyKey = "22222222-3333-4444-5555-666666666666";
+    const fixedIdempotencyKey = "22222222-2222-4222-8222-222222222222";
     const payload = {
       ...validPayload,
       idempotencyKey: fixedIdempotencyKey,
@@ -194,7 +194,7 @@ describe("Contact API Route Handler (/api/contact) - Task 12 Scenarios", () => {
 
     // Second request: conflict on idempotency key, returns [] from insert
     mockReturning.mockResolvedValueOnce([]);
-    mockLimit.mockResolvedValueOnce([{ id: 10, leadId: "lead_first_call" }]);
+    mockLimit.mockResolvedValueOnce([{ id: 10, leadId: "lead_first_call", email: "alex@example.com" }]);
 
     const request2 = new Request("http://localhost:3000/api/contact", {
       method: "POST",
@@ -236,6 +236,86 @@ describe("Contact API Route Handler (/api/contact) - Task 12 Scenarios", () => {
     expect(body.success).toBe(false);
     expect(body.error.code).toBe("INVALID_INPUT");
     expect(mockInsert).not.toHaveBeenCalled();
+    expect(mockSendEmail).not.toHaveBeenCalled();
+  });
+
+  // Restored Regression Test: Rate Limiting
+  it("Rate limited request returns 429 with Retry-After header", async () => {
+    mockCheckRateLimit.mockResolvedValueOnce({
+      success: false,
+      limit: 5,
+      remaining: 0,
+      resetSeconds: 120,
+    });
+
+    const request = new Request("http://localhost:3000/api/contact", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(validPayload),
+    });
+
+    const response = await POST(request);
+    const body = await response.json();
+
+    expect(response.status).toBe(429);
+    expect(body.error.code).toBe("RATE_LIMITED");
+    expect(response.headers.get("Retry-After")).toBe("120");
+    expect(mockInsert).not.toHaveBeenCalled();
+    expect(mockSendEmail).not.toHaveBeenCalled();
+  });
+
+  // Conflict Scenario (b): same idempotency key with differing email returns 409 IDEMPOTENCY_CONFLICT
+  it("Conflict branch (b): reusing idempotency key with differing email returns 409 IDEMPOTENCY_CONFLICT", async () => {
+    const fixedIdempotencyKey = "33333333-3333-4333-8333-333333333333";
+    const payload = {
+      ...validPayload,
+      email: "different-user@example.com",
+      idempotencyKey: fixedIdempotencyKey,
+    };
+
+    mockReturning.mockResolvedValueOnce([]);
+    mockLimit.mockResolvedValueOnce([{ id: 42, leadId: "lead_orig_999", email: "original-owner@example.com" }]);
+
+    const request = new Request("http://localhost:3000/api/contact", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(payload),
+    });
+
+    const response = await POST(request);
+    const body = await response.json();
+
+    expect(response.status).toBe(409);
+    expect(body.success).toBe(false);
+    expect(body.error.code).toBe("IDEMPOTENCY_CONFLICT");
+    expect(body.data?.leadId).toBeUndefined();
+    expect(mockSendEmail).not.toHaveBeenCalled();
+  });
+
+  // Conflict Scenario (c): conflict on insert but lookup returns no record returns honest 503
+  it("Conflict branch (c): conflict on insert but existing row not found returns honest 503 SERVICE_UNAVAILABLE", async () => {
+    const fixedIdempotencyKey = "44444444-4444-4444-8444-444444444444";
+    const payload = {
+      ...validPayload,
+      idempotencyKey: fixedIdempotencyKey,
+    };
+
+    mockReturning.mockResolvedValueOnce([]);
+    mockLimit.mockResolvedValueOnce([]);
+
+    const request = new Request("http://localhost:3000/api/contact", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(payload),
+    });
+
+    const response = await POST(request);
+    const body = await response.json();
+
+    expect(response.status).toBe(503);
+    expect(body.success).toBe(false);
+    expect(body.error.code).toBe("SERVICE_UNAVAILABLE");
+    expect(body.data?.accepted).toBeUndefined();
     expect(mockSendEmail).not.toHaveBeenCalled();
   });
 });
