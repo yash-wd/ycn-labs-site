@@ -9,19 +9,20 @@
 
 ---
 
-## 1. How to Read This Documentation (document registry; the cold-start sequence is CLOSE_PROTOCOL §3)
+## 1. How to Read This Documentation
 
 For any human engineer, contributor, or AI agent (GPT, Claude, AGY), read in this exact order:
 
-0. **Task Gate ([`docs/TASK_GATE.md`](TASK_GATE.md))** — Read before starting or resuming ANY task. Covers day gate, reading sequence, legal triggers, OI-18 demo gate, and STOP conditions.
-1. **Entry Point ([`docs/START_HERE.md`](START_HERE.md))** — Canonical repository entry point and context. Open this first.
-2. **Current State ([`docs/STATE.md`](STATE.md))** — Single source of truth for repository state, in-flight work, and recent decisions.
-3. **Backlog & Execution Queue ([`docs/BACKLOG.md`](BACKLOG.md))** — Master launch execution queue and active backlog authority.
-4. **Readiness Checklist ([`docs/YCN_READINESS_CHECKLIST.md`](YCN_READINESS_CHECKLIST.md))** — Master 143-point project control and evidence readiness ledger.
-5. **Agent Governance ([`AGENTS.md`](../AGENTS.md))** — Permanent rules: Three-Seat Shared Ownership, evidence law, and Cold-Start Verification Gate.
-6. **This Index ([`docs/INDEX.md`](INDEX.md))** — Understand the active authority and document registry.
-7. **Operating Protocol ([`docs/YCN_AGENT_OPERATING_PROTOCOL.md`](YCN_AGENT_OPERATING_PROTOCOL.md))** — Core operational rules and review procedures.
-8. **Living Ledgers:**
+1. **Cold-Start Verification Gate ([`docs/CLOSE_PROTOCOL.md` §3](CLOSE_PROTOCOL.md))** — Mandatory first step once per day/session: verify all 3 repositories vs own upstreams and check cold-start brief.
+2. **Entry & Task Gate ([`docs/START_HERE.md`](START_HERE.md) + [`docs/TASK_GATE.md`](TASK_GATE.md))** — Read START_HERE for canonical repository context, then TASK_GATE.md before starting or resuming ANY task (reading sequence, legal triggers, OI-18 demo gate, STOP conditions).
+3. **Current State ([`docs/STATE.md`](STATE.md))** — Single source of truth for repository state, in-flight work, Gate E readiness, and post-close deltas.
+4. **Backlog & Execution Queue ([`docs/BACKLOG.md`](BACKLOG.md))** — Master launch execution queue and active backlog authority.
+5. **Readiness Checklist ([`docs/YCN_READINESS_CHECKLIST.md`](YCN_READINESS_CHECKLIST.md))** — Master 143-point project control and evidence readiness ledger.
+6. **Owner Instructions Register ([`docs/YCN_OWNER_INSTRUCTIONS_REGISTER.md`](YCN_OWNER_INSTRUCTIONS_REGISTER.md))** — Permanent register of standing directives, rules, and deviations (OI-01 to OI-19, DEV-01 to DEV-18).
+7. **Agent Governance ([`AGENTS.md`](../AGENTS.md))** — Permanent rules: Three-Seat Shared Ownership, evidence law, and Cold-Start Verification Gate.
+8. **This Index ([`docs/INDEX.md`](INDEX.md))** — Active authority and document registry.
+9. **Operating Protocol ([`docs/YCN_AGENT_OPERATING_PROTOCOL.md`](YCN_AGENT_OPERATING_PROTOCOL.md))** — Core operational rules and review procedures.
+10. **Living Ledgers:**
    - **[Decisions](YCN_DECISIONS.md)** — Binding owner architectural, scope, and vNext decisions (DECISION-001 through DECISION-054).
    - **[Claims & Proof](YCN_CLAIMS_AND_PROOF.md)** — Evidentiary backing for all public marketing claims.
    - **[Content Spec](YCN_CONTENT_SPEC.md)** — Canonical approved public copy and candidate copy under review.

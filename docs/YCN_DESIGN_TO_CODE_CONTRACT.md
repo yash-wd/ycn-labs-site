@@ -3,7 +3,7 @@
 **Document ID:** `YCN-V2-DESIGN-CONTRACT-01`  
 **Revision:** 1.0.0  
 **Effective Date:** 17 October 2026  
-**Status:** DRAFT / AUDITED — Prepared for Single Batch Review (GPT & Claude)  
+**Status:** DRAFT PRE-AUDIT — Prepared for Single Batch Review (GPT & Claude)
 **Governing Documents:** `docs/YCN_DESIGN_SYSTEM.md` (Rev 1.2), `app/globals.css`, `docs/BACKLOG.md` (Task 09)
 
 ---
@@ -12,7 +12,7 @@
 
 This contract establishes the formal mathematical and technical bridge between the canonical **YCN Labs Design System** (`docs/YCN_DESIGN_SYSTEM.md`) and the live code implementation across `ycn-labs-site`.
 
-A comprehensive static and visual audit was executed across all components, global stylesheets, and five standard responsive viewports (390px, 768px, 1024px, 1280px, 1440px) under both Dark and Light themes.
+A preliminary static code audit and initial 390px viewport-only pre-audit frame set was executed across components and stylesheets. Full-page 375px mobile minimum, motion behavior, and contrast validation passes remain PENDING under Gate E and Task 09; this pre-audit does not constitute full visual acceptance.
 
 ### Key Audit Findings
 1. **Token Precision:** `app/globals.css` largely adheres to the design system, but contains two surface elevations requiring exact alignment:
