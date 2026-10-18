@@ -67,3 +67,21 @@
 - **`POSTLAUNCH-VNEXT-CANDIDATES`:** Evaluated features proposed under OI-19 (blog-related shares, promotional offers, save/install shortcuts, user-initiated optional push notifications). Kept as candidate inventory; not ratified for V1. Tasks 18/19 are proposals pending explicit Owner ruling.
 
 *OI-19 Operational Decisions Pending Owner Ruling: Notification hub destination (Telegram / Slack / Dedicated Email / Internal Dashboard), Task 18/19 formal creation, and Lean vs Full execution path remain UNDECIDED.*
+
+---
+
+## Lean Launch Scope Annotations (DECISION-055 Proposed)
+
+The following execution scope adjustments apply to existing task IDs 07–17 upon DECISION-055 adoption:
+
+- **Task 07 (Navigation):** Single pilot for Menu perimeter morph (`continuous` mode, 80 px/s). Pending Owner visual verdict (`visual pass` or `drop`). No further animation cycles.
+- **Task 08 (Capability-03 Overflow):** Focused fix for 1024px and 375px table overflow on Capability-03 without changing surrounding layout.
+- **Task 09 (Homepage Polish):** Bounded mobile LCP check on a consumer device over 4G; if LCP > 2.5s, serve static hero on mobile. No new visual features.
+- **Task 10 (Pages Content & Privacy):** Route-by-route India-first content pass (`en_IN`, INR pricing defaults, "Not sure yet" budget option, founder bio on About, concise DPDP notice on `/contact`).
+- **Task 11 (Brand Media):** Web-sized logo assets generated from 8K master (no crops, no new artwork). Authentic media only.
+- **Task 12 (Lead Reliability):** 5 core failure-boundary integration journeys (valid lead, DB down, post-commit email failure preserves lead, idempotency deduplication, invalid input rejection). DB commit is sole durability barrier. Staging accounts established by Owner; fallback to direct verified email if blocked.
+- **Task 13 (Quality Assurance Gate):** Cross-browser and device QA across mobile 375px, keyboard accessibility, Dark/Light modes, and automated test suite.
+- **Task 14 (Comprehension):** Informal review by showing the site to three local business owners and observing navigation.
+- **Task 15 (Release Candidate):** Environment verification, single-rule Sentry error capture, cookieless analytics, DNS cutover preparation, rollback rehearsal.
+- **Task 16 (Production Launch):** Authorized deployment to `ycnlabs.com` upon Owner command on exact verified commit.
+- **Task 17 (Postlaunch Operations):** Handover to maintenance mode (≤ 3 hours/week); 30-day post-launch fix window; customer acquisition outreach active.
