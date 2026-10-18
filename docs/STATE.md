@@ -58,7 +58,7 @@ Before modifying any source code, run `git fetch && git status --porcelain` to v
 - **Published today:** Gate E commit `134b0ec89854e57057f60f50905b219154eeaea2` pushed to `origin/main` (9 files changed; Gitleaks CI run `39018378717` green; Quality CI green).
 - **Active WIP Branches Preserved on GitHub:**
   - `wip/YCN-NAV-07`: SHA `5df9aa73413a73b5ccd85c0bf967b5d69070660f` (Task 07 continuous menu motion pilot, 292 passing tests, technical PASS, Owner visual acceptance pending on localhost:3005).
-  - `wip/YCN-CHECKLIST-GOVERNANCE-01`: SHA `0f5ae469888d3f11c0dc6fa34d858cfd799f24aa` (17 Oct close state: 143-point readiness tracker, design-to-code contract, permanent Owner Instructions Register OI-01 to OI-17, and artifact intake protocol).
+  - `wip/YCN-CHECKLIST-GOVERNANCE-01`: SHA `0f5ae46308ab1c0ccc101d09256535317ccbab65` (17 Oct close state: 143-point readiness tracker, design-to-code contract, permanent Owner Instructions Register OI-01 to OI-17, and artifact intake protocol).
 - **Artifact Intake Reconciled:** 3 downloaded artifacts ingested from `~/Downloads` into private vault `proof/INTAKE_2026-10-17/` with verified SHA-256 hashes (`INTAKE_MANIFEST_2026-10-17.md`): GPT handoff doc (`6554257...`), candidate tracker (`afd5104...`), and Task 09 pre-audit (`47fb3ac...`). 6 web-chat uploads recorded as `SOURCE UNAVAILABLE — WEB CHAT ONLY`.
 - **Pre-Close Corrections Completed:**
   - Logo review console (`proof/LOGO_SITTING/index.html`) neutralized: auto-approve defaults removed, automatic deployment authorization text removed; status set to PENDING OWNER REVIEW.
@@ -86,7 +86,12 @@ Before modifying any source code, run `git fetch && git status --porcelain` to v
 
 ---
 ## Post-Close Governance Delta (18 October 2026)
-- **Current WIP Branch Head:** `wip/YCN-CHECKLIST-GOVERNANCE-01` advanced from 17 Oct close `0f5ae46` → `b05810b` → `6e170a5` (reconciling OI-18/19, DEV-16/17, and Task Gate index).
-- **Independent GPT Review Result:** HOLD on `6e170a5` with 12 bounded corrections (G01–G12) bundled in `YCN_GOVERNANCE_GPT_REVIEW_2026-10-18.zip` (SHA `a10937dba02a002e5a81bccc6a424709295745b2a0855219672297276d3485b9`).
-- **Independent Claude Review Result:** PASS with four corrections on package structure; affirmed GPT's HOLD on `6e170a5` governing review.
-- **Corrected Governance State:** Applied GPT candidate `docs/TASK_GATE.md` (no uninstalled brief tool dependency, removed Tier-2 demo/review exemptions, conditional Vercel commercial check), updated `docs/YCN_OWNER_INSTRUCTIONS_REGISTER.md` (broadened OI-19 inventory scope, fixed DEV-16 attribution to `0f5ae46`, marked DEV-17 preservation AGY-REPORTED, logged DEV-18 for rewrite recurrence), aligned `docs/BACKLOG.md` under existing task scopes (Tasks 10/12/13/15/17), clarified Gate E readiness vs 17 Oct baseline, and aligned document reading hierarchy in `INDEX.md`.
+- **Current WIP Branch Head:** `wip/YCN-CHECKLIST-GOVERNANCE-01` advanced from 17 Oct close `0f5ae46308ab1c0ccc101d09256535317ccbab65` → `b05810b` → `6e170a5` → `864cc14` → current reconciliation commit.
+- **Independent Reviews of Commit 864cc14:**
+  - **GPT Verdict:** HOLD (identified historical SHA mismatch and duplicate Task 17 in BACKLOG; confirmed G01–G12 substantially applied).
+  - **Claude Verdict:** HOLD (identified fabricated historical SHA in STATE, duplicate Task 17 in BACKLOG, misattributed PASS review status, and post-hash inline edit; review of corrected SHA pending).
+- **Corrected Governance State:**
+  - Applied GPT candidate `docs/TASK_GATE.md` (all 23 relative links verified resolving; removed Tier-2 exemptions; conditional Vercel check).
+  - Updated `docs/YCN_OWNER_INSTRUCTIONS_REGISTER.md` (broadened OI-19 scope, fixed DEV-16 attribution to `0f5ae46`, marked DEV-17 AGY-REPORTED, logged DEV-18 recurrence and DEV-19 fabricated SHA).
+  - Cleaned `docs/BACKLOG.md` (preserved unique `17 YCN-POSTLAUNCH-01`; moved OI-19 future items to unnumbered candidate block; removed WhatsApp from hub options).
+  - Reconciled `docs/STATE.md` (restored native verified 17 Oct SHA `0f5ae46308ab1c0ccc101d09256535317ccbab65`; recorded true review verdicts).

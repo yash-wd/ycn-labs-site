@@ -59,7 +59,11 @@
 - [ ] **`14 YCN-COMPREHENSION-01`:** Observe at least five representative nontechnical users performing find/understand/contact tasks.
 - [ ] **`15 YCN-RELEASE-RC-01`:** Freeze SHA, staged smoke, domain/DNS/SSL, required env names, backup, rollback, privacy-respecting analytics live, and incident owner. *Scope includes OI-19 production uptime/error alerting verification.*
 - [ ] **`16 YCN-PRODUCTION-LAUNCH-01`:** Separate authorized deploy of exact approved SHA, no incidental source changes.
-- [ ] **`17 POSTLAUNCH-VNEXT-CANDIDATES`:** Evaluated features proposed under OI-19 (blog-related shares, promotional offers, save/install shortcuts, user-initiated optional push notifications). Kept as candidate inventory; not ratified for V1. Tasks 18/19 are proposals pending explicit Owner ruling.
-
-*OI-19 Operational Decisions Pending Owner Ruling: Notification hub destination (Telegram / WhatsApp / Email / Dashboard), Task 18/19 formal creation, and Lean vs Full execution path remain UNDECIDED.*
 - [ ] **`17 YCN-POSTLAUNCH-01`:** Operations and measurement after launch: lead SLA/response tracking, uptime/alerts, proposal funnel data from live analytics, incident playbook, maintenance backlog.
+
+---
+
+## Postlaunch & vNext Proposed Candidates (Unnumbered / Proposal Only)
+- **`POSTLAUNCH-VNEXT-CANDIDATES`:** Evaluated features proposed under OI-19 (blog-related shares, promotional offers, save/install shortcuts, user-initiated optional push notifications). Kept as candidate inventory; not ratified for V1. Tasks 18/19 are proposals pending explicit Owner ruling.
+
+*OI-19 Operational Decisions Pending Owner Ruling: Notification hub destination (Telegram / Slack / Dedicated Email / Internal Dashboard), Task 18/19 formal creation, and Lean vs Full execution path remain UNDECIDED.*
