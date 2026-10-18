@@ -109,7 +109,7 @@ Update the authoritative continuity records in both repositories:
 - **Brand Library:** Verify all tracked files with `sha256sum -c 14_CONTINUITY/SHA256SUMS.txt`.
 - **Website Repository:** Run quality gates (`pnpm run lint`, `check-types`, `test`, `build`) **only if website code changed** since the previous close.
 
-### Step G: Git Commit & Remote Synchronization
+### Step G: Git Commit & Daily Remote Synchronization
 - Stage files using **explicit paths only** (never `git add .` or `git add -A`).
 - Scan staged text for secrets (API keys, private tokens).
 - Ensure no staged file exceeds 25 MB.
@@ -117,14 +117,21 @@ Update the authoritative continuity records in both repositories:
 - **Push Authorization:** The Owner's instruction **CLOSE** authorizes pushing approved housekeeping/status commits to `main`.
 - Unreviewed code or unapproved artwork must be committed to branch `wip/<task-id>` and pushed, never to `main`.
 - Ensure zero uncommitted, untracked, or unpushed work remains undisclosed.
+- **Mandatory End-of-Day Synchronization Commands (Branch-Aware):**
+  Execute across all three registered repositories (`ycn-labs-site`, `ycn-labs-brand-library`, `ycnlabs` historical):
+  ```bash
+  git fetch && git status --porcelain && git branch -vv && echo "origin/main: $(git rev-parse origin/main)" && git ls-remote origin
+  ```
+  Compare each local branch against its own tracking upstream (`git branch -vv`); record `origin/main` separately. Reconcile published commits, CI run status, WIP branches, unresolved files, decisions, deviations, and tomorrow's opening task. Valid WIP branches will differ from `origin/main` and must never be treated as errors. If synchronization cannot safely complete, report **`CLOSE BLOCKED`** rather than claiming success.
 
 ### Step H: Close Completion & Report
-- Update `YCN_LABS_MASTER/LAST_CLOSE.txt` with the ISO timestamp and both repository HEAD hashes.
+- Update `YCN_LABS_MASTER/LAST_CLOSE.txt` with the ISO timestamp and all repository HEAD hashes.
+- Synchronize status across canonical documents: [`docs/STATE.md`](STATE.md), [`docs/BACKLOG.md`](BACKLOG.md), and [`docs/YCN_READINESS_CHECKLIST.md`](YCN_READINESS_CHECKLIST.md).
 - If all checks pass, declare **CLOSED**.
 - If any check fails, declare **CLOSE BLOCKED** with the exact failure reason.
 - Output the full reconciliation report containing:
   - File disposition table (Path, SHA-256, Action, Destination).
-  - Deletions performed.
+  - Deletions performed (if any authorized).
   - Remote verification (`git ls-remote origin`).
   - Next authorized task per workstream.
 
@@ -134,11 +141,17 @@ Update the authoritative continuity records in both repositories:
 
 Every working session and every new AI chat (GPT, Claude, or AGY) must execute this Cold-Start Verification Gate before proposing or executing work:
 
-1. **Verify Baseline & Alignment:**
-   - Confirm exact repository, branch, and published commit on GitHub (`yash-wd/ycn-labs-site @ main`).
-   - For AGY (with local Linux terminal): Run `git fetch && git status --porcelain` and verify `HEAD == origin/main`. For GPT and Claude (without terminal): Inspect published GitHub files and state that local worktree cleanliness requires AGY verification.
+1. **Mandatory Start-of-Day Synchronization Commands (Branch-Aware):**
+   Execute for all three registered project repositories:
+   ```bash
+   git fetch && git status --porcelain && git branch -vv && echo "origin/main: $(git rev-parse origin/main)"
+   ```
+   - For AGY (local terminal): Post exact command output verifying worktree cleanliness and upstream parity. Compare each local branch against its own tracking upstream (`git branch -vv`) and verify `origin/main` separately. Valid WIP branches will naturally differ from `main`.
+   - For GPT and Claude: Inspect published GitHub commits on `main` and independently verify.
+   - **Discrepancy Rule:** If local and remote differ unexpectedly, or any uncommitted drift exists: **STOP and report**. Never silently rebase, reset, or overwrite work.
 2. **Read Authoritative State:**
-   - Read `docs/START_HERE.md`, `docs/STATE.md` (§2 in-flight queue), `docs/BACKLOG.md`, and controlling decisions in `docs/YCN_DECISIONS.md`.
+   - Read [`docs/START_HERE.md`](START_HERE.md), [`docs/STATE.md`](STATE.md) (§2 in-flight queue), [`docs/BACKLOG.md`](BACKLOG.md), and controlling decisions in [`docs/YCN_DECISIONS.md`](YCN_DECISIONS.md).
+   - Review [`docs/YCN_READINESS_CHECKLIST.md`](YCN_READINESS_CHECKLIST.md) (143-point control tracker).
    - When Brand Library work is selected: Open and verify `https://github.com/yash-wd/ycn-labs-brand-library/blob/main/14_CONTINUITY/RESUME_HERE.md` and its controlling governance before proposing brand actions.
    - Never rely on conversational memory, cached chat summaries, or previous chat transcripts.
 3. **Report Cold-Start Acknowledgment:**
