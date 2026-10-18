@@ -42,6 +42,7 @@ Current YCN site direction: [`docs/vnext/00_START_HERE.md`](docs/vnext/00_START_
 - **PR-Based Single Review (effective on DECISION-055 adoption):** AGY opens GitHub Pull Requests on isolated branches; exactly one independent reviewer (GPT or Claude alternating) reviews the diff; three seats convene only for production deployments, customer data handling, or binding legal text.
 - **OI-18 Visual Demo Scope (effective on DECISION-055 adoption):** HTML demos are required for brand-new visible UI screens or changed customer workflows only; backend reliability fixes, schema edits, and scripts require behavioral test contracts and test outputs, not decorative HTML previews.
 - **Protected Actions Boundary (effective on DECISION-055 adoption):** AGY prepares changes and opens PRs; AGY never merges to main, pushes tags, or records adoption without explicit typed Owner authorization.
+- **Credentials & Secret Safety:** Never read, print, copy or use any credential file or token (.git-credentials, .env*, gh hosts.yml, SSH keys). If authentication fails, STOP and ask the Owner.
 
 ---
 

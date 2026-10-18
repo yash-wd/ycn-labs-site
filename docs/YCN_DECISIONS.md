@@ -229,8 +229,8 @@ Status: Owner-stated strategic direction; does not by itself expand v1.0 scope.
 
 ### DECISION-055: Lean Launch, Preserved V2.0 Scope and Business Proof
 
-**Status: PROPOSED — OWNER ADOPTION PENDING**
-**Effective on approval:** From acceptance through the June 2027 review; commercial focus to October 2027.
+**Status: PROPOSED — OWNER ADOPTION PENDING**  
+**Effective on approval:** From acceptance through the June 2027 review; commercial focus to October 2027.  
 **Precedence:** Supersedes *delivery priorities and routine review/demo procedures* only to the extent explicitly described. Previously approved business policies and security, privacy, data-integrity, brand, frozen-system, main-merge and deploy authority are preserved. Keep Master Plan §14 and existing Task IDs.
 
 ## 1. Direction and success definition
