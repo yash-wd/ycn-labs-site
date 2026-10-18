@@ -229,7 +229,7 @@ Status: Owner-stated strategic direction; does not by itself expand v1.0 scope.
 
 ### DECISION-055: Lean Launch, Preserved V2.0 Scope and Business Proof
 
-**Status: PROPOSED — OWNER ADOPTION PENDING**
+**Status: ADOPTED by Owner, 18 Oct 2026**
 
 **Effective on approval:** From acceptance through the June 2027 review; commercial focus to October 2027.
 
