@@ -225,3 +225,100 @@ Status: Owner-stated strategic direction; does not by itself expand v1.0 scope.
 9. **Authority preserved.** DECISION-040 is superseded only as expressly identified here, DECISION-053 remains binding, and all other ratified copy remains unchanged. Historical vNext blueprints are preserved. H-03 homepage chapter implementation and the W-06 five-panel layout disposition remain separately governed by Gate E. No website-code, infrastructure, provider, migration, spending or release authorization is granted.
 
 **Scope limitation:** DECISION-054 authorizes only the specified changes to `docs/YCN_CONTENT_SPEC.md` and `docs/YCN_DECISIONS.md` through the bounded task `YCN-B1-DEC-054-01`. Publication of legal text, application implementation and Git push remain separately gated.
+
+
+### DECISION-055: Lean Launch, Preserved V2.0 Scope and Business Proof
+
+**Status: PROPOSED — OWNER ADOPTION PENDING**
+**Effective on approval:** From acceptance through the June 2027 review; commercial focus to October 2027.
+**Precedence:** Supersedes *delivery priorities and routine review/demo procedures* only to the extent explicitly described. Previously approved business policies and security, privacy, data-integrity, brand, frozen-system, main-merge and deploy authority are preserved. Keep Master Plan §14 and existing Task IDs.
+
+## 1. Direction and success definition
+
+**The website is a tool to help a small studio earn trust and start conversations, not an enterprise software platform to administer.** Finish the actual current Site V2 codebase as a lean, honest, responsive, commercial studio site; prove the visitor can contact YCN; show only genuine attributable work; and initiate client outreach immediately. June 2027 is a decision about V2.0, not a mandate to build it.
+
+Success by January 2027 is measured with evidence: a live working studio site, verified customer-contact path, genuinely working demonstration or client project, regular outreach, proposals and an initial paid engagement if demand supports one. There is no guaranteed conversion, revenue, Lighthouse score or customer count.
+
+## 2. Eight consolidated amendments to the previous strategy
+
+**A1 — Proportional reviews and GitHub PRs.** AGY remains the only local workstation builder. For routine, bounded work use **one independent reviewer** (GPT or Claude, alternating). Review the actual GitHub diff plus tests; Owner authorizes merge into `main` and any deployment. Elevate independently for data migrations, security, sensitive customer data, legal publication, destructive operations and live production. A single PR is the communication center instead of forwarding transcripts. Owner must ratify changes to standing three-seat rules and explicitly scope any WIP push delegation.
+
+**A2 — Keep integrity; consolidate tests, don't just delete them.** Task 12's minimum five *smoke journeys* are: valid durable acceptance plus tested notification; DB unavailable gives truthful failure; email/status-update fails after commit yet acceptance remains true and recoverable; concurrent retries yield one stored lead, original reference and no duplicate email; malformed/invalid input is rejected. The existing architecture's 12 staging scenarios still include consent, provider failure, analytics, retention, operational recovery and rollback. Group by risk and avoid repeating tests, but do **not** silently waive requirements for a publicly active custom form. If verified staging remains blocked, propose a **separately approved** direct-email/WhatsApp contact path that never falsely claims server-side receipt, and disable the unfinished custom form.
+
+**A3 — Bounded pilot projects, not speculative free work.** Aim for small, realistically priced pilot work with explicit written scope, milestones, acceptance, revision limits, publishing permission and truthful attribution. Discount only when the exchange is commercially reasonable. Never promise a fixed price or a two-week delivery without estimating and verifying capacity.
+
+**A4 — Recovery with accurate labels.** First verify critical source and private records are preserved. The `proof/` subset is not the whole 18.9 GB master. Local Restic snapshots to `/mnt/workSpace` are optional convenience recovery on the **same physical SSD**. A second physical/off-device copy is the stronger resilience measure but remains deferred by Owner pending an explicit ruling. No unreviewed `ycnbackup` installation, source deletion, pruning or scripted full-folder move.
+
+**A5 — No invented pricing, metrics or capabilities.** The business foundation specifies India-first positioning, **custom INR quotes**, and a proposed 50/30/20 commercial framework—not publicly authorized price bands, a ₹35,000 one-size-fits-all offer or unmeasured 99/100 Lighthouse promises. Measure performance, demonstrate actual scope and cost the first project before publishing pricing promises. Retain claims register.
+
+**A6 — Launch with authentic evidence, not a portfolio deadline.** The YCN Labs site itself may be a truthful internal project **once it is live**, with verified code, measured performance, limitations and test outcomes. A working local-business pilot or an honestly labelled independent demonstration may be added when complete. Do not block launch waiting for two or three invented case studies or purchased testimonials.
+
+**A7 — Parking lot by pointers, not duplicate copies.** Create one `docs/V2_PARKING_LOT.md` on Site V2 `main`, pointing to current canonical documents, historical SHAs, WIP branches and private vault locations; keep existing files and evidence intact. A scope-freeze Git tag goes on the exact **Owner-adopted scope commit after approved integration**, not on the old governance merge. Do not move/copy hundreds of files into a second archive or delete original records.
+
+**A8 — Minimal administration, real business setup.** No daily full governance reviews, hours tables, cold-start-generator rollout or ordinary typo deviation numbering. Keep a short native Git preflight, single scoped task, raw necessary test evidence, one reviewer, actual approval and a truthful close note. Log material destructive, provenance, security, privacy or wrong-push incidents. Consult an India-qualified CA before commercial invoicing for the actual legal form, GST/RCM on foreign SaaS, TDS classification, invoices, accounts and tax thresholds; don't codify unverified tax interpretations or defer essential setup to 2027.
+
+## 3. Immediate V1 deliverables (keep existing task IDs)
+
+| Task | Ship/resolve now | Explicitly *not* required for the first launch |
+|---|---|---|
+| `03` | Record source and recoverability risk, a safe minimum recovery method and honest limits; implement local automation only if specifically approved | Backup-dashboard programme, automatic pruning, invented whole-master backup claims |
+| `04` | Inspect the historical live-claims hotfix Preview, then Owner decides promote/hold separately | Direct merging of historical private site into Site V2 |
+| `07` | Owner visually accept or reject the preserved navigation WIP; test and integrate only if approved | New multi-round glow/CTA exploration |
+| `08` | Fix actual Capability-03 overflow at 1024px and verify at 375px plus desktop | New page architecture |
+| `09` | Correct only verified severe visual, motion, accessibility and mobile performance defects | Additional cinematic scene invention |
+| `10` | Honest India-first services, contact and identity; GBP/UK metadata cleanup; no fabricated projects, price bands or service guarantees | New blog, multilingual funnel, CMS |
+| `11` | Use only explicitly Owner-approved logo/brand assets, with actual source/licensing rights | All future crop/derivative campaigns |
+| `12` | Fix false-503, atomic per-intent idempotency and original-ID recovery; staging acceptance or verified fallback contact | CRM, notification dashboard, marketing funnel tracking |
+| `13–14` | CI, real phones/375px, keyboard/theme/reduced motion, credible performance checks; show a few real owners the site | A new formal user-research programme |
+| `15–16` | Verify privacy, operators/inbox, commercial hosting, alerts, rollback/cutover and obtain exact-SHA Owner deploy authorization | Unverified commercial claims, automatic production deploy |
+| `17` | Basic postlaunch monitoring, inbox response ownership and incident recovery | Custom internal operating suite |
+
+No new Task 18/19 is silently created. Deferred OI-19 items stay indexed with reopen evidence.
+
+## 4. Release acceptance: ten outcome-based checks
+
+1. Exact release SHA is clean; lint, types, tests, build, secret scanning and scoped regression checks pass.
+2. Public identity, service scope, portfolio/project provenance, copy, India market and currency/metadata are truthful.
+3. All critical routes, main CTA, keyboard, links, responsive layouts at 375/1024px, both themes and reduced motion work on real devices.
+4. The actual customer contact route is tested end-to-end, accurately distinguishes *stored* from *not stored*, and reaches a monitored human (or an explicitly approved tested fallback replaces the custom form).
+5. Real email sender/inbox and DNS authentication work **if the selected route sends email**; an accountable lead/backup operator owns failures.
+6. Public notices, terms, privacy contact, retention, marketing permissions and data-processing disclosures are accurate and receive applicable professional/legal review.
+7. Mobile performance is measured on a representative physical phone and agreed test profile; no fabricated Lighthouse/Core Web Vitals claims.
+8. Secrets, essential abuse controls, error/uptime alerts and incident response responsibility are verified for the actual environment.
+9. The selected commercial hosting plan, exact repository/branch, staging, domain/DNS cutover, rollback and relevant data recovery are verified; no automatic unapproved deployment.
+10. Owner visually accepts the **actual** candidate and issues an explicit separate deployment decision for the exact commit and environment; postlaunch smoke test and follow-up operator are scheduled.
+
+The 143-item control list stays as historical reference and a source of risk-specific checks, not a daily daily sign-off requirement.
+
+## 5. Timeboxed execution
+
+| When | Work | Proof of progress |
+|---|---|---|
+| **18–20 Oct 2026** | Owner adopts scoped decision; single no-delete source index and canonical reconciliation prepared/reviewed; Task 07 visual verdict; first customer-contact conversations start | Adopted SHA, one approved PR, owner decisions, outreach log |
+| **19–25 Oct** | Authorized Task 12 bug fix on isolated WIP, Task 08 overflow preflight, staged lead operator access; select actual V1 contact path | Code diff, targeted tests, real staging blockers named |
+| **26 Oct–1 Nov** | Task 10 copy, metadata/INR correction, logo decision, honest Work page plan, privacy wording and real-device perf sampling | Reviewed route-level changes and factual screenshots |
+| **2–8 Nov** | Contact staging or fallback acceptance, responsive/perf corrections, monitoring and hosting/cutover preparation | Working verified Preview, real enquiry, measurable page results |
+| **9–15 Nov** | Ten release outcomes, Owner acceptance, controlled production cutover only when safe | Exact live SHA, customer journey smoke, rollback path |
+| **16–30 Nov** | Existing fallback launch checkpoint if critical issues hold the accelerated target; begin/continue external pilot | No falsely rushed go-live, signed small pilot scope |
+| **Dec 2026–Jan 2027** | Outreach, deliver scoped pilot, publish verified work; lean studio maintenance | Conversations → proposals → paid work, attributable case evidence |
+| **Feb–May 2027** | Repeat what sells, define viable optional client maintenance, track costs/revenue | Measured delivery effort, invoices and support obligations |
+| **June 2027** | Decide whether to invest in V2.0 using demand, lead volume, repeat asks, cash, and capacity | Continue V1, make one targeted enhancement or explicitly start V2.0 |
+| **Jul–Oct 2027** | If justified, build one V2.0 improvement at a time; otherwise prioritize client delivery | Incremental customer value rather than new imagined platform scope |
+
+**Commercial experiment:** list 30 warm contacts; make ~10 relevant personalized outreaches weekly; record *replies, conversations, proposals, paid wins, revenue collected* in one simple sheet. Do not wait for site launch to initiate genuine conversations. Spend at most about 3 hours/day of your own time on the YCN marketing site during launch and ~3 hours/week on routine site upkeep afterward (exceptions for incidents).
+
+## 6. Source-control and Owner authority
+
+1. One builder (AGY), one independent reviewer for ordinary approved tasks; elevated appropriate reviewers when safety/customer-data/legal/release risks demand. One PR per bounded change. Reviewer should inspect the actual diff, tests and impact—not re-review other reviewers' prose.
+2. AGY cannot author or revise GPT/Claude standalone visual demos. Proposed narrower demo requirement applies only after Owner approves the change to OI-18. Approved demo is not authorization for coding or release.
+3. Owner explicitly authorizes protected merges, public pushes where required by standing rules, schema migrations, deletions, file moves, spend, frozen-system edits, live hotfixes and production releases. PR creation or WIP push is allowed only within the exact delegation granted by the Owner.
+4. Existing foundation/historical records remain recoverable. No blanket `git clean`, `reset`, `restore`, bulk moves, or new source-of-truth duplicate files.
+5. A new control/process document is added only to remedy a demonstrable operational risk or an actual approved decision. No governance ceremony for its own sake.
+
+## 7. Adoption words (Owner only)
+
+`ADOPT DECISION-055: lean-launch scope and operating changes as written in this candidate. Authorize AGY to prepare a docs-only canonical reconciliation on a new WIP branch for one reviewer. Do not move/delete files, commit/push/merge/deploy, spend, install timers, change frozen systems or run database migrations without separate approval. After integration, prioritize Task 12 and actual customer outreach.`
+
+If the Owner wants to allow a WIP commit/push for that single doc reconciliation, grant it explicitly with its allowed file list. Do **not** treat the candidate as adopted merely because other AI seats recommend it.
+
+**Evidence boundary:** All launch dates, customer count and price conclusions above are targets/hypotheses, not verified results.

@@ -39,6 +39,9 @@ Current YCN site direction: [`docs/vnext/00_START_HERE.md`](docs/vnext/00_START_
 - **Repository and runtime evidence outranks agent summaries.** Never claim "PASS" without raw command output.
 - **Owner approval is mandatory** for all commits, pushes, dependency changes, schema migrations, and releases.
 - **No Documentation Churn:** Follow DECISION-018. Do not create daily journals, session logs, or empty templates. At task completion, evaluate: **Documentation impact: YES / NO**. Update docs only if a specification or decision genuinely changed.
+- **PR-Based Single Review (effective on DECISION-055 adoption):** AGY opens GitHub Pull Requests on isolated branches; exactly one independent reviewer (GPT or Claude alternating) reviews the diff; three seats convene only for production deployments, customer data handling, or binding legal text.
+- **OI-18 Visual Demo Scope (effective on DECISION-055 adoption):** HTML demos are required for brand-new visible UI screens or changed customer workflows only; backend reliability fixes, schema edits, and scripts require behavioral test contracts and test outputs, not decorative HTML previews.
+- **Protected Actions Boundary (effective on DECISION-055 adoption):** AGY prepares changes and opens PRs; AGY never merges to main, pushes tags, or records adoption without explicit typed Owner authorization.
 
 ---
 

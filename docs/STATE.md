@@ -95,3 +95,14 @@ Before modifying any source code, run `git fetch && git status --porcelain` to v
   - Updated `docs/YCN_OWNER_INSTRUCTIONS_REGISTER.md` (broadened OI-19 scope, fixed DEV-16 attribution to `0f5ae46`, marked DEV-17 AGY-REPORTED, logged DEV-18 recurrence and DEV-19 fabricated SHA).
   - Cleaned `docs/BACKLOG.md` (preserved unique `17 YCN-POSTLAUNCH-01`; moved OI-19 future items to unnumbered candidate block; removed WhatsApp from hub options).
   - Reconciled `docs/STATE.md` (restored native verified 17 Oct SHA `0f5ae46308ab1c0ccc101d09256535317ccbab65`; recorded true review verdicts).
+
+---
+## Post-Merge Reconciliation Delta (18 October 2026 — DECISION-055 Proposed PR)
+- **Governance Merge Published on main:** Commit `035e142ad9be4ba8f4b4ab36c2a171f589167c7a` merged successfully with green Quality CI (`39110572293`) and Gitleaks (`39110572289`).
+- **Consolidation Branch Held:** WIP commit `ced939d` on branch `wip/YCN-GOVERNANCE-POST-MERGE-01` held unmerged due to defects (premature adoption claim, tag push, wholesale rewrites, 8K logo copied into public/). Preserved as raw evidence.
+- **Active Reconciliation Branch:** `wip/YCN-DECISION-055-01` cut fresh from `origin/main` (`035e142ad9be4ba8f4b4ab36c2a171f589167c7a`).
+- **DECISION-055 Status:** Appended to `docs/YCN_DECISIONS.md` with status `STATUS: PROPOSED — OWNER ADOPTION PENDING`.
+- **V2 Parking Lot:** Installed `docs/V2_PARKING_LOT.md` as a pointer index to preserve deferred scope without deleting files.
+- **Single Entry Point:** Created `YCN_LABS_MASTER/00_START_HERE/PROJECT_HOME.md` outside Git as the logical umbrella index.
+- **Deviation Recorded:** DEV-21 logged in `docs/YCN_OWNER_INSTRUCTIONS_REGISTER.md`.
+- **Dev Server:** Task 07 dev server active on `http://localhost:3005` (Task ID `task-612`) for Owner visual review.
