@@ -14,7 +14,7 @@
 - [x] **First Public Push:** Initialized Git on `main`, pushed to `yash-wd/ycn-labs-site` under personal SSH key with GitHub no-reply committer identity (`3a792e0`).
 - [x] **Permanent Close Protocol (`YCN-CLOSE-PROTOCOL-01`):** Installed canonical `docs/CLOSE_PROTOCOL.md` and read-only `tools/close-preflight.sh`. Cross-project reconciliation and cold-resume standard ratified.
 - [x] **Gate E Baseline (`YCN-V2-FOUNDATION-ALIGN-01`):** [PUBLISHED at `134b0ec`, 17 Oct 2026] Foundation alignment documentation baseline published (cross-checked business facts, content, design rules, HLD/LLD, law/claims, V1 scope, runbook, discrepancy register, and acceptance criteria 07–12). Final Gate E readiness check target 21 Oct 2026; code execution hold maintained.
-- [ ] **`YCN-CHECKLIST-GOVERNANCE-01`:** [LOCAL DRAFT / IN PROGRESS, 17 Oct 2026] Project-wide checklist tracking system established across canonical files; awaiting independent multi-seat review.
+- [x] **`YCN-CHECKLIST-GOVERNANCE-01`:** [PUBLISHED at `035e142`, 18 Oct 2026] Project-wide checklist tracking system, Task Gate, permanent Owner Instructions Register (OI-01 to OI-19), and design-to-code contract merged into `main` after passing independent multi-seat review.
 
 ---
 

@@ -95,3 +95,15 @@ Before modifying any source code, run `git fetch && git status --porcelain` to v
   - Updated `docs/YCN_OWNER_INSTRUCTIONS_REGISTER.md` (broadened OI-19 scope, fixed DEV-16 attribution to `0f5ae46`, marked DEV-17 AGY-REPORTED, logged DEV-18 recurrence and DEV-19 fabricated SHA).
   - Cleaned `docs/BACKLOG.md` (preserved unique `17 YCN-POSTLAUNCH-01`; moved OI-19 future items to unnumbered candidate block; removed WhatsApp from hub options).
   - Reconciled `docs/STATE.md` (restored native verified 17 Oct SHA `0f5ae46308ab1c0ccc101d09256535317ccbab65`; recorded true review verdicts).
+- **Governance Publication & CI (18 Oct 2026):**
+  - Merged `wip/YCN-CHECKLIST-GOVERNANCE-01` into `main` at `035e142ad9be4ba8f4b4ab36c2a171f589167c7a`.
+  - GitHub Actions verified: Gitleaks CI `39110572289` (Green) and Quality CI `39110572293` (Green, 51s).
+- **Active Navigation Review Server (Port 3005):**
+  - Dedicated worktree `/home/ycn-labs/Desktop/ycn-nav-07` on branch `wip/YCN-NAV-07` merged with `main` at `f6152e0`.
+  - Next.js development server running on port 3005 serving 200 OK for Owner visual review of continuous menu motion.
+- **Task 12 Lead Intake Readiness:**
+  - Ingested GPT demo `YCN_TASK12_LEAD_RELIABILITY_DEMO_v1.html` (SHA-256 `76b9122a...`, size 6,036 bytes).
+  - Preflight checklist completed and bound with per-render UUID `idempotencyKey` lifecycle, 10-minute fallback hash, and post-commit false 503 fix.
+  - Raw command log established; DEV-20 recorded; code execution hold maintained pending Owner `demo pass`.
+- **Backup Automation Candidate:**
+  - Candidate restic script `proof/YCN-VAULT-BACKUP-01/ycnbackup.sh` updated with 5 safety corrections (proof log preservation, non-destructive restore, safe repo initialization, status command, persistent failure flag, and 10% deep verify). Staged in vault, uninstalled pending Owner verdict.
