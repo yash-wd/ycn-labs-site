@@ -1,85 +1,58 @@
 # YCN Labs — Documentation Master Index
 
-- **Project:** YCN Labs Official Website
-- **Revision:** 1.3 (Canonical System)
-- **Current Stage:** Active Development (Foundation Phase; Gates A, B1, B2, C/D complete; Gate E target 21 Oct 2026; live-claims hotfix pending)
-- **Active Development Target:** `main` (Verify with `git rev-parse HEAD`; see `docs/STATE.md`) (`https://github.com/yash-wd/ycn-labs-site`)
-- **Historical Private Reference:** `site-v2 @ 11468f4b36b3fdf451cd0bf04e5f2ee2868b45a5` (preserved on remote branch `site-v2` in `yash-wd/ycnlabs`; preserved strictly for historical/recovery records)
-- **Hosting Provider:** Vercel (No production deployment authorized for `ycn-labs-site`; historical production repo `yash-wd/ycnlabs` receives only Owner-authorized, preview-verified hotfixes)
+- **Project:** YCN Labs Official Website & Studio Operations
+- **Revision:** 2.0 (DECISION-055 Lean Launch & Scope Freeze System)
+- **Current Stage:** Active Development — Lean V1 Launch Sprint (Target: 15 Nov 2026 / Fallback: 30 Nov 2026)
+- **Active Canonical Root:** `/home/ycn-labs/Desktop/ycn-labs-site` (`https://github.com/yash-wd/ycn-labs-site`)
+- **Operating Framework:** DECISION-055 (1 Builder, 1 Reviewer via GitHub PRs, 10-Point Launch Gate)
 
 ---
 
-## 1. How to Read This Documentation
+## 1. Unified Architecture Stack
 
-For any human engineer, contributor, or AI agent (GPT, Claude, AGY), read in this exact order:
+All project assets, code, specifications, and decisions are unified inside this repository:
 
-1. **Cold-Start Verification Gate ([`docs/CLOSE_PROTOCOL.md` §3](CLOSE_PROTOCOL.md))** — Mandatory first step once per day/session: verify all 3 repositories vs own upstreams and check cold-start brief.
-2. **Entry & Task Gate ([`docs/START_HERE.md`](START_HERE.md) + [`docs/TASK_GATE.md`](TASK_GATE.md))** — Read START_HERE for canonical repository context, then TASK_GATE.md before starting or resuming ANY task (reading sequence, legal triggers, OI-18 demo gate, STOP conditions).
-3. **Current State ([`docs/STATE.md`](STATE.md))** — Single source of truth for repository state, in-flight work, Gate E readiness, and post-close deltas.
-4. **Backlog & Execution Queue ([`docs/BACKLOG.md`](BACKLOG.md))** — Master launch execution queue and active backlog authority.
-5. **Readiness Checklist ([`docs/YCN_READINESS_CHECKLIST.md`](YCN_READINESS_CHECKLIST.md))** — Master 143-point project control and evidence readiness ledger.
-6. **Owner Instructions Register ([`docs/YCN_OWNER_INSTRUCTIONS_REGISTER.md`](YCN_OWNER_INSTRUCTIONS_REGISTER.md))** — Permanent register of standing directives, rules, and deviations (OI-01 to OI-19, DEV-01 to DEV-18).
-7. **Agent Governance ([`AGENTS.md`](../AGENTS.md))** — Permanent rules: Three-Seat Shared Ownership, evidence law, and Cold-Start Verification Gate.
-8. **This Index ([`docs/INDEX.md`](INDEX.md))** — Active authority and document registry.
-9. **Operating Protocol ([`docs/YCN_AGENT_OPERATING_PROTOCOL.md`](YCN_AGENT_OPERATING_PROTOCOL.md))** — Core operational rules and review procedures.
-10. **Living Ledgers:**
-   - **[Decisions](YCN_DECISIONS.md)** — Binding owner architectural, scope, and vNext decisions (DECISION-001 through DECISION-054).
-   - **[Claims & Proof](YCN_CLAIMS_AND_PROOF.md)** — Evidentiary backing for all public marketing claims.
-   - **[Content Spec](YCN_CONTENT_SPEC.md)** — Canonical approved public copy and candidate copy under review.
-   - **[Design System](YCN_DESIGN_SYSTEM.md)** — Semantic color tokens, type scale, and motion constraints.
-   - **[Risks & Technical Debt](YCN_RISKS_AND_TECH_DEBT.md)** — Active risks, controls, and technical debt tracking.
-   - **[Changelog](YCN_CHANGELOG.md)** — Project and document revision history.
+1. **[Project Stack Map](PROJECT_STACK.md)** — Architectural blueprint of all folders, layers, and responsibilities.
+2. **[Master Strategy 2026–27](YCN_MASTER_STRATEGY_2026-27.md)** — Binding commercial and technical operating plan (Phases 1–4).
+3. **[Decisions Stack](decisions/README.md)** — Chronological index and text of all 55 decisions (DECISION-001 to DECISION-055).
+4. **[V2 Parking Lot](V2_PARKING_LOT.md)** — Deferred speculative features with SHA pointers and June 2027 reopening criteria.
+5. **[Current State](STATE.md)** — Daily single source of truth for branch state, task progress, and closing summaries.
+6. **[Launch Backlog](BACKLOG.md)** — Focused execution queue for the 4-week lean launch (Tasks 07, 08, 10, 11, 12, 13, 15, 17).
+7. **[Task Gate](TASK_GATE.md)** — Operating constraints, branch isolation, and safety criteria for active work.
+8. **[Master Plan](YCN_MASTER_PLAN.md)** — Complete task breakdown across all foundation and implementation phases.
+9. **[System Architecture](YCN_SYSTEM_ARCHITECTURE.md)** — Modular Next.js monolith technical specification.
+10. **[Content Specification](YCN_CONTENT_SPEC.md)** — Canonical approved public copy for all 18 routes.
+11. **[Design System](YCN_DESIGN_SYSTEM.md)** — Color palette, type hierarchy, and motion guidelines.
+12. **[Claims & Proof Register](YCN_CLAIMS_AND_PROOF.md)** — Empirical verification requirement for all public claims.
+13. **[Brand Records](brand/YCN_LABS_BRAND_TECHNICAL_RECORD_v1.2_FINAL.md)** — Technical brand identity, colors, and 8K master logo asset.
 
 ---
 
-## 2. Active Canonical Document Registry
+## 2. Active Canonical Document Hierarchy
 
-These files constitute the **single active documentation authority** for the repository.
-
-| Document | Filename | Primary Owner | Purpose | Update Trigger |
-|---|---|---|---|---|
-| **vNext Site Direction** | [`docs/vnext/00_START_HERE.md`](vnext/00_START_HERE.md) | Owner / Lead Architect | Active Product-led vNext site specification pack entry point | Major design direction update |
-| **vNext Manifest** | [`docs/vnext/MANIFEST.md`](vnext/MANIFEST.md) | Lead Architect | Inventory of 17 vNext specs + prototypes | vNext doc update |
-| **Master Index** | [`docs/INDEX.md`](INDEX.md) | Lead Architect | Documentation homepage, authority map, and navigation guide | Adding/deprecating docs |
-| **Operating Protocol** | [`docs/YCN_AGENT_OPERATING_PROTOCOL.md`](YCN_AGENT_OPERATING_PROTOCOL.md) | Owner | Operational rules, boundaries, and safe execution constraints | Protocol amendment |
-| **Owner Instructions Register** | [`docs/YCN_OWNER_INSTRUCTIONS_REGISTER.md`](YCN_OWNER_INSTRUCTIONS_REGISTER.md) | Owner | Permanent register of standing directives, rules, and deviations (OI-01 to OI-17) | Direct Owner instruction |
-| **Master Plan** | [`docs/YCN_MASTER_PLAN.md`](YCN_MASTER_PLAN.md) | Lead Architect | High-level system architecture, site topology, and milestones | Major milestone |
-| **Requirements** | [`docs/YCN_REQUIREMENTS.md`](YCN_REQUIREMENTS.md) | Product Owner | Business requirements, user journeys, acceptance criteria | Scope revision |
-| **Content Spec** | [`docs/YCN_CONTENT_SPEC.md`](YCN_CONTENT_SPEC.md) | Product Owner | Authoritative copy, shop-owner vocabulary, translation tables | Copy revision |
-| **Design System** | [`docs/YCN_DESIGN_SYSTEM.md`](YCN_DESIGN_SYSTEM.md) | Design Lead | Semantic tokens, color rules, type scale, motion limits | Token/style change |
-| **Design-to-Code Contract** | [`docs/YCN_DESIGN_TO_CODE_CONTRACT.md`](YCN_DESIGN_TO_CODE_CONTRACT.md) | Design & QA Leads | Token mapping, hardcoded hex audit, 5-viewport screenshot matrix | Foundation alignment |
-| **Active Execution Queue** | [`docs/BACKLOG.md`](BACKLOG.md) / [`docs/STATE.md`](STATE.md) | Product Owner | Primary active launch execution queue and in-flight status | Task milestone / Close |
-| **Readiness Checklist** | [`docs/YCN_READINESS_CHECKLIST.md`](YCN_READINESS_CHECKLIST.md) | Quality Lead / All Seats | 143-point Project Control & Evidence Readiness Checklist | Daily Sync / Task Gate |
-| **Historical Task Reference** | [`docs/YCN_AGY_TASKS.md`](YCN_AGY_TASKS.md) | Lead Engineer | Subordinate execution phases aligned with vNext roadmap | Reference only |
-| **Test Checklist** | [`docs/YCN_TEST_CHECKLIST.md`](YCN_TEST_CHECKLIST.md) | QA Lead | Regression tests, accessibility audit, fail-closed validation | Test plan update |
-| **Decisions Log** | [`docs/YCN_DECISIONS.md`](YCN_DECISIONS.md) | Owner | Binding decision records (DECISION-001 through DECISION-054) | Major decision |
-| **Claims & Proof** | [`docs/YCN_CLAIMS_AND_PROOF.md`](YCN_CLAIMS_AND_PROOF.md) | Compliance | Evidentiary ledger proving all public marketing facts | Public claim added |
-| **Historical Feature Ideas** | [`docs/YCN_BACKLOG.md`](YCN_BACKLOG.md) | Product Owner | Deferred non-blocking feature ideas preserved for history | Scope triage |
-| **Changelog** | [`docs/YCN_CHANGELOG.md`](YCN_CHANGELOG.md) | Lead Engineer | Customer- and system-level version changes | Version release |
-| **Risks & Debt** | [`docs/YCN_RISKS_AND_TECH_DEBT.md`](YCN_RISKS_AND_TECH_DEBT.md) | Engineering Lead | Active risk controls and technical debt inventory | Risk/debt change |
-| **Brand Technical Record** | [`docs/brand/YCN_LABS_BRAND_TECHNICAL_RECORD_v1.2_FINAL.md`](brand/YCN_LABS_BRAND_TECHNICAL_RECORD_v1.2_FINAL.md) | Brand Custodian | Official logo hashes and brand visual standards | Brand asset update |
+| Document | Filename | Primary Owner | Purpose |
+|---|---|---|---|
+| **Project Stack** | [`docs/PROJECT_STACK.md`](PROJECT_STACK.md) | Lead Architect | Map of all project layers, code, decisions, and assets |
+| **Master Strategy** | [`docs/YCN_MASTER_STRATEGY_2026-27.md`](YCN_MASTER_STRATEGY_2026-27.md) | Owner | 1-Year business & technical roadmap (Launch to Retainers) |
+| **Decisions Index** | [`docs/decisions/README.md`](decisions/README.md) | Owner | Complete chronological register of DECISION-001 to 055 |
+| **V2 Parking Lot** | [`docs/V2_PARKING_LOT.md`](V2_PARKING_LOT.md) | Owner | Deferred enterprise scope indexed for June 2027 review |
+| **Current State** | [`docs/STATE.md`](STATE.md) | All Seats | Daily single source of truth for repository state |
+| **Execution Backlog** | [`docs/BACKLOG.md`](BACKLOG.md) | Lead Architect | Active launch sprint task queue |
+| **Task Gate** | [`docs/TASK_GATE.md`](TASK_GATE.md) | All Seats | Pre-flight rules and execution bounds |
+| **Close Protocol** | [`docs/CLOSE_PROTOCOL.md`](CLOSE_PROTOCOL.md) | Owner | Clean session close and verification protocol |
 
 ---
 
+## 3. The 10-Point Launch Gate (Replaces 143-Point Tracker)
 
-## 3. Historical Documents (Non-Authoritative)
-
-All superseded specifications, legacy agent files, and obsolete ledgers have been consolidated under:
-`docs/legacy/`
-
-> [!WARNING]
-> **Files in `docs/legacy/` are strictly historical references.**
-> They do **NOT** govern current development. Do not use legacy ledgers (`PROJECT_STATE.md`, old `AGENTS.md`) or obsolete scene plans to guide implementation.
-
----
-
-## 4. Operational & Governance Rules
-
-1. **Lean Development Documentation (DECISION-018):**  
-   We do not maintain daily developer diaries, session notes, per-task narratives, or empty templates during active coding. Living records are limited to Decisions, Changelog, Claims, Risks/Debt, and raw output in `evidence/`.
-2. **Documentation Impact Rule for Future Tasks:**  
-   Every completed task must answer: **Documentation impact: YES / NO**. Only update docs when a requirement, architecture, token, claim, or risk genuinely changed.
-3. **External Evidence Directory:**  
-   Detailed task execution logs, screenshots, and review outputs reside in `/home/ycn-labs/Desktop/YCN_LABS_MASTER/proof/<task-id>/` and are not committed into repository docs.
-4. **Final Closeout Documentation Pack (Task D3):**  
-   At project closeout (post-D2), AGY will generate a complete, professional 16-document MNC/GCC-grade technical documentation pack (`01_PROJECT_OVERVIEW.md` through `16_FINAL_PROJECT_REPORT.md`) derived entirely from the finished, verified codebase and production evidence.
+Under DECISION-055, release readiness is governed strictly by the 10-Point Launch Gate:
+1. `git diff --check` passes with zero whitespace/merge errors.
+2. `pnpm run type-check` (`tsc --noEmit`) passes with zero errors.
+3. `pnpm run lint` passes (0 errors).
+4. `pnpm test` passes all 280+ tests.
+5. `pnpm run build` generates all 18 routes cleanly.
+6. Real test lead submitted from a mobile device commits to PostgreSQL and notifies Owner.
+7. Mobile 375px audit confirms zero horizontal scrollbar or clipped content.
+8. Mobile performance verified: LCP $\le$ 2.5s on mobile network.
+9. Privacy notice and working contact mailboxes (`hello@`, `privacy@`) live.
+10. Rollback mechanism verified in hosting dashboard.
