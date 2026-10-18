@@ -13,6 +13,7 @@
 
 For any human engineer, contributor, or AI agent (GPT, Claude, AGY), read in this exact order:
 
+0. **Task Gate ([`docs/TASK_GATE.md`](TASK_GATE.md))** — Read before starting or resuming ANY task. Covers day gate, reading sequence, legal triggers, OI-18 demo gate, and STOP conditions.
 1. **Entry Point ([`docs/START_HERE.md`](START_HERE.md))** — Canonical repository entry point and context. Open this first.
 2. **Current State ([`docs/STATE.md`](STATE.md))** — Single source of truth for repository state, in-flight work, and recent decisions.
 3. **Backlog & Execution Queue ([`docs/BACKLOG.md`](BACKLOG.md))** — Master launch execution queue and active backlog authority.

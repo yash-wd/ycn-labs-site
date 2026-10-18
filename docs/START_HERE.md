@@ -14,6 +14,8 @@ Open this file on branch `main`. Before any work run `git fetch && git status --
 ---
 
 ## 1. Document Authority (Canon Order)
+> **Before starting or resuming ANY task:** Read [docs/TASK_GATE.md](TASK_GATE.md) for mandatory day gates, reading sequence, legal triggers, OI-18 demo rules, and STOP conditions.
+
 1. **Owner Rulings** (Supreme authority; sole visual approval seat)
 2. `docs/YCN_DECISIONS.md` (Governing architecture and product choices)
 3. `docs/YCN_CLAIMS_AND_PROOF.md` (Verified claims, evidence thresholds, benchmarks)
