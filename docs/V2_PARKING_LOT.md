@@ -1,7 +1,9 @@
 # YCN Labs — V2.0 Parking Lot (pointer-only candidate)
 
-**Status:** PROPOSED. Intended final canonical path: `ycn-labs-site/docs/V2_PARKING_LOT.md` after Owner adoption and review.  
-**Reopen checkpoint:** June 2027, except a real customer/security/legal/release need makes an item necessary earlier.  
+**Status:** PROPOSED. Intended final canonical path: `ycn-labs-site/docs/V2_PARKING_LOT.md` after Owner adoption and review.
+
+**Reopen checkpoint:** June 2027, except a real customer/security/legal/release need makes an item necessary earlier.
+
 **Do not move, copy, delete or rehash hundreds of source files just to 'park' them.** Each row preserves its actual source and the reason it was deferred. Recheck paths and ref SHAs before adoption.
 
 | ID | Parked work / idea | Existing canonical pointer or evidence | Reopen only if... |
