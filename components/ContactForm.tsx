@@ -11,6 +11,16 @@ import {
 } from "@/lib/validation/contact";
 import { CheckCircle2, AlertCircle, Loader2, Send } from "lucide-react";
 
+function generateUUID(): string {
+  if (typeof crypto !== "undefined" && typeof crypto.randomUUID === "function") {
+    return crypto.randomUUID();
+  }
+  return "xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx".replace(/[xy]/g, (c) => {
+    const r = (Math.random() * 16) | 0;
+    return (c === "x" ? r : (r & 0x3) | 0x8).toString(16);
+  });
+}
+
 const IMPROVEMENT_GOALS = [
   { id: "get-found", label: "Get found", value: "Help customers find my business (Websites & presence)" },
   { id: "enquiries-bookings", label: "Enquiries/bookings/orders", value: "Make enquiries, bookings or orders easier (Customer journeys)" },
@@ -28,6 +38,9 @@ export function ContactForm() {
   // Split inputs for "What happens today?" and "What would you like to change?"
   const [whatHappensToday, setWhatHappensToday] = useState("");
   const [whatToChange, setWhatToChange] = useState("");
+
+  // One idempotencyKey per intentional enquiry; preserved across retries; reset after success
+  const [idempotencyKey, setIdempotencyKey] = useState<string>(() => generateUUID());
 
   const {
     register,
@@ -70,6 +83,7 @@ export function ContactForm() {
     const payload = {
       ...data,
       message: combinedMessage.length >= 10 ? combinedMessage : (data.message || combinedMessage),
+      idempotencyKey,
     };
 
     if (payload.message.length < 10) {
@@ -99,10 +113,13 @@ export function ContactForm() {
       reset();
       setWhatHappensToday("");
       setWhatToChange("");
-    } catch (err: any) {
-      setSubmitError(
-        err.message || "We could not accept your request safely. Your message has not been confirmed—please try again or use the listed contact route."
-      );
+      setIdempotencyKey(generateUUID());
+    } catch (err: unknown) {
+      const errorMessage =
+        err instanceof Error && err.message
+          ? err.message
+          : "We could not accept your request safely. Your message has not been confirmed—please try again or use the listed contact route.";
+      setSubmitError(errorMessage);
     } finally {
       setIsSubmitting(false);
     }
@@ -122,7 +139,10 @@ export function ContactForm() {
         </p>
         <button
           type="button"
-          onClick={() => setSubmitSuccess(false)}
+          onClick={() => {
+            setSubmitSuccess(false);
+            setIdempotencyKey(generateUUID());
+          }}
           className="text-xs font-semibold text-[var(--action-blue)] hover:underline pt-2 inline-block cursor-pointer"
         >
           Send another message
@@ -138,17 +158,17 @@ export function ContactForm() {
         type="text"
         tabIndex={-1}
         autoComplete="off"
-        className="sr-only"
+        className="hidden"
         aria-hidden="true"
         {...register("honeypot")}
       />
 
       {submitError && (
-        <div className="p-4 rounded-xl bg-rose-500/10 border border-rose-500/20 flex items-start gap-3 text-rose-400 text-xs sm:text-sm">
-          <AlertCircle className="w-5 h-5 shrink-0 mt-0.5" />
-          <div className="space-y-0.5">
-            <p className="font-semibold text-rose-300">Temporary failure</p>
-            <p className="text-xs leading-relaxed">{submitError}</p>
+        <div className="p-4 rounded-xl border border-rose-500/20 bg-rose-500/5 text-rose-300 text-sm flex items-start gap-3">
+          <AlertCircle className="w-5 h-5 flex-shrink-0 text-rose-400 mt-0.5" />
+          <div className="space-y-1">
+            <p className="font-medium text-rose-200">Submission Error</p>
+            <p className="text-xs text-rose-300/90 leading-relaxed">{submitError}</p>
           </div>
         </div>
       )}
@@ -158,7 +178,7 @@ export function ContactForm() {
         <label className="block text-[13px] font-semibold text-[var(--text-primary)] font-sans">
           1. What would you like to improve? *
         </label>
-        <div className="grid grid-cols-1 min-[360px]:grid-cols-2 sm:grid-cols-3 gap-2.5">
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
           {IMPROVEMENT_GOALS.map((goal) => {
             const isSelected = selectedGoal === goal.value;
             return (
@@ -166,14 +186,13 @@ export function ContactForm() {
                 key={goal.id}
                 type="button"
                 onClick={() => setValue("projectType", goal.value, { shouldValidate: true })}
-                className={`p-3 rounded-xl border text-left text-[13px] font-medium leading-snug transition-all duration-200 cursor-pointer min-h-[44px] flex items-center justify-between gap-1.5 ${
+                className={`flex items-start text-left p-3.5 rounded-xl border transition-all text-xs cursor-pointer ${
                   isSelected
-                    ? "border-[var(--action-blue)] bg-[var(--action-blue)]/10 text-[var(--action-blue)] shadow-xs"
-                    : "border-[var(--border-subtle)] bg-[var(--bg-canvas)] text-[var(--text-secondary)] hover:border-[var(--border-strong)] hover:text-[var(--text-primary)]"
+                    ? "border-[var(--action-blue)] bg-[var(--action-blue)]/5 text-[var(--text-primary)] font-medium shadow-xs"
+                    : "border-[var(--border-subtle)] bg-[var(--bg-card)] text-[var(--text-secondary)] hover:border-[var(--border-strong)] hover:text-[var(--text-primary)]"
                 }`}
               >
-                <span className="break-words">{goal.label}</span>
-                {isSelected && <span className="w-1.5 h-1.5 rounded-full bg-[var(--action-blue)] shrink-0 ml-1" />}
+                <span>{goal.label}</span>
               </button>
             );
           })}

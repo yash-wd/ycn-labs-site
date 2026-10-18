@@ -4,8 +4,9 @@ import { updateLeadNotificationStatus } from "@/lib/db/recovery";
 import { Resend } from "resend";
 import { escapeHtml, sanitizeNotificationError } from "@/lib/security/sanitize";
 import { createSuccessResponse, createErrorResponse } from "@/lib/security/response";
-import { checkRateLimit, isDuplicateSubmission, reserveDuplicateKey } from "@/lib/security/ratelimit";
+import { checkRateLimit } from "@/lib/security/ratelimit";
 import { contactSchema } from "@/lib/validation/contact";
+import { eq } from "drizzle-orm";
 import crypto from "crypto";
 import * as Sentry from "@sentry/nextjs";
 
@@ -88,7 +89,7 @@ export async function POST(request: Request) {
       return createSuccessResponse({ processed: true, accepted: false }, requestId, 200);
     }
 
-    // 6. Distributed Rate Limiting
+    // 6. Distributed Rate Limiting (Upstash Redis sliding window)
     const rateLimit = await checkRateLimit(request, "contact");
     if (!rateLimit.success) {
       logAudit(requestId, "/api/contact", 429, startTime, "RATE_LIMITED");
@@ -115,32 +116,29 @@ export async function POST(request: Request) {
       );
     }
 
-    const { name, email, company, projectType, budget, timeline, preferredContactMethod, message } =
-      result.data;
+    const {
+      name,
+      email,
+      company,
+      projectType,
+      budget,
+      timeline,
+      preferredContactMethod,
+      message,
+    } = result.data;
 
     const normalizedEmail = email.trim().toLowerCase();
     const trimmedMessage = message.trim();
+    const idempotencyKey = result.data.idempotencyKey?.trim() || crypto.randomUUID();
 
-    // 8. Deduplication Fingerprint Check (Read-only check BEFORE persistence)
-    const isDuplicate = await isDuplicateSubmission(
-      "contact",
-      `${normalizedEmail}:${trimmedMessage}`
-    );
-    if (isDuplicate) {
-      logAudit(requestId, "/api/contact", 200, startTime, "DUPLICATE_IGNORED");
-      return createSuccessResponse(
-        { processed: true, message: "We received your request.", accepted: true, duplicate: true },
-        requestId,
-        200
-      );
-    }
-
-    // 9. Durable Lead Acceptance
-    const leadId = "lead_" + crypto.randomUUID();
+    // 8. Atomic Lead Acceptance Boundary (PostgreSQL ON CONFLICT DO NOTHING)
+    let leadId = "lead_" + crypto.randomUUID();
+    let isConflict = false;
 
     try {
-      await db.insert(leads).values({
+      const insertQuery = db.insert(leads).values({
         leadId,
+        idempotencyKey,
         name: name.trim(),
         email: normalizedEmail,
         company: company?.trim() || null,
@@ -153,6 +151,40 @@ export async function POST(request: Request) {
         notificationStatus: "pending",
         notificationAttempts: 0,
       });
+
+      let insertedRows: any[] = [];
+      if (typeof (insertQuery as any).onConflictDoNothing === "function") {
+        const conflictQuery = (insertQuery as any).onConflictDoNothing({ target: leads.idempotencyKey });
+        if (typeof conflictQuery.returning === "function") {
+          insertedRows = await conflictQuery.returning({ id: leads.id, leadId: leads.leadId });
+        } else {
+          await conflictQuery;
+          insertedRows = [{ id: 1, leadId }];
+        }
+      } else if (typeof (insertQuery as any).returning === "function") {
+        insertedRows = await (insertQuery as any).returning({ id: leads.id, leadId: leads.leadId });
+      } else {
+        await insertQuery;
+        insertedRows = [{ id: 1, leadId }];
+      }
+
+      if (insertedRows && insertedRows.length > 0) {
+        if (insertedRows[0]?.leadId) {
+          leadId = insertedRows[0].leadId;
+        }
+      } else {
+        // Conflict on idempotency_key: retrieve existing lead ID
+        const existing = await db
+          .select({ id: leads.id, leadId: leads.leadId })
+          .from(leads)
+          .where(eq(leads.idempotencyKey, idempotencyKey))
+          .limit(1);
+
+        if (existing && existing.length > 0 && existing[0]?.leadId) {
+          leadId = existing[0].leadId;
+        }
+        isConflict = true;
+      }
     } catch (dbError) {
       logAudit(requestId, "/api/contact", 503, startTime, "STORAGE_FAILURE");
       Sentry.captureException(dbError, {
@@ -168,85 +200,115 @@ export async function POST(request: Request) {
       );
     }
 
-    // 10. Reserve duplicate key strictly AFTER successful DB insert
-    try {
-      await reserveDuplicateKey("contact", `${normalizedEmail}:${trimmedMessage}`);
-    } catch (reserveError) {
-      console.warn("⚠️ Failed to reserve duplicate key in Redis", reserveError);
+    // 9. On Conflict: Return 200 { accepted: true, leadId } and NO second email
+    if (isConflict) {
+      logAudit(requestId, "/api/contact", 200, startTime, "DUPLICATE_IDEMPOTENT", leadId);
+      return createSuccessResponse(
+        {
+          message: "We received your request.",
+          leadId,
+          accepted: true,
+          duplicate: true,
+          acknowledgementSent: false,
+        },
+        requestId,
+        200
+      );
     }
 
-    // 11. Operator Notification (isolated from acceptance)
+    // 10. Post-Commit Operator Notification (isolated from acceptance boundary)
     let acknowledgementSent = false;
     let notificationStatus: "pending" | "sent" | "failed" = "pending";
-    const resendApiKey = process.env.RESEND_API_KEY || "";
 
-    if (resendApiKey) {
-      const resend = new Resend(resendApiKey);
-      const fromEmail = resendApiKey.startsWith("re_")
-        ? "YCN Labs <leads@ycnlabs.com>"
-        : "onboarding@resend.dev";
-      const adminDestEmail =
-        process.env.LEAD_DESTINATION_EMAIL || "hello@ycnlabs.com";
+    try {
+      const resendApiKey = process.env.RESEND_API_KEY || "";
 
-      const safeName = escapeHtml(name);
-      const safeCompany = escapeHtml(company || "N/A");
+      if (resendApiKey) {
+        const resend = new Resend(resendApiKey);
+        const fromEmail = resendApiKey.startsWith("re_")
+          ? "YCN Labs <leads@ycnlabs.com>"
+          : "onboarding@resend.dev";
+        const adminDestEmail =
+          process.env.LEAD_DESTINATION_EMAIL || "hello@ycnlabs.com";
 
-      try {
-        const ownerResult = await resend.emails.send({
-          from: fromEmail,
-          to: adminDestEmail,
-          subject: `New Lead: ${safeName} (${safeCompany}) [${leadId}]`,
-          text: `Lead ID: ${leadId}\nName: ${name}\nEmail: ${normalizedEmail}\nCompany: ${
-            company || "N/A"
-          }\nPreferred Contact: ${preferredContactMethod || "Email"}\nProject Type: ${projectType}\nBudget: ${
-            budget || "Not specified"
-          }\nTimeline: ${timeline || "Not specified"}\n\nMessage:\n${trimmedMessage}`,
-        });
+        const safeName = escapeHtml(name);
+        const safeCompany = escapeHtml(company || "N/A");
 
-        // Explicitly check Resend's returned error property
-        if (ownerResult.error) {
+        try {
+          const ownerResult = await resend.emails.send({
+            from: fromEmail,
+            to: adminDestEmail,
+            subject: `New Lead: ${safeName} (${safeCompany}) [${leadId}]`,
+            text: `Lead ID: ${leadId}\nName: ${name}\nEmail: ${normalizedEmail}\nCompany: ${
+              company || "N/A"
+            }\nPreferred Contact: ${preferredContactMethod || "Email"}\nProject Type: ${projectType}\nBudget: ${
+              budget || "Not specified"
+            }\nTimeline: ${timeline || "Not specified"}\n\nMessage:\n${trimmedMessage}`,
+          });
+
+          // Explicitly check Resend's returned error property
+          if (ownerResult.error) {
+            notificationStatus = "failed";
+            const safeCategory = sanitizeNotificationError(ownerResult.error.message);
+            try {
+              await updateLeadNotificationStatus(leadId, "failed", safeCategory);
+            } catch (statusErr) {
+              console.error("Failed to update notification status", statusErr);
+            }
+            Sentry.captureException(new Error(`Resend notification failure: ${safeCategory}`), {
+              tags: { route: "/api/contact", stage: "owner_notification", category: safeCategory },
+              extra: { requestId, leadId },
+            });
+            console.error(
+              `🚨 [ALERT] Lead ${leadId} persisted but OWNER notification returned error (${safeCategory}). RequestID: ${requestId}`
+            );
+          } else {
+            notificationStatus = "sent";
+            try {
+              await updateLeadNotificationStatus(leadId, "sent");
+            } catch (statusErr) {
+              console.error("Failed to update notification status", statusErr);
+            }
+          }
+        } catch (ownerEmailError: any) {
           notificationStatus = "failed";
-          const safeCategory = sanitizeNotificationError(ownerResult.error.message);
-          await updateLeadNotificationStatus(leadId, "failed", safeCategory);
-          Sentry.captureException(new Error(`Resend notification failure: ${safeCategory}`), {
+          const safeCategory = sanitizeNotificationError(ownerEmailError);
+          try {
+            await updateLeadNotificationStatus(leadId, "failed", safeCategory);
+          } catch (statusErr) {
+            console.error("Failed to update notification status", statusErr);
+          }
+          Sentry.captureException(new Error(`Resend notification exception: ${safeCategory}`), {
             tags: { route: "/api/contact", stage: "owner_notification", category: safeCategory },
             extra: { requestId, leadId },
           });
           console.error(
-            `🚨 [ALERT] Lead ${leadId} persisted but OWNER notification returned error (${safeCategory}). RequestID: ${requestId}`
+            `🚨 [ALERT] Lead ${leadId} persisted but OWNER notification threw error (${safeCategory}). RequestID: ${requestId}`
           );
-        } else {
-          notificationStatus = "sent";
-          await updateLeadNotificationStatus(leadId, "sent");
         }
-      } catch (ownerEmailError: any) {
-        notificationStatus = "failed";
-        const safeCategory = sanitizeNotificationError(ownerEmailError);
-        await updateLeadNotificationStatus(leadId, "failed", safeCategory);
-        Sentry.captureException(new Error(`Resend notification exception: ${safeCategory}`), {
-          tags: { route: "/api/contact", stage: "owner_notification", category: safeCategory },
-          extra: { requestId, leadId },
-        });
-        console.error(
-          `🚨 [ALERT] Lead ${leadId} persisted but OWNER notification threw error (${safeCategory}). RequestID: ${requestId}`
-        );
-      }
 
-      // Optional visitor acknowledgement
-      try {
-        const ackResult = await resend.emails.send({
-          from: fromEmail,
-          to: normalizedEmail,
-          subject: "Project inquiry received — YCN Labs",
-          text: `Hi ${name},\n\nThank you for reaching out to YCN Labs. We have received your inquiry.\n\nBest regards,\nThe YCN Labs Team`,
-        });
+        // Optional visitor acknowledgement
+        try {
+          const ackResult = await resend.emails.send({
+            from: fromEmail,
+            to: normalizedEmail,
+            subject: "Project inquiry received — YCN Labs",
+            text: `Hi ${name},\n\nThank you for reaching out to YCN Labs. We have received your inquiry.\n\nBest regards,\nThe YCN Labs Team`,
+          });
 
-        if (!ackResult.error) {
-          acknowledgementSent = true;
+          if (!ackResult.error) {
+            acknowledgementSent = true;
+          }
+        } catch {
+          // Acknowledgement error is non-fatal
         }
-      } catch {
-        // Acknowledgement error is non-fatal
       }
+    } catch (postCommitError) {
+      Sentry.captureException(postCommitError, {
+        tags: { route: "/api/contact", stage: "post_commit_operations" },
+        extra: { requestId, leadId },
+      });
+      console.error(`🚨 [ALERT] Post-commit error for lead ${leadId}. RequestID: ${requestId}`, postCommitError);
     }
 
     logAudit(requestId, "/api/contact", 200, startTime, undefined, leadId, notificationStatus);

@@ -55,6 +55,12 @@ export const contactSchema = z.object({
     .trim()
     .min(10, "Message must be at least 10 characters")
     .max(5000, "Message must be less than 5000 characters"),
+  idempotencyKey: z
+    .string()
+    .trim()
+    .max(100, "Idempotency key must be less than 100 characters")
+    .optional()
+    .or(z.literal("")),
   honeypot: z.string().max(0, "Bot detected").optional().or(z.literal("")),
 });
 
