@@ -111,10 +111,10 @@ const CAPABILITIES: CapabilityItem[] = [
  * Named tokens defined for reuse across capability sample surfaces.
  */
 const SAMPLE_STATUS_TOKENS = {
-  new: "inline-flex items-center px-2.5 py-0.5 rounded-full bg-[#f0f9ff] text-[#0369a1] border border-[#bae6fd] font-semibold text-[12px] whitespace-nowrap select-none",
-  assigned: "inline-flex items-center px-2.5 py-0.5 rounded-full bg-[#eff6ff] text-[#1d4ed8] border border-[#bfdbfe] font-semibold text-[12px] whitespace-nowrap select-none",
-  inProgress: "inline-flex items-center px-2.5 py-0.5 rounded-full bg-[#fffbeb] text-[#b45309] border border-[#fde68a] font-semibold text-[12px] whitespace-nowrap select-none",
-  complete: "inline-flex items-center px-2.5 py-0.5 rounded-full bg-[#ecfdf5] text-[#047857] border border-[#a7f3d0] font-semibold text-[12px] whitespace-nowrap select-none",
+  new: "inline-flex items-center px-2 xl:px-2.5 py-0.5 rounded-full bg-[#f0f9ff] text-[#0369a1] border border-[#bae6fd] font-semibold text-[11px] xl:text-[12px] whitespace-nowrap select-none",
+  assigned: "inline-flex items-center px-2 xl:px-2.5 py-0.5 rounded-full bg-[#eff6ff] text-[#1d4ed8] border border-[#bfdbfe] font-semibold text-[11px] xl:text-[12px] whitespace-nowrap select-none",
+  inProgress: "inline-flex items-center px-2 xl:px-2.5 py-0.5 rounded-full bg-[#fffbeb] text-[#b45309] border border-[#fde68a] font-semibold text-[11px] xl:text-[12px] whitespace-nowrap select-none",
+  complete: "inline-flex items-center px-2 xl:px-2.5 py-0.5 rounded-full bg-[#ecfdf5] text-[#047857] border border-[#a7f3d0] font-semibold text-[11px] xl:text-[12px] whitespace-nowrap select-none",
 } as const;
 
 const SAMPLE_ACTION_BUTTON_TOKENS = {
@@ -507,22 +507,22 @@ export function PhoneChaptersSection() {
                       : "opacity-0 pointer-events-none"
                   }`}
                 >
-                  {/* Left Sidebar (Narrowed to 144px / w-36 for maximal table breathing room) */}
-                  <div className="w-36 p-3 border-r border-[#e2e8f0] bg-[#ffffff] hidden sm:flex flex-col justify-between text-xs shrink-0 select-none">
+                  {/* Left Sidebar (Narrowed to 112px/w-28 at lg, 144px/w-36 at xl for maximal table breathing room) */}
+                  <div className="w-28 xl:w-36 p-2.5 xl:p-3 border-r border-[#e2e8f0] bg-[#ffffff] hidden sm:flex flex-col justify-between text-xs shrink-0 select-none">
                     <div className="space-y-1">
-                      <div className="px-2.5 py-2 rounded-lg text-[#64748b] flex items-center gap-2 text-[12.5px] font-medium">
+                      <div className="px-2 xl:px-2.5 py-2 rounded-lg text-[#64748b] flex items-center gap-2 text-[12px] xl:text-[12.5px] font-medium">
                         <Layout className="w-4 h-4 text-[#94a3b8] shrink-0" />
                         <span className="whitespace-nowrap">Overview</span>
                       </div>
-                      <div className="px-2.5 py-2 rounded-lg bg-[#eff6ff] text-[#1d4ed8] border border-[#bfdbfe]/60 flex items-center gap-2 text-[12.5px] font-semibold">
+                      <div className="px-2 xl:px-2.5 py-2 rounded-lg bg-[#eff6ff] text-[#1d4ed8] border border-[#bfdbfe]/60 flex items-center gap-2 text-[12px] xl:text-[12.5px] font-semibold">
                         <FileText className="w-4 h-4 text-[#2563eb] shrink-0" />
                         <span className="whitespace-nowrap">Requests</span>
                       </div>
-                      <div className="px-2.5 py-2 rounded-lg text-[#64748b] flex items-center gap-2 text-[12.5px] font-medium">
+                      <div className="px-2 xl:px-2.5 py-2 rounded-lg text-[#64748b] flex items-center gap-2 text-[12px] xl:text-[12.5px] font-medium">
                         <Check className="w-4 h-4 text-[#94a3b8] shrink-0" />
                         <span className="whitespace-nowrap">Tasks</span>
                       </div>
-                      <div className="px-2.5 py-2 rounded-lg text-[#64748b] flex items-center gap-2 text-[12.5px] font-medium">
+                      <div className="px-2 xl:px-2.5 py-2 rounded-lg text-[#64748b] flex items-center gap-2 text-[12px] xl:text-[12.5px] font-medium">
                         <Calendar className="w-4 h-4 text-[#94a3b8] shrink-0" />
                         <span className="whitespace-nowrap">Schedule</span>
                       </div>
@@ -530,10 +530,10 @@ export function PhoneChaptersSection() {
                   </div>
 
                   {/* Main Workspace Table & Pipeline */}
-                  <div className="flex-1 p-5 xl:p-6 overflow-y-auto bg-[#f8fafc] space-y-4">
+                  <div className="flex-1 min-w-0 p-3.5 xl:p-6 overflow-y-auto bg-[#f8fafc] space-y-4">
                     {/* Header with Title and Action Label */}
                     <div className="flex items-center justify-between pb-3 border-b border-[#e2e8f0]">
-                      <h4 className="text-[20px] font-bold text-[#0f172a] tracking-tight">
+                      <h4 className="text-[18px] xl:text-[20px] font-bold text-[#0f172a] tracking-tight">
                         Requests
                       </h4>
                       <span className={SAMPLE_ACTION_BUTTON_TOKENS.primary}>
@@ -542,72 +542,72 @@ export function PhoneChaptersSection() {
                     </div>
 
                     {/* 4-Step Stages Bar */}
-                    <div className="grid grid-cols-4 gap-2.5 text-center text-xs">
-                      <div className="p-2.5 rounded-xl bg-[#ffffff] border border-[#e2e8f0] shadow-2xs space-y-1">
+                    <div className="grid grid-cols-4 gap-1.5 xl:gap-2.5 text-center text-xs">
+                      <div className="p-1.5 xl:p-2.5 rounded-xl bg-[#ffffff] border border-[#e2e8f0] shadow-2xs space-y-1 min-w-0">
                         <FileText className="w-4 h-4 mx-auto text-[#2563eb]" />
-                        <span className="text-[12px] font-semibold text-[#0f172a] block whitespace-nowrap">Received</span>
+                        <span className="text-[11px] xl:text-[12px] font-semibold text-[#0f172a] block truncate">Received</span>
                       </div>
-                      <div className="p-2.5 rounded-xl bg-[#ffffff] border border-[#e2e8f0] shadow-2xs space-y-1">
+                      <div className="p-1.5 xl:p-2.5 rounded-xl bg-[#ffffff] border border-[#e2e8f0] shadow-2xs space-y-1 min-w-0">
                         <User className="w-4 h-4 mx-auto text-[#2563eb]" />
-                        <span className="text-[12px] font-semibold text-[#0f172a] block whitespace-nowrap">Assigned</span>
+                        <span className="text-[11px] xl:text-[12px] font-semibold text-[#0f172a] block truncate">Assigned</span>
                       </div>
-                      <div className="p-2.5 rounded-xl bg-[#ffffff] border border-[#e2e8f0] shadow-2xs space-y-1">
+                      <div className="p-1.5 xl:p-2.5 rounded-xl bg-[#ffffff] border border-[#e2e8f0] shadow-2xs space-y-1 min-w-0">
                         <Workflow className="w-4 h-4 mx-auto text-[#2563eb]" />
-                        <span className="text-[12px] font-semibold text-[#0f172a] block whitespace-nowrap">Next step</span>
+                        <span className="text-[11px] xl:text-[12px] font-semibold text-[#0f172a] block truncate">Next step</span>
                       </div>
-                      <div className="p-2.5 rounded-xl bg-[#ffffff] border border-[#e2e8f0] shadow-2xs space-y-1">
+                      <div className="p-1.5 xl:p-2.5 rounded-xl bg-[#ffffff] border border-[#e2e8f0] shadow-2xs space-y-1 min-w-0">
                         <CheckCircle2 className="w-4 h-4 mx-auto text-[#16a34a]" />
-                        <span className="text-[12px] font-semibold text-[#0f172a] block whitespace-nowrap">Complete</span>
+                        <span className="text-[11px] xl:text-[12px] font-semibold text-[#0f172a] block truncate">Complete</span>
                       </div>
                     </div>
 
-                    {/* 4-Row Operational Table (F3: Request, Owner, Status never wrap; Next step at most 2 lines) */}
-                    <div className="rounded-xl border border-[#e2e8f0] bg-[#ffffff] shadow-xs overflow-hidden">
-                      <table className="w-full text-left text-[14px]">
+                    {/* 4-Row Operational Table (F3: Request, Owner, Status never wrap; Next step at most 2 lines; zero clipping at 1024px) */}
+                    <div className="rounded-xl border border-[#e2e8f0] bg-[#ffffff] shadow-xs overflow-x-auto">
+                      <table className="w-full text-left text-[12px] xl:text-[14px]">
                         <thead>
-                          <tr className="border-b border-[#e2e8f0] bg-[#f8fafc] text-[#475569] font-semibold text-[13px]">
-                            <th className="py-3.5 px-4 w-[24%] whitespace-nowrap">Request</th>
-                            <th className="py-3.5 px-4 w-[24%] whitespace-nowrap">Owner</th>
-                            <th className="py-3.5 px-4 w-[32%]">Next step</th>
-                            <th className="py-3.5 px-4 w-[20%] whitespace-nowrap">Status</th>
+                          <tr className="border-b border-[#e2e8f0] bg-[#f8fafc] text-[#475569] font-semibold text-[11px] xl:text-[13px]">
+                            <th className="py-2.5 xl:py-3.5 px-2.5 xl:px-4 w-[24%] whitespace-nowrap">Request</th>
+                            <th className="py-2.5 xl:py-3.5 px-2.5 xl:px-4 w-[24%] whitespace-nowrap">Owner</th>
+                            <th className="py-2.5 xl:py-3.5 px-2.5 xl:px-4 w-[32%]">Next step</th>
+                            <th className="py-2.5 xl:py-3.5 px-2.5 xl:px-4 w-[20%] whitespace-nowrap">Status</th>
                           </tr>
                         </thead>
                         <tbody className="divide-y divide-[#e2e8f0] text-[#334155]">
                           <tr>
-                            <td className="py-3.5 px-4 font-semibold text-[#0f172a] whitespace-nowrap">Enquiry</td>
-                            <td className="py-3.5 px-4 text-[#475569] whitespace-nowrap">Team member</td>
-                            <td className="py-3.5 px-4 text-[#334155]">Reply to customer</td>
-                            <td className="py-3.5 px-4 whitespace-nowrap">
+                            <td className="py-2.5 xl:py-3.5 px-2.5 xl:px-4 font-semibold text-[#0f172a] whitespace-nowrap">Enquiry</td>
+                            <td className="py-2.5 xl:py-3.5 px-2.5 xl:px-4 text-[#475569] whitespace-nowrap">Team member</td>
+                            <td className="py-2.5 xl:py-3.5 px-2.5 xl:px-4 text-[#334155]">Reply to customer</td>
+                            <td className="py-2.5 xl:py-3.5 px-2.5 xl:px-4 whitespace-nowrap">
                               <span className={SAMPLE_STATUS_TOKENS.new}>
                                 New
                               </span>
                             </td>
                           </tr>
                           <tr>
-                            <td className="py-3.5 px-4 font-semibold text-[#0f172a] whitespace-nowrap">Booking</td>
-                            <td className="py-3.5 px-4 text-[#475569] whitespace-nowrap">Team member</td>
-                            <td className="py-3.5 px-4 text-[#334155]">Confirm time</td>
-                            <td className="py-3.5 px-4 whitespace-nowrap">
+                            <td className="py-2.5 xl:py-3.5 px-2.5 xl:px-4 font-semibold text-[#0f172a] whitespace-nowrap">Booking</td>
+                            <td className="py-2.5 xl:py-3.5 px-2.5 xl:px-4 text-[#475569] whitespace-nowrap">Team member</td>
+                            <td className="py-2.5 xl:py-3.5 px-2.5 xl:px-4 text-[#334155]">Confirm time</td>
+                            <td className="py-2.5 xl:py-3.5 px-2.5 xl:px-4 whitespace-nowrap">
                               <span className={SAMPLE_STATUS_TOKENS.assigned}>
                                 Assigned
                               </span>
                             </td>
                           </tr>
                           <tr>
-                            <td className="py-3.5 px-4 font-semibold text-[#0f172a] whitespace-nowrap">Order</td>
-                            <td className="py-3.5 px-4 text-[#475569] whitespace-nowrap">Team member</td>
-                            <td className="py-3.5 px-4 text-[#334155]">Prepare order</td>
-                            <td className="py-3.5 px-4 whitespace-nowrap">
+                            <td className="py-2.5 xl:py-3.5 px-2.5 xl:px-4 font-semibold text-[#0f172a] whitespace-nowrap">Order</td>
+                            <td className="py-2.5 xl:py-3.5 px-2.5 xl:px-4 text-[#475569] whitespace-nowrap">Team member</td>
+                            <td className="py-2.5 xl:py-3.5 px-2.5 xl:px-4 text-[#334155]">Prepare order</td>
+                            <td className="py-2.5 xl:py-3.5 px-2.5 xl:px-4 whitespace-nowrap">
                               <span className={SAMPLE_STATUS_TOKENS.inProgress}>
                                 In progress
                               </span>
                             </td>
                           </tr>
                           <tr>
-                            <td className="py-3.5 px-4 font-semibold text-[#0f172a] whitespace-nowrap">Follow-up</td>
-                            <td className="py-3.5 px-4 text-[#475569] whitespace-nowrap">Team member</td>
-                            <td className="py-3.5 px-4 text-[#334155]">Send update</td>
-                            <td className="py-3.5 px-4 whitespace-nowrap">
+                            <td className="py-2.5 xl:py-3.5 px-2.5 xl:px-4 font-semibold text-[#0f172a] whitespace-nowrap">Follow-up</td>
+                            <td className="py-2.5 xl:py-3.5 px-2.5 xl:px-4 text-[#475569] whitespace-nowrap">Team member</td>
+                            <td className="py-2.5 xl:py-3.5 px-2.5 xl:px-4 text-[#334155]">Send update</td>
+                            <td className="py-2.5 xl:py-3.5 px-2.5 xl:px-4 whitespace-nowrap">
                               <span className={SAMPLE_STATUS_TOKENS.complete}>
                                 Complete
                               </span>
@@ -995,92 +995,92 @@ export function PhoneChaptersSection() {
 
                     {/* Chapter 03: Business systems & automation (A+ Pilot Live-DOM) */}
                     {idx === 2 && (
-                      <div className="space-y-4 rounded-xl bg-[#f8fafc] text-[#0f172a] p-3.5 sm:p-4 border border-[#e2e8f0]">
+                      <div className="space-y-4 rounded-xl bg-[#f8fafc] text-[#0f172a] p-3.5 sm:p-4 border border-[#e2e8f0] overflow-hidden">
                         {/* Header */}
-                        <div className="flex items-center justify-between pb-2.5 border-b border-[#e2e8f0]">
-                          <h4 className="text-[18px] font-bold text-[#0f172a] tracking-tight">
+                        <div className="flex items-center justify-between pb-2.5 border-b border-[#e2e8f0] gap-2">
+                          <h4 className="text-[17px] sm:text-[18px] font-bold text-[#0f172a] tracking-tight">
                             Requests
                           </h4>
                           <span className={SAMPLE_ACTION_BUTTON_TOKENS.primaryMobile}>
-                            <Plus className="w-3.5 h-3.5" /> New request
+                            <Plus className="w-3.5 h-3.5 shrink-0" /> <span className="whitespace-nowrap">New request</span>
                           </span>
                         </div>
 
                         {/* Stages (2x2 grid for mobile clarity, zero wrapping) */}
                         <div className="grid grid-cols-2 gap-2 text-xs">
-                          <div className="p-2.5 rounded-lg bg-[#ffffff] border border-[#e2e8f0] shadow-2xs flex items-center gap-2.5">
+                          <div className="p-2.5 rounded-lg bg-[#ffffff] border border-[#e2e8f0] shadow-2xs flex items-center gap-2 min-w-0">
                             <FileText className="w-4 h-4 text-[#2563eb] shrink-0" />
-                            <span className="text-[12px] font-semibold text-[#0f172a] whitespace-nowrap">Received</span>
+                            <span className="text-[12px] font-semibold text-[#0f172a] whitespace-nowrap truncate">Received</span>
                           </div>
-                          <div className="p-2.5 rounded-lg bg-[#ffffff] border border-[#e2e8f0] shadow-2xs flex items-center gap-2.5">
+                          <div className="p-2.5 rounded-lg bg-[#ffffff] border border-[#e2e8f0] shadow-2xs flex items-center gap-2 min-w-0">
                             <User className="w-4 h-4 text-[#2563eb] shrink-0" />
-                            <span className="text-[12px] font-semibold text-[#0f172a] whitespace-nowrap">Assigned</span>
+                            <span className="text-[12px] font-semibold text-[#0f172a] whitespace-nowrap truncate">Assigned</span>
                           </div>
-                          <div className="p-2.5 rounded-lg bg-[#ffffff] border border-[#e2e8f0] shadow-2xs flex items-center gap-2.5">
+                          <div className="p-2.5 rounded-lg bg-[#ffffff] border border-[#e2e8f0] shadow-2xs flex items-center gap-2 min-w-0">
                             <Workflow className="w-4 h-4 text-[#2563eb] shrink-0" />
-                            <span className="text-[12px] font-semibold text-[#0f172a] whitespace-nowrap">Next step</span>
+                            <span className="text-[12px] font-semibold text-[#0f172a] whitespace-nowrap truncate">Next step</span>
                           </div>
-                          <div className="p-2.5 rounded-lg bg-[#ffffff] border border-[#e2e8f0] shadow-2xs flex items-center gap-2.5">
+                          <div className="p-2.5 rounded-lg bg-[#ffffff] border border-[#e2e8f0] shadow-2xs flex items-center gap-2 min-w-0">
                             <CheckCircle2 className="w-4 h-4 text-[#16a34a] shrink-0" />
-                            <span className="text-[12px] font-semibold text-[#0f172a] whitespace-nowrap">Complete</span>
+                            <span className="text-[12px] font-semibold text-[#0f172a] whitespace-nowrap truncate">Complete</span>
                           </div>
                         </div>
 
                         {/* Stacked Items (Zero horizontal scroll, zero table clipping) */}
                         <div className="space-y-2.5">
                           {/* Row 1: Enquiry */}
-                          <div className="p-3.5 rounded-xl bg-[#ffffff] border border-[#e2e8f0] shadow-2xs space-y-1.5">
-                            <div className="flex items-center justify-between">
+                          <div className="p-3.5 rounded-xl bg-[#ffffff] border border-[#e2e8f0] shadow-2xs space-y-1.5 min-w-0">
+                            <div className="flex items-center justify-between gap-2">
                               <span className="text-[14px] font-semibold text-[#0f172a] whitespace-nowrap">Enquiry</span>
                               <span className={SAMPLE_STATUS_TOKENS.new}>
                                 New
                               </span>
                             </div>
-                            <div className="flex items-center justify-between text-[13px]">
-                              <span className="text-[#64748b]">Team member</span>
-                              <span className="text-[#334155] font-medium">Reply to customer</span>
+                            <div className="flex items-center justify-between text-[13px] gap-2">
+                              <span className="text-[#64748b] shrink-0">Team member</span>
+                              <span className="text-[#334155] font-medium text-right truncate">Reply to customer</span>
                             </div>
                           </div>
 
                           {/* Row 2: Booking */}
-                          <div className="p-3.5 rounded-xl bg-[#ffffff] border border-[#e2e8f0] shadow-2xs space-y-1.5">
-                            <div className="flex items-center justify-between">
+                          <div className="p-3.5 rounded-xl bg-[#ffffff] border border-[#e2e8f0] shadow-2xs space-y-1.5 min-w-0">
+                            <div className="flex items-center justify-between gap-2">
                               <span className="text-[14px] font-semibold text-[#0f172a] whitespace-nowrap">Booking</span>
                               <span className={SAMPLE_STATUS_TOKENS.assigned}>
                                 Assigned
                               </span>
                             </div>
-                            <div className="flex items-center justify-between text-[13px]">
-                              <span className="text-[#64748b]">Team member</span>
-                              <span className="text-[#334155] font-medium">Confirm time</span>
+                            <div className="flex items-center justify-between text-[13px] gap-2">
+                              <span className="text-[#64748b] shrink-0">Team member</span>
+                              <span className="text-[#334155] font-medium text-right truncate">Confirm time</span>
                             </div>
                           </div>
 
                           {/* Row 3: Order */}
-                          <div className="p-3.5 rounded-xl bg-[#ffffff] border border-[#e2e8f0] shadow-2xs space-y-1.5">
-                            <div className="flex items-center justify-between">
+                          <div className="p-3.5 rounded-xl bg-[#ffffff] border border-[#e2e8f0] shadow-2xs space-y-1.5 min-w-0">
+                            <div className="flex items-center justify-between gap-2">
                               <span className="text-[14px] font-semibold text-[#0f172a] whitespace-nowrap">Order</span>
                               <span className={SAMPLE_STATUS_TOKENS.inProgress}>
                                 In progress
                               </span>
                             </div>
-                            <div className="flex items-center justify-between text-[13px]">
-                              <span className="text-[#64748b]">Team member</span>
-                              <span className="text-[#334155] font-medium">Prepare order</span>
+                            <div className="flex items-center justify-between text-[13px] gap-2">
+                              <span className="text-[#64748b] shrink-0">Team member</span>
+                              <span className="text-[#334155] font-medium text-right truncate">Prepare order</span>
                             </div>
                           </div>
 
                           {/* Row 4: Follow-up */}
-                          <div className="p-3.5 rounded-xl bg-[#ffffff] border border-[#e2e8f0] shadow-2xs space-y-1.5">
-                            <div className="flex items-center justify-between">
+                          <div className="p-3.5 rounded-xl bg-[#ffffff] border border-[#e2e8f0] shadow-2xs space-y-1.5 min-w-0">
+                            <div className="flex items-center justify-between gap-2">
                               <span className="text-[14px] font-semibold text-[#0f172a] whitespace-nowrap">Follow-up</span>
                               <span className={SAMPLE_STATUS_TOKENS.complete}>
                                 Complete
                               </span>
                             </div>
-                            <div className="flex items-center justify-between text-[13px]">
-                              <span className="text-[#64748b]">Team member</span>
-                              <span className="text-[#334155] font-medium">Send update</span>
+                            <div className="flex items-center justify-between text-[13px] gap-2">
+                              <span className="text-[#64748b] shrink-0">Team member</span>
+                              <span className="text-[#334155] font-medium text-right truncate">Send update</span>
                             </div>
                           </div>
                         </div>
