@@ -209,3 +209,5 @@ All branches and worktrees are safely preserved across the pause. The following 
 - `wip/YCN-OVERFLOW-08`
 - `wip/close-2026-10-18`
 *(Zero branch deletions executed).*
+
+### Addendum 19 Oct 21:50 — old site: contact links restyled as buttons (ycnlabs PR #5), ycnlabs main now ed42684f382e7204d808210d280184540884b5ee. Register correction: the entry filed as DEV-24 is DEV-25 (whole-file rewrites); DEV-24 is the node_modules patch.
