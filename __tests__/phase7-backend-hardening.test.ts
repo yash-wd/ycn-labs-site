@@ -3,7 +3,10 @@ import { describe, it, expect, vi, beforeEach } from "vitest";
 // Mock DB
 const mockInsert = vi.fn();
 const mockInsertValues = vi.fn();
+const mockInsertReturning = vi.fn();
+const mockOnConflictDoNothing = vi.fn().mockReturnValue({ returning: mockInsertReturning });
 mockInsert.mockReturnValue({ values: mockInsertValues });
+mockInsertValues.mockReturnValue({ onConflictDoNothing: mockOnConflictDoNothing, returning: mockInsertReturning });
 
 const mockUpdate = vi.fn();
 const mockSet = vi.fn();
@@ -39,13 +42,9 @@ vi.mock("@/lib/db/db", () => ({
 
 // Mock Security & Ratelimit
 const mockCheckRateLimit = vi.fn();
-const mockIsDuplicateSubmission = vi.fn();
-const mockReserveDuplicateKey = vi.fn();
 
 vi.mock("@/lib/security/ratelimit", () => ({
   checkRateLimit: (...args: any[]) => mockCheckRateLimit(...args),
-  isDuplicateSubmission: (...args: any[]) => mockIsDuplicateSubmission(...args),
-  reserveDuplicateKey: (...args: any[]) => mockReserveDuplicateKey(...args),
   hashClientIp: (req: Request) => "mock_hashed_ip_123",
 }));
 
@@ -86,9 +85,8 @@ describe("Phase 7: Contact / Enquiry Backend Hardening", () => {
       remaining: 4,
       resetSeconds: 3600,
     });
-    mockIsDuplicateSubmission.mockResolvedValue(false);
-    mockReserveDuplicateKey.mockResolvedValue(undefined);
-    mockInsertValues.mockResolvedValue({ rowCount: 1 });
+    mockInsertReturning.mockResolvedValue([{ id: 1, leadId: "lead_test_phase7" }]);
+    mockInsertValues.mockReturnValue({ onConflictDoNothing: mockOnConflictDoNothing, returning: mockInsertReturning });
     mockUpdateWhere.mockResolvedValue({ rowCount: 1 });
     mockSendEmail.mockResolvedValue({ data: { id: "email_ok_1" }, error: null });
   });
@@ -239,13 +237,11 @@ describe("Phase 7: Contact / Enquiry Backend Hardening", () => {
       expect(json.error.message).toBe(
         "We could not accept your request safely. Your message has not been confirmed—please try again or use the listed contact route."
       );
-      // Dedupe key MUST NOT be reserved, allowing retry
-      expect(mockReserveDuplicateKey).not.toHaveBeenCalled();
       // Operator notification MUST NOT be called
       expect(mockSendEmail).not.toHaveBeenCalled();
     });
 
-    it("reserves dedupe key in Redis only AFTER successful database insertion", async () => {
+    it("persists lead upon successful database insertion", async () => {
       const req = new Request("http://localhost:3000/api/contact", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
@@ -256,7 +252,6 @@ describe("Phase 7: Contact / Enquiry Backend Hardening", () => {
       expect(res.status).toBe(200);
 
       expect(mockInsert).toHaveBeenCalledTimes(1);
-      expect(mockReserveDuplicateKey).toHaveBeenCalledTimes(1);
     });
   });
 
@@ -426,7 +421,8 @@ describe("Phase 7: Contact / Enquiry Backend Hardening", () => {
 
   describe("5. Deduplication & Idempotency", () => {
     it("recognizes duplicate submission and returns 200 without duplicate DB insert", async () => {
-      mockIsDuplicateSubmission.mockResolvedValueOnce(true);
+      mockInsertReturning.mockResolvedValueOnce([]);
+      mockLimit.mockResolvedValueOnce([{ id: 42, leadId: "lead_orig_dup", email: "sarah@acme-logistics.co.uk" }]);
 
       const req = new Request("http://localhost:3000/api/contact", {
         method: "POST",
@@ -441,7 +437,7 @@ describe("Phase 7: Contact / Enquiry Backend Hardening", () => {
       expect(json.success).toBe(true);
       expect(json.data.duplicate).toBe(true);
       expect(json.data.message).toBe("We received your request.");
-      expect(mockInsert).not.toHaveBeenCalled();
+      expect(json.data.leadId).toBe("lead_orig_dup");
       expect(mockSendEmail).not.toHaveBeenCalled();
     });
   });

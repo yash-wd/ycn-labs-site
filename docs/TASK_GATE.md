@@ -64,3 +64,8 @@
 5. **STOP and disclose:** conflicting or stale evidence; unavailable authority/ref; missing necessary Owner authorization; an unexpected dirty/diverged worktree; changed frozen systems without ruling; unsupported legal claim; unregistered artifact or file mutation; failed test or lost evidence.
 
 **Return status:** `POSITION`, `PASS`, `HOLD`, `BLOCKED` or `EXECUTED-STOPPED` with source-backed reason. The single next authorized task remains in `STATE.md`/`BACKLOG.md`, not in this index.
+
+## 6. Amendments Effective on DECISION-055 Adoption
+- **PR-Based Single Review:** AGY opens a GitHub Pull Request on an isolated branch; exactly one independent reviewer (GPT or Claude alternating) reviews the diff; three seats convene only for production deployments, customer data handling, or binding legal text.
+- **OI-18 Visual Demo Scope:** HTML demos are required for brand-new visible UI screens or changed customer workflows only; backend reliability fixes, schema edits, and scripts require behavioral test contracts and test outputs, not decorative HTML previews.
+- **Protected Actions Boundary:** AGY prepares changes and opens PRs; AGY never merges to main, pushes tags, or records adoption without explicit typed Owner authorization.

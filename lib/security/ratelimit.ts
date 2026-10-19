@@ -19,7 +19,7 @@ export function getUpstashRedis(): { redis: Redis | null; isConfigured: boolean 
   if (!env.UPSTASH_REDIS_REST_URL || !env.UPSTASH_REDIS_REST_TOKEN) {
     if (!warnedMissingRedis && env.NODE_ENV !== "production") {
       console.warn(
-        "⚠️ [SECURITY WARN] Upstash Redis credentials missing. Distributed rate limiting and deduplication bypassed in local development."
+        "⚠️ [SECURITY WARN] Upstash Redis credentials missing. Distributed rate limiting bypassed in local development."
       );
       warnedMissingRedis = true;
     }
@@ -108,40 +108,4 @@ export async function checkRateLimit(
     remaining: result.remaining,
     resetSeconds,
   };
-}
-
-function getDedupeKey(prefix: string, fingerprintInput: string): string {
-  const ns = getNamespacePrefix();
-  const hash = crypto.createHash("sha256").update(fingerprintInput).digest("hex");
-  return `dedupe:${ns}:${prefix}:${hash}`;
-}
-
-/**
- * Checks if a submission with this fingerprint has already been processed within the window.
- * Read-only check: does NOT hold or reserve the key yet.
- */
-export async function isDuplicateSubmission(
-  prefix: string,
-  fingerprintInput: string
-): Promise<boolean> {
-  const { redis, isConfigured } = getUpstashRedis();
-  if (!isConfigured || !redis) return false;
-
-  const key = getDedupeKey(prefix, fingerprintInput);
-  const exists = await redis.get(key);
-  return exists !== null;
-}
-
-/**
- * Reserves the deduplication key AFTER successful persistence to prevent duplicate reprocessing.
- */
-export async function reserveDuplicateKey(
-  prefix: string,
-  fingerprintInput: string
-): Promise<void> {
-  const { redis, isConfigured } = getUpstashRedis();
-  if (!isConfigured || !redis) return;
-
-  const key = getDedupeKey(prefix, fingerprintInput);
-  await redis.set(key, "1", { ex: 600 });
 }

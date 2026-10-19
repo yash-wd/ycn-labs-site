@@ -6,7 +6,8 @@ export type ApiErrorCode =
   | "UNSUPPORTED_MEDIA"
   | "PAYLOAD_TOO_LARGE"
   | "SERVICE_UNAVAILABLE"
-  | "INTERNAL_ERROR";
+  | "INTERNAL_ERROR"
+  | "IDEMPOTENCY_CONFLICT";
 
 export interface ApiSuccess<T = unknown> {
   success: true;
