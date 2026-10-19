@@ -143,3 +143,69 @@ Before modifying any source code, run `git fetch && git status --porcelain` to v
 ## Rules for every seat
 - AGY: branch → PR → STOP. Claude reviews the diff (GPT second opinion only on safety conflicts). Owner merges or says `merge N`.
 - Edit by patch, never whole-file rewrite. Red check = stop and report. Never read, print or use credentials. No new plans or documents.
+
+---
+## Session Close & 10-Day Pause — 19 Oct 2026 (closed)
+
+### 1. Re-Dated Project Roadmap & Calendar
+- **Planned Pause:** 20–29 October 2026 (10-day development freeze).
+- **Resumption Window (Tentative 30 Oct 2026):**
+  - **30 Oct – 5 Nov:** Tasks 10 and 09 (Content & Brand Voice, Mobile Performance & Budgets); create V2 Vercel preview project.
+  - **6–12 Nov:** Tasks 11, 13, and 14 (Logo derivatives, Full QA, 3 real-person testing).
+  - **13–19 Nov:** Task 15 (Production Infrastructure, DNS, security, and release preparation).
+  - **20–30 Nov:** Task 16 (Live DNS cutover to `ycnlabs.com`, live mobile enquiry test, decommission old site).
+  - **Launch Target:** **30 November 2026**; **Fallback Date:** **15 December 2026**.
+
+### 2. Resume Order (Cold Start on 30 October 2026)
+0. **Cold Start Verification:** Fetch all remotes across the 3 repositories (`ycn-labs-site`, `ycnlabs`, `YCN_LABS_BRAND_LIBRARY`). Check branch `-vv` and compare `ls-remote` HEAD SHAs against `LAST_CLOSE.txt`. STOP on mismatch.
+1. **Staging Database & Credentials (If Pending):**
+   - If not executed before pause: Owner runs `lib/db/migrations/STAGING_BOOTSTRAP_ALL.sql` in Neon console on `ycn_staging` database (expect 2 tables: `leads`, `newsletter_signups`) → reply `SQL done` (merges PR #5).
+   - Enter private credentials in `.env.local` (7 confirmed variable names).
+   - Run 5 automated staging test scenarios (`proof/YCN-LEAD-STAGING-12/run_scenarios.sh`).
+2. **V2 Vercel Staging/Preview Project (Recommended Yes):**
+   - Create V2 Vercel project connected to `main` with its Production Branch pointed to a non-existent branch so all merges produce protected Preview deployments only (`noindex`, Vercel Authentication).
+   - No custom domain attached. Real-phone testing for Tasks 09 & 14 runs on that private URL. Live domain cutover stays at Task 16.
+3. **Task 10 (Content & Identity):** Integrate real founder bio, honest service offerings, INR pricing language, genuine work evidence.
+4. **Task 09 (Mobile Performance):** Real-device performance profiling, Lighthouse budgets, image compression.
+
+### 3. Owner Inputs Required Before Task 10
+During the 10-day pause, Owner prepares the following raw textual inputs (phone notes only):
+1. Short founder bio & background for About page.
+2. Legal entity name and registered city.
+3. 2–3 core service descriptions in plain, honest words (no agency buzzwords).
+4. Genuine work evidence (1 showcase project, or an explicit decision to launch with capability demos).
+5. Transparent INR pricing guidance and client engagement terms.
+6. Names of 3 real testers for Task 14.
+7. Verification of 2FA enabled on all critical services (GitHub, Vercel, Neon, Resend, domain registrar).
+
+### 4. Pre-Launch Repository Privacy (Owner-Directed)
+- **Approved Direction:** Change repository visibility via GitHub **Settings → Danger Zone → Change repository visibility → Make private**. Preserves full commit history, PR records, tags (`v1-scope-freeze`), audit SHAs, and CI history. Never delete-and-reinitialize.
+- **19 Oct Pre-Checks & Status:**
+  - `yash-wd/ycnlabs` (Old site): **PRIVATE** (verified; deployed to production from private state on Vercel Hobby without issue).
+  - `yash-wd/ycn-labs-brand-library`: **PRIVATE** (verified flipped to Private by Owner on 19 Oct 2026).
+  - `yash-wd/ycn-labs-site` (V2): **PUBLIC** until Task 15 gate to preserve automated code review and verification access, after which it flips to Private prior to production launch.
+  - Fork count: **0 forks across all three repositories**.
+  - Secret scan (`gitleaks 8.30.1` full-history scan `--log-opts=--all`): 51 commits (`ycn-labs-site`) + 321 commits (`ycnlabs`) + 13 commits (`brand library`) = **385 commits scanned, 0 leaks found**.
+
+### 5. Old Site Status & Follow-ups
+- **Public Domain:** [ycnlabs.com](https://ycnlabs.com) live at commit `4c2246e`.
+- **Launch Notice:** Responsive launch announcement modal and announcement bar active across all pages.
+- **Enquiries Closed:** Server-side contact endpoint (`POST /api/contact`) disabled with immediate HTTP 503 JSON (`ENQUIRIES_CLOSED`). No leads stored, no emails dispatched.
+- **Lead Channel:** Owner decision 19 Oct: old-site lead path not verified; site not promoted; hello@ mailbox is a Task 15 item; WhatsApp (+91 83412 26694) and direct telephone call are the sole contact channels until V2 launch.
+- **Newsletter Form:** Footer newsletter form remains intact as an informational subscription endpoint (reported, unchanged).
+
+### 6. Backup & Disaster Recovery Note
+- **Off-device encrypted backup deferred by Owner (19 Oct); workSpace zip is same-SSD; first return action after cold start: 7z + USB/cloud.**
+- Owner chose a `workSpace` ZIP archive on the local drive mount (`/mnt/workSpace/YCN_BACKUPS/`) over an off-device encrypted archive for this pause window.
+
+### 7. Branch Preservation (Deletion Candidates — Preserved, Not Deleted)
+All branches and worktrees are safely preserved across the pause. The following are tracked as post-launch / resumption cleanup candidates:
+- `docs/YCN-JOURNEY-REFERENCE-2026-10-19`
+- `wip/YCN-CHECKLIST-GOVERNANCE-01`
+- `wip/YCN-DECISION-055-01`
+- `wip/YCN-GOVERNANCE-POST-MERGE-01`
+- `wip/YCN-LEAD-12`
+- `wip/YCN-NAV-07` (and worktree `~/Desktop/ycn-nav-07`)
+- `wip/YCN-OVERFLOW-08`
+- `wip/close-2026-10-18`
+*(Zero branch deletions executed).*
