@@ -1,7 +1,7 @@
 -- YCN Labs — Staging & Production Bootstrap All-In-One Schema
 -- Purpose: Complete, idempotent SQL script to bootstrap the database on Neon/PostgreSQL
 -- Covers: Baseline tables, Migration 0001 (Phase 7 Hardening), Migration 0002 (Phase 12 Idempotency)
--- Safety: Strictly additive. Uses IF NOT EXISTS throughout. No DROP, no TRUNCATE.
+-- Scope: bootstrap of an EMPTY database only. Contains data-shaping statements from migration 0001 (UPDATE lead_id backfill, SET NOT NULL); do not run against a database that already holds leads.
 
 -- ============================================================================
 -- 1. Table: leads (Baseline + 0001 + 0002)
