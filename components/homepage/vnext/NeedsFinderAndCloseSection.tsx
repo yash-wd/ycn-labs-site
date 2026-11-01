@@ -29,7 +29,7 @@ const NEED_OPTIONS: NeedOption[] = [
   {
     id: "product",
     title: "Build a product",
-    description: "Turn an idea or business process into a web, mobile or SaaS product.",
+    description: "Turn a defined idea or business workflow into a useful web application.",
   },
   {
     id: "not-sure",

@@ -1,13 +1,5 @@
 import { z } from "zod";
 
-export const BUDGET_OPTIONS = [
-  "Under £5,000",
-  "£5,000 – £15,000",
-  "£15,000 – £30,000",
-  "£30,000+",
-  "Not sure yet",
-] as const;
-
 export const TIMELINE_OPTIONS = [
   "ASAP (within 1 month)",
   "1 – 3 months",

@@ -6,7 +6,6 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import {
   contactSchema,
   ContactFormData,
-  BUDGET_OPTIONS,
   TIMELINE_OPTIONS,
 } from "@/lib/validation/contact";
 import { CheckCircle2, AlertCircle, Loader2, Send } from "lucide-react";
@@ -55,7 +54,7 @@ export function ContactForm() {
       name: "",
       email: "",
       company: "",
-      projectType: IMPROVEMENT_GOALS[0].value,
+      projectType: "Not sure yet — need guidance on the right digital format",
       budget: "Not sure yet",
       timeline: "Not sure yet",
       message: "",
@@ -309,19 +308,15 @@ export function ContactForm() {
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
           <div>
             <label htmlFor="budget" className="block text-xs font-medium text-[var(--text-secondary)] mb-1">
-              Approximate budget range (optional)
+              Approximate budget estimate (optional)
             </label>
-            <select
+            <input
               id="budget"
+              type="text"
+              placeholder="Not sure yet"
               {...register("budget")}
-              className="w-full px-3.5 py-2.5 rounded-xl border border-[var(--border-subtle)] bg-[var(--bg-canvas)] text-sm font-sans text-[var(--text-primary)] focus:border-[var(--action-blue)] focus:outline-none transition-colors"
-            >
-              {BUDGET_OPTIONS.map((opt) => (
-                <option key={opt} value={opt}>
-                  {opt}
-                </option>
-              ))}
-            </select>
+              className="w-full px-3.5 py-2.5 rounded-xl border border-[var(--border-subtle)] bg-[var(--bg-canvas)] text-sm font-sans text-[var(--text-primary)] placeholder-[var(--text-muted)] focus:border-[var(--action-blue)] focus:outline-none transition-colors"
+            />
           </div>
 
           <div>
