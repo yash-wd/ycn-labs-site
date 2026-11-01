@@ -66,7 +66,7 @@ const OUTCOME_NEEDS: NeedChapter[] = [
     number: "04",
     problem: "I have a product idea",
     capability: "Software products",
-    explanation: "Web apps, mobile products and SaaS built from a useful first version outward.",
+    explanation: "Selected web applications designed around a clearly agreed first version.",
     details: [
       "Disciplined first versions (MVPs) designed around core user value instead of feature bloat.",
       "Scalable web and mobile architectures built on clean TypeScript code and relational data models.",

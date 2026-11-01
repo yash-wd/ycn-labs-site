@@ -29,6 +29,9 @@ const IMPROVEMENT_GOALS = [
   { id: "not-sure", label: "Not sure", value: "Not sure yet — need guidance on the right digital format" },
 ];
 
+const DEFAULT_IMPROVEMENT_GOAL =
+  IMPROVEMENT_GOALS.find((goal) => goal.id === "not-sure")?.value ?? IMPROVEMENT_GOALS[0].value;
+
 export function ContactForm() {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitSuccess, setSubmitSuccess] = useState(false);
@@ -54,7 +57,7 @@ export function ContactForm() {
       name: "",
       email: "",
       company: "",
-      projectType: "Not sure yet — need guidance on the right digital format",
+      projectType: DEFAULT_IMPROVEMENT_GOAL,
       budget: "Not sure yet",
       timeline: "Not sure yet",
       message: "",
