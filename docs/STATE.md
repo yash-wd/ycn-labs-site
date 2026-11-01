@@ -220,3 +220,53 @@ All branches and worktrees are safely preserved across the pause. The following 
 - **Protocol Patches:** AGY open/close protocol rules 4 and 7 codified in `docs/AGY_OPEN_CLOSE_PROTOCOL.md`.
 - **Vault Archive:** Final pause vault archive recorded as `ycn_vault_close_20261019_e.zip`.
 - **Local-Only Evidence:** Note that `proof/` in the `ycn-labs-site` working directory is untracked local-only test and verification evidence (not for public tracking).
+
+
+## CLOSE 2026-11-01
+
+### 1. Remote Main SHAs
+- **V2 (`ycn-labs-site`):** `8a48e066991e741031fc779d05685cc5971c45dd`
+- **Historical (`ycnlabs`):** `ed42684f382e7204d808210d280184540884b5ee`
+- **Brand (`YCN_LABS_BRAND_LIBRARY`):** `386f9794736efca8a6bd03ffd774553790857dc8` (checkout `wip/brand-export-05` at `ffb77158f3ef131dd17deaa013cd7616abc1b471`)
+
+### 2. PRs Merged Today
+- **PR #10 (`docs/publish-resume`):** Merge commit `accf0895756b4a9a1eb3219839f571b9af2ee185` (docs: publish resume guide, protocol, and 19 Oct 23:52 close addendum).
+- **PR #5 (`wip/YCN-STAGING-SQL`):** Merge commit `234adf133ddab053c37245e224ca70b3b49a2228` (docs(db): clarify STAGING_BOOTSTRAP_ALL is scoped to empty databases only).
+- **PR #11 (`wip/YCN-10-01`):** Merge commit `8a48e066991e741031fc779d05685cc5971c45dd` (Task 10a: adopt India-first locale, Hyderabad location, free-text budget, /proof/ ignore, Need 4 copy, IMPROVEMENT_GOALS reference, and contact regression test).
+
+### 3. Open PRs
+- **V2 (`ycn-labs-site`):** 0 open pull requests.
+- **Historical (`ycnlabs`):** 0 open pull requests.
+- **Brand (`YCN_LABS_BRAND_LIBRARY`):** 0 open pull requests.
+
+### 4. Tasks Touched Today
+- **Task 10a (India-First & Content Alignment):** COMPLETE and merged (PR #11).
+- **Task 12 (Staging Setup & Schema Verification):** Schema bootstrap executed by Owner in Neon `ycn_staging` (20 statements, 0 errors, leads/newsletter_signups/index verified). Real enquiry & scenarios pending.
+- **Task 04 (Live Domain Containment):** Phone smoke test verified PASS on live device (popup, WhatsApp, Call buttons).
+- **Task 03 (Vault Backup):** Local backup `ycn_vault_close_20261101_a.zip` verified on `/mnt/workSpace` (82.77 MiB, SHA-256 match, zipfile -t PASS). Off-device encrypted backup remains explicitly OWNER-DEFERRED until Task 15.
+
+### 5. Process Deviations (DEVs Today)
+- **DEV-27:** Turn 1 exploratory commands in sandboxed container (`/mnt`, `01_CURRENT_PROJECT`, `.git`) returned non-zero exit codes (exit 2, 128) without immediate disclosure; remediated by enforcing host command execution (`BypassSandbox: true`, `hostname: YCN-labs`) and recording DEV-27 in the instructions register.
+- **Build / Font Note:** Initial PR #11 CI attempt failed in `next/font` Google loader (`TypeError: Cannot read properties of null (reading '1')`) due to transient upstream Google Fonts fetch; succeeded on rerun (1m 8s) without editing `node_modules`. Carried forward to evaluate self-hosted fonts at Task 09/15.
+
+### 6. Next-Day Order — 2 Nov 2026 (in this order; nothing else)
+0. open → SYNC CHECK A → BRIEF. Baseline = post-merge-11 main SHA from ls-remote. 0 open PRs expected.
+1. AGY posts the 7 staging env variable names only. Owner writes .env.local. AGY: git check-ignore -v .env.local (never read values).
+2. Owner word run scenarios → one real localhost enquiry (lead row in Neon + Resend email received), then the five Task 12 scenarios, then phone test. Raw output to proof/. Task 12 acceptance PASS/FAIL recorded.
+3. Task 12 follow-up: branch wip/YCN-12-NN; ContactForm shows receipt only when data.accepted === true, else existing error path; one regression test. PR → Claude → Owner merge N.
+4. Owner rulings (10b): PhoneChaptersSection chapter-04 mobile/SaaS line; Need 4 detail bullets; duplicate /contact lead paragraph; hello@ display before Task 15.
+5. Task 10b starts when Owner inputs arrive: founder bio, legal name/city, services, one project or "none", INR wording, 3 testers. Branch wip/YCN-10-02.
+6. Owner decisions pending: protected Vercel Preview (no domain); CA/lawyer date for Task 15; off-device backup remains OWNER-DEFERRED.
+Carry: next/font Google loader CI failure (passed on rerun) → evaluate self-hosted fonts at Task 09/15; never edit node_modules.
+Merged today: PR #10 (docs), PR #5 (staging SQL), PR #11 (Task 10a). Phone test PASS. Backup ycn_vault_close_20261101_a.zip verified (same SSD). DEV-27 logged.
+
+### 7. Owner-Only Pending Titles (from OWNER_ONLY_TODO.md)
+- Complete off-device encrypted backup (7-Zip + USB + private cloud) — OWNER-DEFERRED until Task 15
+- Neon staging credentials populated in `.env.local`
+- Six Task 10b Owner inputs (founder bio, legal entity/city, services, portfolio project, INR wording, 3 testers)
+- Vercel staging preview protection decision
+- CA / lawyer review date confirmation for Task 15 release gate
+
+### 8. Worktrees and Deletion Candidates
+- Worktrees: `~/Desktop/ycn-nav-07` on branch `wip/YCN-NAV-07` (preserved).
+- Deletion candidates preserved across close: `wip/YCN-10-01` (merged), `wip/YCN-STAGING-SQL` (merged), `docs/publish-resume` (merged), `wip/YCN-NAV-07`, `wip/YCN-OVERFLOW-08`, `wip/YCN-LEAD-12`, `wip/YCN-CHECKLIST-GOVERNANCE-01`, `wip/YCN-DECISION-055-01`, `wip/YCN-GOVERNANCE-POST-MERGE-01`, `wip/close-2026-10-18`. Zero branch deletions executed.
