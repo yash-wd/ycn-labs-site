@@ -211,3 +211,12 @@ All branches and worktrees are safely preserved across the pause. The following 
 *(Zero branch deletions executed).*
 
 ### Addendum 19 Oct 21:50 — old site: contact links restyled as buttons (ycnlabs PR #5), ycnlabs main now ed42684f382e7204d808210d280184540884b5ee. Register correction: the entry filed as DEV-24 is DEV-25 (whole-file rewrites); DEV-24 is the node_modules patch.
+
+### Addendum 19 Oct 23:52 — Close & Resumption Reconciliations
+- **Branch Classification:** SYNC CHECK A item 7 resolved by explicit classification (21 branches total: 17 Class A, 4 Class B, 0 Class C/D; 0 unique local commits; DEV-21 commit `ced939d` verified on origin). V2: 11 local / 10 remote (1 Class B: `close/2026-10-19-addendum`); Historical: 8 local / 5 remote (3 Class B: `feat/contact-buttons`, `fix/stage1-tokens`, `r05-fresh-homepage`); Brand: 2 local / 2 remote.
+- **Remote Deletions:** Confirmed `delete_branch_on_merge=false` across repositories; evening remote deletions were explicit `--delete-branch` invocations.
+- **Untracked Vault Inventory:** 3 duplicate, 21 disposable, 23 local-only scripts ingested to `proof/INTAKE-2026-10-19/untracked/` with cryptographic manifest.
+- **DEV-26 Recorded:** Native command output numbers mandatory for branch checks.
+- **Protocol Patches:** AGY open/close protocol rules 4 and 7 codified in `docs/AGY_OPEN_CLOSE_PROTOCOL.md`.
+- **Vault Archive:** Final pause vault archive recorded as `ycn_vault_close_20261019_e.zip`.
+- **Local-Only Evidence:** Note that `proof/` in the `ycn-labs-site` working directory is untracked local-only test and verification evidence (not for public tracking).
