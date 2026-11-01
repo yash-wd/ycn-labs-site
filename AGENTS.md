@@ -25,6 +25,7 @@ Reference navigation only; the mandatory cold-start sequence is `docs/CLOSE_PROT
 7. **[`docs/YCN_CLAIMS_AND_PROOF.md`](docs/YCN_CLAIMS_AND_PROOF.md)** — Evidentiary rules for marketing claims.
 8. **[`docs/YCN_RISKS_AND_TECH_DEBT.md`](docs/YCN_RISKS_AND_TECH_DEBT.md)** — Active risks, controls, and technical debt.
 9. **[`docs/CLOSE_PROTOCOL.md`](docs/CLOSE_PROTOCOL.md)** — Permanent close, consolidation, and cold-resume protocol (`YCN-CLOSE-PROTOCOL-01`).
+10. **[`docs/RESUME_2026-10-30.md`](docs/RESUME_2026-10-30.md)** & **[`docs/AGY_OPEN_CLOSE_PROTOCOL.md`](docs/AGY_OPEN_CLOSE_PROTOCOL.md)** — October pause resumption guide and daily opening/closing synchronization protocol.
 
 Current YCN site direction: [`docs/vnext/00_START_HERE.md`](docs/vnext/00_START_HERE.md). This direction is subordinate to YCN_DECISIONS, YCN_CLAIMS_AND_PROOF and YCN_CONTENT_SPEC.
 
