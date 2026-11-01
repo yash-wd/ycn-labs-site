@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import { ContactForm } from "@/components/ContactForm";
-import { Mail, Clock, Shield, CheckCircle2 } from "lucide-react";
+import { Clock, Shield, CheckCircle2 } from "lucide-react";
 
 export const metadata: Metadata = {
   title: "Start a Project — YCN Labs",
@@ -26,6 +26,9 @@ export default function ContactPage() {
             </h1>
             <p className="type-copy-lead text-[var(--text-secondary)] pt-1">
               You don’t need to know whether you need a website, app, automation or custom software. Tell us what happens today and what you want to change.
+            </p>
+            <p className="type-copy-lead text-[var(--text-secondary)]">
+              Tell us what is slow, lost or difficult in your business today. We’ll tell you plainly what could help and what it would cost, before you commit to anything.
             </p>
           </header>
 
@@ -60,7 +63,7 @@ export default function ContactPage() {
               <strong className="text-[var(--text-secondary)] font-sans">Direct contact:</strong> hello@ycnlabs.com
             </p>
             <p>
-              <strong className="text-[var(--text-secondary)] font-sans">Location:</strong> United Kingdom · Remote delivery worldwide
+              <strong className="text-[var(--text-secondary)] font-sans">Location:</strong> Based in Hyderabad, India, working with businesses across India.
             </p>
           </div>
         </div>

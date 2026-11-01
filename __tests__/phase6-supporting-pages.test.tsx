@@ -11,6 +11,7 @@ import ContactPage from "@/app/contact/page";
 import NotFound from "@/app/not-found";
 import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
+import { contactSchema } from "@/lib/validation/contact";
 
 describe("Phase 6: Supporting Pages & Canonical Navigation", () => {
   describe("1. Canonical Navigation & Footer Links", () => {
@@ -187,6 +188,29 @@ describe("Phase 6: Supporting Pages & Canonical Navigation", () => {
       expect(html).toContain("hello@ycnlabs.com");
       // Must not claim unverified response time guarantee per Claims register row 23
       expect(html).not.toContain("respond within one business day");
+    });
+
+    it("defaults project type to 'Not sure yet — need guidance…' option and accepts free-text budget", () => {
+      const html = renderToString(<ContactPage />);
+      // Free-text budget input exists without select or GBP references
+      expect(html).toContain('name="budget"');
+      expect(html).toContain('type="text"');
+      expect(html).not.toContain('<select name="budget"');
+      expect(html).not.toContain("£");
+
+      // Verify contactSchema validates free-text budget and default projectType
+      const validated = contactSchema.parse({
+        name: "Test Visitor",
+        email: "visitor@example.in",
+        projectType: "Not sure yet — need guidance on the right digital format",
+        budget: "₹50,000 – ₹1,50,000 / Flexible",
+        timeline: "Flexible",
+        message: "Need guidance on setting up web operations.",
+      });
+      expect(validated.projectType).toBe(
+        "Not sure yet — need guidance on the right digital format"
+      );
+      expect(validated.budget).toBe("₹50,000 – ₹1,50,000 / Flexible");
     });
   });
 

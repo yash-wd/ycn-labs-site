@@ -6,3 +6,6 @@ node_modules/
 *.log
 .env*.local
 next-env.d.ts
+
+# Local test and verification evidence (local-only, not for public repo)
+/proof/

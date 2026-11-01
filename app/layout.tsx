@@ -39,7 +39,7 @@ export const metadata: Metadata = {
   authors: [{ name: "YCN Labs" }],
   openGraph: {
     type: "website",
-    locale: "en_GB",
+    locale: "en_IN",
     url: "https://ycnlabs.com",
     siteName: "YCN Labs",
     title: "YCN Labs — Websites and software. Built around your business.",
@@ -85,10 +85,6 @@ export default function RootLayout({
     logo: "https://ycnlabs.com/brand/ycn-logo-dark-transparent-448.png",
     description:
       "Websites, web applications, and software products built around your business.",
-    address: {
-      "@type": "PostalAddress",
-      addressCountry: "GB",
-    },
   };
 
   return (
