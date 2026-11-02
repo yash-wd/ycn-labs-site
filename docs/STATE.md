@@ -270,3 +270,51 @@ Merged today: PR #10 (docs), PR #5 (staging SQL), PR #11 (Task 10a). Phone test 
 ### 8. Worktrees and Deletion Candidates
 - Worktrees: `~/Desktop/ycn-nav-07` on branch `wip/YCN-NAV-07` (preserved).
 - Deletion candidates preserved across close: `wip/YCN-10-01` (merged), `wip/YCN-STAGING-SQL` (merged), `docs/publish-resume` (merged), `wip/YCN-NAV-07`, `wip/YCN-OVERFLOW-08`, `wip/YCN-LEAD-12`, `wip/YCN-CHECKLIST-GOVERNANCE-01`, `wip/YCN-DECISION-055-01`, `wip/YCN-GOVERNANCE-POST-MERGE-01`, `wip/close-2026-10-18`. Zero branch deletions executed.
+
+
+## CLOSE 2026-11-02
+
+### 1. Remote Main SHAs
+- **V2 (`ycn-labs-site`):** `361d5d21302ebc50a22ad1e660c8fcc00deca7a0`
+- **Historical (`ycnlabs`):** `ed42684f382e7204d808210d280184540884b5ee`
+- **Brand (`YCN_LABS_BRAND_LIBRARY`):** `386f9794736efca8a6bd03ffd774553790857dc8` (checkout `wip/brand-export-05` at `ffb77158f3ef131dd17deaa013cd7616abc1b471`)
+
+### 2. PRs Merged Today
+- **PR #13 (`wip/YCN-12-02`):** Merge commit `361d5d21302ebc50a22ad1e660c8fcc00deca7a0` (fix(contact): require data.accepted for form success receipt and harden env gitignore (Task 12)).
+
+### 3. Open PRs
+- **V2 (`ycn-labs-site`):** 0 open pull requests.
+- **Historical (`ycnlabs`):** 0 open pull requests.
+- **Brand (`YCN_LABS_BRAND_LIBRARY`):** 0 open pull requests.
+
+### 4. Tasks Touched Today
+- **Task 12 (Lead Reliability & Staging Acceptance):** Real enquiry executed on unchanged main (HTTP 200, lead persisted in Neon `ycn_staging`, transactional email received at `hello@ycnlabs.com` in Zoho Mail). Scenario 1 live PASS; Scenario 2 live-observed (storage failure 503) & automated contract PASS; Scenario 3 automated contract PASS (live email-failure isolation pending); Scenario 4 live concurrent idempotency PASS (matching leadId, duplicate: true on 2nd, exactly 1 email delivered; Neon row count pending); Scenario 5 live input validation rejection PASS; Phone format API test PASS (physical device submission pending). PR #13 merged (`data.accepted === true` client receipt requirement, `.env*` ignore hardening, 7 regression tests). Staging database holds 6 test leads. Diagnostic branch `wip/YCN-12-01` (`bbbd5de`) pushed to origin per Owner ruling as preserved diagnostic WIP — never merge, deletion candidate.
+
+### 5. Process Deviations (DEVs Today)
+- **DEV-29 (Unauthorized Edits on Main, Neon Credential Exposure & Redaction Violation, Unapproved Nano File Deletion):**
+  1. Unauthorized edits made directly on `main` during initial staging troubleshooting prior to branch isolation.
+  2. Neon database credential disclosure: an unhandled Node exception in an ad-hoc diagnostic command printed the full connection string containing the password into the transcript; AGY subsequently re-pasted it in the report summary. Remediated: Owner immediately rotated the `neondb_owner` password in Neon Console and updated `.env.local` using `nano`; Resend/Upstash/hash secret rotation risk Owner-accepted; 2FA verified across GitHub, Neon, Resend, and Upstash; AGY adopted strict redaction policy (`[REDACTED]`) and HTTP API boundary testing only (no ad-hoc scripts with credentials).
+  3. Unapproved deletion: `rm -f .env.local.save .env.local.save.1` was executed without prior manifest approval.
+  4. Diagnostic DNS explanation: router DNS (`192.168.29.1`) refused `*.neon.tech`; laptop Wi-Fi "Keyframe Konnekt" reconfigured to Cloudflare (`1.1.1.1` / `1.0.0.1`); ad-hoc diagnostic `dns.setServers` was run only in a test probe, never added to application code.
+- **DEV-30 (Trailing Newline Discard on wip/YCN-12-02):** AGY executed `git checkout -- __tests__/contact-form-acceptance.test.ts` to discard an uncommitted trailing newline whitespace edit without explicit Owner authorization before switching branches; harmless (whitespace only), but logged per governance precedent (DEV-16/DEV-23).
+
+### 6. Next-Day Order — 3 November 2026 (in this order; nothing else)
+1. `open` → required synchronization check and canonical BRIEF. Resolve any documented close HOLD first.
+2. Controlled live Scenario 3: failed Resend notification after committed lead, restore valid settings, verify recovery and exactly one recovered notification. Owner handles credentials privately.
+3. Read-only Neon query to verify exactly one persisted row for Scenario 4's idempotency key.
+4. Real phone enquiry on trusted local Wi-Fi or separately approved protected Preview.
+5. Record Task 12 final acceptance with accurate evidence categories.
+6. Obtain Owner Task 10b decisions on chapter-04 mobile/SaaS claims, Need 4 bullets, duplicate contact introduction and verified hello@ display.
+7. Begin Task 10b when actual business inputs are supplied.
+8. Carry Task 15 decisions: protected Preview, CA/lawyer booking, production readiness and off-device encrypted backup.
+
+### 7. Owner-Only Pending Titles (from OWNER_ONLY_TODO.md)
+- Complete off-device encrypted backup (7-Zip + USB + private cloud) — OWNER-DEFERRED until Task 15
+- Four Task 10b Owner copy rulings (chapter-04 mobile/SaaS line, Need 4 detail bullets, duplicate /contact lead paragraph, hello@ display)
+- Six Task 10b business inputs (founder bio, legal entity name/city, services, portfolio project, INR wording, 3 testers)
+- Vercel staging preview protection decision
+- CA / lawyer review date confirmation for Task 15 release gate
+
+### 8. Worktrees and Deletion Candidates
+- Worktrees: `~/Desktop/ycn-nav-07` on branch `wip/YCN-NAV-07` (preserved).
+- Deletion candidates preserved across close: `wip/YCN-12-01` (`bbbd5de`, pushed to origin, diagnostic WIP — never merge), `wip/YCN-12-02` (merged via PR #13), `wip/YCN-10-01` (merged), `wip/YCN-STAGING-SQL` (merged), `docs/publish-resume` (merged), `wip/YCN-NAV-07`, `wip/YCN-OVERFLOW-08`, `wip/YCN-LEAD-12`, `wip/YCN-CHECKLIST-GOVERNANCE-01`, `wip/YCN-DECISION-055-01`, `wip/YCN-GOVERNANCE-POST-MERGE-01`, `wip/close-2026-10-18`. Zero branch deletions executed.
