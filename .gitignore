@@ -4,7 +4,8 @@ node_modules/
 *.tsbuildinfo
 .DS_Store
 *.log
-.env*.local
+.env*
+!.env.example
 next-env.d.ts
 
 # Local test and verification evidence (local-only, not for public repo)
