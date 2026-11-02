@@ -32,6 +32,21 @@ const IMPROVEMENT_GOALS = [
 const DEFAULT_IMPROVEMENT_GOAL =
   IMPROVEMENT_GOALS.find((goal) => goal.id === "not-sure")?.value ?? IMPROVEMENT_GOALS[0].value;
 
+export function evaluateContactResponse(
+  resOk: boolean,
+  resData: any
+): { shouldShowSuccess: boolean; errorMessage?: string } {
+  if (!resOk || !resData?.success || resData?.data?.accepted !== true) {
+    return {
+      shouldShowSuccess: false,
+      errorMessage:
+        resData?.error?.message ||
+        "We could not accept your request safely. Your message has not been confirmed—please try again or use the listed contact route.",
+    };
+  }
+  return { shouldShowSuccess: true };
+}
+
 export function ContactForm() {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitSuccess, setSubmitSuccess] = useState(false);
@@ -104,11 +119,10 @@ export function ContactForm() {
       });
 
       const resData = await response.json();
+      const evaluation = evaluateContactResponse(response.ok, resData);
 
-      if (!response.ok || !resData.success) {
-        throw new Error(
-          resData.error?.message || "We could not accept your request safely. Your message has not been confirmed—please try again or use the listed contact route."
-        );
+      if (!evaluation.shouldShowSuccess) {
+        throw new Error(evaluation.errorMessage);
       }
 
       setSubmitSuccess(true);
