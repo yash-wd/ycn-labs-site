@@ -6,10 +6,11 @@ let _db: PostgresJsDatabase<typeof schema> | null = null;
 
 export function getDb(): PostgresJsDatabase<typeof schema> {
   if (!_db) {
-    const connectionString = process.env.DATABASE_URL;
-    if (!connectionString || connectionString.trim() === "") {
+    const rawUrl = process.env.DATABASE_URL;
+    if (!rawUrl || rawUrl.trim() === "") {
       throw new Error("DATABASE_URL is not set — refusing to start database client");
     }
+    const connectionString = rawUrl.trim().replace(/^["']|["']$/g, "");
     const client = postgres(connectionString, { prepare: false });
     _db = drizzle(client, { schema });
   }

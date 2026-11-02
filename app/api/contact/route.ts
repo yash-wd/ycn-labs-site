@@ -250,15 +250,16 @@ export async function POST(request: Request) {
     let notificationStatus: "pending" | "sent" | "failed" = "pending";
 
     try {
-      const resendApiKey = process.env.RESEND_API_KEY || "";
+      const resendApiKey = (process.env.RESEND_API_KEY || "").trim().replace(/^["']|["']$/g, "");
 
       if (resendApiKey) {
         const resend = new Resend(resendApiKey);
         const fromEmail = resendApiKey.startsWith("re_")
           ? "YCN Labs <leads@ycnlabs.com>"
           : "onboarding@resend.dev";
-        const adminDestEmail =
-          process.env.LEAD_DESTINATION_EMAIL || "hello@ycnlabs.com";
+        const adminDestEmail = (
+          process.env.LEAD_DESTINATION_EMAIL || "hello@ycnlabs.com"
+        ).trim().replace(/^["']|["']$/g, "");
 
         const safeName = escapeHtml(name);
         const safeCompany = escapeHtml(company || "N/A");
