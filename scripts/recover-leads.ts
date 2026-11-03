@@ -78,7 +78,7 @@ Commands:
   process.exit(1);
 }
 
-main().catch((err) => {
-  console.error("Fatal error:", err);
+main().catch(() => {
+  console.error("Fatal error: RECOVERY_TOOL_FAILURE");
   process.exit(1);
 });
