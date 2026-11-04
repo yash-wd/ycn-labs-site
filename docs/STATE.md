@@ -326,7 +326,7 @@ Merged today: PR #10 (docs), PR #5 (staging SQL), PR #11 (Task 10a). Phone test 
 ### 1. Active Baseline & Branch State
 - **V2 (`ycn-labs-site`):** `main` at `3804259153cf5b7a251c5323575819088a6bedf9` (clean worktree, matches `origin/main`).
 - **PRs Merged Today:** PR #15 (`wip/YCN-12-RECOVER-01`, merge commit `3804259153cf5b7a251c5323575819088a6bedf9`, fix(ops): sanitize fatal error handler in recover-leads script (Task 12)).
-- **Open PRs:** 0 open pull requests.
+- **Open PRs:** PR #16 (this Task 12 closure PR).
 
 ### 2. Task 12 Final Acceptance — CLOSED & VERIFIED
 - **Task 12 (Lead Reliability & Staging Acceptance):** **CLOSED & VERIFIED** across four distinct evidence layers on `main` (`3804259`):
