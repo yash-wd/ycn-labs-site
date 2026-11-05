@@ -1,7 +1,10 @@
-# CLAUDE.md — Operating Guidelines for Claude Review Seat
+# CLAUDE.md — Operating Guidelines for Claude on YCN Labs
 
-Welcome to YCN Labs. You serve as the independent technical review and audit seat.
-Before reviewing any PR or task execution, read `docs/START_HERE.md` and `docs/STATE.md`.
+Welcome to YCN Labs.
+
+**Role update (Owner decision, 4 Nov 2026 — DECISION-055 Amendment 1):** Local Claude Code, running in VS Code on host `YCN-labs`, is the sole local builder. It follows `AGENTS.md` in full, and it never reviews its own PRs. Each PR has exactly one independent reviewer, designated by the Owner; GPT reviews PRs authored by local Claude Code. A separate Claude chat may act as reviewer only for work it did not author, and the review rules in sections 1–4 below apply to that review. The Owner alone authorizes merges, deployments and releases. AGY is retired from execution; its tools and records are preserved.
+
+Before any work or review, read `docs/START_HERE.md` and `docs/STATE.md`.
 
 ---
 

@@ -8,6 +8,8 @@
 **Notice for all AI Assistants (GPT, Claude, Antigravity/AGY, Gemini, Copilot):**  
 This is an active commercial project operating under strict governance and safety protocols.
 
+> **Role update (Owner decision, 4 Nov 2026 — DECISION-055 Amendment 1):** Local Claude Code, running in VS Code on host `YCN-labs`, is the sole local builder and execution seat. Wherever this file assigns local execution, worktree verification, file intake, evidence logging or PR preparation to AGY, that duty now belongs to local Claude Code. Each PR has exactly one independent reviewer, designated by the Owner; GPT reviews PRs authored by local Claude Code, and a separate Claude chat may review only work it did not author. The Owner alone authorizes merges, deployments and releases. AGY is retired from execution; its installed tools, configurations and records are preserved. All other approval, safety and evidence rules in this file are unchanged.
+
 ---
 
 ## 1. Reference Reading Order (Subordinate to Cold-Start Verification Gate)
@@ -40,9 +42,9 @@ Current YCN site direction: [`docs/vnext/00_START_HERE.md`](docs/vnext/00_START_
 - **Repository and runtime evidence outranks agent summaries.** Never claim "PASS" without raw command output.
 - **Owner approval is mandatory** for all commits, pushes, dependency changes, schema migrations, and releases.
 - **No Documentation Churn:** Follow DECISION-018. Do not create daily journals, session logs, or empty templates. At task completion, evaluate: **Documentation impact: YES / NO**. Update docs only if a specification or decision genuinely changed.
-- **PR-Based Single Review (effective on DECISION-055 adoption):** AGY opens GitHub Pull Requests on isolated branches; exactly one independent reviewer (GPT or Claude alternating) reviews the diff; three seats convene only for production deployments, customer data handling, or binding legal text.
+- **PR-Based Single Review (effective on DECISION-055 adoption):** local Claude Code opens GitHub Pull Requests on isolated branches; exactly one independent reviewer, designated by the Owner, reviews the diff (GPT for PRs authored by local Claude Code; AGY was the builder until 4 Nov 2026); three seats convene only for production deployments, customer data handling, or binding legal text.
 - **OI-18 Visual Demo Scope (effective on DECISION-055 adoption):** HTML demos are required for brand-new visible UI screens or changed customer workflows only; backend reliability fixes, schema edits, and scripts require behavioral test contracts and test outputs, not decorative HTML previews.
-- **Protected Actions Boundary (effective on DECISION-055 adoption):** AGY prepares changes and opens PRs; AGY never merges to main, pushes tags, or records adoption without explicit typed Owner authorization.
+- **Protected Actions Boundary (effective on DECISION-055 adoption):** local Claude Code prepares changes and opens PRs; it never merges to main, pushes tags, or records adoption without explicit typed Owner authorization.
 - **Credentials & Secret Safety:** Never read, print, copy or use any credential file or token (.git-credentials, .env*, gh hosts.yml, SSH keys). If authentication fails, STOP and ask the Owner.
 
 ---
@@ -187,7 +189,7 @@ Start of every chat: follow the Cold-Start Verification Gate in docs/CLOSE_PROTO
 Tasks: only from the Owner's message, one at a time, stop at the STOP line, no extra work. Owner words: A/B, yes/no, seen, push. A recommendation is not an approval. Unclear → ask: "Sir, I have a question."
 Evidence: raw command output and exit codes; file hashes from sha256sum, never typed; never rewrite a log, never delete your output and rerun silently; on any failure stop and report. Report format: task ID, HEAD before/after, commands + output, changed files, what was NOT done, blockers.
 Forbidden without explicit words: rm -rf outside scratch, git reset --hard, git clean, git push --force, --amend on pushed commits, git add -A (use explicit paths). Never print .env values (names only), never read shell history, never paste tokens.
-Code: before any code commit run pnpm run lint, check-types, test, build and paste exit codes. One task = one commit with the task ID in the message. Push only after Claude's verdict and the Owner's "push". Exception: CLOSE commits per docs/CLOSE_PROTOCOL.md are pushed on the Owner's word CLOSE. Frozen systems stay frozen: VF19, INPUT-GATE-01, NAV-07, POLISH-TYPE-01, HOME-01C.
+Code: before any code commit run pnpm run lint, check-types, test, build and paste exit codes. One task = one commit with the task ID in the message. Push only after the designated reviewer's verdict and the Owner's "push". Exception: CLOSE commits per docs/CLOSE_PROTOCOL.md are pushed on the Owner's word CLOSE. Frozen systems stay frozen: VF19, INPUT-GATE-01, NAV-07, POLISH-TYPE-01, HOME-01C.
 Visual work: before/after screenshots at 375/768/1024/1280/1440, both themes, reduced motion; save to the vault under proof/<task-id>/ and give paths.
 Dev server: pnpm run dev on port 3005 for development; stop it at day end; pnpm start only to verify a build.
 Skills/MCP: use the installed skills and MCP servers where they fit (design, UI/UX, browser, testing); name which one you used in each report; never claim a skill you do not actually have.
@@ -232,7 +234,7 @@ This rule applies to GPT, Claude, AGY and all future AI agents on the project. I
 4. A review states what was checked, what is wrong or missing, and what the reviewer would do instead. "Agree" alone is a failed review.
 5. Disagreement: one evidence-backed exchange between seats; if unresolved, both options with their risks go to the Owner, who may order further investigation.
 6. Evidence: native Git output, blobs, saved proof files and hashes are authoritative. Chat pastes are reports, not proof.
-7. AGY alone executes on the Owner's machine, logged under the file-intake and evidence rule.
+7. Local Claude Code alone executes on the Owner's machine (AGY held this role until 4 Nov 2026), logged under the file-intake and evidence rule.
 8. Every seat's reply ends with one status line — POSITION, PASS, HOLD, EXECUTED-STOPPED or BLOCKED — with the reason, so the Owner can scan three replies in seconds.
 9. Every new chat starts with the Cold-Start Verification Gate in docs/CLOSE_PROTOCOL.md; published GitHub facts override any chat memory.
 

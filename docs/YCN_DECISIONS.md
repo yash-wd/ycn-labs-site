@@ -324,3 +324,13 @@ The 143-item control list stays as historical reference and a source of risk-spe
 If the Owner wants to allow a WIP commit/push for that single doc reconciliation, grant it explicitly with its allowed file list. Do **not** treat the candidate as adopted merely because other AI seats recommend it.
 
 **Evidence boundary:** All launch dates, customer count and price conclusions above are targets/hypotheses, not verified results.
+
+### DECISION-055 Amendment 1: Local Builder Role Change (Owner, 4 Nov 2026)
+
+**Status: ADOPTED by Owner.** Decided in the Owner's 4 Nov 2026 handover; this record authorized by the Owner on 5 Nov 2026. The DECISION-055 text above is preserved unchanged as the historical record.
+
+1. **Builder.** Local Claude Code, running in VS Code on host `YCN-labs`, replaces AGY as the sole local workstation builder and execution seat. This amends the sentence in A1 that names AGY as the only local workstation builder, §6 item 1 ("One builder (AGY)"), and every DECISION-055 reference to AGY preparing changes or opening PRs. The §6 item 2 demo rule is not amended here; it remains an OI-18 matter for a separate Owner ruling.
+2. **Review.** Each PR has exactly one independent reviewer, designated by the Owner. GPT reviews PRs authored by local Claude Code. A separate Claude chat may review only work it did not author. This replaces "GPT or Claude, alternating" in A1.
+3. **Authority.** The Owner alone authorizes merges, deployments and releases, as already set out in §6.
+4. **AGY.** AGY is retired from project execution. Its installed tools, configurations, skills, MCP setup, records and proof are preserved; nothing is deleted.
+5. **Scope.** No other DECISION-055 amendment, approval rule, safety rule, evidence rule or frozen-system protection changes.
