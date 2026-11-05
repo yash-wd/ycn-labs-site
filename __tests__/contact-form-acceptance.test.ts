@@ -1,7 +1,20 @@
 import { describe, it, expect } from "vitest";
 import fs from "fs";
 import path from "path";
-import { evaluateContactResponse } from "@/components/ContactForm";
+import { evaluateContactResponse, IMPROVEMENT_GOALS } from "@/components/ContactForm";
+
+describe("ContactForm: improvement goal values (Task 10b)", () => {
+  // Each goal button submits goal.value as projectType (setValue("projectType", goal.value)).
+  // This suite has no DOM, so it checks the value the button submits, not a simulated click.
+  it("'Build a product' submits the web-application value and keeps its visible label", () => {
+    const buildProduct = IMPROVEMENT_GOALS.find((goal) => goal.id === "build-product");
+    expect(buildProduct?.label).toBe("Build a product");
+    expect(buildProduct?.value).toBe("Build a software product (web application)");
+    for (const goal of IMPROVEMENT_GOALS) {
+      expect(`${goal.label} ${goal.value}`).not.toMatch(/mobile|saas/i);
+    }
+  });
+});
 
 describe("ContactForm: Acceptance Boundary & Anti-Bot Receipt Protection", () => {
   it("shows success receipt when success: true and data.accepted: true", () => {

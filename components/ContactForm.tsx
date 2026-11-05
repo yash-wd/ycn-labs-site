@@ -20,11 +20,11 @@ function generateUUID(): string {
   });
 }
 
-const IMPROVEMENT_GOALS = [
+export const IMPROVEMENT_GOALS = [
   { id: "get-found", label: "Get found", value: "Help customers find my business (Websites & presence)" },
   { id: "enquiries-bookings", label: "Enquiries/bookings/orders", value: "Make enquiries, bookings or orders easier (Customer journeys)" },
   { id: "manual-work", label: "Less manual work", value: "Reduce repetitive work (Business systems & automation)" },
-  { id: "build-product", label: "Build a product", value: "Build a software product (Web, mobile or SaaS)" },
+  { id: "build-product", label: "Build a product", value: "Build a software product (web application)" },
   { id: "something-else", label: "Something else", value: "Custom software / Specific operational system" },
   { id: "not-sure", label: "Not sure", value: "Not sure yet — need guidance on the right digital format" },
 ];
