@@ -218,7 +218,7 @@ Do not invent team size, years in business, client count, awards, offices, partn
 
 **H1:** Tell us what you’re trying to improve.
 
-**Sub:** You don’t need to know whether you need a website, app, automation or custom software. Tell us what happens today and what you want to change.
+**Sub:** None. The first-step reassurance below is the only intro paragraph on `/contact` (Owner ruling, 5 Nov 2026, Task 10b). The former sub-headline "You don’t need to know whether you need a website, app, automation or custom software. Tell us what happens today and what you want to change." is removed from the page intro.
 
 **First-step reassurance (public copy; DECISION-054):** Tell us what is slow, lost or difficult in your business today. We'll tell you plainly what could help and what it would cost, before you commit to anything.
 

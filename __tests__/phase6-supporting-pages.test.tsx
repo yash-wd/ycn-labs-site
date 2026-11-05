@@ -179,11 +179,15 @@ describe("Phase 6: Supporting Pages & Canonical Navigation", () => {
   });
 
   describe("7. /contact Route", () => {
-    it("renders canonical H1 and sub-headline", () => {
+    it("renders canonical H1 and the single first-step intro paragraph", () => {
       const html = renderToString(<ContactPage />);
       expect(html).toContain("Tell us what you’re trying to improve.");
       expect(html).toContain(
-        "You don’t need to know whether you need a website, app, automation or custom software."
+        "Tell us what is slow, lost or difficult in your business today."
+      );
+      // Owner ruling 5 Nov 2026 (Task 10b): the former sub-headline is removed from the intro
+      expect(html).not.toContain(
+        "Tell us what happens today and what you want to change."
       );
       expect(html).toContain("hello@ycnlabs.com");
       // Must not claim unverified response time guarantee per Claims register row 23
