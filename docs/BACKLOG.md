@@ -20,6 +20,7 @@
 
 ## Operational Tooling & Maintenance (Carried Forward)
 - [ ] **State Script Integration:** Review and test proposed closer integration without overwriting existing `tools/close-day.sh` (carried forward; pending separate tooling review).
+- [ ] **[OWNER-GATE]** **Claude Code MCP setup:** DEFERRED until a task needs it. Candidates: `shadcn-ui` MCP pinned to `@jpisnice/shadcn-ui-mcp-server@3.0.0` at user scope, and 21st MCP with a new key entered privately by the Owner. The 27 AGY design skills are already available at user scope (5 Nov 2026).
 - [ ] **`BRAND-LOGO-CARRY-FORWARD` — continuity reminder only, NOT an executable logo task:** Brand repo `yash-wd/ycn-labs-brand-library`, branch `wip/brand-export-05`, last Owner-reported checkpoint `ffb7715`; canonical checklist `14_CONTINUITY/RESUME_HERE.md`. Technical exports/candidates are saved on WIP, but Owner visual acceptance, final production variants and integration are NOT COMPLETE. Do not start logo work automatically, promote WIP to `main`, or change the website logo. Coordinated CLOSE is **plan-first** pending O-08: brand local `main` was reported to contain unapproved logo commits; never publish them to `main`, and do not delete/move files without explicit approved manifest. Do not postpone tasks 03 or 11 for this reminder.
 
 ---
@@ -52,6 +53,9 @@
 - [ ] **`08 HOME-02-CAP-03-1024`:** PAUSED until Gate E. Fix existing table overflow at 1024px in Capability-03 without changing approved content/other chapters; measure baseline table dimensions before any code change.
 - [ ] **`09 YCN-HOME-FINAL-01`:** PAUSED until Gate E. Review and correct verified remaining homepage/entrance/phone/laptop/flow/FAQ defects only; keep ratified copy and frozen systems.
 - [ ] **`10 YCN-PAGES-CONTENT-01`:** Route-by-route content, clear services/contact, jurisdiction/currency and claims reconciliation, correct metadata (blocked on O-01..O-06). *Scope includes OI-19 privacy notice copy and enquiry handling separation from marketing permissions.*
+  - **Task 10b progress (5 Nov 2026):** Done: Owner copy rulings (PR #17), ownership wording aligned to DECISION-054 (PR #18), contact-form "Build a product" stored value (PR #20). Service list settled: business websites, selected web applications, scoped automation and integrations, optional paid maintenance.
+  - [ ] **[OWNER-GATE]** Founder/About section: not implemented. Final wording and the demo ruling for that section are pending.
+  - [ ] **[OWNER-GATE]** Business inputs: legal entity name and city, a genuine portfolio project or "none", INR pricing wording, three testers.
 - [ ] **`11 YCN-BRAND-MEDIA-01`:** Approve 02a/02b or explicit existing-asset interim; integrate only approved releases, validate source/license and video rights; replace generic stock video clips with authentic YCN studio footage before production release per `public/media/SOURCES.md` (carried forward requirement; blocked on O-07).
 - [ ] **`11a YCN-SYSTEM-ARCH-01`:** **v1.0 Owner-approved 15 Oct 2026 (YCN-ARCH-V1-01)** in `docs/YCN_SYSTEM_ARCHITECTURE.md`: code-grounded HLD, lead/consent LLD, analytics, SPF/DKIM/DMARC, children's-data handling, privacy/legal review map and mandatory Task 12 false-503/atomic-dedupe scenarios 4–6. Architecture documentation approved; implementation NOT STARTED; legal clearance NOT GRANTED.
 - [x] **`12 YCN-LEAD-STAGING-01`:** **[VERIFIED]** Lead Reliability & Staging Acceptance verified across four distinct evidence layers on `main` (`3804259`, PR #13 `361d5d2`, PR #15 `3804259`):
@@ -63,6 +67,7 @@
 - [ ] **`13 YCN-QUALITY-GATE-01`:** Full lint/types/test/build on exact RC; Playwright browsers; accessibility, security/CSP report-only, performance/SEO audits. *Scope includes OI-19 verification: privacy-respecting aggregates, cookieless audience measurement, no cross-site identifiers.*
 - [ ] **`14 YCN-COMPREHENSION-01`:** Observe at least five representative nontechnical users performing find/understand/contact tasks.
 - [ ] **`15 YCN-RELEASE-RC-01`:** Freeze SHA, staged smoke, domain/DNS/SSL, required env names, backup, rollback, privacy-respecting analytics live, and incident owner. *Scope includes OI-19 production uptime/error alerting verification.*
+  - **Legal review scope (5 Nov 2026):** include `/terms` §2 ownership and portfolio-permission wording, which conflicts with DECISION-054 and DECISION-052 O-05. Not changed in PR #18; needs counsel and an Owner ruling.
 - [ ] **`16 YCN-PRODUCTION-LAUNCH-01`:** Separate authorized deploy of exact approved SHA, no incidental source changes.
 - [ ] **`17 YCN-POSTLAUNCH-01`:** Operations and measurement after launch: lead SLA/response tracking, uptime/alerts, proposal funnel data from live analytics, incident playbook, maintenance backlog.
 

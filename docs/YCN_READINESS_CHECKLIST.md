@@ -204,5 +204,5 @@
 - [ ] **[LOCAL-WIP]** `CHK-139`: Task 07 (`YCN-NAV-ORIGINAL-STYLE-01`): Navigation Menu motion pilot (Technical PASS; Owner visual review and commit pending).
 - [ ] **[PENDING]** `CHK-140`: Task 08 (`HOME-02-CAP-03-1024`): fix table overflow at 1024px in Capability-03 without altering approved content.
 - [ ] **[PENDING]** `CHK-141`: Task 09 (`YCN-HOME-FINAL-01`): align homepage components strictly to ratified Design-to-Code Contract.
-- [ ] **[PENDING]** `CHK-142`: Tasks 10–12: Content & Blueprints (10), Brand Logo Integration (11), Architecture & Lead Staging (11a/12).
+- [ ] **[PENDING]** `CHK-142`: Tasks 10–12: Content & Blueprints (10), Brand Logo Integration (11), Architecture & Lead Staging (11a/12). *Status 5 Nov 2026: Task 12 VERIFIED (PR #16); Task 10 partly done (PRs #17, #18, #20; founder bio and business inputs pending); Task 11 not started.*
 - [ ] **[PENDING]** `CHK-143`: Tasks 13–17: Quality Gate RC (13), User Testing (14), Release Candidate (15), Production Launch (16), Post-Launch Operations (17).
