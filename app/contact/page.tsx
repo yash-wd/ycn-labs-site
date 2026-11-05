@@ -49,7 +49,7 @@ export default function ContactPage() {
               <div className="flex items-start gap-3">
                 <Shield className="w-4 h-4 text-[var(--action-blue)] shrink-0 mt-0.5" />
                 <p>
-                  <strong>Clear written terms:</strong> Deliverables, full code ownership, and support terms are defined in a written agreement before work begins.
+                  <strong>Clear written terms:</strong> Deliverables and support terms are defined in a written agreement before work begins. Before work starts, the agreement sets out plainly what you own and what is licensed.
                 </p>
               </div>
             </div>
