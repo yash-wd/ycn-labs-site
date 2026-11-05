@@ -347,3 +347,62 @@ Merged today: PR #10 (docs), PR #5 (staging SQL), PR #11 (Task 10a). Phone test 
   3. Duplicate `/contact` lead paragraph copy.
   4. Verified `hello@ycnlabs.com` display before Task 15.
   Followed by Task 10b branch implementation when six business inputs are supplied.
+
+---
+
+## CLOSE 2026-11-05 — PAUSE until 10 November 2026
+
+Close record prepared by local Claude Code on 5 Nov 2026 (about 14:30 IST) under the Owner's close authorization. Final closure remains pending the reviewed merge, synchronization, final-main checks and verified backup. **Planned return: 10 Nov 2026. No automatic restart.** Restart guide: [`docs/RESUME_2026-11-10.md`](RESUME_2026-11-10.md). The 3 Nov evidence is in "In-Flight Session Update — 3 November 2026" above and is not repeated here.
+
+Final completion or CLOSE BLOCKED status is recorded in the sanitized completion comment on PR #21 and the private LAST_CLOSE.txt. Read the completion record when resuming; this prepared record alone does not establish CLOSED.
+
+### 1. Repository State
+- **V2 (`ycn-labs-site`):** pre-close code baseline `main` at `437903d769896060e4cd7c31d00c84288779dcf0` (PR #20 merge). The close PR that adds this block merges on top of it; verify the final SHA on return with `git ls-remote origin main`.
+- **Historical (`ycnlabs`):** `main` at `ed42684f382e7204d808210d280184540884b5ee`, unchanged. No changes made.
+- **Brand (`YCN_LABS_BRAND_LIBRARY`):** `main` at `386f9794736efca8a6bd03ffd774553790857dc8`; checkout `wip/brand-export-05` at `ffb77158f3ef131dd17deaa013cd7616abc1b471`, unchanged. No changes made.
+
+### 2. PRs Merged Since CLOSE 2026-11-02
+- **PR #15** (`3804259`): recorded in the 3 Nov in-flight section above.
+- **PR #16** (`a4de526d328aeffb5686f2b20cbbab9c4b934e79`): Task 12 closure docs, with unverified operational items carried to Tasks 13/15 in `docs/BACKLOG.md`.
+- **PR #17** (`e95699283dd795e96de1d8f56000c857b3474615`): Task 10b copy rulings. Chapter 04 and the Need 4 bullet no longer claim mobile or SaaS work; `/contact` keeps only the DECISION-054 first-step paragraph; the content spec's `/contact` line was updated to match.
+- **PR #18** (`3f9a7b060fdd671c6dcb070423a46c8799de615c`): "full code ownership" on `/contact` and under Need 05 replaced with the DECISION-054 sentence.
+- **PR #19** (`12eacf5e5590a87a1fdac94fdf2ceb8e0502a5f9`): governance. DECISION-055 Amendment 1 records local Claude Code as sole builder, GPT as reviewer of its PRs, one reviewer per PR, and Owner-only merge, deploy and release authority. AGY is retired from execution with its tools and records preserved.
+- **PR #20** (`437903d769896060e4cd7c31d00c84288779dcf0`): the contact-form "Build a product" option now stores "Build a software product (web application)". The visible label is unchanged and existing leads are untouched. Its test checks the value mapping only, not a simulated click and submit; the Owner accepted that scope.
+
+### 3. Open PRs
+- **V2:** this close PR only, until it merges. **Historical:** 0. **Brand:** 0.
+
+### 4. Task Status
+- **Task 12:** CLOSED and VERIFIED. Delivery/bounce webhooks, Sentry alert verification and named primary/backup lead-operator ownership remain carried to Tasks 13/15.
+- **Task 10b:** IN PROGRESS. Done: four copy rulings (PR #17), ownership wording (PR #18), form value (PR #20). Service list settled: business websites, selected web applications, scoped automation and integrations, optional paid maintenance.
+  - **Founder/About section: NOT implemented.** Final wording and a ruling on whether this section needs a standalone demo are pending with the Owner. Adviser drafts are not approval.
+  - **Business inputs pending:** legal entity name and city, a genuine portfolio project or "none", INR pricing wording, three testers.
+- **Task 15:** legal review must also cover `/terms` §2 ownership and portfolio-permission wording, which conflicts with DECISION-054 and DECISION-052 O-05.
+- **Tasks 11, 13, 14, 15, 16:** not started. **No production deployment is authorized.**
+
+### 5. Operations
+- The temporary phone-test firewall rule was removed by the Owner on 5 Nov; the Owner's terminal output confirmed it. Do not repeat.
+- Claude Code MCP setup is deferred until a task needs it. The 27 AGY design skills are already available to Claude Code at user scope.
+- No YCN development or test server was running at close.
+- **Vault backup:** New pause backup: PENDING post-merge execution and verification at preparation time. Planned destination is on the same physical SSD. No off-device backup is verified by this record.
+
+### 6. Process Deviations Today
+- None recorded.
+
+### 7. Return-Day Order — 10 November 2026 (in this order; nothing else)
+1. Owner says `open`.
+2. Verify local and remote state of all three repositories; read this block and `docs/RESUME_2026-11-10.md`.
+3. Report completed work, remaining decisions and the next proposed task.
+4. First content decision: the Owner approves the final About bio and its bounded scope, including the demo ruling for that section.
+5. No implementation resumes until the Owner explicitly authorizes it.
+
+### 8. Owner-Only Pending Titles
+- Final About bio wording, and the demo ruling for that section only
+- Task 10b business inputs: legal entity name/city, portfolio project or "none", INR wording, three testers
+- OI-18 demo rule for local Claude Code in general (needed before Task 11 design work)
+- Task 15: CA/lawyer review date, including `/terms` §2; protected Vercel Preview decision; off-device encrypted backup (OWNER-DEFERRED)
+- MCP setup approvals, when a task needs them
+
+### 9. Worktrees and Branches
+- Worktrees: `ycn-labs-site` and `~/Desktop/ycn-nav-07` on `wip/YCN-NAV-07`, preserved.
+- Zero branch deletions. Merged branches kept: `wip/YCN-12-CLOSE-01`, `wip/YCN-10-02`, `wip/YCN-10-03`, `wip/YCN-10-04`, `wip/YCN-GOVERNANCE-ROLES-01`, plus those listed in CLOSE 2026-11-02 §8.
