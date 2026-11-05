@@ -83,7 +83,7 @@ const OUTCOME_NEEDS: NeedChapter[] = [
     details: [
       "Purpose-built software engineered when off-the-shelf templates cannot meet your operational requirements.",
       "Deep analysis of your current operational bottlenecks before recommending or writing code.",
-      "Full code ownership, transparent documentation, and ongoing maintenance agreements.",
+      "Transparent documentation and ongoing maintenance agreements. Before work starts, the agreement sets out plainly what you own and what is licensed.",
     ],
     icon: Layers,
   },
