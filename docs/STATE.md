@@ -352,7 +352,9 @@ Merged today: PR #10 (docs), PR #5 (staging SQL), PR #11 (Task 10a). Phone test 
 
 ## CLOSE 2026-11-05 — PAUSE until 10 November 2026
 
-Closed by local Claude Code on 5 Nov 2026 (about 14:30 IST) under the Owner's close authorization. **Planned return: 10 Nov 2026. No automatic restart.** Restart guide: [`docs/RESUME_2026-11-10.md`](RESUME_2026-11-10.md). The 3 Nov evidence is in "In-Flight Session Update — 3 November 2026" above and is not repeated here.
+Close record prepared by local Claude Code on 5 Nov 2026 (about 14:30 IST) under the Owner's close authorization. Final closure remains pending the reviewed merge, synchronization, final-main checks and verified backup. **Planned return: 10 Nov 2026. No automatic restart.** Restart guide: [`docs/RESUME_2026-11-10.md`](RESUME_2026-11-10.md). The 3 Nov evidence is in "In-Flight Session Update — 3 November 2026" above and is not repeated here.
+
+Final completion or CLOSE BLOCKED status is recorded in the sanitized completion comment on PR #21 and the private LAST_CLOSE.txt. Read the completion record when resuming; this prepared record alone does not establish CLOSED.
 
 ### 1. Repository State
 - **V2 (`ycn-labs-site`):** pre-close code baseline `main` at `437903d769896060e4cd7c31d00c84288779dcf0` (PR #20 merge). The close PR that adds this block merges on top of it; verify the final SHA on return with `git ls-remote origin main`.
@@ -382,7 +384,7 @@ Closed by local Claude Code on 5 Nov 2026 (about 14:30 IST) under the Owner's cl
 - The temporary phone-test firewall rule was removed by the Owner on 5 Nov; the Owner's terminal output confirmed it. Do not repeat.
 - Claude Code MCP setup is deferred until a task needs it. The 27 AGY design skills are already available to Claude Code at user scope.
 - No YCN development or test server was running at close.
-- **Vault backup:** made after this close PR merges, on the same physical SSD. Status: LOCAL ONLY — NO EXTERNAL BACKUP. Details are in the private close record.
+- **Vault backup:** New pause backup: PENDING post-merge execution and verification at preparation time. Planned destination is on the same physical SSD. No off-device backup is verified by this record.
 
 ### 6. Process Deviations Today
 - None recorded.
