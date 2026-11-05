@@ -76,7 +76,7 @@ describe("Content Specification Authority & Anti-Drift Suite", () => {
       expect(normalizedCode).toContain(normalize("I have a product idea"));
       expect(normalizedCode).toContain(normalize("Software products"));
       expect(normalizedCode).toContain(
-        normalize("Web apps, mobile products and SaaS built from a useful first version outward.")
+        normalize("Selected web applications designed around a clearly agreed first version.")
       );
 
       expect(normalizedCode).toContain(normalize("I need something specific"));

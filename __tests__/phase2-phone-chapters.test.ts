@@ -56,7 +56,7 @@ describe("Phase 2: HOME-02D 'Visual Capability Stage' Specification Proof", () =
     expect(sectionHtml).toContain("I have a product idea");
     expect(sectionHtml).toContain("Software products");
     expect(sectionHtml).toContain(
-      "Web apps, mobile products and SaaS built from a useful first version outward."
+      "Selected web applications designed around a clearly agreed first version."
     );
 
     // 05. Custom software

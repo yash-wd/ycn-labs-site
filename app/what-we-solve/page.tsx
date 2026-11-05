@@ -69,7 +69,7 @@ const OUTCOME_NEEDS: NeedChapter[] = [
     explanation: "Selected web applications designed around a clearly agreed first version.",
     details: [
       "Disciplined first versions (MVPs) designed around core user value instead of feature bloat.",
-      "Scalable web and mobile architectures built on clean TypeScript code and relational data models.",
+      "Scalable web application architectures built on clean TypeScript code and relational data models.",
       "Direct user feedback loops to refine the software based on actual operational usage.",
     ],
     icon: Compass,

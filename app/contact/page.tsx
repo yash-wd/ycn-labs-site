@@ -25,9 +25,6 @@ export default function ContactPage() {
               Tell us what you’re trying to improve.
             </h1>
             <p className="type-copy-lead text-[var(--text-secondary)] pt-1">
-              You don’t need to know whether you need a website, app, automation or custom software. Tell us what happens today and what you want to change.
-            </p>
-            <p className="type-copy-lead text-[var(--text-secondary)]">
               Tell us what is slow, lost or difficult in your business today. We’ll tell you plainly what could help and what it would cost, before you commit to anything.
             </p>
           </header>

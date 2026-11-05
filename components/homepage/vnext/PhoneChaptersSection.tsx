@@ -92,7 +92,7 @@ const CAPABILITIES: CapabilityItem[] = [
     need: "I have a product idea",
     capability: "Software products",
     explanation:
-      "Web apps, mobile products and SaaS built from a useful first version outward.",
+      "Selected web applications designed around a clearly agreed first version.",
     stageTitle: "Concept Product",
   },
   {
@@ -1095,7 +1095,7 @@ export function PhoneChaptersSection() {
                             Concept Product
                           </span>
                           <p className="text-[11px] text-[var(--text-secondary)]">
-                            Web apps, mobile products and SaaS built from a useful first version outward.
+                            Selected web applications designed around a clearly agreed first version.
                           </p>
                         </div>
                         <div className="grid grid-cols-2 gap-2 text-xs">
