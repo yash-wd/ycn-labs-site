@@ -92,7 +92,7 @@ export default function AboutPage() {
           Yaseen
         </h2>
         <p className="type-copy-body text-[var(--text-secondary)]">
-          You can call me Yash. I started YCN LABS to help small and growing businesses in India build websites and web applications that fit the way they work. You don’t need a technical brief to talk to me. Tell me where an enquiry gets missed or what you keep doing by hand, and we’ll work out what’s worth building first.
+          You can call me Yash. I started YCN Labs to help small and growing businesses in India build websites and web applications that fit the way they work. You don’t need a technical brief to talk to me. Tell me where an enquiry gets missed or what you keep doing by hand, and we’ll work out what’s worth building first.
         </p>
       </section>
 

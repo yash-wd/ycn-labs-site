@@ -150,7 +150,7 @@ describe("Phase 6: Supporting Pages & Canonical Navigation", () => {
       expect(html).toContain('id="founder-heading"');
       expect(html).toMatch(/<h2[^>]*id="founder-heading"[^>]*>\s*Yaseen\s*<\/h2>/);
       expect(html).toContain(
-        "You can call me Yash. I started YCN LABS to help small and growing businesses in India build websites and web applications that fit the way they work. You don’t need a technical brief to talk to me. Tell me where an enquiry gets missed or what you keep doing by hand, and we’ll work out what’s worth building first."
+        "You can call me Yash. I started YCN Labs to help small and growing businesses in India build websites and web applications that fit the way they work. You don’t need a technical brief to talk to me. Tell me where an enquiry gets missed or what you keep doing by hand, and we’ll work out what’s worth building first."
       );
       // Ending A only; no titles; Hyderabad omitted by Owner ruling
       expect(html).not.toContain("Then I build it myself");
