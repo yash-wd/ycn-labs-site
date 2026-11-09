@@ -180,27 +180,28 @@ export function ContactForm() {
       />
 
       {submitError && (
-        <div className="p-4 rounded-xl border border-rose-500/20 bg-rose-500/5 text-rose-300 text-sm flex items-start gap-3">
-          <AlertCircle className="w-5 h-5 flex-shrink-0 text-rose-400 mt-0.5" />
+        <div role="alert" className="p-4 rounded-xl border border-rose-500/20 bg-rose-500/5 text-rose-800 dark:text-rose-300 text-sm flex items-start gap-3">
+          <AlertCircle aria-hidden="true" className="w-5 h-5 flex-shrink-0 text-rose-700 dark:text-rose-400 mt-0.5" />
           <div className="space-y-1">
-            <p className="font-medium text-rose-200">Submission Error</p>
-            <p className="text-xs text-rose-300/90 leading-relaxed">{submitError}</p>
+            <p className="font-medium text-rose-900 dark:text-rose-200">Submission Error</p>
+            <p className="text-xs text-rose-800 dark:text-rose-300/90 leading-relaxed">{submitError}</p>
           </div>
         </div>
       )}
 
       {/* 1. What would you like to improve? */}
       <div className="space-y-3">
-        <label className="block text-[13px] font-semibold text-[var(--text-primary)] font-sans">
+        <p id="improvement-goal-label" className="block text-[13px] font-semibold text-[var(--text-primary)] font-sans">
           1. What would you like to improve? *
-        </label>
-        <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
+        </p>
+        <div role="group" aria-labelledby="improvement-goal-label" className="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
           {IMPROVEMENT_GOALS.map((goal) => {
             const isSelected = selectedGoal === goal.value;
             return (
               <button
                 key={goal.id}
                 type="button"
+                aria-pressed={isSelected}
                 onClick={() => setValue("projectType", goal.value, { shouldValidate: true })}
                 className={`flex items-start text-left p-3.5 rounded-xl border transition-all text-xs cursor-pointer ${
                   isSelected
@@ -215,7 +216,7 @@ export function ContactForm() {
         </div>
         <input type="hidden" {...register("projectType")} />
         {errors.projectType && (
-          <p className="text-xs text-rose-400">{errors.projectType.message}</p>
+          <p className="text-xs text-rose-700 dark:text-rose-400">{errors.projectType.message}</p>
         )}
       </div>
 
@@ -255,7 +256,7 @@ export function ContactForm() {
           />
           <input type="hidden" {...register("message")} />
           {errors.message && (
-            <p className="text-xs text-rose-400 mt-1">{errors.message.message}</p>
+            <p className="text-xs text-rose-700 dark:text-rose-400 mt-1">{errors.message.message}</p>
           )}
         </div>
       </div>
@@ -280,7 +281,7 @@ export function ContactForm() {
               }`}
             />
             {errors.name && (
-              <p className="text-xs text-rose-400 mt-1">{errors.name.message}</p>
+              <p className="text-xs text-rose-700 dark:text-rose-400 mt-1">{errors.name.message}</p>
             )}
           </div>
 
@@ -298,7 +299,7 @@ export function ContactForm() {
               }`}
             />
             {errors.email && (
-              <p className="text-xs text-rose-400 mt-1">{errors.email.message}</p>
+              <p className="text-xs text-rose-700 dark:text-rose-400 mt-1">{errors.email.message}</p>
             )}
           </div>
         </div>

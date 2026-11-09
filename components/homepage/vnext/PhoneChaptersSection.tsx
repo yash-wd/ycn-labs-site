@@ -126,9 +126,9 @@ export function PhoneChaptersSection() {
   const [activeCapability, setActiveCapability] = useState<number>(0);
 
   useEffect(() => {
-    const prefersReduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-    if (prefersReduced) return;
-
+    // Chapter tracking is not motion: it runs for every visitor so the stage follows the
+    // text under reduced motion too. Transitions are made instant by the global
+    // prefers-reduced-motion rule in app/globals.css.
     const observer = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {

@@ -10,15 +10,17 @@ export function Footer() {
           <div className="md:col-span-2 space-y-4">
             <Link href="/" className="inline-block">
               <div className="relative w-36 h-8">
+                {/* Dark-letter logo on light canvas (same pairing as Header) */}
                 <Image
-                  src="/brand/ycn-logo-dark-transparent-224.png"
+                  src="/brand/ycn-logo-light-transparent-224.png"
                   alt="YCN Labs"
                   fill
                   sizes="144px"
                   className="object-contain block dark:hidden"
                 />
+                {/* White-letter logo on dark canvas */}
                 <Image
-                  src="/brand/ycn-logo-light-transparent-224.png"
+                  src="/brand/ycn-logo-dark-transparent-224.png"
                   alt="YCN Labs"
                   fill
                   sizes="144px"
@@ -29,7 +31,7 @@ export function Footer() {
             <p className="type-copy-body text-slate-600 dark:text-slate-400 max-w-sm">
               YCN Labs — technology and software built around how businesses work.
             </p>
-            <p className="type-caption text-slate-500 dark:text-slate-500">
+            <p className="type-caption text-slate-500 dark:text-slate-400">
               Software, engineered to hold up.
             </p>
           </div>
@@ -98,7 +100,7 @@ export function Footer() {
           </div>
         </div>
 
-        <div className="pt-8 border-t border-slate-200 dark:border-slate-800 flex flex-col sm:flex-row items-center justify-between gap-4 type-caption text-slate-500 dark:text-slate-500">
+        <div className="pt-8 border-t border-slate-200 dark:border-slate-800 flex flex-col sm:flex-row items-center justify-between gap-4 type-caption text-slate-500 dark:text-slate-400">
           <p>© {new Date().getFullYear()} YCN Labs. All rights reserved.</p>
           <p>Built with Next.js & TypeScript</p>
         </div>

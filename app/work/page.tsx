@@ -110,7 +110,7 @@ export default function WorkPage() {
         </div>
 
         <p className="type-copy-body text-sm sm:text-base text-[var(--text-secondary)] leading-relaxed max-w-3xl">
-          Under our Claims Register (<code>docs/YCN_CLAIMS_AND_PROOF.md</code>), case studies and client projects appear publicly only after client permission is confirmed and technical deliverables have completed verified stage audits. We do not pre-fill placeholder clients, create dummy case studies, or publish unverified metrics simply to make this portfolio look full.
+          Under our Claims Register, case studies and client projects appear publicly only after client permission is confirmed and technical deliverables have completed verified stage audits. We do not pre-fill placeholder clients, create dummy case studies, or publish unverified metrics simply to make this portfolio look full.
         </p>
 
         {/* 5 Publication Requirements */}
