@@ -118,8 +118,9 @@ describe("POLISH-HOME-01C: Two-Photograph Asymmetric Editorial System", () => {
 
     it("applies 16px corner radius (rounded-2xl) and shadow depth to editorial frames", () => {
       expect(heroSource).toContain("rounded-2xl");
-      expect(heroSource).toContain("shadow-[0_20px_45px_-15px_rgba(0,0,0,0.45)]");
-      expect(heroSource).toContain("shadow-[0_24px_50px_-10px_rgba(0,0,0,0.55)]");
+      // Softer shadows from YCN-HERO-STACKED-01 (Owner choice C): no shadow reaches the other photo.
+      expect(heroSource).toContain("shadow-[0_14px_30px_-16px_rgba(15,23,42,0.35)]");
+      expect(heroSource).toContain("dark:shadow-[0_18px_36px_-18px_rgba(0,0,0,0.9)]");
     });
   });
 });

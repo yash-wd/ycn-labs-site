@@ -2,8 +2,9 @@ import { describe, it, expect } from "vitest";
 import fs from "fs";
 import path from "path";
 
-// YCN-HERO-STACKED-01 (Owner layout 2, 9 Nov 2026): both hero photos stay visible and
-// nothing overlaps. Device photo first, then team photo; no absolute positioning or negative offsets.
+// YCN-HERO-STACKED-01 (Owner layout 2, then staggered option C, 9 Nov 2026): both hero photos
+// stay visible and nothing overlaps. Device photo first, then team photo; no absolute positioning
+// or negative offsets anywhere in the media column.
 const hero = fs.readFileSync(
   path.join(process.cwd(), "components", "homepage", "vnext", "HeroFoundation.tsx"),
   "utf-8"
@@ -32,9 +33,11 @@ describe("YCN-HERO-STACKED-01: non-overlapping two-photo hero", () => {
     expect(hero).not.toContain("min-h-[320px]");
   });
 
-  it("stacks on desktop at one width, side by side on tablet, stacked on mobile", () => {
+  it("stacks on mobile, side by side on tablet, staggered stack on desktop", () => {
     expect(hero).toContain("flex flex-col sm:flex-row lg:flex-col");
-    expect(hero).toContain("lg:max-w-[400px] xl:max-w-[440px]");
+    expect(hero).toContain("lg:max-w-[436px] xl:max-w-[476px]");
+    expect(frameClass("hero-editorial-device-frame")).toContain("lg:w-[calc(100%-36px)] lg:self-start");
+    expect(frameClass("hero-editorial-team-frame")).toContain("lg:w-[calc(100%-36px)] lg:self-end");
   });
 
   it("keeps the team photo at its natural ratio everywhere and the device at 4:5, or 4:3 on desktop", () => {
@@ -42,8 +45,12 @@ describe("YCN-HERO-STACKED-01: non-overlapping two-photo hero", () => {
     expect(frameClass("hero-editorial-device-frame")).toContain("aspect-[4/5] lg:aspect-[4/3]");
   });
 
-  it("keeps the signal line out of both photos (desktop gap only)", () => {
-    expect(hero).toContain("hidden lg:block self-center w-[90px] h-[1px] my-[-10.5px]");
+  it("keeps the signal line in the 28px desktop gap with no negative margin", () => {
+    expect(hero).toContain("lg:gap-[13.5px]");
+    expect(hero).toContain("hidden lg:block self-center w-[90px] h-[1px] bg-gradient");
+    const media = hero.slice(hero.indexOf('id="hero-media-layer"'));
+    expect(media).not.toMatch(/(^|[\s"])-?m[tblrxy]?-\[-/);
+    expect(media).not.toMatch(/(^|[\s"])-m[tblrxy]?-/);
   });
 
   it("image sizes switch at the real Tailwind breakpoints (640 and 1024)", () => {

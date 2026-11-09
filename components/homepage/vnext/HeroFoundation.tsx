@@ -81,12 +81,13 @@ export function HeroFoundation() {
 
           {/* Two-photo stack (YCN-HERO-STACKED-01, Owner layout 2): nothing overlaps or hides.
               Mobile: device, then team. Tablet: side by side at equal height (natural ratios).
-              Desktop: device above team, same width; device shown at 4:3, team uncropped. */}
-          <div className="relative w-full max-w-[343px] sm:max-w-[720px] lg:max-w-[400px] xl:max-w-[440px] mx-auto flex flex-col sm:flex-row lg:flex-col sm:items-start gap-4 sm:gap-5">
+              Desktop: staggered stack (Owner choice C): device above and to the left, team below and to
+              the right, same width, 28px gap; device shown at 4:3, team uncropped. */}
+          <div className="relative w-full max-w-[343px] sm:max-w-[720px] lg:max-w-[436px] xl:max-w-[476px] mx-auto flex flex-col sm:flex-row lg:flex-col sm:items-start gap-4 sm:gap-5 lg:gap-[13.5px]">
             {/* PHOTO A — Conceptual UI workstation hardware (Owner Override 28 Sep) */}
             <div
               id="hero-editorial-device-frame"
-              className="relative w-[82%] mx-auto sm:w-auto sm:mx-0 sm:flex-[0.8_1_0%] lg:flex-none lg:w-full aspect-[4/5] lg:aspect-[4/3] rounded-2xl overflow-hidden border border-[var(--border-subtle)]/90 dark:border-white/[0.12] shadow-[0_24px_50px_-10px_rgba(0,0,0,0.55)] dark:shadow-[0_32px_65px_-10px_rgba(0,0,0,0.95)] transition-transform duration-500 group"
+              className="relative w-[82%] mx-auto sm:w-auto sm:mx-0 sm:flex-[0.8_1_0%] lg:flex-none lg:w-[calc(100%-36px)] lg:self-start aspect-[4/5] lg:aspect-[4/3] rounded-2xl overflow-hidden border border-[var(--border-subtle)]/90 dark:border-white/[0.12] shadow-[0_14px_30px_-16px_rgba(15,23,42,0.35)] dark:shadow-[0_18px_36px_-18px_rgba(0,0,0,0.9)] transition-transform duration-500 group"
             >
               <Image
                 src="/media/hero/ycn-hero-device-ui-v2.webp"
@@ -103,16 +104,16 @@ export function HeroFoundation() {
               />
             </div>
 
-            {/* Subtle Technical Datum / Signal Line, centred in the gap between the photos (desktop only) */}
+            {/* Subtle Technical Datum / Signal Line, centred in the 28px gap (13.5px + 1px + 13.5px) between the photos (desktop only) */}
             <div
-              className="hidden lg:block self-center w-[90px] h-[1px] my-[-10.5px] bg-gradient-to-r from-transparent via-[var(--action-blue)]/30 to-transparent pointer-events-none"
+              className="hidden lg:block self-center w-[90px] h-[1px] bg-gradient-to-r from-transparent via-[var(--action-blue)]/30 to-transparent pointer-events-none"
               aria-hidden="true"
             />
 
             {/* PHOTO B — Collaboration in modern workspace (uncropped at every width) */}
             <div
               id="hero-editorial-team-frame"
-              className="relative w-full sm:w-auto sm:flex-[1.777_1_0%] lg:flex-none lg:w-full aspect-[1672/941] rounded-2xl overflow-hidden border border-[var(--border-subtle)]/80 dark:border-white/[0.08] shadow-[0_20px_45px_-15px_rgba(0,0,0,0.45)] dark:shadow-[0_28px_60px_-15px_rgba(0,0,0,0.85)] transition-transform duration-500 group"
+              className="relative w-full sm:w-auto sm:flex-[1.777_1_0%] lg:flex-none lg:w-[calc(100%-36px)] lg:self-end aspect-[1672/941] rounded-2xl overflow-hidden border border-[var(--border-subtle)]/80 dark:border-white/[0.08] shadow-[0_14px_30px_-16px_rgba(15,23,42,0.35)] dark:shadow-[0_18px_36px_-18px_rgba(0,0,0,0.9)] transition-transform duration-500 group"
             >
               <Image
                 src="/media/hero/ycn-hero-team-v1.webp"
