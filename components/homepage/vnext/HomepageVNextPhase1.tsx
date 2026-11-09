@@ -16,6 +16,7 @@ import { isDevIntroReplay } from "./entrance-diagnostics";
 
 import { BrandContinuumStage } from "./BrandContinuumStage";
 import { isForceReplay } from "./BrandContinuumFilm";
+import { ENTRANCE_INTERIM_BYPASS } from "./entrance-interim";
 
 export function HomepageVNextPhase1() {
   const [mounted, setMounted] = useState(false);
@@ -23,6 +24,12 @@ export function HomepageVNextPhase1() {
 
   useEffect(() => {
     setMounted(true);
+
+    // Interim bypass (DECISION-048 Amendment 1): never mount the entrance stage.
+    if (ENTRANCE_INTERIM_BYPASS) {
+      setShowEntrance(false);
+      return;
+    }
 
     const forceReplay = isForceReplay();
 

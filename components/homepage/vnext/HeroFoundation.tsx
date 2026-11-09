@@ -66,10 +66,12 @@ export function HeroFoundation() {
           </p>
         </div>
 
-        {/* Right Column: 2-Photo Asymmetric Editorial System */}
+        {/* Right Column: Single Device Editorial Image.
+            Interim first-impression correction (Owner, 9 Nov 2026 — DECISION-048 Amendment 1):
+            the team/office photograph is removed from the Hero; its asset file is preserved. */}
         <div
           id="hero-media-layer"
-          className="lg:col-span-6 xl:col-span-6 flex flex-col items-center justify-center lg:items-end w-full relative pt-4 sm:pt-6 lg:pt-0"
+          className="lg:col-span-6 xl:col-span-6 flex flex-col items-center justify-center w-full relative pt-4 sm:pt-6 lg:pt-0"
         >
           {/* Restrained local optical falloff / tonal depth field */}
           <div
@@ -79,46 +81,22 @@ export function HeroFoundation() {
             <div className="w-[320px] sm:w-[420px] lg:w-[480px] h-[320px] sm:h-[420px] lg:h-[480px] rounded-full bg-[radial-gradient(circle,var(--action-blue)/0.05_0%,transparent_70%)] dark:bg-[radial-gradient(circle,var(--action-blue)/0.08_0%,transparent_70%)] blur-2xl" />
           </div>
 
-          {/* Asymmetric Two-Image Editorial Stage */}
-          <div className="relative w-full max-w-[340px] sm:max-w-[440px] lg:max-w-[540px] xl:max-w-[580px] min-h-[320px] sm:min-h-[400px] lg:min-h-[460px] flex flex-col items-center lg:block">
-            {/* PHOTO A — DOMINANT EDITORIAL MAIN PHOTO: Collaboration in modern workspace */}
+          {/* Device editorial photo: Conceptual UI workstation hardware (Owner Override 28 Sep) */}
+          <div
+            id="hero-editorial-device-frame"
+            className="relative w-full max-w-[280px] sm:max-w-[320px] lg:max-w-[380px] xl:max-w-[420px] aspect-[4/5] rounded-2xl overflow-hidden border border-[var(--border-subtle)]/90 dark:border-white/[0.12] shadow-[0_24px_50px_-10px_rgba(0,0,0,0.55)] dark:shadow-[0_32px_65px_-10px_rgba(0,0,0,0.95)] transition-transform duration-500 group"
+          >
+            <Image
+              src="/media/hero/ycn-hero-device-ui-v2.webp"
+              alt="Modern smartphone and laptop displaying illustrative messaging and data interfaces"
+              fill
+              priority
+              sizes="(max-width: 640px) 280px, (max-width: 1024px) 320px, (max-width: 1280px) 380px, 420px"
+              className="object-cover object-center transform transition-transform duration-700 ease-out group-hover:scale-[1.02]"
+            />
+            {/* Restrained cyan datum detail */}
             <div
-              id="hero-editorial-team-frame"
-              className="relative lg:absolute lg:top-0 lg:left-0 w-full max-w-[320px] sm:max-w-[380px] lg:max-w-[420px] xl:max-w-[460px] aspect-[16/10] rounded-2xl overflow-hidden border border-[var(--border-subtle)]/80 dark:border-white/[0.08] shadow-[0_20px_45px_-15px_rgba(0,0,0,0.45)] dark:shadow-[0_28px_60px_-15px_rgba(0,0,0,0.85)] z-10 transition-transform duration-500 group"
-            >
-              <Image
-                src="/media/hero/ycn-hero-team-v1.webp"
-                alt="Professionals collaborating around laptops in a dark modern workspace"
-                fill
-                priority
-                sizes="(max-width: 640px) 320px, (max-width: 1024px) 380px, 460px"
-                className="object-cover object-center transform transition-transform duration-700 ease-out group-hover:scale-[1.02]"
-              />
-            </div>
-
-            {/* PHOTO B — SECONDARY OFFSET EDITORIAL PHOTO: Conceptual UI workstation hardware (Owner Override 28 Sep) */}
-            <div
-              id="hero-editorial-device-frame"
-              className="relative -mt-12 self-end mr-2 sm:mr-4 lg:mr-0 lg:mt-0 lg:absolute lg:bottom-0 lg:right-0 w-[170px] sm:w-[210px] lg:w-[240px] xl:w-[260px] aspect-[4/5] rounded-2xl overflow-hidden border border-[var(--border-subtle)]/90 dark:border-white/[0.12] shadow-[0_24px_50px_-10px_rgba(0,0,0,0.55)] dark:shadow-[0_32px_65px_-10px_rgba(0,0,0,0.95)] z-20 transition-transform duration-500 group"
-            >
-              <Image
-                src="/media/hero/ycn-hero-device-ui-v2.webp"
-                alt="Modern smartphone and laptop displaying illustrative messaging and data interfaces"
-                fill
-                priority
-                sizes="(max-width: 640px) 170px, (max-width: 1024px) 210px, 260px"
-                className="object-cover object-center transform transition-transform duration-700 ease-out group-hover:scale-[1.02]"
-              />
-              {/* Restrained cyan datum detail */}
-              <div
-                className="absolute top-2.5 right-2.5 w-1.5 h-1.5 rounded-full bg-[var(--action-blue)]/60 dark:bg-[var(--action-blue)] shadow-[0_0_8px_var(--action-blue)] pointer-events-none"
-                aria-hidden="true"
-              />
-            </div>
-
-            {/* Subtle Technical Datum / Signal Line (optical connection) */}
-            <div
-              className="hidden lg:block absolute left-[38%] bottom-[18%] w-[90px] h-[1px] bg-gradient-to-r from-transparent via-[var(--action-blue)]/30 to-transparent pointer-events-none z-15"
+              className="absolute top-2.5 right-2.5 w-1.5 h-1.5 rounded-full bg-[var(--action-blue)]/60 dark:bg-[var(--action-blue)] shadow-[0_0_8px_var(--action-blue)] pointer-events-none"
               aria-hidden="true"
             />
           </div>

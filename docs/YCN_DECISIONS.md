@@ -334,3 +334,14 @@ If the Owner wants to allow a WIP commit/push for that single doc reconciliation
 3. **Authority.** The Owner alone authorizes merges, deployments and releases, as already set out in §6.
 4. **AGY.** AGY is retired from project execution. Its installed tools, configurations, skills, MCP setup, records and proof are preserved; nothing is deleted.
 5. **Scope.** No other DECISION-055 amendment, approval rule, safety rule, evidence rule or frozen-system protection changes.
+
+### DECISION-048 Amendment 1: Interim First-Impression Correction (Owner, 9 Nov 2026)
+
+**Status: ADOPTED by Owner — temporary.** Owner ruling of 9 Nov 2026, given after the read-only UI/UX audit (YCN-UI-AUDIT-01) and GPT's independent review. Task: `YCN-FIRST-IMPRESSION-01`. The DECISION-048 text above is preserved unchanged.
+
+1. **Why.** The entrance film currently played on the homepage shows "Mobile App" and "SaaS Platform", which are outside the approved V1 services (DECISION-052 O-02, DECISION-053), plus garbled AI-generated text. Playing an `.mp4` entrance also conflicts with DECISION-048. The Hero's team/office photograph does not represent YCN Labs or its customers.
+2. **Entrance (VF19 / INPUT-GATE-01 exception).** Until a truthful entrance is separately approved, every homepage visit takes the existing returning-visitor path: no entrance stage, no film request, no input lock, and the navbar and Hero are visible from first paint. This is controlled by one switch, `ENTRANCE_INTERIM_BYPASS` in `components/homepage/vnext/entrance-interim.ts`.
+3. **Hero (HOME-01C exception).** The team/office photograph is removed from the Hero. The existing device image is kept and the media column is rebalanced around it. Approved copy, CTAs, colours, typography and interactions are unchanged.
+4. **Preserved.** No file is deleted. The films, logo assets, `BrandContinuumStage`, `BrandContinuumFilm`, `CodeEntranceContinuum` and the team photograph file all remain in the repository, and the bypass is reversible.
+5. **Intended direction unchanged.** DECISION-048 (code-driven SVG/DOM + GSAP entrance) remains the intended architecture. Re-enabling any entrance, or replacing the Hero image, needs a separate Owner approval.
+6. **Scope.** The exceptions cover only the entrance and Hero components named above. Every other frozen system (NAV-07, POLISH-TYPE-01 and the rest) is unchanged.

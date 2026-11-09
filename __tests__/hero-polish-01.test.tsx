@@ -43,7 +43,7 @@ describe("POLISH-HOME-01: Hero Foundation & Product Protagonist", () => {
 
     it("contains #hero-media-layer holding the editorial media composition", () => {
       expect(markup).toContain('id="hero-media-layer"');
-      expect(markup).toContain('id="hero-editorial-team-frame"');
+      expect(markup).not.toContain('id="hero-editorial-team-frame"');
       expect(markup).toContain('id="hero-editorial-device-frame"');
     });
   });
@@ -109,8 +109,8 @@ describe("POLISH-HOME-01: Hero Foundation & Product Protagonist", () => {
   });
 
   describe("4. Editorial Photography Constellation (Owner 28 Sep Ruling)", () => {
-    it("contains team collaborative editorial photo and dark-screen device photo in Hero", () => {
-      expect(markup).toContain('id="hero-editorial-team-frame"');
+    it("contains the device photo only in Hero (team photo removed by Owner ruling 9 Nov 2026, DECISION-048 Amendment 1)", () => {
+      expect(markup).not.toContain('id="hero-editorial-team-frame"');
       expect(markup).toContain('id="hero-editorial-device-frame"');
     });
 
