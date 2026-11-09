@@ -2,14 +2,60 @@
 
 @custom-variant dark (&:where(.dark, .dark *));
 
+/* ============================================================
+   YCN-TOKENS-T1-01 — BRAND COLOURS (Owner, 9 Nov 2026)
+   To rebrand, edit ONLY the palette below (Layer 1), then check contrast
+   (button text on fill >= 4.5:1, links on canvas >= 4.5:1, focus ring >= 3:1)
+   in both themes. Backgrounds, text, borders and status colours are separate
+   tokens and do not follow a brand change. See docs/YCN_DESIGN_SYSTEM.md §2.
+   ============================================================ */
+:root {
+  /* Layer 1 — brand palette: the only place brand hex values live */
+  --ycn-brand-700: #0470B4;      /* light: button fill, link, focus */
+  --ycn-brand-800: #035b94;      /* light: button hover */
+  --ycn-brand-300: #8BD4FF;      /* dark: button fill, focus */
+  --ycn-brand-200: #BCE5FF;      /* dark: button hover */
+  --ycn-brand-link-300: #7DD3FC; /* dark: link text */
+  --ycn-signal-600: #0299C3;     /* light: lines and moving signal only, never text on white */
+  --ycn-signal-800: #017596;     /* dark: signal line/pulse */
+  --ycn-logo-cyan: #02C1F7;      /* logo/decorative only, never text (not yet used in code) */
+
+  /* Layer 2 — brand roles, light theme */
+  --brand-primary: var(--ycn-brand-700);
+  --brand-primary-hover: var(--ycn-brand-800);
+  --brand-on-primary: #FFFFFF;
+  --brand-link: var(--ycn-brand-700); /* Link text from YCN_DESIGN_SYSTEM.md §2 */
+  --brand-signal: var(--ycn-signal-600);
+  --brand-focus: var(--ycn-brand-700);
+}
+
+.dark {
+  /* Layer 2 — brand roles, dark theme */
+  --brand-primary: var(--ycn-brand-300);
+  --brand-primary-hover: var(--ycn-brand-200);
+  --brand-on-primary: #0D111A;
+  --brand-link: var(--ycn-brand-link-300); /* Link text from YCN_DESIGN_SYSTEM.md §2 */
+  --brand-signal: var(--ycn-signal-800);
+  --brand-focus: var(--ycn-brand-300);
+}
+
+/* Layer 3 — names the components use (unchanged). Declared on both selectors so
+   they re-resolve wherever the theme class applies. */
+:root,
+.dark {
+  --action-blue: var(--brand-primary);
+  --action-blue-hover: var(--brand-primary-hover);
+  --text-on-action: var(--brand-on-primary);
+  --link-text: var(--brand-link);
+  --signal-cyan: var(--brand-signal);
+  --focus-ring: var(--brand-focus);
+}
+
+/* ============================================================
+   NEUTRAL TOKENS — independent of the brand palette
+   ============================================================ */
 :root {
   color-scheme: light;
-
-  /* Brand Action & Signal Tokens */
-  --action-blue: #0470B4;
-  --action-blue-hover: #035b94;
-  --link-text: #0470B4; /* Link text from YCN_DESIGN_SYSTEM.md §2 */
-  --signal-cyan: #0299C3; /* Lines and moving signal only, never text on white */
 
   /* Light Theme Tokens */
   --bg-canvas: #FFFFFF;
@@ -22,9 +68,6 @@
   --text-primary: #0A0C10;
   --text-secondary: #475569; /* Text secondary from YCN_DESIGN_SYSTEM.md §2 */
   --text-muted: #475569;
-  --text-on-action: #FFFFFF;
-
-  --focus-ring: #0470B4;
 }
 
 .dark {
@@ -41,13 +84,6 @@
   --text-primary: #F8FAFC;
   --text-secondary: #A8B3C5; /* Text secondary from YCN_DESIGN_SYSTEM.md §2 */
   --text-muted: #A8B3C5;
-  --text-on-action: #0D111A;
-
-  --signal-cyan: #017596; /* Signal line/pulse in dark */
-  --action-blue: #8BD4FF;
-  --action-blue-hover: #BCE5FF;
-  --link-text: #7DD3FC; /* Link text from YCN_DESIGN_SYSTEM.md §2 */
-  --focus-ring: #8BD4FF;
 }
 
 @theme {

@@ -61,6 +61,18 @@ These are the canonical baseline values for this package unless A0 finds an exis
 - Never use a color token as normal text unless actual rendered contrast passes.
 - White text on `#0470B4` is an acceptable baseline combination; dark-theme inline links use the lighter link token rather than `#0470B4` on dark canvas.
 
+### Changing brand colours (YCN-TOKENS-T1-01, Owner, 9 Nov 2026)
+
+Brand colours live in one place: the **brand palette** at the top of `app/globals.css`. Three layers keep a brand change contained:
+
+1. **Palette** (`--ycn-brand-*`, `--ycn-signal-*`, `--ycn-logo-cyan`): the only place brand hex values are written.
+2. **Brand roles**, per theme (`--brand-primary`, `--brand-primary-hover`, `--brand-on-primary`, `--brand-link`, `--brand-signal`, `--brand-focus`): each points at a palette value.
+3. **Component names** (`--action-blue`, `--action-blue-hover`, `--text-on-action`, `--link-text`, `--signal-cyan`, `--focus-ring`): what components use. They point at the roles and are not edited for a rebrand.
+
+Backgrounds, surfaces, text, borders and status colours (success, warning, error) are separate tokens and do not follow a brand change.
+
+To change the brand: edit the palette only, then confirm contrast in both themes (button text on its fill at least 4.5:1, links on the page background at least 4.5:1, focus ring at least 3:1). A rebrand also needs new logo image files and the theme colour in `app/manifest.ts`, which are not CSS. Until YCN-TOKENS T2 lands, the footer link hover colours, the footer's dark background, the error page and the skip link still contain typed values.
+
 ## 3. Typography
 
 Policy:
