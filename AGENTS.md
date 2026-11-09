@@ -118,9 +118,34 @@ To guarantee that GPT, Claude, AGY, and future sessions resume from the exact sa
 
 ---
 
+## 0. SELECTIVE UI/UX SKILLS WORKFLOW (Owner, 9 Nov 2026 — controls §1–§2 below until project completion or Owner amendment)
+
+Skills are **selected per task**, not all applied at once. Where §1–§2 below say every listed skill must be applied, this section governs.
+
+1. **Authority.** Owner rulings > `docs/YCN_DECISIONS.md` > approved design system and content (`docs/YCN_DESIGN_SYSTEM.md`, `docs/YCN_CONTENT_SPEC.md`, `docs/YCN_CLAIMS_AND_PROOF.md`) > existing architecture and code > skill advice. No skill may override approved tokens, fonts, colours, copy, motion or the frozen systems (VF19, INPUT-GATE-01, NAV-07, POLISH-TYPE-01, HOME-01C).
+2. **Core skills for applicable UI work:**
+   - `web-design-guidelines` for accessibility and usability.
+   - `interface-design` for consistency with existing pages. It targets product UI; on marketing pages, check consistency against `docs/YCN_DESIGN_SYSTEM.md`.
+   - `frontend-design` only for approved new sections or pages.
+   - `impeccable` for manual, read-only audits and critique. Its automatic hook stays off.
+   - The project's existing Playwright for browser checks and screenshots.
+3. **Conditional skills:**
+   - Emil Kowalski's motion skills (`animate`, `review-animations` and related) only for authorized motion work.
+   - `ui-ux-pro-max` for research only, never to restyle the site.
+   - `design-taste-frontend` never restyles approved pages without an Owner ruling.
+   - `shadcn`, `chaiui` and `chaiui-review` only when compatible, needed and approved; never import their themes.
+   - Native-app skills (`write-swift`, `animate-expo`, `mobile-native`, `apple-design`, `vercel-react-native-skills`) do not apply to this Next.js site.
+4. **Tooling limits.** Do not reinstall existing skills, enable hooks or add dependencies without Owner permission. Python browser testing runs only through the existing `webapp-python` helper, verified before use; never `pip install` Playwright into the project or system Python.
+5. **Before building,** report the scope, the skills chosen and why, the components and tokens reused, and the test plan. One task, one branch, one PR.
+6. **Verify applicable UI work** at 375/768/1024/1280/1440 px, in both themes. Check keyboard focus, heading structure, contrast, reduced motion, overflow and console errors, then run lint, check-types, test and build. Private screenshots, logs and SHA-256 hashes go in the task's vault proof folder, never on GitHub. Each PR lists the skills used and their findings.
+7. **Localhost preview.** At each YCN LABS working-session open, start the development preview bound to `127.0.0.1` only (`pnpm exec next dev --webpack -H 127.0.0.1 -p 3005`) and give the Owner the URL. Keep it running during the session and stop it at close. No LAN exposure and no firewall changes. Never submit the contact form on the preview unless a staging test is authorized; it writes a real staging lead and sends email.
+8. **Roles.** Local Claude Code builds; GPT independently reviews its PRs; the Owner approves visuals and merges (DECISION-055 Amendment 1). AGY stays retired from YCN LABS execution; its installed skills may serve other projects.
+
+---
+
 ## 1. MANDATORY DESIGN SKILLS ACTIVATION
 
-For every frontend, UI/UX, styling, animation, component, layout, or page task, you **MUST actively consult and apply** the installed design skills:
+For frontend, UI/UX, styling, animation, component, layout or page tasks, consult the relevant installed design skills, selected per §0:
 
 1. **`ui-ux-pro-max`**  
    - Use local intelligence (`python3 .agents/skills/ui-ux-pro-max/scripts/search.py` or global equivalent).
@@ -163,7 +188,9 @@ For every frontend, UI/UX, styling, animation, component, layout, or page task, 
 
 ## 2. MANDATORY MCP SERVERS UTILIZATION
 
-You have direct access to two specialized design and component MCP servers:
+Status (9 Nov 2026): these two servers were configured in AGY only. They are **not yet configured in Claude Code**; setup is deferred until a task needs them and the Owner approves it (the `21st` server needs a new key entered privately by the Owner). Do not claim access to them until they are configured.
+
+The two specialized design and component MCP servers are:
 
 1. **`21st` (21st.dev Magic MCP)**  
    - Query for world-class curated components, themes, inspiration, and interactive building blocks.
@@ -191,7 +218,7 @@ Evidence: raw command output and exit codes; file hashes from sha256sum, never t
 Forbidden without explicit words: rm -rf outside scratch, git reset --hard, git clean, git push --force, --amend on pushed commits, git add -A (use explicit paths). Never print .env values (names only), never read shell history, never paste tokens.
 Code: before any code commit run pnpm run lint, check-types, test, build and paste exit codes. One task = one commit with the task ID in the message. Push only after the designated reviewer's verdict and the Owner's "push". Exception: CLOSE commits per docs/CLOSE_PROTOCOL.md are pushed on the Owner's word CLOSE. Frozen systems stay frozen: VF19, INPUT-GATE-01, NAV-07, POLISH-TYPE-01, HOME-01C.
 Visual work: before/after screenshots at 375/768/1024/1280/1440, both themes, reduced motion; save to the vault under proof/<task-id>/ and give paths.
-Dev server: pnpm run dev on port 3005 for development; stop it at day end; pnpm start only to verify a build.
+Dev server: pnpm run dev on port 3005 for development, bound to 127.0.0.1 and started at each session open per the design-skills rule §0 item 7; stop it at day end; pnpm start only to verify a build.
 Skills/MCP: use the installed skills and MCP servers where they fit (design, UI/UX, browser, testing); name which one you used in each report; never claim a skill you do not actually have.
 End of day: closing occurs ONLY when the Owner gives the explicit word CLOSE, governed strictly by docs/CLOSE_PROTOCOL.md and the Owner close rule below. Never run tools/close-day.sh automatically or declare a session closed without the Owner's explicit instruction. Every approved green change committed and pushed to main; unfinished work committed to branch wip/<task-id> and pushed (nothing lives only on this laptop); state explicitly if anything remains unpushed.
 
