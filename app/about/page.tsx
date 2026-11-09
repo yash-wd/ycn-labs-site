@@ -86,6 +86,16 @@ export default function AboutPage() {
         </div>
       </section>
 
+      {/* Founder (Owner ruling 9 Nov 2026, Task 10b YCN-10-05) */}
+      <section aria-labelledby="founder-heading" className="max-w-3xl space-y-4 mb-20 md:mb-28">
+        <h2 id="founder-heading" className="type-heading-section text-[var(--text-primary)] font-display">
+          Yaseen
+        </h2>
+        <p className="type-copy-body text-[var(--text-secondary)]">
+          You can call me Yash. I started YCN LABS to help small and growing businesses in India build websites and web applications that fit the way they work. You don’t need a technical brief to talk to me. Tell me where an enquiry gets missed or what you keep doing by hand, and we’ll work out what’s worth building first.
+        </p>
+      </section>
+
       {/* Principles Grid */}
       <section aria-labelledby="principles-heading" className="space-y-8 mb-20 md:mb-28">
         <div className="space-y-2 max-w-2xl">
