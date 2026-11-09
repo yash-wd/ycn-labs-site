@@ -1,24 +1,12 @@
 import type { Metadata } from "next";
-import { Space_Grotesk, Inter } from "next/font/google";
+// Fonts are self-hosted (YCN-FONTS-LOCAL-01): same files and rules next/font/google
+// produced, served from public/fonts so the build never downloads from Google.
+import "./fonts.css";
 import "./globals.css";
 import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
 import { JsonLd } from "@/components/JsonLd";
 import { ThemeProvider } from "@/components/ThemeProvider";
-
-const spaceGrotesk = Space_Grotesk({
-  variable: "--font-space-grotesk",
-  subsets: ["latin"],
-  weight: ["500", "600", "700"],
-  display: "swap",
-});
-
-const inter = Inter({
-  variable: "--font-inter",
-  subsets: ["latin"],
-  weight: ["400", "500", "600"],
-  display: "swap",
-});
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://ycnlabs.com"),
@@ -90,9 +78,12 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning className="scroll-smooth">
       <head>
+        {/* Preload the Latin files, as next/font/google did for subsets: ["latin"]. */}
+        <link rel="preload" href="/fonts/inter/inter-latin.woff2" as="font" type="font/woff2" crossOrigin="anonymous" />
+        <link rel="preload" href="/fonts/space-grotesk/space-grotesk-latin.woff2" as="font" type="font/woff2" crossOrigin="anonymous" />
         <JsonLd data={orgSchema} />
       </head>
-      <body className={`${spaceGrotesk.variable} ${inter.variable} font-sans antialiased min-h-screen flex flex-col`}>
+      <body className="ycn-font-vars font-sans antialiased min-h-screen flex flex-col">
         <ThemeProvider
           attribute="class"
           defaultTheme="dark"
