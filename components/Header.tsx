@@ -7,6 +7,7 @@ import { usePathname } from "next/navigation";
 import { X } from "lucide-react";
 import { gsap } from "gsap";
 import { isDevIntroReplay } from "@/components/homepage/vnext/entrance-diagnostics";
+import { ENTRANCE_INTERIM_BYPASS } from "@/components/homepage/vnext/entrance-interim";
 import { YcnFlowButton } from "@/components/ui/ycn-flow-button";
 import { YcnSignalBorder } from "@/components/ui/ycn-signal-border";
 import { YcnThemeToggle } from "@/components/ui/ycn-theme-toggle";
@@ -66,7 +67,8 @@ export function Header({ isTakeoverActive = false }: { isTakeoverActive?: boolea
         const forceReplay = devReplay || isIntroParam;
         const seen = !forceReplay && (isIntroZero || sessionStorage.getItem("ycn_v2_entrance_seen") === "true");
         const prefersReduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-        if (forceReplay || (!seen && !prefersReduced)) {
+        // Interim bypass (DECISION-048 Amendment 1): no entrance, so no navbar takeover.
+        if (!ENTRANCE_INTERIM_BYPASS && (forceReplay || (!seen && !prefersReduced))) {
           setTakeoverMode(true);
         } else {
           setTakeoverMode(false);
