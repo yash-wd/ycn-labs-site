@@ -214,6 +214,14 @@ We care about clarity on the surface and engineering discipline underneath. We d
 
 Do not invent team size, years in business, client count, awards, offices, partnerships or founder history without verified facts.
 
+**Founder section (public copy; Owner ruling, 9 Nov 2026, Task 10b):** Placed after the narrative panel and before the principles section, with no standalone demo (section-specific ruling; the general OI-18 rule is unchanged).
+
+**H2:** Yaseen
+
+You can call me Yash. I started YCN Labs to help small and growing businesses in India build websites and web applications that fit the way they work. You don’t need a technical brief to talk to me. Tell me where an enquiry gets missed or what you keep doing by hand, and we’ll work out what’s worth building first.
+
+No job title is shown. The operating-location line is omitted from the About page until the Owner confirms it for that page.
+
 ## 9. Start a Project
 
 **H1:** Tell us what you’re trying to improve.

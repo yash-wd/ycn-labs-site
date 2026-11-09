@@ -144,6 +144,19 @@ describe("Phase 6: Supporting Pages & Canonical Navigation", () => {
       expect(html).not.toContain("over 10 years");
       expect(html).not.toContain("Award-winning agency");
     });
+
+    it("renders the Owner-approved founder section verbatim, with no title or location (Task 10b, 9 Nov 2026)", () => {
+      const html = renderToString(<AboutPage />);
+      expect(html).toContain('id="founder-heading"');
+      expect(html).toMatch(/<h2[^>]*id="founder-heading"[^>]*>\s*Yaseen\s*<\/h2>/);
+      expect(html).toContain(
+        "You can call me Yash. I started YCN Labs to help small and growing businesses in India build websites and web applications that fit the way they work. You don’t need a technical brief to talk to me. Tell me where an enquiry gets missed or what you keep doing by hand, and we’ll work out what’s worth building first."
+      );
+      // Ending A only; no titles; Hyderabad omitted by Owner ruling
+      expect(html).not.toContain("Then I build it myself");
+      expect(html).not.toMatch(/\b(CEO|Managing Director)\b/);
+      expect(html).not.toContain("Hyderabad");
+    });
   });
 
   describe("6. /engineering Route", () => {
