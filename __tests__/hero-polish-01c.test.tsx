@@ -62,17 +62,17 @@ describe("POLISH-HOME-01C: Two-Photograph Asymmetric Editorial System", () => {
       expect(reassuranceIdx).toBeGreaterThan(ctaIdx);
     });
 
-    it("preserves #hero-media-layer holding the editorial device photo", () => {
+    it("preserves #hero-media-layer holding the two-photo editorial composition", () => {
       expect(markup).toContain('id="hero-media-layer"');
     });
   });
 
   describe("2. Two-Photo Editorial Visual System (Owner Checkpoint Ruling)", () => {
-    it("Hero no longer contains the team editorial image (team photo removed by Owner ruling 9 Nov 2026, DECISION-048 Amendment 1)", () => {
-      expect(markup).not.toContain('id="hero-editorial-team-frame"');
-      expect(markup).not.toContain("/media/hero/ycn-hero-team-v1.webp");
-      expect(heroSource).not.toContain('src="/media/hero/ycn-hero-team-v1.webp"');
-      expect(markup).not.toContain(
+    it("Hero contains dominant team editorial image in #hero-editorial-team-frame", () => {
+      expect(markup).toContain('id="hero-editorial-team-frame"');
+      expect(markup).toContain("/media/hero/ycn-hero-team-v1.webp");
+      expect(heroSource).toContain('src="/media/hero/ycn-hero-team-v1.webp"');
+      expect(markup).toContain(
         'alt="Professionals collaborating around laptops in a dark modern workspace"'
       );
     });
@@ -111,14 +111,14 @@ describe("POLISH-HOME-01C: Two-Photograph Asymmetric Editorial System", () => {
       expect(heroSource).toContain("var(--action-blue)");
     });
 
-    it("no longer draws the signal line that connected the two photos (team photo removed by Owner ruling 9 Nov 2026, DECISION-048 Amendment 1)", () => {
-      expect(heroSource).not.toContain("w-[90px] h-[1px]");
-      expect(heroSource).not.toContain("from-transparent via-[var(--action-blue)]/30 to-transparent");
+    it("includes subtle technical datum signal connection line", () => {
+      expect(heroSource).toContain("w-[90px] h-[1px]");
+      expect(heroSource).toContain("from-transparent via-[var(--action-blue)]/30 to-transparent");
     });
 
-    it("applies 16px corner radius (rounded-2xl) and shadow depth to the device frame (team photo removed by Owner ruling 9 Nov 2026, DECISION-048 Amendment 1)", () => {
+    it("applies 16px corner radius (rounded-2xl) and shadow depth to editorial frames", () => {
       expect(heroSource).toContain("rounded-2xl");
-      expect(heroSource).not.toContain("shadow-[0_20px_45px_-15px_rgba(0,0,0,0.45)]");
+      expect(heroSource).toContain("shadow-[0_20px_45px_-15px_rgba(0,0,0,0.45)]");
       expect(heroSource).toContain("shadow-[0_24px_50px_-10px_rgba(0,0,0,0.55)]");
     });
   });
