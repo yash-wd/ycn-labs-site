@@ -81,11 +81,10 @@ describe("POLISH-HOME-01B/01C: Two-Photograph Editorial Constellation Suite", ()
       expect(hasDeviceImage).toBe(true);
     });
 
-    it("no longer renders the team photograph in the Hero, while its asset file is preserved (team photo removed by Owner ruling 9 Nov 2026, DECISION-048 Amendment 1)", () => {
-      expect(markup).not.toContain('id="hero-editorial-team-frame"');
-      expect(markup).not.toContain("/media/hero/ycn-hero-team-v1.webp");
-      expect(heroSource).not.toContain('src="/media/hero/ycn-hero-team-v1.webp"');
-      expect(fs.existsSync(path.join(process.cwd(), "public", "media", "hero", "ycn-hero-team-v1.webp"))).toBe(true);
+    it("integrates team collaborative editorial photograph (ycn-hero-team-v1.webp) in #hero-editorial-team-frame", () => {
+      expect(markup).toContain('id="hero-editorial-team-frame"');
+      expect(markup).toContain("/media/hero/ycn-hero-team-v1.webp");
+      expect(heroSource).toContain('src="/media/hero/ycn-hero-team-v1.webp"');
     });
 
     it("uses neutral, descriptive, non-claiming alt text without inventing team or client claims", () => {
@@ -93,7 +92,7 @@ describe("POLISH-HOME-01B/01C: Two-Photograph Editorial Constellation Suite", ()
         markup.includes('alt="Refined digital workspace featuring modern smartphone hardware beside a slim laptop with subtle reflective dark screens"') ||
         markup.includes('alt="Modern smartphone and laptop displaying illustrative messaging and data interfaces"');
       expect(hasNeutralDeviceAlt).toBe(true);
-      expect(markup).not.toContain(
+      expect(markup).toContain(
         'alt="Professionals collaborating around laptops in a dark modern workspace"'
       );
       expect(markup).not.toContain('alt="our team"');
@@ -107,9 +106,9 @@ describe("POLISH-HOME-01B/01C: Two-Photograph Editorial Constellation Suite", ()
       expect(heroSource).toContain("var(--action-blue)");
     });
 
-    it("applies 16px corner radius (rounded-2xl) and shadow depth to the device frame (team photo removed by Owner ruling 9 Nov 2026, DECISION-048 Amendment 1)", () => {
+    it("applies 16px corner radius (rounded-2xl) and shadow depth to editorial frames", () => {
       expect(heroSource).toContain("rounded-2xl");
-      expect(heroSource).not.toContain("shadow-[0_20px_45px_-15px_rgba(0,0,0,0.45)]");
+      expect(heroSource).toContain("shadow-[0_20px_45px_-15px_rgba(0,0,0,0.45)]");
       expect(heroSource).toContain("shadow-[0_24px_50px_-10px_rgba(0,0,0,0.55)]");
     });
   });

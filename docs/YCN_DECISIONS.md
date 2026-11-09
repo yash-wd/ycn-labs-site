@@ -345,3 +345,12 @@ If the Owner wants to allow a WIP commit/push for that single doc reconciliation
 4. **Preserved.** No file is deleted. The films, logo assets, `BrandContinuumStage`, `BrandContinuumFilm`, `CodeEntranceContinuum` and the team photograph file all remain in the repository, and the bypass is reversible.
 5. **Intended direction unchanged.** DECISION-048 (code-driven SVG/DOM + GSAP entrance) remains the intended architecture. Re-enabling any entrance, or replacing the Hero image, needs a separate Owner approval.
 6. **Scope.** The exceptions cover only the entrance and Hero components named above. Every other frozen system (NAV-07, POLISH-TYPE-01 and the rest) is unchanged.
+
+### DECISION-048 Amendment 1 — Update: Hero Restored (Owner, 9 Nov 2026)
+
+**Status: ADOPTED by Owner.** Task: `YCN-HERO-RESTORE-01`. This updates item 3 of DECISION-048 Amendment 1 only; the amendment text above is preserved unchanged as the record.
+
+1. **Hero.** After reviewing two-visual alternatives (a connected phone-and-dashboard illustration, and the device photo with a requests card), the Owner chose to restore the previous two-image Hero exactly as it was before PR #24: the team/office photograph plus the device image (HOME-01C as of 28 Sep 2026).
+2. **Entrance unchanged.** The entrance film stays bypassed under item 2 of the amendment.
+3. **Image check.** The office photograph was inspected at full size (1672×941) before restoring: it contains no readable text, signage or logos. Its style suggests it may be AI-generated, like the entrance film. Its source and licence remain unconfirmed: the pre-launch item in `docs/BACKLOG.md` (Task 11) still applies.
+4. **Honest representation.** The Owner confirmed working with real collaborators. The Hero photograph must not be described anywhere as the YCN Labs team or office.
