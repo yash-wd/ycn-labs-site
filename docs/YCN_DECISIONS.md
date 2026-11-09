@@ -354,3 +354,11 @@ If the Owner wants to allow a WIP commit/push for that single doc reconciliation
 2. **Entrance unchanged.** The entrance film stays bypassed under item 2 of the amendment.
 3. **Image check.** The office photograph was inspected at full size (1672×941) before restoring: it contains no readable text, signage or logos. Its style suggests it may be AI-generated, like the entrance film. Its source and licence remain unconfirmed: the pre-launch item in `docs/BACKLOG.md` (Task 11) still applies.
 4. **Honest representation.** The Owner confirmed working with real collaborators. The Hero photograph must not be described anywhere as the YCN Labs team or office.
+
+### DECISION-048 Amendment 1 — Update: Non-Overlapping Hero (Owner, 9 Nov 2026)
+
+**Status: ADOPTED by Owner.** Task: `YCN-HERO-STACKED-01`. The Owner chose layout 2 from three private non-overlapping previews. This updates the Hero composition only; the records above are preserved unchanged.
+
+1. **Hero (HOME-01C exception).** Both photographs stay, and neither covers or hides the other. Desktop: headline and CTAs on the left; on the right, a staggered stack (Owner choice C after reviewing the first build): the device photograph above and to the left, the office photograph below and to the right, at the same width with a 28px gap and softer shadows that do not reach the other photograph. The device photograph is shown at 4:3 on desktop (empty desk trimmed; phone, hands and laptop kept); the office photograph is uncropped at every width.
+2. **Tablet and mobile.** Tablet: the two photographs side by side at equal height, both uncropped. Mobile: headline and CTAs first, then the device photograph, then the office photograph.
+3. **Unchanged.** Copy, CTAs, typography, colours, borders and alt text are unchanged. The entrance film stays bypassed, the image files are unchanged, and the pre-launch source/licence check in `docs/BACKLOG.md` still applies.
