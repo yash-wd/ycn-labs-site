@@ -406,3 +406,66 @@ Final completion or CLOSE BLOCKED status is recorded in the sanitized completion
 ### 9. Worktrees and Branches
 - Worktrees: `ycn-labs-site` and `~/Desktop/ycn-nav-07` on `wip/YCN-NAV-07`, preserved.
 - Zero branch deletions. Merged branches kept: `wip/YCN-12-CLOSE-01`, `wip/YCN-10-02`, `wip/YCN-10-03`, `wip/YCN-10-04`, `wip/YCN-GOVERNANCE-ROLES-01`, plus those listed in CLOSE 2026-11-02 §8.
+
+---
+
+## Session Update — 9–10 November 2026 (YCN-DOCS-SYNC-01)
+
+Prepared by local Claude Code on 10 Nov 2026 under the Owner's docs-PR authorization. Supersedes the status parts of the 17 Oct header and the "coding hold" language above for current status; those blocks stay as history. Labels: **CONFIRMED** (checked by command or screenshot), **REPORTED** (in records, not re-checked), **UNKNOWN** (not assessed).
+
+### 1. Repository State (CONFIRMED)
+- `main` = `e1df078839d36504a4b53b8d5cc90872b5900c85` (PR #31 merge). Post-merge CI and Gitleaks: success.
+- Quality on `main`: 26 vitest files / 337 tests pass; `tsc --noEmit` clean; ESLint 0 errors / 84 warnings (the 17 Oct baseline was 88); offline production build (`unshare -rn pnpm run build`) succeeds.
+- Open PRs at the time of writing: this docs PR only.
+
+### 2. PRs Merged 9–10 November 2026 (CONFIRMED)
+| PR | Merge | Task |
+|---|---|---|
+| #22 | `6c57657` | Founder section on About (Task 10b, YCN-10-05) |
+| #23 | `e0bead5` | Governance: selective UI/UX skills workflow; localhost preview rule |
+| #24 | `ecb9518` | YCN-FIRST-IMPRESSION-01: entrance film bypass (`ENTRANCE_INTERIM_BYPASS`); interim single-image hero |
+| #25 | `4d8787f` | YCN-FONTS-LOCAL-01: self-hosted Inter and Space Grotesk (fixes the next/font CI flake) |
+| #26 | `0d674fb` | YCN-HERO-RESTORE-01: two-image hero restored |
+| #27 | `9107719` | YCN-SMALL-FIXES-01: footer logo pairing and caption contrast, contact error contrast and `aria-pressed`, reduced-motion chapters, docs path removed from Work |
+| #28 | `5c86d75` | YCN-HERO-STACKED-01: non-overlapping hero (stacked, then staggered C). GitHub 502 during merge: the merge landed but no push CI ran; covered by the next merge run |
+| #29 | `41de36e` | YCN-TOKENS-T1-01: brand palette → roles → component names; no visual change (0 computed-colour diffs on 48 pages; purple swap: 0 non-brand changes) |
+| #30 | `02c34ff` | YCN-HERO-OVERLAP-01: overlapping hero, Owner choice A; device photo covers only the empty bottom-left of the office photo; hover zoom removed |
+| #31 | `e1df078` | YCN-TOKENS-T2-01: footer, error page and skip link use tokens; skip link now visible above the fixed header (`focus:z-[60]`) |
+
+### 3. Owner Decisions This Period (own words or own AskUserQuestion clicks)
+- Hero: keep both photographs; final composition A (PR #30). Entrance film stays bypassed.
+- Colour clean-up in small PRs: T1 (merged), T2 (merged), T3 (status colours + purple Work badge) approved in principle, not started.
+- Founder photo: hidden slot until the Owner supplies a real photograph; no placeholder. Later task.
+- **Launch scope (10 Nov 2026): launch first, visual-first inner pages after launch.** (Record formally in `docs/YCN_DECISIONS.md` at the next governance PR if the Owner wants it as a numbered ruling.)
+- Project status report accepted as the working baseline (private vault `proof/YCN-STATUS-REPORT-2026-11-10/`, plus GPT's independent report and gap check).
+
+### 4. Status Report Findings Recorded (10 Nov 2026)
+- **CONFIRMED, high:** Sentry not initialised (SDK installed, calls present, no `Sentry.init`/instrumentation). Alert delivery unverified.
+- **CONFIRMED, legal:** `/privacy` §4 cites UK/GDPR rights; `/terms` §2 promises full ownership of code, accounts, repositories and domains plus portfolio rights (conflicts with DECISION-054 / 052 O-05). Counsel review and Owner rulings needed.
+- **CONFIRMED:** `/api/health` is liveness only; CSP partial (`frame-ancestors 'none'` + X-Frame-Options + HSTS); no e2e tests in CI; Chromium-only browser checks; `clsx` and `tailwind-merge` unused; 10 legacy components unreachable; README/PROJECT.md corrected in this PR.
+- **REPORTED:** consent/notice tables from the architecture not implemented; named lead operators not recorded; redirect inventory needed before cutover; comprehension sample size 3 vs 5.
+- **UNKNOWN:** current performance (no Lighthouse on this build); off-device vault backup; Vercel project for this repo; what `ycnlabs.com` shows today.
+- Estimated completion ≈ 51% (±10, weighted estimate; see the vault report). Health: AT RISK. 30 Nov target at risk unless external inputs (legal, licences, hosting access) arrive by about 18 Nov.
+
+### 5. Owner-Only Pending Titles
+- Business inputs: legal entity name and city; portfolio project or "none"; INR pricing wording; three testers.
+- Image and film source/licence confirmation (or replacement approval).
+- Counsel/CA review date (Privacy §4, Terms §2, DPDP notice).
+- Task 15 approvals: Vercel project and protected preview, production database, DNS plan; off-device vault backup destination.
+- Sentry account and DSN (entered privately) for the initialisation task.
+- Entrance: permanent bypass for V1 or a truthful replacement.
+- Comprehension sample size (3 or 5); named primary and backup lead operators.
+- Phone/WhatsApp task go-ahead (number already approved).
+
+### 6. Next Order (in this order; nothing else without Owner word)
+1. Independent review and Owner merge of this docs PR.
+2. Sentry initialisation task (needs DSN).
+3. T3 (status tokens, purple badge colour chosen by the Owner).
+4. Phone/WhatsApp on `/contact`.
+5. Task 15 runbook (planning PR), then protected preview.
+6. Quality gate on the preview (Task 13), comprehension test (Task 14), release (15/16).
+
+### 7. Operations
+- Dev server runs on `127.0.0.1:3005` during working sessions (Owner standing request); stop at close.
+- Evidence for every 9–10 Nov task is in the private vault under `proof/YCN-*` with `SHA256SUMS.txt`; nothing on GitHub.
+- No production deployment is authorized.

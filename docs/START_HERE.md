@@ -35,22 +35,22 @@ Open this file on branch `main`. Before any work run `git fetch && git status --
 ---
 
 ## 3. Frozen Systems (Do Not Alter Without Written Approval)
-- **Entrance:** VF19 + INPUT-GATE-01 (Natural scroll cue & skip controller)
+- **Entrance:** VF19 + INPUT-GATE-01 (Natural scroll cue & skip controller). Interim: bypassed by `ENTRANCE_INTERIM_BYPASS` (DECISION-048 Amendment 1); a truthful replacement or permanent bypass needs an Owner ruling.
 - **Navigation:** NAV-07 structure (Navbar original glow restoration pending)
 - **Typography:** POLISH-TYPE-01 (Semantic scale, Space Grotesk / Inter)
-- **Hero Foundation:** HOME-01C Hero layout, CTA, typography, and theme tokens
+- **Hero Foundation:** HOME-01C Hero layout, CTA, typography, and theme tokens (media column changed under Owner-approved exceptions, DECISION-048 Amendment 1 updates, 9–10 Nov 2026; current layout: PR #30)
 
 ---
 
 ## 4. Historical Owner Decisions (9 Oct Handoff §6) & Current Dispositions
 | Item | Topic | Status | Disposition |
 | :---: | :--- | :--- | :--- |
-| **1** | Capability-03 pilot | OPEN | Defect verified (table 446px in 352px container); visual verdict pending Gate E. |
+| **1** | Capability-03 pilot | **RESOLVED** | Task 08 overflow fix merged into `main` (branch `wip/YCN-OVERFLOW-08`); confirmed 10 Nov 2026. |
 | **2** | Navbar border and scroll cue | PENDING GATE E | Option A (80 px/s lap average) ratified in `docs/YCN_DESIGN_SYSTEM.md`; coding paused until Gate E. |
 | **3** | Interim commit on `site-v2` | **RESOLVED (12 Oct)** | Committed locally and pushed to remote `site-v2` (`11468f4b…`); historical private checkpoint. |
 | **4** | Rulebook update | **RESOLVED** | DECISION-051+ ratified; CONTENT_SPEC §3 aligned. |
 | **5** | Homepage structure (7 vs 6 chapters) | PENDING GATE E | DECISION-053/054 copy ratified; chapter implementation H-03 / W-06 layout pending Gate E. |
-| **6** | UK metadata (GB metadata) | PENDING IMPLEMENTATION | India-first/INR policy approved (DECISION-052 O-01 / DECISION-054); metadata cleanup and route implementation pending. |
+| **6** | UK metadata (GB metadata) | **PARTLY RESOLVED** | `app/layout.tsx` uses `en_IN`. Still open: `/privacy` §4 cites UK/GDPR rights (confirmed 10 Nov 2026); INR pricing wording pending Owner input. |
 | **7** | Staging credentials and lead retention | PENDING IMPLEMENTATION & LEGAL | 12-month retention policy approved (DECISION-052 O-06 / ARCH-V1-01); staging credentials (O-10) and legal clearance pending. |
 | **8** | Replacement wording for two form lines | RESOLVED IN SPEC | DECISION-053 ratified exact lines in CONTENT_SPEC; application implementation pending. |
 | **9** | Carried items (Esc, scope, export, kicker) | PENDING GATES | Esc key handler, brand scope, Hero kicker in delivery backlog. |
@@ -58,11 +58,13 @@ Open this file on branch `main`. Before any work run `git fetch && git status --
 ---
 
 ## 5. Roles & Operating Model
-Roles are governed by [`AGENTS.md`](../AGENTS.md) › Shared ownership and task leadership. Strategy, challenge, research, architecture, review and execution are functions any seat may perform; AGY is the only local execution seat.
+Roles are governed by [`AGENTS.md`](../AGENTS.md) and **DECISION-055 Amendment 1 (Owner, 4 Nov 2026)**. The three-seat text below it in older records is historical.
 
-- **Owner:** Final authority on business direction, priorities, scope, legal wording, visual verdicts, releases, commits, pushes, deployments, and close.
-- **Three Collaborative AI Seats (GPT, Claude, AGY):** Proactive intellectual contributors across business, architecture, code, design, cost, risk, and testing. Independent written assessments precede task synthesis; task leadership is assigned or confirmed by the Owner per task based on domain evidence.
-- **AGY Execution Authority:** AGY is the sole seat authorized to operate the local Linux filesystem, execute shell commands, and generate raw proof artifacts under the file intake and evidence rules.
+- **Owner:** Final authority on business direction, priorities, scope, legal wording, visual verdicts, releases, merges, deployments, and close.
+- **Local Claude Code (VS Code, host `YCN-labs`):** the sole builder. One task, one `wip/*` branch, one PR; never reviews its own work.
+- **GPT:** independent reviewer of PRs authored by local Claude Code; one reviewer per PR.
+- **Claude chat:** content and wording advice; reviews only work it did not author.
+- **AGY:** retired from execution. Its tools, skills and records are preserved.
 
 ---
 
@@ -74,4 +76,4 @@ Roles are governed by [`AGENTS.md`](../AGENTS.md) › Shared ownership and task 
 ---
 
 ## 7. Next Immediate Workstream
-Current priorities and the single next operational task are governed dynamically by [`docs/STATE.md`](STATE.md) §2 and [`docs/BACKLOG.md`](BACKLOG.md). UI and backend coding (including Navbar Task 07 and Capability-03 Task 08) remain PAUSED until Gate E readiness and explicit Owner approval.
+Current priorities and the single next operational task are governed by the **latest dated block** in [`docs/STATE.md`](STATE.md) and by [`docs/BACKLOG.md`](BACKLOG.md). The October coding hold ended: Tasks 07 and 08 are merged, and Owner-approved UI and token tasks ran on 9–10 Nov 2026 (PRs #22–#31). Each new task still needs its own Owner authorization, one PR and one independent review. No production deployment is authorized.
