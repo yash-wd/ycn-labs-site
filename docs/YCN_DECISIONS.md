@@ -362,3 +362,11 @@ If the Owner wants to allow a WIP commit/push for that single doc reconciliation
 1. **Hero (HOME-01C exception).** Both photographs stay, and neither covers or hides the other. Desktop: headline and CTAs on the left; on the right, a staggered stack (Owner choice C after reviewing the first build): the device photograph above and to the left, the office photograph below and to the right, at the same width with a 28px gap and softer shadows that do not reach the other photograph. The device photograph is shown at 4:3 on desktop (empty desk trimmed; phone, hands and laptop kept); the office photograph is uncropped at every width.
 2. **Tablet and mobile.** Tablet: the two photographs side by side at equal height, both uncropped. Mobile: headline and CTAs first, then the device photograph, then the office photograph.
 3. **Unchanged.** Copy, CTAs, typography, colours, borders and alt text are unchanged. The entrance film stays bypassed, the image files are unchanged, and the pre-launch source/licence check in `docs/BACKLOG.md` still applies.
+
+### DECISION-048 Amendment 1 — Update: Overlapping Hero, Content-Safe (Owner, 9 Nov 2026)
+
+**Status: ADOPTED by Owner.** Task: `YCN-HERO-OVERLAP-01`. The Owner preferred the depth of the original overlapping Hero over the stacked versions, and chose option A from private previews. This replaces the stacked/staggered composition recorded in the update above; that record is preserved unchanged.
+
+1. **Hero (HOME-01C exception).** The office photograph sits top-right, uncropped; the device photograph sits bottom-left in front of it. The device photograph overlaps only the empty bottom-left sideboard and floor of the office photograph (about the left 20% and lower 36% of the image). No person, face, screen or laptop is covered. The same composition scales down to tablet and mobile.
+2. **Hover zoom removed.** The photographs are not links, so they no longer zoom on hover.
+3. **Unchanged.** Copy, CTAs, typography, colours, alt text and image files are unchanged. The entrance film stays bypassed, and the pre-launch source/licence check in `docs/BACKLOG.md` still applies.

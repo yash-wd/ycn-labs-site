@@ -66,7 +66,7 @@ export function HeroFoundation() {
           </p>
         </div>
 
-        {/* Right Column: two photos, stacked without overlap */}
+        {/* Right Column: two photos; the device photo overlaps only empty background of the team photo */}
         <div
           id="hero-media-layer"
           className="lg:col-span-6 xl:col-span-6 flex flex-col items-center justify-center lg:items-end w-full relative pt-4 sm:pt-6 lg:pt-0"
@@ -79,23 +79,38 @@ export function HeroFoundation() {
             <div className="w-[320px] sm:w-[420px] lg:w-[480px] h-[320px] sm:h-[420px] lg:h-[480px] rounded-full bg-[radial-gradient(circle,var(--action-blue)/0.05_0%,transparent_70%)] dark:bg-[radial-gradient(circle,var(--action-blue)/0.08_0%,transparent_70%)] blur-2xl" />
           </div>
 
-          {/* Two-photo stack (YCN-HERO-STACKED-01, Owner layout 2): nothing overlaps or hides.
-              Mobile: device, then team. Tablet: side by side at equal height (natural ratios).
-              Desktop: staggered stack (Owner choice C): device above and to the left, team below and to
-              the right, same width, 28px gap; device shown at 4:3, team uncropped. */}
-          <div className="relative w-full max-w-[343px] sm:max-w-[720px] lg:max-w-[436px] xl:max-w-[476px] mx-auto flex flex-col sm:flex-row lg:flex-col sm:items-start gap-4 sm:gap-5 lg:gap-[13.5px]">
-            {/* PHOTO A — Conceptual UI workstation hardware (Owner Override 28 Sep) */}
+          {/* Overlapping two-photo composition (YCN-HERO-OVERLAP-01, Owner choice A, 9 Nov 2026).
+              Team photo top-right (82% width, uncropped); device photo bottom-left (34%, 4:5) overlapping
+              ONLY the team photo's empty bottom-left sideboard/floor (x 0-20%, y 64-100% of the image):
+              no person, face, screen or laptop is covered. Same composition, scaled, at every width. */}
+          <div className="relative w-full max-w-[560px] lg:max-w-[470px] xl:max-w-[560px] mx-auto aspect-[100/72]">
+            {/* PHOTO A — Collaboration in modern workspace (uncropped) */}
+            <div
+              id="hero-editorial-team-frame"
+              className="absolute top-0 right-0 w-[82%] aspect-[1672/941] rounded-2xl overflow-hidden border border-[var(--border-subtle)]/80 dark:border-white/[0.08] shadow-[0_14px_30px_-16px_rgba(15,23,42,0.35)] dark:shadow-[0_18px_36px_-18px_rgba(0,0,0,0.9)]"
+            >
+              <Image
+                src="/media/hero/ycn-hero-team-v1.webp"
+                alt="Professionals collaborating around laptops in a dark modern workspace"
+                fill
+                priority
+                sizes="(max-width: 639px) 290px, 460px"
+                className="object-cover object-center"
+              />
+            </div>
+
+            {/* PHOTO B — Conceptual UI workstation hardware (Owner Override 28 Sep), in front */}
             <div
               id="hero-editorial-device-frame"
-              className="relative w-[82%] mx-auto sm:w-auto sm:mx-0 sm:flex-[0.8_1_0%] lg:flex-none lg:w-[calc(100%-36px)] lg:self-start aspect-[4/5] lg:aspect-[4/3] rounded-2xl overflow-hidden border border-[var(--border-subtle)]/90 dark:border-white/[0.12] shadow-[0_14px_30px_-16px_rgba(15,23,42,0.35)] dark:shadow-[0_18px_36px_-18px_rgba(0,0,0,0.9)] transition-transform duration-500 group"
+              className="absolute bottom-0 left-0 z-10 w-[34%] aspect-[4/5] rounded-2xl overflow-hidden border border-[var(--border-subtle)]/90 dark:border-white/[0.12] shadow-[0_22px_44px_-18px_rgba(15,23,42,0.45)] dark:shadow-[0_26px_50px_-16px_rgba(0,0,0,0.95)]"
             >
               <Image
                 src="/media/hero/ycn-hero-device-ui-v2.webp"
                 alt="Modern smartphone and laptop displaying illustrative messaging and data interfaces"
                 fill
                 priority
-                sizes="(max-width: 639px) 282px, (max-width: 1023px) 220px, 440px"
-                className="object-cover object-center transform transition-transform duration-700 ease-out group-hover:scale-[1.02]"
+                sizes="(max-width: 639px) 120px, 190px"
+                className="object-cover object-center"
               />
               {/* Restrained cyan datum detail */}
               <div
@@ -104,26 +119,11 @@ export function HeroFoundation() {
               />
             </div>
 
-            {/* Subtle Technical Datum / Signal Line, centred in the 28px gap (13.5px + 1px + 13.5px) between the photos (desktop only) */}
+            {/* Subtle Technical Datum / Signal Line, in the empty space below the team photo, clear of both photos */}
             <div
-              className="hidden lg:block self-center w-[90px] h-[1px] bg-gradient-to-r from-transparent via-[var(--action-blue)]/30 to-transparent pointer-events-none"
+              className="absolute top-[74%] right-[6%] w-[90px] h-[1px] bg-gradient-to-r from-transparent via-[var(--action-blue)]/30 to-transparent pointer-events-none"
               aria-hidden="true"
             />
-
-            {/* PHOTO B — Collaboration in modern workspace (uncropped at every width) */}
-            <div
-              id="hero-editorial-team-frame"
-              className="relative w-full sm:w-auto sm:flex-[1.777_1_0%] lg:flex-none lg:w-[calc(100%-36px)] lg:self-end aspect-[1672/941] rounded-2xl overflow-hidden border border-[var(--border-subtle)]/80 dark:border-white/[0.08] shadow-[0_14px_30px_-16px_rgba(15,23,42,0.35)] dark:shadow-[0_18px_36px_-18px_rgba(0,0,0,0.9)] transition-transform duration-500 group"
-            >
-              <Image
-                src="/media/hero/ycn-hero-team-v1.webp"
-                alt="Professionals collaborating around laptops in a dark modern workspace"
-                fill
-                priority
-                sizes="(max-width: 639px) 343px, (max-width: 1023px) 480px, 440px"
-                className="object-cover object-center transform transition-transform duration-700 ease-out group-hover:scale-[1.02]"
-              />
-            </div>
           </div>
         </div>
       </div>
