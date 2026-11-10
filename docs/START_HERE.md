@@ -43,15 +43,17 @@ Open this file on branch `main`. Before any work run `git fetch && git status --
 ---
 
 ## 4. Historical Owner Decisions (9 Oct Handoff §6) & Current Dispositions
+> **Snapshot note (10 Nov 2026):** rows marked **RESOLVED**, **PARTLY RESOLVED** or dated 10 Nov were re-checked against `main`. Rows still reading "PENDING GATE E" / "PENDING GATES" are October wording kept as history; the Gate E coding hold itself ended (see §7 and the latest `docs/STATE.md` block). Verify a row before acting on it.
+
 | Item | Topic | Status | Disposition |
 | :---: | :--- | :--- | :--- |
 | **1** | Capability-03 pilot | **RESOLVED** | Task 08 overflow fix merged into `main` (branch `wip/YCN-OVERFLOW-08`); confirmed 10 Nov 2026. |
-| **2** | Navbar border and scroll cue | PENDING GATE E | Option A (80 px/s lap average) ratified in `docs/YCN_DESIGN_SYSTEM.md`; coding paused until Gate E. |
+| **2** | Navbar border and scroll cue | **RESOLVED (code)** | Option A (80 px/s) ratified in `docs/YCN_DESIGN_SYSTEM.md`; Task 07 menu perimeter motion merged (PR #6, 19 Oct 2026). Later NAV-07 changes need their own Owner ruling. |
 | **3** | Interim commit on `site-v2` | **RESOLVED (12 Oct)** | Committed locally and pushed to remote `site-v2` (`11468f4b…`); historical private checkpoint. |
 | **4** | Rulebook update | **RESOLVED** | DECISION-051+ ratified; CONTENT_SPEC §3 aligned. |
 | **5** | Homepage structure (7 vs 6 chapters) | PENDING GATE E | DECISION-053/054 copy ratified; chapter implementation H-03 / W-06 layout pending Gate E. |
 | **6** | UK metadata (GB metadata) | **PARTLY RESOLVED** | `app/layout.tsx` uses `en_IN`. Still open: `/privacy` §4 cites UK/GDPR rights (confirmed 10 Nov 2026); INR pricing wording pending Owner input. |
-| **7** | Staging credentials and lead retention | PENDING IMPLEMENTATION & LEGAL | 12-month retention policy approved (DECISION-052 O-06 / ARCH-V1-01); staging credentials (O-10) and legal clearance pending. |
+| **7** | Staging credentials and lead retention | **STAGING VERIFIED; LEGAL PENDING** | Task 12 lead reliability verified on staging (BACKLOG Task 12, 3 Nov 2026). 12-month retention policy approved (DECISION-052 O-06); counsel review, privacy wording and production credentials still pending. |
 | **8** | Replacement wording for two form lines | RESOLVED IN SPEC | DECISION-053 ratified exact lines in CONTENT_SPEC; application implementation pending. |
 | **9** | Carried items (Esc, scope, export, kicker) | PENDING GATES | Esc key handler, brand scope, Hero kicker in delivery backlog. |
 
