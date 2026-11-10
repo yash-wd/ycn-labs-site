@@ -3,7 +3,7 @@ import Image from "next/image";
 
 export function Footer() {
   return (
-    <footer className="border-t border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-[#0A0E17] text-slate-600 dark:text-slate-400 text-sm transition-colors">
+    <footer className="border-t border-slate-200 dark:border-slate-800 bg-[var(--footer-bg)] text-slate-600 dark:text-slate-400 text-sm transition-colors">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 md:py-16">
         <div className="grid grid-cols-1 md:grid-cols-4 gap-8 mb-12">
           {/* Brand Col */}
@@ -43,32 +43,32 @@ export function Footer() {
             </h3>
             <ul className="space-y-2 type-copy-body text-sm">
               <li>
-                <Link href="/what-we-solve" className="hover:text-[#0470B4] dark:hover:text-[#38BDF8] transition-colors">
+                <Link href="/what-we-solve" className="hover:text-[var(--link-text)] transition-colors">
                   What We Solve
                 </Link>
               </li>
               <li>
-                <Link href="/work" className="hover:text-[#0470B4] dark:hover:text-[#38BDF8] transition-colors">
+                <Link href="/work" className="hover:text-[var(--link-text)] transition-colors">
                   Work
                 </Link>
               </li>
               <li>
-                <Link href="/how-we-work" className="hover:text-[#0470B4] dark:hover:text-[#38BDF8] transition-colors">
+                <Link href="/how-we-work" className="hover:text-[var(--link-text)] transition-colors">
                   How We Work
                 </Link>
               </li>
               <li>
-                <Link href="/engineering" className="hover:text-[#0470B4] dark:hover:text-[#38BDF8] transition-colors">
+                <Link href="/engineering" className="hover:text-[var(--link-text)] transition-colors">
                   Engineering
                 </Link>
               </li>
               <li>
-                <Link href="/about" className="hover:text-[#0470B4] dark:hover:text-[#38BDF8] transition-colors">
+                <Link href="/about" className="hover:text-[var(--link-text)] transition-colors">
                   About
                 </Link>
               </li>
               <li>
-                <Link href="/contact" className="hover:text-[#0470B4] dark:hover:text-[#38BDF8] transition-colors">
+                <Link href="/contact" className="hover:text-[var(--link-text)] transition-colors">
                   Start a Project
                 </Link>
               </li>
@@ -82,17 +82,17 @@ export function Footer() {
             </h3>
             <ul className="space-y-2 type-copy-body text-sm">
               <li>
-                <Link href="/credits" className="hover:text-[#0470B4] dark:hover:text-[#38BDF8] transition-colors">
+                <Link href="/credits" className="hover:text-[var(--link-text)] transition-colors">
                   Asset Credits & Provenance
                 </Link>
               </li>
               <li>
-                <Link href="/privacy" className="hover:text-[#0470B4] dark:hover:text-[#38BDF8] transition-colors">
+                <Link href="/privacy" className="hover:text-[var(--link-text)] transition-colors">
                   Privacy Policy
                 </Link>
               </li>
               <li>
-                <Link href="/terms" className="hover:text-[#0470B4] dark:hover:text-[#38BDF8] transition-colors">
+                <Link href="/terms" className="hover:text-[var(--link-text)] transition-colors">
                   Terms of Service
                 </Link>
               </li>

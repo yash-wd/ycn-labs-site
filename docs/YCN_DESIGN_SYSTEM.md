@@ -71,7 +71,7 @@ Brand colours live in one place: the **brand palette** at the top of `app/global
 
 Backgrounds, surfaces, text, borders and status colours (success, warning, error) are separate tokens and do not follow a brand change.
 
-To change the brand: edit the palette only, then confirm contrast in both themes (button text on its fill at least 4.5:1, links on the page background at least 4.5:1, focus ring at least 3:1). A rebrand also needs new logo image files and the theme colour in `app/manifest.ts`, which are not CSS. Until YCN-TOKENS T2 lands, the footer link hover colours, the footer's dark background, the error page and the skip link still contain typed values.
+To change the brand: edit the palette only, then confirm contrast in both themes (button text on its fill at least 4.5:1, links on the page background at least 4.5:1, focus ring at least 3:1). A rebrand also needs new logo image files and the theme colour in `app/manifest.ts`, which are not CSS. Since YCN-TOKENS-T2-01 the footer, error page and skip link use these tokens; the frozen entrance stage (`BrandContinuumStage`, bypassed) still contains one typed value.
 
 ## 3. Typography
 

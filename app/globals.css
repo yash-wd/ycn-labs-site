@@ -68,6 +68,9 @@
   --text-primary: #0A0C10;
   --text-secondary: #475569; /* Text secondary from YCN_DESIGN_SYSTEM.md §2 */
   --text-muted: #475569;
+
+  /* Component: footer surface (YCN-TOKENS-T2-01; the values the footer already used) */
+  --footer-bg: #F8FAFC;
 }
 
 .dark {
@@ -84,6 +87,8 @@
   --text-primary: #F8FAFC;
   --text-secondary: #A8B3C5; /* Text secondary from YCN_DESIGN_SYSTEM.md §2 */
   --text-muted: #A8B3C5;
+
+  --footer-bg: #0A0E17;
 }
 
 @theme {

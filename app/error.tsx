@@ -23,7 +23,7 @@ export default function Error({
       <div className="flex flex-wrap gap-4 justify-center">
         <button
           onClick={() => reset()}
-          className="px-5 py-2.5 rounded-md bg-[#0470B4] hover:bg-[#035b94] text-white font-medium text-sm transition-colors"
+          className="px-5 py-2.5 rounded-md bg-[var(--action-blue)] hover:bg-[var(--action-blue-hover)] text-[var(--text-on-action)] font-medium text-sm transition-colors"
         >
           Try again
         </button>
