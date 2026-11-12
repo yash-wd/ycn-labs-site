@@ -2,7 +2,7 @@
 
 import React, { useState, useEffect } from "react";
 import dynamic from "next/dynamic";
-import { HeroFoundation } from "./HeroFoundation";
+import { HeroV3 } from "@/components/v3/HeroV3";
 import { PhoneChaptersSection } from "./PhoneChaptersSection";
 import { EditorialLaptopPortalSection } from "./EditorialLaptopPortalSection";
 import { ConnectedRequestsSection } from "./ConnectedRequestsSection";
@@ -62,7 +62,7 @@ export function HomepageVNextPhase1() {
       )}
 
       {/* 3. Hero Foundation: Rendered beneath from frame one */}
-      <HeroFoundation />
+      <HeroV3 />
 
       {/* 4. HOME-02F: Live-DOM Visual Capability Stage (Route A Architecture) */}
       <PhoneChaptersSection />
