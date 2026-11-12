@@ -9,7 +9,7 @@ describe("YCN-SMALL-FIXES-01", () => {
   it("Work page no longer prints the internal docs path", () => {
     const work = read("app", "work", "page.tsx");
     expect(work).not.toContain("docs/YCN_CLAIMS_AND_PROOF.md");
-    expect(work).toContain("Under our Claims Register, case studies");
+    expect(work).toContain("We publish work when the scope, stage and evidence are clear.");
   });
 
   it("Footer uses the same logo pairing as the Header (dark letters on light, white letters on dark)", () => {

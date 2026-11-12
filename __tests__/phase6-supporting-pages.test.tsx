@@ -42,20 +42,17 @@ describe("Phase 6: Supporting Pages & Canonical Navigation", () => {
   });
 
   describe("2. /what-we-solve Route Specification", () => {
-    it("renders ratified H1 and all five outcome needs", () => {
+    it("renders ratified H1 and the four V3 problems with before/after (YCN-V3-UI Day 3, COPY-V3.md)", () => {
       const html = renderToString(<WhatWeSolvePage />);
       expect(html).toContain("What are you trying to change?");
-      expect(html).toContain("Customers need to find me");
-      expect(html).toContain("Websites &amp; digital presence");
-      expect(html).toContain("Customers need an easier way to act");
-      expect(html).toContain("Customer experiences");
-      expect(html).toContain("My team does too much manually");
-      expect(html).toContain("Business systems &amp; automation");
-      expect(html).toContain("I have a product idea");
-      expect(html).toContain("Software products");
-      expect(html).toContain("I need something specific");
-      expect(html).toContain("Custom software");
-      expect(html).toContain("Not sure which one you need? Tell us what is happening today.");
+      for (const t of ["Enquiries get missed.", "Everything is done by hand.", "Customers can’t find you.", "The old site doesn’t bring work."]) {
+        expect(html).toContain(t);
+      }
+      expect((html.match(/>Before:<\/strong>/g) || []).length).toBe(4);
+      expect((html.match(/>After:<\/strong>/g) || []).length).toBe(4);
+      expect(html).toContain("Screens are illustrative demonstrations.");
+      expect(html).toContain("Not sure which one you need?");
+      expect(html).toContain('href="/contact"');
     });
 
     it("contains zero unverified digital-marketing or cybersecurity claims", () => {
@@ -68,13 +65,14 @@ describe("Phase 6: Supporting Pages & Canonical Navigation", () => {
   });
 
   describe("3. /work Route & Truthful Evidence Fallback", () => {
-    it("renders canonical H1, strict classifications, and truthful empty state", () => {
+    it("renders canonical H1, labels every item, and keeps the truthful empty state (YCN-V3-UI Day 3)", () => {
       const html = renderToString(<WorkPage />);
       expect(html).toContain("We show our work honestly.");
-      expect(html).toContain("CLIENT WORK");
-      expect(html).toContain("INTERNAL PRODUCT");
-      expect(html).toContain("CONCEPT BUILD");
+      expect((html.match(/>Concept build</g) || []).length).toBe(5);
+      expect(html).toContain("client work, an internal product or a concept build");
       expect(html).toContain("We publish work when the scope, stage and evidence are clear.");
+      expect(html).toContain("Your project could be the first case study.");
+      expect(html).not.toMatch(/purple/);
     });
 
     it("does not fabricate client logos, metrics, or fictitious case studies", () => {
@@ -87,55 +85,34 @@ describe("Phase 6: Supporting Pages & Canonical Navigation", () => {
   });
 
   describe("4. /how-we-work Route", () => {
-    it("renders exact eight steps in order and ratified headline", () => {
+    it("renders ratified headline and the four V3 steps in order (YCN-V3-UI Day 3)", () => {
       const html = renderToString(<HowWeWorkPage />);
       expect(html).toContain("You know your business. We know technology.");
       expect(html).toContain("You don’t need to arrive with a technical specification.");
-
-      const steps = [
-        "Talk",
-        "Understand",
-        "Plan",
-        "Design",
-        "Build",
-        "Test",
-        "Launch",
-        "Improve",
-      ];
-
-      let lastIndex = 0;
-      for (const step of steps) {
-        const index = html.indexOf(step);
-        expect(index).toBeGreaterThan(lastIndex);
-        lastIndex = index;
+      let last = -1;
+      for (const step of ["Tell us the problem", "Scope and price", "Build and show", "Launch and look after"]) {
+        const i = html.indexOf(step);
+        expect(i).toBeGreaterThan(last);
+        last = i;
       }
+      expect((html.match(/You get:/g) || []).length).toBe(4);
+      expect(html).toContain("a price in INR");
     });
 
-    it("includes the six collaboration areas without SLA promises", () => {
+    it("makes no SLA, response-time or fixed fix-window promises", () => {
       const html = renderToString(<HowWeWorkPage />);
-      expect(html).toContain("Roles");
-      expect(html).toContain("Communication");
-      expect(html).toContain("Scope");
-      expect(html).toContain("Decisions");
-      expect(html).toContain("Feedback");
-      expect(html).toContain("Change Control");
       expect(html).not.toContain("99.9% SLA");
+      expect(html).not.toMatch(/30 days|within \d+ (hours|days)|guarantee/i);
     });
   });
 
   describe("5. /about Route", () => {
-    it("renders canonical H1 and ratified body paragraphs verbatim", () => {
+    it("renders canonical H1, the ratified commitments, and no photo until one exists (YCN-V3-UI Day 3)", () => {
       const html = renderToString(<AboutPage />);
       expect(html).toContain("Technology should make a business easier to understand and easier to run.");
-      expect(html).toContain(
-        "YCN Labs starts with the business problem, then chooses the digital solution that fits."
-      );
-      expect(html).toContain(
-        "We care about clarity on the surface and engineering discipline underneath."
-      );
-      expect(html).toContain(
-        "We do not present concepts as client work or future capabilities as services already proven."
-      );
+      expect(html).toContain("We care about clarity on the surface and engineering discipline underneath.");
+      expect(html).toContain("We do not present concepts as client work or future capabilities as services already proven.");
+      expect(html).not.toContain("<img");
     });
 
     it("does not invent quantitative team size, age, or false awards", () => {

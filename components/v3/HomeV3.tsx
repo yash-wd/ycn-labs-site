@@ -1,7 +1,7 @@
-import Image from "next/image";
 import { Globe, LayoutDashboard, Workflow, Wrench } from "lucide-react";
 import { YcnFlowButton } from "@/components/ui/ycn-flow-button";
 import { Section, SectionHead } from "./Section";
+import { RequestsShot, FlowShot, SiteShot, BeforeAfterShot } from "./Shots";
 
 // YCN-V3-UI Day 2: the homepage below the hero, from COPY-V3.md (Owner-approved base, 10 Nov 2026).
 // Rules: no invented clients or numbers; demonstrations are labelled; claims stay inside DECISION-052/054.
@@ -35,67 +35,6 @@ export const FAQ = [
   { q: "Who owns the finished work?", a: "Ownership and licensing terms are set out plainly in the written agreement before work starts." },
   { q: "What happens after launch?", a: "We fix problems after launch, then offer a monthly maintenance plan if you want one." },
 ];
-
-function RequestsShot() {
-  return (
-    <div className="v3-shot" aria-hidden="true">
-      <div className="v3-shot-title"><span>Requests</span><small>Today</small></div>
-      <div className="v3-row v3-row-new"><span className="v3-av">PS</span><span className="v3-who">Priya S.</span><span className="v3-req">Catering for 40</span><span className="v3-pills"><span className="v3-pill v3-pill-new">New</span></span></div>
-      <div className="v3-row"><span className="v3-av">RK</span><span className="v3-who">Ravi K.</span><span className="v3-req">AC repair quote</span><span className="v3-pills"><span className="v3-pill">Assigned · Arjun</span></span></div>
-      <div className="v3-row"><span className="v3-av">MT</span><span className="v3-who">Meena T.</span><span className="v3-req">200 boxes</span><span className="v3-pills"><span className="v3-pill">Call back today</span></span></div>
-    </div>
-  );
-}
-
-function FlowShot() {
-  return (
-    <div className="v3-shot" aria-hidden="true">
-      <div className="v3-shot-title"><span>New order</span><small>Automatic</small></div>
-      <div className="v3-flow">
-        <div className="v3-flow-step"><b>1</b>Order form received</div>
-        <div className="v3-flow-arrow" />
-        <div className="v3-flow-step"><b>2</b>Row added to the orders sheet</div>
-        <div className="v3-flow-arrow" />
-        <div className="v3-flow-step"><b>3</b>WhatsApp message to dispatch</div>
-      </div>
-    </div>
-  );
-}
-
-function SiteShot() {
-  return (
-    <div className="v3-shot" aria-hidden="true">
-      <div className="v3-site">
-        <div className="v3-site-bar"><i /><i /><i /><span>yourbusiness.in</span></div>
-        <div className="v3-site-body">
-          <strong>What you do, in one clear line.</strong>
-          <span>Open today 9 am – 9 pm · Near the main market</span>
-          <div className="v3-site-actions"><span>Call now</span><span>WhatsApp</span><span>Directions</span></div>
-        </div>
-      </div>
-    </div>
-  );
-}
-
-function BeforeAfterShot() {
-  return (
-    <div className="v3-shot" aria-hidden="true">
-      <div className="grid grid-cols-2 gap-3">
-        {[
-          { src: "/media/messy_desk_books_papers_iphone.jpg", label: "Before: scattered" },
-          { src: "/media/clean_organised_laptop_desk.jpg", label: "After: organised" },
-        ].map((p) => (
-          <figure key={p.src} className="m-0">
-            <div className="relative aspect-[4/3] overflow-hidden rounded-[8px]">
-              <Image src={p.src} alt="" fill sizes="(max-width: 900px) 45vw, 260px" className="object-cover" />
-            </div>
-            <figcaption className="mt-1 text-[11px] text-[#94A3B8]">{p.label}</figcaption>
-          </figure>
-        ))}
-      </div>
-    </div>
-  );
-}
 
 export const PROBLEMS = [
   { title: "Enquiries get missed.", line: "Every request gets an owner, a next step and a clear status.", Shot: RequestsShot },
