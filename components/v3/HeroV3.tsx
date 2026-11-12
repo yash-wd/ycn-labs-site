@@ -38,7 +38,7 @@ export function HeroV3() {
               </YcnFlowButton>
             </YcnSignalBorder>
             <YcnFlowButton
-              href="/how-we-work"
+              href="#how-it-works"
               variant="secondary"
               size="lg"
               showArrow={false}

@@ -76,7 +76,7 @@ describe("YCN-V3-UI Day 1: section kit", () => {
     const html = renderToStaticMarkup(
       React.createElement(Section, { id: "x", labelledBy: "x-h", children: React.createElement(SectionHead, { id: "x-h", title: "T", lead: "L" }) }),
     );
-    expect(html).toContain("py-[var(--space-5)]");
+    expect(html).toContain("sm:py-[var(--space-5)]");
     expect(html).toContain("max-w-[var(--container-max)]");
     expect(html).toContain('aria-labelledby="x-h"');
     expect(html).toContain("<h2");

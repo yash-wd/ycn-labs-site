@@ -11,7 +11,7 @@ const TONE: Record<Tone, string> = {
   surface: "bg-[var(--bg-surface)]",
 };
 const SIZE: Record<Size, string> = {
-  default: "py-[var(--space-5)] lg:py-[var(--space-6)]",
+  default: "py-[var(--space-4)] sm:py-[var(--space-5)] lg:py-[var(--space-6)]",
   tight: "py-[var(--space-4)] lg:py-[var(--space-5)]",
 };
 
