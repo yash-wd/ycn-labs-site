@@ -6,6 +6,7 @@ import { Pause, Play } from "lucide-react";
 // GPT review F2 (13 Nov 2026): the hero demonstration loops every 8 s, so visitors need a way
 // to stop it (WCAG 2.2.2 Pause, Stop, Hide). The button sets data-paused on the enclosing
 // figure; CSS pauses every animation inside .v3-stage. The choice is kept for this browser tab.
+// It also sets data-motion on mount: until then (or without JavaScript) the hero is a still frame.
 // Hidden under prefers-reduced-motion, where the hero is already a still frame.
 const KEY = "ycn-hero-paused";
 
@@ -19,6 +20,16 @@ export function MotionToggle() {
     } catch {
       /* storage unavailable: start playing */
     }
+  }, []);
+
+  // The loop starts only now that this control works (CSS keys the animation on data-motion).
+  // Under reduced motion it never starts, and this button stays hidden.
+  useEffect(() => {
+    const figure = ref.current?.closest(".v3-stage-wrap");
+    if (!figure) return;
+    const reduced = window.matchMedia?.("(prefers-reduced-motion: reduce)").matches;
+    if (!reduced) figure.setAttribute("data-motion", "");
+    return () => figure.removeAttribute("data-motion");
   }, []);
 
   useEffect(() => {

@@ -619,14 +619,21 @@ p {
   box-shadow: 0 0 0 4px color-mix(in srgb, var(--v3-accent) 25%, transparent), 0 0 22px var(--v3-accent);
 }
 
-.v3-anim-press { animation: v3-press 8s ease-in-out infinite; }
-.v3-anim-travel { animation: v3-travel 8s cubic-bezier(0.65, 0, 0.35, 1) infinite; }
-.v3-anim-arrive { animation: v3-arrive 8s ease-out infinite; }
-/* Pill cycling belongs to the hero only; static demonstration screens (.v3-shot) reuse the
-   pill colours but must always show their label (GPT review F1, 13 Nov 2026). */
-.v3-stage .v3-pill-new { animation: v3-pill-1 8s linear infinite; }
-.v3-stage .v3-pill-assigned { animation: v3-pill-2 8s linear infinite; }
-.v3-stage .v3-pill-sent { animation: v3-pill-3 8s linear infinite; }
+/* The loop runs only once MotionToggle has mounted and set data-motion, so the hero is never
+   moving without a working Pause control (no JavaScript = still frame). GPT review D1, 13 Nov 2026.
+   Pill cycling belongs to the hero only; static demonstration screens (.v3-shot) reuse the
+   pill colours but must always show their label (GPT review F1). */
+.v3-stage-wrap[data-motion] .v3-anim-press { animation: v3-press 8s ease-in-out infinite; }
+.v3-stage-wrap[data-motion] .v3-anim-travel { animation: v3-travel 8s cubic-bezier(0.65, 0, 0.35, 1) infinite; }
+.v3-stage-wrap[data-motion] .v3-anim-arrive { animation: v3-arrive 8s ease-out infinite; }
+.v3-stage-wrap[data-motion] .v3-stage .v3-pill-new { animation: v3-pill-1 8s linear infinite; }
+.v3-stage-wrap[data-motion] .v3-stage .v3-pill-assigned { animation: v3-pill-2 8s linear infinite; }
+.v3-stage-wrap[data-motion] .v3-stage .v3-pill-sent { animation: v3-pill-3 8s linear infinite; }
+/* Still frame (before the control mounts, without JavaScript, or under reduced motion):
+   the new request is listed as "New". */
+.v3-stage-wrap:not([data-motion]) .v3-stage .v3-pill-assigned,
+.v3-stage-wrap:not([data-motion]) .v3-stage .v3-pill-sent { opacity: 0; }
+.v3-stage-wrap:not([data-motion]) .v3-motion-toggle { visibility: hidden; }
 /* Visitor-controlled pause (WCAG 2.2.2, GPT review F2). */
 .v3-stage-wrap[data-paused] .v3-stage,
 .v3-stage-wrap[data-paused] .v3-stage * { animation-play-state: paused !important; }

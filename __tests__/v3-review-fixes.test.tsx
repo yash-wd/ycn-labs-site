@@ -20,7 +20,7 @@ describe("PR #33 review fixes", () => {
     for (const pill of ["new", "assigned", "sent"]) {
       // No unscoped rule may animate a pill (static screens reuse these classes).
       expect(css).not.toMatch(new RegExp(`(^|\\n)\\.v3-pill-${pill} \\{ animation`));
-      expect(css).toContain(`.v3-stage .v3-pill-${pill} { animation:`);
+      expect(css).toContain(`.v3-stage-wrap[data-motion] .v3-stage .v3-pill-${pill} { animation:`);
     }
     expect(css).not.toMatch(/\n\s*\.v3-pill-assigned, \.v3-pill-sent \{ opacity: 0; \}/);
     expect(css).toContain(".v3-stage .v3-pill-assigned, .v3-stage .v3-pill-sent { opacity: 0; }");
@@ -37,6 +37,24 @@ describe("PR #33 review fixes", () => {
     expect(html).toContain("Pause animation");
     expect(css).toContain(".v3-stage-wrap[data-paused] .v3-stage * { animation-play-state: paused !important; }");
     expect(css).toMatch(/\.v3-motion-toggle \{ display: none !important; \}/);
+  });
+
+  it("D1: the hero only loops once its pause control has mounted (still frame without JavaScript)", () => {
+    for (const cls of ["press", "travel", "arrive"]) {
+      expect(css).not.toMatch(new RegExp(`(^|\\n)\\.v3-anim-${cls} \\{ animation`));
+      expect(css).toContain(`.v3-stage-wrap[data-motion] .v3-anim-${cls} { animation:`);
+    }
+    expect(css).toContain(".v3-stage-wrap:not([data-motion]) .v3-stage .v3-pill-sent { opacity: 0; }");
+    const toggle = fs.readFileSync(path.join(process.cwd(), "components", "v3", "MotionToggle.tsx"), "utf-8");
+    expect(toggle).toContain('figure.setAttribute("data-motion", "")');
+    expect(renderToStaticMarkup(<DeviceStage />)).not.toContain("data-motion");
+  });
+
+  it("D1: signal borders (header menu, Start a Project) no longer loop (Owner decision 13 Nov 2026)", () => {
+    const src = fs.readFileSync(path.join(process.cwd(), "components", "ui", "ycn-signal-border.tsx"), "utf-8");
+    expect(src).toContain("const SIGNAL_LOOPING = false;");
+    expect(src).toContain("if (isReducedMotion || !SIGNAL_LOOPING) {");
+    expect(src).not.toMatch(/: "opacity-90 group-hover\/signal:opacity-100 animate-\[spin/);
   });
 
   it("F3: How We Work metadata matches the four-step page", () => {

@@ -34,6 +34,13 @@ export interface YcnSignalBorderProps {
  *   * 100% theme-aware using CSS variables (--action-blue, --border-subtle, --signal-cyan).
  *   * Cyan is strictly contained to the optical signal point and never text.
  */
+/**
+ * Owner decision 13 Nov 2026 (accessibility exception to the NAV-07 motion freeze, WCAG 2.2.2):
+ * signal borders no longer loop. The same border, colours and highlight are shown in a fixed
+ * position. Set to true only with a visitor-facing pause control that covers every instance.
+ */
+const SIGNAL_LOOPING = false;
+
 export const YcnSignalBorder = forwardRef<HTMLDivElement, YcnSignalBorderProps>(
   function YcnSignalBorder(
     {
@@ -137,8 +144,9 @@ export const YcnSignalBorder = forwardRef<HTMLDivElement, YcnSignalBorderProps>(
     const svg = orbitSvgRef.current;
     if (!svg) return;
 
-    if (isReducedMotion) {
-      // Gate B2: Static composed frame under prefers-reduced-motion (no ticker, visible static highlight)
+    if (isReducedMotion || !SIGNAL_LOOPING) {
+      // Gate B2: Static composed frame (no ticker, visible static highlight). Used under
+      // prefers-reduced-motion and, since 13 Nov 2026, for everyone (SIGNAL_LOOPING = false).
       if (orbitRectRef.current) {
         orbitRectRef.current.style.strokeDashoffset = "0";
         orbitRectRef.current.setAttribute("stroke-dashoffset", "0");
@@ -276,11 +284,11 @@ export const YcnSignalBorder = forwardRef<HTMLDivElement, YcnSignalBorderProps>(
           aria-hidden="true"
           className={`absolute -inset-[150%] pointer-events-none transition-opacity duration-400 motion-reduce:hidden ${
             isAmbient
-              ? "opacity-80 animate-[spin_8s_linear_infinite]"
+              ? `opacity-80 ${SIGNAL_LOOPING ? "animate-[spin_8s_linear_infinite]" : ""}`
               : isAccent || active
-              ? "opacity-90 group-hover/signal:opacity-100 animate-[spin_4s_linear_infinite]"
+              ? `opacity-90 group-hover/signal:opacity-100 ${SIGNAL_LOOPING ? "animate-[spin_4s_linear_infinite]" : ""}`
               : isInteractive
-              ? "opacity-0 group-hover/signal:opacity-100 group-focus-within/signal:opacity-100 animate-[spin_3s_linear_infinite]"
+              ? `opacity-0 group-hover/signal:opacity-100 group-focus-within/signal:opacity-100 ${SIGNAL_LOOPING ? "animate-[spin_3s_linear_infinite]" : ""}`
               : "opacity-0"
           }`}
           style={{
