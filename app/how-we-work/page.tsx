@@ -7,7 +7,7 @@ import { UpdateShot } from "@/components/v3/Shots";
 export const metadata: Metadata = {
   title: "How We Work — YCN Labs",
   description:
-    "You know your business. We know technology. An honest, eight-step methodology for turning business problems into durable software.",
+    "You know your business. We know technology. Four clear steps from your problem to a working website or tool: talk, agree the scope and price, build, then launch and hand over.",
   alternates: {
     canonical: "https://ycnlabs.com/how-we-work",
   },

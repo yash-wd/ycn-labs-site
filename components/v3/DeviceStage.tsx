@@ -1,6 +1,8 @@
 // YCN-V3-UI hero visual: an illustrative laptop + phone. A customer sends a request from
 // the phone; it lands on the business's requests list and moves New → Assigned → Reply sent.
 // Pure CSS animation (styles in app/globals.css, "HERO DEVICE STAGE"); nothing is sent anywhere.
+// MotionToggle lets visitors pause it (WCAG 2.2.2).
+import { MotionToggle } from "./MotionToggle";
 
 const ROWS = [
   { initials: "RK", who: "Ravi K.", req: "AC repair quote", status: "Assigned · Arjun" },
@@ -67,8 +69,9 @@ export function DeviceStage() {
 
         <span className="v3-signal v3-anim-travel" aria-hidden="true" />
       </div>
-      <figcaption className="mt-[var(--space-2)] type-caption text-[var(--text-secondary)]">
-        Demonstration screens. Names and requests are illustrative.
+      <figcaption className="mt-[var(--space-1)] flex flex-wrap items-center justify-between gap-x-[var(--space-2)] type-caption text-[var(--text-secondary)]">
+        <span>Demonstration screens. Names and requests are illustrative.</span>
+        <MotionToggle />
       </figcaption>
     </figure>
   );

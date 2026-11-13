@@ -37,8 +37,13 @@ describe("YCN-V3-UI Day 1: hero", () => {
   });
 
   it("the demonstration contains no form, input or link (nothing can be sent)", () => {
-    const stage = html.slice(html.indexOf('class="v3-stage"'), html.indexOf("</figure>"));
+    // The demonstration image ends where the caption starts; the caption holds the only
+    // control, the visitor's Pause/Play button (GPT review F2), which sends nothing.
+    const stage = html.slice(html.indexOf('class="v3-stage"'), html.indexOf("<figcaption"));
     expect(stage).not.toMatch(/<form|<input|<button|<a /);
+    const caption = html.slice(html.indexOf("<figcaption"), html.indexOf("</figure>"));
+    expect(caption).not.toMatch(/<form|<input|<a /);
+    expect((caption.match(/<button/g) || []).length).toBe(1);
   });
 
   it("homepage renders the new hero instead of the old photo hero", () => {

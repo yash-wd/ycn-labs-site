@@ -622,9 +622,14 @@ p {
 .v3-anim-press { animation: v3-press 8s ease-in-out infinite; }
 .v3-anim-travel { animation: v3-travel 8s cubic-bezier(0.65, 0, 0.35, 1) infinite; }
 .v3-anim-arrive { animation: v3-arrive 8s ease-out infinite; }
-.v3-pill-new { animation: v3-pill-1 8s linear infinite; }
-.v3-pill-assigned { animation: v3-pill-2 8s linear infinite; }
-.v3-pill-sent { animation: v3-pill-3 8s linear infinite; }
+/* Pill cycling belongs to the hero only; static demonstration screens (.v3-shot) reuse the
+   pill colours but must always show their label (GPT review F1, 13 Nov 2026). */
+.v3-stage .v3-pill-new { animation: v3-pill-1 8s linear infinite; }
+.v3-stage .v3-pill-assigned { animation: v3-pill-2 8s linear infinite; }
+.v3-stage .v3-pill-sent { animation: v3-pill-3 8s linear infinite; }
+/* Visitor-controlled pause (WCAG 2.2.2, GPT review F2). */
+.v3-stage-wrap[data-paused] .v3-stage,
+.v3-stage-wrap[data-paused] .v3-stage * { animation-play-state: paused !important; }
 
 @keyframes v3-press {
   0%, 18% { transform: none; filter: none; }
@@ -671,10 +676,11 @@ p {
 
 @media (prefers-reduced-motion: reduce) {
   .v3-anim-press, .v3-anim-travel, .v3-anim-arrive,
-  .v3-pill-new, .v3-pill-assigned, .v3-pill-sent { animation: none !important; }
+  .v3-stage .v3-pill-new, .v3-stage .v3-pill-assigned, .v3-stage .v3-pill-sent { animation: none !important; }
   .v3-anim-travel { display: none; }
   .v3-anim-arrive { opacity: 1; transform: none; }
-  .v3-pill-assigned, .v3-pill-sent { opacity: 0; }
+  .v3-stage .v3-pill-assigned, .v3-stage .v3-pill-sent { opacity: 0; }
+  .v3-motion-toggle { display: none !important; }
 }
 
 /* ============================================================
