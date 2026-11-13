@@ -28,14 +28,6 @@ describe("YCN-SMALL-FIXES-01", () => {
     expect((footer.match(/text-slate-500 dark:text-slate-400/g) || []).length).toBe(2);
   });
 
-  it("homepage chapters keep tracking under reduced motion", () => {
-    const chapters = read("components", "homepage", "vnext", "PhoneChaptersSection.tsx");
-    expect(chapters).not.toContain("if (prefersReduced) return;");
-    expect(chapters).toContain("new IntersectionObserver(");
-    // Instant swaps come from the global reduced-motion rule.
-    expect(read("app", "globals.css")).toContain("transition-duration: 0.01ms !important;");
-  });
-
   it("contact form errors are readable in light theme and announced", () => {
     const form = read("components", "ContactForm.tsx");
     expect(form).not.toMatch(/className="text-xs text-rose-400/);

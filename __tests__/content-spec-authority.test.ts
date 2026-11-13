@@ -41,93 +41,23 @@ describe("Content Specification Authority & Anti-Drift Suite", () => {
   const normalizedCode = normalize(codeContent);
 
   describe("1. Homepage Canonical Narrative", () => {
-    it("renders exact ratified Hero H1 and Support line", () => {
-      const heroH1 = "Websites and software. Built around your business.";
-      const heroSub =
-        "We turn business problems into digital products that help customers act, teams work clearly, and the business keep moving.";
-
-      expect(normalizedCode).toContain(normalize(heroH1));
-      expect(normalizedCode).toContain(normalize(heroSub));
-    });
-
-    it("renders exact ratified HOME-02 'What are you trying to change?' capabilities, needs, and explanations", () => {
-      // Headline
-      expect(normalizedCode).toContain(normalize("What are you trying to change?"));
-
-      // 5 Canonical Capabilities, Needs, and Explanations
-      expect(normalizedCode).toContain(normalize("Customers need to find me"));
-      expect(normalizedCode).toContain(normalize("Websites & digital presence"));
+    // YCN-V3-UI (Owner approvals 10–12 Nov 2026): the V3 homepage copy (COPY-V3.md, headline A)
+    // replaced the earlier ratified homepage narrative; the old sections were archived on Day 5.
+    // CONTENT_SPEC is updated with the V3 copy at sprint end.
+    it("renders the Owner-approved V3 hero headline and support line", () => {
+      expect(normalizedCode).toContain(normalize("Websites and software that bring your business enquiries."));
       expect(normalizedCode).toContain(
-        normalize("Make it easier for people to understand what you offer and contact you.")
-      );
-
-      expect(normalizedCode).toContain(normalize("Customers need an easier way to act"));
-      expect(normalizedCode).toContain(normalize("Customer experiences"));
-      expect(normalizedCode).toContain(
-        normalize("Enquiries, bookings, ordering, portals and other clear customer journeys.")
-      );
-
-      expect(normalizedCode).toContain(normalize("My team does too much manually"));
-      expect(normalizedCode).toContain(normalize("Business systems & automation"));
-      expect(normalizedCode).toContain(
-        normalize("Dashboards, workflows, integrations and tools built around how the work actually happens.")
-      );
-
-      expect(normalizedCode).toContain(normalize("I have a product idea"));
-      expect(normalizedCode).toContain(normalize("Software products"));
-      expect(normalizedCode).toContain(
-        normalize("Selected web applications designed around a clearly agreed first version.")
-      );
-
-      expect(normalizedCode).toContain(normalize("I need something specific"));
-      expect(normalizedCode).toContain(normalize("Custom software"));
-      expect(normalizedCode).toContain(
-        normalize("Start with the problem and design the appropriate system rather than forcing a standard package.")
-      );
-
-      // Close
-      expect(normalizedCode).toContain(
-        normalize("Not sure which one you need? Tell us what is happening today.")
+        normalize("We build the site, the forms and the follow-up, so customers can reach you and nothing gets lost.")
       );
     });
 
-    it("renders exact ratified Editorial Reset lead and support", () => {
-      const lead = "The product people see is only the beginning.";
-      const support = "What happens after someone acts matters just as much.";
-
-      expect(normalizedCode).toContain(normalize(lead));
-      expect(normalizedCode).toContain(normalize(support));
-    });
-
-    it("renders exact ratified Laptop Portal headline, support, and headings", () => {
-      expect(normalizedCode).toContain(normalize("Simple outside. Structured inside."));
-      expect(normalizedCode).toContain(
-        normalize("Customers get a clear experience. Your team gets the information, ownership and next step behind it.")
-      );
-      expect(normalizedCode).toContain(normalize("Make the next step obvious."));
-      expect(normalizedCode).toContain(normalize("Make the next step visible."));
-    });
-
-    it("renders ratified Connected Flow lead and strictly excludes unratified support sentence", () => {
-      expect(normalizedCode).toContain(normalize("One action. A clear next step."));
-
-      // Unratified copy that drifted into code must remain absent
+    it("keeps the earlier unratified Connected Flow sentences out of the code", () => {
       expect(normalizedCode).not.toContain(
         normalize("Every channel converges into one organized system with an owner, a next step and a clear status.")
       );
       expect(normalizedCode).not.toContain(
         normalize("Multiple plain input sources converge into one organized workflow.")
       );
-    });
-
-    it("renders exact ratified Needs Finder & Quiet Close", () => {
-      expect(normalizedCode).toContain(normalize("What would you like to make easier?"));
-      expect(normalizedCode).toContain(normalize("Help customers find my business"));
-      expect(normalizedCode).toContain(normalize("Make enquiries, bookings or orders easier"));
-      expect(normalizedCode).toContain(normalize("Reduce repetitive work"));
-      expect(normalizedCode).toContain(normalize("Build a product"));
-      expect(normalizedCode).toContain(normalize("What should work better next?"));
-      expect(normalizedCode).toContain(normalize("Start with the problem. We'll work out what the right product should be."));
     });
   });
 

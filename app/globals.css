@@ -390,26 +390,6 @@ p {
   animation: signalPulse 2s ease-in-out infinite;
 }
 
-/* Component-scoped physical device hardware tokens per Owner reference sheet (DECISION-043 & B3) */
-.phone-3d-stage {
-  --phone-chassis: #12161F;
-  --phone-rail: #1E2532;
-}
-
-/* Restrained Phone3D Idle Float (±8px / ~2.6s) */
-@keyframes phoneFloat {
-  0%, 100% {
-    transform: translateY(0px);
-  }
-  50% {
-    transform: translateY(-8px);
-  }
-}
-
-.animate-phone-float {
-  animation: phoneFloat 2.6s ease-in-out infinite;
-}
-
 /* NAV-REG: a full 360° trip around the *actual* menu pill perimeter.
    SVG pathLength=100 keeps the orbit continuous while GSAP changes its width. */
 @keyframes ycn-navbar-full-orbit {
