@@ -10,11 +10,12 @@
 ## Current Work — 13 November 2026 (supersedes older ordering below)
 - [x] **V3 front-end rebuild (Option B), PR #33:** hero, homepage, inner pages, contact channels, tokens, archive, GPT findings F1–F5, Work/About links, WhatsApp button, media clean-up, static signal borders, hero still frame without JavaScript.
 - [x] **Browser test suite:** `pnpm test:e2e` (Playwright, local production build, Chromium + Firefox).
-- [x] **Monitoring prepared:** Sentry off until `SENTRY_DSN` is set; scrubber removes personal data.
+- [x] **Monitoring prepared (PR #33):** Sentry off until `SENTRY_DSN` is set; allow-list sends only error type, route/stage, request ID and code location. Live alert not verified (deferred).
 - [ ] **Merge:** this docs PR, then PR #33 at exact SHAs (Owner).
 - [ ] **Privacy and Terms:** rewrite from the vault fact sheet, then lawyer review (Owner supplies business facts O1–O10).
 - [ ] **Asset decisions:** `docs/ASSET_MANIFEST.md` (intro film, desk photos, unused logo sizes).
-- [ ] **Real phones and WebKit:** Android/iPhone checks; WebKit needs a machine with its system libraries.
+- [ ] **Real phones and WebKit:** Android/iPhone checks; Playwright WebKit needs a machine with its system libraries (WebKit tests are not real Safari/iPhone tests).
+- [ ] **Real enquiry test:** current V3 form against a configured database and email (existing staging or local services; mocked browser tests do not count).
 - [ ] **Comprehension test:** 5 business owners (Owner kept 5 on 13 Nov).
 - [ ] **DEFERRED by the Owner (no subscriptions now):** hosting and protected preview, production database, live monitoring, DNS/email authentication, analytics, cutover. Launch date is set when hosting is chosen.
 
