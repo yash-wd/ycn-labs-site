@@ -1,4 +1,3 @@
-import Image from "next/image";
 
 // YCN-V3-UI demonstration screens (illustrative; aria-hidden; nothing is interactive).
 // Styles: app/globals.css "HOMEPAGE: demonstration screens".
@@ -44,21 +43,33 @@ export function SiteShot() {
   );
 }
 
+// Owner decision 13 Nov 2026 (GPT review F5): show a website before/after, not desk photos.
 export function BeforeAfterShot() {
   return (
     <div className="v3-shot" aria-hidden="true">
       <div className="grid grid-cols-2 gap-3">
-        {[
-          { src: "/media/messy_desk_books_papers_iphone.jpg", label: "Before: scattered" },
-          { src: "/media/clean_organised_laptop_desk.jpg", label: "After: organised" },
-        ].map((p) => (
-          <figure key={p.src} className="m-0">
-            <div className="relative aspect-[4/3] overflow-hidden rounded-[8px]">
-              <Image src={p.src} alt="" fill sizes="(max-width: 900px) 45vw, 260px" className="object-cover" />
+        <figure className="m-0 flex flex-col">
+          <div className="v3-site v3-site-old flex-1">
+            <div className="v3-site-bar"><i /><i /><i /><span>yourbusiness.in</span></div>
+            <div className="v3-site-body">
+              <strong>Welcome to our website</strong>
+              <span className="v3-site-lines"><i /><i /><i /><i /></span>
+              <span className="v3-site-small">Click here for more information</span>
             </div>
-            <figcaption className="mt-1 text-[11px] text-[#94A3B8]">{p.label}</figcaption>
-          </figure>
-        ))}
+          </div>
+          <figcaption className="mt-1 text-[11px] text-[#94A3B8]">Before: hard to act on</figcaption>
+        </figure>
+        <figure className="m-0 flex flex-col">
+          <div className="v3-site flex-1">
+            <div className="v3-site-bar"><i /><i /><i /><span>yourbusiness.in</span></div>
+            <div className="v3-site-body">
+              <strong>Catering for events of 20 to 200.</strong>
+              <span>Open daily · Book a tasting</span>
+              <div className="v3-site-actions"><span>Call now</span><span>WhatsApp</span></div>
+            </div>
+          </div>
+          <figcaption className="mt-1 text-[11px] text-[#94A3B8]">After: clear next step</figcaption>
+        </figure>
       </div>
     </div>
   );

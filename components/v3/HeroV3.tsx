@@ -8,7 +8,7 @@ import { DeviceStage } from "./DeviceStage";
 // hero-media-layer, hero-primary-cta, hero-secondary-cta.
 export const HERO_HEADLINE = "Websites and software that bring your business enquiries.";
 export const HERO_SUPPORT =
-  "We build the site, the forms and the follow-up, so customers can reach you and nothing gets lost.";
+  "We build the site, the forms and the follow-up, so customers can reach you and enquiries are easier to follow up.";
 
 export function HeroV3() {
   return (

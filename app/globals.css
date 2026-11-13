@@ -743,6 +743,15 @@ p {
 .v3-site-actions { display: flex; flex-wrap: wrap; gap: 6px; }
 .v3-site-actions span { padding: 5px 10px; border-radius: 8px; font-size: 11px; font-weight: 600; background: #E2E8F0; color: #0F172A; }
 .v3-site-actions span:first-child { background: #0F172A; color: #FFFFFF; }
+/* Before/after website pair (Owner decision 13 Nov 2026): the "old" site is wordy, with no clear action. */
+.v3-site-old { background: #EEF0F3; }
+.v3-site-old .v3-site-body strong { font-family: Georgia, "Times New Roman", serif; font-weight: 400; color: #334155; }
+.v3-site-lines { display: grid; gap: 5px; }
+.v3-site-lines i { display: block; height: 6px; border-radius: 3px; background: #CBD5E1; }
+.v3-site-lines i:nth-child(2) { width: 92%; }
+.v3-site-lines i:nth-child(3) { width: 96%; }
+.v3-site-lines i:nth-child(4) { width: 60%; }
+.v3-site-small { font-size: 10px; color: #64748B; text-decoration: underline; }
 .v3-shot-note { font-size: 11px; color: #64748B; }
 
 .v3-steps { position: relative; display: grid; gap: var(--space-4); counter-reset: v3-step; }

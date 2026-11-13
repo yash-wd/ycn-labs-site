@@ -43,11 +43,11 @@ describe("Content Specification Authority & Anti-Drift Suite", () => {
   describe("1. Homepage Canonical Narrative", () => {
     // YCN-V3-UI (Owner approvals 10–12 Nov 2026): the V3 homepage copy (COPY-V3.md, headline A)
     // replaced the earlier ratified homepage narrative; the old sections were archived on Day 5.
-    // CONTENT_SPEC is updated with the V3 copy at sprint end.
+    // CONTENT_SPEC is updated with the V3 copy at sprint end. Support line softened by Owner decision 13 Nov 2026.
     it("renders the Owner-approved V3 hero headline and support line", () => {
       expect(normalizedCode).toContain(normalize("Websites and software that bring your business enquiries."));
       expect(normalizedCode).toContain(
-        normalize("We build the site, the forms and the follow-up, so customers can reach you and nothing gets lost.")
+        normalize("We build the site, the forms and the follow-up, so customers can reach you and enquiries are easier to follow up.")
       );
     });
 

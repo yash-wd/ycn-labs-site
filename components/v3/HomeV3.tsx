@@ -1,4 +1,5 @@
-import { Globe, LayoutDashboard, Workflow, Wrench } from "lucide-react";
+import Link from "next/link";
+import { ArrowRight, Globe, LayoutDashboard, MessageCircle, Workflow, Wrench } from "lucide-react";
 import { YcnFlowButton } from "@/components/ui/ycn-flow-button";
 import { Section, SectionHead } from "./Section";
 import { RequestsShot, FlowShot, SiteShot, BeforeAfterShot } from "./Shots";
@@ -31,7 +32,7 @@ export const FAQ = [
   { q: "Do I need a technical brief?", a: "No. Most owners know what is slow, lost or painful. Choosing the right format is our job." },
   { q: "How much will it cost?", a: "We quote each project in INR after a short conversation. There are no preset price bands." },
   { q: "How long does a website take?", a: "It depends on the content and the number of pages. The written scope gives you the timeline." },
-  { q: "Will I be able to update it myself?", a: "Yes, for the content you need to change. We set that up and show you how." },
+  { q: "Will I be able to update it myself?", a: "Yes, where it is agreed in your scope. We set that up and show you how." },
   { q: "Who owns the finished work?", a: "Ownership and licensing terms are set out plainly in the written agreement before work starts." },
   { q: "What happens after launch?", a: "We fix problems after launch, then offer a monthly maintenance plan if you want one." },
 ];
@@ -99,6 +100,22 @@ export function HomeV3Body() {
             </li>
           ))}
         </ul>
+        {/* Owner decision 13 Nov 2026: a route to the evidence and to the person behind it. */}
+        <div className="mt-[var(--space-3)] flex flex-wrap gap-x-[var(--space-3)]">
+          {[
+            { href: "/work", label: "See our work" },
+            { href: "/about", label: "Who you’ll work with" },
+          ].map((l) => (
+            <Link
+              key={l.href}
+              href={l.href}
+              className="inline-flex min-h-[44px] items-center gap-1.5 font-semibold text-[var(--link-text)] underline-offset-4 hover:underline focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--focus-ring)]"
+            >
+              {l.label}
+              <ArrowRight className="h-4 w-4" aria-hidden="true" />
+            </Link>
+          ))}
+        </div>
       </Section>
 
       <Section id="questions" labelledBy="faq-heading" size="tight">
@@ -125,9 +142,21 @@ export function HomeV3Body() {
               We&rsquo;ll tell you plainly what could help and what it would cost, before you commit to anything.
             </p>
           </div>
-          <YcnFlowButton href="/contact" variant="primary" size="lg" className="type-control min-h-[48px] w-full px-7 normal-case md:w-auto">
-            Start a Project
-          </YcnFlowButton>
+          <div className="flex flex-col gap-[var(--space-1)] sm:flex-row md:flex-col lg:flex-row">
+            <YcnFlowButton href="/contact" variant="primary" size="lg" className="type-control min-h-[48px] w-full px-7 normal-case md:w-auto">
+              Start a Project
+            </YcnFlowButton>
+            {/* Owner decision 13 Nov 2026: a secondary, visitor-started WhatsApp chat. */}
+            <a
+              href="https://wa.me/918341226694"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex min-h-[48px] w-full items-center justify-center gap-2 rounded-control border border-[var(--border-strong)] px-6 font-semibold text-[var(--text-primary)] transition-colors hover:border-[var(--action-blue)] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--focus-ring)] md:w-auto"
+            >
+              <MessageCircle className="h-5 w-5" aria-hidden="true" />
+              Chat on WhatsApp
+            </a>
+          </div>
         </div>
       </Section>
     </>
