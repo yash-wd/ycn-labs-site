@@ -2,6 +2,8 @@
 
 Open this file on branch `main`. Before any work run `git fetch && git status --porcelain && git branch -vv` to verify a clean working tree aligned with `origin/main` (or with tracking upstream if on an authorized `wip/*` branch).
 
+> **13 Nov 2026:** read the CURRENT STATUS block at the top of [docs/STATE.md](STATE.md) first. V3 (PR #33) uses headline A, "Websites and software that bring your business enquiries.", approved by the Owner for V3; the ratified line quoted below is historical until `docs/YCN_CONTENT_SPEC.md` is updated with the V3 copy.
+
 > "Websites and software. Built around your business. We turn business problems into digital products that help customers act, teams work clearly, and the business keep moving."  
 > — *docs/YCN_CONTENT_SPEC.md:28-31 (Ratified DECISION-040, docs/YCN_DECISIONS.md:136-137)*
 

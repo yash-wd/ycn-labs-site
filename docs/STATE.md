@@ -13,6 +13,23 @@
 
 ---
 
+## CURRENT STATUS — 13 November 2026 (read this first)
+
+This block supersedes every "Next Order", launch-date and Owner-input list further down. Those remain as dated history.
+
+- **Approach (Owner, 10 Nov):** Option B: rebuild what visitors see (V3) on the existing engine. No restart; the enquiry API, database, email, recovery, fonts, palette, header and CI are kept.
+- **V3 is built in PR #33** (branch `wip/YCN-V3-UI`, open, not merged): device-stage hero with headline A ("Websites and software that bring your business enquiries."), new homepage, five rebuilt inner pages, Contact with call/WhatsApp/email, V3 tokens, archive of the old homepage code.
+- **GPT review findings closed in PR #33:** F1 static demo labels, F2 hero Pause/Play, F3 four-step metadata; Owner-approved F4 softened promises, F5 website before/after, Work/About links, WhatsApp button, removal of 17 unseen media files and 2 unused components.
+- **Motion (Owner, 13 Nov):** header and button signal borders are static (accessibility exception to the NAV-07 freeze, WCAG 2.2.2); the hero loops only once its Pause control works.
+- **Tests:** unit suite plus a Playwright browser suite in the repo (`pnpm test:e2e`, local production build; Chromium and Firefox; WebKit needs sudo-installed libraries). Run locally, not in CI (Owner, 13 Nov).
+- **Monitoring:** Sentry prepared but OFF until `SENTRY_DSN` is set; personal data is scrubbed before sending.
+- **No new paid subscriptions now (Owner, 13 Nov).** Hosting, preview, production database, live monitoring, DNS and analytics are deferred, not done. **The launch date is set when hosting is chosen;** the 30 Nov target and the 19 Nov account-input list no longer apply.
+- **Still open:** Privacy/Terms rewrite (fact sheet prepared in the private vault; lawyer review later); asset decisions in `docs/ASSET_MANIFEST.md` (on PR #33); real-phone and WebKit checks; 5-person comprehension test (Owner kept 5 on 13 Nov); merge of this PR and PR #33.
+- **Integration order:** review and merge this docs PR → bring PR #33 up to date with `main` → review → Owner merge at an exact SHA. A merge does not deploy anything.
+- **Live progress record:** `docs/PROGRESS.md` (on PR #33).
+
+---
+
 ## 1. Verified Quality Gates & Baseline (RUN-VERIFY-01)
 - **Quality Gates:** lint / check-types / test / build all exit 0 from fresh clone simulation without `.env.local`.
 - **Automated Tests:** 280/280 vitest tests passing across 18 test files (`vitest run`).
@@ -447,7 +464,7 @@ Prepared by local Claude Code on 10 Nov 2026 under the Owner's docs-PR authoriza
 - **UNKNOWN:** current performance (no Lighthouse on this build); off-device vault backup; Vercel project for this repo; what `ycnlabs.com` shows today.
 - Estimated completion ≈ 51% (±10, weighted estimate; see the vault report). Health: AT RISK. 30 Nov target at risk unless external inputs (legal, licences, hosting access) arrive by about 18 Nov.
 
-### 5. Owner-Only Pending Titles
+### 5. Owner-Only Pending Titles (as of 10 Nov; see CURRENT STATUS for 13 Nov)
 - Business inputs: legal entity name and city; portfolio project or "none"; INR pricing wording; three testers.
 - Image and film source/licence confirmation (or replacement approval).
 - Counsel/CA review date (Privacy §4, Terms §2, DPDP notice).
@@ -457,7 +474,7 @@ Prepared by local Claude Code on 10 Nov 2026 under the Owner's docs-PR authoriza
 - Comprehension sample size (3 or 5); named primary and backup lead operators.
 - Phone/WhatsApp task go-ahead (number already approved).
 
-### 6. Next Order (in this order; nothing else without Owner word)
+### 6. Next Order (in this order; nothing else without Owner word) — SUPERSEDED 13 Nov 2026, see CURRENT STATUS at the top
 1. Independent review and Owner merge of this docs PR.
 2. Sentry initialisation task (needs DSN).
 3. T3 (status tokens, purple badge colour chosen by the Owner).
