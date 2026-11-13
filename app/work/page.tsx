@@ -43,7 +43,7 @@ export default function WorkPage() {
           ))}
           <li className="flex flex-col justify-center rounded-card border border-dashed border-[var(--border-strong)] p-[var(--space-4)]">
             <h3 className="font-display text-lg font-semibold text-[var(--text-primary)]">Your project could be the first case study.</h3>
-            <Link href="/contact" className="mt-[var(--space-2)] font-semibold text-[var(--link-text)] underline-offset-4 hover:underline">Start a Project</Link>
+            <Link href="/contact" className="mt-[var(--space-2)] inline-flex min-h-[44px] items-center font-semibold text-[var(--link-text)] underline-offset-4 hover:underline">Start a Project</Link>
           </li>
         </ul>
         <p className="type-caption mt-[var(--space-4)] max-w-[var(--measure)] text-[var(--text-secondary)]">

@@ -2,11 +2,11 @@
 
 One line per field, updated once a day (Owner decision 10 Nov 2026: Option B, light lane).
 
-| Field | Day 1 (12 Nov 2026) | Day 2 (12 Nov 2026) | Day 3 (12 Nov 2026) |
-|---|---|---|---|
-| Task | Tokens (spacing, radius, elevation, status), section kit, new hero H1 with headline A | Homepage body: what we build, problems we solve (4 screens), how it works, why YCN, 6 questions, final call | What we solve, How we work, Work, About, Engineering rebuilt on the kit |
-| Target | Homepage first screen shows what YCN builds in seconds; nothing overlaps; works at 375–1440, both themes, reduced motion | ≤ 600 words, ≤ 8 phone screens, nothing overlaps, keyboard and reduced motion work | Each page ≤ 300 words, one visual per message, ratified headlines kept |
-| PR / SHA | See the Day 1 PR (`wip/YCN-V3-UI`) | Same PR, next commit | Same PR, next commit |
-| Evidence | 27 files / 348 tests pass; types clean; lint 0 errors; offline build OK; screenshots in the private vault `proof/YCN-V3-SPRINT/day1` | 28 files / 355 tests; 493 words (was 2,960); 7.6 phone screens before the footer; offline build OK | Words: 220 / 189 / 238 / 141 / 205 (were 1,600–2,200); 355 tests; offline build OK |
-| Blocker / owner | None for the build. Launch items (legal, licences, hosting, Sentry account) stay with the Owner | None | None |
-| Next decision | Owner approved the hero (12 Nov) | Owner approved the homepage (12 Nov); fixes stay "after launch" with no number | Owner: approve the inner pages, then Day 4: Contact, motion, responsive/accessibility pass, Lighthouse, test clean-up |
+| Field | Day 1 (12 Nov 2026) | Day 2 (12 Nov 2026) | Day 3 (12 Nov 2026) | Day 4 (13 Nov 2026) |
+|---|---|---|---|---|
+| Task | Tokens (spacing, radius, elevation, status), section kit, new hero H1 with headline A | Homepage body: what we build, problems we solve (4 screens), how it works, why YCN, 6 questions, final call | What we solve, How we work, Work, About, Engineering rebuilt on the kit | Contact (call, WhatsApp, email), form colours on status tokens, plainer Engineering intro, quality pass |
+| Target | Homepage first screen shows what YCN builds in seconds; nothing overlaps; works at 375–1440, both themes, reduced motion | ≤ 600 words, ≤ 8 phone screens, nothing overlaps, keyboard and reduced motion work | Each page ≤ 300 words, one visual per message, ratified headlines kept | Contrast ≥ 4.5:1, tap targets ≥ 44 px, visible focus, LCP ≤ 2.5 s on slow 4G, CLS ≤ 0.1 |
+| PR / SHA | See the Day 1 PR (`wip/YCN-V3-UI`) | Same PR, next commit | Same PR, next commit | Same PR, next commit |
+| Evidence | 27 files / 348 tests pass; types clean; lint 0 errors; offline build OK; screenshots in the private vault `proof/YCN-V3-SPRINT/day1` | 28 files / 355 tests; 493 words (was 2,960); 7.6 phone screens before the footer; offline build OK | Words: 220 / 189 / 238 / 141 / 205 (were 1,600–2,200); 355 tests; offline build OK | 11 pages × 2 themes × 3 widths: 0 contrast failures (2,830 text elements), focus visible, no overflow; LCP ≈ 1.0 s, CLS 0; 361 tests |
+| Blocker / owner | None for the build. Launch items (legal, licences, hosting, Sentry account) stay with the Owner | None | None | Header logo tap target 36 px (frozen menu bar, NAV-07) |
+| Next decision | Owner approved the hero (12 Nov) | Owner approved the homepage (12 Nov); fixes stay "after launch" with no number | Owner approved the inner pages (12 Nov) | Owner: approve Day 4; archive unused components and retire old-hero tests (yes/no); then Day 5 review and merge |

@@ -141,7 +141,7 @@ describe("Phase 6: Supporting Pages & Canonical Navigation", () => {
       const html = renderToString(<EngineeringPage />);
       expect(html).toContain("Simple for the user. Deliberate underneath.");
       expect(html).toContain(
-        "Technical choices should follow the actual problem. This page explains the practices we use and the evidence available for this website/project; it must not turn targets into claims."
+        "Technical choices should follow the actual problem. Here is how we build, and what we can show for it."
       );
 
       const practices = [

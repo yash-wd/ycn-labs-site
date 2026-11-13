@@ -39,7 +39,9 @@ describe("YCN-SMALL-FIXES-01", () => {
   it("contact form errors are readable in light theme and announced", () => {
     const form = read("components", "ContactForm.tsx");
     expect(form).not.toMatch(/className="text-xs text-rose-400/);
-    expect((form.match(/text-xs text-rose-700 dark:text-rose-400/g) || []).length).toBe(4);
+    // YCN-V3-UI Day 4: error colours moved onto the status tokens (independent of the brand).
+    expect((form.match(/text-xs text-status-error/g) || []).length).toBe(4);
+    expect(form).not.toMatch(/rose-|emerald-/);
     expect(form).toContain('<div role="alert"');
   });
 

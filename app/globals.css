@@ -791,7 +791,7 @@ p {
 }
 .v3-faq details { border-top: 1px solid var(--border-subtle); padding: var(--space-2) 0; }
 .v3-faq details:last-child { border-bottom: 1px solid var(--border-subtle); }
-.v3-faq summary { cursor: pointer; list-style: none; display: flex; justify-content: space-between; gap: var(--space-2); font-weight: 600; color: var(--text-primary); }
+.v3-faq summary { cursor: pointer; list-style: none; display: flex; align-items: center; min-height: 44px; justify-content: space-between; gap: var(--space-2); font-weight: 600; color: var(--text-primary); }
 .v3-faq summary::-webkit-details-marker { display: none; }
 .v3-faq summary::after { content: "+"; color: var(--action-blue); font-weight: 700; }
 .v3-faq details[open] summary::after { content: "–"; }

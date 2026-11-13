@@ -30,7 +30,7 @@ export default function EngineeringPage() {
     <>
       <PageIntro
         title="Simple for the user. Deliberate underneath."
-        lead="Technical choices should follow the actual problem. This page explains the practices we use and the evidence available for this website/project; it must not turn targets into claims."
+        lead="Technical choices should follow the actual problem. Here is how we build, and what we can show for it."
       />
       <Section size="tight" labelledBy="practices-heading">
         <h2 id="practices-heading" className="sr-only">Practices</h2>
