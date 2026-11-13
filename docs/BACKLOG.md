@@ -10,7 +10,8 @@
 ## Current Work — 13 November 2026 (supersedes older ordering below)
 - [x] **V3 front-end rebuild (Option B), PR #33:** hero, homepage, inner pages, contact channels, tokens, archive, GPT findings F1–F5, Work/About links, WhatsApp button, media clean-up, static signal borders, hero still frame without JavaScript.
 - [x] **Browser test suite:** `pnpm test:e2e` (Playwright, local production build, Chromium + Firefox).
-- [x] **Monitoring prepared (PR #33):** Sentry off until `SENTRY_DSN` is set; allow-list sends only error type, route/stage, request ID and code location. Live alert not verified (deferred).
+- [x] **Monitoring prepared (PR #33):** Sentry off until `SENTRY_DSN` is set; allow-list sends only the error type, fixed route/stage/error-category tags, a UUID request ID, project-relative code location (file under app/, lib/ or components/, function, line), environment and time; request paths, messages, enquiry contents and personal data are dropped. Live alert not verified (deferred).
+- [ ] **Owner read-only deploy check before any merge:** installed GitHub Apps' access to `ycn-labs-site`, and any host project linked to it (see STATE.md).
 - [ ] **Merge:** this docs PR, then PR #33 at exact SHAs (Owner).
 - [ ] **Privacy and Terms:** rewrite from the vault fact sheet, then lawyer review (Owner supplies business facts O1–O10).
 - [ ] **Asset decisions:** `docs/ASSET_MANIFEST.md` (intro film, desk photos, unused logo sizes).
