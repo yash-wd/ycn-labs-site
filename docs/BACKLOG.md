@@ -10,7 +10,7 @@
 ## Current Work — 13 November 2026 (supersedes older ordering below)
 - [x] **V3 front-end rebuild (Option B), PR #33:** hero, homepage, inner pages, contact channels, tokens, archive, GPT findings F1–F5, Work/About links, WhatsApp button, media clean-up, static signal borders, hero still frame without JavaScript.
 - [x] **Browser test suite:** `pnpm test:e2e` (Playwright, local production build, Chromium + Firefox).
-- [x] **Monitoring prepared (PR #33):** Sentry off until `SENTRY_DSN` is set; allow-list sends only the error type, fixed route/stage/error-category tags, a UUID request ID, project-relative code location (file under app/, lib/ or components/, function, line), environment and time; request paths, messages, enquiry contents and personal data are dropped. Live alert not verified (deferred).
+- [x] **Monitoring prepared (PR #33):** Sentry off until `SENTRY_DSN` is set; allow-list sends only the error type, fixed route/stage/error-category tags, a UUID request ID, project-relative code location (file under app/, lib/ or components/, function, line), environment and time; request paths, messages, other extra data and contexts are dropped. This is a filter, not a guarantee: before switching it on, inspect real error payloads from synthetic enquiries on a production build (privacy and usefulness) and confirm a test alert reaches a named person. Live alert not verified (deferred).
 - [ ] **Owner read-only deploy check before any merge:** installed GitHub Apps' access to `ycn-labs-site`, and any host project linked to it (see STATE.md).
 - [ ] **Merge:** this docs PR, then PR #33 at exact SHAs (Owner).
 - [ ] **Privacy and Terms:** rewrite from the vault fact sheet, then lawyer review (Owner supplies business facts O1–O10).
@@ -96,7 +96,7 @@
   - [ ] **[REPORTED]** Named primary and backup lead operators are not recorded; required before launch.
   - [ ] **[REPORTED]** Redirect inventory from the old site (`yash-wd/ycnlabs`) before domain cutover; `next.config.mjs` currently has one redirect (`/what-we-build`).
   - [ ] **[UNKNOWN]** Off-device backup of the private vault: the 18–19 Oct archives are on the same SSD; whether the 6 Nov Google Drive upload included the vault is unverified.
-  - [ ] **[UNKNOWN]** No Vercel project exists for this repository yet; the current content of `ycnlabs.com` (old site, claims hotfix) was not checked on 10 Nov.
+  - [ ] **[UNKNOWN as of 10 Nov; see STATE Deployment check, 13 Nov]** Whether any hosting project is linked to this repository (pending Owner check); the current content of `ycnlabs.com` (old site, claims hotfix) was not checked on 10 Nov.
   - **Legal review scope (5 Nov 2026):** include `/terms` §2 ownership and portfolio-permission wording, which conflicts with DECISION-054 and DECISION-052 O-05. Not changed in PR #18; needs counsel and an Owner ruling.
 - [ ] **`16 YCN-PRODUCTION-LAUNCH-01`:** Separate authorized deploy of exact approved SHA, no incidental source changes.
 - [ ] **`17 YCN-POSTLAUNCH-01`:** Operations and measurement after launch: lead SLA/response tracking, uptime/alerts, proposal funnel data from live analytics, incident playbook, maintenance backlog.
