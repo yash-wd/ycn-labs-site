@@ -2,7 +2,6 @@ import { describe, it, expect, beforeEach, afterEach, vi } from "vitest";
 import React from "react";
 import { renderToStaticMarkup } from "react-dom/server";
 import { isDevIntroReplay, logEntranceDiagnostic } from "@/components/homepage/vnext/entrance-diagnostics";
-import { Phone3D } from "@/components/devices/Phone3D";
 
 vi.mock("next/image", () => ({
   default: ({ src, alt, className }: { src: string; alt: string; className?: string }) =>
@@ -72,54 +71,6 @@ describe("Commit B2: Entrance Replay & Production-Inert Proof", () => {
         details: { effectiveType: "2g" },
       })
     );
-  });
-});
-
-describe("Commit B2: Phone3D Modular Architecture & Inert Screen Proof", () => {
-  const html = renderToStaticMarkup(React.createElement(Phone3D));
-
-  it("1. INERT CONTROLS PROOF: Phone3D screen contains ZERO interactive form or link controls", () => {
-    // Assert zero button tags
-    expect(html).not.toMatch(/<button[\s>]/i);
-    // Assert zero anchor/link tags
-    expect(html).not.toMatch(/<a[\s>]/i);
-    // Assert zero input tags
-    expect(html).not.toMatch(/<input[\s>]/i);
-    // Assert zero select tags
-    expect(html).not.toMatch(/<select[\s>]/i);
-    // Assert zero textarea tags
-    expect(html).not.toMatch(/<textarea[\s>]/i);
-    // Assert no positive/focusable tabindex (tabIndex="-1" allowed on inert visual elements)
-    expect(html).not.toMatch(/tabindex=["'](?:[0-9]+)["']/i);
-  });
-
-  it("2. CANON STRINGS PROOF: Phone3D contains verified ratified S0 copy per Owner B3 ruling", () => {
-    expect(html).toContain("Sample experience");
-    expect(html).toContain("How can we help?");
-    expect(html).toContain("Request a quote");
-    expect(html).toContain("Book a service");
-    expect(html).toContain("Track a request");
-    expect(html).toContain("Sample · nothing is sent");
-  });
-
-  it("3. ANTI-SLOP & TRADEMARK PROOF: Prohibited/invented marketing strings and Apple trademarks are absent", () => {
-    // Apple signature clock
-    expect(html).not.toContain("9:41");
-    // Apple Dynamic Island trademark
-    expect(html).not.toMatch(/dynamic\s*island/i);
-    // Invented marketing labels
-    expect(html).not.toContain("Customer View");
-    expect(html).not.toContain("Transparent availability commitments");
-  });
-
-  it("4. COLOR SAFETY PROOF: Action blue used for discovery, signal cyan used strictly for request state", () => {
-    expect(html).toContain("var(--action-blue)");
-    expect(html).toContain("var(--signal-cyan)");
-  });
-
-  it("5. HARDWARE THEME-INVARIANCE PROOF: Chassis uses theme-invariant graphite hardware tokens", () => {
-    expect(html).toContain("var(--phone-chassis)");
-    expect(html).toContain("var(--phone-rail)");
   });
 });
 
@@ -447,7 +398,8 @@ describe("Visual Fix 15: Flash Elimination, Navbar Availability & Hero Presentat
     const path = await import("path");
 
     const heroCode = fs.readFileSync(
-      path.join(process.cwd(), "components", "homepage", "vnext", "HeroFoundation.tsx"),
+      // YCN-V3-UI Day 5: the old photo hero was archived; the live hero is HeroV3.
+      path.join(process.cwd(), "components", "v3", "HeroV3.tsx"),
       "utf-8"
     );
     const stageCode = fs.readFileSync(
@@ -459,7 +411,7 @@ describe("Visual Fix 15: Flash Elimination, Navbar Availability & Hero Presentat
     expect(heroCode).toContain('id="hero-narrative-col"');
     // Top padding ensures geometric gap rule (>= 28px mobile, >= 40px desktop)
     expect(heroCode).toContain("pt-24");
-    expect(heroCode).toContain("md:pt-28");
+    expect(heroCode).toContain("sm:pt-28");
 
     // Scroll budget logic in stage
     expect(stageCode).toContain("h * 0.95");

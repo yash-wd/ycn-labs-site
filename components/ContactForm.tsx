@@ -143,8 +143,8 @@ export function ContactForm() {
 
   if (submitSuccess) {
     return (
-      <div className="p-8 sm:p-10 rounded-2xl border border-emerald-500/20 bg-emerald-500/5 text-center space-y-4">
-        <div className="w-12 h-12 rounded-full bg-emerald-500/10 text-emerald-500 flex items-center justify-center mx-auto">
+      <div className="p-8 sm:p-10 rounded-2xl border border-status-success/30 bg-status-success/5 text-center space-y-4">
+        <div className="w-12 h-12 rounded-full bg-status-success/10 text-status-success flex items-center justify-center mx-auto">
           <CheckCircle2 className="w-6 h-6" />
         </div>
         <h3 className="text-xl sm:text-2xl font-bold text-[var(--text-primary)] font-display">
@@ -180,11 +180,11 @@ export function ContactForm() {
       />
 
       {submitError && (
-        <div role="alert" className="p-4 rounded-xl border border-rose-500/20 bg-rose-500/5 text-rose-800 dark:text-rose-300 text-sm flex items-start gap-3">
-          <AlertCircle aria-hidden="true" className="w-5 h-5 flex-shrink-0 text-rose-700 dark:text-rose-400 mt-0.5" />
+        <div role="alert" className="p-4 rounded-xl border border-status-error/30 bg-status-error/5 text-[var(--text-primary)] text-sm flex items-start gap-3">
+          <AlertCircle aria-hidden="true" className="w-5 h-5 flex-shrink-0 text-status-error mt-0.5" />
           <div className="space-y-1">
-            <p className="font-medium text-rose-900 dark:text-rose-200">Submission Error</p>
-            <p className="text-xs text-rose-800 dark:text-rose-300/90 leading-relaxed">{submitError}</p>
+            <p className="font-medium text-status-error">Submission Error</p>
+            <p className="text-xs text-[var(--text-secondary)] leading-relaxed">{submitError}</p>
           </div>
         </div>
       )}
@@ -216,7 +216,7 @@ export function ContactForm() {
         </div>
         <input type="hidden" {...register("projectType")} />
         {errors.projectType && (
-          <p className="text-xs text-rose-700 dark:text-rose-400">{errors.projectType.message}</p>
+          <p className="text-xs text-status-error">{errors.projectType.message}</p>
         )}
       </div>
 
@@ -235,7 +235,7 @@ export function ContactForm() {
               setValue("message", `${e.target.value}\n\n${whatToChange}`, { shouldValidate: true });
             }}
             placeholder="Tell us what is slow, lost, manual, or painful in your day-to-day operations..."
-            className="w-full px-3.5 py-2.5 rounded-xl border border-[var(--border-subtle)] bg-[var(--bg-canvas)] text-sm font-sans text-[var(--text-primary)] placeholder-[var(--text-muted)] focus:border-[var(--action-blue)] focus:outline-none transition-colors"
+            className="w-full min-h-[44px] px-3.5 py-2.5 rounded-xl border border-[var(--border-subtle)] bg-[var(--bg-canvas)] text-sm font-sans text-[var(--text-primary)] placeholder-[var(--text-muted)] focus:border-[var(--action-blue)] focus:outline-none transition-colors"
           />
         </div>
 
@@ -252,11 +252,11 @@ export function ContactForm() {
               setValue("message", `${whatHappensToday}\n\n${e.target.value}`, { shouldValidate: true });
             }}
             placeholder="What outcome or system would make a concrete difference to your customers or team?"
-            className="w-full px-3.5 py-2.5 rounded-xl border border-[var(--border-subtle)] bg-[var(--bg-canvas)] text-sm font-sans text-[var(--text-primary)] placeholder-[var(--text-muted)] focus:border-[var(--action-blue)] focus:outline-none transition-colors"
+            className="w-full min-h-[44px] px-3.5 py-2.5 rounded-xl border border-[var(--border-subtle)] bg-[var(--bg-canvas)] text-sm font-sans text-[var(--text-primary)] placeholder-[var(--text-muted)] focus:border-[var(--action-blue)] focus:outline-none transition-colors"
           />
           <input type="hidden" {...register("message")} />
           {errors.message && (
-            <p className="text-xs text-rose-700 dark:text-rose-400 mt-1">{errors.message.message}</p>
+            <p className="text-xs text-status-error mt-1">{errors.message.message}</p>
           )}
         </div>
       </div>
@@ -277,11 +277,11 @@ export function ContactForm() {
               placeholder="Full name"
               {...register("name")}
               className={`w-full px-3.5 py-2.5 rounded-xl border text-sm font-sans bg-[var(--bg-canvas)] text-[var(--text-primary)] placeholder-[var(--text-muted)] focus:border-[var(--action-blue)] focus:outline-none transition-colors ${
-                errors.name ? "border-rose-500/50" : "border-[var(--border-subtle)]"
+                errors.name ? "border-status-error/60" : "border-[var(--border-subtle)]"
               }`}
             />
             {errors.name && (
-              <p className="text-xs text-rose-700 dark:text-rose-400 mt-1">{errors.name.message}</p>
+              <p className="text-xs text-status-error mt-1">{errors.name.message}</p>
             )}
           </div>
 
@@ -295,11 +295,11 @@ export function ContactForm() {
               placeholder="name@company.com"
               {...register("email")}
               className={`w-full px-3.5 py-2.5 rounded-xl border text-sm font-sans bg-[var(--bg-canvas)] text-[var(--text-primary)] placeholder-[var(--text-muted)] focus:border-[var(--action-blue)] focus:outline-none transition-colors ${
-                errors.email ? "border-rose-500/50" : "border-[var(--border-subtle)]"
+                errors.email ? "border-status-error/60" : "border-[var(--border-subtle)]"
               }`}
             />
             {errors.email && (
-              <p className="text-xs text-rose-700 dark:text-rose-400 mt-1">{errors.email.message}</p>
+              <p className="text-xs text-status-error mt-1">{errors.email.message}</p>
             )}
           </div>
         </div>
@@ -313,7 +313,7 @@ export function ContactForm() {
             type="text"
             placeholder="Your business name"
             {...register("company")}
-            className="w-full px-3.5 py-2.5 rounded-xl border border-[var(--border-subtle)] bg-[var(--bg-canvas)] text-sm font-sans text-[var(--text-primary)] placeholder-[var(--text-muted)] focus:border-[var(--action-blue)] focus:outline-none transition-colors"
+            className="w-full min-h-[44px] px-3.5 py-2.5 rounded-xl border border-[var(--border-subtle)] bg-[var(--bg-canvas)] text-sm font-sans text-[var(--text-primary)] placeholder-[var(--text-muted)] focus:border-[var(--action-blue)] focus:outline-none transition-colors"
           />
         </div>
       </div>
@@ -333,7 +333,7 @@ export function ContactForm() {
               type="text"
               placeholder="Not sure yet"
               {...register("budget")}
-              className="w-full px-3.5 py-2.5 rounded-xl border border-[var(--border-subtle)] bg-[var(--bg-canvas)] text-sm font-sans text-[var(--text-primary)] placeholder-[var(--text-muted)] focus:border-[var(--action-blue)] focus:outline-none transition-colors"
+              className="w-full min-h-[44px] px-3.5 py-2.5 rounded-xl border border-[var(--border-subtle)] bg-[var(--bg-canvas)] text-sm font-sans text-[var(--text-primary)] placeholder-[var(--text-muted)] focus:border-[var(--action-blue)] focus:outline-none transition-colors"
             />
           </div>
 
@@ -344,7 +344,7 @@ export function ContactForm() {
             <select
               id="timeline"
               {...register("timeline")}
-              className="w-full px-3.5 py-2.5 rounded-xl border border-[var(--border-subtle)] bg-[var(--bg-canvas)] text-sm font-sans text-[var(--text-primary)] focus:border-[var(--action-blue)] focus:outline-none transition-colors"
+              className="w-full min-h-[44px] px-3.5 py-2.5 rounded-xl border border-[var(--border-subtle)] bg-[var(--bg-canvas)] text-sm font-sans text-[var(--text-primary)] focus:border-[var(--action-blue)] focus:outline-none transition-colors"
             >
               {TIMELINE_OPTIONS.map((opt) => (
                 <option key={opt} value={opt}>

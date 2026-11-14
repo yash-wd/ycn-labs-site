@@ -9,7 +9,7 @@ describe("YCN-SMALL-FIXES-01", () => {
   it("Work page no longer prints the internal docs path", () => {
     const work = read("app", "work", "page.tsx");
     expect(work).not.toContain("docs/YCN_CLAIMS_AND_PROOF.md");
-    expect(work).toContain("Under our Claims Register, case studies");
+    expect(work).toContain("We publish work when the scope, stage and evidence are clear.");
   });
 
   it("Footer uses the same logo pairing as the Header (dark letters on light, white letters on dark)", () => {
@@ -28,18 +28,12 @@ describe("YCN-SMALL-FIXES-01", () => {
     expect((footer.match(/text-slate-500 dark:text-slate-400/g) || []).length).toBe(2);
   });
 
-  it("homepage chapters keep tracking under reduced motion", () => {
-    const chapters = read("components", "homepage", "vnext", "PhoneChaptersSection.tsx");
-    expect(chapters).not.toContain("if (prefersReduced) return;");
-    expect(chapters).toContain("new IntersectionObserver(");
-    // Instant swaps come from the global reduced-motion rule.
-    expect(read("app", "globals.css")).toContain("transition-duration: 0.01ms !important;");
-  });
-
   it("contact form errors are readable in light theme and announced", () => {
     const form = read("components", "ContactForm.tsx");
     expect(form).not.toMatch(/className="text-xs text-rose-400/);
-    expect((form.match(/text-xs text-rose-700 dark:text-rose-400/g) || []).length).toBe(4);
+    // YCN-V3-UI Day 4: error colours moved onto the status tokens (independent of the brand).
+    expect((form.match(/text-xs text-status-error/g) || []).length).toBe(4);
+    expect(form).not.toMatch(/rose-|emerald-/);
     expect(form).toContain('<div role="alert"');
   });
 

@@ -10,3 +10,7 @@ next-env.d.ts
 
 # Local test and verification evidence (local-only, not for public repo)
 /proof/
+
+# Playwright (pnpm test:e2e)
+/test-results/
+/playwright-report/
