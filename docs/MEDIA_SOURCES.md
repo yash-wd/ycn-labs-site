@@ -1,3 +1,5 @@
+> **Moved 14 Nov 2026** from `public/media/SOURCES.md` to `docs/` (Owner decision), so this provenance record is kept without being served publicly. Most media it lists were removed on 13 Nov and 14 Nov 2026 (see `docs/ASSET_MANIFEST.md`); the record stays as history.
+
 # V4 Photoreal Prototype Reference Assets — Sources & Licences
 
 All assets in this directory are included as design prototypes and development placeholders within the public development repository under their respective free licences (CC0, CC BY 2.0, Mixkit Free Licence).

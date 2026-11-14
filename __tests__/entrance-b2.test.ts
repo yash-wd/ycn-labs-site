@@ -169,27 +169,20 @@ describe("Visual Fix 01: Brand Continuum Architecture & Fallback Proof", () => {
     expect(fs.statSync(liveLogoPath).size).toBeLessThan(600000);
   });
 
-  it("5. VISUAL FIX 11 MEDIA PROOF: Full 10s entrance v5 derivatives exist under public/entrance/ (size > 2MB and < 5MB)", async () => {
+  it("5. FILM REMOVED (Owner, 14 Nov 2026): entrance film files are gone and the film is marked unavailable", async () => {
     const fs = await import("fs");
     const path = await import("path");
+    const { ENTRANCE_FILM_AVAILABLE } = await import("@/components/homepage/vnext/entrance-interim");
 
-    const landscapeMp4 = path.join(process.cwd(), "public", "entrance", "ycn-intro-final-landscape-v5.mp4");
-    const portraitMp4 = path.join(process.cwd(), "public", "entrance", "ycn-intro-final-portrait-v5.mp4");
-    const landscapePoster = path.join(process.cwd(), "public", "entrance", "ycn-intro-final-landscape-poster-v5.webp");
-    const portraitPoster = path.join(process.cwd(), "public", "entrance", "ycn-intro-final-portrait-poster-v5.webp");
-
-    expect(fs.existsSync(landscapeMp4)).toBe(true);
-    expect(fs.existsSync(portraitMp4)).toBe(true);
-    expect(fs.existsSync(landscapePoster)).toBe(true);
-    expect(fs.existsSync(portraitPoster)).toBe(true);
-
-    const landscapeStat = fs.statSync(landscapeMp4);
-    const portraitStat = fs.statSync(portraitMp4);
-
-    expect(landscapeStat.size).toBeGreaterThan(2000000);
-    expect(landscapeStat.size).toBeLessThan(5000000);
-    expect(portraitStat.size).toBeGreaterThan(2000000);
-    expect(portraitStat.size).toBeLessThan(5000000);
+    for (const f of [
+      "ycn-intro-final-landscape-v5.mp4",
+      "ycn-intro-final-portrait-v5.mp4",
+      "ycn-intro-final-landscape-poster-v5.webp",
+      "ycn-intro-final-portrait-poster-v5.webp",
+    ]) {
+      expect(fs.existsSync(path.join(process.cwd(), "public", "entrance", f))).toBe(false);
+    }
+    expect(ENTRANCE_FILM_AVAILABLE).toBe(false);
   });
 
   it("6. R2 ROOT CLEANLINESS PROOF: Repository root contains ZERO master MP4 files (masters reside in ../ycn-brand-masters/final-entrance-2026-09-26/)", async () => {
@@ -201,18 +194,15 @@ describe("Visual Fix 01: Brand Continuum Architecture & Fallback Proof", () => {
     expect(rootMp4s).toEqual([]);
   });
 
-  it("7. VISUAL FIX 11 DARK POSTER PROOF: Posters are dark-compatible WebP assets", async () => {
+  it("7. FILM UNAVAILABLE GUARD: BrandContinuumFilm requests nothing and falls back when the film is unavailable", async () => {
     const fs = await import("fs");
     const path = await import("path");
+    const film = fs.readFileSync(path.join(process.cwd(), "components", "homepage", "vnext", "BrandContinuumFilm.tsx"), "utf-8");
 
-    const landscapePoster = path.join(process.cwd(), "public", "entrance", "ycn-intro-final-landscape-poster-v5.webp");
-    const portraitPoster = path.join(process.cwd(), "public", "entrance", "ycn-intro-final-portrait-poster-v5.webp");
-
-    const statL = fs.statSync(landscapePoster);
-    const statP = fs.statSync(portraitPoster);
-
-    expect(statL.size).toBeGreaterThan(500);
-    expect(statP.size).toBeGreaterThan(500);
+    // No source is chosen (so no <video> renders and nothing is requested) and onError hands over to the code entrance.
+    expect(film).toContain("if (!ENTRANCE_FILM_AVAILABLE) return null;");
+    expect(film).toMatch(/if \(!ENTRANCE_FILM_AVAILABLE\) \{\s*onError\("film_unavailable"\);\s*return;/);
+    expect(film).toContain("if (!source) return null;");
   });
 
   it("8. VISUAL FIX 03 EXACT CENTERING PROOF: Viewport centering aligns strictly to exact center across all screen widths", () => {

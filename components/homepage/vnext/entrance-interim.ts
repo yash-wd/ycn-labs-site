@@ -14,3 +14,11 @@
  * by the Owner.
  */
 export const ENTRANCE_INTERIM_BYPASS = true;
+
+/**
+ * Entrance film files (public/entrance/ycn-intro-final-*-v5.{mp4,webp}) were removed on
+ * 14 Nov 2026 by Owner decision: the film showed out-of-scope services and was never shown
+ * while the bypass is on. With this `false`, BrandContinuumFilm requests nothing and reports
+ * an error at once, so the stage falls back to the code-driven entrance (DECISION-048).
+ */
+export const ENTRANCE_FILM_AVAILABLE = false;

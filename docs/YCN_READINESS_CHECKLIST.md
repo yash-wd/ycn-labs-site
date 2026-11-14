@@ -155,7 +155,7 @@
 - [ ] **[PENDING]** `CHK-105`: Compile site-wide logo placement map (Header, Footer, Favicon, Web Manifest, OG tags).
 - [ ] **[PENDING]** `CHK-106`: Execute Task 11 brand asset integration strictly with approved variants.
 - [ ] **[OWNER-GATE]** `CHK-107`: Brand library `main` currently unprotected on GitHub (`protected: false`); configuring GitHub branch protection is an Owner-gated action item.
-- [ ] **[PENDING]** `CHK-108`: Audit and replace generic stock video footage with authentic YCN studio footage per `public/media/SOURCES.md`.
+- [ ] **[PENDING]** `CHK-108`: Audit and replace generic stock video footage with authentic YCN studio footage per `docs/MEDIA_SOURCES.md` (moved from `public/media/` on 14 Nov 2026; the stock clips it lists were removed on 13 Nov).
 
 ---
 

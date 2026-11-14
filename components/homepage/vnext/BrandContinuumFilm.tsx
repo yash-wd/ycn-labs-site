@@ -2,6 +2,7 @@
 
 import React, { useEffect, useRef, useState, useCallback } from "react";
 import { SkipForward } from "lucide-react";
+import { ENTRANCE_FILM_AVAILABLE } from "./entrance-interim";
 
 export interface BrandContinuumFilmProps {
   onTimeTick?: (currentTime: number, mainVideo: HTMLVideoElement) => void;
@@ -63,6 +64,7 @@ export function BrandContinuumFilm({
     poster: string;
     isLandscape: boolean;
   } | null>(() => {
+    if (!ENTRANCE_FILM_AVAILABLE) return null; // film files removed 14 Nov 2026: never request them
     if (typeof window !== "undefined") {
       return selectEntranceDerivative(window.innerWidth, window.innerHeight);
     }
@@ -96,6 +98,10 @@ export function BrandContinuumFilm({
 
   // 1. Initial responsive orientation evaluation & source selection
   useEffect(() => {
+    if (!ENTRANCE_FILM_AVAILABLE) {
+      onError("film_unavailable");
+      return;
+    }
     // Check Save-Data / constrained network
     if (typeof navigator !== "undefined") {
       const conn = (navigator as unknown as { connection?: { saveData?: boolean; effectiveType?: string } })
