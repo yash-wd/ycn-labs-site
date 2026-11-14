@@ -46,7 +46,7 @@ function getRatelimiter(type: "contact" | "newsletter"): Ratelimit | null {
       contactRatelimit = new Ratelimit({
         redis,
         limiter: Ratelimit.slidingWindow(5, "1 h"),
-        analytics: true,
+        analytics: false, // Off: Upstash analytics would keep hashed-IP events with no expiry (core-analytics 0.0.10 ignores retention). The site never reads them.
         prefix: `ratelimit:${ns}:contact`,
       });
     }
@@ -56,7 +56,7 @@ function getRatelimiter(type: "contact" | "newsletter"): Ratelimit | null {
       newsletterRatelimit = new Ratelimit({
         redis,
         limiter: Ratelimit.slidingWindow(3, "1 h"),
-        analytics: true,
+        analytics: false, // Off: Upstash analytics would keep hashed-IP events with no expiry (core-analytics 0.0.10 ignores retention). The site never reads them.
         prefix: `ratelimit:${ns}:newsletter`,
       });
     }
