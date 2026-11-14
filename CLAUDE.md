@@ -35,3 +35,12 @@ Watch for known failure patterns:
 - Ensure touch sets are minimal and strictly confined to authorized files.
 - A Git commit is never Tier 0; committing requires separate explicit authorization.
 - Ensure protected components (Hero CTA, scroll cue, entrance) suffer zero regressions.
+
+---
+
+## 5. UI work: Modern Web Guidance and UI/UX skills (Owner, 14 Nov 2026 — until handover)
+For every HTML, CSS or client-side JavaScript change in this repo:
+- **Modern Web Guidance first:** `pnpx modern-web-guidance@latest search "<2–5 words>"`, then `retrieve` the matching guides and apply them with their fallbacks. Baseline target: Widely available (the default).
+- **UI/UX skills, selectively:** `interface-design` and `web-design-guidelines` on every UI task; `impeccable` for audits (its hook stays off); `frontend-design` only for new sections; motion skills only for existing motion. Avoid `design-taste-frontend`, `ui-ux-pro-max` (research only), shadcn/ChaiUI and native-app skills here.
+- **The approved V3 design wins:** headline, palette (Space Grotesk + Inter, navy/blue), layout and frozen systems are not changed because a guide or skill suggests it.
+- **Report:** list the guides and skills used, the checks run (unit, `pnpm test:e2e`, both themes, 375–1440 px, keyboard, reduced motion) and any limitation.
