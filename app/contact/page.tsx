@@ -1,7 +1,10 @@
 import type { Metadata } from "next";
+import { Phone, MessageCircle, Mail } from "lucide-react";
 import { ContactForm } from "@/components/ContactForm";
-import { Clock, Shield, CheckCircle2 } from "lucide-react";
+import { Container } from "@/components/v3/Section";
 
+// YCN-V3-UI Day 4. Ratified H1 and first-step paragraph (DECISION-054) kept; form logic unchanged.
+// Phone/WhatsApp: Owner approval 12 Nov 2026; the same number is already public on ycnlabs.com.
 export const metadata: Metadata = {
   title: "Start a Project — YCN Labs",
   description:
@@ -11,65 +14,57 @@ export const metadata: Metadata = {
   },
 };
 
+const CHANNELS = [
+  { icon: Phone, label: "Call", value: "+91 83412 26694", href: "tel:+918341226694" },
+  { icon: MessageCircle, label: "WhatsApp", value: "Chat on WhatsApp", href: "https://wa.me/918341226694", external: true },
+  { icon: Mail, label: "Email", value: "hello@ycnlabs.com", href: "mailto:hello@ycnlabs.com" },
+];
+
 export default function ContactPage() {
   return (
-    <div className="py-12 md:py-24 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-start">
-        {/* Left Column: Context & Expectations */}
-        <div className="lg:col-span-5 space-y-8">
-          <header className="space-y-4">
-            <p className="type-kicker text-[var(--action-blue)] font-sans">
-              Start a Project
-            </p>
-            <h1 className="type-display-page text-[var(--text-primary)] font-display">
+    <div className="bg-[var(--bg-canvas)] pb-[var(--space-5)] pt-28 sm:pt-32 lg:pb-[var(--space-6)] lg:pt-36">
+      <Container>
+        <div className="grid items-start gap-[var(--space-5)] lg:grid-cols-12">
+          <div className="lg:col-span-5">
+            <h1 className="type-display-page font-display text-[var(--text-primary)]">
               Tell us what you’re trying to improve.
             </h1>
-            <p className="type-copy-lead text-[var(--text-secondary)] pt-1">
+            <p className="type-copy-lead mt-[var(--space-3)] text-[var(--text-secondary)]">
               Tell us what is slow, lost or difficult in your business today. We’ll tell you plainly what could help and what it would cost, before you commit to anything.
             </p>
-          </header>
 
-          <section aria-labelledby="expectations-heading" className="p-6 sm:p-8 rounded-3xl border border-[var(--border-subtle)] bg-[var(--bg-surface)] space-y-5">
-            <h2 id="expectations-heading" className="type-control text-[var(--text-primary)] uppercase tracking-[0.06em]">
-              What to expect
-            </h2>
-            <div className="space-y-4 text-xs sm:text-sm text-[var(--text-secondary)]">
-              <div className="flex items-start gap-3">
-                <CheckCircle2 className="w-4 h-4 text-[var(--action-blue)] shrink-0 mt-0.5" />
-                <p>
-                  <strong>Problem-led review:</strong> We analyze the operational problem you describe before proposing any architecture or tools.
-                </p>
-              </div>
-              <div className="flex items-start gap-3">
-                <Clock className="w-4 h-4 text-[var(--action-blue)] shrink-0 mt-0.5" />
-                <p>
-                  <strong>No pressure consultation:</strong> We share initial thoughts on feasibility, scope boundaries, and estimated pricing before you make a commitment.
-                </p>
-              </div>
-              <div className="flex items-start gap-3">
-                <Shield className="w-4 h-4 text-[var(--action-blue)] shrink-0 mt-0.5" />
-                <p>
-                  <strong>Clear written terms:</strong> Deliverables and support terms are defined in a written agreement before work begins. Before work starts, the agreement sets out plainly what you own and what is licensed.
-                </p>
-              </div>
-            </div>
-          </section>
+            <section aria-labelledby="channels-heading" className="mt-[var(--space-4)]">
+              <h2 id="channels-heading" className="font-display text-lg font-semibold text-[var(--text-primary)]">
+                Prefer to talk?
+              </h2>
+              <ul className="mt-[var(--space-2)] grid gap-[var(--space-1)]">
+                {CHANNELS.map(({ icon: Icon, label, value, href, external }) => (
+                  <li key={label}>
+                    <a
+                      href={href}
+                      {...(external ? { target: "_blank", rel: "noopener noreferrer" } : {})}
+                      className="flex min-h-[56px] items-center gap-[var(--space-2)] rounded-card border border-[var(--border-subtle)] bg-[var(--bg-surface)] px-[var(--space-2)] py-[var(--space-1)] transition-colors hover:border-[var(--action-blue)] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--focus-ring)]"
+                    >
+                      <Icon className="h-5 w-5 shrink-0 text-[var(--action-blue)]" aria-hidden="true" />
+                      <span className="flex flex-col">
+                        <span className="text-sm text-[var(--text-secondary)]">{label}</span>
+                        <span className="font-semibold text-[var(--text-primary)]">{value}</span>
+                      </span>
+                    </a>
+                  </li>
+                ))}
+              </ul>
+              <p className="type-caption mt-[var(--space-2)] text-[var(--text-secondary)]">
+                Based in Hyderabad, India, working with businesses across India.
+              </p>
+            </section>
+          </div>
 
-          <div className="text-xs text-[var(--text-muted)] space-y-1.5 font-mono">
-            <p>
-              <strong className="text-[var(--text-secondary)] font-sans">Direct contact:</strong> hello@ycnlabs.com
-            </p>
-            <p>
-              <strong className="text-[var(--text-secondary)] font-sans">Location:</strong> Based in Hyderabad, India, working with businesses across India.
-            </p>
+          <div className="rounded-panel border border-[var(--border-subtle)] bg-[var(--bg-surface)] p-[var(--space-3)] shadow-soft sm:p-[var(--space-4)] lg:col-span-7">
+            <ContactForm />
           </div>
         </div>
-
-        {/* Right Column: Contact Form */}
-        <div className="lg:col-span-7 p-6 sm:p-10 rounded-3xl border border-[var(--border-subtle)] bg-[var(--bg-surface)] shadow-xs">
-          <ContactForm />
-        </div>
-      </div>
+      </Container>
     </div>
   );
 }

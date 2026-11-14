@@ -9,14 +9,14 @@ This is the official codebase for the **YCN Labs** website (`ycnlabs.com`). YCN 
 
 ## 2. Core Architecture
 - **Framework:** Next.js 16 (App Router, React 19) — `package.json:20,23`
-- **Styling:** Tailwind CSS v4 with custom HSL token architecture (`app/globals.css`) — `package.json:33,37`
-- **Typography:** Space Grotesk & Inter via `next/font/google` — `app/layout.tsx:2-18`
+- **Styling:** Tailwind CSS v4 with a CSS-variable token system in `app/globals.css` (hex values; brand palette → brand roles → component names, YCN-TOKENS-T1-01) — `package.json:33,37`
+- **Typography:** Space Grotesk & Inter, self-hosted (`app/fonts.css`, `public/fonts/`, YCN-FONTS-LOCAL-01); no Google Fonts request at build or runtime — `app/layout.tsx`
 - **Form & Validation:** React Hook Form & Zod 4 — `package.json:12,25,28`
 - **Backend & Database:** Next.js Route Handlers, Drizzle ORM, Postgres client (`postgres`) — `package.json:17,22`
-- **Rate Limiting & Deduplication:** Upstash Redis (`@upstash/redis`, `@upstash/ratelimit`) — `package.json:14-15`; bypassed when Upstash credentials are absent (`lib/security/ratelimit.ts:18-28`, warning emitted when `NODE_ENV !== "production"`)
+- **Rate Limiting & Deduplication:** Upstash Redis (`@upstash/redis`, `@upstash/ratelimit`) — `package.json`; when the Upstash credentials are absent the limiter lets requests through (`lib/security/ratelimit.ts`). In production, `getServerEnv()` (`lib/env/server.ts`) throws on missing required variables **when it is first called**, not at server start; so a production server can start and answer `/api/health` while `/api/contact` fails on first use. Startup-wide readiness is not yet proven. Behaviour when Redis is configured but unreachable, and trust of `x-forwarded-for`, are still to be verified on a deployed preview (Task 13).
 - **Email Delivery:** Resend API integration with error categorization — `package.json:26`
 - **Animation & UI:** GSAP 3.15 (`package.json:18`), Lucide React (`package.json:19`), Next Themes (`package.json:21`)
-- **Observability:** Sentry (`@sentry/nextjs`) exception tracking — `package.json:13`
+- **Observability:** **On `main` (as of 10 Nov 2026):** the Sentry SDK is installed and `app/api/contact/route.ts` calls `Sentry.captureException`, but nothing initialises it, so no errors are reported. **On the unmerged V3 branch (PR #33):** `instrumentation.ts` starts Sentry only when `SENTRY_DSN` is set (off today), and an allow-list sends only the error type, fixed route/stage/error-category tags, a UUID request ID, project-relative code location (file under app/, lib/ or components/, function, line), environment and time; request paths, messages, other extra data and contexts are dropped. This is a filter, not a guarantee: before switching it on, inspect real error payloads from synthetic enquiries on a production build (privacy and usefulness) and confirm a test alert reaches a named person. Error reporting is not operational until a DSN is configured and a test alert is verified. `app/api/health` is a liveness check only; it does not test the database, Redis or email.
 - **Testing:** Vitest (`package.json:39`), Playwright (`package.json:32`)
 - **Deployment Platform:** Vercel (No production deployment authorized during active development)
 
@@ -25,7 +25,7 @@ All active project documentation lives under `docs/`.
 
 - **Documentation Entry Point:** [`docs/INDEX.md`](docs/INDEX.md)
 - **Governance & Safety:** [`docs/YCN_AGENT_OPERATING_PROTOCOL.md`](docs/YCN_AGENT_OPERATING_PROTOCOL.md)
-- **Task Queue:** [`docs/YCN_AGY_TASKS.md`](docs/YCN_AGY_TASKS.md)
+- **Task Queue:** [`docs/BACKLOG.md`](docs/BACKLOG.md) (current); [`docs/YCN_AGY_TASKS.md`](docs/YCN_AGY_TASKS.md) is historical (AGY retired from execution, DECISION-055 Amendment 1)
 - **AI Agent Instructions:** [`AGENTS.md`](AGENTS.md)
 - **Historical Records:** Legacy monorepo documents and superseded ledgers are archived in [`docs/legacy/`](docs/legacy/) and are non-authoritative.
 
