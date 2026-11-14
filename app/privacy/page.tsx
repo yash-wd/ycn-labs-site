@@ -5,7 +5,11 @@ import type { ReactNode } from "react";
  * DRAFT for legal review (14 Nov 2026). Not approved wording and not in force.
  * Built from the Owner's fact-sheet answers O1–O10 (private vault) and the code on main.
  * Square-bracket items are placeholders: legal name, notice address, server locations,
- * reply period and the applicable-law wording. The reviewer must settle all of them before this ships.
+ * reply period, rate-limit statistics retention, the deletion process and the applicable-law wording.
+ * The reviewer must settle all of them before this ships.
+ * Facts behind the wording (GPT review, 14 Nov): lib/security/ratelimit.ts sets Upstash `analytics: true`;
+ * the acknowledgement email is best-effort; purgeLeadsOlderThan (lib/db/recovery.ts) deletes by createdAt,
+ * not by last contact, and no schedule runs it.
  */
 
 export const metadata: Metadata = {
@@ -65,7 +69,10 @@ export default function PrivacyPage() {
           <p>
             If you contact us directly by phone, WhatsApp or email, we receive what you send through that service.
           </p>
-          <p>We do not use analytics or advertising trackers, and our own code sets no cookies.</p>
+          <p>
+            We do not use visitor analytics or advertising trackers, so we do not track which pages you visit. Our own code sets no
+            cookies. The abuse protection in section 4 keeps its own usage statistics.
+          </p>
         </Section>
 
         <Section title="3. Why we use it">
@@ -79,8 +86,10 @@ export default function PrivacyPage() {
 
         <Section title="4. Protecting the form from abuse">
           <p>
-            To limit repeated submissions, we turn your IP address into a one-way code and keep only that code, for up to one hour,
-            with our rate-limiting provider. We do not store your IP address with your enquiry.
+            To limit repeated submissions, we turn your IP address into a one-way code and send only that code to our rate-limiting
+            provider. It counts recent submissions over a one-hour window, and it also keeps rate-limiting statistics linked to the
+            code. How long those statistics are kept: <Placeholder>to be confirmed</Placeholder>. We do not store your IP address with
+            your enquiry.
           </p>
         </Section>
 
@@ -91,12 +100,12 @@ export default function PrivacyPage() {
               <span className="text-[var(--text-primary)]">Neon</span>: our database, which stores your enquiry.
             </li>
             <li>
-              <span className="text-[var(--text-primary)]">Resend</span>: sends us a notification with your enquiry, and sends you a
-              short email confirming we received it.
+              <span className="text-[var(--text-primary)]">Resend</span>: sends us a notification with your enquiry, and tries to send
+              you a short email confirming we received it. If that email fails, your enquiry is still saved.
             </li>
             <li>
-              <span className="text-[var(--text-primary)]">Upstash</span>: rate limiting. It receives only the one-way code described
-              above.
+              <span className="text-[var(--text-primary)]">Upstash</span>: rate limiting and its statistics. It receives only the
+              one-way code described above, not your enquiry.
             </li>
             <li>
               Our hosting provider, <Placeholder>to be confirmed when hosting is chosen</Placeholder>: runs this website and may keep
@@ -104,7 +113,8 @@ export default function PrivacyPage() {
             </li>
             <li>
               <span className="text-[var(--text-primary)]">Sentry</span>, only if we switch on error monitoring: technical error
-              details only, never what you type in the form.
+              details. It is set up to filter out what you type in the form, and that filter will be tested before monitoring is
+              switched on.
             </li>
           </ul>
           <p>
@@ -114,7 +124,10 @@ export default function PrivacyPage() {
 
         <Section title="6. How long we keep it">
           <ul className="list-disc pl-5 space-y-1">
-            <li>Enquiries that do not become projects: deleted 12 months after our last meaningful contact with you.</li>
+            <li>
+              Enquiries that do not become projects: our policy is to delete them 12 months after our last meaningful contact with
+              you. <Placeholder>Deletion is done by hand today; confirm the process before this page is published</Placeholder>
+            </li>
             <li>
               If you become a client, the records needed for the project, the agreement and tax are kept separately, for as long as
               the law requires.
