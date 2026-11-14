@@ -1,76 +1,151 @@
 import type { Metadata } from "next";
+import type { ReactNode } from "react";
+
+/*
+ * DRAFT for legal review (14 Nov 2026). Not approved wording and not in force.
+ * Built from the Owner's fact-sheet answers O1–O10 (private vault) and the code on main.
+ * Square-bracket items are placeholders: legal name, notice address, server locations,
+ * reply period and the applicable-law wording. The reviewer must settle all of them before this ships.
+ */
 
 export const metadata: Metadata = {
   title: "Privacy Policy — YCN Labs",
   description:
-    "Privacy policy detailing data handling, contact form submissions, and analytics transparency for YCN Labs.",
+    "What YCN Labs collects through its contact form, why, who receives it, how long it is kept and how to ask about it.",
   alternates: {
     canonical: "https://ycnlabs.com/privacy",
   },
 };
 
+function Section({ title, children }: { title: string; children: ReactNode }) {
+  return (
+    <section className="p-6 sm:p-8 rounded-2xl border border-[var(--border-subtle)] bg-[var(--bg-surface)] space-y-3">
+      <h2 className="type-heading-card text-lg font-semibold text-[var(--text-primary)]">{title}</h2>
+      {/* Line length capped near 70 characters; pretty wrapping (Modern Web Guidance: typography). */}
+      <div className="max-w-[70ch] space-y-3 text-pretty">{children}</div>
+    </section>
+  );
+}
+
+function Placeholder({ children }: { children: ReactNode }) {
+  return <span className="font-semibold text-[var(--text-primary)]">[{children}]</span>;
+}
+
+const EMAIL = <a href="mailto:hello@ycnlabs.com" translate="no" className="break-words text-[var(--action-blue)] underline decoration-1 underline-offset-4 transition-[text-decoration-thickness] hover:decoration-2">hello@ycnlabs.com</a>;
+
 export default function PrivacyPage() {
   return (
     <div className="py-12 md:py-24 max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
       <div className="mb-12 space-y-3">
-        <p className="type-kicker text-[var(--action-blue)]">
-          Legal
-        </p>
-        <h1 className="type-display-page text-[var(--text-primary)]">
-          Privacy Policy
-        </h1>
-        <p className="type-caption text-[var(--text-muted)]">
-          Last updated: 17 September 2026
-        </p>
+        <p className="type-kicker text-[var(--action-blue)]">Legal</p>
+        <h1 className="type-display-page text-[var(--text-primary)]">Privacy Policy</h1>
+        <p className="type-caption text-[var(--text-muted)]">Draft for legal review, 14 November 2026. Not yet in force.</p>
       </div>
 
       <div className="space-y-8 type-copy-body text-sm text-[var(--text-secondary)] leading-relaxed">
-        <section className="p-6 sm:p-8 rounded-2xl border border-[var(--border-subtle)] bg-[var(--bg-surface)] space-y-3">
-          <h2 className="type-heading-card text-lg font-semibold text-[var(--text-primary)]">
-            1. Information We Collect
-          </h2>
+        <Section title="1. Who we are">
           <p>
-            When you submit an enquiry through our contact form, we collect the details you explicitly provide: your name, email address, company name (if provided), project category, approximate budget range, target timeline, and your project message.
+            YCN Labs is run by <Placeholder>legal name to be added</Placeholder>, a sole proprietor based in Hyderabad, India.
+            Address for legal notices: <Placeholder>to be confirmed</Placeholder>.
           </p>
-          <p>
-            We collect minimal technical connection data (IP address, user agent) solely for the purpose of distributed abuse prevention, rate limiting, and deduplication of automated form submissions.
-          </p>
-        </section>
+          <p>For any question about your information, email {EMAIL}.</p>
+        </Section>
 
-        <section className="p-6 sm:p-8 rounded-2xl border border-[var(--border-subtle)] bg-[var(--bg-surface)] space-y-3">
-          <h2 className="type-heading-card text-lg font-semibold text-[var(--text-primary)]">
-            2. How We Use Your Information
-          </h2>
-          <p>
-            We use your submitted details exclusively to:
-          </p>
-          <ul className="list-disc pl-5 space-y-1 text-xs sm:text-sm">
-            <li>Review and respond to your commercial project enquiry</li>
-            <li>Prepare custom project proposals and technical specifications</li>
-            <li>Communicate directly with you regarding agreed project milestones</li>
+        <Section title="2. What we collect">
+          <p>When you send an enquiry through our contact form, we collect:</p>
+          <ul className="list-disc pl-5 space-y-1">
+            <li>your name and email address;</li>
+            <li>what you want to improve, and what you tell us about what happens today and what you want to change;</li>
+            <li>if you choose to give them: your business name, an approximate budget and a timeline.</li>
           </ul>
           <p>
-            We do not sell, rent, or trade your personal information to any third parties for advertising or marketing purposes.
+            With each enquiry we also keep a reference number, its status, whether our notification email was sent, and when the
+            enquiry was received and updated.
           </p>
-        </section>
-
-        <section className="p-6 sm:p-8 rounded-2xl border border-[var(--border-subtle)] bg-[var(--bg-surface)] space-y-3">
-          <h2 className="type-heading-card text-lg font-semibold text-[var(--text-primary)]">
-            3. Data Storage & Security
-          </h2>
           <p>
-            Form submissions are securely stored in encrypted cloud databases and transmitted over HTTPS. Access to lead records is restricted strictly to authorized engineering personnel evaluating your project.
+            If you contact us directly by phone, WhatsApp or email, we receive what you send through that service.
           </p>
-        </section>
+          <p>We do not use analytics or advertising trackers, and our own code sets no cookies.</p>
+        </Section>
 
-        <section className="p-6 sm:p-8 rounded-2xl border border-[var(--border-subtle)] bg-[var(--bg-surface)] space-y-3">
-          <h2 className="type-heading-card text-lg font-semibold text-[var(--text-primary)]">
-            4. Your Rights
-          </h2>
+        <Section title="3. Why we use it">
+          <ul className="list-disc pl-5 space-y-1">
+            <li>To read and reply to your enquiry.</li>
+            <li>To prepare a quote or proposal if you ask for one.</li>
+            <li>To protect the form from spam and abuse.</li>
+          </ul>
+          <p>We do not sell or rent your information, and we do not use it for advertising.</p>
+        </Section>
+
+        <Section title="4. Protecting the form from abuse">
           <p>
-            Under UK and GDPR data protection regulations, you have the right to request a copy of the personal information we hold about you, or to request its deletion. To make an inquiry, email us at <code className="text-[var(--action-blue)] type-mono">hello@ycnlabs.com</code>.
+            To limit repeated submissions, we turn your IP address into a one-way code and keep only that code, for up to one hour,
+            with our rate-limiting provider. We do not store your IP address with your enquiry.
           </p>
-        </section>
+        </Section>
+
+        <Section title="5. Who receives it">
+          <p>We use these service providers to run the form:</p>
+          <ul className="list-disc pl-5 space-y-1">
+            <li>
+              <span className="text-[var(--text-primary)]">Neon</span>: our database, which stores your enquiry.
+            </li>
+            <li>
+              <span className="text-[var(--text-primary)]">Resend</span>: sends us a notification with your enquiry, and sends you a
+              short email confirming we received it.
+            </li>
+            <li>
+              <span className="text-[var(--text-primary)]">Upstash</span>: rate limiting. It receives only the one-way code described
+              above.
+            </li>
+            <li>
+              Our hosting provider, <Placeholder>to be confirmed when hosting is chosen</Placeholder>: runs this website and may keep
+              standard request logs.
+            </li>
+            <li>
+              <span className="text-[var(--text-primary)]">Sentry</span>, only if we switch on error monitoring: technical error
+              details only, never what you type in the form.
+            </li>
+          </ul>
+          <p>
+            These providers may store data outside India. Server locations: <Placeholder>to be confirmed</Placeholder>.
+          </p>
+        </Section>
+
+        <Section title="6. How long we keep it">
+          <ul className="list-disc pl-5 space-y-1">
+            <li>Enquiries that do not become projects: deleted 12 months after our last meaningful contact with you.</li>
+            <li>
+              If you become a client, the records needed for the project, the agreement and tax are kept separately, for as long as
+              the law requires.
+            </li>
+            <li>
+              In your browser: your light or dark theme choice stays until you clear it. Whether you paused the animation or saw the
+              intro is kept only until you close the tab.
+            </li>
+          </ul>
+        </Section>
+
+        <Section title="7. Who can see it">
+          <p>
+            Only the owner of YCN Labs can see enquiries, in our database and in our enquiry inbox. Information sent through this
+            website travels over an encrypted connection (HTTPS).
+          </p>
+        </Section>
+
+        <Section title="8. Your choices">
+          <p>
+            You can ask us to show you, correct or delete the information we hold about you by emailing {EMAIL}. We will reply
+            within <Placeholder>period to be confirmed</Placeholder>.
+          </p>
+          <p>
+            <Placeholder>Your rights under the law that applies, to be confirmed by legal review</Placeholder>
+          </p>
+        </Section>
+
+        <Section title="9. Changes to this policy">
+          <p>If the way we handle information changes, we will update this page and the date at the top.</p>
+        </Section>
       </div>
     </div>
   );
