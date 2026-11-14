@@ -5,21 +5,21 @@ This is the official codebase for the **YCN Labs** website (`ycnlabs.com`). YCN 
 
 ## 2. Core Architecture
 - **Framework:** Next.js 16 (App Router, React 19)
-- **Styling:** Tailwind CSS v4 with custom HSL token architecture (`app/globals.css`)
-- **Typography:** Geist Sans via `next/font/google`
-- **Form & Validation:** React Hook Form, Zod 4, DOMPurify sanitization
+- **Styling:** Tailwind CSS v4 with a CSS-variable token system in `app/globals.css` (hex values; brand palette → brand roles → component names, YCN-TOKENS-T1-01)
+- **Typography:** Space Grotesk (display) and Inter (body), self-hosted from `public/fonts/` via `app/fonts.css` (YCN-FONTS-LOCAL-01)
+- **Form & Validation:** React Hook Form, Zod 4 (`lib/validation/contact.ts`); server-side escaping and error sanitising in `lib/security/sanitize.ts` (no DOMPurify dependency)
 - **Backend & Database:** Next.js Route Handlers, Drizzle ORM, Postgres client (`postgres`)
-- **Rate Limiting & Deduplication:** Upstash Redis with robust in-memory sliding-window fallback
+- **Rate Limiting & Deduplication:** Upstash Redis sliding window (`lib/security/ratelimit.ts`); duplicate enquiries are deduplicated by a database idempotency key, not by Redis. There is no in-memory fallback: without Upstash credentials the limiter passes requests. In production, `getServerEnv()` (`lib/env/server.ts`) throws on missing required variables when first called (runtime validation, not a startup check); `/api/health` is liveness only and does not exercise it.
 - **Email Delivery:** Resend API integration with partial-failure error capture
-- **Observability:** Sentry (`@sentry/nextjs`) exception tracking and JSON structured audit logs
-- **Deployment Platform:** Vercel
+- **Observability:** **On `main` (as of 10 Nov 2026):** the Sentry SDK is installed and `app/api/contact/route.ts` calls `Sentry.captureException`, but nothing initialises it, so no errors are reported. **On the unmerged V3 branch (PR #33):** `instrumentation.ts` starts Sentry only when `SENTRY_DSN` is set (off today), and an allow-list sends only the error type, fixed route/stage/error-category tags, a UUID request ID, project-relative code location (file under app/, lib/ or components/, function, line), environment and time; request paths, messages, other extra data and contexts are dropped. This is a filter, not a guarantee: before switching it on, inspect real error payloads from synthetic enquiries on a production build (privacy and usefulness) and confirm a test alert reaches a named person. Error reporting is not operational until a DSN is configured and a test alert is verified. `app/api/health` is liveness only.
+- **Deployment Platform:** Vercel is planned but not chosen (Owner deferred subscriptions, 13 Nov 2026). No automatic deployment mechanism was found in the inspected repository settings and workflows; installed-app access and hosting-project configuration remain pending Owner verification. No production deployment is authorized during active development
 
 ## 3. Project Documentation & Single Authority
 All active project documentation lives under `docs/`.
 
 - **Documentation Entry Point:** [`docs/INDEX.md`](docs/INDEX.md)
 - **Governance & Safety:** [`docs/YCN_AGENT_OPERATING_PROTOCOL.md`](docs/YCN_AGENT_OPERATING_PROTOCOL.md)
-- **Task Queue:** [`docs/YCN_AGY_TASKS.md`](docs/YCN_AGY_TASKS.md)
+- **Task Queue:** [`docs/BACKLOG.md`](docs/BACKLOG.md) (current); [`docs/YCN_AGY_TASKS.md`](docs/YCN_AGY_TASKS.md) is historical
 - **AI Agent Instructions:** [`AGENTS.md`](AGENTS.md)
 - **Historical Records:** Legacy monorepo documents and superseded ledgers are archived in [`docs/legacy/`](docs/legacy/) and are non-authoritative.
 
