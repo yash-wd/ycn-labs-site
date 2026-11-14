@@ -335,6 +335,18 @@ If the Owner wants to allow a WIP commit/push for that single doc reconciliation
 4. **AGY.** AGY is retired from project execution. Its installed tools, configurations, skills, MCP setup, records and proof are preserved; nothing is deleted.
 5. **Scope.** No other DECISION-055 amendment, approval rule, safety rule, evidence rule or frozen-system protection changes.
 
+### DECISION-055 Amendment 2: Local Executor Reassignment and Governance Synchronization (Owner, 14 Nov 2026)
+
+**Status: ADOPTED by Owner.** Decided in the Owner's 14 Nov 2026 review and execution instruction. The DECISION-055 and Amendment 1 texts above are preserved unchanged as the historical record.
+
+1. **Local Executor.** Google Antigravity (AGY), running on host `YCN-labs`, is restored and designated as the sole local workstation executor and builder seat. This supersedes DECISION-055 Amendment 1 item 1 and item 4's statement that AGY is retired, while keeping Amendment 1's preservation of AGY's installed tools, configurations, records, and proof.
+2. **Independent Review.** GPT is the designated independent reviewer for PRs authored by AGY, unless the Owner designates another. This supersedes DECISION-055 Amendment 1 item 2.
+3. **Research and Advisory Seat.** Claude (chat) is designated as the independent research and strategic advisory seat, authoring strategy briefs, legal analysis, test protocols, and architectural guidance without direct local file execution.
+4. **Local Claude Code Preservation.** Local Claude Code is no longer an execution seat. Its installation, configuration, notes and past proof are preserved; nothing is deleted. It does not edit, commit or push in YCN repositories without a new Owner ruling.
+5. **Owner Authority Preserved.** The Owner alone authorizes PR preparation, branch creation, commits, pushes, merges, deployments, releases, spending and file deletions. AGY may execute a protected operation only after the Owner explicitly authorizes that specific operation. Approval to draft or review does not authorize committing, pushing, merging, deploying, spending or deleting.
+6. **Verifiable Evidence Standard.** Claims about current repository files, Git state, runtime behaviour, tests and tool execution must be supported by verifiable evidence, including relevant command output and exit codes, exact file and line references, pinned GitHub SHAs, CI runs or preserved proof artifacts. Legal and research findings require authoritative citations. Earlier evidence must retain its date and limitations and must not be represented as a fresh test. Owner-provided facts are identified as Owner-stated. Agent memory or narrative summaries alone are not verification. Failed commands and their consequences must be disclosed. Inaccessible sandbox paths must be reported as `NOT VISIBLE IN SANDBOX`.
+7. **Scope.** All other approval rules, safety boundaries, design tokens, test requirements, frozen-system protections, and close protocols remain binding and unchanged.
+
 ### DECISION-048 Amendment 1: Interim First-Impression Correction (Owner, 9 Nov 2026)
 
 **Status: ADOPTED by Owner — temporary.** Owner ruling of 9 Nov 2026, given after the read-only UI/UX audit (YCN-UI-AUDIT-01) and GPT's independent review. Task: `YCN-FIRST-IMPRESSION-01`. The DECISION-048 text above is preserved unchanged.

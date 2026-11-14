@@ -8,7 +8,7 @@
 **Notice for all AI Assistants (GPT, Claude, Antigravity/AGY, Gemini, Copilot):**  
 This is an active commercial project operating under strict governance and safety protocols.
 
-> **Role update (Owner decision, 4 Nov 2026 — DECISION-055 Amendment 1):** Local Claude Code, running in VS Code on host `YCN-labs`, is the sole local builder and execution seat. Wherever this file assigns local execution, worktree verification, file intake, evidence logging or PR preparation to AGY, that duty now belongs to local Claude Code. Each PR has exactly one independent reviewer, designated by the Owner; GPT reviews PRs authored by local Claude Code, and a separate Claude chat may review only work it did not author. The Owner alone authorizes merges, deployments and releases. AGY is retired from execution; its installed tools, configurations and records are preserved. All other approval, safety and evidence rules in this file are unchanged.
+> **Role update (Owner decision, 14 Nov 2026 — DECISION-055 Amendment 2):** Google Antigravity (AGY), running on host `YCN-labs`, is the sole local workstation executor and builder seat. Wherever this file assigns local execution, worktree verification, file intake, evidence logging, or PR preparation, that duty belongs to AGY. Each PR has exactly one independent reviewer, designated by the Owner: GPT reviews PRs authored by AGY. Claude (chat) acts as the independent research and strategic advisory seat, authoring strategy briefs, legal analysis, and testing protocols without direct local file execution. The Owner alone authorizes merges, deployments, releases, spend, and protected actions. All historical decisions (including DECISION-055 Amendment 1) are preserved for the permanent record. All approval, safety, custody, and evidence rules in this file remain unchanged.
 
 ---
 
@@ -42,9 +42,9 @@ Current YCN site direction: [`docs/vnext/00_START_HERE.md`](docs/vnext/00_START_
 - **Repository and runtime evidence outranks agent summaries.** Never claim "PASS" without raw command output.
 - **Owner approval is mandatory** for all commits, pushes, dependency changes, schema migrations, and releases.
 - **No Documentation Churn:** Follow DECISION-018. Do not create daily journals, session logs, or empty templates. At task completion, evaluate: **Documentation impact: YES / NO**. Update docs only if a specification or decision genuinely changed.
-- **PR-Based Single Review (effective on DECISION-055 adoption):** local Claude Code opens GitHub Pull Requests on isolated branches; exactly one independent reviewer, designated by the Owner, reviews the diff (GPT for PRs authored by local Claude Code; AGY was the builder until 4 Nov 2026); three seats convene only for production deployments, customer data handling, or binding legal text.
+- **PR-Based Single Review (effective on DECISION-055 adoption, amended 14 Nov 2026):** AGY opens GitHub Pull Requests on isolated branches; exactly one independent reviewer, designated by the Owner, reviews the diff (GPT reviews PRs authored by AGY; Claude chat reviews only work it did not author); three seats convene only for production deployments, customer data handling, or binding legal text.
 - **OI-18 Visual Demo Scope (effective on DECISION-055 adoption):** HTML demos are required for brand-new visible UI screens or changed customer workflows only; backend reliability fixes, schema edits, and scripts require behavioral test contracts and test outputs, not decorative HTML previews.
-- **Protected Actions Boundary (effective on DECISION-055 adoption):** local Claude Code prepares changes and opens PRs; it never merges to main, pushes tags, or records adoption without explicit typed Owner authorization.
+- **Protected Actions Boundary (effective on DECISION-055 adoption, amended 14 Nov 2026):** AGY prepares changes and opens PRs; it never merges to main, pushes tags, or records adoption without explicit typed Owner authorization.
 - **Credentials & Secret Safety:** Never read, print, copy or use any credential file or token (.git-credentials, .env*, gh hosts.yml, SSH keys). If authentication fails, STOP and ask the Owner.
 
 ---
@@ -139,7 +139,7 @@ Skills are **selected per task**, not all applied at once. Where §1–§2 below
 5. **Before building,** report the scope, the skills chosen and why, the components and tokens reused, and the test plan. One task, one branch, one PR.
 6. **Verify applicable UI work** at 375/768/1024/1280/1440 px, in both themes. Check keyboard focus, heading structure, contrast, reduced motion, overflow and console errors, then run lint, check-types, test and build. Private screenshots, logs and SHA-256 hashes go in the task's vault proof folder, never on GitHub. Each PR lists the skills used and their findings.
 7. **Localhost preview.** At each YCN LABS working-session open, start the development preview bound to `127.0.0.1` only (`pnpm exec next dev --webpack -H 127.0.0.1 -p 3005`) and give the Owner the URL. Keep it running during the session and stop it at close. No LAN exposure and no firewall changes. Never submit the contact form on the preview unless a staging test is authorized; it writes a real staging lead and sends email.
-8. **Roles.** Local Claude Code builds; GPT independently reviews its PRs; the Owner approves visuals and merges (DECISION-055 Amendment 1). AGY stays retired from YCN LABS execution; its installed skills may serve other projects.
+8. **Roles.** AGY builds; GPT independently reviews its PRs; Claude chat researches and advises; the Owner approves visuals, protected actions, and merges (DECISION-055 Amendment 2).
 
 ---
 
@@ -188,7 +188,7 @@ For frontend, UI/UX, styling, animation, component, layout or page tasks, consul
 
 ## 2. MANDATORY MCP SERVERS UTILIZATION
 
-Status (9 Nov 2026): these two servers were configured in AGY only. They are **not yet configured in Claude Code**; setup is deferred until a task needs them and the Owner approves it (the `21st` server needs a new key entered privately by the Owner). Do not claim access to them until they are configured.
+Status (14 Nov 2026): these two servers are registered in AGY (lazy-loaded), not connection-tested as of 14 Nov 2026. Usage is deferred until a task needs them and the Owner approves it (the `21st` server needs a new key entered privately by the Owner). Do not claim active access or invoke them until authorized.
 
 The two specialized design and component MCP servers are:
 
@@ -261,7 +261,7 @@ This rule applies to GPT, Claude, AGY and all future AI agents on the project. I
 4. A review states what was checked, what is wrong or missing, and what the reviewer would do instead. "Agree" alone is a failed review.
 5. Disagreement: one evidence-backed exchange between seats; if unresolved, both options with their risks go to the Owner, who may order further investigation.
 6. Evidence: native Git output, blobs, saved proof files and hashes are authoritative. Chat pastes are reports, not proof.
-7. Local Claude Code alone executes on the Owner's machine (AGY held this role until 4 Nov 2026), logged under the file-intake and evidence rule.
+7. AGY alone executes on the Owner's machine (DECISION-055 Amendment 2; local Claude Code held this role from 4 to 14 Nov 2026), logged under the file-intake and evidence rule.
 8. Every seat's reply ends with one status line — POSITION, PASS, HOLD, EXECUTED-STOPPED or BLOCKED — with the reason, so the Owner can scan three replies in seconds.
 9. Every new chat starts with the Cold-Start Verification Gate in docs/CLOSE_PROTOCOL.md; published GitHub facts override any chat memory.
 
