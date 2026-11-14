@@ -2,16 +2,21 @@ import type { Metadata } from "next";
 import type { ReactNode } from "react";
 
 /*
- * DRAFT for legal review (14 Nov 2026). Not approved wording and not in force.
- * Built from the Owner's fact-sheet answers O1–O10 (private vault), DECISION-052 and DECISION-054.
- * Square-bracket items are placeholders: legal name, notice address, and the liability, governing-law
- * and disputes wording. The reviewer must settle all of them before this ships.
+ * DRAFT (14 Nov 2026). Not in force until the Owner approves a merge.
+ * Built from the Owner's fact-sheet answers O1–O10 (private vault), his approval to show his name
+ * (14 Nov), DECISION-052 and DECISION-054. Legal points researched:
+ * - Jurisdiction: parties may choose one of the courts that has jurisdiction (A.B.C. Laminart v. A.P. Agencies,
+ *   (1989) 2 SCC 163; Swastik Gases v. Indian Oil, (2013) 9 SCC 32); Indian Contract Act s.28 bars only clauses
+ *   that stop a party enforcing rights, so a choice-of-court clause is valid.
+ * - Liability cap and indirect-loss exclusion: kept reasonable; the signed project agreement governs, and
+ *   nothing limits liability that the law does not allow to be limited.
+ * - Notices: by email or to the postal address in the signed agreement, so no home address is published.
  */
 
 export const metadata: Metadata = {
   title: "Terms of Service — YCN Labs",
   description:
-    "How YCN Labs projects work: written agreements, ownership of the finished work, portfolio use and fixes after launch.",
+    "How YCN Labs projects work: written agreements, ownership of the finished work, portfolio use, fixes after launch, liability and governing law.",
   alternates: {
     canonical: "https://ycnlabs.com/terms",
   },
@@ -27,9 +32,7 @@ function Section({ title, children }: { title: string; children: ReactNode }) {
   );
 }
 
-function Placeholder({ children }: { children: ReactNode }) {
-  return <span className="font-semibold text-[var(--text-primary)]">[{children}]</span>;
-}
+const EMAIL = <a href="mailto:hello@ycnlabs.com" translate="no" className="break-words text-[var(--action-blue)] underline decoration-1 underline-offset-4 transition-[text-decoration-thickness] hover:decoration-2">hello@ycnlabs.com</a>;
 
 export default function TermsPage() {
   return (
@@ -39,22 +42,20 @@ export default function TermsPage() {
         <h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight text-[var(--text-primary)] font-display">
           Terms of Service
         </h1>
-        <p className="text-xs text-[var(--text-muted)] font-mono">Draft for legal review, 14 November 2026. Not yet in force.</p>
+        <p className="text-xs text-[var(--text-muted)] font-mono">Draft, 14 November 2026. Not yet in force.</p>
       </div>
 
       <div className="space-y-8 text-sm text-[var(--text-secondary)] leading-relaxed">
         <Section title="1. Who we are">
           <p>
-            YCN Labs is the trading name of <Placeholder>legal name to be added</Placeholder>, a sole proprietor based in Hyderabad,
-            India. Address for legal notices: <Placeholder>to be confirmed</Placeholder>. Email:{" "}
-            <a href="mailto:hello@ycnlabs.com" translate="no" className="break-words text-[var(--action-blue)] underline decoration-1 underline-offset-4 transition-[text-decoration-thickness] hover:decoration-2">hello@ycnlabs.com</a>.
+            YCN Labs is the trading name of Yaseen Sayyad, a sole proprietor based in Hyderabad, India. Email: {EMAIL}.
           </p>
         </Section>
 
         <Section title="2. This website">
           <p>
             This website explains what we do. Demonstrations and sample screens are illustrations. Nothing on this website is an
-            offer or a contract.
+            offer or a contract. We try to keep it accurate, but it may contain errors and may change without notice.
           </p>
         </Section>
 
@@ -68,7 +69,8 @@ export default function TermsPage() {
         <Section title="4. Your part">
           <p>
             You provide the content, brand assets and access to your accounts and services that the project needs, and give
-            feedback within the agreed times. Changes to the agreed scope are quoted before we start them.
+            feedback within the agreed times. You confirm that you have the right to give us that material. Changes to the agreed
+            scope are quoted before we start them.
           </p>
         </Section>
 
@@ -97,13 +99,24 @@ export default function TermsPage() {
           </p>
         </Section>
 
-        <Section title="8. Liability, law and disputes">
-          <p>
-            <Placeholder>Limits of liability, governing law and where disputes are heard, to be written with legal review</Placeholder>
-          </p>
+        <Section title="8. Liability">
+          <p>Unless your agreement says otherwise:</p>
+          <ul className="list-disc pl-5 space-y-1.5">
+            <li>Our total liability for any claim about a project is limited to the fees you paid us for that project.</li>
+            <li>We are not liable for indirect or consequential losses, such as lost profits, revenue, business or data.</li>
+            <li>Nothing in these terms limits any liability that the law does not allow to be limited.</li>
+          </ul>
         </Section>
 
-        <Section title="9. Changes to these terms">
+        <Section title="9. Law, disputes and notices">
+          <p>
+            These terms and every project agreement are governed by the laws of India. If a dispute arises, we will first try to
+            settle it by discussion. If that fails, the courts at Hyderabad, Telangana have exclusive jurisdiction.
+          </p>
+          <p>Legal notices: email {EMAIL}, or send them to the postal address given in your project agreement.</p>
+        </Section>
+
+        <Section title="10. Changes to these terms">
           <p>
             If these terms change, we will update this page and the date at the top. Signed agreements are not changed by updates
             to this page.

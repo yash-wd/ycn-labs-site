@@ -2,20 +2,25 @@ import type { Metadata } from "next";
 import type { ReactNode } from "react";
 
 /*
- * DRAFT for legal review (14 Nov 2026). Not approved wording and not in force.
- * Built from the Owner's fact-sheet answers O1–O10 (private vault) and the code on main.
- * Square-bracket items are placeholders: legal name, notice address, server locations,
- * reply period, rate-limit statistics retention, the deletion process and the applicable-law wording.
- * The reviewer must settle all of them before this ships.
- * Facts behind the wording (GPT review, 14 Nov): lib/security/ratelimit.ts sets Upstash `analytics: true`;
- * the acknowledgement email is best-effort; purgeLeadsOlderThan (lib/db/recovery.ts) deletes by createdAt,
- * not by last contact, and no schedule runs it.
+ * DRAFT (14 Nov 2026). Not in force until the Owner approves a merge.
+ * Built from the Owner's fact-sheet answers O1–O10 (private vault), his approval to show his name
+ * (14 Nov), and the code on main. Legal basis researched from primary texts:
+ * - In force now: IT Act 2000 s.43A and the IT (Reasonable Security Practices and Procedures and
+ *   Sensitive Personal Data or Information) Rules 2011, G.S.R. 313(E): Rule 4 (published privacy policy),
+ *   Rule 5(9) (named Grievance Officer, grievances redressed within one month).
+ * - From 13 May 2027 (G.S.R. 843(E) and 846(E)): DPDP Act 2023 ss.5–14 and DPDP Rules 2025, Rule 3
+ *   (itemised notice; withdrawal, rights and Board complaint), Rule 9 (contact person), Rule 14
+ *   (means of requests; grievance period not over 90 days), Rule 8(3) (logs kept at least one year).
+ * Remaining placeholders: hosting provider and server locations (hosting not chosen yet).
+ * Depends on PR #36: Upstash rate-limit analytics switched off. Merge #36 before this page.
+ * Facts: acknowledgement email is best-effort; deletion is the Owner's monthly manual review
+ * (docs/YCN_LABS_OWNER_WORKING_ROUTINE.md); purgeLeadsOlderThan deletes by createdAt and is not scheduled.
  */
 
 export const metadata: Metadata = {
   title: "Privacy Policy — YCN Labs",
   description:
-    "What YCN Labs collects through its contact form, why, who receives it, how long it is kept and how to ask about it.",
+    "What YCN Labs collects through its contact form, why, who receives it, how long it is kept, your rights and how to raise a complaint.",
   alternates: {
     canonical: "https://ycnlabs.com/privacy",
   },
@@ -43,14 +48,14 @@ export default function PrivacyPage() {
       <div className="mb-12 space-y-3">
         <p className="type-kicker text-[var(--action-blue)]">Legal</p>
         <h1 className="type-display-page text-[var(--text-primary)]">Privacy Policy</h1>
-        <p className="type-caption text-[var(--text-muted)]">Draft for legal review, 14 November 2026. Not yet in force.</p>
+        <p className="type-caption text-[var(--text-muted)]">Draft, 14 November 2026. Not yet in force.</p>
       </div>
 
       <div className="space-y-8 type-copy-body text-sm text-[var(--text-secondary)] leading-relaxed">
         <Section title="1. Who we are">
           <p>
-            YCN Labs is run by <Placeholder>legal name to be added</Placeholder>, a sole proprietor based in Hyderabad, India.
-            Address for legal notices: <Placeholder>to be confirmed</Placeholder>.
+            YCN Labs is the trading name of Yaseen Sayyad, a sole proprietor based in Hyderabad, India. This policy explains how we
+            handle the personal information you give us through this website.
           </p>
           <p>For any question about your information, email {EMAIL}.</p>
         </Section>
@@ -71,30 +76,32 @@ export default function PrivacyPage() {
           </p>
           <p>
             We do not use visitor analytics or advertising trackers, so we do not track which pages you visit. Our own code sets no
-            cookies. The abuse protection in section 4 keeps its own usage statistics.
+            cookies. We do not ask for passwords, payment details or other sensitive information through this website.
           </p>
         </Section>
 
         <Section title="3. Why we use it">
+          <p>You give us this information so that we can reply. We use it only to:</p>
           <ul className="list-disc pl-5 space-y-1">
-            <li>To read and reply to your enquiry.</li>
-            <li>To prepare a quote or proposal if you ask for one.</li>
-            <li>To protect the form from spam and abuse.</li>
+            <li>read and reply to your enquiry;</li>
+            <li>prepare a quote or proposal if you ask for one;</li>
+            <li>protect the form from spam and abuse.</li>
           </ul>
-          <p>We do not sell or rent your information, and we do not use it for advertising.</p>
+          <p>
+            We do not sell or rent your information, and we do not use it for advertising or send you marketing emails because you
+            sent an enquiry.
+          </p>
         </Section>
 
         <Section title="4. Protecting the form from abuse">
           <p>
             To limit repeated submissions, we turn your IP address into a one-way code and send only that code to our rate-limiting
-            provider. It counts recent submissions over a one-hour window, and it also keeps rate-limiting statistics linked to the
-            code. How long those statistics are kept: <Placeholder>to be confirmed</Placeholder>. We do not store your IP address with
-            your enquiry.
+            provider, which uses it to count submissions over a one-hour window. We do not store your IP address with your enquiry.
           </p>
         </Section>
 
         <Section title="5. Who receives it">
-          <p>We use these service providers to run the form:</p>
+          <p>We use these service providers to run the form. Each receives only what it needs:</p>
           <ul className="list-disc pl-5 space-y-1">
             <li>
               <span className="text-[var(--text-primary)]">Neon</span>: our database, which stores your enquiry.
@@ -104,8 +111,8 @@ export default function PrivacyPage() {
               you a short email confirming we received it. If that email fails, your enquiry is still saved.
             </li>
             <li>
-              <span className="text-[var(--text-primary)]">Upstash</span>: rate limiting and its statistics. It receives only the
-              one-way code described above, not your enquiry.
+              <span className="text-[var(--text-primary)]">Upstash</span>: rate limiting. It receives only the one-way code described
+              above, not your enquiry.
             </li>
             <li>
               Our hosting provider, <Placeholder>to be confirmed when hosting is chosen</Placeholder>: runs this website and may keep
@@ -118,15 +125,16 @@ export default function PrivacyPage() {
             </li>
           </ul>
           <p>
-            These providers may store data outside India. Server locations: <Placeholder>to be confirmed</Placeholder>.
+            These providers may store data outside India. Server locations: <Placeholder>to be confirmed</Placeholder>. We do not
+            share your information with anyone else unless the law requires it.
           </p>
         </Section>
 
         <Section title="6. How long we keep it">
           <ul className="list-disc pl-5 space-y-1">
             <li>
-              Enquiries that do not become projects: our policy is to delete them 12 months after our last meaningful contact with
-              you. <Placeholder>Deletion is done by hand today; confirm the process before this page is published</Placeholder>
+              Enquiries that do not become projects: we review stored enquiries every month and delete those with no meaningful
+              contact for 12 months.
             </li>
             <li>
               If you become a client, the records needed for the project, the agreement and tax are kept separately, for as long as
@@ -139,25 +147,49 @@ export default function PrivacyPage() {
           </ul>
         </Section>
 
-        <Section title="7. Who can see it">
+        <Section title="7. How we protect it">
           <p>
             Only the owner of YCN Labs can see enquiries, in our database and in our enquiry inbox. Information sent through this
-            website travels over an encrypted connection (HTTPS).
+            website travels over an encrypted connection (HTTPS). If a security breach affects your information, we will tell you
+            and the authorities as the law requires.
           </p>
         </Section>
 
-        <Section title="8. Your choices">
+        <Section title="8. Your rights">
+          <p>You can ask us to:</p>
+          <ul className="list-disc pl-5 space-y-1">
+            <li>tell you what information we hold about you and who we shared it with;</li>
+            <li>correct, complete or update it;</li>
+            <li>delete it, unless the law requires us to keep it;</li>
+            <li>stop using it. You can withdraw your agreement as easily as you gave it, by email.</li>
+          </ul>
           <p>
-            You can ask us to show you, correct or delete the information we hold about you by emailing {EMAIL}. We will reply
-            within <Placeholder>period to be confirmed</Placeholder>.
-          </p>
-          <p>
-            <Placeholder>Your rights under the law that applies, to be confirmed by legal review</Placeholder>
+            You can also name someone to act for you if you die or cannot act yourself. Email {EMAIL} from the address you used in
+            your enquiry; we may ask you to confirm the request from that address before we act. We reply within 30 days.
           </p>
         </Section>
 
-        <Section title="9. Changes to this policy">
-          <p>If the way we handle information changes, we will update this page and the date at the top.</p>
+        <Section title="9. Grievance Officer and complaints">
+          <p>
+            Grievance Officer: Yaseen Sayyad, {EMAIL}. We resolve complaints about how we handle your information within 30 days of
+            receiving them.
+          </p>
+          <p>
+            If you are not satisfied with our response, you can complain to the Data Protection Board of India once the Digital
+            Personal Data Protection Act, 2023 gives it that role (from 13 May 2027).
+          </p>
+        </Section>
+
+        <Section title="10. Children">
+          <p>Our services are for businesses. If you are under 18, please do not send us an enquiry.</p>
+        </Section>
+
+        <Section title="11. The law and changes to this policy">
+          <p>
+            We handle personal information under India&rsquo;s Information Technology Act, 2000 and its rules and, as its
+            provisions come into force, the Digital Personal Data Protection Act, 2023 and its rules. If the way we handle
+            information changes, we will update this page and the date at the top.
+          </p>
         </Section>
       </div>
     </div>
