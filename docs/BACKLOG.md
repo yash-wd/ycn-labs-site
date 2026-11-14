@@ -7,6 +7,19 @@
 
 ---
 
+## Current Work — 13 November 2026 (supersedes older ordering below)
+- [x] **V3 front-end rebuild (Option B), PR #33:** hero, homepage, inner pages, contact channels, tokens, archive, GPT findings F1–F5, Work/About links, WhatsApp button, media clean-up, static signal borders, hero still frame without JavaScript.
+- [x] **Browser test suite:** `pnpm test:e2e` (Playwright, local production build, Chromium + Firefox).
+- [x] **Monitoring prepared (PR #33):** Sentry off until `SENTRY_DSN` is set; allow-list sends only the error type, fixed route/stage/error-category tags, a UUID request ID, project-relative code location (file under app/, lib/ or components/, function, line), environment and time; request paths, messages, other extra data and contexts are dropped. This is a filter, not a guarantee: before switching it on, inspect real error payloads from synthetic enquiries on a production build (privacy and usefulness) and confirm a test alert reaches a named person. Live alert not verified (deferred).
+- [ ] **Owner read-only deploy check before any merge:** installed GitHub Apps' access to `ycn-labs-site`, and any host project linked to it (see STATE.md).
+- [ ] **Merge:** this docs PR, then PR #33 at exact SHAs (Owner).
+- [ ] **Privacy and Terms:** rewrite from the vault fact sheet, then lawyer review (Owner supplies business facts O1–O10).
+- [ ] **Asset decisions:** `docs/ASSET_MANIFEST.md` (intro film, desk photos, unused logo sizes).
+- [ ] **Real phones and WebKit:** Android/iPhone checks; Playwright WebKit needs a machine with its system libraries (WebKit tests are not real Safari/iPhone tests).
+- [ ] **Real enquiry test:** current V3 form against a configured database and email (existing staging or local services; mocked browser tests do not count).
+- [ ] **Comprehension test:** 5 business owners (Owner kept 5 on 13 Nov).
+- [ ] **DEFERRED by the Owner (no subscriptions now):** hosting and protected preview, production database, live monitoring, DNS/email authentication, analytics, cutover. Launch date is set when hosting is chosen.
+
 ## Completed Foundations
 - [x] **`REPO-READINESS-00`:** Verified repository privacy, outgoing single commit, limited keyword scan 0 matches, drafted canonical context files.
 - [x] **`BRAND-FIND-01`:** [SUPERSEDED] Replaced by Owner RULING-01. Authoritative 6675px master ratified; brand library established (`ycn-labs-brand-library`).
@@ -54,8 +67,11 @@
 - [ ] **`09 YCN-HOME-FINAL-01`:** PAUSED until Gate E. Review and correct verified remaining homepage/entrance/phone/laptop/flow/FAQ defects only; keep ratified copy and frozen systems.
 - [ ] **`10 YCN-PAGES-CONTENT-01`:** Route-by-route content, clear services/contact, jurisdiction/currency and claims reconciliation, correct metadata (blocked on O-01..O-06). *Scope includes OI-19 privacy notice copy and enquiry handling separation from marketing permissions.*
   - **Task 10b progress (5 Nov 2026):** Done: Owner copy rulings (PR #17), ownership wording aligned to DECISION-054 (PR #18), contact-form "Build a product" stored value (PR #20). Service list settled: business websites, selected web applications, scoped automation and integrations, optional paid maintenance.
-  - [ ] **[OWNER-GATE]** Founder/About section: not implemented. Final wording and the demo ruling for that section are pending.
+  - [x] Founder/About section: implemented with Owner-approved wording (PR #22, 9 Nov 2026). A real founder photograph is a separate later task (hidden photo slot until the Owner supplies the file; no placeholder).
   - [ ] **[OWNER-GATE]** Business inputs: legal entity name and city, a genuine portfolio project or "none", INR pricing wording, three testers.
+  - [ ] **[CONFIRMED 10 Nov 2026, legal]** `app/privacy/page.tsx` §4 says "Under UK and GDPR data protection regulations" on an India-first site. Counsel-approved wording needed before launch (Task 15 legal scope).
+  - [ ] **[Owner 10 Nov 2026]** Phone/WhatsApp contact channel on `/contact` (number approved; pre-launch; own task).
+  - [ ] **[Owner 10 Nov 2026, POST-LAUNCH]** Visual-first inner pages ("One enquiry, three screens", Work and What We Solve visuals) and the About/Work copy distill. Owner decision: launch first, visuals after.
 - [ ] **`11 YCN-BRAND-MEDIA-01`:** Approve 02a/02b or explicit existing-asset interim; integrate only approved releases, validate source/license and video rights; replace generic stock video clips with authentic YCN studio footage before production release per `public/media/SOURCES.md` (carried forward requirement; blocked on O-07).
   - [ ] **[PRE-LAUNCH, Owner 9 Nov 2026]** Confirm the source, licence and usage rights of the entrance films (`public/entrance/ycn-intro-final-{landscape,portrait}-v5.mp4`), the Hero photographs (`public/media/hero/ycn-hero-team-v1.webp`, `ycn-hero-device-v1.webp`) and the Hero device image in use (`ycn-hero-device-ui-v2.webp`). None is recorded in `public/media/SOURCES.md` or `/credits`. The film is currently bypassed (DECISION-048 Amendment 1).
 - [ ] **`11a YCN-SYSTEM-ARCH-01`:** **v1.0 Owner-approved 15 Oct 2026 (YCN-ARCH-V1-01)** in `docs/YCN_SYSTEM_ARCHITECTURE.md`: code-grounded HLD, lead/consent LLD, analytics, SPF/DKIM/DMARC, children's-data handling, privacy/legal review map and mandatory Task 12 false-503/atomic-dedupe scenarios 4–6. Architecture documentation approved; implementation NOT STARTED; legal clearance NOT GRANTED.
@@ -66,8 +82,21 @@
   4. *Physical Device Verification:* Form submission verified from physical Android phone via local production build (`next start`) on Wi-Fi LAN; mobile UI controls (Improvement Goal highlight, message inputs, timeline select) confirmed responsive; on-screen success receipt displayed; matching operator notification received in Zoho at 10:35 AM IST (`lead_13df30cb…`, exact identifier preserved in vault); Neon row verified by Owner in SQL console (`accepted / sent / 1 attempt`). Earlier dev-mode GET reloads documented as dev-mode failure (cause hypothesised, not proven); no mobile-form change required; staging database holds 8 test leads total (AGY-reported; 7 prior + 1 phone lead).
   Not yet verified; carried forward to Tasks 13/15: delivery/bounce webhooks, Sentry error-monitoring and alert verification, and named primary/backup lead-operator ownership (O-03/O-06/O-10, OI-19). These capabilities must not be represented as verified or production-ready until their respective acceptance gates pass.
 - [ ] **`13 YCN-QUALITY-GATE-01`:** Full lint/types/test/build on exact RC; Playwright browsers; accessibility, security/CSP report-only, performance/SEO audits. *Scope includes OI-19 verification: privacy-respecting aggregates, cookieless audience measurement, no cross-site identifiers.*
+  - [ ] **[CONFIRMED 10 Nov 2026]** CSP is partial: `next.config.mjs` sets only `frame-ancestors 'none'` (plus X-Frame-Options and HSTS). Broader policy and headers to be verified on a deployed preview.
+  - [ ] **[CONFIRMED 10 Nov 2026]** Rate limiting: verify trusted client-IP (`x-forwarded-for`) handling behind the real proxy and behaviour when Redis is configured but unreachable. (Without credentials the limiter passes requests; production refuses to start without them, `lib/env/server.ts`.)
+  - [ ] **[UNKNOWN]** Performance: no Lighthouse/LCP measurement exists for the current build; historical figures (mobile 93, LCP 2.63 s) predate the 9–10 Nov hero changes.
+  - [ ] **[CONFIRMED 10 Nov 2026]** No end-to-end tests in the repo or CI; Firefox/WebKit untested (Chromium only).
+  - [ ] **[Later, Owner OK needed]** Remove unused `clsx` and `tailwind-merge`; archive 10 unreachable legacy components (import trace 10 Nov 2026). Post-launch.
 - [ ] **`14 YCN-COMPREHENSION-01`:** Observe at least five representative nontechnical users performing find/understand/contact tasks.
+  - [ ] **[DECISION NEEDED]** Sample size conflict: this line says five; the Lean Launch annotation (Task 14, below) says three. Owner to fix one number before testing.
 - [ ] **`15 YCN-RELEASE-RC-01`:** Freeze SHA, staged smoke, domain/DNS/SSL, required env names, backup, rollback, privacy-respecting analytics live, and incident owner. *Scope includes OI-19 production uptime/error alerting verification.*
+  - [ ] **[CONFIRMED 10 Nov 2026, HIGH]** Sentry is not initialised: the SDK is installed and `app/api/contact/route.ts` calls `Sentry.captureException`, but there is no `Sentry.init`, instrumentation file or `withSentryConfig`. Alert delivery is unverified. Needs its own approved task (DSN entered privately by the Owner) and one verified test alert.
+  - [ ] **[CONFIRMED 10 Nov 2026]** `/api/health` is a liveness check only (static `ok`); it does not test the database, Redis or email. Decide whether a dependency-readiness check is needed for monitoring.
+  - [ ] **[REPORTED, decision needed]** The architecture's privacy-notice/consent-evidence tables are not in `lib/db/schema.ts` (only `leads`, `newsletter_signups`). Counsel and Owner to decide whether V1 needs them.
+  - [ ] **[REPORTED]** Named primary and backup lead operators are not recorded; required before launch.
+  - [ ] **[REPORTED]** Redirect inventory from the old site (`yash-wd/ycnlabs`) before domain cutover; `next.config.mjs` currently has one redirect (`/what-we-build`).
+  - [ ] **[UNKNOWN]** Off-device backup of the private vault: the 18–19 Oct archives are on the same SSD; whether the 6 Nov Google Drive upload included the vault is unverified.
+  - [ ] **[UNKNOWN as of 10 Nov; see STATE Deployment check, 13 Nov]** Whether any hosting project is linked to this repository (pending Owner check); the current content of `ycnlabs.com` (old site, claims hotfix) was not checked on 10 Nov.
   - **Legal review scope (5 Nov 2026):** include `/terms` §2 ownership and portfolio-permission wording, which conflicts with DECISION-054 and DECISION-052 O-05. Not changed in PR #18; needs counsel and an Owner ruling.
 - [ ] **`16 YCN-PRODUCTION-LAUNCH-01`:** Separate authorized deploy of exact approved SHA, no incidental source changes.
 - [ ] **`17 YCN-POSTLAUNCH-01`:** Operations and measurement after launch: lead SLA/response tracking, uptime/alerts, proposal funnel data from live analytics, incident playbook, maintenance backlog.
