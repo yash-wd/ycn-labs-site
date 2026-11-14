@@ -13,13 +13,13 @@
 
 ---
 
-## CURRENT STATUS — 13 November 2026 (read this first)
+## CURRENT STATUS — 14 November 2026 (read this first)
 
 > **Resuming? Read [docs/RESUME_2026-11-14.md](RESUME_2026-11-14.md) first:** exact refs, what is pending, and the order of work.
 
 This block supersedes every "Next Order", launch-date and Owner-input list further down. Those remain as dated history.
 
-- **Milestone:** V3 implementation and local regression testing. This is **not** launch readiness: legal text, WebKit and real-phone checks, a real database/email test, the 5-person test, hosting and cutover remain.
+- **Milestone: V3 merged to `main` on 14 Nov 2026; not launched.** PR #32 (docs) merged at `3155635` → `main` `8578350`; PR #33 (V3) merged at `8b9e17e` → `main` `120136a`, both on the Owner's own approval after GPT PASS. Nothing was deployed: no host project is linked to this repo, and `ycnlabs.com` still shows the old site. This is **not** launch readiness: legal text, WebKit and real-phone checks, a real database/email test, the 5-person test, hosting and cutover remain.
 - **Deployment check: RESULT (Owner, read-only, 14 Nov 2026): no Vercel project is linked to `yash-wd/ycn-labs-site`. Merging into `main` does not deploy anything today.** Verified by the Owner on: 14 Nov 2026. Nothing was changed in GitHub or Vercel.
   - **GitHub app:** installation 148256950 is **Vercel** (Owner screenshots, 14 Nov 07:54 IST, seen by the builder). Repository access "Only select repositories": `yash-wd/ycnlabs` and `yash-wd/ycn-labs-site`. The Owner added `ycn-labs-site` there on 13 Nov; it stays (harmless without a project, needed later for hosting).
   - **Vercel dashboard (Owner screenshots, reviewed by GPT and the adviser, 14 Nov):** team **YCN Labs (Hobby)**, **1 project: `ycnlabs-staging`**, connected to **`yash-wd/ycnlabs`** (the old site, connected 23 Jul), domain `ycnlabs.com`. No project uses `yash-wd/ycn-labs-site`. Other Vercel teams/accounts: **none** (Owner checked the team selector, 14 Nov: only YCN Labs).
@@ -31,15 +31,15 @@ This block supersedes every "Next Order", launch-date and Owner-input list furth
   - **Resolved 14 Nov:** the app's name (Vercel) and the project link (none); see RESULT above.
 
 - **Approach (Owner, 10 Nov):** Option B: rebuild what visitors see (V3) on the existing engine. No restart; the enquiry API, database, email, recovery, fonts, palette, header and CI are kept.
-- **V3 is built in PR #33** (branch `wip/YCN-V3-UI`, open, not merged): device-stage hero with headline A ("Websites and software that bring your business enquiries."), new homepage, five rebuilt inner pages, Contact with call/WhatsApp/email, V3 tokens, archive of the old homepage code.
+- **V3 is on `main`** (from PR #33, branch `wip/YCN-V3-UI`, merged 14 Nov): device-stage hero with headline A ("Websites and software that bring your business enquiries."), new homepage, five rebuilt inner pages, Contact with call/WhatsApp/email, V3 tokens, archive of the old homepage code.
 - **GPT review findings closed in PR #33:** F1 static demo labels, F2 hero Pause/Play, F3 four-step metadata; Owner-approved F4 softened promises, F5 website before/after, Work/About links, WhatsApp button, removal of 17 unseen media files and 2 unused components.
 - **Motion (Owner, 13 Nov):** header and button signal borders are static (accessibility exception to the NAV-07 freeze, WCAG 2.2.2); the hero loops only once its Pause control works.
 - **Tests:** unit suite plus a Playwright browser suite in the repo (`pnpm test:e2e`, local production build; Chromium and Firefox; WebKit needs sudo-installed libraries). Run locally, not in CI (Owner, 13 Nov).
-- **Monitoring:** on `main` Sentry is still not initialised. On PR #33 it is prepared but OFF until `SENTRY_DSN` is set; an allow-list (GPT reviews and Owner choice, 13 Nov) sends only the error type, fixed route/stage/error-category tags, a UUID request ID, project-relative code location (file under app/, lib/ or components/, function, line), environment and time; request paths, messages, other extra data and contexts are dropped. This is a filter, not a guarantee: before switching it on, inspect real error payloads from synthetic enquiries on a production build (privacy and usefulness) and confirm a test alert reaches a named person. No alert has been verified.
+- **Monitoring:** Sentry is prepared on `main` but OFF until `SENTRY_DSN` is set; an allow-list (GPT reviews and Owner choice, 13 Nov) sends only the error type, fixed route/stage/error-category tags, a UUID request ID, project-relative code location (file under app/, lib/ or components/, function, line), environment and time; request paths, messages, other extra data and contexts are dropped. This is a filter, not a guarantee: before switching it on, inspect real error payloads from synthetic enquiries on a production build (privacy and usefulness) and confirm a test alert reaches a named person. No alert has been verified.
 - **No new paid subscriptions now (Owner, 13 Nov).** Hosting, preview, production database, live monitoring, DNS and analytics are deferred, not done. **The launch date is set when hosting is chosen;** the 30 Nov target and the 19 Nov account-input list no longer apply.
-- **Still open:** Privacy/Terms rewrite (fact sheet prepared in the private vault; lawyer review later); asset decisions in `docs/ASSET_MANIFEST.md` (on PR #33); real-phone and WebKit checks; 5-person comprehension test (Owner kept 5 on 13 Nov); merge of this PR and PR #33.
-- **Integration order:** Owner read-only deploy check (done 14 Nov, above) → review and merge this docs PR → bring PR #33 up to date with `main` → rerun unit and browser tests on that exact SHA → review → Owner merge at an exact SHA. A merge does not deploy today (no Vercel project is linked to this repo).
-- **Test evidence (version-specific):** PR #33 `28f2038`: 271 unit tests and 48/48 browser tests (Chromium + Firefox, local production build) pass. Earlier versions were tested separately; a later synchronised version must be retested.
+- **Still open:** Privacy/Terms rewrite (fact sheet prepared in the private vault; lawyer review later); asset decisions in `docs/ASSET_MANIFEST.md`; real-phone and WebKit checks; 5-person comprehension test (Owner kept 5 on 13 Nov); primary and backup enquiry responders; a real V3 enquiry against a configured database and email; hosting and launch (Owner decision).
+- **Integration order: done 14 Nov.** Owner deploy check → PR #32 merged → PR #33 synced with `main`, retested, reviewed → PR #33 merged. A merge does not deploy today (no Vercel project is linked to this repo).
+- **Test evidence (version-specific):** PR #33 `8b9e17e` (the merged version; same code as `28f2038` plus docs): lint 0 errors, type check clean, 271 unit tests, offline production build, 48/48 browser tests (Chromium + Firefox) pass; CI pass. Later code changes must be retested.
 - **Live progress record:** `docs/PROGRESS.md` (on PR #33).
 
 ---
