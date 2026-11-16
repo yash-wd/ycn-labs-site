@@ -1,10 +1,9 @@
 "use client";
 
 import React, { useState, useEffect } from "react";
-import dynamic from "next/dynamic";
 import { HeroV3 } from "@/components/v3/HeroV3";
 import { HomeV3Body } from "@/components/v3/HomeV3";
-import { isDevIntroReplay } from "./entrance-diagnostics";
+import { HomepageR2 } from "@/components/r2/HomepageR2";
 
 import { BrandContinuumStage } from "./BrandContinuumStage";
 import { isForceReplay } from "./BrandContinuumFilm";
@@ -53,11 +52,16 @@ export function HomepageVNextPhase1() {
         />
       )}
 
-      {/* 3. Hero Foundation: Rendered beneath from frame one */}
-      <HeroV3 />
+      {/* 3. Homepage R2: Modern Candidate A + 3-Service Interactive Showcase + Bento + Outcomes */}
+      <HomepageR2 />
 
-      {/* 4. YCN-V3-UI Day 2: the new homepage body (COPY-V3.md, Owner-approved base) */}
-      <HomeV3Body />
+      {/* V3 Base Preserved for Instant Rollback & Contract Verification */}
+      {false && (
+        <>
+          <HeroV3 />
+          <HomeV3Body />
+        </>
+      )}
     </div>
   );
 }

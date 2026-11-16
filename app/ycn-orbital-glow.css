@@ -1,0 +1,135 @@
+/* YCN Labs — Orbital Glow (review-only, opt-in implementation candidate)
+ * Design intent: subtle cyan/blue light around genuine product visuals and
+ * clickable content; preserve quiet reading areas and the finalized logo.
+ * Dependencies: existing V3 semantic tokens in app/globals.css.
+ * Does not replace Candidate A adoption or change backend behaviour.
+ */
+:root {
+  --ycn-glow-near: color-mix(in srgb, var(--ycn-logo-cyan) 14%, transparent);
+  --ycn-glow-far: color-mix(in srgb, var(--action-blue) 9%, transparent);
+  --ycn-orbit-line: color-mix(in srgb, var(--action-blue) 30%, transparent);
+  --ycn-orbit-node: var(--action-blue);
+  --ycn-glow-edge: color-mix(in srgb, var(--action-blue) 24%, var(--border-subtle));
+  --ycn-glow-duration: 240ms;
+}
+.dark {
+  --ycn-glow-near: color-mix(in srgb, var(--ycn-logo-cyan) 18%, transparent);
+  --ycn-glow-far: color-mix(in srgb, var(--action-blue) 12%, transparent);
+  --ycn-orbit-line: color-mix(in srgb, var(--ycn-logo-cyan) 25%, transparent);
+  --ycn-orbit-node: var(--ycn-logo-cyan);
+  --ycn-glow-edge: color-mix(in srgb, var(--ycn-logo-cyan) 26%, var(--border-subtle));
+}
+
+/* The existing V3 DeviceStage is a real CSS/DOM concept demo.
+ * This class only improves its BACKGROUND. No new imagery or faux dashboards. */
+.v3-stage-wrap.ycn-orbit-stage {
+  position: relative;
+  isolation: isolate;
+}
+/* Specificity and import order intentionally override V3's existing 14%-glow. */
+.v3-stage-wrap.ycn-orbit-stage::before {
+  content: "";
+  position: absolute;
+  inset: -8% -6% -3% 8%;
+  z-index: -1;
+  pointer-events: none;
+  background:
+    radial-gradient(ellipse 57% 50% at 70% 46%, var(--ycn-glow-near), transparent 100%),
+    radial-gradient(ellipse 67% 57% at 48% 56%, var(--ycn-glow-far), transparent 100%);
+  opacity: 1;
+}
+/* A PARTIAL, hairline orbital arc — not a full ring, never a logo redraw. */
+.v3-stage-wrap.ycn-orbit-stage::after {
+  content: "";
+  position: absolute;
+  z-index: -1;
+  pointer-events: none;
+  width: 74%;
+  aspect-ratio: 1.25;
+  top: -3%;
+  right: 0;
+  border: 1px solid var(--ycn-orbit-line);
+  border-right-color: transparent;
+  border-bottom-color: transparent;
+  border-radius: 50%;
+  transform: rotate(-24deg);
+  background: radial-gradient(circle at 29% 7%, var(--ycn-orbit-node) 0 3px, transparent 4px);
+  opacity: .62;
+}
+
+/* Opt-in effect for an image or approved media frame (not a universal img rule). */
+.ycn-glow-media {
+  position: relative;
+  isolation: isolate;
+}
+.ycn-glow-media::before {
+  content: "";
+  position: absolute;
+  inset: -20px;
+  z-index: -1;
+  pointer-events: none;
+  border-radius: inherit;
+  background: radial-gradient(ellipse 68% 60% at 56% 50%, var(--ycn-glow-near), transparent 92%);
+  opacity: .6;
+}
+
+/* Apply only to chosen content surfaces; do not make all cards glow. */
+.ycn-glow-card {
+  position: relative;
+  isolation: isolate;
+  border-radius: var(--radius-card, 16px);
+}
+.ycn-glow-card::before {
+  content: "";
+  position: absolute;
+  z-index: -1;
+  inset: -18px;
+  pointer-events: none;
+  background: radial-gradient(ellipse 60% 50% at 50% 46%, var(--ycn-glow-near), transparent 96%);
+  border-radius: inherit;
+  opacity: 0;
+  transition: opacity var(--ycn-glow-duration) ease;
+}
+.ycn-glow-card::after {
+  content: "";
+  position: absolute;
+  z-index: 1;
+  inset: 0;
+  pointer-events: none;
+  border: 1px solid var(--ycn-glow-edge);
+  border-radius: inherit;
+  opacity: 0;
+  transition: opacity var(--ycn-glow-duration) ease;
+}
+/* Non-clickable informational cards keep their static treatment. */
+.ycn-glow-card[data-ycn-glow="rest"]::before { opacity: .24; }
+.ycn-glow-card[data-ycn-glow="rest"]::after { opacity: .34; }
+/* Keyboard focus on a REAL link or button inside the card is as important as hover. */
+.ycn-glow-card[data-ycn-glow="hover"]:focus-within::before,
+.ycn-glow-card[data-ycn-glow="hover"]:focus-within::after {
+  opacity: 1;
+}
+@media (hover: hover) and (pointer: fine) {
+  .ycn-glow-card[data-ycn-glow="hover"]:hover::before,
+  .ycn-glow-card[data-ycn-glow="hover"]:hover::after { opacity: 1; }
+}
+
+/* On mobile the arc disappears rather than cropping at the viewport edge.
+ * The glow stays behind the lower device stage, away from hero copy. */
+@media (max-width: 640px) {
+  .v3-stage-wrap.ycn-orbit-stage::after { display: none; }
+  .v3-stage-wrap.ycn-orbit-stage::before {
+    inset: 6% 0 10%;
+    background: radial-gradient(ellipse 65% 56% at 58% 53%, var(--ycn-glow-near), transparent 100%);
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .ycn-glow-card::before, .ycn-glow-card::after { transition: none; }
+}
+@media (forced-colors: active) {
+  .v3-stage-wrap.ycn-orbit-stage::before,
+  .v3-stage-wrap.ycn-orbit-stage::after,
+  .ycn-glow-media::before,
+  .ycn-glow-card::before,
+  .ycn-glow-card::after { display: none; }
+}

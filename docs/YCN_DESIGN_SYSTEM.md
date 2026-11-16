@@ -260,3 +260,45 @@ At representative points in every story scene, pause the animation. The composit
 - Below-fold heavy assets lazy loaded.
 - Avoid layout-thrashing animation; prefer transform/opacity.
 - Do not publish Lighthouse/CWV/WCAG claims until tested/verified.
+
+---
+
+## 14. PROTOTYPE — NOT FINAL: Candidate A & Orbital Glow Treatment (16 Nov 2026)
+
+> **Status:** Under visual evaluation on prototype branch `wip/YCN-BRAND-PROTOTYPE-01`. Requires Owner visual acceptance before production adoption.
+
+### A. Candidate A Semantic Theme Mapping
+| Semantic role | Proposed light | Proposed dark | Purpose / Contrast standard |
+|---|---|---|---|
+| `--bg-canvas` | `#F7FAFC` | `#080D16` | Main page canvas; quiet reading area |
+| `--bg-surface` | `#EDF3F8` | `#0D1522` | Supporting section bands, structural cards |
+| `--bg-surface-elevated` | `#FFFFFF` | `#121D2E` | Raised workflow stages, form panels |
+| `--text-primary` | `#0B1220` | `#F4F8FC` | Headings & primary body copy (WCAG AAA) |
+| `--text-secondary` | `#40536B` | `#B4C1D1` | Subtitles, descriptions, supporting text |
+| `--text-muted` | `#52657A` | `#94A3B8` | Captions, metadata, footnotes |
+| `--action-blue` | `#0470B4` | `#02C1F7` | Primary action button fill |
+| `--action-blue-hover` | `#035B94` | `#67E8F9` | Primary action hover state |
+| `--text-on-action` | `#FFFFFF` | `#071018` | Button text (9.50:1 AAA contrast) |
+| `--link-text` | `#035B94` | `#67E8F9` | Inline text links |
+| `--focus-ring` | `#0470B4` | `#67E8F9` | Accessible keyboard focus ring |
+| `--control-border` | `#66758F` | `#64748B` | Form inputs & button boundaries |
+| `--ycn-logo-cyan` | `#02C1F7` | `#02C1F7` | Locked official logo master cyan |
+
+### B. Orbital Glow Treatment Rules (`app/ycn-orbital-glow.css`)
+1. **Localized Hero Atmosphere (`.ycn-orbit-stage`):**
+   - Soft cyan/blue radial illumination behind the interactive `DeviceStage`.
+   - Thin 1px hairline partial arc rotated with a single glowing node (`::after`), referencing the official logo orbit without drawing a full ring.
+   - On mobile screens (`≤640px`), the partial arc is hidden (`display: none;`) to prevent screen-edge clipping, and the glow is pulled downward away from the headline.
+2. **Opt-in Card Hover Illumination (`.ycn-glow-card`):**
+   - Applies subtle edge lighting and soft ambient glow only to clickable cards on hover and keyboard focus (`:focus-within`).
+   - Static informational cards remain un-glowed (`data-ycn-glow="rest"`).
+3. **Approved Media Frames (`.ycn-glow-media`):**
+   - Soft ambient halo behind verified screenshots and genuine product diagrams.
+4. **Contrast & Accessibility Invariants:**
+   - Glow is purely decorative (`isolation: isolate`); text and form contrast never rely on glow.
+   - High-contrast / Forced Colors fallback: `@media (forced-colors: active)` hides decorative pseudo-elements.
+   - Reduced-motion fallback: `@media (prefers-reduced-motion: reduce)` disables transition timings.
+5. **Asset Intake Gate:**
+   - No speculative AI graphics, generic animated GIFs, or fake client screenshots.
+   - Specific asset briefs provided to the Owner whenever a visual asset is needed.
+
