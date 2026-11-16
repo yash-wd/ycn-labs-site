@@ -63,7 +63,8 @@
 .ycnr-cta-primary{color:var(--r-btn-text)!important;background:var(--r-btn);box-shadow:0 12px 30px -22px var(--r-link)}
 .ycnr-cta-outline{border-color:var(--r-line);color:var(--r-ink)!important;background:var(--r-surface)}
 .ycnr-cta-outline:hover{border-color:var(--r-link)}
-.ycnr-cta-arrow{font-size:19px;line-height:0}
+.ycnr-cta-arrow{display:inline-block;transition:transform .2s ease;margin-left:4px}
+.ycnr-cta:hover .ycnr-cta-arrow{transform:translate(2px,-2px)}
 .ycnr-reassure{margin:18px 0 0;font-size:13px;line-height:1.6;color:var(--r-muted)}
 .ycnr-reassure strong{color:var(--r-ink);font-weight:650}
 .ycnr-stage-area{position:relative;min-width:0}
@@ -134,7 +135,9 @@
 .ycnr-offer-num{color:var(--r-link);letter-spacing:.13em;font-size:11px;font-weight:800}
 .ycnr-offer h3{font-family:var(--font-space-grotesk,"Space Grotesk"),sans-serif;font-size:27px;letter-spacing:-.035em;line-height:1.2;margin:44px 0 10px}
 .ycnr-offer p{font-size:14px;color:var(--r-secondary);line-height:1.6;max-width:280px;margin:0}
-.ycnr-offer-icon{position:absolute;right:22px;top:21px;width:45px;height:45px;border:1px solid color-mix(in srgb,var(--r-link) 42%,var(--r-line));border-radius:13px;display:grid;place-items:center;color:var(--r-link);font-size:20px;background:color-mix(in srgb,var(--r-link) 6%,transparent)}
+.ycnr-offer-icon{position:absolute;right:22px;top:21px;width:45px;height:45px;border:1px solid color-mix(in srgb,var(--r-link) 42%,var(--r-line));border-radius:13px;display:grid;place-items:center;color:var(--r-link);background:color-mix(in srgb,var(--r-link) 6%,transparent);transition:transform .23s ease,border-color .23s ease,background .23s ease,box-shadow .23s ease}
+.ycnr-offer:hover .ycnr-offer-icon{border-color:var(--r-link);background:color-mix(in srgb,var(--r-link) 14%,transparent);box-shadow:0 0 16px -2px color-mix(in srgb,var(--r-link) 30%,transparent);transform:scale(1.05)}
+.ycnr-icon-success{color:#34D399;flex-shrink:0}
 .ycnr-offer::after{content:"";position:absolute;inset:auto -5% -23% 35%;height:170px;background:radial-gradient(ellipse at center,var(--r-aura),transparent 70%);pointer-events:none;opacity:.45}
 .ycnr-numbergrid{display:grid;grid-template-columns:repeat(3,1fr);border:1px solid var(--r-line);border-radius:18px;overflow:hidden}
 .ycnr-numbergrid>div{padding:26px 24px;min-height:165px;background:var(--r-surface)}

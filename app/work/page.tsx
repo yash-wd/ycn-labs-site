@@ -1,5 +1,6 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
+import { ArrowUpRight } from 'lucide-react';
 import { workStudies } from '@/lib/ycn-work-studies';
 import { WorkVisual } from '@/components/work/WorkVisual';
 import styles from '@/components/work/work.module.css';
@@ -69,7 +70,7 @@ export default function WorkPage() {
                     href={`/work/${study.slug}`}
                     aria-label={`Explore ${study.category.toLowerCase()}: ${study.heading}`}
                   >
-                    Explore this case <span aria-hidden="true">↗</span>
+                    Explore this case <ArrowUpRight size={14} className="inline ml-1" aria-hidden="true" />
                   </Link>
                 </div>
                 <div className={styles.cardVisual}>
@@ -89,7 +90,7 @@ export default function WorkPage() {
                   href="/contact"
                   className="inline-flex min-h-[44px] items-center font-semibold text-[var(--w-accent)] hover:underline"
                 >
-                  Start a Project <span aria-hidden="true">↗</span>
+                  Start a Project <ArrowUpRight size={15} className="inline ml-1" aria-hidden="true" />
                 </Link>
               </div>
               <div className={styles.cardVisual}>
@@ -135,7 +136,7 @@ export default function WorkPage() {
               </p>
             </div>
             <Link className="inline-flex min-h-[44px] items-center justify-center rounded-lg bg-[var(--w-accent)] px-6 py-3 font-semibold text-[var(--w-actionText)] transition hover:opacity-90" href="/contact">
-              Start a project <span aria-hidden="true">↗</span>
+              Start a project <ArrowUpRight size={15} className="inline ml-1" aria-hidden="true" />
             </Link>
           </div>
         </div>

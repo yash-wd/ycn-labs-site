@@ -3,6 +3,18 @@
 import React, { useState, useEffect, useRef } from "react";
 import Link from "next/link";
 import gsap from "gsap";
+import {
+  ArrowRight,
+  ArrowUpRight,
+  Check,
+  CheckCircle2,
+  Circle,
+  Globe,
+  LayoutDashboard,
+  RotateCcw,
+  Smartphone,
+  Workflow,
+} from "lucide-react";
 
 type SceneType = "website" | "app" | "automation";
 
@@ -130,13 +142,14 @@ export function RealisticWebsiteDemo({ initialBookingStatus = "idle" }: Realisti
               </button>
             ) : (
               <div className="ycnr-booked-notice" role="status">
-                <span className="ycnr-check">✓</span>
+                <CheckCircle2 size={16} strokeWidth={2.2} className="ycnr-icon-success" style={{ flexShrink: 0 }} />
                 <span>Example only. On a real site, the clinic would receive this request.</span>
                 <button
                   type="button"
                   className="ycnr-reset-demo-btn"
                   onClick={() => setBookingStatus("idle")}
                 >
+                  <RotateCcw size={12} strokeWidth={2} style={{ display: "inline", marginRight: "4px", verticalAlign: "middle" }} />
                   Reset example
                 </button>
               </div>
@@ -284,7 +297,15 @@ export function RealisticWebAppDemo() {
                     title={item.status === "replied" ? "Status is Replied (terminal). Click Reset example to restart." : "Click to advance status"}
                     aria-label={`Advance status for ${item.id}, currently ${item.status}`}
                   >
-                    {item.status === "replied" ? "REPLIED ✓" : `${item.status.toUpperCase()} ➔`}
+                    {item.status === "replied" ? (
+                      <>
+                        REPLIED <Check size={11} strokeWidth={2.5} style={{ display: "inline", verticalAlign: "middle" }} />
+                      </>
+                    ) : (
+                      <>
+                        {item.status.toUpperCase()} <ArrowRight size={11} strokeWidth={2} style={{ display: "inline", verticalAlign: "middle" }} />
+                      </>
+                    )}
                   </button>
                 </div>
               </div>
@@ -299,6 +320,7 @@ export function RealisticWebAppDemo() {
               onClick={resetRequests}
               style={{ marginLeft: "12px" }}
             >
+              <RotateCcw size={12} strokeWidth={2} style={{ display: "inline", marginRight: "4px", verticalAlign: "middle" }} />
               Reset example
             </button>
           </div>
@@ -371,7 +393,15 @@ export function RealisticAutomationDemo({ initialStep = 1 }: RealisticAutomation
               className="ycnr-run-flow-btn"
               onClick={handleNext}
             >
-              {activeStep < 3 ? "Simulate next step ➔" : "Reset example ↺"}
+              {activeStep < 3 ? (
+                <>
+                  Simulate next step <ArrowRight size={13} strokeWidth={2} style={{ display: "inline", marginLeft: "4px", verticalAlign: "middle" }} />
+                </>
+              ) : (
+                <>
+                  Reset example <RotateCcw size={13} strokeWidth={2} style={{ display: "inline", marginLeft: "4px", verticalAlign: "middle" }} />
+                </>
+              )}
             </button>
           </div>
 
@@ -396,7 +426,13 @@ export function RealisticAutomationDemo({ initialStep = 1 }: RealisticAutomation
                     <strong>{st.name}</strong>
                     <p>{st.desc}</p>
                     <div className="ycnr-card-status">
-                      <span className="ycnr-check">{isActive ? "✓" : "○"}</span>
+                      <span className="ycnr-check">
+                        {isActive ? (
+                          <Check size={11} strokeWidth={2.5} />
+                        ) : (
+                          <Circle size={8} strokeWidth={2} opacity={0.35} />
+                        )}
+                      </span>
                       <span>{isActive ? st.status : "Waiting for trigger..."}</span>
                     </div>
                   </div>
@@ -407,7 +443,10 @@ export function RealisticAutomationDemo({ initialStep = 1 }: RealisticAutomation
 
           {activeStep === 3 && (
             <div className="ycnr-whatsapp-bubble" role="status">
-              <div className="ycnr-wa-head">📱 Illustrative Team Alert Concept</div>
+              <div className="ycnr-wa-head">
+                <Smartphone size={14} strokeWidth={2} style={{ display: "inline", marginRight: "6px", verticalAlign: "text-bottom" }} />
+                Illustrative Team Alert Concept
+              </div>
               <p>
                 &quot;Simulation: New project inquiry from sample customer. All details mapped to sheet preview.&quot;
               </p>
@@ -498,9 +537,12 @@ export function HomepageR2() {
                 href="/contact"
               >
                 Start a project{" "}
-                <span aria-hidden="true" className="ycnr-cta-arrow">
-                  ↗
-                </span>
+                <ArrowUpRight
+                  size={15}
+                  strokeWidth={2.2}
+                  className="ycnr-cta-arrow"
+                  aria-hidden="true"
+                />
               </Link>
               <Link
                 id="hero-secondary-cta"
@@ -535,7 +577,10 @@ export function HomepageR2() {
                   aria-pressed={activeScene === "website"}
                   onClick={() => setActiveScene("website")}
                 >
-                  <span className="ycnr-tab-title">Websites</span>
+                  <span className="ycnr-tab-title">
+                    <Globe size={13} strokeWidth={1.75} style={{ display: "inline", marginRight: "6px", verticalAlign: "middle" }} />
+                    Websites
+                  </span>
                   <small className="ycnr-tab-sub">Make next step obvious</small>
                 </button>
                 <button
@@ -544,7 +589,10 @@ export function HomepageR2() {
                   aria-pressed={activeScene === "app"}
                   onClick={() => setActiveScene("app")}
                 >
-                  <span className="ycnr-tab-title">Web apps</span>
+                  <span className="ycnr-tab-title">
+                    <LayoutDashboard size={13} strokeWidth={1.75} style={{ display: "inline", marginRight: "6px", verticalAlign: "middle" }} />
+                    Web apps
+                  </span>
                   <small className="ycnr-tab-sub">Every request in 1 place</small>
                 </button>
                 <button
@@ -553,7 +601,10 @@ export function HomepageR2() {
                   aria-pressed={activeScene === "automation"}
                   onClick={() => setActiveScene("automation")}
                 >
-                  <span className="ycnr-tab-title">Automation</span>
+                  <span className="ycnr-tab-title">
+                    <Workflow size={13} strokeWidth={1.75} style={{ display: "inline", marginRight: "6px", verticalAlign: "middle" }} />
+                    Automation
+                  </span>
                   <small className="ycnr-tab-sub">Stop typing twice</small>
                 </button>
               </div>
@@ -609,7 +660,7 @@ export function HomepageR2() {
             <Link className="ycnr-offer" href="/contact">
               <span className="ycnr-offer-num">01 / BUSINESS WEBSITES</span>
               <span className="ycnr-offer-icon" aria-hidden="true">
-                ↗
+                <Globe size={22} strokeWidth={1.75} />
               </span>
               <h3>Make a strong first impression.</h3>
               <p>
@@ -619,7 +670,7 @@ export function HomepageR2() {
             <Link className="ycnr-offer" href="/contact">
               <span className="ycnr-offer-num">02 / WEB APPLICATIONS</span>
               <span className="ycnr-offer-icon" aria-hidden="true">
-                ▦
+                <LayoutDashboard size={22} strokeWidth={1.75} />
               </span>
               <h3>Bring the work together.</h3>
               <p>
@@ -629,7 +680,7 @@ export function HomepageR2() {
             <Link className="ycnr-offer" href="/contact">
               <span className="ycnr-offer-num">03 / AUTOMATION</span>
               <span className="ycnr-offer-icon" aria-hidden="true">
-                ⇢
+                <Workflow size={22} strokeWidth={1.75} />
               </span>
               <h3>Less copying. More doing.</h3>
               <p>
@@ -726,7 +777,15 @@ export function HomepageR2() {
                 Understand the proposal, see what is being made, and know the next
                 step.
               </p>
-              <Link href="/about">Meet the founder ↗</Link>
+              <Link href="/about">
+                Meet the founder{" "}
+                <ArrowUpRight
+                  size={14}
+                  strokeWidth={2}
+                  style={{ display: "inline", verticalAlign: "middle" }}
+                  aria-hidden="true"
+                />
+              </Link>
             </div>
             <div className="ycnr-trust-notes">
               <div>
@@ -808,9 +867,12 @@ export function HomepageR2() {
             <div className="ycnr-final-actions">
               <Link className="ycnr-cta ycnr-cta-primary" href="/contact">
                 Start a project{" "}
-                <span className="ycnr-cta-arrow" aria-hidden="true">
-                  ↗
-                </span>
+                <ArrowUpRight
+                  size={15}
+                  strokeWidth={2.2}
+                  className="ycnr-cta-arrow"
+                  aria-hidden="true"
+                />
               </Link>
               <a
                 className="ycnr-cta ycnr-cta-outline"
