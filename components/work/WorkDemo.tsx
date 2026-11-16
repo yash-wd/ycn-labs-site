@@ -1,6 +1,7 @@
 'use client';
 
 import { useState } from 'react';
+import { ArrowRight, ArrowUpRight, Check } from 'lucide-react';
 import type { WorkScene } from '@/lib/ycn-work-studies';
 import styles from './work.module.css';
 
@@ -36,7 +37,7 @@ function ServiceWebsiteDemo() {
       <label>Service<select value={service} onChange={e => { setService(e.target.value); setReview(false); }}><option>Small repair</option><option>Installation visit</option><option>Maintenance check</option></select></label>
       <label>Preferred timing<select value={day} onChange={e => { setDay(e.target.value); setReview(false); }}><option>Weekday</option><option>Weekend</option><option>Not sure yet</option></select></label>
     </div>
-    <button className={styles.actionButton} type="button" onClick={() => setReview(true)}>Preview a request <span aria-hidden="true">↗</span></button>
+    <button className={styles.actionButton} type="button" onClick={() => setReview(true)}>Preview a request <ArrowUpRight size={16} strokeWidth={1.9} aria-hidden="true" /></button>
     <div className={styles.feedback} role="status" aria-live="polite">{review ? <><small>READY TO REVIEW · EXAMPLE ONLY</small><h3>{service}</h3><p>Preferred timing: {day}. A real site would confirm contact details and availability before sending.</p></> : <><small>A CLEAR NEXT STEP</small><h3>No account required to start</h3><p>Make the important information easy to find, then ask for only the details needed to respond.</p></>}</div>
     <p className={styles.demoFoot}>Concept. No real business, opening hours or booking service is represented. Nothing is sent.</p>
   </div>;
@@ -60,7 +61,7 @@ function RequestsDemo() {
     );
   return <div className={styles.demoArea}>
     <div className={styles.exampleTitle}><small>REQUEST WORKSPACE · EXAMPLE DATA</small><h3>Who has the next step?</h3><p>Give each request an owner and a status. Try moving a request forward.</p></div>
-    <div className={styles.tableWrap}><table className={styles.requestTable}><thead><tr><th scope="col">Request</th><th scope="col">Responsible role</th><th scope="col">Status</th><th scope="col">Action</th></tr></thead><tbody>{rows.map(row => <tr key={row.id}><th scope="row">{row.task}</th><td>{row.owner}</td><td><span className={styles.statusChip}>{row.status}</span></td><td><button type="button" className={styles.smallAction} onClick={() => advance(row.id)} disabled={row.status === 'Replied'} aria-label={row.status === 'Replied' ? `${row.task} is Replied (terminal)` : `Advance ${row.task} from ${row.status}`}>{row.status === 'Replied' ? 'Done' : 'Next'} <span aria-hidden="true">{row.status === 'Replied' ? '✓' : '→'}</span></button></td></tr>)}</tbody></table></div>
+    <div className={styles.tableWrap}><table className={styles.requestTable}><thead><tr><th scope="col">Request</th><th scope="col">Responsible role</th><th scope="col">Status</th><th scope="col">Action</th></tr></thead><tbody>{rows.map(row => <tr key={row.id}><th scope="row">{row.task}</th><td>{row.owner}</td><td><span className={styles.statusChip}>{row.status}</span></td><td><button type="button" className={styles.smallAction} onClick={() => advance(row.id)} disabled={row.status === 'Replied'} aria-label={row.status === 'Replied' ? `${row.task} is Replied (terminal)` : `Advance ${row.task} from ${row.status}`}>{row.status === 'Replied' ? 'Done' : 'Next'} <span aria-hidden="true">{row.status === 'Replied' ? <Check size={16} strokeWidth={2} style={{ display: 'inline', marginLeft: '4px', verticalAlign: 'middle' }} /> : <ArrowRight size={16} strokeWidth={1.9} style={{ display: 'inline', marginLeft: '4px', verticalAlign: 'middle' }} />}</span></button></td></tr>)}</tbody></table></div>
     <div className={styles.demoControls}><button type="button" className={styles.textButton} onClick={() => setRows(initialRows.map(x => ({ ...x })))}>Reset example</button><span aria-live="polite" role="status">{rows.filter(x => x.status === 'Replied').length} of 3 marked Replied</span></div>
     <p className={styles.demoFoot}>Illustrative browser-only interaction. No shared accounts, notification or database.</p>
   </div>;
@@ -82,7 +83,7 @@ function QuoteDemo() {
       <label>Sample rate (₹)<input type="number" inputMode="decimal" min="0" max="1000000" value={rate} onChange={e => {setRate(e.target.value);setReview(false);}} /></label>
     </div>
     <div className={styles.quoteTotal}><span>Illustrative subtotal</span><strong aria-live="polite">{INR.format(total)}</strong></div>
-    <button className={styles.actionButton} type="button" onClick={() => setReview(true)}>Review example quote <span aria-hidden="true">↗</span></button>
+    <button className={styles.actionButton} type="button" onClick={() => setReview(true)}>Review example quote <ArrowUpRight size={16} strokeWidth={1.9} aria-hidden="true" /></button>
     {review && <div className={styles.feedback} role="status" aria-live="polite"><small>NOT A CUSTOMER QUOTE</small><h3>{item.trim() || 'Untitled service'}</h3><p>{q} × {INR.format(r)} = {INR.format(total)}. A real business would approve rates, taxes, terms and delivery before issuing anything.</p></div>}
     <p className={styles.demoFoot}>Sample figures only, not YCN prices. Taxes, discounts and contractual terms are excluded. Nothing is saved or sent.</p>
   </div>;

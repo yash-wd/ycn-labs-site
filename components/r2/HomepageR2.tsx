@@ -444,7 +444,7 @@ export function RealisticAutomationDemo({ initialStep = 1 }: RealisticAutomation
           {activeStep === 3 && (
             <div className="ycnr-whatsapp-bubble" role="status">
               <div className="ycnr-wa-head">
-                <Smartphone size={14} strokeWidth={2} style={{ display: "inline", marginRight: "6px", verticalAlign: "text-bottom" }} />
+                <Smartphone size={18} strokeWidth={1.8} style={{ display: "inline", marginRight: "6px", verticalAlign: "text-bottom" }} aria-hidden="true" />
                 Illustrative Team Alert Concept
               </div>
               <p>
@@ -660,7 +660,7 @@ export function HomepageR2() {
             <Link className="ycnr-offer" href="/contact">
               <span className="ycnr-offer-num">01 / BUSINESS WEBSITES</span>
               <span className="ycnr-offer-icon" aria-hidden="true">
-                <Globe size={22} strokeWidth={1.75} />
+                <Globe size={24} strokeWidth={1.8} />
               </span>
               <h3>Make a strong first impression.</h3>
               <p>
@@ -670,7 +670,7 @@ export function HomepageR2() {
             <Link className="ycnr-offer" href="/contact">
               <span className="ycnr-offer-num">02 / WEB APPLICATIONS</span>
               <span className="ycnr-offer-icon" aria-hidden="true">
-                <LayoutDashboard size={22} strokeWidth={1.75} />
+                <LayoutDashboard size={24} strokeWidth={1.8} />
               </span>
               <h3>Bring the work together.</h3>
               <p>
@@ -680,7 +680,7 @@ export function HomepageR2() {
             <Link className="ycnr-offer" href="/contact">
               <span className="ycnr-offer-num">03 / AUTOMATION</span>
               <span className="ycnr-offer-icon" aria-hidden="true">
-                <Workflow size={22} strokeWidth={1.75} />
+                <Workflow size={24} strokeWidth={1.8} />
               </span>
               <h3>Less copying. More doing.</h3>
               <p>

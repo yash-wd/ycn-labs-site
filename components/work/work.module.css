@@ -43,7 +43,7 @@
 .diagramHeader span:first-child{color:var(--w-accent);font-weight:750}
 .diagramChain{position:relative;display:flex;align-items:center;justify-content:space-between;gap:6px;flex-wrap:wrap;margin:30px 0}
 .diagramChain span{padding:11px 14px;background:var(--w-paper);border:1px solid var(--w-line);border-radius:10px;font-size:.85rem;font-weight:650;flex:1;text-align:center;min-width:65px}
-.diagramChain b{color:var(--w-accent);font-size:1.1rem}
+.diagramChain b,.diagramChain svg{color:var(--w-accent);font-size:1.1rem;display:inline;flex-shrink:0}
 .diagramNote{position:relative;border-top:1px solid var(--w-line);padding-top:16px;color:var(--w-muted);font-size:.8rem;line-height:1.5}
 .visualWebsite{background:linear-gradient(150deg,var(--w-bg),var(--w-paper))}
 .miniNav{position:relative;display:flex;justify-content:space-between;gap:12px;align-items:center;border-bottom:1px solid var(--w-line);padding-bottom:13px;font-size:.67rem;color:var(--w-muted)}

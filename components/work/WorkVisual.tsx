@@ -1,3 +1,4 @@
+import { ArrowRight } from 'lucide-react';
 import type { WorkScene } from '@/lib/ycn-work-studies';
 import styles from './work.module.css';
 
@@ -6,7 +7,7 @@ export function WorkVisual({ scene }: { scene: WorkScene }) {
   if (scene === 'internal') {
     return <div className={`${styles.visual} ${styles.visualInternal}`} aria-label="Diagram showing an enquiry accepted, saved and notification attempted">
       <div className={styles.diagramHeader}><span>YCN / Enquiry path</span><span>INTERNAL · IN DEVELOPMENT</span></div>
-      <div className={styles.diagramChain}><span>Enquiry</span><b aria-hidden="true">→</b><span>Check</span><b aria-hidden="true">→</b><span>Save</span><b aria-hidden="true">→</b><span>Notify</span></div>
+      <div className={styles.diagramChain}><span>Enquiry</span><ArrowRight size={16} strokeWidth={1.9} aria-hidden="true" /><span>Check</span><ArrowRight size={16} strokeWidth={1.9} aria-hidden="true" /><span>Save</span><ArrowRight size={16} strokeWidth={1.9} aria-hidden="true" /><span>Notify</span></div>
       <div className={styles.diagramNote}>The receipt depends on storage, not the notification.</div>
     </div>;
   }

@@ -302,3 +302,23 @@ At representative points in every story scene, pause the animation. The composit
    - No speculative AI graphics, generic animated GIFs, or fake client screenshots.
    - Specific asset briefs provided to the Owner whenever a visual asset is needed.
 
+### C. Prototype Icon System (Lucide React Standard)
+1. **Single Family Standard:**
+   - Standardize on `lucide-react` across active prototype surfaces (R2 Homepage, Work Studies, and future inner pages).
+   - Prohibit mixing emojis (e.g. `📱`), loose font glyphs (e.g. `↗`, `▦`, `⇢`), or secondary third-party icon libraries.
+2. **Optical Scale & Stroke Weights:**
+   - Service / Feature Cards: `24px`, stroke width `1.8` (`Globe`, `LayoutDashboard`, `Workflow`).
+   - Action / Destination Links: `16px–18px`, stroke width `1.8–1.9` (`ArrowUpRight`, `ArrowRight`, `ArrowDownRight`).
+   - Form & Control Feedback: `12px–16px`, stroke width `2.0` (`Check`, `CheckCircle2`, `RotateCcw`, `Circle`).
+   - Illustrative Notification Context: `18px`, stroke width `1.8` (`Smartphone`).
+3. **Color & Theme Inheritance:**
+   - Vector icons inherit color via `currentColor` from parent semantic text/link/accent tokens.
+   - Dark theme: inherits `--r-link` / `--action-blue` (`#02C1F7` Orbital Cyan).
+   - Light theme: inherits `--action-blue` (`#0470B4` Deep Azure).
+   - Semantic success indicators use dedicated success tokens with clear text labels (never misuse brand cyan as an error/warning color).
+4. **Accessibility & Motion Invariants:**
+   - Decorative SVGs carry `aria-hidden="true"`.
+   - Standalone icon controls must provide accessible text via `aria-label` or adjacent copy and meet min 44x44px touch targets.
+   - Micro-interaction hover/focus transitions are kept snappy (160–220ms).
+   - Strictly honor `@media (prefers-reduced-motion: reduce)`.
+
