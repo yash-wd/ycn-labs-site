@@ -1,8 +1,6 @@
 "use client";
 
 import React, { useState, useEffect } from "react";
-import { HeroV3 } from "@/components/v3/HeroV3";
-import { HomeV3Body } from "@/components/v3/HomeV3";
 import { HomepageR2 } from "@/components/r2/HomepageR2";
 
 import { BrandContinuumStage } from "./BrandContinuumStage";
@@ -54,14 +52,6 @@ export function HomepageVNextPhase1() {
 
       {/* 3. Homepage R2: Modern Candidate A + 3-Service Interactive Showcase + Bento + Outcomes */}
       <HomepageR2 />
-
-      {/* V3 Base Preserved for Instant Rollback & Contract Verification */}
-      {false && (
-        <>
-          <HeroV3 />
-          <HomeV3Body />
-        </>
-      )}
     </div>
   );
 }

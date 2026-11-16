@@ -15,38 +15,56 @@ interface SceneMeta {
 const SCENE_META: Record<SceneType, SceneMeta> = {
   website: {
     title: "Websites",
-    tagline: "Look credible in five seconds.",
-    description: "A clear digital first impression, built around your real customers.",
+    tagline: "Make the next step obvious.",
+    description: "A service business page with services, opening hours and one clear 'Book a visit' button. No glowing square.",
   },
   app: {
     title: "Web apps",
-    tagline: "One place for every request.",
-    description: "Structured requests and clear ownership for your team.",
+    tagline: "Every request in one place.",
+    description: "Three requests moving from New to Assigned to Replied, each with a person's role against it.",
   },
   automation: {
     title: "Automation",
     tagline: "Stop typing it twice.",
-    description: "Connect incoming forms directly to the right person and record.",
+    description: "A form comes in, the sheet updates, the owner gets a message.",
   },
 };
 
 /* -------------------------------------------------------------------------- */
-/* SCENE 1: REALISTIC MINI BUSINESS WEBSITE (IN CODE)                         */
+/* SCENE 1: REALISTIC MINI BUSINESS WEBSITE (INTERACTIVE IN CODE)              */
 /* -------------------------------------------------------------------------- */
 function RealisticWebsiteDemo() {
+  const [selectedService, setSelectedService] = useState<string>("consultation");
+  const [bookingStatus, setBookingStatus] = useState<"idle" | "booked">("idle");
+
+  const services = [
+    {
+      id: "consultation",
+      title: "Initial Consultation",
+      duration: "45 mins",
+      summary: "In-person or video evaluation with clinical history review.",
+    },
+    {
+      id: "review",
+      title: "Annual Health Review",
+      duration: "60 mins",
+      summary: "Full preventative wellness checkup and diagnostic discussion.",
+    },
+  ];
+
   return (
     <div className="ycnr-scene" id="scene-website">
       <div className="ycnr-labelrow">
         <b>01 / A CLEAR FIRST IMPRESSION</b>
-        <span>Look credible in five seconds</span>
+        <span>Make the next step obvious</span>
       </div>
 
-      <div className="ycnr-browser" aria-label="Illustrative healthcare business website">
+      <div className="ycnr-browser" aria-label="Illustrative healthcare service website demonstration">
         <div className="ycnr-browser-head" aria-hidden="true">
           <span className="ycnr-dot" />
           <span className="ycnr-dot" />
           <span className="ycnr-dot" />
-          <span className="ycnr-url">metro-diagnostics.in / full-body-checkup</span>
+          <span className="ycnr-url">sample-care.in / book-visit</span>
         </div>
 
         <div className="ycnr-site-realistic">
@@ -54,61 +72,74 @@ function RealisticWebsiteDemo() {
           <div className="ycnr-mini-nav" aria-hidden="true">
             <div className="ycnr-mini-brand">
               <span className="ycnr-mini-logo-dot" />
-              <strong>METRO DIAGNOSTICS</strong>
+              <strong>APEX CARE PRACTICE</strong>
             </div>
             <div className="ycnr-mini-links">
-              <span>Tests</span>
-              <span>Home Visit</span>
-              <span className="ycnr-mini-nav-btn">Book Scan ↗</span>
+              <span>Services</span>
+              <span>Hours: Mon–Sat 9AM–7PM</span>
+              <span className="ycnr-mini-nav-btn">Call Clinic</span>
             </div>
           </div>
 
           {/* Mini Hero */}
           <div className="ycnr-mini-hero">
-            <span className="ycnr-mini-badge">NABL ACCREDITED LAB · HYDERABAD</span>
+            <span className="ycnr-mini-badge">SERVICE BUSINESS CONCEPT · SAMPLE STUDIO</span>
             <h4 className="ycnr-mini-title">
-              Diagnostic Care You Can Trust at Home.
+              Clear Healthcare Consultations. Easy Scheduling.
             </h4>
             <p className="ycnr-mini-sub">
-              Certified phlebotomists at your doorstep in 60 minutes. Verified digital reports delivered via WhatsApp the same day.
+              What we offer, when we are open, and one simple button to request an appointment.
             </p>
-            <div className="ycnr-mini-cta-row">
-              <span className="ycnr-mini-primary-btn">Book Home Collection ↗</span>
-              <span className="ycnr-mini-secondary-btn">View Health Packages</span>
-            </div>
           </div>
 
-          {/* Mini Service Cards */}
-          <div className="ycnr-mini-cards">
-            <div className="ycnr-mini-card">
-              <div className="ycnr-mini-card-head">
-                <strong>Executive Health Panel</strong>
-                <span className="ycnr-mini-save">Save 40%</span>
-              </div>
-              <p>76 Parameters · Complete Blood, Liver, Kidney &amp; Thyroid Profile</p>
-              <div className="ycnr-mini-card-foot">
-                <span className="ycnr-mini-price">₹1,499 <small>₹2,500</small></span>
-                <span className="ycnr-mini-add">Select +</span>
-              </div>
-            </div>
-
-            <div className="ycnr-mini-card">
-              <div className="ycnr-mini-card-head">
-                <strong>Diabetes &amp; Heart Screen</strong>
-                <span className="ycnr-mini-save">Popular</span>
-              </div>
-              <p>HbA1c, Lipid Profile, Fasting Sugar &amp; Cardiac Risk Factor</p>
-              <div className="ycnr-mini-card-foot">
-                <span className="ycnr-mini-price">₹899 <small>₹1,400</small></span>
-                <span className="ycnr-mini-add">Select +</span>
-              </div>
-            </div>
+          {/* Service Selector (Interactive) */}
+          <div className="ycnr-service-selector" role="radiogroup" aria-label="Select sample service">
+            {services.map((s) => (
+              <button
+                key={s.id}
+                type="button"
+                className={`ycnr-service-card ${selectedService === s.id ? "active" : ""}`}
+                onClick={() => {
+                  setSelectedService(s.id);
+                  setBookingStatus("idle");
+                }}
+                aria-pressed={selectedService === s.id}
+              >
+                <div className="ycnr-service-head">
+                  <strong>{s.title}</strong>
+                  <span className="ycnr-service-tag">{s.duration}</span>
+                </div>
+                <p>{s.summary}</p>
+              </button>
+            ))}
           </div>
 
-          {/* Floating Confirmation Pill */}
-          <div className="ycnr-mini-live-pill" aria-hidden="true">
-            <span className="ycnr-pulse-green" />
-            <span>Sample collected for Rahul K. · Report arriving in 3.5 hrs</span>
+          {/* Interactive Booking Action */}
+          <div className="ycnr-mini-booking-bar">
+            {bookingStatus === "idle" ? (
+              <button
+                type="button"
+                className="ycnr-demo-action-btn"
+                onClick={() => setBookingStatus("booked")}
+              >
+                Book a visit ↗
+              </button>
+            ) : (
+              <div className="ycnr-booked-notice" role="status">
+                <span className="ycnr-check">✓</span>
+                <span>Visit request sent. Clinic receives details directly.</span>
+                <button
+                  type="button"
+                  className="ycnr-reset-demo-btn"
+                  onClick={() => setBookingStatus("idle")}
+                >
+                  Reset
+                </button>
+              </div>
+            )}
+            <small className="ycnr-hint-text">
+              Interactive concept: click services or button to test the flow
+            </small>
           </div>
         </div>
       </div>
@@ -117,97 +148,123 @@ function RealisticWebsiteDemo() {
 }
 
 /* -------------------------------------------------------------------------- */
-/* SCENE 2: REALISTIC OPERATIONS & REQUEST PORTAL (IN CODE)                  */
+/* SCENE 2: REALISTIC OPERATIONS & REQUEST PORTAL (INTERACTIVE IN CODE)       */
 /* -------------------------------------------------------------------------- */
+interface SampleRequest {
+  id: string;
+  title: string;
+  role: string;
+  status: "new" | "assigned" | "replied";
+}
+
 function RealisticWebAppDemo() {
+  const [filter, setFilter] = useState<"all" | "new" | "assigned" | "replied">("all");
+  const [requests, setRequests] = useState<SampleRequest[]>([
+    {
+      id: "#REQ-101",
+      title: "Commercial site inspection inquiry",
+      role: "Lead: Senior Surveyor",
+      status: "new",
+    },
+    {
+      id: "#REQ-102",
+      title: "Equipment preventive maintenance",
+      role: "Lead: Field Operations",
+      status: "assigned",
+    },
+    {
+      id: "#REQ-103",
+      title: "Customer rescheduling request",
+      role: "Lead: Client Support",
+      status: "replied",
+    },
+  ]);
+
+  const advanceStatus = (id: string) => {
+    setRequests((prev) =>
+      prev.map((r) => {
+        if (r.id !== id) return r;
+        const nextStatus = r.status === "new" ? "assigned" : r.status === "assigned" ? "replied" : "new";
+        return { ...r, status: nextStatus };
+      })
+    );
+  };
+
+  const filtered = requests.filter((r) => (filter === "all" ? true : r.status === filter));
+
+  const counts = {
+    all: requests.length,
+    new: requests.filter((r) => r.status === "new").length,
+    assigned: requests.filter((r) => r.status === "assigned").length,
+    replied: requests.filter((r) => r.status === "replied").length,
+  };
+
   return (
     <div className="ycnr-scene" id="scene-app">
       <div className="ycnr-labelrow">
         <b>02 / WORK IN ONE PLACE</b>
-        <span>One place for every request</span>
+        <span>Every request in one place</span>
       </div>
 
-      <div className="ycnr-browser" aria-label="Illustrative operational request management web app">
+      <div className="ycnr-browser" aria-label="Illustrative request queue web app demonstration">
         <div className="ycnr-browser-head" aria-hidden="true">
           <span className="ycnr-dot" />
           <span className="ycnr-dot" />
           <span className="ycnr-dot" />
-          <span className="ycnr-url">ops.citylogistics.in / dispatch-queue</span>
+          <span className="ycnr-url">ops.samplehub.in / request-board</span>
         </div>
 
         <div className="ycnr-app-realistic">
           {/* Top Operational Bar */}
           <div className="ycnr-app-topbar">
             <div>
-              <strong className="ycnr-app-company">FieldOps Dispatch</strong>
-              <span className="ycnr-app-active-tag">🟢 8 Teams Active</span>
+              <strong className="ycnr-app-company">Operations Hub</strong>
+              <span className="ycnr-app-active-tag">Active Queue</span>
             </div>
-            <div className="ycnr-app-filter-tabs">
-              <span className="ycnr-app-tab active">All (12)</span>
-              <span className="ycnr-app-tab">Urgent (2)</span>
-              <span className="ycnr-app-tab">In Transit (5)</span>
-            </div>
-          </div>
-
-          {/* Metrics Row */}
-          <div className="ycnr-app-metrics-strip">
-            <div className="ycnr-metric-box">
-              <span className="ycnr-metric-label">Pending Dispatch</span>
-              <span className="ycnr-metric-val">3</span>
-            </div>
-            <div className="ycnr-metric-box">
-              <span className="ycnr-metric-label">In Transit</span>
-              <span className="ycnr-metric-val">5</span>
-            </div>
-            <div className="ycnr-metric-box">
-              <span className="ycnr-metric-label">Avg Resolution</span>
-              <span className="ycnr-metric-val">42m</span>
+            <div className="ycnr-app-filter-tabs" role="tablist" aria-label="Filter requests">
+              {(["all", "new", "assigned", "replied"] as const).map((key) => (
+                <button
+                  key={key}
+                  type="button"
+                  role="tab"
+                  aria-selected={filter === key}
+                  className={`ycnr-app-tab ${filter === key ? "active" : ""}`}
+                  onClick={() => setFilter(key)}
+                >
+                  {key.charAt(0).toUpperCase() + key.slice(1)} ({counts[key]})
+                </button>
+              ))}
             </div>
           </div>
 
-          {/* Live Request Queue */}
-          <div className="ycnr-app-table">
-            <div className="ycnr-table-row">
-              <div className="ycnr-row-left">
-                <span className="ycnr-id">#WO-9042</span>
-                <div>
-                  <strong>Cold-Chain Pharma Delivery</strong>
-                  <small>Apollo Med Supply (Gachibowli) · Tech: Ramesh V.</small>
+          {/* Interactive Request Queue */}
+          <div className="ycnr-app-table" role="region" aria-label="Sample requests list">
+            {filtered.map((item) => (
+              <div key={item.id} className="ycnr-table-row">
+                <div className="ycnr-row-left">
+                  <span className="ycnr-id">{item.id}</span>
+                  <div>
+                    <strong className="ycnr-row-title">{item.title}</strong>
+                    <small className="ycnr-row-role">{item.role}</small>
+                  </div>
+                </div>
+                <div className="ycnr-row-right">
+                  <button
+                    type="button"
+                    className={`ycnr-badge-${item.status}`}
+                    onClick={() => advanceStatus(item.id)}
+                    title="Click to cycle status"
+                    aria-label={`Cycle status for ${item.id}, currently ${item.status}`}
+                  >
+                    {item.status.toUpperCase()} ↺
+                  </button>
                 </div>
               </div>
-              <div className="ycnr-row-right">
-                <span className="ycnr-badge-urgent">URGENT</span>
-                <span className="ycnr-eta">ETA 18m</span>
-              </div>
-            </div>
+            ))}
+          </div>
 
-            <div className="ycnr-table-row">
-              <div className="ycnr-row-left">
-                <span className="ycnr-id">#WO-9039</span>
-                <div>
-                  <strong>Substation Transformer Overhaul</strong>
-                  <small>Schneider Electric Unit 3 · Tech: Imran S.</small>
-                </div>
-              </div>
-              <div className="ycnr-row-right">
-                <span className="ycnr-badge-progress">ON SITE</span>
-                <span className="ycnr-eta">Started 45m ago</span>
-              </div>
-            </div>
-
-            <div className="ycnr-table-row">
-              <div className="ycnr-row-left">
-                <span className="ycnr-id">#WO-9031</span>
-                <div>
-                  <strong>Regional Branch Document Sync</strong>
-                  <small>HDFC Regional Hub · Tech: Kiran P.</small>
-                </div>
-              </div>
-              <div className="ycnr-row-right">
-                <span className="ycnr-badge-done">DELIVERED</span>
-                <span className="ycnr-eta">Signed (OTP)</span>
-              </div>
-            </div>
+          <div className="ycnr-interactive-guide">
+            <small>Click any badge above to cycle status: New → Assigned → Replied</small>
           </div>
         </div>
       </div>
@@ -216,9 +273,39 @@ function RealisticWebAppDemo() {
 }
 
 /* -------------------------------------------------------------------------- */
-/* SCENE 3: REALISTIC INTAKE & DISPATCH AUTOMATION (IN CODE)                 */
+/* SCENE 3: REALISTIC INTAKE & DISPATCH AUTOMATION (INTERACTIVE IN CODE)       */
 /* -------------------------------------------------------------------------- */
 function RealisticAutomationDemo() {
+  const [activeStep, setActiveStep] = useState<number>(1);
+
+  const steps = [
+    {
+      num: "01",
+      name: "Form received",
+      channel: "Website Inquiry",
+      desc: "Customer submits service details on your site form.",
+      status: "Inquiry captured cleanly",
+    },
+    {
+      num: "02",
+      name: "Record created",
+      channel: "Database / Sheet",
+      desc: "Row appended in database and connected to internal team list.",
+      status: "Saved & categorized",
+    },
+    {
+      num: "03",
+      name: "Owner notified",
+      channel: "WhatsApp & Email",
+      desc: "Direct message dispatched with customer name and project summary.",
+      status: "Delivered to mobile",
+    },
+  ];
+
+  const handleNext = () => {
+    setActiveStep((prev) => (prev < 3 ? prev + 1 : 1));
+  };
+
   return (
     <div className="ycnr-scene" id="scene-automation">
       <div className="ycnr-labelrow">
@@ -226,82 +313,66 @@ function RealisticAutomationDemo() {
         <span>Stop typing it twice</span>
       </div>
 
-      <div className="ycnr-browser" aria-label="Illustrative automated workflow pipeline">
+      <div className="ycnr-browser" aria-label="Illustrative automated workflow simulation">
         <div className="ycnr-browser-head" aria-hidden="true">
           <span className="ycnr-dot" />
           <span className="ycnr-dot" />
           <span className="ycnr-dot" />
-          <span className="ycnr-url">pipeline.ycnlabs.com / live-intake</span>
+          <span className="ycnr-url">pipeline.sampleworkflow.in / intake-flow</span>
         </div>
 
         <div className="ycnr-flow-realistic">
-          <div className="ycnr-pipeline-steps">
-            {/* Step 1: Inbound Lead */}
-            <div className="ycnr-pipeline-card">
-              <div className="ycnr-card-head">
-                <span className="ycnr-step-num">01 / INTAKE</span>
-                <span className="ycnr-step-pill">Website Form</span>
-              </div>
-              <div className="ycnr-card-body">
-                <strong>Enquiry from Sunita Rao (Managing Director, Rao Logistics)</strong>
-                <p>Requirement: Automated Invoice Generation &amp; WhatsApp Dispatch</p>
-                <div className="ycnr-card-status">
-                  <span className="ycnr-check">✓</span>
-                  <span>Form validated &amp; sanitized (0.04s)</span>
-                </div>
-              </div>
-            </div>
-
-            {/* Connecting Signal Arrow 1 */}
-            <div className="ycnr-pipeline-arrow" aria-hidden="true">
-              <div className="ycnr-arrow-pulse" />
-              <span>Automatic Webhook · Instant Payload</span>
-              <div className="ycnr-arrow-line">↓</div>
-            </div>
-
-            {/* Step 2: Structured Storage */}
-            <div className="ycnr-pipeline-card">
-              <div className="ycnr-card-head">
-                <span className="ycnr-step-num">02 / DATABASE &amp; CRM</span>
-                <span className="ycnr-step-pill">PostgreSQL Engine</span>
-              </div>
-              <div className="ycnr-card-body">
-                <strong>Row #341 Created · Deduplicated by PAN/Mobile</strong>
-                <p>Unique contact verification passed. Stored with AES-256 encryption.</p>
-                <div className="ycnr-card-status">
-                  <span className="ycnr-check">✓</span>
-                  <span>Record persisted · Assigned to: Yash (Lead Engineer)</span>
-                </div>
-              </div>
-            </div>
-
-            {/* Connecting Signal Arrow 2 */}
-            <div className="ycnr-pipeline-arrow" aria-hidden="true">
-              <div className="ycnr-arrow-pulse" />
-              <span>Multi-Channel Dispatcher</span>
-              <div className="ycnr-arrow-line">↓</div>
-            </div>
-
-            {/* Step 3: Instant Owner Alert */}
-            <div className="ycnr-pipeline-card highlight">
-              <div className="ycnr-card-head">
-                <span className="ycnr-step-num">03 / INSTANT DISPATCH</span>
-                <span className="ycnr-step-pill cyan">WhatsApp &amp; Email</span>
-              </div>
-              <div className="ycnr-card-body">
-                <div className="ycnr-whatsapp-bubble">
-                  <div className="ycnr-wa-head">📱 WhatsApp Notification to Founder</div>
-                  <p>
-                    &quot;🚨 <strong>New Project:</strong> Sunita Rao requested Invoice Automation. Tap to open project brief or call customer directly.&quot;
-                  </p>
-                </div>
-                <div className="ycnr-card-status">
-                  <span className="ycnr-check">✓</span>
-                  <span>Delivered to mobile in 0.38s total · Zero manual data entry</span>
-                </div>
-              </div>
-            </div>
+          <div className="ycnr-automation-controls">
+            <span className="ycnr-flow-indicator">
+              Active stage: <strong>{activeStep} of 3</strong>
+            </span>
+            <button
+              type="button"
+              className="ycnr-run-flow-btn"
+              onClick={handleNext}
+            >
+              {activeStep < 3 ? "Simulate next step ➔" : "Replay simulation ↺"}
+            </button>
           </div>
+
+          <div className="ycnr-pipeline-steps">
+            {steps.map((st, idx) => {
+              const stepNumber = idx + 1;
+              const isActive = activeStep >= stepNumber;
+              const isCurrent = activeStep === stepNumber;
+
+              return (
+                <div
+                  key={st.num}
+                  className={`ycnr-pipeline-card ${isActive ? "active" : ""} ${isCurrent ? "highlight" : ""}`}
+                >
+                  <div className="ycnr-card-head">
+                    <span className="ycnr-step-num">
+                      {st.num} / {st.name.toUpperCase()}
+                    </span>
+                    <span className="ycnr-step-pill">{st.channel}</span>
+                  </div>
+                  <div className="ycnr-card-body">
+                    <strong>{st.name}</strong>
+                    <p>{st.desc}</p>
+                    <div className="ycnr-card-status">
+                      <span className="ycnr-check">{isActive ? "✓" : "○"}</span>
+                      <span>{isActive ? st.status : "Waiting for trigger..."}</span>
+                    </div>
+                  </div>
+                </div>
+              );
+            })}
+          </div>
+
+          {activeStep === 3 && (
+            <div className="ycnr-whatsapp-bubble" role="status">
+              <div className="ycnr-wa-head">📱 Direct Alert to Business Owner</div>
+              <p>
+                &quot;New project inquiry from sample customer. All details saved to sheet. Tap to review.&quot;
+              </p>
+            </div>
+          )}
         </div>
       </div>
     </div>
@@ -338,11 +409,15 @@ export function HomepageR2() {
     const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
     if (prefersReducedMotion || !sceneWrapRef.current) return;
 
-    gsap.fromTo(
-      sceneWrapRef.current,
-      { opacity: 0.6, y: 10 },
-      { opacity: 1, y: 0, duration: 0.35, ease: "power2.out" }
-    );
+    const ctx = gsap.context(() => {
+      gsap.fromTo(
+        sceneWrapRef.current,
+        { opacity: 0.7, y: 8 },
+        { opacity: 1, y: 0, duration: 0.3, ease: "power2.out" }
+      );
+    }, sceneWrapRef);
+
+    return () => ctx.revert();
   }, [activeScene]);
 
   return (
@@ -358,16 +433,16 @@ export function HomepageR2() {
           {/* Left Column: Bold Narrative */}
           <div id="hero-narrative-col">
             <div className="ycnr-kicker">
-              Business websites · Web apps · Automation
+              Websites · Web apps · Automation
             </div>
             <h1 className="ycnr-heading" id="hero-heading" ref={headingRef}>
-              Websites that build trust.
+              Websites that earn trust.
               <br />
               <span className="ycnr-accent">Software that saves time.</span>
             </h1>
             <p className="ycnr-lead">
-              We build websites, web apps and automations for growing businesses.
-              Clear for your customers. Simple for your team.
+              We design and build websites, web apps and practical automations that
+              make your business easier to understand and easier to run.
             </p>
             <div className="ycnr-cta-row">
               <Link
@@ -385,11 +460,11 @@ export function HomepageR2() {
                 className="ycnr-cta ycnr-cta-outline"
                 href="#what-we-build"
               >
-                Explore what we build
+                See what we build
               </Link>
             </div>
             <p className="ycnr-reassure">
-              <strong>No technical brief needed.</strong> Start with the problem.
+              <strong>No technical brief needed.</strong> Just tell us what isn&apos;t working.
             </p>
           </div>
 
@@ -414,7 +489,7 @@ export function HomepageR2() {
                   onClick={() => setActiveScene("website")}
                 >
                   <span className="ycnr-tab-title">Websites</span>
-                  <small className="ycnr-tab-sub">Look credible in 5s</small>
+                  <small className="ycnr-tab-sub">Make next step obvious</small>
                 </button>
                 <button
                   type="button"
@@ -423,7 +498,7 @@ export function HomepageR2() {
                   onClick={() => setActiveScene("app")}
                 >
                   <span className="ycnr-tab-title">Web apps</span>
-                  <small className="ycnr-tab-sub">Work in one place</small>
+                  <small className="ycnr-tab-sub">Every request in 1 place</small>
                 </button>
                 <button
                   type="button"
@@ -491,8 +566,7 @@ export function HomepageR2() {
               </span>
               <h3>Make a strong first impression.</h3>
               <p>
-                Business websites that explain what you offer and make contacting
-                you easy.
+                A clear, fast website: what you offer, where you are, how to reach you.
               </p>
             </Link>
             <Link className="ycnr-offer" href="/contact">
@@ -502,8 +576,7 @@ export function HomepageR2() {
               </span>
               <h3>Bring the work together.</h3>
               <p>
-                Useful web apps that bring requests, people and next steps
-                together.
+                Orders, bookings and requests on one screen, with a name against each.
               </p>
             </Link>
             <Link className="ycnr-offer" href="/contact">
@@ -513,8 +586,7 @@ export function HomepageR2() {
               </span>
               <h3>Less copying. More doing.</h3>
               <p>
-                Practical automations for the routine steps your team does again
-                and again.
+                When a form comes in, the sheet updates and the right person is told.
               </p>
             </Link>
           </div>
@@ -551,23 +623,21 @@ export function HomepageR2() {
               <span>01 / UNDERSTAND</span>
               <h3>Talk through the problem.</h3>
               <p>
-                Tell us what is difficult today. No technical language needed.
+                Tell us what is difficult today, in your own words.
               </p>
             </li>
             <li>
               <span>02 / SHOW</span>
-              <h3>See the plan take shape.</h3>
+              <h3>See the plan and the price.</h3>
               <p>
-                Agree on the scope, see the design, and know the cost before work
-                begins.
+                A written scope and a quote in rupees before work starts.
               </p>
             </li>
             <li>
               <span>03 / DELIVER</span>
-              <h3>Build, test, hand over.</h3>
+              <h3>Build. Test. Hand over.</h3>
               <p>
-                Review progress, check what matters, and receive the agreed
-                deliverables.
+                You see progress, check it, and receive what was agreed.
               </p>
             </li>
           </ol>
@@ -595,8 +665,7 @@ export function HomepageR2() {
               </h2>
             </div>
             <p className="ycnr-section-lead">
-              You work directly with the founder and engineer building your
-              product. No middle managers. No lost context.
+              You deal with the person who builds it.
             </p>
           </div>
           <div className="ycnr-trust-layout">
@@ -683,13 +752,10 @@ export function HomepageR2() {
             <div>
               <p className="ycnr-kicker">Start with a conversation</p>
               <h2 id="ycnr-final-heading">
-                What could work better
-                <br />
-                in your business?
+                What would you like to make easier?
               </h2>
               <p>
-                Tell us what is slowing things down. We will help identify a
-                practical next step.
+                Tell us what is happening today. We&apos;ll suggest a first step.
               </p>
             </div>
             <div className="ycnr-final-actions">

@@ -46,9 +46,9 @@ describe("YCN-V3-UI Day 1: hero", () => {
     expect((caption.match(/<button/g) || []).length).toBe(1);
   });
 
-  it("homepage renders the new hero instead of the old photo hero", () => {
-    expect(home).toContain('import { HeroV3 } from "@/components/v3/HeroV3";');
-    expect(home).toContain("<HeroV3 />");
+  it("homepage renders the interactive candidate homepage instead of the old photo hero", () => {
+    expect(home).toContain('import { HomepageR2 } from "@/components/r2/HomepageR2";');
+    expect(home).toContain("<HomepageR2 />");
     expect(home).not.toContain("<HeroFoundation />");
   });
 });

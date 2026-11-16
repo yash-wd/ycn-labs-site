@@ -56,8 +56,8 @@ describe("YCN-V3-UI Day 2: homepage body", () => {
     expect(html).toContain('<ol class="v3-steps">');
   });
 
-  it("homepage renders hero then the new body, and none of the old sections", () => {
-    expect(home.indexOf("<HeroV3 />")).toBeLessThan(home.indexOf("<HomeV3Body />"));
+  it("homepage renders the candidate homepage, and none of the old sections", () => {
+    expect(home).toContain("<HomepageR2 />");
     for (const old of ["<PhoneChaptersSection", "<ConnectedRequestsSection", "<HomepageFAQSection", "<NeedsFinderAndCloseSection"]) {
       expect(home).not.toContain(old);
     }
