@@ -69,11 +69,10 @@ describe("Phase 6: Supporting Pages & Canonical Navigation", () => {
       const html = renderToString(<WorkPage />);
       expect(html).toContain("We show our work honestly.");
       expect(html).toContain("Internal build · In development");
-      expect((html.match(/Independent concept · Demonstration/g) || []).length).toBe(3);
-      expect(html).toContain("Next project invitation");
+      expect((html.match(/Studio concept/g) || []).length).toBe(3);
+      expect(html).toContain("Have a project like this?");
       expect(html).toContain("client work, an internal product or a concept build");
       expect(html).toContain("We publish work when the scope, stage and evidence are clear.");
-      expect(html).toContain("Your project could be the first case study.");
       expect(html).not.toMatch(/purple/);
     });
 

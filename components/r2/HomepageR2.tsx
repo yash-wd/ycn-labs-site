@@ -33,9 +33,13 @@ const SCENE_META: Record<SceneType, SceneMeta> = {
 /* -------------------------------------------------------------------------- */
 /* SCENE 1: REALISTIC MINI BUSINESS WEBSITE (INTERACTIVE IN CODE)              */
 /* -------------------------------------------------------------------------- */
-export function RealisticWebsiteDemo() {
+export interface RealisticWebsiteDemoProps {
+  initialBookingStatus?: "idle" | "booked";
+}
+
+export function RealisticWebsiteDemo({ initialBookingStatus = "idle" }: RealisticWebsiteDemoProps = {}) {
   const [selectedService, setSelectedService] = useState<string>("consultation");
-  const [bookingStatus, setBookingStatus] = useState<"idle" | "booked">("idle");
+  const [bookingStatus, setBookingStatus] = useState<"idle" | "booked">(initialBookingStatus);
 
   const services = [
     {
@@ -93,7 +97,7 @@ export function RealisticWebsiteDemo() {
           </div>
 
           {/* Service Selector (Interactive) */}
-          <div className="ycnr-service-selector" role="radiogroup" aria-label="Select sample service">
+          <div className="ycnr-service-selector" role="group" aria-label="Select sample service">
             {services.map((s) => (
               <button
                 key={s.id}
@@ -122,18 +126,18 @@ export function RealisticWebsiteDemo() {
                 className="ycnr-demo-action-btn"
                 onClick={() => setBookingStatus("booked")}
               >
-                Preview visit request ↗
+                Request a visit
               </button>
             ) : (
               <div className="ycnr-booked-notice" role="status">
                 <span className="ycnr-check">✓</span>
-                <span>Simulated request previewed. Browser demonstration only — no real request transmitted.</span>
+                <span>Example only. On a real site, the clinic would receive this request.</span>
                 <button
                   type="button"
                   className="ycnr-reset-demo-btn"
                   onClick={() => setBookingStatus("idle")}
                 >
-                  Reset
+                  Reset example
                 </button>
               </div>
             )}
@@ -245,13 +249,12 @@ export function RealisticWebAppDemo() {
               <strong className="ycnr-app-company">Operations Hub</strong>
               <span className="ycnr-app-active-tag">Active Queue</span>
             </div>
-            <div className="ycnr-app-filter-tabs" role="tablist" aria-label="Filter requests">
+            <div className="ycnr-app-filter-tabs" role="group" aria-label="Filter requests by status">
               {(["all", "new", "assigned", "replied"] as const).map((key) => (
                 <button
                   key={key}
                   type="button"
-                  role="tab"
-                  aria-selected={filter === key}
+                  aria-pressed={filter === key}
                   className={`ycnr-app-tab ${filter === key ? "active" : ""}`}
                   onClick={() => setFilter(key)}
                 >
@@ -278,7 +281,7 @@ export function RealisticWebAppDemo() {
                     className={`ycnr-badge-${item.status}`}
                     onClick={() => advanceStatus(item.id)}
                     disabled={item.status === "replied"}
-                    title={item.status === "replied" ? "Status is Replied (terminal). Click Reset queue to restart." : "Click to advance status"}
+                    title={item.status === "replied" ? "Status is Replied (terminal). Click Reset example to restart." : "Click to advance status"}
                     aria-label={`Advance status for ${item.id}, currently ${item.status}`}
                   >
                     {item.status === "replied" ? "REPLIED ✓" : `${item.status.toUpperCase()} ➔`}
@@ -296,7 +299,7 @@ export function RealisticWebAppDemo() {
               onClick={resetRequests}
               style={{ marginLeft: "12px" }}
             >
-              Reset queue
+              Reset example
             </button>
           </div>
         </div>
@@ -308,8 +311,12 @@ export function RealisticWebAppDemo() {
 /* -------------------------------------------------------------------------- */
 /* SCENE 3: REALISTIC INTAKE & DISPATCH AUTOMATION (INTERACTIVE IN CODE)       */
 /* -------------------------------------------------------------------------- */
-export function RealisticAutomationDemo() {
-  const [activeStep, setActiveStep] = useState<number>(1);
+export interface RealisticAutomationDemoProps {
+  initialStep?: number;
+}
+
+export function RealisticAutomationDemo({ initialStep = 1 }: RealisticAutomationDemoProps = {}) {
+  const [activeStep, setActiveStep] = useState<number>(initialStep);
 
   const steps = [
     {
@@ -364,7 +371,7 @@ export function RealisticAutomationDemo() {
               className="ycnr-run-flow-btn"
               onClick={handleNext}
             >
-              {activeStep < 3 ? "Simulate next step ➔" : "Replay simulation ↺"}
+              {activeStep < 3 ? "Simulate next step ➔" : "Reset example ↺"}
             </button>
           </div>
 
@@ -405,7 +412,7 @@ export function RealisticAutomationDemo() {
                 &quot;Simulation: New project inquiry from sample customer. All details mapped to sheet preview.&quot;
               </p>
               <small style={{ display: "block", marginTop: "4px", opacity: 0.8 }}>
-                Browser simulation only · No actual WhatsApp or SMS message sent
+                Example only. Nothing is actually sent.
               </small>
             </div>
           )}

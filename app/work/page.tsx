@@ -60,7 +60,7 @@ export default function WorkPage() {
                   <span className={styles.status}>
                     {study.status === 'INTERNAL BUILD · IN DEVELOPMENT'
                       ? 'Internal build · In development'
-                      : 'Independent concept · Demonstration'}
+                      : 'Studio concept'}
                   </span>
                   <h3>{study.heading}</h3>
                   <p>{study.lead}</p>
@@ -82,8 +82,7 @@ export default function WorkPage() {
             <li className={styles.card}>
               <div className={styles.cardBody}>
                 <p className={styles.cardIndex}>05 / INVITATION</p>
-                <span className={styles.status}>Next project invitation</span>
-                <h3>Your project could be the first case study.</h3>
+                <h3>Have a project like this?</h3>
                 <p>
                   Have an enquiry bottleneck or a manual process you want to automate? We begin with a written scope and quote in rupees.
                 </p>

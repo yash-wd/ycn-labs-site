@@ -278,7 +278,7 @@ At representative points in every story scene, pause the animation. The composit
 | `--text-muted` | `#52657A` | `#94A3B8` | Captions, metadata, footnotes |
 | `--action-blue` | `#0470B4` | `#02C1F7` | Primary action button fill |
 | `--action-blue-hover` | `#035B94` | `#67E8F9` | Primary action hover state |
-| `--text-on-action` | `#FFFFFF` | `#071018` | Button text (9.50:1 AAA contrast) |
+| `--text-on-action` | `#FFFFFF` | `#071018` | Button text (approx. 9.10:1 AAA contrast on #02C1F7) |
 | `--link-text` | `#035B94` | `#67E8F9` | Inline text links |
 | `--focus-ring` | `#0470B4` | `#67E8F9` | Accessible keyboard focus ring |
 | `--control-border` | `#66758F` | `#64748B` | Form inputs & button boundaries |

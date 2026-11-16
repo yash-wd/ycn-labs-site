@@ -82,19 +82,25 @@ describe("Homepage R2 Candidate: Exact Copy & Integrity Verification", () => {
   });
 
   it("P0 Check: removes false submission and mobile delivery feedback from browser simulations", () => {
-    const websiteHtml = renderToStaticMarkup(React.createElement(RealisticWebsiteDemo));
-    const appHtml = renderToStaticMarkup(React.createElement(RealisticWebAppDemo));
-    const autoHtml = renderToStaticMarkup(React.createElement(RealisticAutomationDemo));
+    const websiteIdleHtml = renderToStaticMarkup(<RealisticWebsiteDemo />);
+    const websiteBookedHtml = renderToStaticMarkup(<RealisticWebsiteDemo initialBookingStatus="booked" />);
+    const appHtml = renderToStaticMarkup(<RealisticWebAppDemo />);
+    const autoStep1Html = renderToStaticMarkup(<RealisticAutomationDemo />);
+    const autoStep3Html = renderToStaticMarkup(<RealisticAutomationDemo initialStep={3} />);
 
-    expect(websiteHtml).not.toContain("Clinic receives details directly");
-    expect(websiteHtml).toContain("Preview visit request");
-    expect(websiteHtml).toContain("Interactive concept: click services or button to test the flow. Nothing is sent.");
+    expect(websiteIdleHtml).not.toContain("Clinic receives details directly");
+    expect(websiteIdleHtml).toContain("Request a visit");
+
+    expect(websiteBookedHtml).toContain("Example only. On a real site, the clinic would receive this request.");
+    expect(websiteBookedHtml).toContain("Reset example");
 
     expect(appHtml).toContain("Terminal until reset");
-    expect(appHtml).toContain("Reset queue");
+    expect(appHtml).toContain("Reset example");
 
-    expect(autoHtml).not.toContain("Delivered to mobile");
-    expect(autoHtml).toContain("Simulation demonstration only. No real data is recorded");
+    expect(autoStep1Html).not.toContain("Delivered to mobile");
+    expect(autoStep1Html).toContain("Simulation demonstration only. No real data is recorded");
+
+    expect(autoStep3Html).toContain("Example only. Nothing is actually sent.");
   });
 
   it("contains interactive controls and accessible ARIA attributes", () => {

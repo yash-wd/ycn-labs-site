@@ -6,6 +6,7 @@ import { test, expect, type Browser, type Page } from "@playwright/test";
 const PAGES = [
   "/",
   "/what-we-solve",
+  "/what-we-build",
   "/work",
   "/work/ycn-labs-website",
   "/work/service-business-website",
@@ -139,13 +140,13 @@ test.describe("Homepage R2 Interactive Demonstrations", () => {
 
     // Click preview action
     const bookBtn = page.locator(".ycnr-demo-action-btn");
-    await expect(bookBtn).toContainText("Preview visit request");
+    await expect(bookBtn).toContainText("Request a visit");
     await bookBtn.click();
 
     // Notice appears with reset button
     const notice = page.locator(".ycnr-booked-notice");
     await expect(notice).toBeVisible();
-    await expect(notice).toContainText("Browser demonstration only — no real request transmitted");
+    await expect(notice).toContainText("Example only. On a real site, the clinic would receive this request.");
 
     // Reset button resets state
     await page.locator(".ycnr-reset-demo-btn").click();
@@ -174,7 +175,7 @@ test.describe("Homepage R2 Interactive Demonstrations", () => {
     await expect(rowBadge).toContainText("REPLIED");
 
     // Reset queue restores initial status
-    await page.locator("button", { hasText: "Reset queue" }).click();
+    await page.locator("button", { hasText: "Reset example" }).click();
     await expect(rowBadge).toContainText("NEW");
     await expect(rowBadge).toBeEnabled();
     await ctx.close();
@@ -193,11 +194,21 @@ test.describe("Homepage R2 Interactive Demonstrations", () => {
     await runBtn.click();
     await expect(indicator).toContainText("3 of 3");
     await expect(page.locator(".ycnr-whatsapp-bubble")).toBeVisible();
+    await expect(page.locator(".ycnr-whatsapp-bubble")).toContainText("Example only. Nothing is actually sent.");
 
-    // Replay restarts
+    // Reset restarts
     await runBtn.click();
     await expect(indicator).toContainText("1 of 3");
     await ctx.close();
+  });
+
+  test("narrow mobile reflow (320px): / and /work render without horizontal overflow", async ({ browser }) => {
+    for (const route of ["/", "/work"]) {
+      const { ctx, page, errors } = await open(browser, route, { width: 320, height: 568 });
+      expect(await page.evaluate(() => document.documentElement.scrollWidth <= window.innerWidth)).toBe(true);
+      expect(errors).toEqual([]);
+      await ctx.close();
+    }
   });
 
   test("Keyboard navigation and reduced motion compliance", async ({ browser }) => {
@@ -231,8 +242,8 @@ test.describe("Work portfolio and case studies", () => {
 
     // Check truthful classification badges
     await expect(page.getByText("Internal build · In development")).toBeVisible();
-    await expect(page.getByText("Independent concept · Demonstration")).toHaveCount(3);
-    await expect(page.getByText("Next project invitation")).toBeVisible();
+    await expect(page.getByText("Studio concept")).toHaveCount(3);
+    await expect(page.getByText("Have a project like this?")).toBeVisible();
     await ctx.close();
   });
 
