@@ -33,7 +33,7 @@ const SCENE_META: Record<SceneType, SceneMeta> = {
 /* -------------------------------------------------------------------------- */
 /* SCENE 1: REALISTIC MINI BUSINESS WEBSITE (INTERACTIVE IN CODE)              */
 /* -------------------------------------------------------------------------- */
-function RealisticWebsiteDemo() {
+export function RealisticWebsiteDemo() {
   const [selectedService, setSelectedService] = useState<string>("consultation");
   const [bookingStatus, setBookingStatus] = useState<"idle" | "booked">("idle");
 
@@ -122,12 +122,12 @@ function RealisticWebsiteDemo() {
                 className="ycnr-demo-action-btn"
                 onClick={() => setBookingStatus("booked")}
               >
-                Book a visit ↗
+                Preview visit request ↗
               </button>
             ) : (
               <div className="ycnr-booked-notice" role="status">
                 <span className="ycnr-check">✓</span>
-                <span>Visit request sent. Clinic receives details directly.</span>
+                <span>Simulated request previewed. Browser demonstration only — no real request transmitted.</span>
                 <button
                   type="button"
                   className="ycnr-reset-demo-btn"
@@ -138,7 +138,7 @@ function RealisticWebsiteDemo() {
               </div>
             )}
             <small className="ycnr-hint-text">
-              Interactive concept: click services or button to test the flow
+              Interactive concept: click services or button to test the flow. Nothing is sent.
             </small>
           </div>
         </div>
@@ -157,7 +157,7 @@ interface SampleRequest {
   status: "new" | "assigned" | "replied";
 }
 
-function RealisticWebAppDemo() {
+export function RealisticWebAppDemo() {
   const [filter, setFilter] = useState<"all" | "new" | "assigned" | "replied">("all");
   const [requests, setRequests] = useState<SampleRequest[]>([
     {
@@ -184,10 +184,34 @@ function RealisticWebAppDemo() {
     setRequests((prev) =>
       prev.map((r) => {
         if (r.id !== id) return r;
-        const nextStatus = r.status === "new" ? "assigned" : r.status === "assigned" ? "replied" : "new";
+        if (r.status === "replied") return r;
+        const nextStatus = r.status === "new" ? "assigned" : "replied";
         return { ...r, status: nextStatus };
       })
     );
+  };
+
+  const resetRequests = () => {
+    setRequests([
+      {
+        id: "#REQ-101",
+        title: "Commercial site inspection inquiry",
+        role: "Lead: Senior Surveyor",
+        status: "new",
+      },
+      {
+        id: "#REQ-102",
+        title: "Equipment preventive maintenance",
+        role: "Lead: Field Operations",
+        status: "assigned",
+      },
+      {
+        id: "#REQ-103",
+        title: "Customer rescheduling request",
+        role: "Lead: Client Support",
+        status: "replied",
+      },
+    ]);
   };
 
   const filtered = requests.filter((r) => (filter === "all" ? true : r.status === filter));
@@ -253,10 +277,11 @@ function RealisticWebAppDemo() {
                     type="button"
                     className={`ycnr-badge-${item.status}`}
                     onClick={() => advanceStatus(item.id)}
-                    title="Click to cycle status"
-                    aria-label={`Cycle status for ${item.id}, currently ${item.status}`}
+                    disabled={item.status === "replied"}
+                    title={item.status === "replied" ? "Status is Replied (terminal). Click Reset queue to restart." : "Click to advance status"}
+                    aria-label={`Advance status for ${item.id}, currently ${item.status}`}
                   >
-                    {item.status.toUpperCase()} ↺
+                    {item.status === "replied" ? "REPLIED ✓" : `${item.status.toUpperCase()} ➔`}
                   </button>
                 </div>
               </div>
@@ -264,7 +289,15 @@ function RealisticWebAppDemo() {
           </div>
 
           <div className="ycnr-interactive-guide">
-            <small>Click any badge above to cycle status: New → Assigned → Replied</small>
+            <small>Advance status: New ➔ Assigned ➔ Replied (Terminal until reset)</small>
+            <button
+              type="button"
+              className="ycnr-reset-demo-btn"
+              onClick={resetRequests}
+              style={{ marginLeft: "12px" }}
+            >
+              Reset queue
+            </button>
           </div>
         </div>
       </div>
@@ -275,30 +308,30 @@ function RealisticWebAppDemo() {
 /* -------------------------------------------------------------------------- */
 /* SCENE 3: REALISTIC INTAKE & DISPATCH AUTOMATION (INTERACTIVE IN CODE)       */
 /* -------------------------------------------------------------------------- */
-function RealisticAutomationDemo() {
+export function RealisticAutomationDemo() {
   const [activeStep, setActiveStep] = useState<number>(1);
 
   const steps = [
     {
       num: "01",
-      name: "Form received",
-      channel: "Website Inquiry",
-      desc: "Customer submits service details on your site form.",
-      status: "Inquiry captured cleanly",
+      name: "Form intake",
+      channel: "Simulated Web Form",
+      desc: "Concept: A structured form collects only what the team needs to reply.",
+      status: "Browser preview · Not submitted",
     },
     {
       num: "02",
-      name: "Record created",
-      channel: "Database / Sheet",
-      desc: "Row appended in database and connected to internal team list.",
-      status: "Saved & categorized",
+      name: "Structured record",
+      channel: "Illustrative Database",
+      desc: "Concept: Data stores reliably before notifications to prevent lost leads.",
+      status: "Concept mapping · No live storage",
     },
     {
       num: "03",
-      name: "Owner notified",
-      channel: "WhatsApp & Email",
-      desc: "Direct message dispatched with customer name and project summary.",
-      status: "Delivered to mobile",
+      name: "Internal alert",
+      channel: "Notification Concept",
+      desc: "Concept: An automated notification alerts the responsible owner.",
+      status: "Simulated dispatch · No phone alerted",
     },
   ];
 
@@ -367,12 +400,19 @@ function RealisticAutomationDemo() {
 
           {activeStep === 3 && (
             <div className="ycnr-whatsapp-bubble" role="status">
-              <div className="ycnr-wa-head">📱 Direct Alert to Business Owner</div>
+              <div className="ycnr-wa-head">📱 Illustrative Team Alert Concept</div>
               <p>
-                &quot;New project inquiry from sample customer. All details saved to sheet. Tap to review.&quot;
+                &quot;Simulation: New project inquiry from sample customer. All details mapped to sheet preview.&quot;
               </p>
+              <small style={{ display: "block", marginTop: "4px", opacity: 0.8 }}>
+                Browser simulation only · No actual WhatsApp or SMS message sent
+              </small>
             </div>
           )}
+
+          <div className="ycnr-interactive-guide">
+            <small>Simulation demonstration only. No real data is recorded, and no mobile message is delivered.</small>
+          </div>
         </div>
       </div>
     </div>

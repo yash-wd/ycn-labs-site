@@ -48,13 +48,19 @@ const initialRows: readonly { id: string; task: string; owner: string; status: R
   { id: 'B', task: 'Quotation', owner: 'Sales', status: 'Assigned' },
   { id: 'C', task: 'Service visit', owner: 'Technician', status: 'Replied' },
 ];
-const next: Record<RequestStatus, RequestStatus> = { New: 'Assigned', Assigned: 'Replied', Replied: 'New' };
 function RequestsDemo() {
   const [rows, setRows] = useState(() => initialRows.map(x => ({ ...x })));
-  const advance = (id: string) => setRows(prev => prev.map(x => x.id === id ? { ...x, status: next[x.status] } : x));
+  const advance = (id: string) =>
+    setRows(prev =>
+      prev.map(x => {
+        if (x.id !== id) return x;
+        if (x.status === 'Replied') return x;
+        return { ...x, status: x.status === 'New' ? 'Assigned' : 'Replied' };
+      })
+    );
   return <div className={styles.demoArea}>
     <div className={styles.exampleTitle}><small>REQUEST WORKSPACE · EXAMPLE DATA</small><h3>Who has the next step?</h3><p>Give each request an owner and a status. Try moving a request forward.</p></div>
-    <div className={styles.tableWrap}><table className={styles.requestTable}><thead><tr><th scope="col">Request</th><th scope="col">Responsible role</th><th scope="col">Status</th><th scope="col">Action</th></tr></thead><tbody>{rows.map(row => <tr key={row.id}><th scope="row">{row.task}</th><td>{row.owner}</td><td><span className={styles.statusChip}>{row.status}</span></td><td><button type="button" className={styles.smallAction} onClick={() => advance(row.id)} aria-label={`Advance ${row.task} from ${row.status}`}>Next <span aria-hidden="true">→</span></button></td></tr>)}</tbody></table></div>
+    <div className={styles.tableWrap}><table className={styles.requestTable}><thead><tr><th scope="col">Request</th><th scope="col">Responsible role</th><th scope="col">Status</th><th scope="col">Action</th></tr></thead><tbody>{rows.map(row => <tr key={row.id}><th scope="row">{row.task}</th><td>{row.owner}</td><td><span className={styles.statusChip}>{row.status}</span></td><td><button type="button" className={styles.smallAction} onClick={() => advance(row.id)} disabled={row.status === 'Replied'} aria-label={row.status === 'Replied' ? `${row.task} is Replied (terminal)` : `Advance ${row.task} from ${row.status}`}>{row.status === 'Replied' ? 'Done' : 'Next'} <span aria-hidden="true">{row.status === 'Replied' ? '✓' : '→'}</span></button></td></tr>)}</tbody></table></div>
     <div className={styles.demoControls}><button type="button" className={styles.textButton} onClick={() => setRows(initialRows.map(x => ({ ...x })))}>Reset example</button><span aria-live="polite" role="status">{rows.filter(x => x.status === 'Replied').length} of 3 marked Replied</span></div>
     <p className={styles.demoFoot}>Illustrative browser-only interaction. No shared accounts, notification or database.</p>
   </div>;

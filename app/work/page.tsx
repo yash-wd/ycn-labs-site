@@ -57,7 +57,11 @@ export default function WorkPage() {
               <li key={study.slug} className={index === 0 ? styles.featureCard : styles.card}>
                 <div className={styles.cardBody}>
                   <p className={styles.cardIndex}>{study.index} / {study.category}</p>
-                  <span className={styles.status}>Concept build</span>
+                  <span className={styles.status}>
+                    {study.status === 'INTERNAL BUILD · IN DEVELOPMENT'
+                      ? 'Internal build · In development'
+                      : 'Independent concept · Demonstration'}
+                  </span>
                   <h3>{study.heading}</h3>
                   <p>{study.lead}</p>
                   <Link
@@ -77,8 +81,8 @@ export default function WorkPage() {
             {/* 5th Card: Direct Invitation */}
             <li className={styles.card}>
               <div className={styles.cardBody}>
-                <p className={styles.cardIndex}>05 / YOUR PROJECT</p>
-                <span className={styles.status}>Concept build</span>
+                <p className={styles.cardIndex}>05 / INVITATION</p>
+                <span className={styles.status}>Next project invitation</span>
                 <h3>Your project could be the first case study.</h3>
                 <p>
                   Have an enquiry bottleneck or a manual process you want to automate? We begin with a written scope and quote in rupees.

@@ -8,7 +8,12 @@ vi.mock("next/link", () => ({
     React.createElement("a", { href, ...rest }, children),
 }));
 
-import { HomepageR2 } from "@/components/r2/HomepageR2";
+import {
+  HomepageR2,
+  RealisticWebsiteDemo,
+  RealisticWebAppDemo,
+  RealisticAutomationDemo,
+} from "@/components/r2/HomepageR2";
 
 describe("Homepage R2 Candidate: Exact Copy & Integrity Verification", () => {
   const html = renderToStaticMarkup(React.createElement(HomepageR2));
@@ -74,6 +79,22 @@ describe("Homepage R2 Candidate: Exact Copy & Integrity Verification", () => {
 
     // Concept is explicitly labelled
     expect(html).toContain("CONCEPT · NOT CLIENT WORK");
+  });
+
+  it("P0 Check: removes false submission and mobile delivery feedback from browser simulations", () => {
+    const websiteHtml = renderToStaticMarkup(React.createElement(RealisticWebsiteDemo));
+    const appHtml = renderToStaticMarkup(React.createElement(RealisticWebAppDemo));
+    const autoHtml = renderToStaticMarkup(React.createElement(RealisticAutomationDemo));
+
+    expect(websiteHtml).not.toContain("Clinic receives details directly");
+    expect(websiteHtml).toContain("Preview visit request");
+    expect(websiteHtml).toContain("Interactive concept: click services or button to test the flow. Nothing is sent.");
+
+    expect(appHtml).toContain("Terminal until reset");
+    expect(appHtml).toContain("Reset queue");
+
+    expect(autoHtml).not.toContain("Delivered to mobile");
+    expect(autoHtml).toContain("Simulation demonstration only. No real data is recorded");
   });
 
   it("contains interactive controls and accessible ARIA attributes", () => {

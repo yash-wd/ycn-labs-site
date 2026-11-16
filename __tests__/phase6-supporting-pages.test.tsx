@@ -68,7 +68,9 @@ describe("Phase 6: Supporting Pages & Canonical Navigation", () => {
     it("renders canonical H1, labels every item, and keeps the truthful empty state (YCN-V3-UI Day 3)", () => {
       const html = renderToString(<WorkPage />);
       expect(html).toContain("We show our work honestly.");
-      expect((html.match(/>Concept build</g) || []).length).toBe(5);
+      expect(html).toContain("Internal build · In development");
+      expect((html.match(/Independent concept · Demonstration/g) || []).length).toBe(3);
+      expect(html).toContain("Next project invitation");
       expect(html).toContain("client work, an internal product or a concept build");
       expect(html).toContain("We publish work when the scope, stage and evidence are clear.");
       expect(html).toContain("Your project could be the first case study.");

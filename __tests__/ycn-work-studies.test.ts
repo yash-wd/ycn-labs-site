@@ -1,5 +1,8 @@
 import { describe, expect, it } from 'vitest';
+import React from 'react';
+import { renderToStaticMarkup } from 'react-dom/server';
 import { getWorkStudy, workStudies } from '@/lib/ycn-work-studies';
+import { WorkDemo } from '@/components/work/WorkDemo';
 
 describe('YCN Work case-study publishing rules', () => {
   it('has exactly one internal build and three clearly labelled independent concepts', () => {
@@ -26,5 +29,13 @@ describe('YCN Work case-study publishing rules', () => {
       expect(s.disclaimer).toMatch(/(concept|development)/i);
       expect(`${s.lead} ${s.disclaimer}`).not.toMatch(/(NDA|confidential client|permission to show|guaranteed ROI|100% secure|trusted by \d+)/i);
     }
+  });
+
+  it('renders interactive request demo where Replied is terminal and Reset is available', () => {
+    const html = renderToStaticMarkup(React.createElement(WorkDemo, { scene: 'requests' }));
+    expect(html).toContain('REQUEST WORKSPACE · EXAMPLE DATA');
+    expect(html).toContain('Reset example');
+    expect(html).toContain('disabled=""');
+    expect(html).toContain('is Replied (terminal)');
   });
 });
