@@ -3,6 +3,8 @@ import type { Metadata } from "next";
 // produced, served from public/fonts so the build never downloads from Google.
 import "./fonts.css";
 import "./globals.css";
+import "./ycn-orbital-glow.css";
+import "./ycn-r2.css";
 import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
 import { JsonLd } from "@/components/JsonLd";

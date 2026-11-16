@@ -15,7 +15,7 @@ export const DEVICE_STAGE_LABEL =
 
 export function DeviceStage() {
   return (
-    <figure className="v3-stage-wrap">
+    <figure className="v3-stage-wrap ycn-orbit-stage">
       <div className="v3-stage" role="img" aria-label={DEVICE_STAGE_LABEL}>
         <div className="v3-laptop" aria-hidden="true">
           <div className="v3-screen">
