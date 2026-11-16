@@ -324,21 +324,21 @@ export function RealisticAutomationDemo({ initialStep = 1 }: RealisticAutomation
       name: "Form intake",
       channel: "Simulated Web Form",
       desc: "Concept: A structured form collects only what the team needs to reply.",
-      status: "Browser preview · Not submitted",
+      status: "Form received (example)",
     },
     {
       num: "02",
       name: "Structured record",
       channel: "Illustrative Database",
       desc: "Concept: Data stores reliably before notifications to prevent lost leads.",
-      status: "Concept mapping · No live storage",
+      status: "Record created (example)",
     },
     {
       num: "03",
       name: "Internal alert",
       channel: "Notification Concept",
       desc: "Concept: An automated notification alerts the responsible owner.",
-      status: "Simulated dispatch · No phone alerted",
+      status: "Owner notified (example)",
     },
   ];
 

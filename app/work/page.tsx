@@ -81,7 +81,6 @@ export default function WorkPage() {
             {/* 5th Card: Direct Invitation */}
             <li className={styles.card}>
               <div className={styles.cardBody}>
-                <p className={styles.cardIndex}>05 / INVITATION</p>
                 <h3>Have a project like this?</h3>
                 <p>
                   Have an enquiry bottleneck or a manual process you want to automate? We begin with a written scope and quote in rupees.
