@@ -1,0 +1,13 @@
+priority,format,working_title,audience_problem,intent,proposed_destination,visual_needed,status
+P0,article,"Before you rebuild your website, check these six things","Website looks okay but enquiries are unclear",diagnose,/blog/before-you-rebuild-your-business-website,"Original annotated page excerpt",DRAFT
+P0,article,"When customer requests live in WhatsApp, start with one clear list","Requests get lost across messages",organize,/blog/from-whatsapp-enquiries-to-a-clear-workflow,"Original synthetic request-board diagram",DRAFT
+P0,article,"Do you need a website, a web app, or both?","Unsure what kind of solution is needed",choose,/blog/does-your-business-need-a-website-or-web-app,"Original website-vs-app split screen",DRAFT
+P1,article,"Seven questions to ask before hiring someone to build your website","Concern about project ownership and handover",trust,/blog/questions-before-hiring-a-website-developer,"Original checklist card",DRAFT
+P1,video,"Why customers leave a service website without contacting you","Unclear service information",learn,/gallery,"Owner-produced 16:9 + 9:16 walkthrough",OWNER_ASSET_REQUIRED
+P1,video,"One request — one owner — one next action","Repeated follow-up confusion",learn,/gallery,"Screen-recorded YCN concept queue",OWNER_ASSET_REQUIRED
+P1,video,"Website or web app?","Unsure what to buy",learn,/gallery,"Owner voice + real code demo",OWNER_ASSET_REQUIRED
+P1,article,"What goes into a useful website handover?","Fear of vendor lock-in",evaluate,/blog,"Checklist and screenshot of an approved real handover",NOT_WRITTEN
+P2,article,"How to brief a web developer without writing code","No technical requirements",prepare,/blog,"Owner's personal sample brief",NOT_WRITTEN
+P2,video,"What happens when an enquiry email fails?","Worry about missed leads",learn,/gallery,"Synthetic-data test recording after approval",OWNER_ASSET_REQUIRED
+P2,studio_update,"YCN website release notes","Need proof of genuine progress",trust,/updates,"Verified actual release link and approved screenshot",PENDING_REAL_RELEASE
+P3,studio_update,"Published external mention or event","Need verified studio activity",trust,/updates,"Actual external link and owner permission",NO_REAL_EVENT_SUPPLIED

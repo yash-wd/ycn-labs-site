@@ -1,55 +1,143 @@
-import type { Metadata } from "next";
-import Link from "next/link";
-import type { ReactNode } from "react";
-import { PageIntro, Section } from "@/components/v3/Section";
-import { RequestsShot, IntakeShot, FlowShot, SiteShot, StatusShot } from "@/components/v3/Shots";
+import type { Metadata } from 'next';
+import Link from 'next/link';
+import { workStudies } from '@/lib/ycn-work-studies';
+import { WorkVisual } from '@/components/work/WorkVisual';
+import styles from '@/components/work/work.module.css';
 
-// YCN-V3-UI Day 3 (COPY-V3.md, Owner-approved base). Ratified H1 and classification kept;
-// every item is a concept build until real client work may be published.
 export const metadata: Metadata = {
-  title: "Work & Evidence — YCN Labs",
+  title: 'Work & Evidence — YCN Labs',
   description:
-    "We show our work honestly. How YCN Labs classifies client work, internal products, and concept builds.",
-  alternates: {
-    canonical: "https://ycnlabs.com/work",
-  },
+    'We show our work honestly. How YCN Labs classifies client work, internal products, and concept builds.',
+  alternates: { canonical: '/work' },
 };
-
-const ITEMS: { title: string; line: string; shot: ReactNode }[] = [
-  { title: "Requests list", line: "Every enquiry with an owner, a next step and a status.", shot: <RequestsShot /> },
-  { title: "Phone intake", line: "A short form customers can finish on a phone.", shot: <IntakeShot /> },
-  { title: "Automation flow", line: "An order creates the record and tells the right person.", shot: <FlowShot /> },
-  { title: "Business website", line: "What you do, where you are, and how to reach you.", shot: <SiteShot /> },
-  { title: "Status and follow-up", line: "Who needs a call back, and who already has a reply.", shot: <StatusShot /> },
-];
 
 export default function WorkPage() {
   return (
-    <>
-      <PageIntro
-        title="We show our work honestly."
-        lead="We are a young studio. These screens are demonstrations we built to show how our work behaves. Real client case studies will appear here as clients allow."
-      />
-      <Section size="tight" labelledBy="gallery-heading">
-        <h2 id="gallery-heading" className="sr-only">Demonstrations</h2>
-        <ul className="grid gap-[var(--space-4)] md:grid-cols-2 lg:grid-cols-3">
-          {ITEMS.map((it) => (
-            <li key={it.title}>
-              <span className="inline-block rounded-full border border-[var(--border-strong)] px-3 py-0.5 text-xs text-[var(--text-secondary)]">Concept build</span>
-              <div className="mt-[var(--space-2)]">{it.shot}</div>
-              <h3 className="mt-[var(--space-2)] font-display text-lg font-semibold text-[var(--text-primary)]">{it.title}</h3>
-              <p className="type-copy-body mt-1 text-[var(--text-secondary)]">{it.line}</p>
+    <div className={styles.work}>
+      {/* 1. Hero */}
+      <section className={styles.hero} aria-labelledby="work-title">
+        <div className={styles.container}>
+          <p className={styles.eyebrow}>YCN LABS / WORK &amp; THINKING</p>
+          <h1 id="work-title">
+            We show our work honestly.
+          </h1>
+          <p className={styles.heroLead}>
+            One project we are building. Three original, interactive concepts. See the decisions behind useful digital experiences—not invented client success stories.
+          </p>
+          <div className={styles.heroActions}>
+            <a href="#work-studies" className="inline-flex min-h-[44px] items-center justify-center rounded-lg bg-[var(--w-accent)] px-5 py-2.5 font-semibold text-[var(--w-actionText)] transition hover:opacity-90">
+              Explore the work <span aria-hidden="true">↘</span>
+            </a>
+            <Link href="/contact" className="inline-flex min-h-[44px] items-center justify-center rounded-lg border border-[var(--w-line)] bg-[var(--w-paper)] px-5 py-2.5 font-semibold text-[var(--w-ink)] transition hover:bg-[var(--w-surface)]">
+              Start a project
+            </Link>
+          </div>
+        </div>
+      </section>
+
+      {/* 2. Portfolio Studies */}
+      <section id="work-studies" className={styles.portfolioSection} aria-labelledby="work-studies-title">
+        <div className={styles.container}>
+          <div className={styles.sectionHeading}>
+            <div>
+              <p className={styles.eyebrow}>A CLOSER LOOK</p>
+              <h2 id="work-studies-title">
+                Four different problems.
+                <br />
+                Four considered approaches.
+              </h2>
+            </div>
+            <p>
+              Explore how a useful digital experience behaves. The labels explain what is internal development and what is an illustrative concept.
+            </p>
+          </div>
+
+          <ul className={styles.grid}>
+            {workStudies.map((study, index) => (
+              <li key={study.slug} className={index === 0 ? styles.featureCard : styles.card}>
+                <div className={styles.cardBody}>
+                  <p className={styles.cardIndex}>{study.index} / {study.category}</p>
+                  <span className={styles.status}>Concept build</span>
+                  <h3>{study.heading}</h3>
+                  <p>{study.lead}</p>
+                  <Link
+                    className="inline-flex min-h-[44px] items-center font-semibold text-[var(--w-accent)] hover:underline"
+                    href={`/work/${study.slug}`}
+                    aria-label={`Explore ${study.category.toLowerCase()}: ${study.heading}`}
+                  >
+                    Explore this case <span aria-hidden="true">↗</span>
+                  </Link>
+                </div>
+                <div className={styles.cardVisual}>
+                  <WorkVisual scene={study.scene} />
+                </div>
+              </li>
+            ))}
+
+            {/* 5th Card: Direct Invitation */}
+            <li className={styles.card}>
+              <div className={styles.cardBody}>
+                <p className={styles.cardIndex}>05 / YOUR PROJECT</p>
+                <span className={styles.status}>Concept build</span>
+                <h3>Your project could be the first case study.</h3>
+                <p>
+                  Have an enquiry bottleneck or a manual process you want to automate? We begin with a written scope and quote in rupees.
+                </p>
+                <Link
+                  href="/contact"
+                  className="inline-flex min-h-[44px] items-center font-semibold text-[var(--w-accent)] hover:underline"
+                >
+                  Start a Project <span aria-hidden="true">↗</span>
+                </Link>
+              </div>
+              <div className={styles.cardVisual}>
+                <div className={`${styles.visual} ${styles.visualInternal}`}>
+                  <div className={styles.diagramHeader}>
+                    <span>NEXT PROJECT</span>
+                    <span>INVITATION</span>
+                  </div>
+                  <div className={styles.diagramChain}>
+                    <span>Problem</span>
+                    <b aria-hidden="true">→</b>
+                    <span>Scope</span>
+                    <b aria-hidden="true">→</b>
+                    <span>Build</span>
+                  </div>
+                  <div className={styles.diagramNote}>
+                    Written scope and fixed INR quote before work begins.
+                  </div>
+                </div>
+              </div>
             </li>
-          ))}
-          <li className="flex flex-col justify-center rounded-card border border-dashed border-[var(--border-strong)] p-[var(--space-4)]">
-            <h3 className="font-display text-lg font-semibold text-[var(--text-primary)]">Your project could be the first case study.</h3>
-            <Link href="/contact" className="mt-[var(--space-2)] inline-flex min-h-[44px] items-center font-semibold text-[var(--link-text)] underline-offset-4 hover:underline">Start a Project</Link>
-          </li>
-        </ul>
-        <p className="type-caption mt-[var(--space-4)] max-w-[var(--measure)] text-[var(--text-secondary)]">
-          We publish work when the scope, stage and evidence are clear. Each item is labelled as client work, an internal product or a concept build.
-        </p>
-      </Section>
-    </>
+          </ul>
+
+          <p className={styles.honesty}>
+            We publish work when the scope, stage and evidence are clear. Each item is labelled as client work, an internal product or a concept build.
+          </p>
+        </div>
+      </section>
+
+      {/* 3. Closing Section */}
+      <section className={styles.closing} aria-labelledby="work-close-heading">
+        <div className={styles.container}>
+          <div className={styles.closingGrid}>
+            <div>
+              <p className={styles.eyebrow}>YOUR SITUATION IS DIFFERENT</p>
+              <h2 id="work-close-heading">
+                Tell us what is difficult.
+                <br />
+                We will start there.
+              </h2>
+              <p>
+                Not every business needs a custom system. A clearer page, a better spreadsheet or one well-designed workflow may be the right first step.
+              </p>
+            </div>
+            <Link className="inline-flex min-h-[44px] items-center justify-center rounded-lg bg-[var(--w-accent)] px-6 py-3 font-semibold text-[var(--w-actionText)] transition hover:opacity-90" href="/contact">
+              Start a project <span aria-hidden="true">↗</span>
+            </Link>
+          </div>
+        </div>
+      </section>
+    </div>
   );
 }

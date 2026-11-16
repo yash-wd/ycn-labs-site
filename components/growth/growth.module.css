@@ -1,0 +1,56 @@
+/* YCN Growth / Editorial — existing site semantic roles, not a second global palette.
+   This is a review-branch addition, never import external UI kits or third-party artwork. */
+.page { color:var(--text-primary); background:var(--bg-canvas); font-family:var(--font-inter),system-ui,sans-serif; padding:clamp(5rem,8vw,8rem) 0 6rem; }
+.container {width:min(1200px,calc(100% - 40px));margin:0 auto}
+.narrow {max-width:780px}
+.eyebrow {color:var(--link-text);text-transform:uppercase;letter-spacing:.12em;font-size:.77rem;font-weight:750;margin:0 0 1rem}
+.h1,.h2,.h3 {font-family:var(--font-space-grotesk),var(--font-inter),system-ui,sans-serif;letter-spacing:-.035em;line-height:1.12}
+.h1 {font-size:clamp(2.65rem,5vw,4.8rem);max-width:900px;margin:0 0 1.4rem;font-weight:600;text-wrap:balance}
+.h2 {font-size:clamp(1.7rem,3vw,2.55rem);margin:0 0 1rem;font-weight:600}
+.h3 {font-size:1.22rem;margin:0 0 .6rem;font-weight:650}
+.lede {font-size:clamp(1.06rem,1.35vw,1.23rem);line-height:1.7;color:var(--text-secondary);max-width:780px;margin:0 0 2.3rem}
+.small {color:var(--text-secondary);font-size:.9rem;line-height:1.6}
+.muted {color:var(--text-muted);font-size:.86rem}
+.meta {display:flex;gap:.6rem 1.2rem;flex-wrap:wrap;color:var(--text-secondary);font-size:.87rem;margin:0 0 1.8rem}
+.grid {display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:1rem;margin-top:2rem}
+.card {display:flex;flex-direction:column;gap:.75rem;min-height:240px;padding:clamp(1.15rem,2.4vw,2rem);border:1px solid var(--border-subtle);border-radius:var(--radius-card,16px);background:var(--bg-surface);text-decoration:none;color:var(--text-primary);transition:transform .19s ease,border-color .19s ease,box-shadow .19s ease}
+.card:hover {transform:translateY(-2px);border-color:var(--link-text);box-shadow:0 14px 35px -29px var(--action-blue)}
+.card:focus-visible,.button:focus-visible,.context summary:focus-visible,.textLink:focus-visible{outline:3px solid var(--focus-ring);outline-offset:3px}
+.card p {margin:0;line-height:1.6;color:var(--text-secondary)}
+.card small {color:var(--link-text);font-weight:650;text-transform:uppercase;letter-spacing:.06em}
+.card .cardArrow {margin-top:auto;font-weight:650;color:var(--link-text)}
+.button {display:inline-flex;align-items:center;justify-content:center;min-height:48px;padding:12px 20px;border-radius:var(--radius-control,10px);color:var(--text-on-action);background:var(--action-blue);font-weight:650;text-decoration:none;transition:transform .19s ease,background .19s ease}
+.button:hover{transform:translateY(-2px);background:var(--action-blue-hover)}
+.textLink{color:var(--link-text);font-weight:650;text-decoration:underline;text-underline-offset:4px}
+.section {margin-top:clamp(2.7rem,6vw,5rem)}
+.separator {height:1px;background:var(--border-subtle);border:0;margin:2.2rem 0}
+.context {padding:1.2rem 1.5rem;background:var(--bg-section);border:1px solid var(--border-subtle);border-radius:16px;margin:2rem 0}
+.context summary{cursor:pointer;font-weight:650;min-height:44px;display:flex;align-items:center;justify-content:space-between;gap:1rem}
+.context summary::after{content:'+';font-size:1.5rem;color:var(--link-text)}
+.context[open] summary::after{content:'−'}
+.context p{line-height:1.7;color:var(--text-secondary)}
+.context ul,.article ul{padding-left:1.45rem;line-height:1.75;color:var(--text-secondary)}
+.article {max-width:760px;font-size:1.035rem;line-height:1.76}
+.article p{color:var(--text-secondary);margin:0 0 1.5rem}
+.article h2{font-size:clamp(1.5rem,2vw,2rem);line-height:1.2;margin:2.7rem 0 1rem;color:var(--text-primary);font-family:var(--font-space-grotesk),sans-serif}
+.article li{padding-left:.25rem;margin:.6rem 0}
+.example {border-left:3px solid var(--action-blue);padding:1.2rem 1.35rem;margin:1.5rem 0;background:var(--bg-section);border-radius:0 12px 12px 0}
+.example h3{font-size:1.08rem;margin:0 0 .6rem}
+.example p{margin:0}
+.related {display:flex;gap:1rem;justify-content:space-between;flex-wrap:wrap;border-top:1px solid var(--border-subtle);padding-top:1.4rem;margin-top:3rem}
+.empty {padding:clamp(1.5rem,4vw,3rem);border:1px solid var(--border-subtle);border-radius:22px;background:var(--bg-section)}
+.empty p {color:var(--text-secondary);line-height:1.65;max-width:640px}
+.breadcrumb{display:flex;gap:.55rem;align-items:center;flex-wrap:wrap;color:var(--text-secondary);font-size:.9rem;margin-bottom:2rem}
+.breadcrumb a{color:var(--link-text)}
+.tagline{font-size:.9rem;color:var(--text-muted)}
+.notice{font-size:.85rem;line-height:1.6;color:var(--text-secondary);padding:.8rem 1rem;border-left:3px solid var(--link-text);background:var(--bg-section);margin-bottom:2rem}
+.resourceGrid {display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:1rem;margin-top:1.5rem}
+.resource {padding:1.4rem;border-radius:16px;border:1px solid var(--border-subtle);background:var(--bg-surface)}
+.resource h3 {margin:0 0 .5rem;font-family:var(--font-space-grotesk),sans-serif;font-size:1.25rem}
+.resource p{line-height:1.6;color:var(--text-secondary);margin:0}
+@media(max-width:850px){.resourceGrid{grid-template-columns:1fr}.grid{grid-template-columns:1fr}}
+@media(max-width:560px){.container{width:calc(100% - 36px)}.page{padding-top:5.5rem}.card{min-height:210px}.article{font-size:1rem}.related{flex-direction:column}.h1{letter-spacing:-.04em}}
+@media(prefers-reduced-motion:reduce){.card,.button{transition:none!important}.card:hover,.button:hover{transform:none!important}}
+@media(forced-colors:active){.card,.example,.empty,.context,.resource{border:1px solid CanvasText}}
+
+.thumbnail{display:block;width:100%;height:auto;aspect-ratio:16/9;object-fit:cover;border-radius:11px;border:1px solid var(--border-subtle);background:var(--bg-section)}
