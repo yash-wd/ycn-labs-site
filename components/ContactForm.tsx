@@ -371,7 +371,7 @@ export function ContactForm() {
           ) : (
             <>
               <Send className="w-4 h-4" />
-              <span>Send project enquiry</span>
+              <span>Send my enquiry</span>
             </>
           )}
         </button>

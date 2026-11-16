@@ -1,59 +1,131 @@
 import type { Metadata } from "next";
-import { Gauge, Accessibility, ShieldCheck, RefreshCcw, Boxes, FlaskConical, Activity, FileCheck } from "lucide-react";
-import { YcnFlowButton } from "@/components/ui/ycn-flow-button";
-import { PageIntro, Section, ShotRow, CtaBand } from "@/components/v3/Section";
-import { ProtectShot } from "@/components/v3/Shots";
+import Link from "next/link";
+import { ArrowUpRight, Gauge, Accessibility, ShieldCheck, RefreshCcw, Boxes, FlaskConical, Activity, FileCheck, Database, MailCheck, ShieldAlert, Cpu } from "lucide-react";
+import { EngineeringSimulator } from "@/components/inner/EngineeringSimulator";
+import styles from "@/components/inner/inner-pages.module.css";
 
-// YCN-V3-UI Day 3. Ratified H1, intro and eight practice areas kept, one line each.
 export const metadata: Metadata = {
   title: "Engineering Practices — YCN Labs",
   description:
-    "Simple for the user. Deliberate underneath. Technical choices and engineering practices used by YCN Labs.",
+    "What happens when something fails matters as much as when it works. Concrete engineering standards, reliable error handling, and test-verified code.",
   alternates: {
     canonical: "https://ycnlabs.com/engineering",
   },
 };
 
+const PROOF_POINTS = [
+  {
+    icon: Database,
+    title: "Saved before \"thank you\"",
+    desc: "You see success only after the enquiry is stored in the database. A confirmation is never shown if storage failed.",
+  },
+  {
+    icon: MailCheck,
+    title: "If the email fails, nothing is lost",
+    desc: "The enquiry stays safely committed in PostgreSQL with a failed-notification flag so it can be re-sent without losing the lead.",
+  },
+  {
+    icon: ShieldAlert,
+    title: "Protected from misuse",
+    desc: "The form is protected from misuse with in-memory and distributed rate-limiting, honeypots, and input sanitization.",
+  },
+  {
+    icon: FlaskConical,
+    title: "Automated verification before merge",
+    desc: "Every change is checked by automated unit tests, end-to-end browser tests, and production builds before merging.",
+  },
+  {
+    icon: Cpu,
+    title: "Self-hosted fonts and assets",
+    desc: "Fonts and files are served directly from the site itself. No external Google Fonts tracking or CDN single-points-of-failure.",
+  },
+];
+
 const PRACTICES = [
-  { icon: Gauge, title: "Performance", line: "Keep important experiences responsive on real devices/networks." },
-  { icon: Accessibility, title: "Accessibility", line: "Design and test so more people can complete the journey." },
-  { icon: ShieldCheck, title: "Security", line: "Use appropriate boundaries, validation, secret handling and least privilege." },
-  { icon: RefreshCcw, title: "Reliability", line: "Handle errors, retries, fallbacks and recovery deliberately." },
-  { icon: Boxes, title: "Architecture", line: "Choose structure based on requirements, not fashion." },
-  { icon: FlaskConical, title: "Testing", line: "Verify the behavior that matters instead of relying on visual confidence." },
-  { icon: Activity, title: "Monitoring & operations", line: "Know when a production path fails and who is responsible." },
-  { icon: FileCheck, title: "Handover", line: "Documentation, ownership and support follow the actual agreement." },
+  { icon: Gauge, title: "Performance", line: "Responsive interfaces that load fast on mobile devices without heavy client scripts." },
+  { icon: Accessibility, title: "Accessibility", line: "Keyboard navigation, proper ARIA labels, contrast compliance, and reduced-motion support." },
+  { icon: ShieldCheck, title: "Security", line: "Strict input validation with Zod, sanitized database parameters, and no secret leakage." },
+  { icon: RefreshCcw, title: "Reliability", line: "Idempotent requests, controlled retries, transaction boundaries, and deliberate failure paths." },
+  { icon: Boxes, title: "Architecture", line: "Standard Next.js with clean modular components rather than bloated framework stacks." },
+  { icon: FlaskConical, title: "Automated Testing", line: "Continuous verification through Vitest unit tests, Playwright browser journeys, and type checks." },
+  { icon: Activity, title: "Monitoring & Operations", line: "Clean structured logging without PII leakage, with recovery tools for failed notifications." },
+  { icon: FileCheck, title: "Transparent Handover", line: "Complete source repository, dependency licenses, and operational notes transferred to you." },
 ];
 
 export default function EngineeringPage() {
   return (
-    <>
-      <PageIntro
-        title="Simple for the user. Deliberate underneath."
-        lead="Technical choices should follow the actual problem. Here is how we build, and what we can show for it."
-      />
-      <Section size="tight" labelledBy="practices-heading">
-        <h2 id="practices-heading" className="sr-only">Practices</h2>
-        <ul className="grid gap-[var(--space-3)] sm:grid-cols-2 lg:grid-cols-4">
-          {PRACTICES.map(({ icon: Icon, title, line }) => (
-            <li key={title} className="border-t-2 border-[var(--border-strong)] pt-[var(--space-2)]">
-              <Icon className="h-5 w-5 text-[var(--action-blue)]" aria-hidden="true" />
-              <h3 className="mt-[var(--space-1)] font-display text-base font-semibold text-[var(--text-primary)]">{title}</h3>
-              <p className="type-copy-body mt-1 text-[var(--text-secondary)]">{line}</p>
-            </li>
-          ))}
-        </ul>
-      </Section>
-      <Section size="tight">
-        <ShotRow title="How this site handles an enquiry" shot={<ProtectShot />} flip>
-          <p>The form saves your enquiry before it says it was received. If our email fails, the enquiry is still kept, so it can be sent again. Pressing the button twice does not create a duplicate.</p>
-        </ShotRow>
-      </Section>
-      <CtaBand id="eng-cta" title="Want the technical detail for your project?" lead="Ask us. We explain the choices in plain language.">
-        <YcnFlowButton href="/contact" variant="primary" size="lg" className="type-control min-h-[48px] w-full px-7 normal-case md:w-auto">
-          Start a Project
-        </YcnFlowButton>
-      </CtaBand>
-    </>
+    <div className={styles.pageWrap}>
+      <header className={styles.hero}>
+        <div className={styles.container}>
+          <p className={styles.eyebrow}>YCN LABS / ENGINEERING</p>
+          <h1>What happens when something fails matters as much as when it works.</h1>
+          <p className={styles.heroLead}>
+            Technical choices should follow the actual problem. Our own enquiry form is the example. Here is what it does, in plain words.
+          </p>
+        </div>
+      </header>
+
+      <main className={styles.container}>
+        {/* Concrete Verified Proof Points */}
+        <section aria-labelledby="proof-heading">
+          <small className={styles.eyebrow}>VERIFIABLE ARCHITECTURE</small>
+          <h2 id="proof-heading" style={{ fontFamily: "var(--font-space-grotesk)", fontSize: "1.8rem", letterSpacing: "-0.03em", margin: "6px 0 24px" }}>
+            Five engineering rules grounded in our own code
+          </h2>
+          <div className={styles.engStudyGrid}>
+            {PROOF_POINTS.map((p) => {
+              const Icon = p.icon;
+              return (
+                <div key={p.title} className={styles.proofItem}>
+                  <div className={styles.proofHeader}>
+                    <Icon size={18} strokeWidth={1.8} style={{ color: "var(--action-blue)" }} aria-hidden="true" />
+                    <h3>{p.title}</h3>
+                  </div>
+                  <p>{p.desc}</p>
+                </div>
+              );
+            })}
+          </div>
+        </section>
+
+        {/* Interactive Simulator */}
+        <EngineeringSimulator />
+
+        {/* Eight Engineering Disciplines */}
+        <section style={{ marginTop: "60px" }} aria-labelledby="practices-heading">
+          <small className={styles.eyebrow}>ENGINEERING STANDARDS</small>
+          <h2 id="practices-heading" style={{ fontFamily: "var(--font-space-grotesk)", fontSize: "1.8rem", letterSpacing: "-0.03em", margin: "6px 0 24px" }}>
+            How we build for stability and longevity
+          </h2>
+          <div className={styles.engStudyGrid}>
+            {PRACTICES.map((p) => {
+              const Icon = p.icon;
+              return (
+                <div key={p.title} className={styles.proofItem}>
+                  <div className={styles.proofHeader}>
+                    <Icon size={18} strokeWidth={1.8} style={{ color: "var(--action-blue)" }} aria-hidden="true" />
+                    <h3>{p.title}</h3>
+                  </div>
+                  <p>{p.line}</p>
+                </div>
+              );
+            })}
+          </div>
+        </section>
+
+        {/* Closing Action */}
+        <section className={styles.ctaBand} aria-labelledby="eng-cta-heading">
+          <div>
+            <h2 id="eng-cta-heading">Want to see how we&apos;d approach your system?</h2>
+            <p>
+              Ask us any technical question about architecture, data safety, or hosting for your project.
+            </p>
+          </div>
+          <Link href="/contact" className={styles.ctaButton}>
+            Ask us a technical question <ArrowUpRight size={16} strokeWidth={2} aria-hidden="true" />
+          </Link>
+        </section>
+      </main>
+    </div>
   );
 }

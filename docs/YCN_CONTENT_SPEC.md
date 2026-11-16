@@ -11,6 +11,11 @@ Avoid first-reading phrases such as: cutting-edge, seamless, empower, leverage, 
 
 Do not make factual promises unless `YCN_CLAIMS_AND_PROOF.md` allows publication.
 
+### Voice & Perspective Rule (Ratified 16 Nov 2026)
+- **"We" for YCN Labs everywhere:** The studio speaks collectively across the homepage, services, processes, engineering, case studies, and contact ("We design and build...", "How we work...", "We explain what is difficult").
+- **"I" only in the founder section of About:** The founder speaks in the first person ("I'm Yaseen. Most people call me Yash...", "I started YCN Labs in Hyderabad...").
+- **Never imply a current team or employee staff:** Yaseen leads every project personally. When a project needs additional specialist hands, that arrangement is transparently disclosed to the client before work begins. No fictitious staff, agency hierarchies, or false client rosters.
+
 ## 2. Navigation
 
 *(Ratified per DECISION-039 on 2026-09-21)*  

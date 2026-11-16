@@ -56,9 +56,9 @@ describe("Homepage R2 Candidate: Exact Copy & Integrity Verification", () => {
   });
 
   it("enforces solo-builder accountability without corporate obfuscation", () => {
-    expect(html).toContain("One person.");
-    expect(html).toContain("Full responsibility.");
-    expect(html).toContain("You deal with the person who builds it.");
+    expect(html).toContain("Founder-led.");
+    expect(html).toContain("Fully accountable.");
+    expect(html).toContain("Yaseen leads every project personally. When a project needs more hands, we bring in specialists and tell you who is doing what.");
     expect(html).toContain("Talk directly with the person building your project.");
   });
 

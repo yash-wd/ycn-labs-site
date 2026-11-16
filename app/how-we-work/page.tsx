@@ -1,54 +1,124 @@
 import type { Metadata } from "next";
-import { YcnFlowButton } from "@/components/ui/ycn-flow-button";
-import { PageIntro, Section, ShotRow, CtaBand } from "@/components/v3/Section";
-import { UpdateShot } from "@/components/v3/Shots";
+import Link from "next/link";
+import { ArrowUpRight, CheckCircle2, FileText, Smartphone, Laptop, Key, ShieldCheck } from "lucide-react";
+import styles from "@/components/inner/inner-pages.module.css";
 
-// YCN-V3-UI Day 3 (COPY-V3.md, Owner-approved base). Ratified H1 kept.
 export const metadata: Metadata = {
   title: "How We Work — YCN Labs",
   description:
-    "You know your business. We know technology. Four clear steps from your problem to a working website or tool: talk, agree the scope and price, build, then launch and hand over.",
+    "From first conversation to a handover you can understand. Six clear steps from problem to delivery with fixed INR pricing and working previews.",
   alternates: {
     canonical: "https://ycnlabs.com/how-we-work",
   },
 };
 
-const HOW_STEPS = [
-  { title: "Tell us the problem", body: "A short call or message. You describe your day; we ask questions.", get: "a plain summary of what we heard." },
-  { title: "Scope and price", body: "Nothing starts until you agree.", get: "a written scope, a price in INR and a timeline." },
-  { title: "Build and show", body: "You see working previews, not just reports.", get: "plain-language updates and a say at each step." },
-  { title: "Launch and look after", body: "We go live together.", get: "a handover of what you own, fixes after launch, and an optional maintenance plan." },
+const STEPS = [
+  {
+    num: "01",
+    title: "First conversation",
+    desc: "We ask what happens today, what should change and who will use it.",
+    get: "A plain-language summary of what we heard and the smallest useful first scope.",
+    icon: FileText,
+  },
+  {
+    num: "02",
+    title: "Written scope and quote",
+    desc: "What is included, what is not, the price and the payment stages.",
+    get: "A written scope, a price in INR and clear milestones before development starts.",
+    icon: CheckCircle2,
+  },
+  {
+    num: "03",
+    title: "Previews",
+    desc: "You open a working link, not a status report.",
+    get: "Private preview links you can open directly on your browser and try out.",
+    icon: Laptop,
+  },
+  {
+    num: "04",
+    title: "Testing",
+    desc: "On your phone, with your content.",
+    get: "Verification that the actual user journeys, validation rules, and forms work as agreed.",
+    icon: Smartphone,
+  },
+  {
+    num: "05",
+    title: "Handover",
+    desc: "Your accounts, written notes, and what the agreement says you receive.",
+    get: "Direct access to your domain, accounts, documentation, and the code you own.",
+    icon: Key,
+  },
+  {
+    num: "06",
+    title: "After launch",
+    desc: "Fixes and support as written in your agreement.",
+    get: "Post-launch warranty fixes and agreed support, with optional maintenance scope.",
+    icon: ShieldCheck,
+  },
 ];
 
 export default function HowWeWorkPage() {
   return (
-    <>
-      <PageIntro
-        title="You know your business. We know technology."
-        lead="Four steps, and you see progress at each one. You don’t need to arrive with a technical specification."
-      />
-      <Section tone="surface" labelledBy="steps-heading">
-        <h2 id="steps-heading" className="sr-only">The four steps</h2>
-        <ol className="v3-steps">
-          {HOW_STEPS.map((s) => (
-            <li key={s.title} className="v3-step">
-              <h3 className="font-display text-lg font-semibold text-[var(--text-primary)]">{s.title}</h3>
-              <p className="type-copy-body mt-[var(--space-1)] text-[var(--text-secondary)]">{s.body}</p>
-              <p className="type-copy-body mt-[var(--space-1)] text-[var(--text-secondary)]"><strong className="text-[var(--text-primary)]">You get:</strong> {s.get}</p>
-            </li>
-          ))}
+    <div className={styles.pageWrap}>
+      <header className={styles.hero}>
+        <div className={styles.container}>
+          <p className={styles.eyebrow}>YCN LABS / HOW WE WORK</p>
+          <h1>From first conversation to a handover you can understand.</h1>
+          <p className={styles.heroLead}>
+            You should know what we&apos;re building, when you&apos;ll review it and what you receive before the work begins.
+          </p>
+        </div>
+      </header>
+
+      <main className={styles.container}>
+        <ol className={styles.stepsList} aria-label="The six delivery steps">
+          {STEPS.map((s) => {
+            const Icon = s.icon;
+            return (
+              <li key={s.num} className={styles.stepCard}>
+                <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: "12px" }}>
+                  <span className={styles.stepNum}>{s.num} / STEP</span>
+                  <Icon size={18} strokeWidth={1.8} style={{ color: "var(--action-blue)" }} aria-hidden="true" />
+                </div>
+                <h3>{s.title}</h3>
+                <p>{s.desc}</p>
+                <div className={styles.stepGet}>
+                  <strong>You get:</strong> {s.get}
+                </div>
+              </li>
+            );
+          })}
         </ol>
-      </Section>
-      <Section size="tight">
-        <ShotRow title="What we need from you" shot={<UpdateShot />}>
-          <p>Someone who can answer questions, your existing content and logo, and decisions within a day or two. Each week you get a short update like this one.</p>
-        </ShotRow>
-      </Section>
-      <CtaBand id="how-cta" title="Start with the problem, not the technology.">
-        <YcnFlowButton href="/contact" variant="primary" size="lg" className="type-control min-h-[48px] w-full px-7 normal-case md:w-auto">
-          Start a Project
-        </YcnFlowButton>
-      </CtaBand>
-    </>
+
+        {/* Expectation Panels */}
+        <section className={styles.splitPanels} aria-label="Expectations and adjustments">
+          <div className={styles.infoBox}>
+            <h3>What we need from you</h3>
+            <p>
+              Your content and photos, one person who decides, and feedback within the agreed time. Clear inputs keep projects moving without surprise delays.
+            </p>
+          </div>
+          <div className={styles.infoBox}>
+            <h3>What if the plan changes?</h3>
+            <p>
+              New work is quoted in writing before we start it. Nothing is added silently, and you always decide whether an addition is worth the extra scope.
+            </p>
+          </div>
+        </section>
+
+        {/* Closing Action */}
+        <section className={styles.ctaBand} aria-labelledby="work-cta-heading">
+          <div>
+            <h2 id="work-cta-heading">Start with the problem, not the technology.</h2>
+            <p>
+              Tell us what is difficult today. We will help you define the smallest useful first version.
+            </p>
+          </div>
+          <Link href="/contact" className={styles.ctaButton}>
+            Start with step one <ArrowUpRight size={16} strokeWidth={2} aria-hidden="true" />
+          </Link>
+        </section>
+      </main>
+    </div>
   );
 }

@@ -757,13 +757,14 @@ export function HomepageR2() {
             <div>
               <p className="ycnr-kicker">Accountability</p>
               <h2 className="ycnr-h2" id="ycnr-trust-heading">
-                One person.
+                Founder-led.
                 <br />
-                Full responsibility.
+                Fully accountable.
               </h2>
             </div>
             <p className="ycnr-section-lead">
-              You deal with the person who builds it.
+              Yaseen leads every project personally. When a project needs more
+              hands, we bring in specialists and tell you who is doing what.
             </p>
           </div>
           <div className="ycnr-trust-layout">
