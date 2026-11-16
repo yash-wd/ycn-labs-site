@@ -30,12 +30,12 @@ describe("YCN-FIRST-IMPRESSION-01: interim entrance bypass", () => {
     );
   });
 
-  it("preserves every entrance component, film and logo asset (nothing deleted)", () => {
+  it("preserves every entrance component and logo asset; the film files were removed by Owner decision (14 Nov 2026)", () => {
     for (const f of ["BrandContinuumStage.tsx", "BrandContinuumFilm.tsx", "CodeEntranceContinuum.tsx"]) {
       expect(exists("components", "homepage", "vnext", f)).toBe(true);
     }
-    expect(exists("public", "entrance", "ycn-intro-final-landscape-v5.mp4")).toBe(true);
-    expect(exists("public", "entrance", "ycn-intro-final-portrait-v5.mp4")).toBe(true);
+    expect(exists("public", "entrance", "ycn-intro-final-landscape-v5.mp4")).toBe(false);
+    expect(exists("public", "entrance", "ycn-intro-final-portrait-v5.mp4")).toBe(false);
     expect(exists("public", "brand", "ycn-final-live-logo-v6.png")).toBe(true);
     // The homepage still wires the stage, so turning the bypass off restores it.
     expect(homepage).toContain("<BrandContinuumStage");

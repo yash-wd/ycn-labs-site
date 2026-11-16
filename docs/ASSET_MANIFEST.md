@@ -1,6 +1,6 @@
 # Public asset manifest
 
-**Checked:** 13 November 2026, branch `wip/YCN-V3-UI` (PR #33).
+**Checked:** 13 November 2026, branch `wip/YCN-V3-UI` (PR #33). **Updated:** 14 November 2026, branch `wip/YCN-ASSETS-PRUNE-01`.
 **Why this matters:** every file in `public/` is downloadable at its URL once the site is deployed, even if no page shows it.
 **Rule:** nothing here is deleted without the Owner's approval of the exact files (`git rm` keeps history).
 
@@ -16,21 +16,22 @@
 | `brand/ycn-og-1200x630.jpg` | Social preview image | YCN Labs own artwork |
 | `fonts/inter/*`, `fonts/space-grotesk/*` (with `OFL.txt`) | Self-hosted fonts | SIL Open Font License 1.1 |
 
-## Used only by the bypassed intro film: decision needed
+## Not used by any page: kept
 
-| Files | Size | Status | Recommendation |
-|---|---|---|---|
-| `entrance/ycn-intro-final-{landscape,portrait}-v5.mp4` | 2.8 MB each | Referenced by `components/homepage/vnext/BrandContinuumFilm.tsx`; never shown while `ENTRANCE_INTERIM_BYPASS = true` | **Exclude from launch.** The film was bypassed because it shows out-of-scope and garbled text; it is still downloadable. Remove from `public/` before launch (or keep only if the Owner plans to bring a corrected film back). |
-| `entrance/ycn-intro-final-{landscape,portrait}-poster-v5.webp` | ~40 KB each | Same | Same as the films. |
-
-## Not used by any page: proposals
-
-| Files | Size | Recommendation |
+| Files | Size | Note |
 |---|---|---|
-| `media/clean_organised_laptop_desk.jpg`, `media/messy_desk_books_papers_iphone.jpg` | 178 + 200 KB | Retained by Owner decision on 13 Nov; no page shows them since the before/after became website screens. CC0. **Remove before launch** unless a page will use them. |
-| `media/SOURCES.md` | 10 KB | Provenance record for media, most of it now removed. **Move to `docs/`** so the record survives without being served publicly. |
-| `brand/ycn-labs-full-{light,dark}.webp` | 1.3 MB each | Unused duplicates of the PNG logos. **Remove**, or switch the entrance to them (smaller). |
-| `brand/ycn-logo-{light,dark}-transparent-{88,176,264}.png` | 12–94 KB | Unused logo sizes. **Keep** (own artwork, small, handy for future use) or remove; low priority. |
+| `brand/ycn-logo-{light,dark}-transparent-{88,176,264}.png` | 12–94 KB | Unused logo sizes. Kept (own artwork, small, handy for future use). |
+
+## Removed on 14 Nov 2026 (Owner decision, exact files approved)
+
+| Files | Why |
+|---|---|
+| `entrance/ycn-intro-final-{landscape,portrait}-v5.mp4`, `entrance/ycn-intro-final-{landscape,portrait}-poster-v5.webp` | Bypassed intro film (out-of-scope services, AI-generated retail scene with a "YCN" sign); would have been publicly downloadable. `ENTRANCE_FILM_AVAILABLE = false` makes `BrandContinuumFilm` request nothing and fall back to the code entrance if the bypass is ever turned off. |
+| `media/clean_organised_laptop_desk.jpg`, `media/messy_desk_books_papers_iphone.jpg` | No page used them; the second shows third-party brands (Apple, LG and others). Supersedes the 13 Nov retention. |
+| `brand/ycn-labs-full-{light,dark}.webp` | Unused 1.3 MB duplicates of the PNG logos. |
+| `media/SOURCES.md` | **Moved** to `docs/MEDIA_SOURCES.md` (kept, no longer served publicly). |
+
+All removals used `git rm`, so every file stays recoverable from history.
 
 ## Removed on 13 Nov 2026 (Owner decision)
 

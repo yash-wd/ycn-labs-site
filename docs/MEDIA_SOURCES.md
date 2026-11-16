@@ -1,6 +1,8 @@
-# V4 Photoreal Prototype Reference Assets — Sources & Licences
+> **Historical Provenance Record (Moved 14 Nov 2026):** Formerly located at `public/media/SOURCES.md` and moved to `docs/` (Owner decision) so this provenance record is preserved without being publicly served. This document is a historical record of prototype and placeholder assets used during earlier development phases; most of the media assets listed below were removed from `public/` on 13 Nov and 14 Nov 2026 via `git rm` (see `docs/ASSET_MANIFEST.md`) and remain in the repository's Git history. This record is retained for provenance and licensing audit history.
 
-All assets in this directory are included as design prototypes and development placeholders within the public development repository under their respective free licences (CC0, CC BY 2.0, Mixkit Free Licence).
+# V4 Photoreal Prototype Reference Assets — Sources & Licences (Historical Provenance Record)
+
+The assets catalogued below were included in the public development repository as design prototypes and development placeholders under their respective free licences (CC0, CC BY 2.0, Mixkit Free Licence). Most listed files have since been removed from `public/` (and are not included in the active application build), while remaining preserved in the repository's Git history.
 
 > **Pre-Release Milestone:** All generic stock video clips (`clip1`, `clip2`, `clip3`) and placeholder stock photography must be replaced with authentic, proprietary YCN studio footage and photography prior to commercial production release and deployment.
 
