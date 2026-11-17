@@ -25,7 +25,7 @@ export async function POST(request: Request) {
       logAudit(requestId, "/api/contact", 503, startTime, "SERVICE_UNAVAILABLE");
       return createErrorResponse(
         "SERVICE_UNAVAILABLE",
-        "Preview only. Enquiries are switched off in this environment.",
+        "Preview only. Enquiries are switched off here, so nothing will be sent.",
         requestId,
         503
       );

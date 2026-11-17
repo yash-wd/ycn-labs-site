@@ -8,7 +8,6 @@ import {
   ContactFormData,
   TIMELINE_OPTIONS,
 } from "@/lib/validation/contact";
-import { isStaging } from "@/lib/env/staging";
 import { CheckCircle2, AlertCircle, Loader2, Send } from "lucide-react";
 
 function generateUUID(): string {
@@ -52,37 +51,15 @@ export interface ContactFormProps {
   isPreview?: boolean;
 }
 
-export function ContactForm({ isPreview: propIsPreview }: ContactFormProps = {}) {
+export function ContactForm({ isPreview = false }: ContactFormProps = {}) {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitSuccess, setSubmitSuccess] = useState(false);
   const [submitError, setSubmitError] = useState<string | null>(null);
-
-  // Determine preview mode: prop takes precedence if passed.
-  // On client, check sessionStorage test override or environment detection.
-  // During SSR without explicit prop, default to false so canonical SSR markup and SSG are preserved.
-  const [isPreview, setIsPreview] = useState<boolean>(() => {
-    if (propIsPreview !== undefined) return propIsPreview;
-    return false;
-  });
+  const [isMounted, setIsMounted] = useState(false);
 
   useEffect(() => {
-    if (propIsPreview !== undefined) {
-      setIsPreview(propIsPreview);
-      return;
-    }
-    if (typeof window !== "undefined") {
-      const override = window.sessionStorage?.getItem("ycn_preview_mode");
-      if (override === "false") {
-        setIsPreview(false);
-        return;
-      }
-      if (override === "true") {
-        setIsPreview(true);
-        return;
-      }
-    }
-    setIsPreview(isStaging());
-  }, [propIsPreview]);
+    setIsMounted(true);
+  }, []);
 
   // Split inputs for "What happens today?" and "What would you like to change?"
   const [whatHappensToday, setWhatHappensToday] = useState("");
@@ -146,6 +123,12 @@ export function ContactForm({ isPreview: propIsPreview }: ContactFormProps = {})
       return;
     }
 
+    if (isPreview || !isMounted) {
+      setSubmitError("Preview only. Enquiries are switched off here, so nothing will be sent.");
+      setIsSubmitting(false);
+      return;
+    }
+
     try {
       const response = await fetch("/api/contact", {
         method: "POST",
@@ -205,7 +188,7 @@ export function ContactForm({ isPreview: propIsPreview }: ContactFormProps = {})
   }
 
   return (
-    <form onSubmit={handleSubmit(onSubmit)} className="space-y-8">
+    <form action="#" method="POST" onSubmit={handleSubmit(onSubmit)} className="space-y-8">
       {/* Visual-Only Preview State Notice (Fail-Closed Non-Production Boundary) */}
       {isPreview && (
         <div
@@ -410,8 +393,8 @@ export function ContactForm({ isPreview: propIsPreview }: ContactFormProps = {})
       <div className="pt-2">
         <button
           type="submit"
-          disabled={isSubmitting || isPreview}
-          aria-disabled={isSubmitting || isPreview}
+          disabled={!isMounted || isSubmitting || isPreview}
+          aria-disabled={!isMounted || isSubmitting || isPreview}
           title={isPreview ? "Preview only. Enquiries are switched off here, so nothing will be sent." : undefined}
           className="w-full inline-flex items-center justify-center gap-2 py-3.5 px-6 rounded-xl bg-[var(--action-blue)] hover:bg-[var(--action-blue-hover)] text-[var(--text-on-action)] font-semibold text-sm normal-case tracking-[0.01em] shadow-xs transition-colors disabled:opacity-50 disabled:cursor-not-allowed focus:outline-none focus-visible:ring-2 focus-visible:ring-[var(--focus-ring)] min-h-[44px] cursor-pointer"
         >
@@ -419,10 +402,6 @@ export function ContactForm({ isPreview: propIsPreview }: ContactFormProps = {})
             <>
               <Loader2 className="w-4 h-4 animate-spin" />
               <span>Sending your request…</span>
-            </>
-          ) : isPreview ? (
-            <>
-              <span>Enquiries switched off in preview</span>
             </>
           ) : (
             <>

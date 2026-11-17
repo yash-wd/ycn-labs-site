@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Phone, MessageCircle, Mail, ShieldCheck, FileCheck } from "lucide-react";
 import { ContactForm } from "@/components/ContactForm";
+import { isStaging } from "@/lib/env/staging";
 import styles from "@/components/inner/inner-pages.module.css";
 
 export const metadata: Metadata = {
@@ -108,7 +109,7 @@ export default function ContactPage() {
                 For example: enquiries come on WhatsApp and nobody knows who replied.
               </p>
             </div>
-            <ContactForm />
+            <ContactForm isPreview={isStaging()} />
           </div>
         </div>
       </div>

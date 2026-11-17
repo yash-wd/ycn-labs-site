@@ -1,4 +1,7 @@
 import { describe, it, expect, vi, beforeEach, afterEach } from "vitest";
+import React from "react";
+import { renderToString } from "react-dom/server";
+import ContactPage from "@/app/contact/page";
 
 // Mock DB operations
 const mockInsert = vi.fn();
@@ -118,7 +121,7 @@ describe("Staging Contact Isolation (Fail-Closed Non-Production Boundary)", () =
       expect(res.status).toBe(503);
       expect(json.success).toBe(false);
       expect(json.error.code).toBe("SERVICE_UNAVAILABLE");
-      expect(json.error.message).toContain("Preview only");
+      expect(json.error.message).toBe("Preview only. Enquiries are switched off here, so nothing will be sent.");
       expect(json).not.toHaveProperty("data");
       expect(json).not.toHaveProperty("leadId");
       expect(json.error).not.toHaveProperty("accepted");
@@ -251,6 +254,79 @@ describe("Staging Contact Isolation (Fail-Closed Non-Production Boundary)", () =
 
       expect(mockInsert).not.toHaveBeenCalled();
       expect(mockSendEmail).not.toHaveBeenCalled();
+    });
+  });
+
+  describe("Environment Precedence & Staging Safeguards (NEXT_PUBLIC_SITE_ENV vs NEXT_PUBLIC_ENV)", () => {
+    it("primary 'staging' with fallback 'production' remains in staging (primary precedence)", async () => {
+      process.env.NEXT_PUBLIC_SITE_ENV = "staging";
+      process.env.NEXT_PUBLIC_ENV = "production";
+
+      const req = createValidRequest();
+      const res = await POST(req);
+      expect(res.status).toBe(503);
+      const json = await res.json();
+      expect(json.error.message).toBe("Preview only. Enquiries are switched off here, so nothing will be sent.");
+    });
+
+    it("both variables absent remains in staging (fail-safe inversion)", async () => {
+      delete process.env.NEXT_PUBLIC_SITE_ENV;
+      delete process.env.NEXT_PUBLIC_ENV;
+
+      const req = createValidRequest();
+      const res = await POST(req);
+      expect(res.status).toBe(503);
+    });
+
+    it("primary absent with fallback 'production' activates production (documented fallback behavior)", async () => {
+      delete process.env.NEXT_PUBLIC_SITE_ENV;
+      process.env.NEXT_PUBLIC_ENV = "production";
+
+      const req = createValidRequest();
+      const res = await POST(req);
+      expect(res.status).toBe(200);
+    });
+  });
+
+  describe("Server-Rendered Initial HTML & No-JavaScript Form Safety", () => {
+    it("in preview mode: initial SSR HTML renders approved notice and disabled button with POST method", () => {
+      process.env.NEXT_PUBLIC_SITE_ENV = "staging";
+
+      const html = renderToString(React.createElement(ContactPage));
+
+      // Warning banner present verbatim
+      expect(html).toContain("Preview only. Enquiries are switched off here, so nothing will be sent.");
+
+      // Button is disabled with aria-disabled in initial HTML
+      expect(html).toContain('disabled=""');
+      expect(html).toContain('aria-disabled="true"');
+
+      // Button text remains canonical "Send my enquiry"
+      expect(html).toContain("Send my enquiry");
+
+      // Form method is POST and action is # to prevent implicit GET URL data leakage
+      expect(html).toContain('method="POST"');
+      expect(html).toContain('action="#"');
+    });
+
+    it("in production mode: initial SSR HTML has disabled button until client hydration, with POST method", () => {
+      process.env.NEXT_PUBLIC_SITE_ENV = "production";
+
+      const html = renderToString(React.createElement(ContactPage));
+
+      // Warning banner absent in production
+      expect(html).not.toContain("Preview only. Enquiries are switched off here");
+
+      // Initial SSR button starts disabled before hydration (pre-hydration safety)
+      expect(html).toContain('disabled=""');
+      expect(html).toContain('aria-disabled="true"');
+
+      // Button text is canonical "Send my enquiry"
+      expect(html).toContain("Send my enquiry");
+
+      // Form method is POST and action is #
+      expect(html).toContain('method="POST"');
+      expect(html).toContain('action="#"');
     });
   });
 });
