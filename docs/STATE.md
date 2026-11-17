@@ -17,15 +17,18 @@
 
 This block supersedes older current-status blocks below without erasing their historical records.
 
-- **Milestone: PR #40 (Inner Pages & Content Alignment) merged into `main` on 17 Nov 2026; site remains unlaunched.**
-  - **Reviewed PR #40 Head:** `350383dc5de4765ed60cba20599bdd39ccfd034c`.
-  - **Main Merge Commit:** `724d94320098dd073ec2f67bebd1fec8c8456ed6`.
-  - **Tree SHA Verification:** Git tree `cf6bac80fabf9bf2edc35590852a0eff21be359d` is 100% identical between merge commit `724d943` and reviewed head `350383d`.
-  - **Post-Merge GitHub CI (Run 44054089513):** PASSED (TypeScript clean, 0 lint errors, 56 warnings, 297/297 Vitest unit tests passed, Next.js 16.3.6 production build passed, 38/38 Chromium Playwright browser tests passed).
-  - **Post-Merge Gitleaks (Run 44054090501):** Attempt 1 failed due to a GitHub API user-lookup server error triggering scanner licence-validation failure. Attempt 2 (Owner-authorized rerun) PASSED with 0 leaks. The rerun scanned 0 commits on the merge commit; the earlier PR run independently scanned 4 commits with 0 leaks.
-  - **Repository Ruleset Active (`Protect main`):** GitHub branch protection is active on default branch `main`, requiring pull requests, `quality` and `gitleaks` checks, blocking force pushes and branch deletion with an empty bypass list.
-  - **Deployment Status:** No production deployment of `ycn-labs-site` has been authorized or verified. The historical live-site repository (`yash-wd/ycnlabs`) remains untouched.
-  - **Active Work:** Task `YCN-POST-MERGE-01` (maintenance PR covering `docs/STATE.md`, `docs/BACKLOG.md`, `AGENTS.md`, `app/robots.ts`, `app/sitemap.ts`, and SEO tests) is currently in-progress on branch `wip/YCN-POST-MERGE-01` pending independent review and merge.
+- **Milestone: PR #41 (Post-Merge Maintenance & Records) merged into `main` on 17 Nov 2026; site remains unlaunched.**
+  - **Reviewed PR #41 Head:** `7a3c5ebbeccd05fb15bce2660170b4cc9058b40e`.
+  - **Main Merge Commit:** `6caf77b658e83c66a122c4a1ceabfac93acb5fa0`.
+  - **Tree SHA Verification:** Git tree identical between merge commit `6caf77b` and reviewed head `7a3c5eb`.
+  - **Post-Merge GitHub CI & Gitleaks:** PASSED on GitHub with green status.
+  - **Active Task:** `YCN-STAGING-ISOLATION-01` (Fail-Closed Staging Contact Boundary).
+    - **Branch:** `wip/YCN-STAGING-ISOLATION-01`.
+    - **Server Boundary (`app/api/contact/route.ts`):** Evaluates `isStaging()` before body processing, rate limiting, validation, or DB calls. Immediately halts and refuses submissions with HTTP 503 `SERVICE_UNAVAILABLE` and `success: false`. Never returns `accepted: true`, fake lead IDs, or synthetic receipts.
+    - **Client Form Notice (`components/ContactForm.tsx`):** In preview mode, prominently displays Owner-approved sentence: *"Preview only. Enquiries are switched off here, so nothing will be sent."* with submit button disabled (`"Enquiries switched off in preview"`). Client `onSubmit` prevents direct dispatch.
+    - **Regression Test Suite (`__tests__/staging-isolation.test.ts`):** 8 automated tests proving fail-closed refusal across unset, staging, preview, and unexpected environments, verifying 0 DB inserts, 0 Redis checks, and 0 Resend emails, while preserving genuine production contracts.
+    - **Verification:** TypeScript clean (0 errors), ESLint clean (0 errors, 61 warnings), Vitest (311/311 passed across 30 files; 303 existing preserved + 8 new isolation tests), Next.js 16.3.6 production build passed, Chromium Playwright suite passed (39/39: 38 existing preserved + 1 preview test).
+    - **Status:** [LOCAL-WIP] Completed locally; awaiting Owner authorization to open PR.
 
 ### 17 November 2026 Incidents & Corrections Record
 

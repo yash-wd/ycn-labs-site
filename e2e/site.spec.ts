@@ -28,7 +28,7 @@ const WA = "https://wa.me/918341226694";
 async function open(
   browser: Browser,
   route: string,
-  opts: { theme?: "dark" | "light"; width?: number; height?: number; reduced?: boolean; js?: boolean } = {}
+  opts: { theme?: "dark" | "light"; width?: number; height?: number; reduced?: boolean; js?: boolean; production?: boolean } = {}
 ) {
   const ctx = await browser.newContext({
     viewport: { width: opts.width ?? 1440, height: opts.height ?? 900 },
@@ -36,6 +36,7 @@ async function open(
     javaScriptEnabled: opts.js ?? true,
   });
   if (opts.theme) await ctx.addInitScript((t) => localStorage.setItem("theme", t), opts.theme);
+  if (opts.production) await ctx.addInitScript(() => sessionStorage.setItem("ycn_preview_mode", "false"));
   const page = await ctx.newPage();
   const errors: string[] = [];
   page.on("pageerror", (e) => errors.push(e.message));
@@ -354,8 +355,17 @@ test.describe("contact page (API mocked)", () => {
     await ctx.close();
   });
 
-  test("empty submit shows field errors and sends nothing", async ({ browser }) => {
+  test("in non-production preview mode, displays preview notice and disables submit button", async ({ browser }) => {
     const { ctx, page } = await open(browser, "/contact");
+    await expect(page.getByText("Preview only. Enquiries are switched off here, so nothing will be sent.")).toBeVisible();
+    const submitBtn = page.locator('form button[type="submit"]');
+    await expect(submitBtn).toBeDisabled();
+    await expect(submitBtn).toHaveText(/Enquiries switched off in preview/);
+    await ctx.close();
+  });
+
+  test("empty submit shows field errors and sends nothing", async ({ browser }) => {
+    const { ctx, page } = await open(browser, "/contact", { production: true });
     let calls = 0;
     await page.route("**/api/contact", (r) => {
       calls++;
@@ -368,7 +378,7 @@ test.describe("contact page (API mocked)", () => {
   });
 
   test("accepted response shows the receipt; the request carries an idempotency key", async ({ browser }) => {
-    const { ctx, page } = await open(browser, "/contact");
+    const { ctx, page } = await open(browser, "/contact", { production: true });
     let body: Record<string, unknown> = {};
     await page.route("**/api/contact", async (r) => {
       body = r.request().postDataJSON();
@@ -386,7 +396,7 @@ test.describe("contact page (API mocked)", () => {
   });
 
   test("a storage failure shows an error, keeps the typed text, and retries with the same key", async ({ browser }) => {
-    const { ctx, page } = await open(browser, "/contact");
+    const { ctx, page } = await open(browser, "/contact", { production: true });
     const keys: unknown[] = [];
     await page.route("**/api/contact", async (r) => {
       keys.push(r.request().postDataJSON().idempotencyKey);

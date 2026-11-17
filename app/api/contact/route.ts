@@ -6,6 +6,7 @@ import { escapeHtml, sanitizeNotificationError } from "@/lib/security/sanitize";
 import { createSuccessResponse, createErrorResponse } from "@/lib/security/response";
 import { checkRateLimit } from "@/lib/security/ratelimit";
 import { contactSchema } from "@/lib/validation/contact";
+import { isStaging } from "@/lib/env/staging";
 import { eq } from "drizzle-orm";
 import crypto from "crypto";
 import * as Sentry from "@sentry/nextjs";
@@ -17,6 +18,18 @@ export async function POST(request: Request) {
   const startTime = Date.now();
 
   try {
+    // 0. Fail-Closed Staging / Non-Production Environment Guard
+    // Rejects all submissions in any environment not explicitly verified as production.
+    // Zero database writes, zero Redis calls, zero external email dispatches.
+    if (isStaging()) {
+      logAudit(requestId, "/api/contact", 503, startTime, "SERVICE_UNAVAILABLE");
+      return createErrorResponse(
+        "SERVICE_UNAVAILABLE",
+        "Preview only. Enquiries are switched off in this environment.",
+        requestId,
+        503
+      );
+    }
     // 1. Content-Type Check
     const contentType = request.headers.get("content-type") || "";
     if (!contentType.includes("application/json")) {

@@ -50,6 +50,7 @@ import { POST } from "@/app/api/contact/route";
 describe("Contact API Route Handler (/api/contact) - Task 12 Scenarios", () => {
   beforeEach(() => {
     vi.clearAllMocks();
+    process.env.NEXT_PUBLIC_SITE_ENV = "production";
     process.env.RESEND_API_KEY = "re_test_12345";
     process.env.LEAD_DESTINATION_EMAIL = "hello@ycnlabs.com";
 

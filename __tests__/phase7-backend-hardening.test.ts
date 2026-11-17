@@ -76,6 +76,7 @@ import crypto from "crypto";
 describe("Phase 7: Contact / Enquiry Backend Hardening", () => {
   beforeEach(() => {
     vi.clearAllMocks();
+    process.env.NEXT_PUBLIC_SITE_ENV = "production";
     process.env.RESEND_API_KEY = "re_test_key";
     process.env.LEAD_DESTINATION_EMAIL = "hello@ycnlabs.com";
 
