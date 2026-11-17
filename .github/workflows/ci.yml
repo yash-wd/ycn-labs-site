@@ -40,9 +40,6 @@ jobs:
       - name: Type check
         run: pnpm run check-types
 
-      - name: Test
-        run: pnpm run test
-
       - name: Assert credentials isolation
         run: |
           for var in DATABASE_URL RESEND_API_KEY LEAD_DESTINATION_EMAIL UPSTASH_REDIS_REST_URL UPSTASH_REDIS_REST_TOKEN RATE_LIMIT_HASH_SECRET SENTRY_DSN; do
@@ -52,6 +49,9 @@ jobs:
             fi
           done
           echo "Credentials isolation verified: zero provider credentials present."
+
+      - name: Test
+        run: pnpm run test
 
       - name: Install Playwright Chromium
         run: pnpm exec playwright install --with-deps chromium
@@ -63,6 +63,8 @@ jobs:
 
       - name: Run Playwright Preview tests (Chromium)
         run: pnpm exec playwright test --project=chromium --grep "@preview"
+        env:
+          NEXT_PUBLIC_SITE_ENV: staging
 
       - name: Build (Production test configuration)
         run: pnpm run build
@@ -71,4 +73,6 @@ jobs:
 
       - name: Run Playwright Production tests (Chromium)
         run: pnpm exec playwright test --project=chromium --grep-invert "@preview"
+        env:
+          NEXT_PUBLIC_SITE_ENV: production
 
