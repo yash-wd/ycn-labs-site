@@ -12,6 +12,8 @@ import NotFound from "@/app/not-found";
 import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
 import { contactSchema } from "@/lib/validation/contact";
+import { SituationExplorer } from "@/components/inner/SituationExplorer";
+import { SIM_SCENARIOS } from "@/components/inner/EngineeringSimulator";
 
 describe("Phase 6: Supporting Pages & Canonical Navigation", () => {
   describe("1. Canonical Navigation & Footer Links", () => {
@@ -57,7 +59,7 @@ describe("Phase 6: Supporting Pages & Canonical Navigation", () => {
       }
       expect(html).toContain("A page, a shared sheet, or custom software?");
       expect(html).toContain("Sometimes the answer is a better spreadsheet.");
-      expect(html).toContain("Tell us your version");
+      expect(html).toContain("Start a Project");
       expect(html).toContain('href="/contact"');
     });
 
@@ -109,11 +111,12 @@ describe("Phase 6: Supporting Pages & Canonical Navigation", () => {
         last = i;
       }
       expect((html.match(/You get:/g) || []).length).toBe(6);
-      expect(html).toContain("a price in INR");
+      expect(html).toContain("a quote in rupees");
       expect(html).toContain("What we need from you");
       expect(html).toContain("What if the plan changes?");
-      expect(html).toContain("Start with step one");
+      expect(html).toContain("Start a Project");
       expect(html).toContain('href="/contact"');
+      expect(html).not.toMatch(/fixed\s+(inr|price|pricing)/i);
     });
 
     it("makes no SLA, response-time or fixed fix-window promises", () => {
@@ -140,13 +143,18 @@ describe("Phase 6: Supporting Pages & Canonical Navigation", () => {
       expect(html).not.toContain("Award-winning agency");
     });
 
-    it("renders the founder section with first-person voice and no false titles", () => {
+    it("renders the Owner-approved founder section verbatim, with no title or location (Task 10b, 9 Nov 2026)", () => {
       const html = renderToString(<AboutPage />);
       expect(html).toContain('id="founder-heading"');
       expect(html).toMatch(/<h2[^>]*id="founder-heading"[^>]*>\s*Yaseen\s*<\/h2>/);
-      expect(html).toContain("I&#x27;m Yaseen. Most people call me Yash.");
-      expect(html).toContain("Tell me where an enquiry gets missed or what you keep doing by hand");
+      expect(html).toContain(
+        "You can call me Yash. I started YCN Labs to help small and growing businesses in India build websites and web applications that fit the way they work. You don’t need a technical brief to talk to me. Tell me where an enquiry gets missed or what you keep doing by hand, and we’ll work out what’s worth building first."
+      );
+      expect(html).not.toContain("Then I build it myself");
       expect(html).not.toMatch(/\b(CEO|Managing Director)\b/);
+      expect(html).not.toContain("Hyderabad");
+      expect(html).toContain("Start a Project");
+      expect(html).toContain("What you receive at handover is written in your agreement.");
     });
   });
 
@@ -156,9 +164,24 @@ describe("Phase 6: Supporting Pages & Canonical Navigation", () => {
       expect(html).toContain("What happens when something fails matters as much as when it works.");
       expect(html).toContain("Five engineering rules grounded in our own code");
       expect(html).toContain("Saved before");
-      expect(html).toContain("If the email fails, nothing is lost");
+      expect(html).toContain("The form is built to save your enquiry before the notification email is sent");
+      expect(html).not.toContain("If the email fails, nothing is lost");
       expect(html).toContain("Automated verification before merge");
       expect(html).toContain("How our enquiry pipeline handles failure");
+      expect(html).toContain("Example only. This shows how the form is designed to behave.");
+      expect(SIM_SCENARIOS.email_fails.outcome).toBe("The enquiry stays saved. The email can be re-sent.");
+      expect(SIM_SCENARIOS.storage_fails.outcome).toBe("No enquiry is saved, and the visitor is told so. No false thank-you.");
+      expect(SIM_SCENARIOS.normal.outcome).not.toContain("Zero data loss");
+      expect(html).not.toContain("Zero data loss");
+      expect(html).not.toContain("email retry scheduled");
+      expect(html).not.toContain("recovered via scripts");
+      expect(html).toContain("We check colour contrast during design.");
+      expect(html).not.toContain("contrast compliance");
+      expect(html).toContain("We keep passwords and keys out of the code");
+      expect(html).not.toContain("no secret leakage");
+      expect(html).not.toContain("without PII leakage");
+      expect(html).toContain("Handover as listed in your agreement");
+      expect(html).not.toContain("Complete source repository");
 
       const practices = [
         "Performance",
@@ -174,7 +197,7 @@ describe("Phase 6: Supporting Pages & Canonical Navigation", () => {
       for (const practice of practices) {
         expect(html).toContain(practice);
       }
-      expect(html).toContain("Ask us a technical question");
+      expect(html).toContain("Start a Project");
     });
 
     it("avoids false compliance or uptime guarantees", () => {
@@ -190,10 +213,13 @@ describe("Phase 6: Supporting Pages & Canonical Navigation", () => {
       const html = renderToString(<ContactPage />);
       expect(html).toContain("What&#x27;s difficult in your business right now?");
       expect(html).toContain("What happens after I send this?");
+      expect(html).toContain("We discuss scope and send a written quote before anyone commits to anything.");
+      expect(html).not.toMatch(/fixed\s+(inr|price)/i);
       expect(html).toContain("hello@ycnlabs.com");
       expect(html).toContain("+91 83412 26694");
       // Must not claim unverified response time guarantee per Claims register row 23
       expect(html).not.toContain("respond within one business day");
+      expect(html).toContain("Send my enquiry");
     });
 
     it("defaults project type to 'Not sure yet — need guidance…' option and accepts free-text budget", () => {
@@ -228,6 +254,30 @@ describe("Phase 6: Supporting Pages & Canonical Navigation", () => {
       expect(html).toContain('href="/work"');
       expect(html).toContain('href="/contact"');
       expect(html).toContain("Start a Project");
+    });
+  });
+
+  describe("9. Landmark & Accessibility Integrity Across Supporting Pages", () => {
+    it("ensures no nested <main> landmarks exist across supporting pages", () => {
+      expect(renderToString(<WhatWeSolvePage />)).not.toContain("<main");
+      expect(renderToString(<HowWeWorkPage />)).not.toContain("<main");
+      expect(renderToString(<AboutPage />)).not.toContain("<main");
+      expect(renderToString(<EngineeringPage />)).not.toContain("<main");
+      expect(renderToString(<ContactPage />)).not.toContain("<main");
+    });
+
+    it("ensures canonical primary CTA label 'Start a Project' on all four content inner pages", () => {
+      for (const Component of [WhatWeSolvePage, HowWeWorkPage, AboutPage, EngineeringPage]) {
+        const html = renderToString(<Component />);
+        expect(html).toContain("Start a Project");
+      }
+    });
+
+    it("provides accessible keyboard toggle and announced state in SituationExplorer", () => {
+      const html = renderToString(<SituationExplorer />);
+      expect(html).toContain('aria-pressed="false"');
+      expect(html).toContain("Select");
+      expect(html).toContain("<button");
     });
   });
 });

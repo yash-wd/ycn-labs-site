@@ -106,6 +106,37 @@
   color: var(--action-blue, #02C1F7);
 }
 
+.situationToggleBtn {
+  background: transparent;
+  color: var(--action-blue, #0470B4);
+  border: 1px solid var(--action-blue, #0470B4);
+  border-radius: 8px;
+  padding: 4px 10px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  min-height: 32px;
+  transition: background-color 0.15s ease, color 0.15s ease, border-color 0.15s ease;
+}
+
+:global(.dark) .situationToggleBtn {
+  color: var(--action-blue, #02C1F7);
+  border-color: var(--action-blue, #02C1F7);
+}
+
+.situationToggleBtn[aria-pressed="true"] {
+  background: var(--action-blue, #0470B4);
+  color: #FFFFFF;
+}
+
+:global(.dark) .situationToggleBtn[aria-pressed="true"] {
+  background: var(--action-blue, #02C1F7);
+  color: #080D16;
+}
+
 .quoteHeader {
   font-family: var(--font-space-grotesk, 'Space Grotesk'), system-ui, sans-serif;
   font-size: 1.25rem;
@@ -428,6 +459,24 @@
   background: var(--bg-surface, #0D1522);
 }
 
+.simNotice {
+  display: inline-block;
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: var(--text-secondary, #40536B);
+  background: var(--bg-canvas, #FFFFFF);
+  border: 1px solid var(--border-subtle, #D7E1EB);
+  border-radius: 6px;
+  padding: 4px 10px;
+  margin: 6px 0 12px;
+}
+
+:global(.dark) .simNotice {
+  color: var(--text-secondary, #B4C1D1);
+  background: var(--bg-surface-elevated, #121D2E);
+  border-color: var(--border-subtle, #243247);
+}
+
 .simControls {
   display: flex;
   gap: 10px;
@@ -568,11 +617,18 @@
   transform: translateY(-1px);
 }
 
+.contactGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 320px), 1fr));
+  gap: 36px;
+  align-items: start;
+}
+
 @media (max-width: 768px) {
   .hero {
     padding: 70px 0 40px;
   }
-  .situationGrid, .stepsList, .decisionCols, .splitPanels, .engStudyGrid {
+  .situationGrid, .stepsList, .decisionCols, .splitPanels, .engStudyGrid, .contactGrid {
     grid-template-columns: 1fr;
   }
   .ctaBand {
@@ -582,7 +638,7 @@
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .situationCard, .ctaButton, .simBtn {
+  .situationCard, .ctaButton, .simBtn, .situationToggleBtn {
     transition: none !important;
     animation: none !important;
   }

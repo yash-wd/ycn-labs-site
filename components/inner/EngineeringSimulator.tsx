@@ -6,22 +6,22 @@ import styles from "./inner-pages.module.css";
 
 type SimState = "normal" | "email_fails" | "storage_fails";
 
-const SIM_SCENARIOS = {
+export const SIM_SCENARIOS = {
   normal: {
     label: "Normal operation",
     badge: "200 ACCEPTED",
     title: "Enquiry stored & notification sent",
     desc: "1. Payload validated → 2. Saved to PostgreSQL with unique idempotency key → 3. Owner notified via Resend → 4. Confirmation receipt with lead ID returned.",
     icon: CheckCircle2,
-    outcome: "Receipt displayed to visitor. Zero data loss.",
+    outcome: "Receipt displayed to visitor.",
   },
   email_fails: {
     label: "Email provider outage",
     badge: "200 ACCEPTED (RECOVERABLE)",
-    title: "Storage succeeded; email retry scheduled",
-    desc: "1. Payload validated → 2. Saved to PostgreSQL → 3. Resend email fails → 4. Lead remains safely committed in DB with status 'failed' for operational follow-up.",
+    title: "Storage succeeded; notification pending",
+    desc: "1. Payload validated → 2. Saved to PostgreSQL → 3. Resend email fails → 4. Lead remains saved in database with status 'failed'.",
     icon: AlertTriangle,
-    outcome: "Receipt displayed. Lead is safe in database and recovered via scripts.",
+    outcome: "The enquiry stays saved. The email can be re-sent.",
   },
   storage_fails: {
     label: "Database unavailable",
@@ -29,7 +29,7 @@ const SIM_SCENARIOS = {
     title: "No false receipt shown",
     desc: "1. Payload validated → 2. Database transaction fails → 3. System halts immediately → 4. Never promises confirmation when data wasn't saved.",
     icon: XCircle,
-    outcome: "Honest error returned. Form preserves user input so they can retry.",
+    outcome: "No enquiry is saved, and the visitor is told so. No false thank-you.",
   },
 } as const;
 
@@ -41,6 +41,11 @@ export function EngineeringSimulator() {
   return (
     <div className={styles.simulationBox} aria-label="Interactive failure mode simulation">
       <small className={styles.eyebrow}>INTERACTIVE ARCHITECTURE SIMULATION</small>
+      <div>
+        <span className={styles.simNotice}>
+          Example only. This shows how the form is designed to behave.
+        </span>
+      </div>
       <h3 style={{ margin: "6px 0 10px", fontSize: "1.3rem" }}>
         How our enquiry pipeline handles failure
       </h3>

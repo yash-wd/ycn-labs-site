@@ -75,14 +75,21 @@ export function SituationExplorer() {
             className={styles.situationCard}
             style={{
               borderColor: isSelected ? "var(--action-blue)" : undefined,
-              cursor: "pointer",
             }}
-            onClick={() => setActiveId(isSelected ? null : s.id)}
           >
             <div>
               <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: "12px" }}>
                 <span className={styles.situationNum}>{s.num} / {s.category.toUpperCase()}</span>
-                <Icon size={18} strokeWidth={1.8} style={{ color: "var(--action-blue)" }} aria-hidden="true" />
+                <button
+                  type="button"
+                  className={styles.situationToggleBtn}
+                  aria-pressed={isSelected}
+                  aria-label={`Highlight situation ${s.num}: ${s.quote}`}
+                  onClick={() => setActiveId(isSelected ? null : s.id)}
+                >
+                  <Icon size={14} strokeWidth={1.8} aria-hidden="true" />
+                  <span>{isSelected ? "Selected" : "Select"}</span>
+                </button>
               </div>
               <h2 className={styles.quoteHeader}>“{s.quote}”</h2>
               <div className={styles.buildBlock}>

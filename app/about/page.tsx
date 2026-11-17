@@ -25,7 +25,7 @@ const PRINCIPLES = [
   {
     icon: ShieldCheck,
     title: "Your accounts stay yours",
-    desc: "No proprietary lock-in. You own your domain, your accounts, your data, and the code you pay for.",
+    desc: "No proprietary lock-in. You own your domain, your accounts, your data. What you receive at handover is written in your agreement.",
   },
   {
     icon: CheckCircle2,
@@ -52,7 +52,7 @@ export default function AboutPage() {
         </div>
       </header>
 
-      <main className={styles.container}>
+      <div className={styles.container}>
         {/* Founder & Studio Sections */}
         <div className={styles.splitPanels}>
           <div className={styles.infoBox}>
@@ -61,10 +61,7 @@ export default function AboutPage() {
               Yaseen
             </h2>
             <p style={{ marginBottom: "14px" }}>
-              I&apos;m Yaseen. Most people call me Yash. I started YCN Labs in Hyderabad to help small and growing businesses in India build websites and web applications that fit the way they work.
-            </p>
-            <p>
-              You don&apos;t need a technical brief to talk to me. Tell me where an enquiry gets missed or what you keep doing by hand, and we&apos;ll work out what&apos;s worth building first.
+              You can call me Yash. I started YCN Labs to help small and growing businesses in India build websites and web applications that fit the way they work. You don’t need a technical brief to talk to me. Tell me where an enquiry gets missed or what you keep doing by hand, and we’ll work out what’s worth building first.
             </p>
             {FOUNDER_PHOTO ? (
               <div style={{ position: "relative", aspectRatio: "4/5", marginTop: "20px", borderRadius: "14px", overflow: "hidden" }}>
@@ -79,7 +76,7 @@ export default function AboutPage() {
               Founder-led studio
             </h2>
             <p style={{ marginBottom: "14px" }}>
-              YCN Labs is a founder-led studio. I lead every project myself. When a project needs more hands, we bring in specialists, and you are told who is doing what before work starts.
+              YCN Labs is a founder-led studio. Yaseen leads every project. When a project needs more hands, we bring in specialists, and you are told who is doing what before work starts.
             </p>
             <p>
               You communicate directly with the person responsible for the delivery. There are no account managers in the middle and no unexpected subcontractors.
@@ -121,10 +118,10 @@ export default function AboutPage() {
             </p>
           </div>
           <Link href="/contact" className={styles.ctaButton}>
-            Tell me what you&apos;re trying to make easier <ArrowUpRight size={16} strokeWidth={2} aria-hidden="true" />
+            Start a Project <ArrowUpRight size={16} strokeWidth={2} aria-hidden="true" />
           </Link>
         </section>
-      </main>
+      </div>
     </div>
   );
 }

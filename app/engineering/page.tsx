@@ -21,8 +21,8 @@ const PROOF_POINTS = [
   },
   {
     icon: MailCheck,
-    title: "If the email fails, nothing is lost",
-    desc: "The enquiry stays safely committed in PostgreSQL with a failed-notification flag so it can be re-sent without losing the lead.",
+    title: "Saved before notification email",
+    desc: "The form is built to save your enquiry before the notification email is sent, so a failed email does not remove it.",
   },
   {
     icon: ShieldAlert,
@@ -43,13 +43,13 @@ const PROOF_POINTS = [
 
 const PRACTICES = [
   { icon: Gauge, title: "Performance", line: "Responsive interfaces that load fast on mobile devices without heavy client scripts." },
-  { icon: Accessibility, title: "Accessibility", line: "Keyboard navigation, proper ARIA labels, contrast compliance, and reduced-motion support." },
-  { icon: ShieldCheck, title: "Security", line: "Strict input validation with Zod, sanitized database parameters, and no secret leakage." },
+  { icon: Accessibility, title: "Accessibility", line: "Keyboard navigation, proper ARIA labels, reduced-motion support. We check colour contrast during design." },
+  { icon: ShieldCheck, title: "Security", line: "Strict input validation with Zod, sanitized database parameters. We keep passwords and keys out of the code." },
   { icon: RefreshCcw, title: "Reliability", line: "Idempotent requests, controlled retries, transaction boundaries, and deliberate failure paths." },
   { icon: Boxes, title: "Architecture", line: "Standard Next.js with clean modular components rather than bloated framework stacks." },
   { icon: FlaskConical, title: "Automated Testing", line: "Continuous verification through Vitest unit tests, Playwright browser journeys, and type checks." },
-  { icon: Activity, title: "Monitoring & Operations", line: "Clean structured logging without PII leakage, with recovery tools for failed notifications." },
-  { icon: FileCheck, title: "Transparent Handover", line: "Complete source repository, dependency licenses, and operational notes transferred to you." },
+  { icon: Activity, title: "Monitoring & Operations", line: "Clean structured logging, avoiding logging personal details, with recovery tools for failed notifications." },
+  { icon: FileCheck, title: "Transparent Handover", line: "Handover as listed in your agreement, including dependency licenses and operational notes." },
 ];
 
 export default function EngineeringPage() {
@@ -65,7 +65,7 @@ export default function EngineeringPage() {
         </div>
       </header>
 
-      <main className={styles.container}>
+      <div className={styles.container}>
         {/* Concrete Verified Proof Points */}
         <section aria-labelledby="proof-heading">
           <small className={styles.eyebrow}>VERIFIABLE ARCHITECTURE</small>
@@ -122,10 +122,10 @@ export default function EngineeringPage() {
             </p>
           </div>
           <Link href="/contact" className={styles.ctaButton}>
-            Ask us a technical question <ArrowUpRight size={16} strokeWidth={2} aria-hidden="true" />
+            Start a Project <ArrowUpRight size={16} strokeWidth={2} aria-hidden="true" />
           </Link>
         </section>
-      </main>
+      </div>
     </div>
   );
 }

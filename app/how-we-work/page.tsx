@@ -6,7 +6,7 @@ import styles from "@/components/inner/inner-pages.module.css";
 export const metadata: Metadata = {
   title: "How We Work — YCN Labs",
   description:
-    "From first conversation to a handover you can understand. Six clear steps from problem to delivery with fixed INR pricing and working previews.",
+    "From first conversation to a handover you can understand. Six clear steps from problem to delivery with a written scope and a quote in rupees before any work starts, and working previews.",
   alternates: {
     canonical: "https://ycnlabs.com/how-we-work",
   },
@@ -24,7 +24,7 @@ const STEPS = [
     num: "02",
     title: "Written scope and quote",
     desc: "What is included, what is not, the price and the payment stages.",
-    get: "A written scope, a price in INR and clear milestones before development starts.",
+    get: "A written scope, a quote in rupees and clear milestones before any work starts.",
     icon: CheckCircle2,
   },
   {
@@ -45,7 +45,7 @@ const STEPS = [
     num: "05",
     title: "Handover",
     desc: "Your accounts, written notes, and what the agreement says you receive.",
-    get: "Direct access to your domain, accounts, documentation, and the code you own.",
+    get: "Direct access to your domain, accounts, documentation, and handover as listed in your agreement.",
     icon: Key,
   },
   {
@@ -70,7 +70,7 @@ export default function HowWeWorkPage() {
         </div>
       </header>
 
-      <main className={styles.container}>
+      <div className={styles.container}>
         <ol className={styles.stepsList} aria-label="The six delivery steps">
           {STEPS.map((s) => {
             const Icon = s.icon;
@@ -115,10 +115,10 @@ export default function HowWeWorkPage() {
             </p>
           </div>
           <Link href="/contact" className={styles.ctaButton}>
-            Start with step one <ArrowUpRight size={16} strokeWidth={2} aria-hidden="true" />
+            Start a Project <ArrowUpRight size={16} strokeWidth={2} aria-hidden="true" />
           </Link>
         </section>
-      </main>
+      </div>
     </div>
   );
 }

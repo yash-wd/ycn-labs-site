@@ -26,7 +26,7 @@ export default function WhatWeSolvePage() {
         </div>
       </header>
 
-      <main className={styles.container}>
+      <div className={styles.container}>
         <SituationExplorer />
 
         {/* Decision Triad: A page, a shared sheet, or custom software? */}
@@ -70,10 +70,10 @@ export default function WhatWeSolvePage() {
             </p>
           </div>
           <Link href="/contact" className={styles.ctaButton}>
-            Tell us your version <ArrowUpRight size={16} strokeWidth={2} aria-hidden="true" />
+            Start a Project <ArrowUpRight size={16} strokeWidth={2} aria-hidden="true" />
           </Link>
         </section>
-      </main>
+      </div>
     </div>
   );
 }

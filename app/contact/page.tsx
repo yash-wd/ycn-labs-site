@@ -31,8 +31,8 @@ export default function ContactPage() {
         </div>
       </header>
 
-      <main className={styles.container}>
-        <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(320px, 1fr))", gap: "36px", alignItems: "start" }}>
+      <div className={styles.container}>
+        <div className={styles.contactGrid}>
           {/* Left Column: Direct channels and reassurance */}
           <div>
             <div className={styles.infoBox} style={{ marginBottom: "20px" }}>
@@ -50,7 +50,7 @@ export default function ContactPage() {
                 </div>
                 <div style={{ display: "flex", gap: "10px", alignItems: "flex-start", fontSize: "0.88rem" }}>
                   <FileCheck size={16} strokeWidth={2} style={{ color: "var(--action-blue)", marginTop: "2px", flexShrink: 0 }} aria-hidden="true" />
-                  <span>We provide a written scope and a fixed INR price before work starts.</span>
+                  <span>We discuss scope and send a written quote before anyone commits to anything.</span>
                 </div>
               </div>
             </div>
@@ -111,7 +111,7 @@ export default function ContactPage() {
             <ContactForm />
           </div>
         </div>
-      </main>
+      </div>
     </div>
   );
 }
