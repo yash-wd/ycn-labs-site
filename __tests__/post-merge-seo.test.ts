@@ -39,6 +39,13 @@ describe("Post-Merge SEO: robots.ts & sitemap.ts fail-safe behavior", () => {
       const entries = sitemap();
       expect(entries).toEqual([]);
     });
+
+    it("returns an empty sitemap when site environment is completely unset", () => {
+      delete process.env.NEXT_PUBLIC_SITE_ENV;
+      delete process.env.NEXT_PUBLIC_ENV;
+      const entries = sitemap();
+      expect(entries).toEqual([]);
+    });
   });
 
   describe("Explicit Production Environment (NEXT_PUBLIC_SITE_ENV=production)", () => {

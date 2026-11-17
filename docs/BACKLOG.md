@@ -14,7 +14,7 @@
 - [ ] **`YCN-POST-MERGE-01` [IN-PROGRESS / LOCAL-WIP]:** Bounded maintenance task updating `docs/STATE.md`, `docs/BACKLOG.md`, `AGENTS.md` (5 governance rules), `app/robots.ts`, `app/sitemap.ts`, and adding `__tests__/post-merge-seo.test.ts`.
 - [ ] **Protected Staging Trial:** Separate hosting and Owner authorization (Netlify staging preview with isolated credentials; no production deployment).
 - [ ] **Mobile Navigation Accessibility Remediation:** Fix confirmed focus transfer, tab containment, and background inertness defects on `#mobile-nav-sheet` (separate Owner-authorized `NAV-07` remediation task).
-- [ ] **Privacy, Terms & Legal Copy:** Complete legal review; resolve unsupported ContactForm statement `"Your information is never sold or used for marketing lists."` in conjunction with Privacy policy (Task PR #35 / legal clearance).
+- [ ] **Privacy, Terms & Legal Copy:** Complete legal review; resolve unsupported ContactForm statement `"We respect your privacy. No data is shared or sold."` in conjunction with Privacy policy (Task PR #35 / legal clearance).
 - [ ] **Pre-Launch Operational Verification:** Real database and email acceptance against configured staging service, operational monitoring alert check, durable backup & rollback dry-run, WebKit and physical device testing, and 5-person comprehension testing before public cutover.
 - [ ] **Owner Visual Refinements:** Consolidate Owner design suggestions and backlog enhancements into a single prioritized, bounded post-merge design task.
 
@@ -24,7 +24,7 @@
 - **SEO Metadata Alignment:** `app/layout.tsx` metadata retains older title/description; to be reconciled with the ratified H1 in a future separately approved SEO task.
 - **Permanent Close Protocol:** Workstation sessions remain OPEN until the Owner gives the explicit typed word `CLOSE` per `docs/CLOSE_PROTOCOL.md`.
 - **Master Readiness Checklist:** Reconcile master 143-point readiness tracker in `docs/YCN_READINESS_CHECKLIST.md` following maintenance merge.
-- **Off-Device Backup & Tooling Review:** Off-device private vault backup verification pending; review AGY change to `tools/copy_plan.py`.
+- **Off-Device Backup & Tooling Review:** Off-device private vault backup verification pending; review reported change to `tools/copy_plan.py` (location unverified; not tracked in repository).
 - **Owner Pending Business Inputs:** Founder facts and photograph, real attributable project details, starting price guidance, hosting provider decision, designated secondary enquiry responder, and legal/CA review.
 
 ---

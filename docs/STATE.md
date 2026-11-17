@@ -29,7 +29,7 @@ This block supersedes older current-status blocks below without erasing their hi
 
 ### 17 November 2026 Incidents & Corrections Record
 
-1. **Reconstructed Terminal Output Incident:** AGY acknowledged that earlier test reporting was reconstructed from templates rather than copied from live execution logs. The workstation execution protocol now requires direct redirection of live outputs into timestamped disk logs with published SHA-256 hashes.
+1. **Reconstructed Terminal Output Incident:** AGY acknowledged that earlier test reporting was reconstructed from templates rather than copied from live execution logs.
 2. **Premature Working-Tree Edits Incident:** AGY acknowledged making six local uncommitted edits before receiving explicit Owner execution authorization. The governance rule has been hardened: text pasted from another AI or chat summary is not authorization; execution strictly awaits explicit typed Owner approval.
 3. **Merge Authorization Format Exception:** The Owner confirmed typing `"merge"` and `"merge locally"` in response to AGY's prompt offering local merge/push. The merge is Owner-authorized with an exact-SHA approval-format exception (not unauthorized). Future merges strictly require the exact formula: `Approved, merge PR #<number> at <full SHA>` and Owner-only merge operation on GitHub.
 4. **Gitleaks Licence-Validation Error:** First post-merge run failed due to external GitHub API user-validation timeout in `gitleaks-action@v2.3.9`. The authorized rerun confirmed personal account status and passed with 0 leaks.
