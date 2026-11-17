@@ -24,8 +24,8 @@ const PRINCIPLES = [
   },
   {
     icon: ShieldCheck,
-    title: "Your accounts stay yours",
-    desc: "No proprietary lock-in. You own your domain, your accounts, your data. What you receive at handover is written in your agreement.",
+    title: "Clear ownership from the start",
+    desc: "No proprietary lock-in. Before work starts, the agreement sets out plainly what you own and what is licensed.",
   },
   {
     icon: CheckCircle2,
@@ -76,7 +76,7 @@ export default function AboutPage() {
               Founder-led studio
             </h2>
             <p style={{ marginBottom: "14px" }}>
-              YCN Labs is a founder-led studio. Yaseen leads every project. When a project needs more hands, we bring in specialists, and you are told who is doing what before work starts.
+              YCN Labs is a founder-led studio. The founder leads every project. When a project needs more hands, we will bring in specialists, and you will be told who is doing what before work starts.
             </p>
             <p>
               You communicate directly with the person responsible for the delivery. There are no account managers in the middle and no unexpected subcontractors.

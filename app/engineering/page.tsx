@@ -32,7 +32,7 @@ const PROOF_POINTS = [
   {
     icon: FlaskConical,
     title: "Automated verification before merge",
-    desc: "Every change is checked by automated unit tests, end-to-end browser tests, and production builds before merging.",
+    desc: "Each change goes through automated checks before it is merged: lint, type checks, unit tests and a production build. We also run browser tests on the main pages.",
   },
   {
     icon: Cpu,
@@ -43,12 +43,12 @@ const PROOF_POINTS = [
 
 const PRACTICES = [
   { icon: Gauge, title: "Performance", line: "Responsive interfaces that load fast on mobile devices without heavy client scripts." },
-  { icon: Accessibility, title: "Accessibility", line: "Keyboard navigation, proper ARIA labels, reduced-motion support. We check colour contrast during design." },
-  { icon: ShieldCheck, title: "Security", line: "Strict input validation with Zod, sanitized database parameters. We keep passwords and keys out of the code." },
+  { icon: Accessibility, title: "Accessibility", line: "Keyboard navigation, proper ARIA labels, and reduced-motion support. We design with colour contrast and keyboard use in mind." },
+  { icon: ShieldCheck, title: "Security", line: "Strict input validation with Zod and sanitized database parameters. Our code is scanned for passwords and keys before it is merged." },
   { icon: RefreshCcw, title: "Reliability", line: "Idempotent requests, controlled retries, transaction boundaries, and deliberate failure paths." },
   { icon: Boxes, title: "Architecture", line: "Standard Next.js with clean modular components rather than bloated framework stacks." },
   { icon: FlaskConical, title: "Automated Testing", line: "Continuous verification through Vitest unit tests, Playwright browser journeys, and type checks." },
-  { icon: Activity, title: "Monitoring & Operations", line: "Clean structured logging, avoiding logging personal details, with recovery tools for failed notifications." },
+  { icon: Activity, title: "Monitoring & Operations", line: "Documented recovery tools and procedures for failed notifications as agreed for your system." },
   { icon: FileCheck, title: "Transparent Handover", line: "Handover as listed in your agreement, including dependency licenses and operational notes." },
 ];
 

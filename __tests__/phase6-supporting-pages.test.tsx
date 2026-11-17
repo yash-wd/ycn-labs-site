@@ -116,6 +116,7 @@ describe("Phase 6: Supporting Pages & Canonical Navigation", () => {
       expect(html).toContain("What if the plan changes?");
       expect(html).toContain("Start a Project");
       expect(html).toContain('href="/contact"');
+      expect(html).toContain("Handover of domain access, accounts and documentation, as listed in your agreement.");
       expect(html).not.toMatch(/fixed\s+(inr|price|pricing)/i);
     });
 
@@ -154,7 +155,10 @@ describe("Phase 6: Supporting Pages & Canonical Navigation", () => {
       expect(html).not.toMatch(/\b(CEO|Managing Director)\b/);
       expect(html).not.toContain("Hyderabad");
       expect(html).toContain("Start a Project");
-      expect(html).toContain("What you receive at handover is written in your agreement.");
+      expect(html).toContain("Before work starts, the agreement sets out plainly what you own and what is licensed.");
+      expect(html).toContain("The founder leads every project.");
+      expect(html).toContain("When a project needs more hands, we will bring in specialists");
+      expect(html).not.toContain("Yaseen leads every project");
     });
   });
 
@@ -167,6 +171,7 @@ describe("Phase 6: Supporting Pages & Canonical Navigation", () => {
       expect(html).toContain("The form is built to save your enquiry before the notification email is sent");
       expect(html).not.toContain("If the email fails, nothing is lost");
       expect(html).toContain("Automated verification before merge");
+      expect(html).toContain("Each change goes through automated checks before it is merged: lint, type checks, unit tests and a production build. We also run browser tests on the main pages.");
       expect(html).toContain("How our enquiry pipeline handles failure");
       expect(html).toContain("Example only. This shows how the form is designed to behave.");
       expect(SIM_SCENARIOS.email_fails.outcome).toBe("The enquiry stays saved. The email can be re-sent.");
@@ -175,11 +180,13 @@ describe("Phase 6: Supporting Pages & Canonical Navigation", () => {
       expect(html).not.toContain("Zero data loss");
       expect(html).not.toContain("email retry scheduled");
       expect(html).not.toContain("recovered via scripts");
-      expect(html).toContain("We check colour contrast during design.");
+      expect(html).toContain("We design with colour contrast and keyboard use in mind.");
       expect(html).not.toContain("contrast compliance");
-      expect(html).toContain("We keep passwords and keys out of the code");
+      expect(html).toContain("Our code is scanned for passwords and keys before it is merged.");
       expect(html).not.toContain("no secret leakage");
       expect(html).not.toContain("without PII leakage");
+      expect(html).toContain("Documented recovery tools and procedures for failed notifications as agreed for your system.");
+      expect(html).not.toContain("Clean structured logging");
       expect(html).toContain("Handover as listed in your agreement");
       expect(html).not.toContain("Complete source repository");
 

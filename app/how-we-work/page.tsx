@@ -45,7 +45,7 @@ const STEPS = [
     num: "05",
     title: "Handover",
     desc: "Your accounts, written notes, and what the agreement says you receive.",
-    get: "Direct access to your domain, accounts, documentation, and handover as listed in your agreement.",
+    get: "Handover of domain access, accounts and documentation, as listed in your agreement.",
     icon: Key,
   },
   {
