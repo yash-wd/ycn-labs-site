@@ -3,8 +3,8 @@ import fs from "fs";
 import os from "os";
 import path from "path";
 
-// YCN-V3 browser regression suite (Owner decision 13 Nov 2026: in the repo, run locally, not in CI).
-// Runs against a local production build: `pnpm test:e2e` builds, then Playwright starts
+// YCN-V3 browser regression suite (Owner decision 17 Nov 2026: full 38-test Chromium suite runs in GitHub CI; supersedes 13 Nov local-only comment).
+// Runs against a production build: `pnpm test:e2e` builds, then Playwright starts
 // `next start` on port 3105. Stop the dev server first: dev and build share the .next folder.
 //
 // Browsers: Chromium uses the cached build on this machine when present (PW_CHROMIUM_PATH

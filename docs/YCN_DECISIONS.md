@@ -382,3 +382,13 @@ If the Owner wants to allow a WIP commit/push for that single doc reconciliation
 1. **Hero (HOME-01C exception).** The office photograph sits top-right, uncropped; the device photograph sits bottom-left in front of it. The device photograph overlaps only the empty bottom-left sideboard and floor of the office photograph (about the left 20% and lower 36% of the image). No person, face, screen or laptop is covered. The same composition scales down to tablet and mobile.
 2. **Hover zoom removed.** The photographs are not links, so they no longer zoom on hover.
 3. **Unchanged.** Copy, CTAs, typography, colours, alt text and image files are unchanged. The entrance film stays bypassed, and the pre-launch source/licence check in `docs/BACKLOG.md` still applies.
+
+### DECISION-056: Homepage Hero Headline Harmonization and CI Playwright Browser Testing Policy
+
+**Status: ADOPTED by Owner, 17 Nov 2026**  
+**Task:** `YCN-INNER-PAGES-01` (PR #40)
+
+1. **Homepage Hero Headline.** The current R2 homepage H1 `"Websites that earn trust. Software that saves time."` is formally ratified as the production homepage headline, harmonized across `components/r2/HomepageR2.tsx` and `docs/YCN_CONTENT_SPEC.md` §3. This supersedes the earlier DECISION-040 baseline headline (`"Websites and software. Built around your business."`), which is preserved for historical record.
+2. **Chromium Playwright Browser Testing in GitHub CI.** The full Chromium Playwright test suite (38 tests) is integrated into automated GitHub CI (`.github/workflows/ci.yml`) to run on every push and pull request to `main`. This supersedes the 13 November 2026 local-only browser testing policy recorded in `playwright.config.ts`, which is preserved for historical record.
+3. **Preserved Authority.** All other architectural, brand, and governance decisions (including DECISION-054, DECISION-055, and frozen systems) remain in full effect.
+

@@ -202,8 +202,8 @@ test.describe("Homepage R2 Interactive Demonstrations", () => {
     await ctx.close();
   });
 
-  test("narrow mobile reflow (320px): / and /work render without horizontal overflow", async ({ browser }) => {
-    for (const route of ["/", "/work"]) {
+  test("narrow mobile reflow (320px): all key routes render without horizontal overflow", async ({ browser }) => {
+    for (const route of ["/", "/work", "/what-we-solve", "/how-we-work", "/about", "/engineering", "/contact"]) {
       const { ctx, page, errors } = await open(browser, route, { width: 320, height: 568 });
       expect(await page.evaluate(() => document.documentElement.scrollWidth <= window.innerWidth)).toBe(true);
       expect(errors).toEqual([]);
@@ -282,6 +282,58 @@ test.describe("Work portfolio and case studies", () => {
 
     // Total should display ₹10,000
     await expect(page.locator("strong[aria-live='polite']")).toContainText("10,000");
+    await ctx.close();
+  });
+});
+
+test.describe("inner pages integrity & accessibility", () => {
+  test("single main landmark and canonical CTA on all inner pages", async ({ browser }) => {
+    const innerPages = ["/what-we-solve", "/how-we-work", "/about", "/engineering", "/contact"];
+    for (const route of innerPages) {
+      const { ctx, page } = await open(browser, route);
+      await expect(page.locator("main")).toHaveCount(1);
+      await expect(page.locator("#main-content")).toBeVisible();
+      if (route !== "/contact") {
+        await expect(page.locator('a[href="/contact"]:has-text("Start a Project")').first()).toBeVisible();
+      }
+      await ctx.close();
+    }
+  });
+
+  test("SituationExplorer: keyboard operability and announced state toggle", async ({ browser }) => {
+    const { ctx, page } = await open(browser, "/what-we-solve");
+    const firstToggle = page.locator('button[aria-label*="Highlight situation 01"]').first();
+    await expect(firstToggle).toBeVisible();
+    await expect(firstToggle).toHaveAttribute("aria-pressed", "false");
+    await expect(firstToggle).toContainText("Select");
+
+    // Keyboard activation with Enter
+    await firstToggle.focus();
+    await page.keyboard.press("Enter");
+    await expect(firstToggle).toHaveAttribute("aria-pressed", "true");
+    await expect(firstToggle).toContainText("Selected");
+
+    // Toggle off with Space
+    await page.keyboard.press("Space");
+    await expect(firstToggle).toHaveAttribute("aria-pressed", "false");
+    await expect(firstToggle).toContainText("Select");
+    await ctx.close();
+  });
+
+  test("EngineeringSimulator: interactive failure mode simulations and example notice", async ({ browser }) => {
+    const { ctx, page } = await open(browser, "/engineering");
+    await expect(page.getByText("Example only. This shows how the form is designed to behave.")).toBeVisible();
+
+    // Default normal state
+    await expect(page.locator('div[role="status"]')).toContainText("Receipt displayed to visitor.");
+
+    // Switch to Email provider outage
+    await page.locator('button:has-text("Email provider fails")').click();
+    await expect(page.locator('div[role="status"]')).toContainText("The enquiry stays saved. The email can be re-sent.");
+
+    // Switch to Database down
+    await page.locator('button:has-text("Database down")').click();
+    await expect(page.locator('div[role="status"]')).toContainText("No enquiry is saved, and the visitor is told so. No false thank-you.");
     await ctx.close();
   });
 });

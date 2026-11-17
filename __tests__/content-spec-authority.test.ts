@@ -64,12 +64,12 @@ describe("Content Specification Authority & Anti-Drift Suite", () => {
   describe("2. Supporting Pages Canonical H1s", () => {
     it("renders exact ratified H1 across all canonical supporting routes", () => {
       const canonicalRoutes = [
-        { route: "app/what-we-solve/page.tsx", h1: "What are you trying to change?" },
+        { route: "app/what-we-solve/page.tsx", h1: "Which part of your business is harder than it should be?" },
         { route: "app/work/page.tsx", h1: "We show our work honestly." },
-        { route: "app/how-we-work/page.tsx", h1: "You know your business. We know technology." },
-        { route: "app/about/page.tsx", h1: "Technology should make a business easier to understand and easier to run." },
-        { route: "app/engineering/page.tsx", h1: "Simple for the user. Deliberate underneath." },
-        { route: "app/contact/page.tsx", h1: "Tell us what you're trying to improve." },
+        { route: "app/how-we-work/page.tsx", h1: "From first conversation to a handover you can understand." },
+        { route: "app/about/page.tsx", h1: "The work has someone accountable behind it." },
+        { route: "app/engineering/page.tsx", h1: "What happens when something fails matters as much as when it works." },
+        { route: "app/contact/page.tsx", h1: "What's difficult in your business right now?" },
       ];
 
       for (const { route, h1 } of canonicalRoutes) {

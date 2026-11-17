@@ -26,9 +26,10 @@ describe("Homepage R2 Candidate: Exact Copy & Integrity Verification", () => {
     );
   });
 
-  it("unifies primary call to action to 'Start a project' across sections", () => {
-    const startMatches = html.match(/Start a project/g) || [];
+  it("unifies primary call to action to 'Start a Project' across sections", () => {
+    const startMatches = html.match(/Start a Project/g) || [];
     expect(startMatches.length).toBeGreaterThanOrEqual(2);
+    expect(html).not.toContain("Start a project");
     expect(html).toContain("See what we build");
     expect(html).toContain("Just tell us what isn&#x27;t working.");
   });
@@ -56,9 +57,12 @@ describe("Homepage R2 Candidate: Exact Copy & Integrity Verification", () => {
   });
 
   it("enforces solo-builder accountability without corporate obfuscation", () => {
-    expect(html).toContain("One person.");
-    expect(html).toContain("Full responsibility.");
-    expect(html).toContain("You deal with the person who builds it.");
+    expect(html).toContain("Founder-led.");
+    expect(html).toContain("Fully accountable.");
+    expect(html).toContain(
+      "The founder leads every project. When a project needs more hands, we will bring in specialists, and you will be told who is doing what before work starts."
+    );
+    expect(html).not.toContain("Yaseen leads every project personally");
     expect(html).toContain("Talk directly with the person building your project.");
   });
 

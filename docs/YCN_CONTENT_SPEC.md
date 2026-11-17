@@ -11,6 +11,11 @@ Avoid first-reading phrases such as: cutting-edge, seamless, empower, leverage, 
 
 Do not make factual promises unless `YCN_CLAIMS_AND_PROOF.md` allows publication.
 
+### Voice & Perspective Rule (Ratified 16 Nov 2026)
+- **"We" for YCN Labs everywhere:** The studio speaks collectively across the homepage, services, processes, engineering, case studies, and contact ("We design and build...", "How we work...", "We explain what is difficult").
+- **"I" only in the founder section of About:** The founder speaks in the first person ("You can call me Yash...", "I started YCN Labs to help small and growing businesses in India...").
+- **Never imply a current team or employee staff:** The founder leads every project. When a project needs more hands, we will bring in specialists, and you will be told who is doing what before work starts. No fictitious staff, agency hierarchies, or false client rosters.
+
 ## 2. Navigation
 
 *(Ratified per DECISION-039 on 2026-09-21)*  
@@ -21,12 +26,12 @@ Do not make factual promises unless `YCN_CLAIMS_AND_PROOF.md` allows publication
 
 ## 3. Home
 
-*(Ratified per DECISION-040 on 2026-09-21)*
+*(Ratified per DECISION-040 on 2026-09-21; H1 superseded per DECISION-056 on 2026-11-17)*
 
 ### HERO-01
 
-**H1 [RATIFIED]:** Websites and software. Built around your business.  
-*(Candidate alternative 'Build what moves your business forward.' REJECTED / SUPERSEDED on 2026-09-21).*
+**H1 [RATIFIED]:** Websites that earn trust. Software that saves time.  
+*(Historical DECISION-040 H1 'Websites and software. Built around your business.' superseded per DECISION-056).*
 
 **Sub [RATIFIED]:** We turn business problems into digital products that help customers act, teams work clearly, and the business keep moving.
 
@@ -116,9 +121,12 @@ Talk → Understand → Plan → Design → Build → Test → Launch → Improv
 
 **CTA:** Start a Project
 
-## 4. What We Build
+## 4. What We Solve
 
-**H1:** What are you trying to change?
+*(Ratified per DECISION-039; replaces historical /what-we-build)*
+
+**H1 [RATIFIED]:** Which part of your business is harder than it should be?  
+*(Historical H1 'What are you trying to change?' superseded).*
 
 ### Need 1 — Customers need to find me
 **Capability:** Websites & digital presence  
@@ -164,7 +172,8 @@ Do not pre-fill real project names/statuses unless the register verifies them.
 
 ## 6. How We Work
 
-**H1:** You know your business. We know technology.
+**H1 [RATIFIED]:** From first conversation to a handover you can understand.  
+*(Historical H1 'You know your business. We know technology.' superseded).*
 
 - **Talk** — Tell us what is happening.
 - **Understand** — We study the problem before choosing technology.
@@ -179,7 +188,8 @@ Do not pre-fill real project names/statuses unless the register verifies them.
 
 ## 7. Engineering
 
-**H1:** Simple for the user. Deliberate underneath.
+**H1 [RATIFIED]:** What happens when something fails matters as much as when it works.  
+*(Historical H1 'Simple for the user. Deliberate underneath.' superseded).*
 
 **Public intro:**
 
@@ -202,7 +212,8 @@ Only publish measured numbers/certification/conformance when the Claims register
 
 ## 8. About
 
-**H1:** Technology should make a business easier to understand and easier to run.
+**H1 [RATIFIED]:** The work has someone accountable behind it.  
+*(Historical H1 'Technology should make a business easier to understand and easier to run.' superseded).*
 
 YCN Labs starts with the business problem, then chooses the digital solution that fits. We are building the company to serve businesses taking a first step online and teams that have outgrown the way they work today.
 
@@ -224,7 +235,8 @@ No job title is shown. The operating-location line is omitted from the About pag
 
 ## 9. Start a Project
 
-**H1:** Tell us what you’re trying to improve.
+**H1 [RATIFIED]:** What's difficult in your business right now?  
+*(Historical H1 'Tell us what you’re trying to improve.' superseded).*
 
 **Sub:** None. The first-step reassurance below is the only intro paragraph on `/contact` (Owner ruling, 5 Nov 2026, Task 10b). The former sub-headline "You don’t need to know whether you need a website, app, automation or custom software. Tell us what happens today and what you want to change." is removed from the page intro.
 
