@@ -6,7 +6,7 @@ import styles from "@/components/inner/inner-pages.module.css";
 export const metadata: Metadata = {
   title: "Start a Project — YCN Labs",
   description:
-    "What's difficult in your business right now? A few lines in your own words are enough. Tell us what is slow, lost or difficult today.",
+    "Tell us what is slow, lost or difficult in your business today. We'll tell you plainly what could help and what it would cost, before you commit to anything.",
   alternates: {
     canonical: "https://ycnlabs.com/contact",
   },
@@ -26,7 +26,7 @@ export default function ContactPage() {
           <p className={styles.eyebrow}>YCN LABS / CONTACT</p>
           <h1>What&apos;s difficult in your business right now?</h1>
           <p className={styles.heroLead}>
-            A few lines in your own words are enough. No technical brief needed.
+            Tell us what is slow, lost or difficult in your business today. We&apos;ll tell you plainly what could help and what it would cost, before you commit to anything.
           </p>
         </div>
       </header>
@@ -41,7 +41,7 @@ export default function ContactPage() {
                 What happens after I send this?
               </h2>
               <p style={{ marginBottom: "12px" }}>
-                Your enquiry is saved first. We read it ourselves and reply by email. We discuss scope before anyone commits to anything.
+                The form is designed to confirm receipt only after your enquiry has been saved. We read it ourselves and reply by email. We discuss scope before anyone commits to anything.
               </p>
               <div style={{ display: "grid", gap: "10px", marginTop: "16px" }}>
                 <div style={{ display: "flex", gap: "10px", alignItems: "flex-start", fontSize: "0.88rem" }}>

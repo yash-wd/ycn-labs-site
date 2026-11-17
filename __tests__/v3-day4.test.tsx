@@ -17,7 +17,9 @@ describe("YCN-V3-UI Day 4", () => {
 
   it("Contact keeps the ratified H1 and first-step paragraph", () => {
     expect(contact).toContain("What&#x27;s difficult in your business right now?");
-    expect(contact).toContain("A few lines in your own words are enough.");
+    expect(contact).toContain(
+      "Tell us what is slow, lost or difficult in your business today. We&#x27;ll tell you plainly what could help and what it would cost, before you commit to anything."
+    );
     expect((contact.match(/<h1/g) || []).length).toBe(1);
   });
 
@@ -50,7 +52,9 @@ describe("YCN-V3-UI Day 4", () => {
 
   it("Engineering intro uses the Owner-approved plain line", () => {
     const html = renderToString(<EngineeringPage />);
-    expect(html).toContain("Technical choices should follow the actual problem.");
+    expect(html).toContain(
+      "Technical choices follow the actual problem. Here we explain how we choose technology, the practices behind this website, and how we check them before release."
+    );
     expect(html).not.toContain("must not turn targets into claims");
   });
 });

@@ -17,17 +17,17 @@ const PROOF_POINTS = [
   {
     icon: Database,
     title: "Saved before \"thank you\"",
-    desc: "You see success only after the enquiry is stored in the database. A confirmation is never shown if storage failed.",
+    desc: "The interface is designed to show success only after the enquiry is stored in the database, with no confirmation shown if storage fails.",
   },
   {
     icon: MailCheck,
     title: "Saved before notification email",
-    desc: "The form is built to save your enquiry before the notification email is sent, so a failed email does not remove it.",
+    desc: "The form is designed to save your enquiry before the notification email is sent, so that a failed email does not remove it.",
   },
   {
     icon: ShieldAlert,
     title: "Protected from misuse",
-    desc: "The form is protected from misuse with in-memory and distributed rate-limiting, honeypots, and input sanitization.",
+    desc: "The form incorporates rate limiting, honeypot fields, and input validation.",
   },
   {
     icon: FlaskConical,
@@ -42,10 +42,10 @@ const PROOF_POINTS = [
 ];
 
 const PRACTICES = [
-  { icon: Gauge, title: "Performance", line: "Responsive interfaces that load fast on mobile devices without heavy client scripts." },
-  { icon: Accessibility, title: "Accessibility", line: "Keyboard navigation, proper ARIA labels, and reduced-motion support. We design with colour contrast and keyboard use in mind." },
+  { icon: Gauge, title: "Performance", line: "Responsive interfaces built for mobile devices." },
+  { icon: Accessibility, title: "Accessibility", line: "We design for keyboard use, reduced motion and readable colour contrast." },
   { icon: ShieldCheck, title: "Security", line: "Strict input validation with Zod and sanitized database parameters. Our code is scanned for passwords and keys before it is merged." },
-  { icon: RefreshCcw, title: "Reliability", line: "Idempotent requests, controlled retries, transaction boundaries, and deliberate failure paths." },
+  { icon: RefreshCcw, title: "Reliability", line: "Idempotent requests, transaction boundaries, and deliberate failure paths." },
   { icon: Boxes, title: "Architecture", line: "Standard Next.js with clean modular components rather than bloated framework stacks." },
   { icon: FlaskConical, title: "Automated Testing", line: "Continuous verification through Vitest unit tests, Playwright browser journeys, and type checks." },
   { icon: Activity, title: "Monitoring & Operations", line: "Documented recovery tools and procedures for failed notifications as agreed for your system." },
@@ -60,7 +60,7 @@ export default function EngineeringPage() {
           <p className={styles.eyebrow}>YCN LABS / ENGINEERING</p>
           <h1>What happens when something fails matters as much as when it works.</h1>
           <p className={styles.heroLead}>
-            Technical choices should follow the actual problem. Our own enquiry form is the example. Here is what it does, in plain words.
+            Technical choices follow the actual problem. Here we explain how we choose technology, the practices behind this website, and how we check them before release.
           </p>
         </div>
       </header>

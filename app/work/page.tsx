@@ -30,7 +30,7 @@ export default function WorkPage() {
               Explore the work <ArrowDownRight size={16} strokeWidth={1.9} className="inline ml-1" aria-hidden="true" />
             </a>
             <Link href="/contact" className="inline-flex min-h-[44px] items-center justify-center rounded-lg border border-[var(--w-line)] bg-[var(--w-paper)] px-5 py-2.5 font-semibold text-[var(--w-ink)] transition hover:bg-[var(--w-surface)]">
-              Start a project
+              Start a Project
             </Link>
           </div>
         </div>
@@ -107,7 +107,7 @@ export default function WorkPage() {
                     <span>Build</span>
                   </div>
                   <div className={styles.diagramNote}>
-                    Written scope and fixed INR quote before work begins.
+                    Written scope and quote in rupees before work begins.
                   </div>
                 </div>
               </div>
@@ -136,7 +136,7 @@ export default function WorkPage() {
               </p>
             </div>
             <Link className="inline-flex min-h-[44px] items-center justify-center rounded-lg bg-[var(--w-accent)] px-6 py-3 font-semibold text-[var(--w-actionText)] transition hover:opacity-90" href="/contact">
-              Start a project <ArrowUpRight size={16} strokeWidth={1.9} className="inline ml-1" aria-hidden="true" />
+              Start a Project <ArrowUpRight size={16} strokeWidth={1.9} className="inline ml-1" aria-hidden="true" />
             </Link>
           </div>
         </div>

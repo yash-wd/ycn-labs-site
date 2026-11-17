@@ -9,7 +9,7 @@ type SimState = "normal" | "email_fails" | "storage_fails";
 export const SIM_SCENARIOS = {
   normal: {
     label: "Normal operation",
-    badge: "200 ACCEPTED",
+    badge: "ENQUIRY ACCEPTED",
     title: "Enquiry stored & notification sent",
     desc: "1. Payload validated → 2. Saved to PostgreSQL with unique idempotency key → 3. Owner notified via Resend → 4. Confirmation receipt with lead ID returned.",
     icon: CheckCircle2,
@@ -17,7 +17,7 @@ export const SIM_SCENARIOS = {
   },
   email_fails: {
     label: "Email provider outage",
-    badge: "200 ACCEPTED (RECOVERABLE)",
+    badge: "ENQUIRY SAVED — EMAIL FAILED",
     title: "Storage succeeded; notification pending",
     desc: "1. Payload validated → 2. Saved to PostgreSQL → 3. Resend email fails → 4. Lead remains saved in database with status 'failed'.",
     icon: AlertTriangle,
@@ -25,7 +25,7 @@ export const SIM_SCENARIOS = {
   },
   storage_fails: {
     label: "Database unavailable",
-    badge: "503 SERVICE UNAVAILABLE",
+    badge: "ENQUIRY NOT ACCEPTED",
     title: "No false receipt shown",
     desc: "1. Payload validated → 2. Database transaction fails → 3. System halts immediately → 4. Never promises confirmation when data wasn't saved.",
     icon: XCircle,
@@ -50,7 +50,7 @@ export function EngineeringSimulator() {
         How our enquiry pipeline handles failure
       </h3>
       <p style={{ margin: 0, fontSize: "0.92rem", color: "var(--text-secondary)" }}>
-        Choose a condition to inspect how the system behaves under real provider failure:
+        Choose a condition to inspect how the system is designed to handle failure:
       </p>
 
       <div className={styles.simControls} role="group" aria-label="Failure condition selector">

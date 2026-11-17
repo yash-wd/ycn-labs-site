@@ -59,7 +59,7 @@ describe("PR #33 review fixes", () => {
 
   it("F3: How We Work metadata matches the step-based page", () => {
     expect(String(howMeta.description)).not.toMatch(/eight/i);
-    expect(String(howMeta.description)).toMatch(/(Four|Six) clear steps/);
+    expect(String(howMeta.description)).toMatch(/Six clear steps/);
   });
 
   it("F4: the two unguaranteed promises are softened (Owner decision 13 Nov 2026)", () => {

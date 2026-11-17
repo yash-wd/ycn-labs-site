@@ -25,7 +25,7 @@ const PRINCIPLES = [
   {
     icon: ShieldCheck,
     title: "Clear ownership from the start",
-    desc: "No proprietary lock-in. Before work starts, the agreement sets out plainly what you own and what is licensed.",
+    desc: "Before work starts, the agreement sets out plainly what you own and what is licensed.",
   },
   {
     icon: CheckCircle2,
@@ -112,7 +112,7 @@ export default function AboutPage() {
         {/* Closing Action */}
         <section className={styles.ctaBand} aria-labelledby="about-cta-heading">
           <div>
-            <h2 id="about-cta-heading">Tell me what you&apos;re trying to make easier.</h2>
+            <h2 id="about-cta-heading">Tell us what you&apos;re trying to make easier.</h2>
             <p>
               A short description of where your day gets slowed down is all we need to start.
             </p>

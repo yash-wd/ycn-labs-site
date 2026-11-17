@@ -26,12 +26,12 @@ Do not make factual promises unless `YCN_CLAIMS_AND_PROOF.md` allows publication
 
 ## 3. Home
 
-*(Ratified per DECISION-040 on 2026-09-21)*
+*(Ratified per DECISION-040 on 2026-09-21; H1 superseded per DECISION-056 on 2026-11-17)*
 
 ### HERO-01
 
-**H1 [RATIFIED]:** Websites and software. Built around your business.  
-*(Candidate alternative 'Build what moves your business forward.' REJECTED / SUPERSEDED on 2026-09-21).*
+**H1 [RATIFIED]:** Websites that earn trust. Software that saves time.  
+*(Historical DECISION-040 H1 'Websites and software. Built around your business.' superseded per DECISION-056).*
 
 **Sub [RATIFIED]:** We turn business problems into digital products that help customers act, teams work clearly, and the business keep moving.
 

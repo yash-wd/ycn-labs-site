@@ -536,7 +536,7 @@ export function HomepageR2() {
                 className="ycnr-cta ycnr-cta-primary"
                 href="/contact"
               >
-                Start a project{" "}
+                Start a Project{" "}
                 <ArrowUpRight
                   size={15}
                   strokeWidth={2.2}
@@ -763,8 +763,9 @@ export function HomepageR2() {
               </h2>
             </div>
             <p className="ycnr-section-lead">
-              Yaseen leads every project personally. When a project needs more
-              hands, we bring in specialists and tell you who is doing what.
+              The founder leads every project. When a project needs more hands,
+              we will bring in specialists, and you will be told who is doing
+              what before work starts.
             </p>
           </div>
           <div className="ycnr-trust-layout">
@@ -867,7 +868,7 @@ export function HomepageR2() {
             </div>
             <div className="ycnr-final-actions">
               <Link className="ycnr-cta ycnr-cta-primary" href="/contact">
-                Start a project{" "}
+                Start a Project{" "}
                 <ArrowUpRight
                   size={15}
                   strokeWidth={2.2}

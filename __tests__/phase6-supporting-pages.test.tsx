@@ -117,6 +117,8 @@ describe("Phase 6: Supporting Pages & Canonical Navigation", () => {
       expect(html).toContain("Start a Project");
       expect(html).toContain('href="/contact"');
       expect(html).toContain("Handover of domain access, accounts and documentation, as listed in your agreement.");
+      expect(html).toContain("Fixes and support after launch, as written in your agreement.");
+      expect(html).not.toContain("Post-launch warranty fixes");
       expect(html).not.toMatch(/fixed\s+(inr|price|pricing)/i);
     });
 
@@ -156,9 +158,12 @@ describe("Phase 6: Supporting Pages & Canonical Navigation", () => {
       expect(html).not.toContain("Hyderabad");
       expect(html).toContain("Start a Project");
       expect(html).toContain("Before work starts, the agreement sets out plainly what you own and what is licensed.");
+      expect(html).not.toContain("No proprietary lock-in");
       expect(html).toContain("The founder leads every project.");
       expect(html).toContain("When a project needs more hands, we will bring in specialists");
       expect(html).not.toContain("Yaseen leads every project");
+      expect(html).toContain("Tell us what you&#x27;re trying to make easier.");
+      expect(html).not.toContain("Tell me what");
     });
   });
 
@@ -166,22 +171,32 @@ describe("Phase 6: Supporting Pages & Canonical Navigation", () => {
     it("renders exact H1, ratified proof points, simulator, and eight practice areas", () => {
       const html = renderToString(<EngineeringPage />);
       expect(html).toContain("What happens when something fails matters as much as when it works.");
+      expect(html).toContain("Technical choices follow the actual problem. Here we explain how we choose technology, the practices behind this website, and how we check them before release.");
       expect(html).toContain("Five engineering rules grounded in our own code");
       expect(html).toContain("Saved before");
-      expect(html).toContain("The form is built to save your enquiry before the notification email is sent");
+      expect(html).toContain("The interface is designed to show success only after the enquiry is stored in the database, with no confirmation shown if storage fails.");
+      expect(html).toContain("The form is designed to save your enquiry before the notification email is sent, so that a failed email does not remove it.");
+      expect(html).not.toContain("The form is built to save your enquiry");
       expect(html).not.toContain("If the email fails, nothing is lost");
+      expect(html).toContain("The form incorporates rate limiting, honeypot fields, and input validation.");
       expect(html).toContain("Automated verification before merge");
       expect(html).toContain("Each change goes through automated checks before it is merged: lint, type checks, unit tests and a production build. We also run browser tests on the main pages.");
       expect(html).toContain("How our enquiry pipeline handles failure");
+      expect(html).toContain("Choose a condition to inspect how the system is designed to handle failure:");
       expect(html).toContain("Example only. This shows how the form is designed to behave.");
+      expect(SIM_SCENARIOS.normal.badge).toBe("ENQUIRY ACCEPTED");
+      expect(SIM_SCENARIOS.email_fails.badge).toBe("ENQUIRY SAVED — EMAIL FAILED");
+      expect(SIM_SCENARIOS.storage_fails.badge).toBe("ENQUIRY NOT ACCEPTED");
       expect(SIM_SCENARIOS.email_fails.outcome).toBe("The enquiry stays saved. The email can be re-sent.");
       expect(SIM_SCENARIOS.storage_fails.outcome).toBe("No enquiry is saved, and the visitor is told so. No false thank-you.");
       expect(SIM_SCENARIOS.normal.outcome).not.toContain("Zero data loss");
       expect(html).not.toContain("Zero data loss");
       expect(html).not.toContain("email retry scheduled");
       expect(html).not.toContain("recovered via scripts");
-      expect(html).toContain("We design with colour contrast and keyboard use in mind.");
+      expect(html).toContain("Responsive interfaces built for mobile devices.");
+      expect(html).toContain("We design for keyboard use, reduced motion and readable colour contrast.");
       expect(html).not.toContain("contrast compliance");
+      expect(html).toContain("Idempotent requests, transaction boundaries, and deliberate failure paths.");
       expect(html).toContain("Our code is scanned for passwords and keys before it is merged.");
       expect(html).not.toContain("no secret leakage");
       expect(html).not.toContain("without PII leakage");
@@ -219,7 +234,11 @@ describe("Phase 6: Supporting Pages & Canonical Navigation", () => {
     it("renders canonical H1, direct channels, and reassurance", () => {
       const html = renderToString(<ContactPage />);
       expect(html).toContain("What&#x27;s difficult in your business right now?");
+      expect(html).toContain("Tell us what is slow, lost or difficult in your business today. We&#x27;ll tell you plainly what could help and what it would cost, before you commit to anything.");
+      expect(html).not.toContain("No technical brief needed");
       expect(html).toContain("What happens after I send this?");
+      expect(html).toContain("The form is designed to confirm receipt only after your enquiry has been saved.");
+      expect(html).not.toContain("Your enquiry is saved first.");
       expect(html).toContain("We discuss scope and send a written quote before anyone commits to anything.");
       expect(html).not.toMatch(/fixed\s+(inr|price)/i);
       expect(html).toContain("hello@ycnlabs.com");

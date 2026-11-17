@@ -52,7 +52,7 @@ const STEPS = [
     num: "06",
     title: "After launch",
     desc: "Fixes and support as written in your agreement.",
-    get: "Post-launch warranty fixes and agreed support, with optional maintenance scope.",
+    get: "Fixes and support after launch, as written in your agreement.",
     icon: ShieldCheck,
   },
 ];
