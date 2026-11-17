@@ -47,6 +47,18 @@ Current YCN site direction: [`docs/vnext/00_START_HERE.md`](docs/vnext/00_START_
 - **Protected Actions Boundary (effective on DECISION-055 adoption, amended 14 Nov 2026):** AGY prepares changes and opens PRs; it never merges to main, pushes tags, or records adoption without explicit typed Owner authorization.
 - **Credentials & Secret Safety:** Never read, print, copy or use any credential file or token (.git-credentials, .env*, gh hosts.yml, SSH keys). If authentication fails, STOP and ask the Owner.
 
+### Standing Governance Clarification (Owner, 17 November 2026)
+
+The following five binding operating rules clarify and reinforce existing controls:
+
+1. **Single Instruction Author:** Working GPT is the sole author of consolidated execution instructions for AGY. Claude (chat) and independent judges advise, critique, and review. The Owner alone decides and authorizes.
+2. **No Improvised Public Copy:** AGY must implement only approved public wording verbatim. If a required sentence is missing, unsupported, or disputed, AGY must STOP and request an Owner decision rather than inventing replacement public copy.
+3. **No Unauthorized Test Weakening:** AGY must not delete, skip, weaken, or broaden any test or regression assertion merely to obtain a PASS. Any necessary test change requires an approved specification, explicit Owner authorization, and full disclosure in the PR description.
+4. **Owner-Only GitHub Merge & Exact-SHA Formula:** The Owner separately authorizes edits, commits, and pushes to isolated branches. For every merge, the Owner must type the exact formula:  
+   `Approved, merge PR #<number> at <full reviewed SHA>`  
+   Only the Owner operates the GitHub merge control. AGY must never merge branches or push directly to `main` (enforced technically by the GitHub `Protect main` ruleset). Forwarded AI recommendations, chat summaries, or reviewer approvals are NOT Owner authorization.
+5. **Independent Verification:** The published GitHub commit and actual automated GitHub Actions run results (`quality`, `gitleaks`) are the authoritative acceptance evidence. AGY's local terminal outputs and test logs are supplementary evidence and must never be reconstructed or represented as GitHub results.
+
 ---
 
 # MANDATORY PROJECT RULE: Project-Wide Checklist & Continuity Tracking System

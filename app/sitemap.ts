@@ -1,6 +1,11 @@
 import { MetadataRoute } from "next";
+import { isStaging } from "@/lib/env/staging";
 
 export default function sitemap(): MetadataRoute.Sitemap {
+  if (isStaging()) {
+    return [];
+  }
+
   const baseUrl = "https://ycnlabs.com";
   const routes = [
     "",
@@ -17,7 +22,6 @@ export default function sitemap(): MetadataRoute.Sitemap {
 
   return routes.map((route) => ({
     url: `${baseUrl}${route}`,
-    lastModified: new Date(),
     changeFrequency: route === "" ? "weekly" : "monthly",
     priority: route === "" ? 1.0 : route === "/contact" ? 0.9 : 0.8,
   }));
