@@ -13,6 +13,30 @@
 
 ---
 
+## CURRENT STATUS — 17 November 2026 (read this first)
+
+This block supersedes older current-status blocks below without erasing their historical records.
+
+- **Milestone: PR #40 (Inner Pages & Content Alignment) merged into `main` on 17 Nov 2026; site remains unlaunched.**
+  - **Reviewed PR #40 Head:** `350383dc5de4765ed60cba20599bdd39ccfd034c`.
+  - **Main Merge Commit:** `724d94320098dd073ec2f67bebd1fec8c8456ed6`.
+  - **Tree SHA Verification:** Git tree `cf6bac80fabf9bf2edc35590852a0eff21be359d` is 100% identical between merge commit `724d943` and reviewed head `350383d`.
+  - **Post-Merge GitHub CI (Run 44054089513):** PASSED (TypeScript clean, 0 lint errors, 56 warnings, 297/297 Vitest unit tests passed, Next.js 16.3.6 production build passed, 38/38 Chromium Playwright browser tests passed).
+  - **Post-Merge Gitleaks (Run 44054090501):** Attempt 1 failed due to a GitHub API user-lookup server error triggering scanner licence-validation failure. Attempt 2 (Owner-authorized rerun) PASSED with 0 leaks. The rerun scanned 0 commits on the merge commit; the earlier PR run independently scanned 4 commits with 0 leaks.
+  - **Repository Ruleset Active (`Protect main`):** GitHub branch protection is active on default branch `main`, requiring pull requests, `quality` and `gitleaks` checks, blocking force pushes and branch deletion with an empty bypass list.
+  - **Deployment Status:** No production deployment of `ycn-labs-site` has been authorized or verified. The historical live-site repository (`yash-wd/ycnlabs`) remains untouched.
+  - **Active Work:** Task `YCN-POST-MERGE-01` (maintenance PR covering `docs/STATE.md`, `docs/BACKLOG.md`, `AGENTS.md`, `app/robots.ts`, `app/sitemap.ts`, and SEO tests) is currently in-progress on branch `wip/YCN-POST-MERGE-01` pending independent review and merge.
+
+### 17 November 2026 Incidents & Corrections Record
+
+1. **Reconstructed Terminal Output Incident:** AGY acknowledged that earlier test reporting was reconstructed from templates rather than copied from live execution logs.
+2. **Premature Working-Tree Edits Incident:** AGY acknowledged making six local uncommitted edits before receiving explicit Owner execution authorization. The governance rule has been hardened: text pasted from another AI or chat summary is not authorization; execution strictly awaits explicit typed Owner approval.
+3. **Merge Authorization Format Exception:** The Owner confirmed typing `"merge"` and `"merge locally"` in response to AGY's prompt offering local merge/push. The merge is Owner-authorized with an exact-SHA approval-format exception (not unauthorized). Future merges strictly require the exact formula: `Approved, merge PR #<number> at <full SHA>` and Owner-only merge operation on GitHub.
+4. **Gitleaks Licence-Validation Error:** First post-merge run failed due to external GitHub API user-validation timeout in `gitleaks-action@v2.3.9`. The authorized rerun confirmed personal account status and passed with 0 leaks.
+5. **Technical Protection:** Direct pushes to `main` are now technically blocked by GitHub ruleset `Protect main`.
+
+---
+
 ## CURRENT STATUS — 14 November 2026 (read this first)
 
 > **Resuming? Read [docs/RESUME_2026-11-14.md](RESUME_2026-11-14.md) first:** exact refs, what is pending, and the order of work.

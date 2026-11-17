@@ -7,6 +7,28 @@
 
 ---
 
+## Current Work — 17 November 2026 (supersedes older ordering below)
+
+- [x] **PR #40 (Inner Pages & Content Alignment):** Merged into `main` at `724d94320098dd073ec2f67bebd1fec8c8456ed6` (reviewed head `350383d`). Added 38-test Chromium Playwright suite to CI, ratified Hero H1 per DECISION-056, reconciled founder/specialists copy, removed unapproved commercial promises, restored Contact reassurance and strict test guards, qualified Engineering claims and simulator.
+- [x] **Repository Protection (`Protect main`):** GitHub branch protection ruleset enabled on default branch `main`, requiring pull requests and `quality` + `gitleaks` checks, blocking force pushes and branch deletions.
+- [ ] **`YCN-POST-MERGE-01` [IN-PROGRESS / LOCAL-WIP]:** Bounded maintenance task updating `docs/STATE.md`, `docs/BACKLOG.md`, `AGENTS.md` (5 governance rules), `app/robots.ts`, `app/sitemap.ts`, and adding `__tests__/post-merge-seo.test.ts`.
+- [ ] **Protected Staging Trial:** Separate hosting and Owner authorization (Netlify staging preview with isolated credentials; no production deployment).
+- [ ] **Mobile Navigation Accessibility Remediation:** Fix confirmed focus transfer, tab containment, and background inertness defects on `#mobile-nav-sheet` (separate Owner-authorized `NAV-07` remediation task).
+- [ ] **Privacy, Terms & Legal Copy:** Complete legal review; resolve unsupported ContactForm statement `"We respect your privacy. No data is shared or sold."` in conjunction with Privacy policy (Task PR #35 / legal clearance).
+- [ ] **Pre-Launch Operational Verification:** Real database and email acceptance against configured staging service, operational monitoring alert check, durable backup & rollback dry-run, WebKit and physical device testing, and 5-person comprehension testing before public cutover.
+- [ ] **Owner Visual Refinements:** Consolidate Owner design suggestions and backlog enhancements into a single prioritized, bounded post-merge design task.
+
+### Open Decisions & Carry-Forward Ledger (17 Nov 2026)
+
+- **Repository Visibility:** Repository remains public for now; Owner will make a separate decision regarding repository privacy prior to production launch.
+- **SEO Metadata Alignment:** `app/layout.tsx` metadata retains older title/description; to be reconciled with the ratified H1 in a future separately approved SEO task.
+- **Permanent Close Protocol:** Workstation sessions remain OPEN until the Owner gives the explicit typed word `CLOSE` per `docs/CLOSE_PROTOCOL.md`.
+- **Master Readiness Checklist:** Reconcile master 143-point readiness tracker in `docs/YCN_READINESS_CHECKLIST.md` following maintenance merge.
+- **Off-Device Backup & Tooling Review:** Off-device private vault backup verification pending; review reported change to `tools/copy_plan.py` (location unverified; not tracked in repository).
+- **Owner Pending Business Inputs:** Founder facts and photograph, real attributable project details, starting price guidance, hosting provider decision, designated secondary enquiry responder, and legal/CA review.
+
+---
+
 ## Current Work — 13 November 2026 (supersedes older ordering below)
 - [x] **V3 front-end rebuild (Option B), PR #33:** hero, homepage, inner pages, contact channels, tokens, archive, GPT findings F1–F5, Work/About links, WhatsApp button, media clean-up, static signal borders, hero still frame without JavaScript.
 - [x] **Browser test suite:** `pnpm test:e2e` (Playwright, local production build, Chromium + Firefox).

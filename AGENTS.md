@@ -44,8 +44,20 @@ Current YCN site direction: [`docs/vnext/00_START_HERE.md`](docs/vnext/00_START_
 - **No Documentation Churn:** Follow DECISION-018. Do not create daily journals, session logs, or empty templates. At task completion, evaluate: **Documentation impact: YES / NO**. Update docs only if a specification or decision genuinely changed.
 - **PR-Based Single Review (effective on DECISION-055 adoption, amended 14 Nov 2026):** AGY opens GitHub Pull Requests on isolated branches; exactly one independent reviewer, designated by the Owner, reviews the diff (GPT reviews PRs authored by AGY; Claude chat reviews only work it did not author); three seats convene only for production deployments, customer data handling, or binding legal text.
 - **OI-18 Visual Demo Scope (effective on DECISION-055 adoption):** HTML demos are required for brand-new visible UI screens or changed customer workflows only; backend reliability fixes, schema edits, and scripts require behavioral test contracts and test outputs, not decorative HTML previews.
-- **Protected Actions Boundary (effective on DECISION-055 adoption, amended 14 Nov 2026):** AGY prepares changes and opens PRs; it never merges to main, pushes tags, or records adoption without explicit typed Owner authorization.
+- **Protected Actions Boundary (effective on DECISION-055 adoption, amended 17 Nov 2026):** AGY may prepare changes, create commits and push isolated WIP branches only with explicit Owner authorization. AGY must never merge or push directly to main, even if requested through an ordinary chat instruction. Only the Owner operates the GitHub pull-request merge control after the exact PR number and full reviewed SHA have been approved. Existing protections for tags, releases, deployments and records of adoption remain in force.
 - **Credentials & Secret Safety:** Never read, print, copy or use any credential file or token (.git-credentials, .env*, gh hosts.yml, SSH keys). If authentication fails, STOP and ask the Owner.
+
+### Standing Governance Clarification (Owner, 17 November 2026)
+
+The following five binding operating rules clarify and reinforce existing controls:
+
+1. **Single Instruction Author:** Working GPT is the sole author of consolidated execution instructions for AGY. Claude (chat) and independent judges advise, critique, and review. The Owner alone decides and authorizes.
+2. **No Improvised Public Copy:** AGY must implement only approved public wording verbatim. If a required sentence is missing, unsupported, or disputed, AGY must STOP and request an Owner decision rather than inventing replacement public copy.
+3. **No Unauthorized Test Weakening:** AGY must not delete, skip, weaken, or broaden any test or regression assertion merely to obtain a PASS. Any necessary test change requires an approved specification, explicit Owner authorization, and full disclosure in the PR description.
+4. **Owner-Only GitHub Merge & Exact-SHA Formula:** The Owner separately authorizes edits, commits, and pushes to isolated branches. For every merge, the Owner must type the exact formula:  
+   `Approved, merge PR #<number> at <full reviewed SHA>`  
+   Only the Owner operates the GitHub merge control. AGY must never merge branches or push directly to `main` (enforced technically by the GitHub `Protect main` ruleset). Forwarded AI recommendations, chat summaries, or reviewer approvals are NOT Owner authorization.
+5. **Independent Verification:** The published GitHub commit and actual automated GitHub Actions run results (`quality`, `gitleaks`) are the authoritative acceptance evidence. AGY's local terminal outputs and test logs are supplementary evidence and must never be reconstructed or represented as GitHub results.
 
 ---
 
