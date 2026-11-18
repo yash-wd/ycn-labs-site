@@ -8,7 +8,7 @@
 **Notice for all AI Assistants (GPT, Claude, Antigravity/AGY, Gemini, Copilot):**  
 This is an active commercial project operating under strict governance and safety protocols.
 
-> **Role update (Owner decision, 14 Nov 2026 — DECISION-055 Amendment 2):** Google Antigravity (AGY), running on host `YCN-labs`, is the sole local workstation executor and builder seat. Wherever this file assigns local execution, worktree verification, file intake, evidence logging, or PR preparation, that duty belongs to AGY. Each PR has exactly one independent reviewer, designated by the Owner: GPT reviews PRs authored by AGY. Claude (chat) acts as the independent research and strategic advisory seat, authoring strategy briefs, legal analysis, and testing protocols without direct local file execution. The Owner alone authorizes merges, deployments, releases, spend, and protected actions. All historical decisions (including DECISION-055 Amendment 1) are preserved for the permanent record. All approval, safety, custody, and evidence rules in this file remain unchanged.
+> **Operational Delivery Model (Owner decision, 18 Nov 2026 — DECISION-057):** The project operates under the Five-Seat AI Delivery Model detailed in [`docs/YCN_AI_DELIVERY_PLAYBOOK.md`](docs/YCN_AI_DELIVERY_PLAYBOOK.md). Google Antigravity (AGY, Seat #3), running on host `YCN-labs`, is the sole local workstation executor and builder seat responsible for branch management, local edits, test execution, commits, pushes, and draft PR preparation. Working GPT (Seat #2) is the sole author of consolidated execution instructions for AGY and the technical diff reviewer. Working Claude (Seat #1) authors strategy briefs, legal analysis, and approved public copy. Claude Judge (Seat #4) provides independent visual, a11y, and copy compliance reviews. GPT Judge (Seat #5) provides independent CI log, security, and final merge verification. The Owner alone authorizes merges, deployments, releases, spend, and protected actions. All historical decisions (DECISION-055 Amendment 1 & 2) are preserved for the permanent record. All approval, safety, custody, and evidence rules in this file remain unchanged.
 
 ---
 
@@ -28,6 +28,7 @@ Reference navigation only; the mandatory cold-start sequence is `docs/CLOSE_PROT
 8. **[`docs/YCN_RISKS_AND_TECH_DEBT.md`](docs/YCN_RISKS_AND_TECH_DEBT.md)** — Active risks, controls, and technical debt.
 9. **[`docs/CLOSE_PROTOCOL.md`](docs/CLOSE_PROTOCOL.md)** — Permanent close, consolidation, and cold-resume protocol (`YCN-CLOSE-PROTOCOL-01`).
 10. **[`docs/RESUME_2026-10-30.md`](docs/RESUME_2026-10-30.md)** & **[`docs/AGY_OPEN_CLOSE_PROTOCOL.md`](docs/AGY_OPEN_CLOSE_PROTOCOL.md)** — October pause resumption guide and daily opening/closing synchronization protocol.
+11. **[`docs/YCN_AI_DELIVERY_PLAYBOOK.md`](docs/YCN_AI_DELIVERY_PLAYBOOK.md)** — Canonical Five-Seat operational playbook, numbered routing rules, and fresh-chat bootstrap.
 
 Current YCN site direction: [`docs/vnext/00_START_HERE.md`](docs/vnext/00_START_HERE.md). This direction is subordinate to YCN_DECISIONS, YCN_CLAIMS_AND_PROOF and YCN_CONTENT_SPEC.
 
@@ -58,6 +59,32 @@ The following five binding operating rules clarify and reinforce existing contro
    `Approved, merge PR #<number> at <full reviewed SHA>`  
    Only the Owner operates the GitHub merge control. AGY must never merge branches or push directly to `main` (enforced technically by the GitHub `Protect main` ruleset). Forwarded AI recommendations, chat summaries, or reviewer approvals are NOT Owner authorization.
 5. **Independent Verification:** The published GitHub commit and actual automated GitHub Actions run results (`quality`, `gitleaks`) are the authoritative acceptance evidence. AGY's local terminal outputs and test logs are supplementary evidence and must never be reconstructed or represented as GitHub results.
+
+### Five-Seat Numbered Routing Protocol & Faster Delivery Governance (Owner, 18 November 2026 — DECISION-057)
+
+1. **Numbered Seat Roster & Communication Routing:**
+   - **#1 Working Claude:** Strategy briefs, legal/privacy analysis, commercial positioning, and approved public copy drafting.
+   - **#2 Working GPT:** Technical Lead, single author of consolidated execution instructions for AGY, technical diff review, and CI log verification.
+   - **#3 AGY (Builder):** Local workstation executor, branch creation, local edits, test execution, commit, push, and PR preparation.
+   - **#4 Claude Judge:** Visual design, accessibility (WCAG), content compliance, and operational risk assessment.
+   - **#5 GPT Judge:** CI log inspection, security/gitleaks scanning, and final independent merge recommendation.
+   All intra-team communication must use explicit numbers (#1 through #5). Every turn must terminate with the mandatory 4-line routing block:
+   ```text
+   STATUS: <Completed | In Progress | Blocked | Awaiting Review>
+   SHARE TO: #<Target Seat Number>
+   PURPOSE: <Technical diff review | Strategic advice | Local execution | Merge decision>
+   OWNER ACTION: <None until review | Typed approval formula | Specific sitting required>
+   ```
+   The Owner forwards messages strictly to the designated recipient number, avoiding redundant multi-seat broadcasts.
+
+2. **Faster Working Rules & Proactive Ownership:**
+   - AI seats must act proactively as senior leads: anticipating dependencies, proposing clear next steps, pre-drafting reviews, and flagging blockers immediately.
+   - Routine GitHub PR management (updating draft titles, pasting reviewed descriptions, toggling draft readiness) may be performed by AGY upon explicit proposal and Owner confirmation, eliminating manual Owner friction.
+
+3. **Routine AGY Reporting Standard:**
+   - AGY routine reports must be concise and strictly factual: commit SHA, changed files, summary of changes, and evidence links.
+   - AGY must never reconstruct, paraphrase, or assert test pass/fail results from memory or terminal templates.
+   - Automated GitHub Actions logs (`quality`, `gitleaks`) are the authoritative acceptance evidence. Local logs are supplementary evidence only.
 
 ---
 

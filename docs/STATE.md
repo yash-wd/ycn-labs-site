@@ -13,7 +13,32 @@
 
 ---
 
-## CURRENT STATUS — 17 November 2026 (read this first)
+## CURRENT STATUS — 18 November 2026 (read this first)
+
+This block supersedes older current-status blocks below without erasing their historical records.
+
+- **Milestone: PR #42 (Staging Isolation & Fail-Closed Contact Boundary) merged into `main` on 18 Nov 2026; site remains unlaunched.**
+  - **Reviewed PR #42 Head:** `36b6779ba403d6ce10365f15d84f9dc5fced49c2`.
+  - **Main Merge Commit:** `0c164a0ce42cba011f83a85272723d8835f9c27e`.
+  - **GitHub CI Verification (Run 44166441221):** PASSED (TypeScript clean, ESLint clean, 316/316 Vitest unit tests passed, 3 preview Chromium Playwright tests passed, 39 production Chromium Playwright tests passed, Next.js 16.3.6 builds passed).
+  - **GitHub Gitleaks Verification (Run 44166441391):** PASSED with 0 leaks across 3 commits.
+  - **Merged by:** Owner directly on GitHub.
+  - **Deployment Status:** No production deployment authorized for `ycn-labs-site`.
+
+- **Active Task: `YCN-OPS-PLAYBOOK-01` (Five-Seat AI Delivery Playbook & Governance Harmonization).**
+  - **Branch:** `wip/YCN-OPS-PLAYBOOK-01`.
+  - **Base `main`:** `0c164a0ce42cba011f83a85272723d8835f9c27e`.
+  - **Scope:**
+    - Canonical public documentation of the Five-Seat model (`docs/YCN_AI_DELIVERY_PLAYBOOK.md`, `AGENTS.md`, `docs/START_HERE.md`, `docs/CLOSE_PROTOCOL.md`, `docs/INDEX.md`, `docs/YCN_DECISIONS.md`, `docs/STATE.md`, `docs/BACKLOG.md`).
+    - Private operational archive established in master vault (`YCN_LABS_MASTER/02_BUSINESS_OPERATIONS/AI_DELIVERY_SYSTEM/`).
+    - Formal ratification of DECISION-057 (Five-Seat AI Delivery Model, Numbered Routing Protocol #1 through #5, and Faster Delivery Governance).
+  - **New Backlog Addition:** `MEDIA-01` (Dedicated Media / Awareness / Client Project Videos Page & Homepage Route).
+
+- **Next Immediate Workstream:** Owner-supervised Staging Deployment Sitting & Verification Gate / NAV-07 Mobile Navigation Accessibility Remediation.
+
+---
+
+## CURRENT STATUS — 17 November 2026
 
 This block supersedes older current-status blocks below without erasing their historical records.
 

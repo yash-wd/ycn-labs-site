@@ -18,7 +18,7 @@ Whenever the Owner says **CLOSE**:
 1. AGY / the active agent must complete a **full project reconciliation**, not merely stop working or output a chat summary.
 2. The procedure must collect newly generated files, organize them into canonical locations, identify and eliminate redundant verified duplicates, synchronize approved repository states to GitHub, and establish a bulletproof **cold restart point**.
 3. A future session starting tomorrow, next month, or a year later must be able to resume accurately from repository files alone, without access to conversational transcripts.
-4. **The Owner's word CLOSE authorizes pushing housekeeping and close commits to `main`**, provided tests/checks pass and no unreviewed code or unapproved artwork is introduced. Unreviewed work-in-progress routes strictly to a `wip/<task-id>` branch.
+4. **Push Authorization Note (Superseded by DECISION-055 Amendment 2, 17 Nov 2026 Governance Directive, and DECISION-057):** Direct pushes to `main` are strictly prohibited (enforced technically by the GitHub `Protect main` ruleset). Even at CLOSE, all changes (including housekeeping, documentation, and close status records) must route strictly through dedicated `close/<YYYY-MM-DD>` or `wip/<task-id>` branches and PRs. Only the Owner operates GitHub merge controls using the exact formula: `Approved, merge PR #<number> at <full reviewed SHA>`.
 
 ---
 
@@ -114,7 +114,7 @@ Update the authoritative continuity records in both repositories:
 - Scan staged text for secrets (API keys, private tokens).
 - Ensure no staged file exceeds 25 MB.
 - Commit message format: `close: <YYYY-MM-DD> — <summary>`.
-- **Push Authorization:** The Owner's instruction **CLOSE** authorizes pushing approved housekeeping/status commits to `main`.
+- **Push Authorization (Superseded by GitHub `Protect main` Ruleset & DECISION-057):** Direct pushes to `main` are strictly prohibited. The Owner's instruction **CLOSE** authorizes creating an isolated `close/<YYYY-MM-DD>` branch, committing approved housekeeping/status files, pushing to that isolated branch, and opening a PR. Only the Owner merges into `main` on GitHub.
 - Unreviewed code or unapproved artwork must be committed to branch `wip/<task-id>` and pushed, never to `main`.
 - Ensure zero uncommitted, untracked, or unpushed work remains undisclosed.
 - **Mandatory End-of-Day Synchronization Commands (Branch-Aware):**

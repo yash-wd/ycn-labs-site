@@ -19,11 +19,11 @@ For any human engineer, contributor, or AI agent (GPT, Claude, AGY), read in thi
 4. **Backlog & Execution Queue ([`docs/BACKLOG.md`](BACKLOG.md))** — Master launch execution queue and active backlog authority.
 5. **Readiness Checklist ([`docs/YCN_READINESS_CHECKLIST.md`](YCN_READINESS_CHECKLIST.md))** — Master 143-point project control and evidence readiness ledger.
 6. **Owner Instructions Register ([`docs/YCN_OWNER_INSTRUCTIONS_REGISTER.md`](YCN_OWNER_INSTRUCTIONS_REGISTER.md))** — Permanent register of standing directives, rules, and deviations (OI-01 to OI-19, DEV-01 to DEV-18).
-7. **Agent Governance ([`AGENTS.md`](../AGENTS.md))** — Permanent rules: Three-Seat Shared Ownership, evidence law, and Cold-Start Verification Gate.
+7. **Agent Governance & Delivery Playbook ([`AGENTS.md`](../AGENTS.md) + [`docs/YCN_AI_DELIVERY_PLAYBOOK.md`](YCN_AI_DELIVERY_PLAYBOOK.md))** — Permanent rules: Five-Seat AI Delivery Model, numbered routing protocol (#1 to #5), evidence law, and Cold-Start Verification Gate.
 8. **This Index ([`docs/INDEX.md`](INDEX.md))** — Active authority and document registry.
 9. **Operating Protocol ([`docs/YCN_AGENT_OPERATING_PROTOCOL.md`](YCN_AGENT_OPERATING_PROTOCOL.md))** — Core operational rules and review procedures.
 10. **Living Ledgers:**
-   - **[Decisions](YCN_DECISIONS.md)** — Binding owner architectural, scope, and vNext decisions (DECISION-001 through DECISION-054).
+   - **[Decisions](YCN_DECISIONS.md)** — Binding owner architectural, scope, and vNext decisions (DECISION-001 through DECISION-057).
    - **[Claims & Proof](YCN_CLAIMS_AND_PROOF.md)** — Evidentiary backing for all public marketing claims.
    - **[Content Spec](YCN_CONTENT_SPEC.md)** — Canonical approved public copy and candidate copy under review.
    - **[Design System](YCN_DESIGN_SYSTEM.md)** — Semantic color tokens, type scale, and motion constraints.
@@ -41,6 +41,7 @@ These files constitute the **single active documentation authority** for the rep
 | **vNext Site Direction** | [`docs/vnext/00_START_HERE.md`](vnext/00_START_HERE.md) | Owner / Lead Architect | Active Product-led vNext site specification pack entry point | Major design direction update |
 | **vNext Manifest** | [`docs/vnext/MANIFEST.md`](vnext/MANIFEST.md) | Lead Architect | Inventory of 17 vNext specs + prototypes | vNext doc update |
 | **Master Index** | [`docs/INDEX.md`](INDEX.md) | Lead Architect | Documentation homepage, authority map, and navigation guide | Adding/deprecating docs |
+| **AI Delivery Playbook** | [`docs/YCN_AI_DELIVERY_PLAYBOOK.md`](YCN_AI_DELIVERY_PLAYBOOK.md) | Owner / Lead Architect | Five-Seat AI delivery protocol, numbered routing, fresh-chat bootstrap, and faster delivery governance | Delivery model / seat update |
 | **Operating Protocol** | [`docs/YCN_AGENT_OPERATING_PROTOCOL.md`](YCN_AGENT_OPERATING_PROTOCOL.md) | Owner | Operational rules, boundaries, and safe execution constraints | Protocol amendment |
 | **Owner Instructions Register** | [`docs/YCN_OWNER_INSTRUCTIONS_REGISTER.md`](YCN_OWNER_INSTRUCTIONS_REGISTER.md) | Owner | Permanent register of standing directives, rules, and deviations (OI-01 to OI-17) | Direct Owner instruction |
 | **Master Plan** | [`docs/YCN_MASTER_PLAN.md`](YCN_MASTER_PLAN.md) | Lead Architect | High-level system architecture, site topology, and milestones | Major milestone |
@@ -52,7 +53,7 @@ These files constitute the **single active documentation authority** for the rep
 | **Readiness Checklist** | [`docs/YCN_READINESS_CHECKLIST.md`](YCN_READINESS_CHECKLIST.md) | Quality Lead / All Seats | 143-point Project Control & Evidence Readiness Checklist | Daily Sync / Task Gate |
 | **Historical Task Reference** | [`docs/YCN_AGY_TASKS.md`](YCN_AGY_TASKS.md) | Lead Engineer | Subordinate execution phases aligned with vNext roadmap | Reference only |
 | **Test Checklist** | [`docs/YCN_TEST_CHECKLIST.md`](YCN_TEST_CHECKLIST.md) | QA Lead | Regression tests, accessibility audit, fail-closed validation | Test plan update |
-| **Decisions Log** | [`docs/YCN_DECISIONS.md`](YCN_DECISIONS.md) | Owner | Binding decision records (DECISION-001 through DECISION-054) | Major decision |
+| **Decisions Log** | [`docs/YCN_DECISIONS.md`](YCN_DECISIONS.md) | Owner | Binding decision records (DECISION-001 through DECISION-057) | Major decision |
 | **Claims & Proof** | [`docs/YCN_CLAIMS_AND_PROOF.md`](YCN_CLAIMS_AND_PROOF.md) | Compliance | Evidentiary ledger proving all public marketing facts | Public claim added |
 | **Historical Feature Ideas** | [`docs/YCN_BACKLOG.md`](YCN_BACKLOG.md) | Product Owner | Deferred non-blocking feature ideas preserved for history | Scope triage |
 | **Changelog** | [`docs/YCN_CHANGELOG.md`](YCN_CHANGELOG.md) | Lead Engineer | Customer- and system-level version changes | Version release |

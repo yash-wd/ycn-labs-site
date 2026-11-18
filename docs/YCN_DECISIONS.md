@@ -392,3 +392,21 @@ If the Owner wants to allow a WIP commit/push for that single doc reconciliation
 2. **Chromium Playwright Browser Testing in GitHub CI.** The full Chromium Playwright test suite (38 tests) is integrated into automated GitHub CI (`.github/workflows/ci.yml`) to run on every push and pull request to `main`. This supersedes the 13 November 2026 local-only browser testing policy recorded in `playwright.config.ts`, which is preserved for historical record.
 3. **Preserved Authority.** All other architectural, brand, and governance decisions (including DECISION-054, DECISION-055, and frozen systems) remain in full effect.
 
+### DECISION-057: Five-Seat AI Delivery Model, Numbered Routing Protocol, and Faster Delivery Governance
+
+**Status: ADOPTED by Owner, 18 Nov 2026**  
+**Task:** `YCN-OPS-PLAYBOOK-01`
+
+1. **Ratification of the Five-Seat Delivery Model.** The Owner formally ratifies the five-seat operational model detailed in `docs/YCN_AI_DELIVERY_PLAYBOOK.md`, defining explicit division of labor across AI assistants:
+   - **#1 Working Claude (Strategy, Content & Commercial):** Sole owner of strategy briefs, legal/privacy analysis, commercial positioning, and approved public copy drafting.
+   - **#2 Working GPT (Tech Lead & Diff Reviewer):** Sole author of consolidated execution instructions for AGY, technical architecture design, independent diff review of AGY PRs, and GitHub Actions CI log verification.
+   - **#3 AGY (Workstation Builder & Local Executor):** Google Antigravity running on host `YCN-labs`. Sole local workstation builder, branch creation, local edits, tests, commits, pushes, and draft PR preparation.
+   - **#4 Claude Judge (Design, A11y & Content Compliance):** Independent critique on visual craft, accessibility (WCAG), copy compliance, and operational risk analysis.
+   - **#5 GPT Judge (CI, Security & Final Technical Gate):** Independent verification of automated GitHub Actions logs, security/gitleaks scanning, and final technical merge recommendation.
+   - **Owner:** Sole decision maker and operational authority for releases, merges, deployments, spend, and protected actions.
+2. **Numbered Routing Protocol.** All intra-team communication adheres strictly to the numbered routing system (#1 through #5). Every turn ends with the mandatory 4-line routing block (`STATUS`, `SHARE TO`, `PURPOSE`, `OWNER ACTION`). The Owner forwards messages strictly to the designated recipient number, eliminating redundant broad broadcasts.
+3. **Faster Delivery Governance.** AI seats operate proactively as senior leads: anticipating dependencies, pre-drafting reviews, defining exact verification criteria, and proposing the single next logical task. Routine GitHub PR metadata management (titles, descriptions, readiness state) is delegated to AGY upon explicit proposal and Owner approval.
+4. **Routine AGY Reporting Standard.** AGY reports are concise and strictly factual: commit SHA, changed files, summary of changes, and evidence links. Terminal outputs and CI results are never reconstructed or paraphrased; automated GitHub Actions logs (`quality`, `gitleaks`) are the sole authoritative evidence for CI status.
+5. **Private Vault Operational Archive.** Internal operational templates, improvement ideas, and handover records are maintained in the private master vault (`YCN_LABS_MASTER/02_BUSINESS_OPERATIONS/AI_DELIVERY_SYSTEM/`), completely isolated from the public Git repository.
+6. **Preserved Authority.** All frozen systems, design tokens, safety boundaries, and the Owner-only exact-SHA merge formula (`Approved, merge PR #<number> at <full reviewed SHA>`) remain strictly binding and in full effect.
+
