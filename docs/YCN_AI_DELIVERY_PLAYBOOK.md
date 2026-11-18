@@ -45,6 +45,8 @@ GitHub is the authority for published repository versions; the private vault is 
 
 **Owner** alone approves project direction, public copy, visual designs, task execution, credentials/access, spending, legal/financial commitments, deployment, merges, exceptional deletions and CLOSE. An AI recommendation or a pasted AI message is not by itself a new Owner instruction; the Owner must explicitly authorize the named action in their own communication.
 
+*Judge engagement:* #2 Working GPT is the designated independent reviewer of routine PRs authored by #3. #4 Claude Judge and #5 GPT Judge are convened for independent risk evaluation at material design, personal data, legal, security, or release gates, or upon Owner request. A second judge review is not required merely because a routine PR exists. Judges have no approval or merge authority.
+
 ## 4. Mandatory routing and handoffs
 
 Every substantive seat response ends with four lines:
@@ -177,8 +179,8 @@ To ensure absolute honesty and prevent misleading progress estimates:
    $$\text{Checklist Progress \%} = \frac{\text{Verified Items}}{\text{Total Items (143)}} \times 100$$  
    Calculated strictly against the canonical 143-point tracker in `docs/YCN_READINESS_CHECKLIST.md`. Represents recorded checklist state; only updated with direct verifiable evidence.
 2. **Major Milestone Progress:**  
-   $$\text{Milestone Progress \%} = \frac{\text{Accepted Major Milestones}}{\text{Approved V1 Baseline Milestones (14)}} \times 100$$  
-   Calculated against the 14-milestone baseline in `docs/BACKLOG.md`. Clearly labelled as **milestone-count progress**, NOT a measure of elapsed engineering effort or launch readiness. The baseline denominator (14) is fixed and requires explicit Owner authorization to revise.
+   $$\text{Milestone Progress \%} = \frac{\text{Accepted Major Milestones}}{\text{Approved V1 Baseline Milestones (15)}} \times 100$$  
+   Calculated against the 15-milestone baseline in `docs/BACKLOG.md` (currently 4/15 = 26.7%; with `MEDIA-01` tracked in parallel outside the launch denominator). Clearly labelled as **milestone-count progress**, NOT a measure of elapsed engineering effort or launch readiness. The baseline denominator (15) is fixed and requires explicit Owner authorization to revise.
 
 Use **PASS / CHANGES REQUESTED** for #2's PR verdict; judges use **APPROVE / APPROVE WITH CHANGES / CHANGES REQUESTED / NEEDS EVIDENCE**, with severity and provenance. High/material issues block affected gate; minor noncritical changes go to backlog.
 

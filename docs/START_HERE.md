@@ -70,6 +70,7 @@ Roles are governed by [`AGENTS.md`](../AGENTS.md), [`docs/YCN_AI_DELIVERY_PLAYBO
 - **#3 AGY (Google Antigravity on host `YCN-labs`):** Sole local workstation builder and executor. Handles branch creation, local code edits, test execution, commits, pushes, and draft PR preparation. One task, one `wip/*` branch, one PR.
 - **#4 Claude Judge:** Independent visual design critique, accessibility (WCAG), content compliance, and operational risk assessment.
 - **#5 GPT Judge:** Independent CI log inspection, security/gitleaks scanning, and final technical merge recommendation.
+*(Note: #2 Working GPT is the designated independent reviewer of routine PRs authored by #3. #4 Claude Judge and #5 GPT Judge are convened for independent risk evaluation at material design, personal data, legal, security, or release gates, or upon Owner request. Judges have no approval or merge authority).*
 
 ---
 

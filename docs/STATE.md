@@ -35,11 +35,11 @@ This block supersedes older current-status blocks below without erasing their hi
     - Targeted supersession notes in historical operational docs (`docs/YCN_AGENT_OPERATING_PROTOCOL.md`, `docs/AGY_OPEN_CLOSE_PROTOCOL.md`, `docs/YCN_LABS_OWNER_WORKING_ROUTINE.md`).
     - Private operational archive established in master vault (`YCN_LABS_MASTER/02_BUSINESS_OPERATIONS/AI_DELIVERY_SYSTEM/`).
     - Formal ratification of DECISION-057 and its Major Milestone / Safe CLOSE Clarification.
-    - Versioned V1 Release Milestone Baseline (14 milestones, M01–M14) in `docs/BACKLOG.md`.
+    - Versioned V1 Release Milestone Baseline (15 milestones, M01–M15; MEDIA-01 parallel track) in `docs/BACKLOG.md`.
 
 - **Current Progress Metrics (18 Nov 2026):**
-  - **Detailed Checklist Progress:** 34 / 143 items verified (23.8% recorded readiness; 109 unchecked, 24 Owner gates in `docs/YCN_READINESS_CHECKLIST.md`).
-  - **V1 Major Milestone Progress:** 4 / 14 accepted milestones (28.6% milestone-count progress; M01–M04 verified in `docs/BACKLOG.md`).
+  - **Detailed Checklist Progress:** 33 / 143 items verified (23.1% recorded readiness; 110 unchecked, 24 Owner gates in `docs/YCN_READINESS_CHECKLIST.md`).
+  - **V1 Major Milestone Progress:** 4 / 15 accepted milestones (26.7% milestone-count progress; M01–M04 verified in `docs/BACKLOG.md`).
 
 - **Next Immediate Delivery Milestone:** Private Netlify Staging Deployment & Access Verification (M05) — pending Owner setting default project visibility to Private. Followed by NAV-07 Mobile Navigation Accessibility Remediation (M06).
 

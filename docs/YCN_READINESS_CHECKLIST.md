@@ -4,7 +4,7 @@
 **Effective Date:** 2026-10-17  
 **Controlling Authority:** Standing Owner Directive (Owner alone authorizes; AI seats advise and review)  
 **Total Checkpoints:** 143 Discrete Verification Items (`CHK-001` through `CHK-143`)  
-**Current Recorded Status (18 Nov 2026):** 34 / 143 items verified (23.8% recorded readiness; 109 unchecked, including 24 Owner gates). *Note: This represents recorded checklist state; only updated with direct verifiable evidence, not an audited launch-readiness estimate.*  
+**Current Recorded Status (18 Nov 2026):** 33 / 143 items verified (23.1% recorded readiness; 110 unchecked, including 24 Owner gates). *Note: This represents recorded checklist state; only updated with direct verifiable evidence, not an audited launch-readiness estimate.*  
 **Permanent Rule:** Every project requirement, architectural decision, development change, design token, test, bug fix, migration step, and Owner instruction must be tracked through this checklist. Nothing is marked completed without reproducible evidence (Git commit SHA, automated test output, or preserved hash).
 
 ---

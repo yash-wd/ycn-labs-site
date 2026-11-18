@@ -68,6 +68,7 @@ The following five binding operating rules clarify and reinforce existing contro
    - **#3 AGY (Builder):** Local workstation executor, branch creation, local edits, test execution, commit, push, and PR preparation.
    - **#4 Claude Judge:** Visual design, accessibility (WCAG), content compliance, and operational risk assessment.
    - **#5 GPT Judge:** CI log inspection, security/gitleaks scanning, and final independent merge recommendation.
+   *(Note: #2 Working GPT is the designated independent reviewer of routine PRs authored by #3. #4 Claude Judge and #5 GPT Judge are convened for independent risk evaluation at material design, personal data, legal, security, or release gates, or upon Owner request. Judges have no approval or merge authority).*
    All intra-team communication must use explicit numbers (#1 through #5). Every turn must terminate with the mandatory 4-line routing block:
    ```text
    STATUS: <Completed | In Progress | Blocked | Awaiting Review>
@@ -88,7 +89,7 @@ The following five binding operating rules clarify and reinforce existing contro
 
 4. **Major Milestone Completion Briefing & Measured Progress:**
    - At the completion of each Owner-accepted major milestone, #2 Working GPT provides the standardized milestone delivery briefing (JUST COMPLETED, LAST THREE COMPLETED, CURRENT WORK, NEXT THREE TASKS, COMPLETED/PENDING counts, PROGRESS PERCENTAGES, BLOCKERS, CLOSE RECOMMENDATION, OWNER ACTION).
-   - Progress is measured honestly via two distinct metrics: (1) Detailed Checklist Progress (verified items / 143 total in `docs/YCN_READINESS_CHECKLIST.md`), and (2) Major Milestone Progress (accepted major milestones / 14 approved baseline in `docs/BACKLOG.md`). Neither is a claim of elapsed engineering effort or launch readiness.
+   - Progress is measured honestly via two distinct metrics: (1) Detailed Checklist Progress (verified items / 143 total in `docs/YCN_READINESS_CHECKLIST.md`), and (2) Major Milestone Progress (accepted major milestones / 15 approved baseline in `docs/BACKLOG.md`). Neither is a claim of elapsed engineering effort or launch readiness.
 
 5. **Safe Working Session CLOSE Contract:**
    - Only the Owner's explicit command `CLOSE` triggers closure; work never closes automatically because of time of day, message count, or task completion.

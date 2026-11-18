@@ -3,16 +3,16 @@
 **Strategy:** Ship customer-facing functionality and verify real enquiry workflows under risk-tiered gates.  
 **Operating Principle:** Raw command evidence strictly outranks narrative summaries.  
 **Governing Execution Order:** Master Plan §14.7 (`docs/YCN_MASTER_PLAN.md`).  
-**Master Readiness Tracker:** [`docs/YCN_READINESS_CHECKLIST.md`](YCN_READINESS_CHECKLIST.md) (143-point control ledger; recorded status: 34/143 = 23.8%).  
-**V1 Milestone Progress:** 4 / 14 accepted major milestones (28.6% milestone-count progress; baseline v1.0 ratified 18 Nov 2026 under DECISION-057).
+**Master Readiness Tracker:** [`docs/YCN_READINESS_CHECKLIST.md`](YCN_READINESS_CHECKLIST.md) (143-point control ledger; recorded status: 33/143 = 23.1%).  
+**V1 Milestone Progress:** 4 / 15 accepted major milestones (26.7% milestone-count progress; baseline v1.1 adopted 18 Nov 2026 under DECISION-057 Clarification).
 
 ---
 
-## 1. V1 Release Major-Milestone Baseline (Version 1.0 — 18 Nov 2026)
+## 1. V1 Release Major-Milestone Baseline (Version 1.1 — 18 Nov 2026)
 
 > **Measurement Formula:**  
-> $$\text{Milestone Progress \%} = \frac{\text{Accepted Major Milestones}}{\text{Total Baseline Milestones (14)}} \times 100 = \frac{4}{14} \times 100 = 28.6\%$$  
-> *Note: This represents milestone-count progress across agreed deliverables, NOT elapsed engineering hours, remaining effort, or audited launch readiness.* The denominator is fixed at 14 and may only be revised with explicit Owner approval and a versioned record.
+> $$\text{Milestone Progress \%} = \frac{\text{Accepted Major Milestones}}{\text{Total Baseline Milestones (15)}} \times 100 = \frac{4}{15} \times 100 = 26.7\%$$  
+> *Note: This represents milestone-count progress across agreed deliverables, NOT elapsed engineering hours, remaining effort, or audited launch readiness.* The denominator is fixed at 15 and may only be revised with explicit Owner approval and a versioned record. (Note on history: An earlier draft proposed 14 milestones at 28.6%, which bundled release operations into M13 and included video-dependent media; superseded before merge by this 15-milestone baseline).
 
 | ID | Major Deliverable | Status | Acceptance Evidence / Prerequisite |
 | :---: | :--- | :---: | :--- |
@@ -25,11 +25,15 @@
 | **M07** | **Four-mode hero visual prototype & wording** | `[PENDING]` | Owner visual sitting, approved responsive layouts, verified truthfulness, ratified wording. |
 | **M08** | **Four-mode hero & services implementation** | `[PENDING]` | Component implementation, zero layout shift, Playwright visual tests, independent diff review. |
 | **M09** | **Responsive, accessibility & performance polish** | `[PENDING]` | 375/768/1024/1280/1440 px multi-viewport audit, color contrast min 4.5:1, reduced-motion pass. |
-| **M10** | **MEDIA-01 Gallery content & discovery** | `[PENDING]` | Dedicated `/gallery` or `/media` page, verified client recordings, educational video, homepage section. |
-| **M11** | **First approved blog publication & SEO** | `[PENDING]` | Editorial content approved by Owner, factual verification, structured metadata, sitemap check. |
-| **M12** | **Owner business inputs & estimate pilot** | `[PENDING]` | Attributable case details, pricing guidance, legal entity confirmation, enquiry handling test. |
-| **M13** | **Legal, enquiry operations, backups & release** | `[PENDING]` | Privacy/Terms clearance; real DB/Resend staging enquiry acceptance; backup dry-run; 5-person test. |
-| **M14** | **Owner-authorized production launch** | `[PENDING]` | DNS cutover, production secrets provisioning, post-launch smoke test, release tag. |
+| **M10** | **First approved blog publication & SEO** | `[PENDING]` | Editorial content approved by Owner, factual verification, structured metadata, sitemap check. |
+| **M11** | **Owner business inputs & estimate pilot** | `[PENDING]` | Attributable case details, pricing guidance, legal entity confirmation, enquiry handling test. |
+| **M12** | **Legal pages & privacy clearance** | `[PENDING]` | Privacy policy and Terms finalized from business facts; counsel review; privacy claims reconciled. |
+| **M13** | **Enquiry operations, monitoring & backups** | `[PENDING]` | Real DB/Resend staging enquiry acceptance; monitoring payload scrub test; backup & rollback verification. |
+| **M14** | **Real-device audits & release candidate** | `[PENDING]` | Physical Android/iPhone verification, WebKit check, 5-person comprehension test pass. |
+| **M15** | **Owner-authorized production launch** | `[PENDING]` | DNS cutover, production secrets provisioning, post-launch smoke test, release tag. |
+
+### Parallel Track (Outside V1 Launch Denominator)
+- **`MEDIA-01` (Gallery Videos & Homepage Discovery):** Dedicated `/gallery` or `/media` page showcasing recorded client project demonstrations, business awareness videos, and social media channels; plus homepage discovery route. Tracked in parallel as media assets are produced by the Owner; does not gate or block the V1 launch percentage.
 
 ---
 
