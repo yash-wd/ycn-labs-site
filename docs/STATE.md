@@ -23,18 +23,25 @@ This block supersedes older current-status blocks below without erasing their hi
   - **GitHub CI Verification (Run 44166441221):** PASSED (TypeScript clean, ESLint clean, 316/316 Vitest unit tests passed, 3 preview Chromium Playwright tests passed, 39 production Chromium Playwright tests passed, Next.js 16.3.6 builds passed).
   - **GitHub Gitleaks Verification (Run 44166441391):** PASSED with 0 leaks across 3 commits.
   - **Merged by:** Owner directly on GitHub.
+  - **Checklist Item Updated:** `CHK-116` marked `[VERIFIED]`.
   - **Deployment Status:** No production deployment authorized for `ycn-labs-site`.
 
-- **Active Task: `YCN-OPS-PLAYBOOK-01` (Five-Seat AI Delivery Playbook & Governance Harmonization).**
+- **Active Task: `YCN-OPS-PLAYBOOK-01` (Five-Seat AI Delivery Playbook, Milestone System & Safe CLOSE Amendment).**
   - **Branch:** `wip/YCN-OPS-PLAYBOOK-01`.
+  - **Status:** [LOCAL-WIP] Initial delivery commit `e2f2e90` pushed; final milestone/progress/safe-close amendment applied; draft PR preparation pending.
   - **Base `main`:** `0c164a0ce42cba011f83a85272723d8835f9c27e`.
   - **Scope:**
-    - Canonical public documentation of the Five-Seat model (`docs/YCN_AI_DELIVERY_PLAYBOOK.md`, `AGENTS.md`, `docs/START_HERE.md`, `docs/CLOSE_PROTOCOL.md`, `docs/INDEX.md`, `docs/YCN_DECISIONS.md`, `docs/STATE.md`, `docs/BACKLOG.md`).
+    - Canonical public documentation of Five-Seat model (`docs/YCN_AI_DELIVERY_PLAYBOOK.md`, `AGENTS.md`, `docs/START_HERE.md`, `docs/CLOSE_PROTOCOL.md`, `docs/INDEX.md`, `docs/YCN_DECISIONS.md`, `docs/STATE.md`, `docs/BACKLOG.md`, `docs/YCN_READINESS_CHECKLIST.md`, `docs/PROGRESS.md`).
+    - Targeted supersession notes in historical operational docs (`docs/YCN_AGENT_OPERATING_PROTOCOL.md`, `docs/AGY_OPEN_CLOSE_PROTOCOL.md`, `docs/YCN_LABS_OWNER_WORKING_ROUTINE.md`).
     - Private operational archive established in master vault (`YCN_LABS_MASTER/02_BUSINESS_OPERATIONS/AI_DELIVERY_SYSTEM/`).
-    - Formal ratification of DECISION-057 (Five-Seat AI Delivery Model, Numbered Routing Protocol #1 through #5, and Faster Delivery Governance).
-  - **New Backlog Addition:** `MEDIA-01` (Dedicated Media / Awareness / Client Project Videos Page & Homepage Route).
+    - Formal ratification of DECISION-057 and its Major Milestone / Safe CLOSE Clarification.
+    - Versioned V1 Release Milestone Baseline (14 milestones, M01–M14) in `docs/BACKLOG.md`.
 
-- **Next Immediate Workstream:** Owner-supervised Staging Deployment Sitting & Verification Gate / NAV-07 Mobile Navigation Accessibility Remediation.
+- **Current Progress Metrics (18 Nov 2026):**
+  - **Detailed Checklist Progress:** 34 / 143 items verified (23.8% recorded readiness; 109 unchecked, 24 Owner gates in `docs/YCN_READINESS_CHECKLIST.md`).
+  - **V1 Major Milestone Progress:** 4 / 14 accepted milestones (28.6% milestone-count progress; M01–M04 verified in `docs/BACKLOG.md`).
+
+- **Next Immediate Delivery Milestone:** Private Netlify Staging Deployment & Access Verification (M05) — pending Owner setting default project visibility to Private. Followed by NAV-07 Mobile Navigation Accessibility Remediation (M06).
 
 ---
 

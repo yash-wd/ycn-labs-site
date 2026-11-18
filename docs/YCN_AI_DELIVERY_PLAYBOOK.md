@@ -1,7 +1,7 @@
 # YCN Labs — AI Delivery Playbook
 
 **Revision:** Working GPT (#2) source-reconciled candidate, 18 November 2026  
-**Publication status:** **DRAFT — awaiting Owner approval, AGY documentation PR, independent source review and GitHub merge.**  
+**Publication status:** Candidate documentation on branch `wip/YCN-OPS-PLAYBOOK-01`, awaiting draft PR review and Owner merge on GitHub. Note: The overarching Five-Seat governance model was formally adopted by Owner directive in DECISION-057 (18 Nov 2026); this document constitutes its canonical repository specification.  
 **Scope:** Reusable operating methods for YCN Labs and future Owner-authorized projects; not a substitute for the project's technical master plan.
 
 > **Authority:** Owner's explicit decisions and the currently ratified `AGENTS.md` and `docs/YCN_DECISIONS.md` govern until this revision is approved and merged. When older instructions conflict with newer Owner rulings, flag the conflict and explicitly supersede obsolete operative clauses; preserve historical records. This playbook is a method, not a source of automatic permission.
@@ -120,9 +120,19 @@ New external facts receive a dated primary source when possible; unchecked items
 
 **OPEN or a new chat:** Follow `docs/CLOSE_PROTOCOL.md` §3 and the existing verified project entry; #3 checks local git and registered vault scope; #2 checks published GitHub. A WIP branch is compared to its *own upstream*, not automatically with `main`. Report missing evidence instead of inferring it.
 
-**The Owner's explicit `CLOSE` is the only close trigger.** It starts a scoped reconciliation and plan-first inventory. It does **not** grant permission for direct `main` pushes, unreviewed publication, unrestricted local scans, file moves, deletion, credential inspection or deployment. The newer Owner-only PR merge rule in `AGENTS.md` controls over obsolete clauses in historical close documents. Never run deprecated/unsafe close scripts blindly; require an approved exact manifest for any destructive operation.
+**The Owner's explicit `CLOSE` is the only close trigger.** Only the Owner's explicit command `CLOSE` triggers the close procedure; work never closes automatically because of time of day, message count, or task completion.
 
-At CLOSE, reconcile registered repositories and WIP branches, review genuine evidence, write the next task and decision list to canonical records, check private-vault status, verify copy hashes and backup status, and report **CLOSED** or **CLOSE BLOCKED**. Retain unresolved items and disclose unverified off-device backups. Do not end a session by time of day.
+**The Safe CLOSE Contract:**
+1. **Closing at Milestone Boundaries:** A safe CLOSE is routinely recommended at an accepted major-milestone boundary when practical, but the Owner alone decides whether to close or continue to the next task.
+2. **Unfinished-Task Checkpointing:** The Owner may request CLOSE at any time, including mid-task. If CLOSE is requested during an unfinished task, #3 safely checkpoints all in-progress work to its dedicated `wip/<task-id>` branch, records the exact stopped state in the private handover, and discloses the incomplete status. Never force completion or claim unverified completion merely to close.
+3. **Synchronization & Branch Safety:** Inspect registered Git repositories and their tracking upstreams (`git branch -vv`, `git fetch`, `git status --porcelain`, `origin/main`). Compare WIP branches against their own upstreams, never assuming every WIP branch equals `main`. Disclose any unpushed or divergent commits.
+4. **Zero Main Direct Push / Zero AGY Merge:** CLOSE never authorizes pushing directly to protected `main` or merging branches locally. All repository status updates route strictly through isolated branches and Owner-only PR merges.
+5. **No Destructive Operations:** Zero automatic file moves, deletions, overwrites, secret inspection, or deployments during CLOSE.
+6. **Private Vault & Continuity Custody:** Preserve the private master vault, approved files, seat handovers (`PRIVATE_SEAT_HANDOVERS.md`), and next-three-task preparation. Verify local backup copies; mark off-device backup UNVERIFIED unless directly established by evidence.
+7. **Close Outcome Determination:**
+   - **`CLOSE COMPLETE`** — All mandatory safety, synchronization, and checkpoint conditions verified.
+   - **`CLOSE BLOCKED`** — An essential safety or checkpoint condition failed or could not be completed; report the precise blocker and required remediation.
+8. **Scope Distinction:** **CLOSE ends a working session safely; it does NOT mean the entire YCN Labs project is finished.**
 
 A fresh chat cannot be guaranteed to recall earlier chats. Use the seat card and the latest committed state, not old chat memory. If GitHub cannot be accessed, the Owner supplies the latest approved status excerpt and playbook; the seat reports that limitation.
 
@@ -138,20 +148,39 @@ A fresh chat cannot be guaranteed to recall earlier chats. Use the seat card and
 
 The Owner can inspect this folder; AGY verifies file presence and hashes. Do not move, overwrite or delete other vault files. Never commit the private folder to public GitHub. Reuse ideas in future projects only after the Owner approves appropriate anonymization and public release.
 
-## 12. Delivery dashboard and verdicts
+## 12. Delivery dashboard, milestone reporting and progress measurement
 
-Keep one short dashboard in the existing `docs/STATE.md`/`docs/BACKLOG.md`, **not** a competing new master plan:
+Keep one short dashboard in the existing `docs/STATE.md`/`docs/BACKLOG.md`, **not** a competing new master plan.
 
-```text
-DONE: milestone and direct verification evidence
-EVIDENCE: exact published SHA, CI run, observed deployment/Owner check as appropriate
-CURRENT: single critical-path task and lead
-BLOCKER: real blocker, not speculation
-NEXT: already-scoped next task, dependencies and lead
-OWNER ACTION: one decision or none
-```
+### A. Major Milestone Completion Gate
+A **major milestone** is defined strictly by an Owner-accepted, verifiable business or engineering outcome (merged PR on `main` with passing automated GitHub Actions CI & Gitleaks, verified deployment, or Owner-signed business/design deliverable). Routine bug fixes, intermediate WIP commits, documentation touch-ups, or test reruns are not major milestones.
 
-Count genuine customer-facing milestones and accepted quality outcomes. A number of PRs, checkboxes or AI messages is not an evidence-based percentage of launch readiness. Use **PASS / CHANGES REQUESTED** for #2's PR verdict; judges use **APPROVE / APPROVE WITH CHANGES / CHANGES REQUESTED / NEEDS EVIDENCE**, with severity and provenance. High/material issues block affected gate; minor noncritical changes go to backlog.
+At the completion of every accepted major milestone, #2 Working GPT provides a standardized delivery briefing:
+
+| Field | Purpose / What it Shows |
+| :--- | :--- |
+| **JUST COMPLETED** | Task ID, delivered outcome, and verifiable evidence (commit SHA, GitHub CI run IDs). |
+| **LAST THREE COMPLETED** | Three most recent accepted major deliverables. |
+| **CURRENT WORK** | Active technical, editorial, and commercial workstreams. |
+| **NEXT THREE TASKS** | Ordered major tasks, accountable seats, prerequisites, and readiness. |
+| **COMPLETED / PENDING** | Unfinished items count and separate Owner-gated count. |
+| **PROGRESS PERCENTAGE** | Two transparent metrics: checklist progress and major milestone progress (defined below). |
+| **BLOCKERS** | Material delivery blockers only (not speculation). |
+| **CLOSE RECOMMENDATION** | Concise recommendation: **GOOD POINT TO CLOSE** or **CONTINUE**, with one concrete reason. |
+| **OWNER ACTION** | One precise decision formula, or none if awaiting review. |
+
+*No milestone may be marked complete merely because code was committed or pushed. Applicable CI, independent review, and Owner acceptance evidence are mandatory.*
+
+### B. Progress Measurement — Two Distinct Metrics
+To ensure absolute honesty and prevent misleading progress estimates:
+1. **Detailed Checklist Progress:**  
+   $$\text{Checklist Progress \%} = \frac{\text{Verified Items}}{\text{Total Items (143)}} \times 100$$  
+   Calculated strictly against the canonical 143-point tracker in `docs/YCN_READINESS_CHECKLIST.md`. Represents recorded checklist state; only updated with direct verifiable evidence.
+2. **Major Milestone Progress:**  
+   $$\text{Milestone Progress \%} = \frac{\text{Accepted Major Milestones}}{\text{Approved V1 Baseline Milestones (14)}} \times 100$$  
+   Calculated against the 14-milestone baseline in `docs/BACKLOG.md`. Clearly labelled as **milestone-count progress**, NOT a measure of elapsed engineering effort or launch readiness. The baseline denominator (14) is fixed and requires explicit Owner authorization to revise.
+
+Use **PASS / CHANGES REQUESTED** for #2's PR verdict; judges use **APPROVE / APPROVE WITH CHANGES / CHANGES REQUESTED / NEEDS EVIDENCE**, with severity and provenance. High/material issues block affected gate; minor noncritical changes go to backlog.
 
 ## 13. Permanent seat cards (read the relevant card on each fresh start)
 

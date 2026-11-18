@@ -5,6 +5,8 @@
 
 ## 1. Roles & Collaboration Model
 
+> **Governance Notice (18 Nov 2026 — DECISION-057):** Active team roles and operating procedures are governed by the Five-Seat AI Delivery Model in [`docs/YCN_AI_DELIVERY_PLAYBOOK.md`](YCN_AI_DELIVERY_PLAYBOOK.md) and [`AGENTS.md`](../AGENTS.md). The three-seat structure below is preserved as historical record.
+
 Roles are governed by [`AGENTS.md`](../AGENTS.md) › Shared ownership and task leadership. Strategy, challenge, research, architecture, review and execution are functions any seat may perform; AGY is the only local execution seat.
 
 - **Owner:** Final authority on business direction, publication promises, release, scope, visual approval, commits, pushes, and close.

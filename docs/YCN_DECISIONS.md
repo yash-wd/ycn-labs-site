@@ -410,3 +410,13 @@ If the Owner wants to allow a WIP commit/push for that single doc reconciliation
 5. **Private Vault Operational Archive.** Internal operational templates, improvement ideas, and handover records are maintained in the private master vault (`YCN_LABS_MASTER/02_BUSINESS_OPERATIONS/AI_DELIVERY_SYSTEM/`), completely isolated from the public Git repository.
 6. **Preserved Authority.** All frozen systems, design tokens, safety boundaries, and the Owner-only exact-SHA merge formula (`Approved, merge PR #<number> at <full reviewed SHA>`) remain strictly binding and in full effect.
 
+### DECISION-057 Clarification: Major Milestone Completion, Progress Dashboard, and Safe CLOSE (Owner, 18 Nov 2026)
+
+**Status: ADOPTED by Owner, 18 Nov 2026**  
+**Task:** `YCN-OPS-PLAYBOOK-01` (Milestone & Safe-CLOSE Amendment)
+
+1. **Major Milestone Completion Gate.** A major milestone is defined strictly by an Owner-accepted, verifiable business or engineering outcome (merged PR on `main` with passing GitHub CI/Gitleaks, verified deployment, or Owner-approved deliverable). At milestone completion, #2 Working GPT provides a concise delivery briefing with standardized fields (JUST COMPLETED, LAST THREE COMPLETED, CURRENT WORK, NEXT THREE TASKS, COMPLETED/PENDING counts, PROGRESS PERCENTAGES, BLOCKERS, CLOSE RECOMMENDATION, OWNER ACTION).
+2. **V1 Milestone Baseline.** The V1 delivery program is summarized into a fixed 14-milestone baseline in `docs/BACKLOG.md` (M01–M14). Milestone completion progress is measured as accepted milestones / 14 (currently 4/14 = 28.6%). The baseline denominator is fixed at 14 and requires explicit Owner approval to revise. Detailed readiness continues to be tracked separately through the 143-point checklist in `docs/YCN_READINESS_CHECKLIST.md` (currently 34/143 = 23.8%).
+3. **Safe Session CLOSE Contract.** Only the Owner's explicit command `CLOSE` triggers closure; sessions never close automatically. A safe CLOSE is routinely recommended at an accepted major milestone, but may be requested mid-task via safe checkpointing without false completion claims. Zero direct pushes to `main`, zero AGY merges. Unmerged status is safely recorded in the private vault handover (`PRIVATE_SEAT_HANDOVERS.md`).
+4. **Scope Distinction.** CLOSE ends a working session safely; it does NOT mean the entire YCN Labs project is finished.
+

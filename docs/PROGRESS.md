@@ -1,5 +1,7 @@
 # YCN V3 sprint — daily scoreboard
 
+> **Historical Record Notice (18 Nov 2026 — DECISION-057):** The scoreboard below records the temporary 5-day V3 front-end sprint (12–13 November 2026, merged via PR #33 at commit `120136a`). It is preserved for historical reference only. Active project status, milestones, and delivery queue are tracked exclusively in [`docs/STATE.md`](STATE.md) and [`docs/BACKLOG.md`](BACKLOG.md).
+
 One line per field, updated once a day (Owner decision 10 Nov 2026: Option B, light lane).
 
 | Field | Day 1 (12 Nov 2026) | Day 2 (12 Nov 2026) | Day 3 (12 Nov 2026) | Day 4 (13 Nov 2026) | Day 5 (13 Nov 2026) | Review fixes (13 Nov 2026) | Motion + browser tests (13 Nov 2026) |

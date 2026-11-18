@@ -1,13 +1,39 @@
 # YCN Labs — Prioritized Delivery Backlog
 
 **Strategy:** Ship customer-facing functionality and verify real enquiry workflows under risk-tiered gates.  
-**Operating Principle:** Raw command evidence strictly outranks narrative summaries.
+**Operating Principle:** Raw command evidence strictly outranks narrative summaries.  
 **Governing Execution Order:** Master Plan §14.7 (`docs/YCN_MASTER_PLAN.md`).  
-**Master Readiness Tracker:** [`docs/YCN_READINESS_CHECKLIST.md`](YCN_READINESS_CHECKLIST.md) (143-point control ledger).
+**Master Readiness Tracker:** [`docs/YCN_READINESS_CHECKLIST.md`](YCN_READINESS_CHECKLIST.md) (143-point control ledger; recorded status: 34/143 = 23.8%).  
+**V1 Milestone Progress:** 4 / 14 accepted major milestones (28.6% milestone-count progress; baseline v1.0 ratified 18 Nov 2026 under DECISION-057).
 
 ---
 
-## Current Work — 18 November 2026 (supersedes older ordering below)
+## 1. V1 Release Major-Milestone Baseline (Version 1.0 — 18 Nov 2026)
+
+> **Measurement Formula:**  
+> $$\text{Milestone Progress \%} = \frac{\text{Accepted Major Milestones}}{\text{Total Baseline Milestones (14)}} \times 100 = \frac{4}{14} \times 100 = 28.6\%$$  
+> *Note: This represents milestone-count progress across agreed deliverables, NOT elapsed engineering hours, remaining effort, or audited launch readiness.* The denominator is fixed at 14 and may only be revised with explicit Owner approval and a versioned record.
+
+| ID | Major Deliverable | Status | Acceptance Evidence / Prerequisite |
+| :---: | :--- | :---: | :--- |
+| **M01** | **V3 website foundation** | **[VERIFIED]** | Merged PR #33 (`120136a`). Clean rebuild, semantic tokens, Playwright test suite. |
+| **M02** | **Inner pages & content alignment** | **[VERIFIED]** | Merged PR #40 (`724d943`). Ratified Hero H1, 38-test Playwright CI, founder bio clean. |
+| **M03** | **Protected governance, maintenance & SEO** | **[VERIFIED]** | Merged PR #41 (`6caf77b`). GitHub `Protect main` ruleset, fail-safe SEO, 5 governance rules. |
+| **M04** | **Fail-closed staging contact boundary** | **[VERIFIED]** | Merged PR #42 (`0c164a0`). HTTP 503 fail-closed guard, preview notice, disabled submit, CI run 44166441221. |
+| **M05** | **Private staging deployed & verified** | `[PENDING]` | Netlify private project setting confirmed by Owner; access-controlled preview verified; zero leakage. |
+| **M06** | **NAV-07 mobile navigation accessibility** | `[PENDING]` | `#mobile-nav-sheet` initial focus, tab containment, background inertness, WCAG keyboard pass. |
+| **M07** | **Four-mode hero visual prototype & wording** | `[PENDING]` | Owner visual sitting, approved responsive layouts, verified truthfulness, ratified wording. |
+| **M08** | **Four-mode hero & services implementation** | `[PENDING]` | Component implementation, zero layout shift, Playwright visual tests, independent diff review. |
+| **M09** | **Responsive, accessibility & performance polish** | `[PENDING]` | 375/768/1024/1280/1440 px multi-viewport audit, color contrast min 4.5:1, reduced-motion pass. |
+| **M10** | **MEDIA-01 Gallery content & discovery** | `[PENDING]` | Dedicated `/gallery` or `/media` page, verified client recordings, educational video, homepage section. |
+| **M11** | **First approved blog publication & SEO** | `[PENDING]` | Editorial content approved by Owner, factual verification, structured metadata, sitemap check. |
+| **M12** | **Owner business inputs & estimate pilot** | `[PENDING]` | Attributable case details, pricing guidance, legal entity confirmation, enquiry handling test. |
+| **M13** | **Legal, enquiry operations, backups & release** | `[PENDING]` | Privacy/Terms clearance; real DB/Resend staging enquiry acceptance; backup dry-run; 5-person test. |
+| **M14** | **Owner-authorized production launch** | `[PENDING]` | DNS cutover, production secrets provisioning, post-launch smoke test, release tag. |
+
+---
+
+## 2. Current Work — 18 November 2026 (supersedes older ordering below)
 
 - [x] **PR #42 (`YCN-STAGING-ISOLATION-01`):** Merged into `main` at `0c164a0ce42cba011f83a85272723d8835f9c27e` (reviewed head `36b6779`). Fail-closed server contact guard (`503 SERVICE_UNAVAILABLE`), preview notice, disabled submit button, pre-hydration form safety, two-config CI, synthetic preview test, verified on GitHub CI and Gitleaks.
 - [ ] **`YCN-OPS-PLAYBOOK-01` [LOCAL-WIP]:** Implement Five-Seat AI Delivery Playbook, numbered routing protocol (#1 to #5), faster delivery governance, reconcile `AGENTS.md`, `docs/START_HERE.md`, `docs/CLOSE_PROTOCOL.md`, `docs/INDEX.md`, `docs/YCN_DECISIONS.md` (DECISION-057), `docs/STATE.md`, and `docs/BACKLOG.md`. Set up private archive templates in `YCN_LABS_MASTER/02_BUSINESS_OPERATIONS/AI_DELIVERY_SYSTEM/`.

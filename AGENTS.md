@@ -86,6 +86,21 @@ The following five binding operating rules clarify and reinforce existing contro
    - AGY must never reconstruct, paraphrase, or assert test pass/fail results from memory or terminal templates.
    - Automated GitHub Actions logs (`quality`, `gitleaks`) are the authoritative acceptance evidence. Local logs are supplementary evidence only.
 
+4. **Major Milestone Completion Briefing & Measured Progress:**
+   - At the completion of each Owner-accepted major milestone, #2 Working GPT provides the standardized milestone delivery briefing (JUST COMPLETED, LAST THREE COMPLETED, CURRENT WORK, NEXT THREE TASKS, COMPLETED/PENDING counts, PROGRESS PERCENTAGES, BLOCKERS, CLOSE RECOMMENDATION, OWNER ACTION).
+   - Progress is measured honestly via two distinct metrics: (1) Detailed Checklist Progress (verified items / 143 total in `docs/YCN_READINESS_CHECKLIST.md`), and (2) Major Milestone Progress (accepted major milestones / 14 approved baseline in `docs/BACKLOG.md`). Neither is a claim of elapsed engineering effort or launch readiness.
+
+5. **Safe Working Session CLOSE Contract:**
+   - Only the Owner's explicit command `CLOSE` triggers closure; work never closes automatically because of time of day, message count, or task completion.
+   - Recommended at an accepted major milestone boundary; if requested mid-task, #3 safely checkpoints unfinished work to `wip/<task-id>` without claiming false completion.
+   - Zero direct pushes to `main`, zero AGY merges, zero destructive operations. All repository status updates route strictly through isolated branches and PRs.
+   - Reconciles repositories, preserves private vault custody, logs seat handovers, and reports `CLOSE COMPLETE` or `CLOSE BLOCKED`.
+   - **Scope Distinction:** CLOSE ends a working session safely; it does NOT mean the entire YCN Labs project is finished.
+
+6. **Precedence & Governance Continuity:**
+   - The Five-Seat AI Delivery Model (DECISION-057 and `docs/YCN_AI_DELIVERY_PLAYBOOK.md`) strictly governs all active operations.
+   - Historical three-seat procedures, legacy builder assignments, or conflicting instructions in older documentation files are preserved strictly as dated historical records and are superseded by this protocol.
+
 ---
 
 # MANDATORY PROJECT RULE: Project-Wide Checklist & Continuity Tracking System
