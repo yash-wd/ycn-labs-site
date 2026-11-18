@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import {
@@ -47,10 +47,19 @@ export function evaluateContactResponse(
   return { shouldShowSuccess: true };
 }
 
-export function ContactForm() {
+export interface ContactFormProps {
+  isPreview?: boolean;
+}
+
+export function ContactForm({ isPreview = false }: ContactFormProps = {}) {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitSuccess, setSubmitSuccess] = useState(false);
   const [submitError, setSubmitError] = useState<string | null>(null);
+  const [isMounted, setIsMounted] = useState(false);
+
+  useEffect(() => {
+    setIsMounted(true);
+  }, []);
 
   // Split inputs for "What happens today?" and "What would you like to change?"
   const [whatHappensToday, setWhatHappensToday] = useState("");
@@ -83,6 +92,11 @@ export function ContactForm() {
   const selectedGoal = watch("projectType");
 
   const onSubmit = async (data: ContactFormData) => {
+    if (isPreview) {
+      setSubmitError("Preview only. Enquiries are switched off here, so nothing will be sent.");
+      return;
+    }
+
     setIsSubmitting(true);
     setSubmitError(null);
 
@@ -105,6 +119,12 @@ export function ContactForm() {
 
     if (payload.message.length < 10) {
       setSubmitError("Check the highlighted details and try again. Please provide a brief description (at least 10 characters).");
+      setIsSubmitting(false);
+      return;
+    }
+
+    if (isPreview || !isMounted) {
+      setSubmitError("Preview only. Enquiries are switched off here, so nothing will be sent.");
       setIsSubmitting(false);
       return;
     }
@@ -168,7 +188,20 @@ export function ContactForm() {
   }
 
   return (
-    <form onSubmit={handleSubmit(onSubmit)} className="space-y-8">
+    <form action="#" method="POST" onSubmit={handleSubmit(onSubmit)} className="space-y-8">
+      {/* Visual-Only Preview State Notice (Fail-Closed Non-Production Boundary) */}
+      {isPreview && (
+        <div
+          role="status"
+          aria-live="polite"
+          data-testid="contact-preview-notice"
+          className="p-4 rounded-xl border border-[var(--border-subtle)] bg-[var(--bg-canvas)] text-xs font-medium text-[var(--text-secondary)] flex items-start gap-2.5"
+        >
+          <AlertCircle aria-hidden="true" className="w-4 h-4 text-[var(--action-blue)] shrink-0 mt-0.5" />
+          <span>Preview only. Enquiries are switched off here, so nothing will be sent.</span>
+        </div>
+      )}
+
       {/* Honeypot field (hidden from legitimate users) */}
       <input
         type="text"
@@ -360,8 +393,10 @@ export function ContactForm() {
       <div className="pt-2">
         <button
           type="submit"
-          disabled={isSubmitting}
-          className="w-full inline-flex items-center justify-center gap-2 py-3.5 px-6 rounded-xl bg-[var(--action-blue)] hover:bg-[var(--action-blue-hover)] text-[var(--text-on-action)] font-semibold text-sm normal-case tracking-[0.01em] shadow-xs transition-colors disabled:opacity-50 focus:outline-none focus-visible:ring-2 focus-visible:ring-[var(--focus-ring)] min-h-[44px] cursor-pointer"
+          disabled={!isMounted || isSubmitting || isPreview}
+          aria-disabled={!isMounted || isSubmitting || isPreview}
+          title={isPreview ? "Preview only. Enquiries are switched off here, so nothing will be sent." : undefined}
+          className="w-full inline-flex items-center justify-center gap-2 py-3.5 px-6 rounded-xl bg-[var(--action-blue)] hover:bg-[var(--action-blue-hover)] text-[var(--text-on-action)] font-semibold text-sm normal-case tracking-[0.01em] shadow-xs transition-colors disabled:opacity-50 disabled:cursor-not-allowed focus:outline-none focus-visible:ring-2 focus-visible:ring-[var(--focus-ring)] min-h-[44px] cursor-pointer"
         >
           {isSubmitting ? (
             <>

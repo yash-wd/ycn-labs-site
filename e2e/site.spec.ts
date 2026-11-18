@@ -354,6 +354,104 @@ test.describe("contact page (API mocked)", () => {
     await ctx.close();
   });
 
+  test("@preview in non-production preview mode, displays preview notice and disables submit button", async ({ browser }) => {
+    const { ctx, page } = await open(browser, "/contact");
+    await expect(page.getByText("Preview only. Enquiries are switched off here, so nothing will be sent.")).toBeVisible();
+    const submitBtn = page.locator('form button[type="submit"]');
+    await expect(submitBtn).toBeDisabled();
+    await expect(submitBtn).toHaveText(/Send my enquiry/);
+    await ctx.close();
+  });
+
+  test("@preview synthetic direct POST to /api/contact receives HTTP 503 refusal in preview mode", async ({ request }) => {
+    const res = await request.post("/api/contact", {
+      data: {
+        name: "Preview Visitor",
+        email: "visitor@example.com",
+        message: "This enquiry should be refused by the preview boundary.",
+      },
+    });
+    expect(res.status()).toBe(503);
+    const json = await res.json();
+    expect(json.success).toBe(false);
+    expect(json.error.code).toBe("SERVICE_UNAVAILABLE");
+    expect(json.error.message).toBe("Preview only. Enquiries are switched off here, so nothing will be sent.");
+    expect(json).not.toHaveProperty("data");
+    expect(json).not.toHaveProperty("leadId");
+  });
+
+  test("@preview no-JavaScript safety: disabled button and Enter press cause no submission or navigation", async ({ browser }) => {
+    const { ctx, page } = await open(browser, "/contact", { js: false });
+    await expect(page.getByText("Preview only. Enquiries are switched off here, so nothing will be sent.")).toBeVisible();
+
+    const requests: { method: string; url: string }[] = [];
+    page.on("request", (req) => {
+      requests.push({ method: req.method(), url: req.url() });
+    });
+
+    const submitBtn = page.locator('form button[type="submit"]');
+    await expect(submitBtn).toBeDisabled();
+
+    // Verify form method is POST
+    const form = page.locator("form");
+    await expect(form).toHaveAttribute("method", "POST");
+
+    // Attempt interaction with disabled button (force click)
+    await submitBtn.click({ force: true }).catch(() => {});
+
+    // Attempting to press Enter in text field does not leak data into query string or submit
+    const nameInput = page.locator("#name");
+    await nameInput.fill("Sensitive Visitor");
+    await nameInput.press("Enter");
+
+    // Assert zero contact or submission requests were dispatched
+    const contactRequests = requests.filter(
+      (r) => r.url.includes("/api/contact") || (r.method === "POST" && r.url.includes("/contact"))
+    );
+    expect(contactRequests).toHaveLength(0);
+
+    // Assert URL remains /contact without navigation away or query parameter data leakage
+    expect(page.url()).not.toContain("?");
+    expect(page.url()).not.toContain("Sensitive");
+    expect(page.url()).toMatch(/\/contact$/);
+    await ctx.close();
+  });
+
+  test("no-JavaScript form safety: initial button is disabled and Enter press causes no submission or navigation", async ({ browser }) => {
+    const { ctx, page } = await open(browser, "/contact", { js: false });
+
+    const requests: { method: string; url: string }[] = [];
+    page.on("request", (req) => {
+      requests.push({ method: req.method(), url: req.url() });
+    });
+
+    const submitBtn = page.locator('form button[type="submit"]');
+    await expect(submitBtn).toBeDisabled();
+
+    // Verify form method is POST
+    const form = page.locator("form");
+    await expect(form).toHaveAttribute("method", "POST");
+
+    // Attempt interaction with disabled button (force click)
+    await submitBtn.click({ force: true }).catch(() => {});
+
+    const nameInput = page.locator("#name");
+    await nameInput.fill("Production Visitor");
+    await nameInput.press("Enter");
+
+    // Assert zero contact or submission requests were dispatched
+    const contactRequests = requests.filter(
+      (r) => r.url.includes("/api/contact") || (r.method === "POST" && r.url.includes("/contact"))
+    );
+    expect(contactRequests).toHaveLength(0);
+
+    // Assert URL remains /contact without navigation away or query parameter data leakage
+    expect(page.url()).not.toContain("?");
+    expect(page.url()).not.toContain("Production");
+    expect(page.url()).toMatch(/\/contact$/);
+    await ctx.close();
+  });
+
   test("empty submit shows field errors and sends nothing", async ({ browser }) => {
     const { ctx, page } = await open(browser, "/contact");
     let calls = 0;

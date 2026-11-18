@@ -168,7 +168,7 @@
 - [ ] **[PENDING]** `CHK-113`: Selective carry-over list compiled with SHA-256 hashes for Owner-approved historical assets.
 - [ ] **[PENDING]** `CHK-114`: Confirm zero bulk Git merge of `yash-wd/ycnlabs` into `ycn-labs-site`.
 - [ ] **[OWNER-GATE]** `CHK-115`: Neon lead database strategy decision: shared production DB vs one-time row migration.
-- [ ] **[LOCAL-WIP]** `CHK-116`: Approved architecture constraint: production lead records prohibited from staging/preview environments (technical verification of preview DB pending Task 12).
+- [ ] **[LOCAL-WIP]** `CHK-116`: Approved architecture constraint: production lead records and notifications prohibited from staging/preview environments; fail-closed 503 boundary implemented in `/api/contact` and verified by `__tests__/staging-isolation.test.ts` (Task `YCN-STAGING-ISOLATION-01`; pending independent review & GitHub checks).
 - [ ] **[PENDING]** `CHK-117`: Verify 12-month legal retention compliance for pre-sales enquiries under DECISION-052.
 - [ ] **[PENDING]** `CHK-118`: Scope Resend email provider configuration reuse across preview and production.
 - [ ] **[OWNER-GATE]** `CHK-119`: Provision dedicated Upstash Redis instance for Site V2 rate-limiting.

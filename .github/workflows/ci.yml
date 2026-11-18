@@ -40,15 +40,39 @@ jobs:
       - name: Type check
         run: pnpm run check-types
 
+      - name: Assert credentials isolation
+        run: |
+          for var in DATABASE_URL RESEND_API_KEY LEAD_DESTINATION_EMAIL UPSTASH_REDIS_REST_URL UPSTASH_REDIS_REST_TOKEN RATE_LIMIT_HASH_SECRET SENTRY_DSN; do
+            if [ -n "${!var}" ]; then
+              echo "::error::Unexpected credential present in CI environment: $var"
+              exit 1
+            fi
+          done
+          echo "Credentials isolation verified: zero provider credentials present."
+
       - name: Test
         run: pnpm run test
-
-      - name: Build
-        run: pnpm run build
 
       - name: Install Playwright Chromium
         run: pnpm exec playwright install --with-deps chromium
 
-      - name: Run Playwright tests (Chromium)
-        run: pnpm exec playwright test --project=chromium
+      - name: Build (Preview configuration)
+        run: pnpm run build
+        env:
+          NEXT_PUBLIC_SITE_ENV: staging
+
+      - name: Run Playwright Preview tests (Chromium)
+        run: pnpm exec playwright test --project=chromium --grep "@preview"
+        env:
+          NEXT_PUBLIC_SITE_ENV: staging
+
+      - name: Build (Production test configuration)
+        run: pnpm run build
+        env:
+          NEXT_PUBLIC_SITE_ENV: production
+
+      - name: Run Playwright Production tests (Chromium)
+        run: pnpm exec playwright test --project=chromium --grep-invert "@preview"
+        env:
+          NEXT_PUBLIC_SITE_ENV: production
 
