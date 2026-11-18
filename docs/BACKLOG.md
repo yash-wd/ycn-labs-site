@@ -1,13 +1,56 @@
 # YCN Labs — Prioritized Delivery Backlog
 
 **Strategy:** Ship customer-facing functionality and verify real enquiry workflows under risk-tiered gates.  
-**Operating Principle:** Raw command evidence strictly outranks narrative summaries.
+**Operating Principle:** Raw command evidence strictly outranks narrative summaries.  
 **Governing Execution Order:** Master Plan §14.7 (`docs/YCN_MASTER_PLAN.md`).  
-**Master Readiness Tracker:** [`docs/YCN_READINESS_CHECKLIST.md`](YCN_READINESS_CHECKLIST.md) (143-point control ledger).
+**Master Readiness Tracker:** [`docs/YCN_READINESS_CHECKLIST.md`](YCN_READINESS_CHECKLIST.md) (143-point control ledger; recorded status: 33/143 = 23.1%).  
+**V1 Milestone Progress:** 4 / 15 accepted major milestones (26.7% milestone-count progress; baseline v1.1 adopted 18 Nov 2026 under DECISION-057 Clarification).
 
 ---
 
-## Current Work — 17 November 2026 (supersedes older ordering below)
+## 1. V1 Release Major-Milestone Baseline (Version 1.1 — 18 Nov 2026)
+
+> **Measurement Formula:**  
+> $$\text{Milestone Progress \%} = \frac{\text{Accepted Major Milestones}}{\text{Total Baseline Milestones (15)}} \times 100 = \frac{4}{15} \times 100 = 26.7\%$$  
+> *Note: This represents milestone-count progress across agreed deliverables, NOT elapsed engineering hours, remaining effort, or audited launch readiness.* The denominator is fixed at 15 and may only be revised with explicit Owner approval and a versioned record. (Note on history: An earlier draft proposed 14 milestones at 28.6%, which bundled release operations into M13 and included video-dependent media; superseded before merge by this 15-milestone baseline).
+
+| ID | Major Deliverable | Status | Acceptance Evidence / Prerequisite |
+| :---: | :--- | :---: | :--- |
+| **M01** | **V3 website foundation** | **[VERIFIED]** | Merged PR #33 (`120136a`). Clean rebuild, semantic tokens, Playwright test suite. |
+| **M02** | **Inner pages & content alignment** | **[VERIFIED]** | Merged PR #40 (`724d943`). Ratified Hero H1, 38-test Playwright CI, founder bio clean. |
+| **M03** | **Protected governance, maintenance & SEO** | **[VERIFIED]** | Merged PR #41 (`6caf77b`). GitHub `Protect main` ruleset, fail-safe SEO, 5 governance rules. |
+| **M04** | **Fail-closed staging contact boundary** | **[VERIFIED]** | Merged PR #42 (`0c164a0`). HTTP 503 fail-closed guard, preview notice, disabled submit, CI run 44166441221. |
+| **M05** | **Private staging deployed & verified** | `[PENDING]` | Netlify private project setting confirmed by Owner; access-controlled preview verified; zero leakage. |
+| **M06** | **NAV-07 mobile navigation accessibility** | `[PENDING]` | `#mobile-nav-sheet` initial focus, tab containment, background inertness, WCAG keyboard pass. |
+| **M07** | **Four-mode hero visual prototype & wording** | `[PENDING]` | Owner visual sitting, approved responsive layouts, verified truthfulness, ratified wording. |
+| **M08** | **Four-mode hero & services implementation** | `[PENDING]` | Component implementation, zero layout shift, Playwright visual tests, independent diff review. |
+| **M09** | **Responsive, accessibility & performance polish** | `[PENDING]` | 375/768/1024/1280/1440 px multi-viewport audit, color contrast min 4.5:1, reduced-motion pass. |
+| **M10** | **First approved blog publication & SEO** | `[PENDING]` | Editorial content approved by Owner, factual verification, structured metadata, sitemap check. |
+| **M11** | **Owner business inputs & estimate pilot** | `[PENDING]` | Attributable case details, pricing guidance, legal entity confirmation, enquiry handling test. |
+| **M12** | **Legal pages & privacy clearance** | `[PENDING]` | Privacy policy and Terms finalized from business facts; counsel review; privacy claims reconciled. |
+| **M13** | **Enquiry operations, monitoring & backups** | `[PENDING]` | Real DB/Resend staging enquiry acceptance; monitoring payload scrub test; backup & rollback verification. |
+| **M14** | **Real-device audits & release candidate** | `[PENDING]` | Physical Android/iPhone verification, WebKit check, 5-person comprehension test pass. |
+| **M15** | **Owner-authorized production launch** | `[PENDING]` | DNS cutover, production secrets provisioning, post-launch smoke test, release tag. |
+
+### Parallel Track (Outside V1 Launch Denominator)
+- **`MEDIA-01` (Gallery Videos & Homepage Discovery):** Dedicated `/gallery` or `/media` page showcasing recorded client project demonstrations, business awareness videos, and social media channels; plus homepage discovery route. Tracked in parallel as media assets are produced by the Owner; does not gate or block the V1 launch percentage.
+
+---
+
+## 2. Current Work — 18 November 2026 (supersedes older ordering below)
+
+- [x] **PR #42 (`YCN-STAGING-ISOLATION-01`):** Merged into `main` at `0c164a0ce42cba011f83a85272723d8835f9c27e` (reviewed head `36b6779`). Fail-closed server contact guard (`503 SERVICE_UNAVAILABLE`), preview notice, disabled submit button, pre-hydration form safety, two-config CI, synthetic preview test, verified on GitHub CI and Gitleaks.
+- [ ] **`YCN-OPS-PLAYBOOK-01` [LOCAL-WIP]:** Implement Five-Seat AI Delivery Playbook, numbered routing protocol (#1 to #5), faster delivery governance, reconcile `AGENTS.md`, `docs/START_HERE.md`, `docs/CLOSE_PROTOCOL.md`, `docs/INDEX.md`, `docs/YCN_DECISIONS.md` (DECISION-057), `docs/STATE.md`, and `docs/BACKLOG.md`. Set up private archive templates in `YCN_LABS_MASTER/02_BUSINESS_OPERATIONS/AI_DELIVERY_SYSTEM/`.
+- [ ] **`MEDIA-01` [PENDING]:** Dedicated media / gallery page for client project screen recordings, educational videos on web development & apps for business owners, and social media channels; plus landing/homepage section routing to this page.
+- [ ] **Protected Staging Trial:** Separate hosting and Owner authorization (Netlify staging preview with isolated credentials; no production deployment).
+- [ ] **Mobile Navigation Accessibility Remediation:** Fix confirmed focus transfer, tab containment, and background inertness defects on `#mobile-nav-sheet` (separate Owner-authorized `NAV-07` remediation task).
+- [ ] **Privacy, Terms & Legal Copy:** Complete legal review; resolve unsupported ContactForm statement `"We respect your privacy. No data is shared or sold."` in conjunction with Privacy policy (Task PR #35 / legal clearance).
+- [ ] **Pre-Launch Operational Verification:** Real database and email acceptance against configured staging service, operational monitoring alert check, durable backup & rollback dry-run, WebKit and physical device testing, and 5-person comprehension testing before public cutover.
+- [ ] **Owner Visual Refinements:** Consolidate Owner design suggestions and backlog enhancements into a single prioritized, bounded post-merge design task.
+
+---
+
+## Current Work — 17 November 2026
 
 - [x] **PR #40 (Inner Pages & Content Alignment):** Merged into `main` at `724d94320098dd073ec2f67bebd1fec8c8456ed6` (reviewed head `350383d`). Added 38-test Chromium Playwright suite to CI, ratified Hero H1 per DECISION-056, reconciled founder/specialists copy, removed unapproved commercial promises, restored Contact reassurance and strict test guards, qualified Engineering claims and simulator.
 - [x] **Repository Protection (`Protect main`):** GitHub branch protection ruleset enabled on default branch `main`, requiring pull requests and `quality` + `gitleaks` checks, blocking force pushes and branch deletions.

@@ -1,5 +1,7 @@
 # YCN Labs — Owner's Complete Two-Repository Working Routine
 
+> **Governance Notice (18 Nov 2026 — DECISION-057):** Active team coordination and delivery workflows are governed by the Five-Seat AI Delivery Model in [`docs/YCN_AI_DELIVERY_PLAYBOOK.md`](YCN_AI_DELIVERY_PLAYBOOK.md) and [`AGENTS.md`](../AGENTS.md). Numbered routing (#1 through #5), Owner-only exact-SHA PR merges, milestone briefings, and the safe CLOSE contract supersede earlier three-seat routines. Historical procedures below are preserved for context.
+
 **Permanent working guide | Version 1.0 | Prepared 13 October 2026**  
 **Purpose:** A simple, repeatable routine for working with GPT, Claude and AGY on the **YCN Labs website and brand identity**, from the current checkpoint to final delivery, without repeatedly sharing old chats, files, or decisions.
 

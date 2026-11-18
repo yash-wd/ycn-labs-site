@@ -1,4 +1,7 @@
 # AGY — OPEN / CLOSE PROTOCOL (standing, every working day)
+
+> **Governance Notice (18 Nov 2026 — DECISION-057):** Active daily operations are governed by the Five-Seat AI Delivery Model in [`docs/YCN_AI_DELIVERY_PLAYBOOK.md`](YCN_AI_DELIVERY_PLAYBOOK.md), [`AGENTS.md`](../AGENTS.md), and [`docs/CLOSE_PROTOCOL.md`](CLOSE_PROTOCOL.md). Numbered routing (#1 through #5) and Owner-only PR merges control all operations. Direct main pushes are prohibited.
+
 Authority: AGENTS.md · docs/STATE.md latest block · DECISION-055. Two Owner words frame a day: `open` and `close`. Between them nothing runs without an Owner word.
 Principle: AGY never briefs from memory. Every fact in a BRIEF comes from a command output or a file. GitHub holds engineering truth (code, docs/, AGENTS.md, workflows); the vault holds private truth (02_BUSINESS_OPERATIONS, proof/, backups, OWNER_ONLY_TODO.md); the BRIEF is the bridge the Owner pastes into the Claude and GPT chats.
 

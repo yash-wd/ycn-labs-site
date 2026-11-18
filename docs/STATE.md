@@ -13,7 +13,39 @@
 
 ---
 
-## CURRENT STATUS — 17 November 2026 (read this first)
+## CURRENT STATUS — 18 November 2026 (read this first)
+
+This block supersedes older current-status blocks below without erasing their historical records.
+
+- **Milestone: PR #42 (Staging Isolation & Fail-Closed Contact Boundary) merged into `main` on 18 Nov 2026; site remains unlaunched.**
+  - **Reviewed PR #42 Head:** `36b6779ba403d6ce10365f15d84f9dc5fced49c2`.
+  - **Main Merge Commit:** `0c164a0ce42cba011f83a85272723d8835f9c27e`.
+  - **GitHub CI Verification (Run 44166441221):** PASSED (TypeScript clean, ESLint clean, 316/316 Vitest unit tests passed, 3 preview Chromium Playwright tests passed, 39 production Chromium Playwright tests passed, Next.js 16.3.6 builds passed).
+  - **GitHub Gitleaks Verification (Run 44166441391):** PASSED with 0 leaks across 3 commits.
+  - **Merged by:** Owner directly on GitHub.
+  - **Checklist Item Updated:** `CHK-116` marked `[VERIFIED]`.
+  - **Deployment Status:** No production deployment authorized for `ycn-labs-site`.
+
+- **Active Task: `YCN-OPS-PLAYBOOK-01` (Five-Seat AI Delivery Playbook, Milestone System & Safe CLOSE Amendment).**
+  - **Branch:** `wip/YCN-OPS-PLAYBOOK-01`.
+  - **Status:** [LOCAL-WIP] Initial delivery commit `e2f2e90` pushed; final milestone/progress/safe-close amendment applied; draft PR preparation pending.
+  - **Base `main`:** `0c164a0ce42cba011f83a85272723d8835f9c27e`.
+  - **Scope:**
+    - Canonical public documentation of Five-Seat model (`docs/YCN_AI_DELIVERY_PLAYBOOK.md`, `AGENTS.md`, `docs/START_HERE.md`, `docs/CLOSE_PROTOCOL.md`, `docs/INDEX.md`, `docs/YCN_DECISIONS.md`, `docs/STATE.md`, `docs/BACKLOG.md`, `docs/YCN_READINESS_CHECKLIST.md`, `docs/PROGRESS.md`).
+    - Targeted supersession notes in historical operational docs (`docs/YCN_AGENT_OPERATING_PROTOCOL.md`, `docs/AGY_OPEN_CLOSE_PROTOCOL.md`, `docs/YCN_LABS_OWNER_WORKING_ROUTINE.md`).
+    - Private operational archive established in master vault (`YCN_LABS_MASTER/02_BUSINESS_OPERATIONS/AI_DELIVERY_SYSTEM/`).
+    - Formal ratification of DECISION-057 and its Major Milestone / Safe CLOSE Clarification.
+    - Versioned V1 Release Milestone Baseline (15 milestones, M01–M15; MEDIA-01 parallel track) in `docs/BACKLOG.md`.
+
+- **Current Progress Metrics (18 Nov 2026):**
+  - **Detailed Checklist Progress:** 33 / 143 items verified (23.1% recorded readiness; 110 unchecked, 24 Owner gates in `docs/YCN_READINESS_CHECKLIST.md`).
+  - **V1 Major Milestone Progress:** 4 / 15 accepted milestones (26.7% milestone-count progress; M01–M04 verified in `docs/BACKLOG.md`).
+
+- **Next Immediate Delivery Milestone:** Private Netlify Staging Deployment & Access Verification (M05) — pending Owner setting default project visibility to Private. Followed by NAV-07 Mobile Navigation Accessibility Remediation (M06).
+
+---
+
+## CURRENT STATUS — 17 November 2026
 
 This block supersedes older current-status blocks below without erasing their historical records.
 

@@ -12,13 +12,16 @@
 
 ---
 
-## Standing Owner Rule
+## Standing Owner Rule & Safe CLOSE Contract
 
 Whenever the Owner says **CLOSE**:
 1. AGY / the active agent must complete a **full project reconciliation**, not merely stop working or output a chat summary.
 2. The procedure must collect newly generated files, organize them into canonical locations, identify and eliminate redundant verified duplicates, synchronize approved repository states to GitHub, and establish a bulletproof **cold restart point**.
 3. A future session starting tomorrow, next month, or a year later must be able to resume accurately from repository files alone, without access to conversational transcripts.
-4. **The Owner's word CLOSE authorizes pushing housekeeping and close commits to `main`**, provided tests/checks pass and no unreviewed code or unapproved artwork is introduced. Unreviewed work-in-progress routes strictly to a `wip/<task-id>` branch.
+4. **Push Authorization Note (Superseded by DECISION-055 Amendment 2, 17 Nov 2026 Governance Directive, and DECISION-057):** Direct pushes to `main` are strictly prohibited (enforced technically by the GitHub `Protect main` ruleset). Even at CLOSE, all changes (including housekeeping, documentation, and close status records) must route strictly through dedicated `close/<YYYY-MM-DD>` or `wip/<task-id>` branches and PRs. Only the Owner operates GitHub merge controls using the exact formula: `Approved, merge PR #<number> at <full reviewed SHA>`.
+5. **Major Milestone Boundary & Unfinished-Task Checkpointing:** A safe CLOSE is routinely recommended after an accepted major milestone. However, the Owner may request CLOSE at any time, including mid-task. When CLOSE is requested mid-task, AGY safely checkpoints in-progress work to `wip/<task-id>`, logs the exact incomplete state in `YCN_LABS_MASTER/02_BUSINESS_OPERATIONS/AI_DELIVERY_SYSTEM/PRIVATE_SEAT_HANDOVERS.md`, and discloses unfinished status.
+6. **No Forced Merge to Close:** Closing a session never requires forcing a documentation/records PR into `main`. Unmerged status is safely preserved in the private vault handover and published via authorized PR in due course.
+7. **Session Scope Distinction:** **CLOSE ends a working session safely; it does NOT mean the entire YCN Labs project is finished.**
 
 ---
 
@@ -114,7 +117,7 @@ Update the authoritative continuity records in both repositories:
 - Scan staged text for secrets (API keys, private tokens).
 - Ensure no staged file exceeds 25 MB.
 - Commit message format: `close: <YYYY-MM-DD> — <summary>`.
-- **Push Authorization:** The Owner's instruction **CLOSE** authorizes pushing approved housekeeping/status commits to `main`.
+- **Push Authorization (Superseded by GitHub `Protect main` Ruleset & DECISION-057):** Direct pushes to `main` are strictly prohibited. The Owner's instruction **CLOSE** authorizes creating an isolated `close/<YYYY-MM-DD>` branch, committing approved housekeeping/status files, pushing to that isolated branch, and opening a PR. Only the Owner merges into `main` on GitHub.
 - Unreviewed code or unapproved artwork must be committed to branch `wip/<task-id>` and pushed, never to `main`.
 - Ensure zero uncommitted, untracked, or unpushed work remains undisclosed.
 - **Mandatory End-of-Day Synchronization Commands (Branch-Aware):**
@@ -127,7 +130,9 @@ Update the authoritative continuity records in both repositories:
 ### Step H: Close Completion & Report
 - Update `YCN_LABS_MASTER/LAST_CLOSE.txt` with the ISO timestamp and all repository HEAD hashes.
 - Synchronize status across canonical documents: [`docs/STATE.md`](STATE.md), [`docs/BACKLOG.md`](BACKLOG.md), and [`docs/YCN_READINESS_CHECKLIST.md`](YCN_READINESS_CHECKLIST.md).
-- If all checks pass, declare **CLOSED**.
+- Update private vault handover in `YCN_LABS_MASTER/02_BUSINESS_OPERATIONS/AI_DELIVERY_SYSTEM/PRIVATE_SEAT_HANDOVERS.md`.
+- Disclose backup status: local vault verified; off-device backup marked UNVERIFIED unless directly established.
+- If all checks pass, declare **CLOSE COMPLETE**.
 - If any check fails, declare **CLOSE BLOCKED** with the exact failure reason.
 - Output the full reconciliation report containing:
   - File disposition table (Path, SHA-256, Action, Destination).

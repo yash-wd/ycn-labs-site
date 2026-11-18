@@ -62,13 +62,15 @@ Open this file on branch `main`. Before any work run `git fetch && git status --
 ---
 
 ## 5. Roles & Operating Model
-Roles are governed by [`AGENTS.md`](../AGENTS.md) and **DECISION-055 Amendment 1 (Owner, 4 Nov 2026)**. The three-seat text below it in older records is historical.
+Roles are governed by [`AGENTS.md`](../AGENTS.md), [`docs/YCN_AI_DELIVERY_PLAYBOOK.md`](YCN_AI_DELIVERY_PLAYBOOK.md), and **DECISION-057 (Owner, 18 Nov 2026)**. Historical two-seat and three-seat models in older records are preserved for history only.
 
-- **Owner:** Final authority on business direction, priorities, scope, legal wording, visual verdicts, releases, merges, deployments, and close.
-- **Local Claude Code (VS Code, host `YCN-labs`):** the sole builder. One task, one `wip/*` branch, one PR; never reviews its own work.
-- **GPT:** independent reviewer of PRs authored by local Claude Code; one reviewer per PR.
-- **Claude chat:** content and wording advice; reviews only work it did not author.
-- **AGY:** retired from execution. Its tools, skills and records are preserved.
+- **Owner:** Final authority on business direction, priorities, scope, legal wording, visual verdicts, releases, merges, deployments, and close. Only the Owner operates GitHub merge controls using the exact formula: `Approved, merge PR #<number> at <full reviewed SHA>`.
+- **#1 Working Claude:** Strategy briefs, legal/privacy analysis, commercial positioning, and approved public copy drafting.
+- **#2 Working GPT:** Technical Lead, sole author of consolidated execution instructions for AGY, technical diff reviewer, and CI log verification.
+- **#3 AGY (Google Antigravity on host `YCN-labs`):** Sole local workstation builder and executor. Handles branch creation, local code edits, test execution, commits, pushes, and draft PR preparation. One task, one `wip/*` branch, one PR.
+- **#4 Claude Judge:** Independent visual design critique, accessibility (WCAG), content compliance, and operational risk assessment.
+- **#5 GPT Judge:** Independent CI log inspection, security/gitleaks scanning, and final technical merge recommendation.
+*(Note: #2 Working GPT is the designated independent reviewer of routine PRs authored by #3. #4 Claude Judge and #5 GPT Judge are convened for independent risk evaluation at material design, personal data, legal, security, or release gates, or upon Owner request. Judges have no approval or merge authority).*
 
 ---
 
