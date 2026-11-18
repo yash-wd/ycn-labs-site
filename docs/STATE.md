@@ -26,22 +26,32 @@ This block supersedes older current-status blocks below without erasing their hi
   - **Checklist Item Updated:** `CHK-116` marked `[VERIFIED]`.
   - **Deployment Status:** No production deployment authorized for `ycn-labs-site`.
 
-- **Active Task: `YCN-OPS-PLAYBOOK-01` (Five-Seat AI Delivery Playbook, Milestone System & Safe CLOSE Amendment).**
-  - **Branch:** `wip/YCN-OPS-PLAYBOOK-01`.
-  - **Status:** [LOCAL-WIP] Initial delivery commit `e2f2e90` pushed; final milestone/progress/safe-close amendment applied; draft PR preparation pending.
-  - **Base `main`:** `0c164a0ce42cba011f83a85272723d8835f9c27e`.
-  - **Scope:**
-    - Canonical public documentation of Five-Seat model (`docs/YCN_AI_DELIVERY_PLAYBOOK.md`, `AGENTS.md`, `docs/START_HERE.md`, `docs/CLOSE_PROTOCOL.md`, `docs/INDEX.md`, `docs/YCN_DECISIONS.md`, `docs/STATE.md`, `docs/BACKLOG.md`, `docs/YCN_READINESS_CHECKLIST.md`, `docs/PROGRESS.md`).
-    - Targeted supersession notes in historical operational docs (`docs/YCN_AGENT_OPERATING_PROTOCOL.md`, `docs/AGY_OPEN_CLOSE_PROTOCOL.md`, `docs/YCN_LABS_OWNER_WORKING_ROUTINE.md`).
-    - Private operational archive established in master vault (`YCN_LABS_MASTER/02_BUSINESS_OPERATIONS/AI_DELIVERY_SYSTEM/`).
-    - Formal ratification of DECISION-057 and its Major Milestone / Safe CLOSE Clarification.
-    - Versioned V1 Release Milestone Baseline (15 milestones, M01–M15; MEDIA-01 parallel track) in `docs/BACKLOG.md`.
+- **Milestone: PR #43 (`YCN-OPS-PLAYBOOK-01` — Five-Seat AI Delivery Playbook & Safe CLOSE) merged into `main` on 18 Nov 2026.**
+  - **Reviewed PR #43 Head:** `7de125f7f557c6ca0b177f8667e3f53b1c3e2ecb`.
+  - **Main Merge Commit:** `d9b10396acb661ea77ae60f41165f073c5bc12f4`.
+  - **Post-Merge GitHub CI (Run 44260276078):** PASSED (TypeScript clean, ESLint clean, 316/316 unit tests passed, 3 preview Chromium tests passed, 39 production Chromium tests passed, Next.js 16.3.6 builds passed).
+  - **Post-Merge Gitleaks (Run 44260276117):** PASSED with 0 leaks.
+  - **Merged by:** Owner directly on GitHub.
+  - **Canonical Artifacts:** Published `docs/YCN_AI_DELIVERY_PLAYBOOK.md`, ratified DECISION-057, private vault archive established in `YCN_LABS_MASTER/02_BUSINESS_OPERATIONS/AI_DELIVERY_SYSTEM/`.
+
+- **Milestone: M05 (Private Netlify Staging Deployment & Verification) ACCEPTED by Owner on 18 Nov 2026.**
+  - **Status:** `[VERIFIED — OWNER-ATTESTED]`.
+  - **Host & Project:** Netlify project `ycn-labs-site-staging` deployed from `main@d9b10396acb661ea77ae60f41165f073c5bc12f4`.
+  - **Owner-Confirmed Acceptance:** Correct staging environment variables; zero production credentials provisioned; homepage renders; contact form displays preview notice and disabled submit button; synthetic POST returns HTTP 503 without storing enquiry; robots.txt disallows search indexing; production/preview access restricted to Private; automatic publishing locked; deploy logs Private; Git-based deployment enforcement enabled.
+  - **Governance:** DECISION-058 adopted. Staging-only hosting selection; no production deployment or DNS decision.
+
+- **Active Task: `YCN-NAV-07-A11Y-01` (M06 — NAV-07 Mobile Navigation Accessibility Remediation).**
+  - **Branch:** `wip/YCN-NAV-07-A11Y-01`.
+  - **Base `main`:** `d9b10396acb661ea77ae60f41165f073c5bc12f4`.
+  - **Status:** [LOCAL-WIP] Execution authorized by Owner; remediating `#mobile-nav-sheet` accessibility defects without navbar redesign.
+  - **Scope:** Initial focus management, tab/shift-tab containment within dialog, background content inertness and interaction blocking, Escape and capsule focus restoration, route change focus safety, mobile-to-desktop resize cleanup, exit-animation panel non-interactivity, and Playwright browser regression test suite.
+  - **Permitted Files:** `components/Header.tsx`, `e2e/site.spec.ts`, `docs/STATE.md`, `docs/BACKLOG.md`, `docs/YCN_DECISIONS.md`.
 
 - **Current Progress Metrics (18 Nov 2026):**
   - **Detailed Checklist Progress:** 33 / 143 items verified (23.1% recorded readiness; 110 unchecked, 24 Owner gates in `docs/YCN_READINESS_CHECKLIST.md`).
-  - **V1 Major Milestone Progress:** 4 / 15 accepted milestones (26.7% milestone-count progress; M01–M04 verified in `docs/BACKLOG.md`).
+  - **V1 Major Milestone Progress:** 5 / 15 accepted milestones (33.3% milestone-count progress; M01–M05 accepted; 10 pending in `docs/BACKLOG.md`).
 
-- **Next Immediate Delivery Milestone:** Private Netlify Staging Deployment & Access Verification (M05) — pending Owner setting default project visibility to Private. Followed by NAV-07 Mobile Navigation Accessibility Remediation (M06).
+- **Next Delivery Milestones:** M07 (Four-mode hero visual prototype & wording) followed by M08 (Four-mode hero & services implementation). Parallel track: `MEDIA-01`.
 
 ---
 

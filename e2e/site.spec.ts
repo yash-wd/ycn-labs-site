@@ -108,6 +108,193 @@ test.describe("navigation and theme", () => {
   });
 });
 
+test.describe("M06 NAV-07 Mobile Navigation Accessibility", () => {
+  test("initial focus transfers reliably to first navigation link upon opening", async ({ browser }) => {
+    const { ctx, page } = await open(browser, "/", { width: 375, height: 812 });
+    const trigger = page.locator("#navbar-menu-capsule-button");
+    await trigger.click();
+
+    const sheet = page.locator("#mobile-nav-sheet");
+    await expect(sheet).toBeVisible();
+    await expect(sheet).toHaveAttribute("role", "dialog");
+    await expect(sheet).toHaveAttribute("aria-modal", "true");
+
+    const firstLink = sheet.locator('a[href="/work"]').first();
+    await expect(firstLink).toBeFocused();
+    await ctx.close();
+  });
+
+  test("Tab and Shift+Tab remain trapped within mobile dialog and catch escaped focus", async ({ browser }) => {
+    const { ctx, page } = await open(browser, "/", { width: 375, height: 812 });
+    await page.locator("#navbar-menu-capsule-button").click();
+    const sheet = page.locator("#mobile-nav-sheet");
+    await expect(sheet).toBeVisible();
+
+    const firstLink = sheet.locator('a[href="/work"]').first();
+    const closeBtn = page.locator("#mobile-nav-close-button");
+    const lastEl = page.locator("#mobile-menu-cta-button");
+
+    await expect(firstLink).toBeFocused();
+
+    // Focus close button (first focusable in DOM) and Shift+Tab to wrap to last element (#mobile-menu-cta-button)
+    await closeBtn.focus();
+    await page.keyboard.press("Shift+Tab");
+    await expect(lastEl).toBeFocused();
+
+    // Tab from last element wraps to first element (closeBtn)
+    await page.keyboard.press("Tab");
+    await expect(closeBtn).toBeFocused();
+
+    // Escaped focus: simulate focus outside modal then press Tab
+    await page.evaluate(() => document.body.focus());
+    await page.keyboard.press("Tab");
+    await expect(sheet).toBeVisible();
+    const activeIsInside = await page.evaluate(() => {
+      const sheetEl = document.getElementById("mobile-nav-sheet");
+      return sheetEl ? sheetEl.contains(document.activeElement) : false;
+    });
+    expect(activeIsInside).toBe(true);
+
+    await ctx.close();
+  });
+
+  test("background content is inert and non-interactive while mobile modal is active", async ({ browser }) => {
+    const { ctx, page } = await open(browser, "/", { width: 375, height: 812 });
+    await page.locator("#navbar-menu-capsule-button").click();
+    await expect(page.locator("#mobile-nav-sheet")).toBeVisible();
+
+    // Main and footer must have inert and aria-hidden attributes
+    const mainInert = await page.locator("main").getAttribute("inert");
+    const mainHidden = await page.locator("main").getAttribute("aria-hidden");
+    expect(mainInert).not.toBeNull();
+    expect(mainHidden).toBe("true");
+
+    const footerInert = await page.locator("footer").getAttribute("inert");
+    const footerHidden = await page.locator("footer").getAttribute("aria-hidden");
+    expect(footerInert).not.toBeNull();
+    expect(footerHidden).toBe("true");
+
+    // Backdrop is visible
+    const backdrop = page.locator("#mobile-nav-backdrop");
+    await expect(backdrop).toBeVisible();
+
+    // Close menu and verify inertness is cleared
+    await page.keyboard.press("Escape");
+    await expect(page.locator("#mobile-nav-sheet")).toBeHidden();
+
+    const mainCleared = await page.locator("main").getAttribute("inert");
+    expect(mainCleared).toBeNull();
+    await ctx.close();
+  });
+
+  test("Escape key closes mobile menu and restores focus to menu capsule button", async ({ browser }) => {
+    const { ctx, page } = await open(browser, "/", { width: 375, height: 812 });
+    const trigger = page.locator("#navbar-menu-capsule-button");
+    await trigger.click();
+    await expect(page.locator("#mobile-nav-sheet")).toBeVisible();
+
+    await page.keyboard.press("Escape");
+    await expect(page.locator("#mobile-nav-sheet")).toBeHidden();
+    await expect(trigger).toBeFocused();
+    await expect(trigger).toHaveAttribute("aria-expanded", "false");
+    await ctx.close();
+  });
+
+  test("in-panel close button closes mobile menu and restores focus to menu capsule button", async ({ browser }) => {
+    const { ctx, page } = await open(browser, "/", { width: 375, height: 812 });
+    const trigger = page.locator("#navbar-menu-capsule-button");
+    await trigger.click();
+    await expect(page.locator("#mobile-nav-sheet")).toBeVisible();
+
+    await page.locator("#mobile-nav-close-button").click();
+    await expect(page.locator("#mobile-nav-sheet")).toBeHidden();
+    await expect(trigger).toBeFocused();
+    await ctx.close();
+  });
+
+  test("capsule toggle button closes mobile menu and restores focus", async ({ browser }) => {
+    const { ctx, page } = await open(browser, "/", { width: 375, height: 812 });
+    const trigger = page.locator("#navbar-menu-capsule-button");
+    await trigger.click();
+    await expect(page.locator("#mobile-nav-sheet")).toBeVisible();
+
+    await trigger.click();
+    await expect(page.locator("#mobile-nav-sheet")).toBeHidden();
+    await expect(trigger).toBeFocused();
+    await ctx.close();
+  });
+
+  test("backdrop click closes mobile menu and restores focus", async ({ browser }) => {
+    const { ctx, page } = await open(browser, "/", { width: 375, height: 812 });
+    const trigger = page.locator("#navbar-menu-capsule-button");
+    await trigger.click();
+    await expect(page.locator("#mobile-nav-sheet")).toBeVisible();
+
+    await page.locator("#mobile-nav-backdrop").click({ position: { x: 20, y: 20 } });
+    await expect(page.locator("#mobile-nav-sheet")).toBeHidden();
+    await expect(trigger).toBeFocused();
+    await ctx.close();
+  });
+
+  test("route navigation closes mobile menu, clears inertness, and restores logical focus destination", async ({ browser }) => {
+    const { ctx, page } = await open(browser, "/", { width: 375, height: 812 });
+    await page.locator("#navbar-menu-capsule-button").click();
+    await expect(page.locator("#mobile-nav-sheet")).toBeVisible();
+
+    await page.locator('#mobile-nav-sheet a[href="/work"]').click();
+    await expect(page).toHaveURL(/\/work$/);
+    await expect(page.locator("#mobile-nav-sheet")).toBeHidden();
+
+    // Logical focus destination on new page is main-content
+    await expect(page.locator("#main-content")).toBeFocused();
+
+    // Inertness removed from main
+    await expect(page.locator("main")).not.toHaveAttribute("inert");
+    await ctx.close();
+  });
+
+  test("viewport resize from mobile to desktop closes menu safely and clears inertness", async ({ browser }) => {
+    const { ctx, page } = await open(browser, "/", { width: 768, height: 1024 });
+    const trigger = page.locator("#navbar-menu-capsule-button");
+    await trigger.click();
+    await expect(page.locator("#mobile-nav-sheet")).toBeVisible();
+
+    // Resize across 1024px desktop breakpoint
+    await page.setViewportSize({ width: 1024, height: 800 });
+    await expect(page.locator("#mobile-nav-sheet")).toBeHidden();
+    await expect(trigger).toBeFocused();
+
+    await expect(page.locator("main")).not.toHaveAttribute("inert");
+    await ctx.close();
+  });
+
+  test("reduced motion operation: opens and closes cleanly without delay", async ({ browser }) => {
+    const { ctx, page } = await open(browser, "/", { width: 375, height: 812, reduced: true });
+    const trigger = page.locator("#navbar-menu-capsule-button");
+    await trigger.click();
+    await expect(page.locator("#mobile-nav-sheet")).toBeVisible();
+
+    await page.keyboard.press("Escape");
+    await expect(page.locator("#mobile-nav-sheet")).toBeHidden();
+    await expect(trigger).toBeFocused();
+    await ctx.close();
+  });
+
+  test("multi-viewport desktop and tablet regression across light and dark themes", async ({ browser }) => {
+    for (const theme of ["dark", "light"] as const) {
+      for (const width of [1024, 1440]) {
+        const { ctx, page } = await open(browser, "/", { theme, width, height: 900 });
+        const trigger = page.locator("#navbar-menu-capsule-button");
+        await trigger.click();
+        await expect(page.locator("#desktop-nav-expanded")).toBeVisible();
+        await page.keyboard.press("Escape");
+        await expect(trigger).toBeFocused();
+        await ctx.close();
+      }
+    }
+  });
+});
+
 test.describe("Homepage R2 Interactive Demonstrations", () => {
   test("scene switching: Websites, Web apps, Automation tabs switch cleanly", async ({ browser }) => {
     const { ctx, page } = await open(browser, "/");

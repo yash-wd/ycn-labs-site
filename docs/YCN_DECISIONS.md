@@ -421,3 +421,18 @@ If the Owner wants to allow a WIP commit/push for that single doc reconciliation
 4. **Judge Role Clarification.** #2 Working GPT is the sole author of execution briefs and designated reviewer of normal AGY-authored PRs. #4 Claude Judge and #5 GPT Judge are convened for independent risk evaluation at material design, personal data, legal, security, or release gates, or upon Owner request. Judges advise and assess risk; they have no merge, commit, or approval authority.
 5. **Scope Distinction.** CLOSE ends a working session safely; it does NOT mean the entire YCN Labs project is finished.
 
+### DECISION-058: Staging-Only Hosting Provider Selection (Netlify) and Operational Isolation Boundaries
+
+**Status: ADOPTED by Owner, 18 Nov 2026**  
+**Task:** `YCN-STAGING-DEPLOY-01` (Milestone M05 Acceptance)
+
+1. **Staging Provider Selection.** The Owner has designated and verified Netlify as the isolated staging host (`ycn-labs-site-staging`) for private review builds of `ycn-labs-site` deployed from verified `main@d9b1039`.
+2. **Strict Operational Boundaries.** Staging deployment is authorized solely under verified access controls:
+   - Default project and preview visibility configured as Private; search engine indexing disallowed via `robots.txt`.
+   - Staging environment variables configured exclusively with synthetic/preview values; zero production database, Redis, or Resend credentials provisioned.
+   - Automatic publishing locked; deploy logs configured as Private; Git-based deployment enforcement enabled.
+   - Fail-closed contact boundary active: preview contact form displays warning notice with disabled submit; synthetic POST requests receive HTTP 503 without storing enquiries or triggering notifications.
+3. **No Production Hosting or DNS Decision.** This decision does NOT authorize production deployment, DNS changes, or public launch on Netlify. Production hosting, domain cutover, and live credentials remain separate Owner gates.
+4. **Preserved Authority.** All frozen systems, design tokens, security boundaries, and Owner merge controls remain in full effect.
+
+
