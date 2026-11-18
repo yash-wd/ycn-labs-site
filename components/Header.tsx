@@ -143,28 +143,26 @@ export function Header({ isTakeoverActive = false }: { isTakeoverActive?: boolea
     setIsDesktopExpanded(false);
     setIsMenuOpen(false);
 
+    document
+      .querySelectorAll<HTMLElement>(
+        "main, footer, [href='#main-content'], #navbar-logo-slot, #navbar-right-cta, #navbar-theme-toggle-wrapper"
+      )
+      .forEach((el) => {
+        el.removeAttribute("inert");
+        el.removeAttribute("aria-hidden");
+      });
+
     if (isNavigatingFromMenuRef.current) {
       isNavigatingFromMenuRef.current = false;
-      const focusMain = () => {
-        const main = document.getElementById("main-content");
-        if (main) {
-          if (!main.hasAttribute("tabindex")) {
-            main.setAttribute("tabindex", "-1");
-          }
-          main.focus({ preventScroll: true });
-        } else {
-          desktopMenuTriggerRef.current?.focus();
+      const main = document.getElementById("main-content");
+      if (main) {
+        if (!main.hasAttribute("tabindex")) {
+          main.setAttribute("tabindex", "-1");
         }
-      };
-
-      focusMain();
-      const raf = requestAnimationFrame(focusMain);
-      const timer = setTimeout(focusMain, 100);
-
-      return () => {
-        cancelAnimationFrame(raf);
-        clearTimeout(timer);
-      };
+        main.focus({ preventScroll: true });
+      } else {
+        desktopMenuTriggerRef.current?.focus();
+      }
     }
   }, [pathname]);
 
@@ -495,15 +493,14 @@ export function Header({ isTakeoverActive = false }: { isTakeoverActive?: boolea
     if (typeof window !== "undefined" && window.innerWidth >= 1024) {
       setIsDesktopExpanded((prev) => !prev);
     } else {
-      setIsMenuOpen((prev) => {
-        const next = !prev;
-        if (!next) {
-          desktopMenuTriggerRef.current?.focus();
-        }
-        return next;
-      });
+      if (isMenuOpen) {
+        setIsMenuOpen(false);
+        desktopMenuTriggerRef.current?.focus();
+      } else {
+        setIsMenuOpen(true);
+      }
     }
-  }, []);
+  }, [isMenuOpen]);
 
   // Canonical Primary Routes (docs/YCN_CONTENT_SPEC.md §2, DECISION-039)
   const primaryLinks = [
@@ -778,7 +775,7 @@ export function Header({ isTakeoverActive = false }: { isTakeoverActive?: boolea
                     desktopMenuTriggerRef.current?.focus();
                   }}
                   aria-label="Close navigation menu"
-                  className="p-1 -mr-1 min-h-[36px] min-w-[36px] flex items-center justify-center rounded-full hover:bg-[var(--border-subtle)]/50 text-[var(--text-secondary)] hover:text-[var(--text-primary)] transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-[var(--focus-ring)] cursor-pointer"
+                  className="p-2.5 min-h-[44px] min-w-[44px] flex items-center justify-center rounded-full hover:bg-[var(--border-subtle)]/50 text-[var(--text-secondary)] hover:text-[var(--text-primary)] transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-[var(--focus-ring)] cursor-pointer"
                 >
                   <X className="w-4 h-4" />
                 </button>

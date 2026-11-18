@@ -280,6 +280,70 @@ test.describe("M06 NAV-07 Mobile Navigation Accessibility", () => {
     await ctx.close();
   });
 
+  test("background clicks and pointer interactions are blocked while mobile modal is active", async ({ browser }) => {
+    const { ctx, page } = await open(browser, "/", { width: 375, height: 812 });
+    await page.locator("#navbar-menu-capsule-button").click();
+    await expect(page.locator("#mobile-nav-sheet")).toBeVisible();
+
+    // Verify background theme toggle wrapper has inert and aria-hidden
+    await expect(page.locator("#navbar-theme-toggle-wrapper")).toHaveAttribute("inert");
+    await expect(page.locator("#navbar-theme-toggle-wrapper")).toHaveAttribute("aria-hidden", "true");
+
+    // Attempting to dispatch click on background theme toggle does not change theme
+    const themeSwitched = await page.evaluate(() => {
+      const btn = document.getElementById("navbar-theme-toggle");
+      if (!btn) return false;
+      const initialDark = document.documentElement.classList.contains("dark");
+      try {
+        btn.click();
+      } catch {
+        // Inert element click rejected
+      }
+      const newDark = document.documentElement.classList.contains("dark");
+      return initialDark !== newDark;
+    });
+    expect(themeSwitched).toBe(false);
+
+    // Verify background main interactive link cannot be clicked or trigger navigation
+    const navigated = await page.evaluate(() => {
+      const heroLink = document.querySelector<HTMLAnchorElement>("main a[href]");
+      if (!heroLink) return false;
+      const initialHref = window.location.pathname;
+      try {
+        heroLink.click();
+      } catch {
+        // Inert element click rejected
+      }
+      return window.location.pathname !== initialHref;
+    });
+    expect(navigated).toBe(false);
+
+    await ctx.close();
+  });
+
+  test("rapid toggle sequences cleanly recover state and logical focus without stuck inertness", async ({ browser }) => {
+    const { ctx, page } = await open(browser, "/", { width: 375, height: 812 });
+    const trigger = page.locator("#navbar-menu-capsule-button");
+    const sheet = page.locator("#mobile-nav-sheet");
+
+    // Rapidly toggle menu open and closed 3 consecutive times
+    for (let i = 0; i < 3; i++) {
+      await trigger.click();
+      await expect(sheet).toBeVisible();
+      await trigger.click();
+      await expect(sheet).toBeHidden();
+      await expect(trigger).toBeFocused();
+    }
+
+    // After rapid cycles, confirm inertness is fully removed and main is active
+    await expect(page.locator("main")).not.toHaveAttribute("inert");
+    await expect(page.locator("main")).not.toHaveAttribute("aria-hidden");
+    await expect(page.locator("footer")).not.toHaveAttribute("inert");
+    await expect(trigger).toBeFocused();
+
+    await ctx.close();
+  });
+
   test("multi-viewport desktop and tablet regression across light and dark themes", async ({ browser }) => {
     for (const theme of ["dark", "light"] as const) {
       for (const width of [1024, 1440]) {

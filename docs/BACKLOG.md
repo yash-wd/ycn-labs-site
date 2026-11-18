@@ -47,9 +47,24 @@
 - [ ] **Privacy, Terms & Legal Copy:** Complete legal review; resolve unsupported ContactForm statement `"We respect your privacy. No data is shared or sold."` in conjunction with Privacy policy (Task PR #35 / legal clearance).
 - [ ] **Pre-Launch Operational Verification:** Real database and email acceptance against configured staging service, operational monitoring alert check, durable backup & rollback dry-run, WebKit and physical device testing, and 5-person comprehension testing before public cutover.
 - [ ] **Owner Visual Refinements:** Consolidate Owner design suggestions and backlog enhancements into a single prioritized, bounded post-merge design task.
-- [ ] **Privacy, Terms & Legal Copy:** Complete legal review; resolve unsupported ContactForm statement `"We respect your privacy. No data is shared or sold."` in conjunction with Privacy policy (Task PR #35 / legal clearance).
-- [ ] **Pre-Launch Operational Verification:** Real database and email acceptance against configured staging service, operational monitoring alert check, durable backup & rollback dry-run, WebKit and physical device testing, and 5-person comprehension testing before public cutover.
-- [ ] **Owner Visual Refinements:** Consolidate Owner design suggestions and backlog enhancements into a single prioritized, bounded post-merge design task.
+
+---
+
+## 3. Deferred Growth & Improvement Triggers
+
+- **`GROWTH-01` (#1 First-Client Outreach Strategy):** Seat #1 strategy brief on first-client acquisition plan; deferred until after M15 release candidate freeze.
+- **`GROWTH-02` (Local Business Prospect Shortlist):** Private shortlist of up to 20 qualified local business prospects in Hyderabad/Telangana; deferred until after M15 release candidate freeze.
+- **`GROWTH-03` (Direct 1-to-1 Client Outreach):** Founder-led direct outreach and enquiry engagement; active only after M15/M16 public launch.
+- **`EARLY-UX-01` (5 Supervised Staging Demos):** Supervised user navigation walkthroughs with 5 nontechnical local business owners on private staging URL; scheduled during M14 comprehension gate.
+- **`AI-TRIAL-01` (Public Research AI Trial):** Optional 1-week free-model public research trial or capability showcase; evaluated post-launch, strictly without compromising commercial positioning.
+- **`PRICE-01` (Commercial Pricing Research):** Seat #1 commercial research and recommendation on starting prices for standard packages vs custom builds; deferred to post-V1 operations.
+- **`SOCIAL-01` (Brand Social Channels):** Official LinkedIn Company Page and Google Business Profile setup; initiated in parallel or following V1 public launch.
+- **`SEC-OPINION-01` (External Security Opinion):** Optional independent AI/human security scan review at the pre-launch security gate (M13); strictly non-blocking if standard automated gates pass.
+- **`OPS-MARKETING-CAPACITY` (Marketing Role Evaluation):** Post-launch evaluation of dedicated marketing/sales capacity once commercial revenue or client inbound begins.
+- **`MEDIA-01` Subtriggers (Original Video Roadmap):**
+  - *Videos 1–2 (General Awareness & Web/App Impact):* Educational screen-recorded walkthroughs on why modern web/app systems help small-to-medium businesses; scheduled after M05 staging stabilization.
+  - *Videos 3–4 (Hero & Workflow Demonstrations):* Technical demonstrations of YCN Labs engineering workflow, responsive architecture, and performance; scheduled after M08 inner page completion.
+  - *Client Media Safeguard:* Under DECISION-052/DECISION-054, no client screen recordings, code, or identifiable assets may be featured without explicit prior written authorization.
 
 ---
 
