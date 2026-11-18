@@ -49,6 +49,7 @@ export function Header({ isTakeoverActive = false }: { isTakeoverActive?: boolea
   const desktopRailRef = useRef<HTMLDivElement>(null);
   const desktopShellRef = useRef<HTMLDivElement>(null);
   const hasDesktopOpenedRef = useRef(false);
+  const isNavigatingFromMenuRef = useRef(false);
 
   const pathname = usePathname();
   const [takeoverMode, setTakeoverMode] = useState(false);
@@ -123,6 +124,11 @@ export function Header({ isTakeoverActive = false }: { isTakeoverActive?: boolea
     const handleResize = () => {
       if (window.innerWidth >= 1024 && isMenuOpen) {
         setIsMenuOpen(false);
+        desktopMenuTriggerRef.current?.focus();
+        document.querySelectorAll<HTMLElement>("main, footer, [href='#main-content'], #navbar-logo-slot, #navbar-right-cta, #navbar-theme-toggle-wrapper").forEach((el) => {
+          el.removeAttribute("inert");
+          el.removeAttribute("aria-hidden");
+        });
       }
       if (window.innerWidth < 1024 && isDesktopExpanded) {
         setIsDesktopExpanded(false);
@@ -132,13 +138,58 @@ export function Header({ isTakeoverActive = false }: { isTakeoverActive?: boolea
     return () => window.removeEventListener("resize", handleResize);
   }, [isMenuOpen, isDesktopExpanded]);
 
-  // Close menus on route navigation
+  // Close menus on route navigation and restore logical focus destination
   useEffect(() => {
     setIsDesktopExpanded(false);
     setIsMenuOpen(false);
+
+    document
+      .querySelectorAll<HTMLElement>(
+        "main, footer, [href='#main-content'], #navbar-logo-slot, #navbar-right-cta, #navbar-theme-toggle-wrapper"
+      )
+      .forEach((el) => {
+        el.removeAttribute("inert");
+        el.removeAttribute("aria-hidden");
+      });
+
+    if (isNavigatingFromMenuRef.current) {
+      isNavigatingFromMenuRef.current = false;
+      const main = document.getElementById("main-content");
+      if (main) {
+        if (!main.hasAttribute("tabindex")) {
+          main.setAttribute("tabindex", "-1");
+        }
+        main.focus({ preventScroll: true });
+      } else {
+        desktopMenuTriggerRef.current?.focus();
+      }
+    }
   }, [pathname]);
 
-  // Mobile Menu Focus Trap
+  // Mobile Menu Initial Focus Management
+  useEffect(() => {
+    if (!isMenuOpen) return;
+
+    const raf = requestAnimationFrame(() => {
+      if (!mobileSheetRef.current) return;
+      // Focus first primary navigation link (Work) or first focusable element
+      const firstLink = mobileSheetRef.current.querySelector<HTMLElement>(
+        'nav a[href="/work"], nav a[href]'
+      );
+      if (firstLink) {
+        firstLink.focus();
+      } else {
+        const firstFocusable = mobileSheetRef.current.querySelector<HTMLElement>(
+          'a[href], button:not([disabled]), [tabindex]:not([tabindex="-1"])'
+        );
+        firstFocusable?.focus();
+      }
+    });
+
+    return () => cancelAnimationFrame(raf);
+  }, [isMenuOpen]);
+
+  // Mobile Menu Focus Trap & Containment
   useEffect(() => {
     if (!isMenuOpen) return;
 
@@ -151,6 +202,17 @@ export function Header({ isTakeoverActive = false }: { isTakeoverActive?: boolea
 
       const firstEl = focusableEls[0];
       const lastEl = focusableEls[focusableEls.length - 1];
+
+      // If focus has unexpectedly moved outside the modal, trap it back in
+      if (!mobileSheetRef.current.contains(document.activeElement)) {
+        e.preventDefault();
+        if (e.shiftKey) {
+          lastEl.focus();
+        } else {
+          firstEl.focus();
+        }
+        return;
+      }
 
       if (e.shiftKey) {
         if (document.activeElement === firstEl) {
@@ -167,6 +229,34 @@ export function Header({ isTakeoverActive = false }: { isTakeoverActive?: boolea
 
     window.addEventListener("keydown", handleTabKey);
     return () => window.removeEventListener("keydown", handleTabKey);
+  }, [isMenuOpen]);
+
+  // Background inertness & non-interactivity while mobile menu is open
+  useEffect(() => {
+    if (!isMenuOpen) return;
+
+    const backgroundElements: HTMLElement[] = [];
+    const mainEl = document.querySelector<HTMLElement>("main");
+    const footerEl = document.querySelector<HTMLElement>("footer");
+    const skipLink = document.querySelector<HTMLElement>("a[href='#main-content']");
+    const logoSlot = document.getElementById("navbar-logo-slot");
+    const rightCta = document.getElementById("navbar-right-cta");
+    const themeToggle = document.getElementById("navbar-theme-toggle-wrapper");
+
+    [mainEl, footerEl, skipLink, logoSlot, rightCta, themeToggle].forEach((el) => {
+      if (el) {
+        backgroundElements.push(el);
+        el.setAttribute("inert", "");
+        el.setAttribute("aria-hidden", "true");
+      }
+    });
+
+    return () => {
+      backgroundElements.forEach((el) => {
+        el.removeAttribute("inert");
+        el.removeAttribute("aria-hidden");
+      });
+    };
   }, [isMenuOpen]);
 
   // Non-destructive mobile scroll lock:
@@ -337,9 +427,7 @@ export function Header({ isTakeoverActive = false }: { isTakeoverActive?: boolea
       window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
     if (prefersReduced) {
-      if (!isMenuOpen) {
-        setIsSheetVisible(false);
-      }
+      setIsSheetVisible(isMenuOpen);
       return;
     }
 
@@ -405,9 +493,14 @@ export function Header({ isTakeoverActive = false }: { isTakeoverActive?: boolea
     if (typeof window !== "undefined" && window.innerWidth >= 1024) {
       setIsDesktopExpanded((prev) => !prev);
     } else {
-      setIsMenuOpen((prev) => !prev);
+      if (isMenuOpen) {
+        setIsMenuOpen(false);
+        desktopMenuTriggerRef.current?.focus();
+      } else {
+        setIsMenuOpen(true);
+      }
     }
-  }, []);
+  }, [isMenuOpen]);
 
   // Canonical Primary Routes (docs/YCN_CONTENT_SPEC.md §2, DECISION-039)
   const primaryLinks = [
@@ -488,7 +581,7 @@ export function Header({ isTakeoverActive = false }: { isTakeoverActive?: boolea
         <div
           id="navbar-center-cluster"
           data-testid="navbar-center-cluster"
-          className={`absolute right-4 sm:right-auto sm:left-1/2 sm:-translate-x-1/2 top-1/2 -translate-y-1/2 z-30 flex items-center transition-all duration-300 ${
+          className={`absolute right-4 sm:right-auto sm:left-1/2 sm:-translate-x-1/2 top-1/2 -translate-y-1/2 z-40 flex items-center transition-all duration-300 ${
             activeTakeover
               ? "opacity-0 pointer-events-none -translate-y-4"
               : "opacity-100 pointer-events-auto"
@@ -642,74 +735,132 @@ export function Header({ isTakeoverActive = false }: { isTakeoverActive?: boolea
 
       {/* MOBILE VERTICAL NAVIGATION PANEL (< 1024px): Compact centered panel below header */}
       {(isMenuOpen || isSheetVisible) && (
-        <div
-          id="mobile-nav-sheet"
-          ref={mobileSheetRef}
-          role="dialog"
-          aria-modal="true"
-          aria-label="Mobile Navigation Menu"
-          className="fixed top-18 inset-x-4 max-w-sm mx-auto z-40 bg-[var(--bg-surface)]/95 rounded-2xl border border-[var(--border-subtle)] shadow-2xl backdrop-blur-md p-5 lg:hidden pointer-events-auto"
-        >
-          <div className="space-y-4">
-            <p className="text-[10px] uppercase tracking-widest font-semibold text-[var(--text-muted)]">
-              Navigation
-            </p>
-            <nav className="space-y-1">
-              {primaryLinks.map((item, idx) => {
-                const isActive = pathname === item.href;
-                return (
+        <>
+          {/* Mobile backdrop scrim (interaction blocking & outside-click dismissal) */}
+          <div
+            id="mobile-nav-backdrop"
+            data-testid="mobile-nav-backdrop"
+            aria-hidden="true"
+            onClick={() => {
+              setIsMenuOpen(false);
+              desktopMenuTriggerRef.current?.focus();
+            }}
+            className={`fixed inset-0 z-30 bg-black/25 dark:bg-black/50 backdrop-blur-[2px] lg:hidden transition-opacity duration-300 ${
+              isMenuOpen ? "opacity-100 pointer-events-auto" : "opacity-0 pointer-events-none"
+            }`}
+          />
+          <div
+            id="mobile-nav-sheet"
+            ref={mobileSheetRef}
+            role="dialog"
+            aria-modal="true"
+            aria-label="Mobile Navigation Menu"
+            aria-hidden={!isMenuOpen ? "true" : undefined}
+            inert={!isMenuOpen ? true : undefined}
+            tabIndex={-1}
+            className={`fixed top-18 inset-x-4 max-w-sm mx-auto z-40 bg-[var(--bg-surface)]/95 rounded-2xl border border-[var(--border-subtle)] shadow-2xl backdrop-blur-md p-5 lg:hidden ${
+              isMenuOpen ? "pointer-events-auto" : "pointer-events-none"
+            }`}
+          >
+            <div className="space-y-4">
+              <div className="flex items-center justify-between">
+                <p className="text-[10px] uppercase tracking-widest font-semibold text-[var(--text-muted)]">
+                  Navigation
+                </p>
+                <button
+                  id="mobile-nav-close-button"
+                  type="button"
+                  onClick={() => {
+                    setIsMenuOpen(false);
+                    desktopMenuTriggerRef.current?.focus();
+                  }}
+                  aria-label="Close navigation menu"
+                  className="p-2.5 min-h-[44px] min-w-[44px] flex items-center justify-center rounded-full hover:bg-[var(--border-subtle)]/50 text-[var(--text-secondary)] hover:text-[var(--text-primary)] transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-[var(--focus-ring)] cursor-pointer"
+                >
+                  <X className="w-4 h-4" />
+                </button>
+              </div>
+              <nav className="space-y-1">
+                {primaryLinks.map((item, idx) => {
+                  const isActive = pathname === item.href;
+                  return (
+                    <Link
+                      key={item.href}
+                      href={item.href}
+                      aria-current={isActive ? "page" : undefined}
+                      onClick={() => {
+                        if (pathname === item.href) {
+                          setIsMenuOpen(false);
+                          desktopMenuTriggerRef.current?.focus();
+                        } else {
+                          isNavigatingFromMenuRef.current = true;
+                          setIsMenuOpen(false);
+                        }
+                      }}
+                      className={`flex items-center justify-between py-2.5 px-3 rounded-lg text-base font-semibold tracking-tight transition-colors ${
+                        isActive
+                          ? "bg-[var(--action-blue)]/10 text-[var(--action-blue)]"
+                          : "text-[var(--text-primary)] hover:bg-[var(--bg-canvas)]"
+                      }`}
+                    >
+                      <span>{item.label}</span>
+                      <span className="text-xs font-mono font-normal text-[var(--text-muted)]">
+                        0{idx + 1}
+                      </span>
+                    </Link>
+                  );
+                })}
+                <div className="pt-2 border-t border-[var(--border-subtle)]/60">
                   <Link
-                    key={item.href}
-                    href={item.href}
-                    aria-current={isActive ? "page" : undefined}
-                    onClick={() => setIsMenuOpen(false)}
-                    className={`flex items-center justify-between py-2.5 px-3 rounded-lg text-base font-semibold tracking-tight transition-colors ${
-                      isActive
-                        ? "bg-[var(--action-blue)]/10 text-[var(--action-blue)]"
-                        : "text-[var(--text-primary)] hover:bg-[var(--bg-canvas)]"
+                    href="/engineering"
+                    aria-current={pathname === "/engineering" ? "page" : undefined}
+                    onClick={() => {
+                      if (pathname === "/engineering") {
+                        setIsMenuOpen(false);
+                        desktopMenuTriggerRef.current?.focus();
+                      } else {
+                        isNavigatingFromMenuRef.current = true;
+                        setIsMenuOpen(false);
+                      }
+                    }}
+                    className={`flex items-center justify-between py-2 px-3 rounded-lg text-xs font-medium transition-colors ${
+                      pathname === "/engineering"
+                        ? "text-[var(--action-blue)] font-semibold"
+                        : "text-[var(--text-secondary)] hover:text-[var(--text-primary)]"
                     }`}
                   >
-                    <span>{item.label}</span>
-                    <span className="text-xs font-mono font-normal text-[var(--text-muted)]">
-                      0{idx + 1}
-                    </span>
+                    <span>Engineering</span>
+                    <span className="text-[var(--text-muted)]">→</span>
                   </Link>
-                );
-              })}
-              <div className="pt-2 border-t border-[var(--border-subtle)]/60">
-                <Link
-                  href="/engineering"
-                  aria-current={pathname === "/engineering" ? "page" : undefined}
-                  onClick={() => setIsMenuOpen(false)}
-                  className={`flex items-center justify-between py-2 px-3 rounded-lg text-xs font-medium transition-colors ${
-                    pathname === "/engineering"
-                      ? "text-[var(--action-blue)] font-semibold"
-                      : "text-[var(--text-secondary)] hover:text-[var(--text-primary)]"
-                  }`}
-                >
-                  <span>Engineering</span>
-                  <span className="text-[var(--text-muted)]">→</span>
-                </Link>
-              </div>
-            </nav>
+                </div>
+              </nav>
 
-            {/* Canonical Start a Project CTA inside opened mobile menu (Owner Ruling 28 Sep NAV-04) */}
-            <div className="pt-2 border-t border-[var(--border-subtle)]">
-              <YcnSignalBorder mode="accent" borderRadius={8} className="w-full">
-                <YcnFlowButton
-                  id="mobile-menu-cta-button"
-                  href="/contact"
-                  variant="primary"
-                  size="md"
-                  className="w-full min-h-[44px] justify-center text-xs font-semibold tracking-wider whitespace-nowrap"
-                  onClick={() => setIsMenuOpen(false)}
-                >
-                  Start a Project
-                </YcnFlowButton>
-              </YcnSignalBorder>
+              {/* Canonical Start a Project CTA inside opened mobile menu (Owner Ruling 28 Sep NAV-04) */}
+              <div className="pt-2 border-t border-[var(--border-subtle)]">
+                <YcnSignalBorder mode="accent" borderRadius={8} className="w-full">
+                  <YcnFlowButton
+                    id="mobile-menu-cta-button"
+                    href="/contact"
+                    variant="primary"
+                    size="md"
+                    className="w-full min-h-[44px] justify-center text-xs font-semibold tracking-wider whitespace-nowrap"
+                    onClick={() => {
+                      if (pathname === "/contact") {
+                        setIsMenuOpen(false);
+                        desktopMenuTriggerRef.current?.focus();
+                      } else {
+                        isNavigatingFromMenuRef.current = true;
+                        setIsMenuOpen(false);
+                      }
+                    }}
+                  >
+                    Start a Project
+                  </YcnFlowButton>
+                </YcnSignalBorder>
+              </div>
             </div>
           </div>
-        </div>
+        </>
       )}
     </header>
   );
