@@ -80,7 +80,7 @@ The following five binding operating rules clarify and reinforce existing contro
 
 2. **Faster Working Rules & Proactive Ownership:**
    - AI seats must act proactively as senior leads: anticipating dependencies, proposing clear next steps, pre-drafting reviews, and flagging blockers immediately.
-   - Routine GitHub PR management (updating draft titles, pasting reviewed descriptions, toggling draft readiness) may be performed by AGY upon explicit proposal and Owner confirmation, eliminating manual Owner friction.
+   - Routine GitHub PR management (updating draft titles, pasting reviewed descriptions, toggling draft readiness) may be performed by AGY upon task-specific Owner approval and strictly through an independently approved, least-privilege GitHub tool. Workstation presence of `gh` does not grant permission to use Owner-wide credentials. If least-privilege tooling is unavailable, AGY provides the exact URL and metadata for the Owner to operate directly.
 
 3. **Routine AGY Reporting Standard:**
    - AGY routine reports must be concise and strictly factual: commit SHA, changed files, summary of changes, and evidence links.

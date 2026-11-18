@@ -1,7 +1,7 @@
 # YCN Labs — AI Delivery Playbook
 
 **Revision:** Working GPT (#2) source-reconciled candidate, 18 November 2026  
-**Publication status:** Candidate documentation on branch `wip/YCN-OPS-PLAYBOOK-01`, awaiting draft PR review and Owner merge on GitHub. Note: The overarching Five-Seat governance model was formally adopted by Owner directive in DECISION-057 (18 Nov 2026); this document constitutes its canonical repository specification.  
+**Governance status:** The Five-Seat AI Delivery Model was adopted by Owner directive under DECISION-057. This playbook becomes operative as a published repository specification once merged into protected main. Unmerged branch versions are proposals.  
 **Scope:** Reusable operating methods for YCN Labs and future Owner-authorized projects; not a substitute for the project's technical master plan.
 
 > **Authority:** Owner's explicit decisions and the currently ratified `AGENTS.md` and `docs/YCN_DECISIONS.md` govern until this revision is approved and merged. When older instructions conflict with newer Owner rulings, flag the conflict and explicitly supersede obsolete operative clauses; preserve historical records. This playbook is a method, not a source of automatic permission.
@@ -73,7 +73,7 @@ OWNER ACTION: <one concrete action, or none>
 5. **Local evidence.** Run appropriate lint, type, unit, build, Playwright, accessibility and visual checks. Keep authentic raw logs in the approved evidence location; report failures and their provenance.
 6. **PR and GitHub checks.** Publish only approved WIP commits and prepare one PR with accurate description; `quality` and `gitleaks` must run on the final reviewed SHA.
 7. **Independent review.** #2 verifies the actual diff, source behaviour and GitHub results, with PASS or narrowly described CHANGES REQUESTED. If the same root cause fails twice, reconsider the approach rather than making unlimited correction attempts.
-8. **Owner merge gate.** Only the Owner moves the PR to Ready, if needed, and operates GitHub merge controls. The exact authorization format is `Approved, merge PR #<number> at <full 40-character reviewed SHA>`. New SHA requires re-review.
+8. **Owner merge gate & PR review status.** The Owner alone authorizes review-status changes and operates GitHub merge controls. AGY may update PR metadata or mark a PR Ready for review only after specific Owner approval and strictly through an independently approved, least-privilege GitHub tool; an unrestricted Owner-account GitHub login must not be used by AGY. If such a tool is unavailable, AGY provides the exact GitHub link and instructions for the Owner to operate directly. Only the Owner performs merges using the exact formula: `Approved, merge PR #<number> at <full 40-character reviewed SHA>`. Any new SHA requires re-review.
 9. **Post-merge verification.** Check actual `main` merge SHA, post-merge checks and changed tree. #3 synchronizes local `main` only under a safe authorized operation.
 10. **Continuity.** Update the existing authoritative queue/state records where they truly changed. Prepare the next bounded task for approval; do not begin it without approval.
 
@@ -180,7 +180,7 @@ To ensure absolute honesty and prevent misleading progress estimates:
    Calculated strictly against the canonical 143-point tracker in `docs/YCN_READINESS_CHECKLIST.md`. Represents recorded checklist state; only updated with direct verifiable evidence.
 2. **Major Milestone Progress:**  
    $$\text{Milestone Progress \%} = \frac{\text{Accepted Major Milestones}}{\text{Approved V1 Baseline Milestones (15)}} \times 100$$  
-   Calculated against the 15-milestone baseline in `docs/BACKLOG.md` (currently 4/15 = 26.7%; with `MEDIA-01` tracked in parallel outside the launch denominator). Clearly labelled as **milestone-count progress**, NOT a measure of elapsed engineering effort or launch readiness. The baseline denominator (15) is fixed and requires explicit Owner authorization to revise.
+   Calculated against the 15-milestone baseline in `docs/BACKLOG.md` (refer to `docs/STATE.md` and `docs/BACKLOG.md` for live verified counts and progress percentages; with `MEDIA-01` tracked in parallel outside the launch denominator). Clearly labelled as **milestone-count progress**, NOT a measure of elapsed engineering effort or launch readiness. The baseline denominator (15) is fixed and requires explicit Owner authorization to revise.
 
 Use **PASS / CHANGES REQUESTED** for #2's PR verdict; judges use **APPROVE / APPROVE WITH CHANGES / CHANGES REQUESTED / NEEDS EVIDENCE**, with severity and provenance. High/material issues block affected gate; minor noncritical changes go to backlog.
 
