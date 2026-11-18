@@ -52,19 +52,20 @@
 
 ## 3. Deferred Growth & Improvement Triggers
 
-- **`GROWTH-01` (#1 First-Client Outreach Strategy):** Seat #1 strategy brief on first-client acquisition plan; deferred until after M15 release candidate freeze.
-- **`GROWTH-02` (Local Business Prospect Shortlist):** Private shortlist of up to 20 qualified local business prospects in Hyderabad/Telangana; deferred until after M15 release candidate freeze.
-- **`GROWTH-03` (Direct 1-to-1 Client Outreach):** Founder-led direct outreach and enquiry engagement; active only after M15/M16 public launch.
-- **`EARLY-UX-01` (5 Supervised Staging Demos):** Supervised user navigation walkthroughs with 5 nontechnical local business owners on private staging URL; scheduled during M14 comprehension gate.
-- **`AI-TRIAL-01` (Public Research AI Trial):** Optional 1-week free-model public research trial or capability showcase; evaluated post-launch, strictly without compromising commercial positioning.
-- **`PRICE-01` (Commercial Pricing Research):** Seat #1 commercial research and recommendation on starting prices for standard packages vs custom builds; deferred to post-V1 operations.
-- **`SOCIAL-01` (Brand Social Channels):** Official LinkedIn Company Page and Google Business Profile setup; initiated in parallel or following V1 public launch.
-- **`SEC-OPINION-01` (External Security Opinion):** Optional independent AI/human security scan review at the pre-launch security gate (M13); strictly non-blocking if standard automated gates pass.
-- **`OPS-MARKETING-CAPACITY` (Marketing Role Evaluation):** Post-launch evaluation of dedicated marketing/sales capacity once commercial revenue or client inbound begins.
-- **`MEDIA-01` Subtriggers (Original Video Roadmap):**
-  - *Videos 1–2 (General Awareness & Web/App Impact):* Educational screen-recorded walkthroughs on why modern web/app systems help small-to-medium businesses; scheduled after M05 staging stabilization.
-  - *Videos 3–4 (Hero & Workflow Demonstrations):* Technical demonstrations of YCN Labs engineering workflow, responsive architecture, and performance; scheduled after M08 inner page completion.
-  - *Client Media Safeguard:* Under DECISION-052/DECISION-054, no client screen recordings, code, or identifiable assets may be featured without explicit prior written authorization.
+- **`GROWTH-01` (#1 First-Clients Plan):** #1 first-clients plan; Owner's sector and offer decisions are due now at the next business review.
+- **`GROWTH-02` (Prospect Shortlist):** Owner's private list of up to 20 prospects; prepare after GROWTH-01 approval. No geographic restriction unless Owner specifies one.
+- **`EARLY-UX-01` (Five Supervised Demonstrations):** Five supervised demonstrations to real people selected by Owner. M05 trigger reached. Do not represent this as M14 final acceptance.
+- **`AI-TRIAL-01` (Free-AI Public Prospect-Research Trial):** Optional one-week free-AI public prospect-research trial. M05 trigger reached; execution requires Owner approval and #1 supervision. Every entry must have a source link; #1 validates a sample. No additional permanent seat or private data.
+- **`PRICE-01` (Starting-Price Research):** #1 sourced starting-price research before public price commitments or quotations, when Owner authorizes.
+- **`GROWTH-03` (Direct 1-to-1 Outreach):** Individually approved one-to-one outreach only after M15 public launch, starting-price decisions and one credible real project ready to show.
+- **`SOCIAL-01` (Brand Social Channels):** Review LinkedIn and Google Business Profile setup after M15; verify business eligibility and details before publishing.
+- **`SEC-OPINION-01` (External Security Opinion):** Optional one-off different-model assessment at any material security gate, using a public commit only; not an automatic extra approval authority.
+- **`OPS-MARKETING-CAPACITY` (Marketing Capacity Review):** Review a separate marketing seat only after launch, if measured #1 workload demonstrates overload.
+- **`MEDIA-01` Subtriggers (Original Video Roadmap):** Videos 1–2 may be prepared after M05; videos 3–4 after M08 hero implementation. Preserve client-media permission boundaries (under DECISION-052/DECISION-054, no client screen recordings, code, or identifiable assets may be featured without explicit prior written authorization).
+
+### Reporting Rule: Parked Items Now Due
+- In standardized milestone delivery briefings, #2 Working GPT explicitly reports eligible parked items whose milestone trigger has been reached (e.g. M05 reaching EARLY-UX-01, GROWTH-01 decisions, AI-TRIAL-01 consideration, and MEDIA-01 videos 1–2).
+- Purely a manual reporting protocol in seat handovers; no automated notifications or alerts are claimed.
 
 ---
 

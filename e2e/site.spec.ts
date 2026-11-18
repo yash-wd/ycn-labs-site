@@ -282,64 +282,109 @@ test.describe("M06 NAV-07 Mobile Navigation Accessibility", () => {
 
   test("background clicks and pointer interactions are blocked while mobile modal is active", async ({ browser }) => {
     const { ctx, page } = await open(browser, "/", { width: 375, height: 812 });
-    await page.locator("#navbar-menu-capsule-button").click();
-    await expect(page.locator("#mobile-nav-sheet")).toBeVisible();
+    const trigger = page.locator("#navbar-menu-capsule-button");
+    const sheet = page.locator("#mobile-nav-sheet");
 
-    // Verify background theme toggle wrapper has inert and aria-hidden
+    // Open mobile menu
+    await trigger.click();
+    await expect(sheet).toBeVisible();
+
+    // Verify background containers have inert and aria-hidden
+    await expect(page.locator("main")).toHaveAttribute("inert");
+    await expect(page.locator("main")).toHaveAttribute("aria-hidden", "true");
     await expect(page.locator("#navbar-theme-toggle-wrapper")).toHaveAttribute("inert");
     await expect(page.locator("#navbar-theme-toggle-wrapper")).toHaveAttribute("aria-hidden", "true");
 
-    // Attempting to dispatch click on background theme toggle does not change theme
-    const themeSwitched = await page.evaluate(() => {
-      const btn = document.getElementById("navbar-theme-toggle");
-      if (!btn) return false;
-      const initialDark = document.documentElement.classList.contains("dark");
-      try {
-        btn.click();
-      } catch {
-        // Inert element click rejected
-      }
-      const newDark = document.documentElement.classList.contains("dark");
-      return initialDark !== newDark;
-    });
-    expect(themeSwitched).toBe(false);
+    // Record initial page state
+    const initialUrl = page.url();
+    const initialHtmlClass = await page.locator("html").getAttribute("class");
 
-    // Verify background main interactive link cannot be clicked or trigger navigation
-    const navigated = await page.evaluate(() => {
-      const heroLink = document.querySelector<HTMLAnchorElement>("main a[href]");
-      if (!heroLink) return false;
-      const initialHref = window.location.pathname;
-      try {
-        heroLink.click();
-      } catch {
-        // Inert element click rejected
-      }
-      return window.location.pathname !== initialHref;
-    });
-    expect(navigated).toBe(false);
+    // 1. Observable action: Attempting to click inert background theme toggle does NOT activate it
+    const themeToggle = page.locator("#navbar-theme-toggle");
+    const themeBox = await themeToggle.boundingBox();
+    expect(themeBox).not.toBeNull();
+    if (themeBox) {
+      await page.mouse.click(themeBox.x + themeBox.width / 2, themeBox.y + themeBox.height / 2);
+    }
+
+    // Verify theme toggle action did NOT execute (theme class on <html> is unchanged)
+    const afterThemeClickHtmlClass = await page.locator("html").getAttribute("class");
+    expect(afterThemeClickHtmlClass).toBe(initialHtmlClass);
+    // Menu remains open (inert button click did not trigger action or dismiss sheet)
+    await expect(sheet).toBeVisible();
+
+    // 2. Observable action: Clicking on background content outside the menu sheet hits #mobile-nav-backdrop
+    // Click at coordinates of an interactive link inside main
+    const heroLink = page.locator("main a[href]").first();
+    const heroBox = await heroLink.boundingBox();
+    expect(heroBox).not.toBeNull();
+    if (heroBox) {
+      // Backdrop at z-30 intercepts pointer event over main content
+      await page.mouse.click(heroBox.x + heroBox.width / 2, heroBox.y + heroBox.height / 2);
+    }
+
+    // Modal dismisses via backdrop interaction
+    await expect(sheet).toBeHidden();
+    await expect(trigger).toBeFocused();
+
+    // Observable outcome: No unwanted navigation occurred (remains on initial URL)
+    await expect(page).toHaveURL(initialUrl);
+
+    // Verify inertness is removed once modal is dismissed
+    await expect(page.locator("main")).not.toHaveAttribute("inert");
+    await expect(page.locator("#navbar-theme-toggle-wrapper")).not.toHaveAttribute("inert");
+
+    // 3. Observable verification: Now that modal is closed and inertness cleared,
+    // verify normal Playwright pointer click on theme toggle works as intended.
+    await themeToggle.click();
+    const isDark = () => page.evaluate(() => document.documentElement.classList.contains("dark"));
+    const initialDark = initialHtmlClass?.includes("dark") ?? false;
+    await expect.poll(isDark).toBe(!initialDark);
 
     await ctx.close();
   });
 
-  test("rapid toggle sequences cleanly recover state and logical focus without stuck inertness", async ({ browser }) => {
+  test("rapid reopen during exit animation cleanly recovers state, focus, and clears inertness", async ({ browser }) => {
     const { ctx, page } = await open(browser, "/", { width: 375, height: 812 });
     const trigger = page.locator("#navbar-menu-capsule-button");
     const sheet = page.locator("#mobile-nav-sheet");
 
-    // Rapidly toggle menu open and closed 3 consecutive times
-    for (let i = 0; i < 3; i++) {
-      await trigger.click();
-      await expect(sheet).toBeVisible();
-      await trigger.click();
-      await expect(sheet).toBeHidden();
-      await expect(trigger).toBeFocused();
-    }
+    // 1. Standard open
+    await trigger.click();
+    await expect(sheet).toBeVisible();
+    await expect(sheet.locator('a[href="/work"]').first()).toBeFocused();
 
-    // After rapid cycles, confirm inertness is fully removed and main is active
+    // 2. Trigger close: exit animation begins (duration: 420ms)
+    await trigger.click();
+    // Capsule button flips state immediately
+    await expect(trigger).toHaveAttribute("aria-expanded", "false");
+
+    // 3. Immediately trigger reopen while the exit animation is in-flight
+    // (without waiting for sheet to finish closing or become hidden)
+    await trigger.click();
+
+    // Sheet re-opens cleanly, aborting exit animation
+    await expect(sheet).toBeVisible();
+    await expect(trigger).toHaveAttribute("aria-expanded", "true");
+    await expect(sheet).not.toHaveAttribute("inert");
+    await expect(sheet).not.toHaveAttribute("aria-hidden");
+    await expect(sheet.locator('a[href="/work"]').first()).toBeFocused();
+
+    // Background remains inert while menu is active
+    await expect(page.locator("main")).toHaveAttribute("inert");
+    await expect(page.locator("main")).toHaveAttribute("aria-hidden", "true");
+
+    // 4. Close via Escape key and verify full recovery
+    await page.keyboard.press("Escape");
+    await expect(sheet).toBeHidden();
+    await expect(trigger).toBeFocused();
+
+    // Confirm all background elements have inertness removed completely
     await expect(page.locator("main")).not.toHaveAttribute("inert");
     await expect(page.locator("main")).not.toHaveAttribute("aria-hidden");
     await expect(page.locator("footer")).not.toHaveAttribute("inert");
-    await expect(trigger).toBeFocused();
+    await expect(page.locator("footer")).not.toHaveAttribute("aria-hidden");
+    await expect(page.locator("#navbar-theme-toggle-wrapper")).not.toHaveAttribute("inert");
 
     await ctx.close();
   });
