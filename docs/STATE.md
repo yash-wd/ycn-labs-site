@@ -35,7 +35,7 @@ This block supersedes older current-status blocks below without erasing their hi
 - **Active Task: `YCN-M08-A-FOUNDATION-01` (Milestone M08-A: Hero & Showroom Foundation Implementation).**
   - **Branch:** `wip/YCN-M08-A-FOUNDATION-01`.
   - **Base `main`:** `d47fe73cc1eabbfad74d599fe3a66e309418a985`.
-  - **Status:** `[LOCAL-WIP]` Implemented locally; Next.js 16.3.6 production build passed; 333/333 unit tests green; preview route `/m08-preview` guarded against production/staging; ready for technical review and PR.
+  - **Status:** `[LOCAL-WIP]` Implemented locally; Next.js 16.3.6 production build passed; 337/337 unit tests green; 56 Chromium tests passed on CI (run 44685233655); preview route `/m08-preview` verified HTTP 404 in production; PR #45 open as Draft; awaiting final review.
   - **Scope:** Modular components under `components/m08/` (`HeroSection.tsx`, `HeroDeviceVisual.tsx`, `ShowroomFoundation.tsx`, `showroomModes.ts`, scoped CSS modules), unit test suite `__tests__/m08-foundation.test.tsx`, and dev-only preview route `app/m08-preview/page.tsx` (returns 404 in production/staging). Homepage `app/page.tsx` strictly preserved unmodified.
 
 - **Current Progress Metrics (20 Nov 2026):**

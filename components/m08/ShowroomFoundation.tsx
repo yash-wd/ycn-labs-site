@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState, useRef, useEffect, KeyboardEvent } from 'react';
+import React, { useState, useRef, KeyboardEvent } from 'react';
 import {
   Globe,
   Smartphone,
@@ -20,29 +20,10 @@ import styles from './ShowroomFoundation.module.css';
 
 export function ShowroomFoundation() {
   const [activeMode, setActiveMode] = useState<ShowroomMode>('website');
-  const [expanded, setExpanded] = useState<boolean>(false);
   const tabRefs = useRef<(HTMLButtonElement | null)[]>([]);
-  const expandBtnRef = useRef<HTMLButtonElement | null>(null);
 
   const activeIndex = SHOWROOM_MODES.findIndex((m) => m.id === activeMode);
   const activeMeta = SHOWROOM_MODES[activeIndex] || SHOWROOM_MODES[0];
-
-  useEffect(() => {
-    if (!expanded) return;
-
-    const handleGlobalKeyDown = (e: globalThis.KeyboardEvent) => {
-      if (e.key === 'Escape') {
-        e.preventDefault();
-        setExpanded(false);
-        expandBtnRef.current?.focus();
-      }
-    };
-
-    window.addEventListener('keydown', handleGlobalKeyDown);
-    return () => {
-      window.removeEventListener('keydown', handleGlobalKeyDown);
-    };
-  }, [expanded]);
 
   const handleKeyDown = (e: KeyboardEvent<HTMLButtonElement>, index: number) => {
     const count = SHOWROOM_MODES.length;
@@ -129,19 +110,9 @@ export function ShowroomFoundation() {
           })}
         </div>
 
-        {/* Mode Caption & Expand Control */}
+        {/* Mode Caption */}
         <div className={styles.modeMeta}>
           <p id="mode-caption">{activeMeta.caption}</p>
-          <button
-            ref={expandBtnRef}
-            type="button"
-            className={styles.expandBtn}
-            onClick={() => setExpanded((prev) => !prev)}
-            aria-expanded={expanded}
-            aria-label={expanded ? 'Close larger view' : 'Open larger view'}
-          >
-            {expanded ? 'Close larger view ↙' : 'Open larger view ↗'}
-          </button>
         </div>
 
         {/* Live Announcement for Screen Readers */}
@@ -160,7 +131,7 @@ export function ShowroomFoundation() {
               aria-labelledby={`tab-${mode.id}`}
               aria-label={mode.stageLabel}
               hidden={!isSelected}
-              className={`${styles.stage} ${expanded ? styles.stageExpanded : ''}`}
+              className={styles.stage}
             >
               <div className={styles.stagePlaceholder}>
                 <span className={styles.stagePlaceholderChip}>
@@ -182,9 +153,7 @@ export function ShowroomFoundation() {
         {/* Fictional Concept Disclosure Banner */}
         <div className={styles.disclosure} id="demo-disclosure">
           <Info className={styles.disclosureIcon} aria-hidden="true" />
-          <p>
-            <b>Fictional concept demonstrations.</b> {SHOWROOM_DISCLOSURE}
-          </p>
+          <p>{SHOWROOM_DISCLOSURE}</p>
         </div>
       </div>
     </section>

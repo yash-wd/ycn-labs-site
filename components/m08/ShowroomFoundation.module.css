@@ -99,14 +99,12 @@
   box-shadow: 0 5px 12px -10px rgba(0, 0, 0, 0.5), inset 0 -3px var(--r-btn, #02C1F7);
 }
 
-.selector:focus-visible,
-.expandBtn:focus-visible {
+.selector:focus-visible {
   outline: 3px solid var(--r-link, #035B94);
   outline-offset: 3px;
 }
 
-:global(.dark) .selector:focus-visible,
-:global(.dark) .expandBtn:focus-visible {
+:global(.dark) .selector:focus-visible {
   outline-color: var(--r-link, #67E8F9);
 }
 
@@ -121,7 +119,7 @@
   color: var(--r-link, #67E8F9);
 }
 
-/* Mode Caption & Controls */
+/* Mode Caption */
 .modeMeta {
   display: flex;
   justify-content: space-between;
@@ -141,22 +139,6 @@
   margin: 0;
 }
 
-.expandBtn {
-  border: none;
-  color: var(--r-link, #035B94);
-  background: transparent;
-  min-height: 44px;
-  text-decoration: underline;
-  text-underline-offset: 4px;
-  font-size: 12px;
-  cursor: pointer;
-  padding: 0;
-}
-
-:global(.dark) .expandBtn {
-  color: var(--r-link, #67E8F9);
-}
-
 /* Stage & Placeholder Region */
 .stage {
   min-height: 520px;
@@ -165,10 +147,6 @@
   justify-content: center;
   align-items: center;
   padding: 24px 0;
-}
-
-.stageExpanded {
-  padding-top: 8px;
 }
 
 .stage::before {

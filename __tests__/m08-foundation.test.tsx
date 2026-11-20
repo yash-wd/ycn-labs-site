@@ -126,10 +126,9 @@ describe('M08-A Foundation: Component & Integrity Verification', () => {
       expect(html).toMatch(/id="panel-learning"[^>]*hidden=""/);
     });
 
-    it('renders expand button with proper initial aria attributes', () => {
-      expect(html).toContain('aria-expanded="false"');
-      expect(html).toContain('aria-label="Open larger view"');
-      expect(html).toContain('Open larger view ↗');
+    it('does not render premature enlarged-view control in M08-A foundation', () => {
+      expect(html).not.toContain('Open larger view');
+      expect(html).not.toContain('Close larger view');
     });
 
     it('renders live announcement element for screen readers', () => {
@@ -138,9 +137,9 @@ describe('M08-A Foundation: Component & Integrity Verification', () => {
       expect(html).toContain('Websites example selected.');
     });
 
-    it('renders exact approved disclosure banner', () => {
+    it('renders exact approved disclosure banner without misleading extra text', () => {
       expect(html).toContain(SHOWROOM_DISCLOSURE);
-      expect(html).toContain('Fictional concept demonstrations.');
+      expect(html).not.toContain('Fictional concept demonstrations.');
     });
   });
 

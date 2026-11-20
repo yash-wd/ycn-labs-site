@@ -36,7 +36,7 @@ Do not make factual promises unless `YCN_CLAIMS_AND_PROOF.md` allows publication
 **Sub [RATIFIED]:** We turn business problems into digital products that help customers act, teams work clearly, and the business keep moving.
 
 **CTA:** Start a Project  
-**Secondary:** See what we build  
+**Secondary:** See what we solve  
 **Reassurance:** You don’t need a technical brief to start.
 
 #### Hero Visual (Two-Device Composition) [RATIFIED per DECISION-059]
@@ -48,14 +48,14 @@ Do not make factual promises unless `YCN_CLAIMS_AND_PROOF.md` allows publication
 - **Phone Shop CTA:** Shop now →
 - **Accessible Caption:** Example shop. Not a real business or client.
 - **Screen Reader Description:** Example shop on a laptop and a phone. See the interactive examples below.
-- **Anchor Link CTA:** Explore the interactive examples
+- **Anchor Link CTA:** Explore interactive examples
 
 ### SHOWROOM-01 / EXPLORE WHAT WE CAN BUILD [RATIFIED per DECISION-059]
 
 **Section Heading:** Explore what we can build  
-**Intro Subhead:** Choose an example. Try the interactions inside its device and see how a business could use it.  
+**Intro Subhead:** Pick an example and try it. Everything here is a demo.  
 **Selector Group Accessible Label:** Choose an example  
-**Fictional Simulation Disclosure Banner:** Each example is fictional and locally simulated. Try a mode below.  
+**Simulation Disclosure Banner:** Examples only. Example Home Repairs, Example Home Supplies, Example Learning Hub and the example shop shown above are not real businesses or clients. Nothing you do here is submitted, bought or sent.  
 
 #### Six Showroom Modes & Captions [RATIFIED]
 1. **Websites (`websites`):** A clear website that shows what you do and makes it easy to ask for a visit.
@@ -63,7 +63,7 @@ Do not make factual promises unless `YCN_CLAIMS_AND_PROOF.md` allows publication
 3. **Automation (`automation`):** Routine follow-ups can run on their own, so fewer of them rely on memory.
 4. **CRM & admin (`crm-admin`):** One screen for requests, jobs and customers, so you can see what is still open.
 5. **Online store (`online-store`):** Customers can browse products, fill a cart and place an order online.
-6. **Learning platform (`learning-platform`):** Students can follow lessons at their own pace and view sample progress.
+6. **Learning platform (`learning-platform`):** Students can follow lessons at their own pace and see their progress.
 
 ### STATEMENT-01
 
