@@ -13,7 +13,40 @@
 
 ---
 
-## CURRENT STATUS — 18 November 2026 (read this first)
+## CURRENT STATUS — 20 November 2026 (read this first)
+
+This block supersedes older current-status blocks below without erasing their historical records.
+
+- **Milestone: PR #44 (M06 — `YCN-NAV-07-A11Y-01` Mobile Navigation Accessibility Remediation) merged into `main` on 19 Nov 2026; site remains unlaunched.**
+  - **Reviewed PR #44 Head:** Merged at `d47fe73cc1eabbfad74d599fe3a66e309418a985`.
+  - **GitHub CI Verification:** PASSED (TypeScript clean, ESLint clean, unit tests passed, Chromium Playwright browser suite passed, Next.js production builds passed).
+  - **GitHub Gitleaks Verification:** PASSED with 0 leaks.
+  - **Merged by:** Owner directly on GitHub.
+  - **Milestone M06:** `[VERIFIED]`. `#mobile-nav-sheet` accessibility defects remediated without redesign.
+
+- **Milestone: M07 (Homepage Hero Visual Prototype & Interactive Showroom Direction) ACCEPTED by Owner on 20 Nov 2026.**
+  - **Status:** `[VERIFIED — OWNER-ACCEPTED]`.
+  - **Approved Prototype File:** `YCN_M07_Candidate_04_Hero_Polish.html` with verified SHA-256 `d779c92af7b339ec9146118c381e8c37d4219f9d86f561706e121852249e748f`.
+  - **Ratified Architecture:** Lightweight two-device hero composition (laptop + phone showcasing an example online store *Shop.* with original vector artwork), followed by a separate interactive showroom section below the hero (*"Explore what we can build"*).
+  - **Commercial Capabilities Scope:** YCN Labs and its team deliver all 6 digital product types: Websites, Web apps, Automation, CRM & admin, Online store, Learning platform.
+  - **Demonstration Disclosures:** Simulated businesses (*Example Home Repairs*, *Example Home Supplies*, *Example Learning Hub*, *Shop.*) are disclosed simulations/examples to prevent visitors mistaking them for past clients.
+  - **Governance:** DECISION-059 adopted.
+
+- **Active Task: `YCN-M08-A-FOUNDATION-01` (Milestone M08-A: Hero & Showroom Foundation Implementation).**
+  - **Branch:** `wip/YCN-M08-A-FOUNDATION-01`.
+  - **Base `main`:** `d47fe73cc1eabbfad74d599fe3a66e309418a985`.
+  - **Status:** `[LOCAL-WIP]` Implemented locally; Next.js 16.3.6 production build passed; 333/333 unit tests green; preview route `/m08-preview` guarded against production/staging; ready for technical review and PR.
+  - **Scope:** Modular components under `components/m08/` (`HeroSection.tsx`, `HeroDeviceVisual.tsx`, `ShowroomFoundation.tsx`, `showroomModes.ts`, scoped CSS modules), unit test suite `__tests__/m08-foundation.test.tsx`, and dev-only preview route `app/m08-preview/page.tsx` (returns 404 in production/staging). Homepage `app/page.tsx` strictly preserved unmodified.
+
+- **Current Progress Metrics (20 Nov 2026):**
+  - **Detailed Checklist Progress:** 35 / 143 items verified (24.5% recorded readiness; 108 unchecked in `docs/YCN_READINESS_CHECKLIST.md`).
+  - **V1 Major Milestone Progress:** 7 / 15 accepted milestones (46.7% milestone-count progress; M01–M07 accepted; 8 pending in `docs/BACKLOG.md`).
+
+- **Next Delivery Milestones:** M08-B (`YCN-M08-B-SHOWROOM-DEMOS-01` — Interactive demonstration interiors for the 6 showroom devices). Parallel track: `MEDIA-01`.
+
+---
+
+## CURRENT STATUS — 18 November 2026
 
 This block supersedes older current-status blocks below without erasing their historical records.
 

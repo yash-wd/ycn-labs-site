@@ -3,15 +3,15 @@
 **Strategy:** Ship customer-facing functionality and verify real enquiry workflows under risk-tiered gates.  
 **Operating Principle:** Raw command evidence strictly outranks narrative summaries.  
 **Governing Execution Order:** Master Plan §14.7 (`docs/YCN_MASTER_PLAN.md`).  
-**Master Readiness Tracker:** [`docs/YCN_READINESS_CHECKLIST.md`](YCN_READINESS_CHECKLIST.md) (143-point control ledger; recorded status: 33/143 = 23.1%).  
-**V1 Milestone Progress:** 5 / 15 accepted major milestones (33.3% milestone-count progress; baseline v1.1 adopted 18 Nov 2026 under DECISION-057 Clarification).
+**Master Readiness Tracker:** [`docs/YCN_READINESS_CHECKLIST.md`](YCN_READINESS_CHECKLIST.md) (143-point control ledger; recorded status: 35/143 = 24.5%).  
+**V1 Milestone Progress:** 7 / 15 accepted major milestones (46.7% milestone-count progress; baseline v1.1 adopted 18 Nov 2026 under DECISION-057 Clarification, updated 20 Nov 2026).
 
 ---
 
-## 1. V1 Release Major-Milestone Baseline (Version 1.1 — 18 Nov 2026)
+## 1. V1 Release Major-Milestone Baseline (Version 1.1 — 18 Nov 2026, updated 20 Nov 2026)
 
 > **Measurement Formula:**  
-> $$\text{Milestone Progress \%} = \frac{\text{Accepted Major Milestones}}{\text{Total Baseline Milestones (15)}} \times 100 = \frac{5}{15} \times 100 = 33.3\%$$  
+> $$\text{Milestone Progress \%} = \frac{\text{Accepted Major Milestones}}{\text{Total Baseline Milestones (15)}} \times 100 = \frac{7}{15} \times 100 = 46.7\%$$  
 > *Note: This represents milestone-count progress across agreed deliverables, NOT elapsed engineering hours, remaining effort, or audited launch readiness.* The denominator is fixed at 15 and may only be revised with explicit Owner approval and a versioned record. (Note on history: An earlier draft proposed 14 milestones at 28.6%, which bundled release operations into M13 and included video-dependent media; superseded before merge by this 15-milestone baseline).
 
 | ID | Major Deliverable | Status | Acceptance Evidence / Prerequisite |
@@ -21,9 +21,9 @@
 | **M03** | **Protected governance, maintenance & SEO** | **[VERIFIED]** | Merged PR #41 (`6caf77b`). GitHub `Protect main` ruleset, fail-safe SEO, 5 governance rules. |
 | **M04** | **Fail-closed staging contact boundary** | **[VERIFIED]** | Merged PR #42 (`0c164a0`). HTTP 503 fail-closed guard, preview notice, disabled submit, CI run 44166441221. |
 | **M05** | **Private staging deployed & verified** | **[VERIFIED — OWNER-ATTESTED]** | Netlify private staging (`ycn-labs-site-staging`) confirmed by Owner on 18 Nov 2026 deployed from `main@d9b1039`; fail-closed staging contact verified; robots disallowed; private logs; git-deploy locked; DECISION-058. |
-| **M06** | **NAV-07 mobile navigation accessibility** | `[IN PROGRESS]` | `#mobile-nav-sheet` initial focus, tab containment, background inertness, WCAG keyboard pass (`YCN-NAV-07-A11Y-01`). |
-| **M07** | **Four-mode hero visual prototype & wording** | `[PENDING]` | Owner visual sitting, approved responsive layouts, verified truthfulness, ratified wording. |
-| **M08** | **Four-mode hero & services implementation** | `[PENDING]` | Component implementation, zero layout shift, Playwright visual tests, independent diff review. |
+| **M06** | **NAV-07 mobile navigation accessibility** | **[VERIFIED]** | Merged PR #44 (commit `d47fe73`). `#mobile-nav-sheet` initial focus, tab containment, background inertness, WCAG keyboard pass (`YCN-NAV-07-A11Y-01`). |
+| **M07** | **Homepage hero visual prototype & wording** | **[VERIFIED — OWNER-ACCEPTED]** | Prototype `YCN_M07_Candidate_04_Hero_Polish.html` (SHA-256 `d779c92af7b339ec9146118c381e8c37d4219f9d86f561706e121852249e748f`) accepted by Owner on 20 Nov 2026. Ratified 6-capability showroom scope and lightweight two-device hero; DECISION-059. |
+| **M08** | **Six-mode hero & showroom implementation** | `[IN PROGRESS]` | Component implementation (M08-A Foundation `[LOCAL-WIP]` on `wip/YCN-M08-A-FOUNDATION-01`; M08-B interactive device interiors `[PENDING]`). |
 | **M09** | **Responsive, accessibility & performance polish** | `[PENDING]` | 375/768/1024/1280/1440 px multi-viewport audit, color contrast min 4.5:1, reduced-motion pass. |
 | **M10** | **First approved blog publication & SEO** | `[PENDING]` | Editorial content approved by Owner, factual verification, structured metadata, sitemap check. |
 | **M11** | **Owner business inputs & estimate pilot** | `[PENDING]` | Attributable case details, pricing guidance, legal entity confirmation, enquiry handling test. |
@@ -37,7 +37,21 @@
 
 ---
 
-## 2. Current Work — 18 November 2026 (supersedes older ordering below)
+## 2. Current Work — 20 November 2026 (supersedes older ordering below)
+
+- [x] **M06 NAV-07 Mobile Navigation Accessibility Remediation (`YCN-NAV-07-A11Y-01`):** **[VERIFIED]** Merged PR #44 into `main` at `d47fe73cc1eabbfad74d599fe3a66e309418a985`. Remediated `#mobile-nav-sheet` focus management, tab containment, background inertness, and keyboard controls. Verified on GitHub Actions (`quality` and `gitleaks`).
+- [x] **M07 Homepage Hero Visual Prototype & Interactive Showroom Direction:** **[VERIFIED — OWNER-ACCEPTED]** Candidate 04 Hero Polish prototype (`YCN_M07_Candidate_04_Hero_Polish.html`, SHA-256 `d779c92af7b339ec9146118c381e8c37d4219f9d86f561706e121852249e748f`) formally accepted by Owner on 20 Nov 2026. Ratified 6-capability showroom scope and lightweight two-device hero (DECISION-059).
+- [ ] **M08 Six-Mode Hero & Showroom Implementation (`YCN-M08-A-FOUNDATION-01` & `YCN-M08-B-SHOWROOM-DEMOS-01`):**
+  - [ ] **M08-A Foundation (`YCN-M08-A-FOUNDATION-01`) [LOCAL-WIP]:** Modular components implemented under `components/m08/`, dev-only preview route `app/m08-preview/page.tsx` (returns 404 in production/staging), 333 unit tests green, Next.js 16.3.6 production build passed. Awaiting technical diff review and PR.
+  - [ ] **M08-B Interactive Demos (`YCN-M08-B-SHOWROOM-DEMOS-01`) [PENDING]:** Interactive device interior implementations for the 6 showroom products (Websites, Web apps, Automation, CRM & admin, Online store, Learning platform).
+- [ ] **`MEDIA-01` [PENDING]:** Dedicated media / gallery page for client project screen recordings, educational videos on web development & apps for business owners, and social media channels; plus landing/homepage section routing to this page.
+- [ ] **Privacy, Terms & Legal Copy:** Complete legal review; resolve unsupported ContactForm statement `"We respect your privacy. No data is shared or sold."` in conjunction with Privacy policy (Task PR #35 / legal clearance).
+- [ ] **Pre-Launch Operational Verification:** Real database and email acceptance against configured staging service, operational monitoring alert check, durable backup & rollback dry-run, WebKit and physical device testing, and 5-person comprehension testing before public cutover.
+- [ ] **Owner Visual Refinements:** Consolidate Owner design suggestions and backlog enhancements into a single prioritized, bounded post-merge design task.
+
+---
+
+## Current Work — 18 November 2026 (supersedes older ordering below)
 
 - [x] **PR #42 (`YCN-STAGING-ISOLATION-01`):** Merged into `main` at `0c164a0ce42cba011f83a85272723d8835f9c27e` (reviewed head `36b6779`). Fail-closed server contact guard (`503 SERVICE_UNAVAILABLE`), preview notice, disabled submit button, pre-hydration form safety, two-config CI, synthetic preview test, verified on GitHub CI and Gitleaks.
 - [x] **PR #43 (`YCN-OPS-PLAYBOOK-01`):** Merged into `main` at `d9b10396acb661ea77ae60f41165f073c5bc12f4` (reviewed head `7de125f`). Adopted Five-Seat AI Delivery Playbook (`docs/YCN_AI_DELIVERY_PLAYBOOK.md`), numbered routing protocol (#1 to #5), faster delivery governance, DECISION-057, milestone briefings, safe CLOSE contract, verified on GitHub CI (run 44260276078) and Gitleaks (run 44260276117).

@@ -435,4 +435,19 @@ If the Owner wants to allow a WIP commit/push for that single doc reconciliation
 3. **No Production Hosting or DNS Decision.** This decision does NOT authorize production deployment, DNS changes, or public launch on Netlify. Production hosting, domain cutover, and live credentials remain separate Owner gates.
 4. **Preserved Authority.** All frozen systems, design tokens, security boundaries, and Owner merge controls remain in full effect.
 
+### DECISION-059: Adoption of Candidate 04 Hero Polish & Six-Capability Showroom Architecture (Owner, 20 Nov 2026)
+
+**Status: ADOPTED by Owner, 20 Nov 2026**  
+**Task:** `YCN-M08-A-FOUNDATION-01` (Milestone M07 Ratification & M08 Architecture)
+
+1. **Approved Homepage & Hero Architecture.** The Owner formally ratifies the architecture established in `YCN_M07_Candidate_04_Hero_Polish.html` (SHA-256: `d779c92af7b339ec9146118c381e8c37d4219f9d86f561706e121852249e748f`):
+   - **Hero Section:** Lightweight two-device composition (landscape laptop + overlapping portrait phone) showcasing an example online store (*Shop.*) with original vector artwork.
+   - **Hero Copy & Transparency:** Approved H1 (*"Websites that earn trust. Software that saves time."*), supporting reassurance (*"You don't need a technical brief to start."*), and ratified shop copy (*"Showcase your products."* / *"Curate collections, take payments securely, and manage orders cleanly."*). Accompanied by accessible caption: *"Example shop. Not a real business or client."* and screen-reader description: *"Example shop on a laptop and a phone. See the interactive examples below."*.
+   - **Showroom Section:** Separate interactive product showroom section below the hero (*"Explore what we can build"*), featuring an accessible 6-button selector grid (W3C APG Tablist) and dedicated device stage.
+2. **Commercial Scope vs. Fictional Demonstrations.**
+   - **Commercial Services Scope:** YCN Labs and its team offer and deliver all six core digital product capabilities: (1) Websites, (2) Web apps, (3) Automation, (4) CRM & admin, (5) Online stores, and (6) Learning platforms. If a client needs any of these, YCN Labs delivers it.
+   - **Demonstration Business Disclosures:** All simulated businesses shown inside the interactive device demonstrations (*Example Home Repairs*, *Example Home Supplies*, *Example Learning Hub*, and *Shop.*) are fictional illustrative examples created exclusively for demonstration purposes so no visitor mistakes them for past client work.
+3. **Development Isolation Boundary (`/m08-preview`).** To maintain production integrity and prevent unlaunched showroom states from polluting the public homepage before all interactive device interiors are completed, the M08 components are previewed via a dedicated development-only route (`/m08-preview`). This route strictly returns HTTP 404 (`notFound()`) in production, Netlify staging, branch deploys, and deploy previews.
+4. **Preserved Authority.** The public homepage (`app/page.tsx`), header navigation, contact safety boundaries, and frozen systems remain untouched until all six device demonstrations and accessibility reviews are formally accepted.
+
 

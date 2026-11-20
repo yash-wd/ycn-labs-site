@@ -39,6 +39,34 @@ Do not make factual promises unless `YCN_CLAIMS_AND_PROOF.md` allows publication
 **Secondary:** See what we build  
 **Reassurance:** You don’t need a technical brief to start.
 
+#### Hero Visual (Two-Device Composition) [RATIFIED per DECISION-059]
+- **Laptop Shop Tagline:** Showcase your products.
+- **Laptop Shop Subtitle:** Curate collections, take payments securely, and manage orders cleanly.
+- **Laptop Shop CTA:** Explore catalog
+- **Laptop Shop Badge:** New collection
+- **Phone Shop Tagline:** Fresh arrivals.
+- **Phone Shop Subtitle:** Handcrafted leather goods and timepieces.
+- **Phone Shop CTA:** Shop now
+- **Phone Shop Badge:** In stock
+- **Accessible Caption:** Example shop. Not a real business or client.
+- **Screen Reader Description:** Example shop on a laptop and a phone. See the interactive examples below.
+- **Anchor Link CTA:** Explore the interactive examples
+
+### SHOWROOM-01 / EXPLORE WHAT WE CAN BUILD [RATIFIED per DECISION-059]
+
+**Section Heading:** Explore what we can build  
+**Intro Subhead:** Choose an example. Try the interactions inside its device and see how a business could use it.  
+**Selector Group Accessible Label:** Choose an example  
+**Fictional Simulation Disclosure Banner:** Each example is fictional and locally simulated. Try a mode below.  
+
+#### Six Showroom Modes & Captions [RATIFIED]
+1. **Websites (`websites`):** A clear website that shows what you do and makes it easy to ask for a visit.
+2. **Web apps (`web-apps`):** A guided mobile request flow that helps customers submit clean details on any screen.
+3. **Automation (`automation`):** Routine follow-ups can run on their own, so fewer of them rely on memory.
+4. **CRM & admin (`crm-admin`):** Keep track of active requests, customer details, and next steps in one place.
+5. **Online store (`online-store`):** Showcase your products, take payments securely, and keep inventory organized.
+6. **Learning platform (`learning-platform`):** Structured lessons, student progress tracking, and clear course navigation.
+
 ### STATEMENT-01
 
 **H2 [RATIFIED]:** Your customers shouldn't need an explanation.  
