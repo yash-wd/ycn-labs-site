@@ -3,7 +3,7 @@
 **Strategy:** Ship customer-facing functionality and verify real enquiry workflows under risk-tiered gates.  
 **Operating Principle:** Raw command evidence strictly outranks narrative summaries.  
 **Governing Execution Order:** Master Plan §14.7 (`docs/YCN_MASTER_PLAN.md`).  
-**Master Readiness Tracker:** [`docs/YCN_READINESS_CHECKLIST.md`](YCN_READINESS_CHECKLIST.md) (143-point control ledger; recorded status: 35/143 = 24.5%).  
+**Master Readiness Tracker:** [`docs/YCN_READINESS_CHECKLIST.md`](YCN_READINESS_CHECKLIST.md) (143-point control ledger; recorded status: 33/143 = 23.1%).  
 **V1 Milestone Progress:** 7 / 15 accepted major milestones (46.7% milestone-count progress; baseline v1.1 adopted 18 Nov 2026 under DECISION-057 Clarification, updated 20 Nov 2026).
 
 ---

@@ -53,7 +53,7 @@ export const SHOWROOM_MODES: ShowroomModeMeta[] = [
   {
     id: 'learning',
     label: 'Learning platform',
-    caption: 'Students can follow lessons at their own pace and see their progress.',
+    caption: 'Students can follow lessons at their own pace and view sample progress.',
     stageLabel: 'Example: Learning platform',
     icon: 'GraduationCap',
   },

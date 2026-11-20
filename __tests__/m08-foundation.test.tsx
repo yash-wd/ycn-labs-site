@@ -73,8 +73,18 @@ describe('M08-A Foundation: Component & Integrity Verification', () => {
       expect(html).toContain('Smartwatch');
     });
 
-    it('renders the accessible readable caption under the picture (Owner Condition 1)', () => {
+    it('renders the accessible readable caption under the picture (Owner Condition 1) outside aria-hidden', () => {
       expect(html).toContain('Example shop. Not a real business or client.');
+      // The outer scene container must not be aria-hidden
+      expect(html).not.toMatch(/class="[^"]*heroSceneShop[^"]*"\s+aria-hidden="true"/);
+      // The caption itself must not be aria-hidden
+      expect(html).not.toMatch(/class="[^"]*heroSceneHint[^"]*"\s+aria-hidden="true"/);
+    });
+
+    it('marks decorative device visual components as aria-hidden="true"', () => {
+      expect(html).toContain('data-device="laptop" aria-hidden="true"');
+      expect(html).toContain('data-device="phone" aria-hidden="true"');
+      expect(html).toContain('class="sr-only">Example shop on a laptop and a phone. See the interactive examples below.</span>');
     });
   });
 
@@ -91,20 +101,35 @@ describe('M08-A Foundation: Component & Integrity Verification', () => {
       expect(html).toContain(`aria-label="${SELECTOR_GROUP_LABEL}"`);
     });
 
-    it('renders all six mode selectors', () => {
+    it('renders all six mode selectors with corresponding tabpanel relationships', () => {
       expect(SHOWROOM_MODES).toHaveLength(6);
       SHOWROOM_MODES.forEach((mode) => {
         expect(html).toContain(`id="tab-${mode.id}"`);
+        expect(html).toContain(`aria-controls="panel-${mode.id}"`);
+        expect(html).toContain(`id="panel-${mode.id}"`);
+        expect(html).toContain(`aria-labelledby="tab-${mode.id}"`);
         expect(html).toContain(mode.label.replace('&', '&amp;'));
       });
     });
 
-    it('renders initial active mode as Websites with proper aria attributes', () => {
+    it('renders initial active mode as Websites with active panel visible and others hidden', () => {
       expect(html).toContain('id="tab-website"');
       expect(html).toContain('aria-selected="true"');
       expect(html).toContain('id="panel-website"');
       expect(html).toContain('role="tabpanel"');
       expect(html).toContain('aria-label="Example: Websites"');
+      // Inactive panels have hidden attribute
+      expect(html).toMatch(/id="panel-webapp"[^>]*hidden=""/);
+      expect(html).toMatch(/id="panel-automation"[^>]*hidden=""/);
+      expect(html).toMatch(/id="panel-crm"[^>]*hidden=""/);
+      expect(html).toMatch(/id="panel-store"[^>]*hidden=""/);
+      expect(html).toMatch(/id="panel-learning"[^>]*hidden=""/);
+    });
+
+    it('renders expand button with proper initial aria attributes', () => {
+      expect(html).toContain('aria-expanded="false"');
+      expect(html).toContain('aria-label="Open larger view"');
+      expect(html).toContain('Open larger view ↗');
     });
 
     it('renders live announcement element for screen readers', () => {
@@ -142,6 +167,26 @@ describe('M08-A Foundation: Component & Integrity Verification', () => {
       process.env.NODE_ENV = originalEnv;
     });
 
+    it('throws NEXT_NOT_FOUND (HTTP 404) in Netlify production context', () => {
+      // @ts-expect-error mutating NODE_ENV for test
+      process.env.NODE_ENV = 'development';
+      process.env.CONTEXT = 'production';
+      expect(() => M08PreviewPage()).toThrow('NEXT_NOT_FOUND');
+      process.env.CONTEXT = originalContext;
+      // @ts-expect-error restoring NODE_ENV
+      process.env.NODE_ENV = originalEnv;
+    });
+
+    it('throws NEXT_NOT_FOUND (HTTP 404) in Netlify deploy-preview context', () => {
+      // @ts-expect-error mutating NODE_ENV for test
+      process.env.NODE_ENV = 'development';
+      process.env.CONTEXT = 'deploy-preview';
+      expect(() => M08PreviewPage()).toThrow('NEXT_NOT_FOUND');
+      process.env.CONTEXT = originalContext;
+      // @ts-expect-error restoring NODE_ENV
+      process.env.NODE_ENV = originalEnv;
+    });
+
     it('throws NEXT_NOT_FOUND (HTTP 404) in Netlify branch deploy', () => {
       // @ts-expect-error mutating NODE_ENV for test
       process.env.NODE_ENV = 'development';
@@ -152,7 +197,7 @@ describe('M08-A Foundation: Component & Integrity Verification', () => {
       process.env.NODE_ENV = originalEnv;
     });
 
-    it('renders successfully in local development mode', () => {
+    it('renders successfully in local development mode without nested <main> tag', () => {
       // @ts-expect-error mutating NODE_ENV for test
       process.env.NODE_ENV = 'development';
       delete process.env.NETLIFY;
@@ -161,6 +206,9 @@ describe('M08-A Foundation: Component & Integrity Verification', () => {
       expect(html).toContain('Development Preview Only');
       expect(html).toContain('Websites that earn trust.');
       expect(html).toContain('Explore what we can build');
+      // Landmark nesting check: must not contain a <main> landmark
+      expect(html).not.toContain('<main');
+      expect(html).not.toContain('</main>');
       // @ts-expect-error restoring NODE_ENV
       process.env.NODE_ENV = originalEnv;
       process.env.NETLIFY = originalNetlify;

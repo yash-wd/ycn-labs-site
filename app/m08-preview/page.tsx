@@ -25,12 +25,12 @@ export default function M08PreviewPage() {
   }
 
   return (
-    <main className="min-h-screen bg-[var(--r-canvas,#F7FAFC)] text-[var(--r-ink,#0B1220)]">
+    <div className="min-h-screen bg-[var(--r-canvas,#F7FAFC)] text-[var(--r-ink,#0B1220)]">
       <div className="bg-amber-100 dark:bg-amber-950/50 text-amber-900 dark:text-amber-200 text-xs px-4 py-2 border-b border-amber-300 dark:border-amber-800 text-center font-medium">
         Development Preview Only — M08-A Hero &amp; Showroom Foundation (Not active on public homepage)
       </div>
       <HeroSection />
       <ShowroomFoundation />
-    </main>
+    </div>
   );
 }

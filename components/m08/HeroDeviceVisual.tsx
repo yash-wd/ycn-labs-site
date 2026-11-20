@@ -3,7 +3,7 @@ import styles from './HeroSection.module.css';
 
 export function HeroDeviceVisual() {
   return (
-    <div className={styles.heroSceneShop} aria-hidden="true">
+    <div className={styles.heroSceneShop}>
       {/* Hidden SVG Definitions for Vector Product Artwork */}
       <svg className={styles.heroArtDefinitions} focusable="false" height="0" width="0" aria-hidden="true">
         <defs>
@@ -55,10 +55,10 @@ export function HeroDeviceVisual() {
         </defs>
       </svg>
 
-      <div className={styles.heroGlowOrbit} />
+      <div className={styles.heroGlowOrbit} aria-hidden="true" />
 
-      {/* Laptop Device */}
-      <div className={styles.heroLaptop} data-device="laptop">
+      {/* Laptop Device (Decorative artwork hidden from screen readers) */}
+      <div className={styles.heroLaptop} data-device="laptop" aria-hidden="true">
         <div className={styles.heroLaptopCamera} />
         <div className={styles.heroLaptopBezel}>
           <div className={styles.heroShopBar}>
@@ -122,8 +122,8 @@ export function HeroDeviceVisual() {
         <div className={styles.heroLaptopBase} />
       </div>
 
-      {/* Smartphone Device */}
-      <div className={styles.heroHandset} data-device="phone">
+      {/* Smartphone Device (Decorative artwork hidden from screen readers) */}
+      <div className={styles.heroHandset} data-device="phone" aria-hidden="true">
         <div className={styles.heroPhoneButtons} />
         <div className={styles.heroPhoneGlass}>
           <div className={styles.heroPhoneStatus}>
@@ -152,6 +152,9 @@ export function HeroDeviceVisual() {
           <div className={styles.heroPhoneHome} />
         </div>
       </div>
+
+      {/* Screen reader narrative description */}
+      <span className="sr-only">Example shop on a laptop and a phone. See the interactive examples below.</span>
 
       {/* Accessible readable caption mandated by Owner Condition 1 */}
       <p className={styles.heroSceneHint}>Example shop. Not a real business or client.</p>

@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState, useRef, KeyboardEvent } from 'react';
+import React, { useState, useRef, useEffect, KeyboardEvent } from 'react';
 import {
   Globe,
   Smartphone,
@@ -22,9 +22,27 @@ export function ShowroomFoundation() {
   const [activeMode, setActiveMode] = useState<ShowroomMode>('website');
   const [expanded, setExpanded] = useState<boolean>(false);
   const tabRefs = useRef<(HTMLButtonElement | null)[]>([]);
+  const expandBtnRef = useRef<HTMLButtonElement | null>(null);
 
   const activeIndex = SHOWROOM_MODES.findIndex((m) => m.id === activeMode);
   const activeMeta = SHOWROOM_MODES[activeIndex] || SHOWROOM_MODES[0];
+
+  useEffect(() => {
+    if (!expanded) return;
+
+    const handleGlobalKeyDown = (e: globalThis.KeyboardEvent) => {
+      if (e.key === 'Escape') {
+        e.preventDefault();
+        setExpanded(false);
+        expandBtnRef.current?.focus();
+      }
+    };
+
+    window.addEventListener('keydown', handleGlobalKeyDown);
+    return () => {
+      window.removeEventListener('keydown', handleGlobalKeyDown);
+    };
+  }, [expanded]);
 
   const handleKeyDown = (e: KeyboardEvent<HTMLButtonElement>, index: number) => {
     const count = SHOWROOM_MODES.length;
@@ -115,10 +133,12 @@ export function ShowroomFoundation() {
         <div className={styles.modeMeta}>
           <p id="mode-caption">{activeMeta.caption}</p>
           <button
+            ref={expandBtnRef}
             type="button"
             className={styles.expandBtn}
             onClick={() => setExpanded((prev) => !prev)}
             aria-expanded={expanded}
+            aria-label={expanded ? 'Close larger view' : 'Open larger view'}
           >
             {expanded ? 'Close larger view ↙' : 'Open larger view ↗'}
           </button>
@@ -129,28 +149,35 @@ export function ShowroomFoundation() {
           {`${activeMeta.label} example selected.`}
         </p>
 
-        {/* Interactive Stage Region / Foundation Shell */}
-        <div
-          id={`panel-${activeMode}`}
-          role="tabpanel"
-          aria-labelledby={`tab-${activeMode}`}
-          aria-label={activeMeta.stageLabel}
-          className={`${styles.stage} ${expanded ? styles.stageExpanded : ''}`}
-        >
-          <div className={styles.stagePlaceholder}>
-            <span className={styles.stagePlaceholderChip}>
-              {renderIcon(activeMeta.icon)}
-              <span>{activeMeta.label}</span>
-            </span>
-            <h3 className={styles.stagePlaceholderTitle}>
-              {activeMeta.label} Demonstration Shell
-            </h3>
-            <p className={styles.stagePlaceholderText}>{activeMeta.caption}</p>
-            <p className={styles.stagePlaceholderText}>
-              Modular client component will be mounted here in subsequent phases (M08-B / M08-C / M08-D).
-            </p>
-          </div>
-        </div>
+        {/* Interactive Stage Region / Foundation Shell (all 6 tabpanels in DOM to satisfy aria-controls) */}
+        {SHOWROOM_MODES.map((mode) => {
+          const isSelected = activeMode === mode.id;
+          return (
+            <div
+              key={mode.id}
+              id={`panel-${mode.id}`}
+              role="tabpanel"
+              aria-labelledby={`tab-${mode.id}`}
+              aria-label={mode.stageLabel}
+              hidden={!isSelected}
+              className={`${styles.stage} ${expanded ? styles.stageExpanded : ''}`}
+            >
+              <div className={styles.stagePlaceholder}>
+                <span className={styles.stagePlaceholderChip}>
+                  {renderIcon(mode.icon)}
+                  <span>{mode.label}</span>
+                </span>
+                <h3 className={styles.stagePlaceholderTitle}>
+                  {mode.label} Demonstration Shell
+                </h3>
+                <p className={styles.stagePlaceholderText}>{mode.caption}</p>
+                <p className={styles.stagePlaceholderText}>
+                  Modular client component will be mounted here in subsequent phases (M08-B / M08-C / M08-D).
+                </p>
+              </div>
+            </div>
+          );
+        })}
 
         {/* Fictional Concept Disclosure Banner */}
         <div className={styles.disclosure} id="demo-disclosure">

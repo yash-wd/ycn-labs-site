@@ -17,7 +17,7 @@
 
 This block supersedes older current-status blocks below without erasing their historical records.
 
-- **Milestone: PR #44 (M06 — `YCN-NAV-07-A11Y-01` Mobile Navigation Accessibility Remediation) merged into `main` on 19 Nov 2026; site remains unlaunched.**
+- **Milestone: PR #44 (M06 — `YCN-NAV-07-A11Y-01` Mobile Navigation Accessibility Remediation) merged into `main` on 18 Nov 2026 (23:35 IST); site remains unlaunched.**
   - **Reviewed PR #44 Head:** Merged at `d47fe73cc1eabbfad74d599fe3a66e309418a985`.
   - **GitHub CI Verification:** PASSED (TypeScript clean, ESLint clean, unit tests passed, Chromium Playwright browser suite passed, Next.js production builds passed).
   - **GitHub Gitleaks Verification:** PASSED with 0 leaks.
@@ -39,7 +39,7 @@ This block supersedes older current-status blocks below without erasing their hi
   - **Scope:** Modular components under `components/m08/` (`HeroSection.tsx`, `HeroDeviceVisual.tsx`, `ShowroomFoundation.tsx`, `showroomModes.ts`, scoped CSS modules), unit test suite `__tests__/m08-foundation.test.tsx`, and dev-only preview route `app/m08-preview/page.tsx` (returns 404 in production/staging). Homepage `app/page.tsx` strictly preserved unmodified.
 
 - **Current Progress Metrics (20 Nov 2026):**
-  - **Detailed Checklist Progress:** 35 / 143 items verified (24.5% recorded readiness; 108 unchecked in `docs/YCN_READINESS_CHECKLIST.md`).
+  - **Detailed Checklist Progress:** 33 / 143 items verified (23.1% recorded readiness; 110 unchecked, 24 Owner gates in `docs/YCN_READINESS_CHECKLIST.md`).
   - **V1 Major Milestone Progress:** 7 / 15 accepted milestones (46.7% milestone-count progress; M01–M07 accepted; 8 pending in `docs/BACKLOG.md`).
 
 - **Next Delivery Milestones:** M08-B (`YCN-M08-B-SHOWROOM-DEMOS-01` — Interactive demonstration interiors for the 6 showroom devices). Parallel track: `MEDIA-01`.
