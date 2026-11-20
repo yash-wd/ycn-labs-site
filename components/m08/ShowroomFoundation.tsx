@@ -131,6 +131,7 @@ export function ShowroomFoundation() {
               aria-labelledby={`tab-${mode.id}`}
               aria-label={mode.stageLabel}
               hidden={!isSelected}
+              tabIndex={isSelected ? 0 : -1}
               className={styles.stage}
             >
               <div className={styles.stagePlaceholder}>

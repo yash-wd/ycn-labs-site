@@ -149,6 +149,16 @@
   padding: 24px 0;
 }
 
+.stage:focus-visible {
+  outline: 3px solid var(--r-link, #035B94);
+  outline-offset: 4px;
+  border-radius: 16px;
+}
+
+:global(.dark) .stage:focus-visible {
+  outline-color: var(--r-link, #67E8F9);
+}
+
 .stage::before {
   content: "";
   position: absolute;

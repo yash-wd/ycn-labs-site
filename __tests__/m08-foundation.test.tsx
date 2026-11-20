@@ -118,12 +118,13 @@ describe('M08-A Foundation: Component & Integrity Verification', () => {
       expect(html).toContain('id="panel-website"');
       expect(html).toContain('role="tabpanel"');
       expect(html).toContain('aria-label="Example: Websites"');
-      // Inactive panels have hidden attribute
-      expect(html).toMatch(/id="panel-webapp"[^>]*hidden=""/);
-      expect(html).toMatch(/id="panel-automation"[^>]*hidden=""/);
-      expect(html).toMatch(/id="panel-crm"[^>]*hidden=""/);
-      expect(html).toMatch(/id="panel-store"[^>]*hidden=""/);
-      expect(html).toMatch(/id="panel-learning"[^>]*hidden=""/);
+      expect(html).toMatch(/id="panel-website"[^>]*tabindex="0"/);
+      // Inactive panels have hidden attribute and tabindex="-1"
+      expect(html).toMatch(/id="panel-webapp"[^>]*hidden=""[^>]*tabindex="-1"/);
+      expect(html).toMatch(/id="panel-automation"[^>]*hidden=""[^>]*tabindex="-1"/);
+      expect(html).toMatch(/id="panel-crm"[^>]*hidden=""[^>]*tabindex="-1"/);
+      expect(html).toMatch(/id="panel-store"[^>]*hidden=""[^>]*tabindex="-1"/);
+      expect(html).toMatch(/id="panel-learning"[^>]*hidden=""[^>]*tabindex="-1"/);
     });
 
     it('does not render premature enlarged-view control in M08-A foundation', () => {
