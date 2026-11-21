@@ -150,6 +150,28 @@ test.describe("M08 Showroom local development browser verification", () => {
         // Verify actual theme class is applied to html element
         await expect(page.locator("html")).toHaveClass(new RegExp(`\\b${theme}\\b`));
 
+        // Verify computed canvas background and primary text colors (Seat 2 Gate A regression assertion)
+        const container = page.locator("div.min-h-screen");
+        const containerColors = await container.evaluate((el) => {
+          const style = window.getComputedStyle(el);
+          return {
+            bg: style.backgroundColor,
+            text: style.color,
+          };
+        });
+
+        if (theme === "light") {
+          expect(containerColors.bg).toBe("rgb(255, 255, 255)");
+          expect(containerColors.text).toBe("rgb(10, 12, 16)");
+        } else {
+          expect(containerColors.bg).toBe("rgb(13, 17, 26)");
+          expect(containerColors.text).toBe("rgb(248, 250, 252)");
+
+          // Verify H1 text color is readable against dark canvas
+          const h1Color = await page.locator("h1#hero-title").evaluate((el) => window.getComputedStyle(el).color);
+          expect(h1Color).toBe("rgb(244, 248, 252)");
+        }
+
         // Verify all 6 modes reflow cleanly without horizontal overflow
         for (const mode of MODES) {
           await page.locator(`#tab-${mode.id}`).click();
