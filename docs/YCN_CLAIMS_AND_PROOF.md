@@ -33,6 +33,8 @@ Public factual claims require evidence appropriate to the wording. Owner approva
 | Security practices | Actual implementation/checklist evidence | UNVERIFIED until audit | Describe specific implemented practices, never “100% secure.” |
 | Enquiry durability/recovery | Staging/production acceptance + failure/recovery evidence | UNVERIFIED until B3/D1 | Do not promise reliable receipt until proven. |
 | “Internal product”, “concept”, “deployed” statuses | Repo/runtime/source classification | UNVERIFIED until audit | Use explicit stage/limitations. |
+| Six Core Digital Product Capabilities (Websites, Web apps, Automation, CRM & admin, Online store, Learning platform) | Owner capability commitment & engineering delivery readiness (DECISION-059) | COMMITMENT | Owner-approved commercial service commitment. Delivery capability offered if requested by a client. Does not claim or imply verified past client delivery. |
+| Showroom & Hero Demonstration Businesses (Example Home Repairs, Example Home Supplies, Example Learning Hub, Shop.) | Explicit disclosures in UI, accessible captions, and screen reader text | VERIFIED (Fictional simulations) | Disclosed as fictional simulations/examples in UI, captions, and accessibility labels; never represented as past clients or real businesses. |
 
 ## Process
 

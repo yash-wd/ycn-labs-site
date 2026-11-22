@@ -804,3 +804,13 @@ test.describe("contact page (API mocked)", () => {
     await ctx.close();
   });
 });
+
+test.describe("M08 preview route isolation", () => {
+  test("/m08-preview returns HTTP 404 in production environment", async ({ browser }) => {
+    const { ctx, page, status } = await open(browser, "/m08-preview");
+    expect(status).toBe(404);
+    await expect(page.locator("h1")).toContainText("This path does not go anywhere.");
+    await expect(page.getByText("404 Not Found")).toBeVisible();
+    await ctx.close();
+  });
+});
