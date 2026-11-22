@@ -76,3 +76,107 @@ jobs:
         env:
           NEXT_PUBLIC_SITE_ENV: production
 
+  dev-preview-chromium:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4.4.0
+
+      - name: Install pnpm
+        uses: pnpm/action-setup@fc06bc1257f339d1d5d8b3a19a8cae5388b55320 # v4.4.0
+        with:
+          version: 11
+
+      - name: Setup Node.js
+        uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4.4.0
+        with:
+          node-version: 24
+
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+
+      - name: Generate Next.js TypeScript definitions
+        run: pnpm exec next typegen
+
+      - name: Assert credentials isolation
+        run: |
+          for var in DATABASE_URL RESEND_API_KEY LEAD_DESTINATION_EMAIL UPSTASH_REDIS_REST_URL UPSTASH_REDIS_REST_TOKEN RATE_LIMIT_HASH_SECRET SENTRY_DSN; do
+            if [ -n "${!var}" ]; then
+              echo "::error::Unexpected credential present in CI environment: $var"
+              exit 1
+            fi
+          done
+          echo "Credentials isolation verified: zero provider credentials present."
+
+      - name: Install Playwright Chromium
+        run: pnpm exec playwright install --with-deps chromium
+
+      - name: Record CI commit identity (Seat #5 R-01)
+        run: |
+          PR_HEAD_SHA="${{ github.event.pull_request.head.sha }}"
+          CHECKOUT_SHA="$(git rev-parse HEAD)"
+          echo "=== CI COMMIT IDENTITY ==="
+          echo "PR Source Head SHA: ${PR_HEAD_SHA:-N/A (push)}"
+          echo "Tested Checkout SHA: ${CHECKOUT_SHA}"
+          echo "Workflow Run ID: ${{ github.run_id }}"
+          echo "Workflow Run Number: ${{ github.run_number }}"
+          echo "Test Base URL: http://127.0.0.1:3005"
+          echo "=========================="
+
+      - name: Start temporary development server and run M08-B browser suite
+        run: |
+          pnpm exec next dev -H 127.0.0.1 -p 3005 &
+          DEV_PID=$!
+          echo "Started next dev on PID $DEV_PID, waiting for HTTP 200..."
+          for i in $(seq 1 45); do
+            STATUS=$(curl -s -o /dev/null -w "%{http_code}" http://127.0.0.1:3005/m08-preview || true)
+            if [ "$STATUS" = "200" ]; then
+              echo "Development server is ready (HTTP 200 after ${i}s)."
+              break
+            fi
+            sleep 1
+          done
+          if [ "$STATUS" != "200" ]; then
+            echo "::error::Development server failed to respond with HTTP 200 within 45s (last status: $STATUS)"
+            kill $DEV_PID || true
+            exit 1
+          fi
+
+          # Run dedicated development browser test suite and 36-screenshot matrix
+          PW_DEV_URL="http://127.0.0.1:3005" pnpm exec playwright test --config=playwright.m08-dev.config.ts
+          TEST_EXIT=$?
+
+          kill $DEV_PID || true
+          exit $TEST_EXIT
+
+      - name: Verify 36 screenshots and sanitized manifest
+        if: always()
+        run: |
+          MANIFEST="test-results/m08-screenshots/manifest.json"
+          if [ -f "$MANIFEST" ]; then
+            echo "Manifest found. Verifying 36 screenshots..."
+            COUNT=$(ls -1 test-results/m08-screenshots/*.png 2>/dev/null | wc -l)
+            echo "Screenshot PNG count: $COUNT"
+            if [ "$COUNT" -ne 36 ]; then
+              echo "::error::Expected exactly 36 screenshots in test-results/m08-screenshots/, found $COUNT"
+              exit 1
+            fi
+            # Privacy audit: ensure no absolute workstation paths or usernames
+            if grep -q -E "(/home/|ycn-labs)" "$MANIFEST"; then
+              echo "::error::Privacy violation: absolute workstation path or username found in manifest!"
+              exit 1
+            fi
+            echo "Manifest and 36 screenshots verified successfully."
+          else
+            echo "No screenshot manifest generated (tests may have failed before capture)."
+          fi
+
+      - name: Upload M08-B Showroom 36-Screenshot Matrix Artifact
+        if: always()
+        uses: actions/upload-artifact@4cec3d8aa04e39d1a68397de0c4cd6fb9dce8ec1 # v4.6.1
+        with:
+          name: m08-b-showroom-screenshots-${{ github.run_id }}
+          path: test-results/m08-screenshots/
+          if-no-files-found: warn
+
+
