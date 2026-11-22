@@ -112,6 +112,7 @@ jobs:
         run: pnpm exec playwright install --with-deps chromium
 
       - name: Record CI commit identity (Seat #5 R-01)
+        id: commit_identity
         run: |
           PR_HEAD_SHA="${{ github.event.pull_request.head.sha }}"
           CHECKOUT_SHA="$(git rev-parse HEAD)"
@@ -122,8 +123,14 @@ jobs:
           echo "Workflow Run Number: ${{ github.run_number }}"
           echo "Test Base URL: http://127.0.0.1:3005"
           echo "=========================="
+          echo "checkout_sha=${CHECKOUT_SHA}" >> "$GITHUB_OUTPUT"
 
       - name: Start temporary development server and run M08-B browser suite
+        env:
+          PW_DEV_URL: "http://127.0.0.1:3005"
+          PR_SOURCE_HEAD_SHA: ${{ github.event.pull_request.head.sha || github.sha }}
+          TESTED_CHECKOUT_SHA: ${{ steps.commit_identity.outputs.checkout_sha }}
+          GITHUB_RUN_ID: ${{ github.run_id }}
         run: |
           pnpm exec next dev -H 127.0.0.1 -p 3005 &
           DEV_PID=$!
@@ -143,7 +150,7 @@ jobs:
           fi
 
           # Run dedicated development browser test suite and 36-screenshot matrix
-          PW_DEV_URL="http://127.0.0.1:3005" pnpm exec playwright test --config=playwright.m08-dev.config.ts
+          pnpm exec playwright test --config=playwright.m08-dev.config.ts
           TEST_EXIT=$?
 
           kill $DEV_PID || true
@@ -154,7 +161,7 @@ jobs:
         run: |
           MANIFEST="test-results/m08-screenshots/manifest.json"
           if [ -f "$MANIFEST" ]; then
-            echo "Manifest found. Verifying 36 screenshots..."
+            echo "Manifest found. Verifying 36 screenshots and commit identity..."
             COUNT=$(ls -1 test-results/m08-screenshots/*.png 2>/dev/null | wc -l)
             echo "Screenshot PNG count: $COUNT"
             if [ "$COUNT" -ne 36 ]; then
@@ -166,7 +173,12 @@ jobs:
               echo "::error::Privacy violation: absolute workstation path or username found in manifest!"
               exit 1
             fi
-            echo "Manifest and 36 screenshots verified successfully."
+            # Identity audit: verify source_pr_head_sha and tested_checkout_sha are populated
+            if ! grep -q "source_pr_head_sha" "$MANIFEST" || ! grep -q "tested_checkout_sha" "$MANIFEST"; then
+              echo "::error::Manifest missing source_pr_head_sha or tested_checkout_sha!"
+              exit 1
+            fi
+            echo "Manifest, 36 screenshots, and commit identity verified successfully."
           else
             echo "No screenshot manifest generated (tests may have failed before capture)."
           fi

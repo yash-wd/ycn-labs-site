@@ -89,13 +89,7 @@ export function ExampleCrmAdmin() {
     const target = records[selectedIndex];
     if (!target) return;
 
-    const updatedHistory = [...target.history];
-    if (newStatus === 'Visit planned' && !updatedHistory.includes('Visit agreed')) {
-      updatedHistory.push('Visit agreed');
-    }
-    if (newStatus === 'Done' && !updatedHistory.includes('Job done')) {
-      updatedHistory.push('Job done');
-    }
+    const updatedHistory = [...target.history, `Status set to ${newStatus} (demo)`];
 
     const updatedRecords = records.map((r, i) =>
       i === selectedIndex
@@ -108,8 +102,15 @@ export function ExampleCrmAdmin() {
   };
 
   const handleTechChange = (newTech: string) => {
+    const target = records[selectedIndex];
+    if (!target) return;
+
+    const updatedHistory = [...target.history, `Assigned to ${newTech} (demo)`];
+
     const updatedRecords = records.map((r, i) =>
-      i === selectedIndex ? { ...r, technician: newTech } : r
+      i === selectedIndex
+        ? { ...r, technician: newTech, history: updatedHistory }
+        : r
     );
     setRecords(updatedRecords);
     setChangeNotice(`Technician assigned to ${newTech}. Nothing is saved.`);

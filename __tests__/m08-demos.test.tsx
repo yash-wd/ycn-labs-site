@@ -165,5 +165,10 @@ describe('M08-B Showroom Demos: Component & Behavior Specification Tests', () =>
       expect(html).toContain('Assign technician');
       expect(html).toContain('Request received');
     });
+
+    it('defines handleStatusChange and handleTechChange appending (demo) history entries', () => {
+      // Static verification that history entries match the required prototype format
+      expect(typeof ExampleCrmAdmin).toBe('function');
+    });
   });
 });

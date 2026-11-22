@@ -18,7 +18,7 @@
 This block supersedes older current-status blocks below without erasing their historical records.
 
 - **Milestone: PR #45 (M08-A — `YCN-M08-A-FOUNDATION-01` Hero & Showroom Foundation Implementation) merged into `main` on 22 Nov 2026; site remains unlaunched.**
-  - **Reviewed PR #45 Head:** Merged at `cf6932c4f3647a60331c0a207bd1e8864a1f5e22`.
+  - **Reviewed PR #45 Source Head:** `4503b6a8ce215134257009fab699707da5cdc117`.
   - **Main Merge Commit:** `cf6932c4f3647a60331c0a207bd1e8864a1f5e22`.
   - **GitHub CI Verification:** PASSED on PR #45.
   - **Merged by:** Owner directly on GitHub.
@@ -32,7 +32,7 @@ This block supersedes older current-status blocks below without erasing their hi
 
 - **Current Progress Metrics (22 November 2026):**
   - **Detailed Checklist Progress:** 33 / 143 items verified (23.1% recorded readiness; 110 unchecked, 24 Owner gates in `docs/YCN_READINESS_CHECKLIST.md`).
-  - **V1 Major Milestone Progress:** 8 / 15 milestone progress (53.3% count progress; M01–M07 accepted, M08-A merged into M08 in progress; 7 pending in `docs/BACKLOG.md`).
+  - **V1 Major Milestone Progress:** 7 / 15 accepted major milestones (46.7% milestone-count progress; M01–M07 accepted; M08 in progress with M08-A merged and M08-B in progress; 8 pending in `docs/BACKLOG.md`).
 
 - **Next Delivery Milestones:** M08-C (`YCN-M08-C-SHOWROOM-AUTOMATION-01` — Automation showroom demonstration interior), M08-D (`YCN-M08-D-SHOWROOM-STORE-LEARNING-01` — Online store and Learning platform demonstration interiors). Parallel track: `MEDIA-01`.
 
