@@ -4,6 +4,7 @@ import { renderToStaticMarkup } from 'react-dom/server';
 import { ExampleWebsite } from '@/components/m08/demos/ExampleWebsite';
 import { ExampleWebApp } from '@/components/m08/demos/ExampleWebApp';
 import { ExampleCrmAdmin } from '@/components/m08/demos/ExampleCrmAdmin';
+import { ExampleAutomation } from '@/components/m08/demos/ExampleAutomation';
 import {
   ExampleTabletFrame,
   ExamplePhoneFrame,
@@ -164,6 +165,85 @@ describe('M08-B Showroom Demos: Component & Behavior Specification Tests', () =>
       expect(html).toContain('Change status');
       expect(html).toContain('Assign technician');
       expect(html).toContain('Request received');
+    });
+  });
+
+  describe('ExampleAutomation (Automation Demonstration)', () => {
+    const html = renderToStaticMarkup(React.createElement(ExampleAutomation));
+
+    it('renders workflow container with id="demo-automation" in laptop shell with light productScreen', () => {
+      expect(html).toContain('id="demo-automation"');
+      expect(html).toContain('data-device="laptop"');
+      expect(html).toContain('productScreen');
+    });
+
+    it('renders header "Example Home Repairs · Workflows", subline, and "Simulated" chip', () => {
+      expect(html).toContain('Example Home Repairs · Workflows');
+      expect(html).toContain('Request handling · Sample execution');
+      expect(html).toContain('Simulated');
+    });
+
+    it('renders initial status "Ready. Press Run example." in status element', () => {
+      expect(html).toContain('id="auto-status"');
+      expect(html).toContain('Ready. Press Run example.');
+    });
+
+    it('renders accessible control buttons: Run example, Pause, Start again', () => {
+      expect(html).toContain('data-action="auto-run"');
+      expect(html).toContain('Run example');
+      expect(html).toContain('data-action="auto-pause"');
+      expect(html).toContain('Pause');
+      expect(html).toContain('data-action="auto-reset"');
+      expect(html).toContain('Start again');
+    });
+
+    it('renders all 6 sequential workflow step nodes with initial titles and Waiting status', () => {
+      expect(html).toContain('A customer sends a request');
+      expect(html).toContain('The request is saved');
+      expect(html).toContain('The owner gets an alert');
+      expect(html).toContain('The owner confirms the visit');
+      expect(html).toContain('The technician marks the job done');
+      expect(html).toContain('The customer gets an update');
+      expect(html).toContain('data-index="0"');
+      expect(html).toContain('data-index="5"');
+    });
+
+    it('renders detail inspection card with initial step 1 information', () => {
+      expect(html).toContain('id="auto-detail"');
+      expect(html).toContain('Starts it');
+      expect(html).toContain('Anita requests a tap repair, with Saturday morning preferred.');
+    });
+
+    it('renders Execution history section with initial empty state "No steps have run."', () => {
+      expect(html).toContain('Execution history');
+      expect(html).toContain('No steps have run.');
+    });
+
+    it('renders human action bar with initial idle prompt and failure simulation toggle', () => {
+      expect(html).toContain('Person steps need your click.');
+      expect(html).toContain('data-action="auto-fail"');
+      expect(html).toContain('Show what happens when a step fails');
+    });
+
+    it('renders companion phone shell with 9:41 lock clock and notification stream switch', () => {
+      expect(html).toContain('9:41');
+      expect(html).toContain('Sample · Now');
+      expect(html).toContain('data-action="auto-phone"');
+      expect(html).toContain('data-phone="owner"');
+      expect(html).toContain('data-phone="customer');
+      expect(html).toContain('Notifications appear here as the sample workflow runs.');
+    });
+
+    it('renders mobile notification fallback with proper accessible attributes', () => {
+      expect(html).toContain('aria-label="Mobile notification preview"');
+      expect(html).toContain('Phone notification preview · 9:41');
+      expect(html).toContain('An alert will appear here after its step runs.');
+    });
+
+    it('strictly avoids arbitrary text glyphs in status icons and hardware shells', () => {
+      expect(html).not.toContain('◉ ▰');
+      expect(html).not.toContain('◉');
+      expect(html).not.toContain('▰');
     });
   });
 });
