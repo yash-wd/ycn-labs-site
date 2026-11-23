@@ -13,32 +13,32 @@
 
 ---
 
-## CURRENT STATUS — 22 November 2026 (read this first)
+## CURRENT STATUS — 23 November 2026 (read this first)
 
 This block supersedes older current-status blocks below without erasing their historical records.
 
-- **Milestone: PR #45 (M08-A — `YCN-M08-A-FOUNDATION-01` Hero & Showroom Foundation Implementation) merged into `main` on 22 Nov 2026; site remains unlaunched.**
-  - **Reviewed PR #45 Source Head:** `4503b6a8ce215134257009fab699707da5cdc117`.
-  - **Main Merge Commit:** `cf6932c4f3647a60331c0a207bd1e8864a1f5e22`.
-  - **GitHub CI Verification:** PASSED on PR #45.
+- **Milestone: PR #46 (M08-B — `YCN-M08-B-SHOWROOM-DEMOS-01` Showroom Demonstration Interiors — Websites, Web apps, CRM & admin) merged into `main` on 23 Nov 2026; site remains unlaunched.**
+  - **Reviewed PR #46 Source Head:** `f3bb811b5e3754b69aec90e13a88331d4d5b0e33`.
+  - **Main Merge Commit:** `e7b35dbd77c69fd4d936b3ac8afb0bc78f67597c`.
+  - **Merge Tree SHA:** `b27fe769bb20040eedd8844462804bbab63626a1` (exact identity with source).
+  - **GitHub CI Verification:** PASSED on PR #46 (run 45103200511: 356 unit tests, 53 prod Chromium, 3 staging preview, 11 dev browser, 36 clean screenshots) and post-merge Gitleaks PASSED (run 45108204638).
   - **Merged by:** Owner directly on GitHub.
-  - **Milestone M08-A:** `[VERIFIED]`. HeroSection, HeroDeviceVisual, ShowroomFoundation, and dev-preview route established.
+  - **Milestone M08-B:** `[VERIFIED]`. Interactive demonstration interiors for Websites, Web apps, and CRM & admin established with state preservation.
 
-- **Active Task: `YCN-M08-B-SHOWROOM-DEMOS-01` (Milestone M08-B: Showroom Demonstration Interiors — Websites, Web apps, CRM & admin).**
-  - **Branch:** `wip/YCN-M08-B-SHOWROOM-DEMOS-01`.
-  - **Base `main`:** `cf6932c4f3647a60331c0a207bd1e8864a1f5e22`.
-  - **Status:** `[LOCAL-WIP]` Implemented locally; 14-file boundary strictly respected; 40 Vitest unit tests passing across foundation and demos suites; 36-configuration screenshot matrix (3 demos × 6 viewports × 2 themes) and behavioral browser suite verified on dedicated `playwright.m08-dev.config.ts`; Next.js production build passing with `/m08-preview` HTTP 404 in production; isolated `dev-preview-chromium` job added to `.github/workflows/ci.yml`.
-  - **Scope:** Interactive interiors for Websites (`ExampleWebsite.tsx`, Example Home Repairs, light-only screen, basin illustration, responsive nav, local demo request), Web apps (`ExampleWebApp.tsx`, 3-step validation flow, required fields, v3 mandatory wording), CRM & admin (`ExampleCrmAdmin.tsx`, 10 seeded records, search by customer/job/area, status filter, technician assignment, reset), and hardware frames (`ExampleDeviceFrames.tsx`). State preservation across tab switches verified.
+- **Active Task: `YCN-M08-C-SHOWROOM-AUTOMATION-01` (Milestone M08-C: Interactive Automation Showroom Demonstration Interior).**
+  - **Branch:** `wip/YCN-M08-C-SHOWROOM-AUTOMATION-01`.
+  - **Base `main`:** `e7b35dbd77c69fd4d936b3ac8afb0bc78f67597c`.
+  - **Status:** `[LOCAL-WIP]` Implemented locally within the authorized 8-file scope; interactive Automation demonstration mounted inside `#panel-automation` with dual-device laptop frame and companion phone notifier; 6-stage workflow simulation with deliberate human confirmation gates (Confirm visit, Mark job done), failure/retry testing, recipient toggle, and execution history; expanded 48-configuration screenshot matrix (4 demos × 6 viewports × 2 themes) and CI workflow updated.
 
-- **Current Progress Metrics (22 November 2026):**
+- **Current Progress Metrics (23 November 2026):**
   - **Detailed Checklist Progress:** 33 / 143 items verified (23.1% recorded readiness; 110 unchecked, 24 Owner gates in `docs/YCN_READINESS_CHECKLIST.md`).
-  - **V1 Major Milestone Progress:** 7 / 15 accepted major milestones (46.7% milestone-count progress; M01–M07 accepted; M08 in progress with M08-A merged and M08-B in progress; 8 pending in `docs/BACKLOG.md`).
+  - **V1 Major Milestone Progress:** 7 / 15 accepted major milestones (46.7% milestone-count progress; M01–M07 accepted; M08 in progress with M08-A and M08-B merged, M08-C in progress, M08-D pending; 8 pending in `docs/BACKLOG.md`).
 
-- **Next Delivery Milestones:** M08-C (`YCN-M08-C-SHOWROOM-AUTOMATION-01` — Automation showroom demonstration interior), M08-D (`YCN-M08-D-SHOWROOM-STORE-LEARNING-01` — Online store and Learning platform demonstration interiors). Parallel track: `MEDIA-01`.
+- **Next Delivery Milestones:** M08-D (`YCN-M08-D-SHOWROOM-STORE-LEARNING-01` — Online store and Learning platform demonstration interiors). Parallel track: `MEDIA-01`.
 
 ---
 
-## CURRENT STATUS — 20 November 2026
+## CURRENT STATUS — 22 November 2026
 
 This block supersedes older current-status blocks below without erasing their historical records.
 

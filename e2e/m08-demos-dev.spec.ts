@@ -3,13 +3,13 @@ import fs from 'fs';
 import path from 'path';
 import crypto from 'crypto';
 
-// M08-B Showroom Demos Development Browser Verification & 36-Screenshot Matrix
+// M08-C Showroom Demos Development Browser Verification & 48-Screenshot Matrix
 // Runs against local dev preview server (PW_DEV_URL, default http://127.0.0.1:3005).
 
 const DEV_BASE_URL = process.env.PW_DEV_URL ?? 'http://127.0.0.1:3005';
 const SCREENSHOT_DIR = path.join(process.cwd(), 'test-results', 'm08-screenshots');
 
-const MODES = ['website', 'webapp', 'crm'] as const;
+const MODES = ['website', 'webapp', 'crm', 'automation'] as const;
 const VIEWPORTS = [
   { width: 320, height: 600 },
   { width: 375, height: 667 },
@@ -65,7 +65,7 @@ async function openDevPreview(
 test.describe('M08-B Showroom Demos Verification', () => {
   test.skip(!process.env.PW_DEV_URL, 'Runs against active local development preview server (PW_DEV_URL)');
 
-  test('captures complete 36-configuration screenshot matrix (3 demos × 6 viewports × 2 themes) with sanitized manifest', async ({
+  test('captures complete 48-configuration screenshot matrix (4 demos × 6 viewports × 2 themes) with sanitized manifest', async ({
     browser,
   }) => {
     fs.mkdirSync(SCREENSHOT_DIR, { recursive: true });
@@ -133,13 +133,13 @@ test.describe('M08-B Showroom Demos Verification', () => {
       }
     }
 
-    // Verify all 36 configurations were captured
-    expect(manifestEntries).toHaveLength(36);
+    // Verify all 48 configurations were captured
+    expect(manifestEntries).toHaveLength(48);
 
     // Write sanitized manifest (no absolute workstation paths; only relative filenames)
     const manifestPath = path.join(SCREENSHOT_DIR, 'manifest.json');
     const manifestData = {
-      description: 'M08-B Showroom 36-Configuration Development Preview Matrix',
+      description: 'M08-C Showroom 48-Configuration Development Preview Matrix',
       source_pr_head_sha: process.env.PR_SOURCE_HEAD_SHA ?? process.env.GITHUB_SHA ?? 'local-run',
       tested_checkout_sha: process.env.TESTED_CHECKOUT_SHA ?? 'local-run',
       workflow_run_id: process.env.GITHUB_RUN_ID ?? 'local-run',
@@ -288,6 +288,154 @@ test.describe('M08-B Showroom Demos Verification', () => {
     await ctx.close();
   });
 
+  test('verifies interactive workflow execution, human confirmation gates, failure/retry, and reset in Automation demo', async ({
+    browser,
+  }) => {
+    const { ctx, page } = await openDevPreview(browser);
+    await page.locator('#tab-automation').click();
+
+    // 1. Verify initial layout and idle status
+    await expect(page.locator('#panel-automation')).toBeVisible();
+    await expect(page.locator('#auto-status')).toHaveText('Ready. Press Run example.');
+    await expect(
+      page.locator('#panel-automation strong:has-text("Example Home Repairs · Workflows")')
+    ).toBeVisible();
+    await expect(
+      page.locator('#panel-automation small:has-text("Person steps need your click.")')
+    ).toBeVisible();
+
+    // 2. Run example -> progresses automatically through steps 0, 1, 2 until Human Gate 1 (step 3)
+    await page.locator('#panel-automation button[data-action="auto-run"]').click();
+
+    // Human Gate 1: Waiting for owner to confirm the visit
+    const confirmBtn = page.locator('#panel-automation button[data-action="auto-confirm"]');
+    await expect(confirmBtn).toBeVisible({ timeout: 5000 });
+    await expect(confirmBtn).toHaveText('Confirm visit');
+    await expect(page.locator('#auto-status')).toHaveText('Waiting for owner to confirm the visit.');
+    await expect(
+      page.locator('#panel-automation small:has-text("Owner action · not automatic")')
+    ).toBeVisible();
+
+    // Verify simulated owner notification appears on lockscreen
+    await expect(
+      page.locator('#panel-automation [role="region"] strong:has-text("New request")')
+    ).toBeVisible();
+
+    // 3. Owner clicks "Confirm visit" -> advances to Human Gate 2 (step 4)
+    await confirmBtn.click();
+    const completeBtn = page.locator('#panel-automation button[data-action="auto-complete"]');
+    await expect(completeBtn).toBeVisible({ timeout: 5000 });
+    await expect(completeBtn).toHaveText('Mark job done');
+    await expect(page.locator('#auto-status')).toHaveText('Waiting for technician to finish the job.');
+    await expect(
+      page.locator('#panel-automation small:has-text("Technician action · not automatic")')
+    ).toBeVisible();
+
+    // 4. Technician clicks "Mark job done" -> executes step 4 and advances automatically to step 5 (done)
+    await completeBtn.click();
+    await expect(page.locator('#auto-status')).toHaveText(
+      'Example finished. No message was sent.',
+      { timeout: 5000 }
+    );
+    await expect(
+      page.locator('#panel-automation ul li:has-text("Sample customer completion update shown")')
+    ).toBeVisible();
+
+    // 5. Reset via "Start again"
+    await page.locator('#panel-automation button[data-action="auto-reset"]').click();
+    await expect(page.locator('#auto-status')).toHaveText('Ready. Press Run example.');
+
+    // 5b. Verify Pause stops automatic progression and Resume continues progression
+    await page.locator('#panel-automation button[data-action="auto-run"]').click();
+    const pauseBtn = page.locator('#panel-automation button[data-action="auto-pause"]');
+    await pauseBtn.click();
+    await expect(pauseBtn).toHaveText('Resume');
+    const pausedStatusText = await page.locator('#auto-status').textContent();
+    expect(pausedStatusText).toContain('Paused at step');
+
+    // Wait 1000ms to verify that automatic progression has genuinely halted while paused
+    await page.waitForTimeout(1000);
+    await expect(page.locator('#auto-status')).toHaveText(pausedStatusText!);
+
+    // Resume execution
+    await pauseBtn.click();
+    await expect(pauseBtn).toHaveText('Pause');
+    // Progression continues and reaches the owner confirmation gate
+    await expect(confirmBtn).toBeVisible({ timeout: 5000 });
+    await expect(page.locator('#auto-status')).toHaveText('Waiting for owner to confirm the visit.');
+
+    // Reset again before failure test
+    await page.locator('#panel-automation button[data-action="auto-reset"]').click();
+    await expect(page.locator('#auto-status')).toHaveText('Ready. Press Run example.');
+
+    // 6. Test simulated failure and retry
+    const failToggle = page.locator('#panel-automation button[data-action="auto-fail"]');
+    await failToggle.click();
+    await expect(failToggle).toHaveAttribute('aria-pressed', 'true');
+
+    await page.locator('#panel-automation button[data-action="auto-run"]').click();
+
+    // Halts at step 2 with failure status
+    const retryBtn = page.locator('#panel-automation button[data-action="auto-retry"]');
+    await expect(retryBtn).toBeVisible({ timeout: 5000 });
+    await expect(retryBtn).toHaveText('Try that step again');
+    await expect(page.locator('#auto-status')).toHaveText('Owner alert failed. Try that step again.');
+    await expect(
+      page.locator('#panel-automation small:has-text("No later steps run before retry.")')
+    ).toBeVisible();
+
+    // Click retry -> resumes and reaches owner confirmation gate
+    await retryBtn.click();
+    await expect(confirmBtn).toBeVisible({ timeout: 5000 });
+    await expect(page.locator('#auto-status')).toHaveText('Waiting for owner to confirm the visit.');
+
+    // 7. Test Phone Recipient Switch
+    const customerPhoneBtn = page
+      .locator('#panel-automation button[data-action="auto-phone"][data-phone="customer"]:visible');
+    await customerPhoneBtn.click();
+    await expect(customerPhoneBtn).toHaveAttribute('aria-pressed', 'true');
+
+    const ownerPhoneBtn = page
+      .locator('#panel-automation button[data-action="auto-phone"][data-phone="owner"]:visible');
+    await ownerPhoneBtn.click();
+    await expect(ownerPhoneBtn).toHaveAttribute('aria-pressed', 'true');
+
+    await ctx.close();
+  });
+
+  test('verifies reduced-motion timing and accessibility are honored in Automation demo', async ({
+    browser,
+  }) => {
+    const { ctx, page } = await openDevPreview(browser);
+    await page.emulateMedia({ reducedMotion: 'reduce' });
+    await page.locator('#tab-automation').click();
+
+    // Verify reduced-motion media query matches in browser context
+    const prefersReduced = await page.evaluate(
+      () => window.matchMedia('(prefers-reduced-motion: reduce)').matches
+    );
+    expect(prefersReduced).toBe(true);
+
+    const startTime = Date.now();
+    await page.locator('#panel-automation button[data-action="auto-run"]').click();
+
+    // In reduced motion mode, step progression delay is 20ms instead of 680ms
+    // Reaching owner confirmation gate (steps 0 -> 1 -> 2) should complete in under 800ms
+    const confirmBtn = page.locator('#panel-automation button[data-action="auto-confirm"]');
+    await expect(confirmBtn).toBeVisible({ timeout: 2000 });
+    const elapsedMs = Date.now() - startTime;
+    expect(elapsedMs).toBeLessThan(800);
+
+    // Verify transition: none is enforced on animated controls under prefers-reduced-motion
+    const transitionVal = await page
+      .locator('#panel-automation button[data-action="auto-select"]')
+      .first()
+      .evaluate((el) => window.getComputedStyle(el).transition);
+    expect(transitionVal).toMatch(/none|0s/);
+
+    await ctx.close();
+  });
+
   test('verifies state preservation across mode switches (Seat #5 R-02 invariant)', async ({
     browser,
   }) => {
@@ -311,18 +459,32 @@ test.describe('M08-B Showroom Demos Verification', () => {
       page.locator('#panel-crm aside[aria-label="Request detail inspection"] ol li').filter({ hasText: 'Assigned to Suresh (demo)' })
     ).toBeVisible();
 
-    // 3. Switch back to Web apps: verify it is STILL on Step 2 with Monday selected!
+    // 3. Switch to Automation: run and reach Human Gate 1 (Confirm visit)
+    await page.locator('#tab-automation').click();
+    await page.locator('#panel-automation button[data-action="auto-run"]').click();
+    await expect(
+      page.locator('#panel-automation button[data-action="auto-confirm"]')
+    ).toBeVisible({ timeout: 5000 });
+
+    // 4. Switch back to Web apps: verify it is STILL on Step 2 with Monday selected!
     await page.locator('#tab-webapp').click();
     await expect(page.locator('#app-main')).toContainText('STEP 2 OF 3');
     await expect(page.locator('#panel-webapp button:has-text("Monday")')).toHaveAttribute('aria-pressed', 'true');
 
-    // 4. Switch back to CRM: verify Suresh is STILL assigned to Ravi and history entry persists!
+    // 5. Switch back to CRM: verify Suresh is STILL assigned to Ravi and history entry persists!
     await page.locator('#tab-crm').click();
     const techVal = await page.locator('#panel-crm select[aria-label="Assign technician"]').inputValue();
     expect(techVal).toBe('Suresh');
     await expect(
       page.locator('#panel-crm aside[aria-label="Request detail inspection"] ol li').filter({ hasText: 'Assigned to Suresh (demo)' })
     ).toBeVisible();
+
+    // 6. Switch back to Automation: verify "Confirm visit" button and waiting state STILL persist!
+    await page.locator('#tab-automation').click();
+    await expect(
+      page.locator('#panel-automation button[data-action="auto-confirm"]')
+    ).toBeVisible();
+    await expect(page.locator('#auto-status')).toHaveText('Waiting for owner to confirm the visit.');
 
     await ctx.close();
   });

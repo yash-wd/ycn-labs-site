@@ -19,6 +19,7 @@ import {
 import { ExampleWebsite } from './demos/ExampleWebsite';
 import { ExampleWebApp } from './demos/ExampleWebApp';
 import { ExampleCrmAdmin } from './demos/ExampleCrmAdmin';
+import { ExampleAutomation } from './demos/ExampleAutomation';
 import styles from './ShowroomFoundation.module.css';
 
 export function ShowroomFoundation() {
@@ -140,7 +141,11 @@ export function ShowroomFoundation() {
               {mode.id === 'website' && <ExampleWebsite />}
               {mode.id === 'webapp' && <ExampleWebApp />}
               {mode.id === 'crm' && <ExampleCrmAdmin />}
-              {mode.id !== 'website' && mode.id !== 'webapp' && mode.id !== 'crm' && (
+              {mode.id === 'automation' && <ExampleAutomation />}
+              {mode.id !== 'website' &&
+                mode.id !== 'webapp' &&
+                mode.id !== 'crm' &&
+                mode.id !== 'automation' && (
                 <div className={styles.stagePlaceholder}>
                   <span className={styles.stagePlaceholderChip}>
                     {renderIcon(mode.icon)}

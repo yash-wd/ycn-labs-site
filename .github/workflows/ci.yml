@@ -150,14 +150,14 @@ jobs:
             exit 1
           fi
 
-          # Run dedicated development browser test suite and 36-screenshot matrix
+          # Run dedicated development browser test suite and 48-screenshot matrix
           pnpm exec playwright test --config=playwright.m08-dev.config.ts
           TEST_EXIT=$?
 
           kill $DEV_PID || true
           exit $TEST_EXIT
 
-      - name: Verify 36 screenshots and sanitized manifest
+      - name: Verify 48 screenshots and sanitized manifest
         if: always()
         env:
           EXPECTED_PR_HEAD_SHA: ${{ steps.commit_identity.outputs.pr_head_sha }}
@@ -166,11 +166,11 @@ jobs:
           MANIFEST: test-results/m08-screenshots/manifest.json
         run: |
           if [ -f "$MANIFEST" ]; then
-            echo "Manifest found. Verifying 36 screenshots and commit identity..."
+            echo "Manifest found. Verifying 48 screenshots and commit identity..."
             COUNT=$(ls -1 test-results/m08-screenshots/*.png 2>/dev/null | wc -l)
             echo "Screenshot PNG count: $COUNT"
-            if [ "$COUNT" -ne 36 ]; then
-              echo "::error::Expected exactly 36 screenshots in test-results/m08-screenshots/, found $COUNT"
+            if [ "$COUNT" -ne 48 ]; then
+              echo "::error::Expected exactly 48 screenshots in test-results/m08-screenshots/, found $COUNT"
               exit 1
             fi
             # Privacy audit: ensure no absolute workstation paths or usernames
@@ -206,16 +206,16 @@ jobs:
               }
               console.log("Identity values validated successfully.");
             '
-            echo "Manifest, 36 screenshots, and commit identity verified successfully."
+            echo "Manifest, 48 screenshots, and commit identity verified successfully."
           else
             echo "No screenshot manifest generated (tests may have failed before capture)."
           fi
 
-      - name: Upload M08-B Showroom 36-Screenshot Matrix Artifact
+      - name: Upload M08-C Showroom 48-Screenshot Matrix Artifact
         if: always()
         uses: actions/upload-artifact@4cec3d8aa04e39d1a68397de0c4cd6fb9dce8ec1 # v4.6.1
         with:
-          name: m08-b-showroom-screenshots-${{ github.run_id }}
+          name: m08-c-showroom-screenshots-${{ github.run_id }}
           path: test-results/m08-screenshots/
           if-no-files-found: warn
 
