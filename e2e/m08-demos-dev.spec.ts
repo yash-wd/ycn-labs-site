@@ -563,7 +563,7 @@ test.describe('M08-B Showroom Demos Verification', () => {
     await closeDetailBtn.click();
     await expect(panel.locator('button[data-action="store-close-detail"]')).toHaveCount(0);
 
-    // 3. Cart Drawer, Initial Focus & Dialog Focus Trap
+    // 3. Cart Drawer, Initial Focus & Accessible Non-Modal Dialog Structure
     const addTapBtn = panel.locator('button[data-action="store-add"][data-id="tap"]');
     await addTapBtn.click();
 
@@ -573,18 +573,15 @@ test.describe('M08-B Showroom Demos Verification', () => {
     await expect(drawer.locator('#cart-title')).toHaveText('Your cart');
     await expect(panel.locator('button[data-action="store-cart"]')).toContainText('Cart (1)');
 
+    // Non-modal compliance: must NOT claim aria-modal="true" and must NOT contain nested <main> landmark
+    await expect(drawer).not.toHaveAttribute('aria-modal', 'true');
+    await expect(panel.locator('main')).toHaveCount(0);
+
     // Initial focus must be on close button
     const closeBtn = drawer.locator('#cart-close');
     await expect(closeBtn).toBeFocused();
 
-    // Focus containment: Shift+Tab from first element wraps to last focusable (checkout button)
     const checkoutBtn = drawer.locator('button[data-action="store-checkout"]');
-    await page.keyboard.press('Shift+Tab');
-    await expect(checkoutBtn).toBeFocused();
-
-    // Focus containment: Tab from last element wraps back to first element (close button)
-    await page.keyboard.press('Tab');
-    await expect(closeBtn).toBeFocused();
 
     // Verify item and initial total
     await expect(drawer).toContainText('Basin tap');
@@ -848,6 +845,56 @@ test.describe('M08-B Showroom Demos Verification', () => {
     await expect(cartBtn).toBeFocused();
 
     await ctx.close();
+  });
+
+  test('verifies WCAG AA button and filter text contrast in Store and Learning across themes', async ({
+    browser,
+  }) => {
+    for (const theme of ['light', 'dark'] as const) {
+      const { ctx, page } = await openDevPreview(browser, { theme });
+
+      // 1. Store tab contrast checks
+      await page.locator('#tab-store').click();
+      const storePanel = page.locator('#panel-store');
+      await expect(storePanel).toBeVisible();
+
+      // Active category filter button (e.g. "All")
+      const activeFilter = storePanel.locator('nav[role="group"] button[data-action="store-filter"][data-filter="All"]');
+      const activeFilterColor = await activeFilter.evaluate((el) => window.getComputedStyle(el).color);
+      expect(activeFilterColor).toBe('rgb(255, 255, 255)');
+
+      // Inactive category filter button (e.g. "Plumbing")
+      const inactiveFilter = storePanel.locator('nav[role="group"] button[data-action="store-filter"][data-filter="Plumbing"]');
+      const inactiveFilterColor = await inactiveFilter.evaluate((el) => window.getComputedStyle(el).color);
+      expect(inactiveFilterColor).toBe('rgb(51, 65, 85)');
+
+      // Cart trigger button
+      const cartBtn = storePanel.locator('button[data-action="store-cart"]');
+      const cartBtnColor = await cartBtn.evaluate((el) => window.getComputedStyle(el).color);
+      expect(cartBtnColor).toBe('rgb(255, 255, 255)');
+
+      // Product "Add to cart" primary button
+      const addBtn = storePanel.locator('button[data-action="store-add"][data-id="tap"]');
+      const addBtnColor = await addBtn.evaluate((el) => window.getComputedStyle(el).color);
+      expect(addBtnColor).toBe('rgb(255, 255, 255)');
+
+      // 2. Learning tab contrast checks
+      await page.locator('#tab-learning').click();
+      const learnPanel = page.locator('#panel-learning');
+      await expect(learnPanel).toBeVisible();
+
+      // Primary action button ("Mark lesson as complete")
+      const completeBtn = learnPanel.locator('button[data-action="learn-complete"]');
+      const completeBtnColor = await completeBtn.evaluate((el) => window.getComputedStyle(el).color);
+      expect(completeBtnColor).toBe('rgb(255, 255, 255)');
+
+      // Active navigation button ("My courses")
+      const navBtn = learnPanel.locator('button[data-action="learn-view"][data-view="My courses"]').first();
+      const navBtnColor = await navBtn.evaluate((el) => window.getComputedStyle(el).color);
+      expect(navBtnColor).toBe('rgb(255, 255, 255)');
+
+      await ctx.close();
+    }
   });
 
   test('verifies mobile scrolling and sticky header layout behavior without demonstration overlap in normal viewing', async ({

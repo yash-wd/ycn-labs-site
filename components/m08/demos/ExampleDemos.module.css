@@ -39,7 +39,10 @@
   outline-offset: 2px;
 }
 
-.productScreen button,
+.productScreen button {
+  font-family: inherit;
+}
+
 .productScreen select,
 .productScreen input {
   color: inherit;
@@ -1858,7 +1861,7 @@
 
 .cartTrigger {
   background: #0470b4;
-  color: #ffffff;
+  color: #ffffff !important;
   border: none;
   border-radius: 7px;
   padding: 8px 14px;
@@ -1872,6 +1875,7 @@
 
 .cartTrigger:hover {
   background: #035b94;
+  color: #ffffff !important;
 }
 
 .storeHero {
@@ -1925,7 +1929,7 @@
 
 .filterActive {
   background: #142b44;
-  color: #ffffff;
+  color: #ffffff !important;
   border: 1px solid #142b44;
   border-radius: 20px;
   padding: 6px 14px;
@@ -1936,7 +1940,7 @@
 
 .filterInactive {
   background: #f1f5f9;
-  color: #506278;
+  color: #334155;
   border: 1px solid #dce4ed;
   border-radius: 20px;
   padding: 6px 14px;
@@ -1947,6 +1951,7 @@
 
 .filterInactive:hover {
   background: #e2e8f0;
+  color: #0f172a;
 }
 
 .storeDetail {
@@ -2045,7 +2050,7 @@
 .primaryBtn {
   background: #0470b4;
   border: 1px solid #0470b4;
-  color: #ffffff;
+  color: #ffffff !important;
   padding: 6px 12px;
   border-radius: 6px;
   font-size: 12px;
@@ -2059,11 +2064,14 @@
 
 .primaryBtn:hover {
   background: #035b94;
+  border-color: #035b94;
+  color: #ffffff !important;
 }
 
 .primaryBtn:disabled {
   opacity: 0.5;
   cursor: not-allowed;
+  color: #ffffff !important;
 }
 
 .storeFootnote {
@@ -2276,7 +2284,7 @@
   width: 100%;
   border: none;
   background: #234669;
-  color: #ffffff;
+  color: #ffffff !important;
   padding: 10px 12px;
   text-align: left;
   border-radius: 8px;
@@ -2590,7 +2598,7 @@
 
   .learnMobileActive {
     background: #234669;
-    color: #ffffff;
+    color: #ffffff !important;
     border: none;
     border-radius: 6px;
     padding: 6px 12px;

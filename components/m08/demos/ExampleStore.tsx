@@ -245,22 +245,6 @@ export function ExampleStore({ isActive = true }: ExampleStoreProps = {}) {
       closeCart();
       return;
     }
-    if (e.key === 'Tab' && dialogRef.current) {
-      const focusables = dialogRef.current.querySelectorAll<HTMLElement>(
-        'button:not([disabled]), input:not([disabled]), a:not([disabled])'
-      );
-      if (focusables.length === 0) return;
-      const first = focusables[0];
-      const last = focusables[focusables.length - 1];
-
-      if (e.shiftKey && document.activeElement === first) {
-        e.preventDefault();
-        last.focus();
-      } else if (!e.shiftKey && document.activeElement === last) {
-        e.preventDefault();
-        first.focus();
-      }
-    }
   };
 
   return (
@@ -425,7 +409,7 @@ export function ExampleStore({ isActive = true }: ExampleStoreProps = {}) {
               </p>
             </div>
 
-            {/* Cart Slide-out Drawer */}
+            {/* Cart Slide-out Drawer (Accessible Non-Modal Slide-out Dialog) */}
             {drawerOpen && (
               <>
                 <div
@@ -438,7 +422,6 @@ export function ExampleStore({ isActive = true }: ExampleStoreProps = {}) {
                   ref={dialogRef}
                   className={styles.storeDrawer}
                   role="dialog"
-                  aria-modal="true"
                   aria-labelledby="cart-title"
                   onKeyDown={handleDialogKeyDown}
                 >
@@ -457,7 +440,7 @@ export function ExampleStore({ isActive = true }: ExampleStoreProps = {}) {
                     </button>
                   </header>
 
-                  <main className={styles.drawerMain}>
+                  <div className={styles.drawerMain}>
                     {completed ? (
                       <div className={styles.cartResult}>
                         <strong>Demo order</strong>
@@ -521,7 +504,7 @@ export function ExampleStore({ isActive = true }: ExampleStoreProps = {}) {
                     ) : (
                       <p className={styles.mutedText}>Your cart is empty.</p>
                     )}
-                  </main>
+                  </div>
 
                   {!completed && (
                     <footer className={styles.drawerFooter}>

@@ -25,11 +25,18 @@ This block supersedes older current-status blocks below without erasing their hi
   - **Merged by:** Owner directly on GitHub.
   - **Milestone M08-C:** `[VERIFIED]`. Interactive Automation demonstration interior established with state preservation.
 
-- **Active Task: `YCN-M08-D-SHOWROOM-STORE-LEARNING-01` (Milestone M08-D: Online Store & Learning Platform Showroom Demonstration Interiors).**
-  - **Branch:** `wip/YCN-M08-D-SHOWROOM-STORE-LEARNING-01`.
-  - **Base `main`:** `bdcf0f504522e70b0e1a84b1bd4b585dd2d01721`.
-  - **GitHub PR:** PR #48 opened as Draft; CI run 45147851395 and Gitleaks passed (381 unit tests, 53 prod Chromium, 3 staging preview, 16 dev browser, 72 clean screenshots).
-  - **Status:** `[LOCAL-WIP]` Implemented within authorized 9-file scope; interactive Online Store (*Example Home Supplies*) mounted inside `#panel-store` and Learning Platform (*Example Learning Hub*) inside `#panel-learning`; applied targeted post-review fix ensuring temporary Store cart dialog safely closes on leaving Store without clearing items, suspending global Escape intercept and preserving cross-mode keyboard focus; verified with 17 dev browser tests and 72-screenshot matrix.
+- **Milestone: PR #48 (M08-D — `YCN-M08-D-SHOWROOM-STORE-LEARNING-01` Interactive Online Store & Learning Platform Showroom Demonstrations) merged into `main` on 23 Nov 2026; site remains unlaunched.**
+  - **Reviewed PR #48 Source Head:** `cc791e34c740b4f0571814ea0a9832a06e37e194`.
+  - **Main Merge Commit:** `27d5e2150b78bb092482364dd3dc31c4e817ce4a`.
+  - **Merge Tree SHA:** Exact identity with reviewed source tree.
+  - **GitHub CI Verification:** PASSED on PR #48 and post-merge run 45163674376 (381 unit tests, 53 prod Chromium, 3 staging preview, 17 dev browser, 72 clean screenshots) and post-merge Gitleaks PASSED (run 45163674940).
+  - **Merged by:** Owner directly on GitHub.
+  - **Milestone M08-D:** `[VERIFIED]`. All six showroom demonstration interiors implemented on `main`.
+
+- **Active Task: `YCN-M08-GATE-A11Y-CONTRAST-01` (Milestone M08 Gate: Showroom Store Accessibility Semantics & Button Contrast Remediation).**
+  - **Branch:** `wip/YCN-M08-GATE-A11Y-CONTRAST-01`.
+  - **Base `main`:** `27d5e2150b78bb092482364dd3dc31c4e817ce4a`.
+  - **Status:** `[LOCAL-WIP]` Implemented within authorized 4-file scope; corrected Store cart drawer accessibility semantics by removing false `aria-modal="true"`, removing nested `<main>` landmark, and preserving non-modal keyboard dismissal; resolved button and category filter text contrast across Store and Learning by scoping `.productScreen button` font-family and establishing explicit white text on blue/dark buttons (`Cart`, `Add to cart`, `Mark lesson as complete`, `All` selected filter, and navigation tabs) meeting WCAG AA >= 4.5:1; verified with 18 dev browser tests and 72-screenshot matrix.
 
 - **Current Progress Metrics (23 November 2026):**
   - **Detailed Checklist Progress:** 33 / 143 items verified (23.1% recorded readiness; 110 unchecked, 24 Owner gates in `docs/YCN_READINESS_CHECKLIST.md`).
