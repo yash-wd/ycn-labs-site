@@ -144,7 +144,7 @@ export function ShowroomFoundation() {
               {mode.id === 'webapp' && <ExampleWebApp />}
               {mode.id === 'crm' && <ExampleCrmAdmin />}
               {mode.id === 'automation' && <ExampleAutomation />}
-              {mode.id === 'store' && <ExampleStore />}
+              {mode.id === 'store' && <ExampleStore isActive={isSelected} />}
               {mode.id === 'learning' && <ExampleLearning />}
             </div>
           );

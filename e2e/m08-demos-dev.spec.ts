@@ -784,6 +784,72 @@ test.describe('M08-B Showroom Demos Verification', () => {
     await ctx.close();
   });
 
+  test('verifies cross-mode keyboard safety: hidden Store dialog does not intercept Escape and preserves cart state across mode switch', async ({
+    browser,
+  }) => {
+    const { ctx, page } = await openDevPreview(browser);
+
+    // 1. Navigate to Store tab
+    const storeTab = page.locator('#tab-store');
+    await storeTab.click();
+    await expect(storeTab).toHaveAttribute('aria-selected', 'true');
+    const storePanel = page.locator('#panel-store');
+    await expect(storePanel).toBeVisible();
+
+    // 2. Open Store cart with an item
+    const addTapBtn = storePanel.locator('button[data-action="store-add"][data-id="tap"]');
+    await addTapBtn.click();
+    const drawer = storePanel.locator('aside[role="dialog"]');
+    await expect(drawer).toBeVisible();
+    await expect(storePanel.locator('button[data-action="store-cart"]')).toContainText('Cart (1)');
+
+    // 3. Switch to Learning mode while cart dialog was open
+    const learningTab = page.locator('#tab-learning');
+    await learningTab.click();
+    await expect(learningTab).toHaveAttribute('aria-selected', 'true');
+    const learningPanel = page.locator('#panel-learning');
+    await expect(learningPanel).toBeVisible();
+    await expect(storePanel).toBeHidden();
+
+    // 4. In Learning, select a lesson and focus an interactive element
+    const lesson1Btn = learningPanel.locator('button[data-action="learn-lesson"][data-index="0"]');
+    await lesson1Btn.click();
+    await expect(lesson1Btn).toBeFocused();
+
+    // 5. Press Escape in Learning: verify Learning focus/interaction is unaffected
+    await page.keyboard.press('Escape');
+    await expect(lesson1Btn).toBeFocused();
+    await expect(learningPanel).toBeVisible();
+
+    // Interact with Learning quiz after Escape
+    const quizRadio = learningPanel.locator('input[name="lesson-quiz"][value="Enter"]');
+    await quizRadio.check();
+    await expect(quizRadio).toBeChecked();
+
+    // 6. Switch back to Store: verify cart contents are preserved and dialog keyboard behavior works normally
+    await storeTab.click();
+    await expect(storeTab).toHaveAttribute('aria-selected', 'true');
+    await expect(storePanel).toBeVisible();
+    await expect(storePanel.locator('button[data-action="store-cart"]')).toContainText('Cart (1)');
+
+    // Reopen cart dialog: verify item is intact
+    const cartBtn = storePanel.locator('button[data-action="store-cart"]');
+    await cartBtn.click();
+    await expect(drawer).toBeVisible();
+    await expect(drawer).toContainText('Basin tap');
+    await expect(drawer).toContainText('₹450');
+
+    // Verify dialog keyboard behavior (initial focus and Escape dismiss) works normally
+    const closeBtn = drawer.locator('#cart-close');
+    await expect(closeBtn).toBeFocused();
+
+    await page.keyboard.press('Escape');
+    await expect(drawer).toBeHidden();
+    await expect(cartBtn).toBeFocused();
+
+    await ctx.close();
+  });
+
   test('verifies mobile scrolling and sticky header layout behavior without demonstration overlap in normal viewing', async ({
     browser,
   }) => {

@@ -115,7 +115,11 @@ export function ProductArt({ id }: { id: string }) {
   );
 }
 
-export function ExampleStore() {
+interface ExampleStoreProps {
+  isActive?: boolean;
+}
+
+export function ExampleStore({ isActive = true }: ExampleStoreProps = {}) {
   const [filter, setFilter] = useState<string>('All');
   const [selectedId, setSelectedId] = useState<string | null>(null);
   const [cart, setCart] = useState<Record<string, number>>({});
@@ -149,7 +153,9 @@ export function ExampleStore() {
 
   const closeCart = () => {
     setDrawerOpen(false);
-    cartTriggerRef.current?.focus();
+    if (isActive) {
+      cartTriggerRef.current?.focus();
+    }
   };
 
   const handleAddToCart = (id: string) => {
@@ -196,15 +202,33 @@ export function ExampleStore() {
     setCart({});
     setCompleted(false);
     setDrawerOpen(false);
-    cartTriggerRef.current?.focus();
+    if (isActive) {
+      cartTriggerRef.current?.focus();
+    }
   };
+
+  // When leaving Store (mode becomes inactive), close the temporary cart dialog
+  // while strictly preserving the cart products and quantities.
+  useEffect(() => {
+    if (!isActive && drawerOpen) {
+      setDrawerOpen(false);
+    }
+  }, [isActive, drawerOpen]);
 
   // Focus management & Trap when drawer opens
   useEffect(() => {
-    if (!drawerOpen) return;
+    if (!drawerOpen || !isActive) return;
     drawerCloseRef.current?.focus();
 
     const handleGlobalKeyDown = (e: globalThis.KeyboardEvent) => {
+      // Inactive mode or hidden dialog must never intercept Escape or steal focus
+      if (!isActive) return;
+      if (
+        dialogRef.current &&
+        (dialogRef.current.closest('[hidden]') || dialogRef.current.offsetParent === null)
+      ) {
+        return;
+      }
       if (e.key === 'Escape') {
         e.preventDefault();
         closeCart();
@@ -212,9 +236,10 @@ export function ExampleStore() {
     };
     window.addEventListener('keydown', handleGlobalKeyDown);
     return () => window.removeEventListener('keydown', handleGlobalKeyDown);
-  }, [drawerOpen, completed]);
+  }, [drawerOpen, completed, isActive]);
 
   const handleDialogKeyDown = (e: KeyboardEvent<HTMLElement>) => {
+    if (!isActive) return;
     if (e.key === 'Escape') {
       e.preventDefault();
       closeCart();
