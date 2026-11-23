@@ -20,6 +20,8 @@ import { ExampleWebsite } from './demos/ExampleWebsite';
 import { ExampleWebApp } from './demos/ExampleWebApp';
 import { ExampleCrmAdmin } from './demos/ExampleCrmAdmin';
 import { ExampleAutomation } from './demos/ExampleAutomation';
+import { ExampleStore } from './demos/ExampleStore';
+import { ExampleLearning } from './demos/ExampleLearning';
 import styles from './ShowroomFoundation.module.css';
 
 export function ShowroomFoundation() {
@@ -142,24 +144,8 @@ export function ShowroomFoundation() {
               {mode.id === 'webapp' && <ExampleWebApp />}
               {mode.id === 'crm' && <ExampleCrmAdmin />}
               {mode.id === 'automation' && <ExampleAutomation />}
-              {mode.id !== 'website' &&
-                mode.id !== 'webapp' &&
-                mode.id !== 'crm' &&
-                mode.id !== 'automation' && (
-                <div className={styles.stagePlaceholder}>
-                  <span className={styles.stagePlaceholderChip}>
-                    {renderIcon(mode.icon)}
-                    <span>{mode.label}</span>
-                  </span>
-                  <h3 className={styles.stagePlaceholderTitle}>
-                    {mode.label} Demonstration Shell
-                  </h3>
-                  <p className={styles.stagePlaceholderText}>{mode.caption}</p>
-                  <p className={styles.stagePlaceholderText}>
-                    Modular client component will be mounted here in subsequent phases (M08-C / M08-D).
-                  </p>
-                </div>
-              )}
+              {mode.id === 'store' && <ExampleStore isActive={isSelected} />}
+              {mode.id === 'learning' && <ExampleLearning />}
             </div>
           );
         })}

@@ -1771,4 +1771,844 @@
   .notification {
     animation: none !important;
   }
+
+  .learnProgressTrack span,
+  .storeCard,
+  .storeDrawer {
+    transition: none !important;
+    animation: none !important;
+  }
 }
+
+/* ==========================================================================
+   Online Store (M08-D) Styles
+   ========================================================================== */
+.storeDevice {
+  width: 100%;
+}
+
+.storeDevice .hardware {
+  height: 565px;
+}
+
+.storeUi {
+  background: #ffffff;
+  min-height: 100%;
+  position: relative;
+  box-sizing: border-box;
+}
+
+.storeContent {
+  padding: 16px 20px 24px;
+  box-sizing: border-box;
+}
+
+.storeHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-bottom: 14px;
+  border-bottom: 1px solid #e2eaf3;
+  gap: 12px;
+}
+
+.storeBrand {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.storeMark {
+  background: #1b506d;
+  color: #ffffff;
+  border-radius: 7px;
+  width: 28px;
+  height: 28px;
+  display: grid;
+  place-items: center;
+  flex: none;
+}
+
+.storeBrandName {
+  font-size: 15px;
+  font-weight: 700;
+  color: #142b44;
+}
+
+.storeNav {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.storeLink {
+  background: transparent;
+  border: none;
+  color: #0470b4;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  padding: 6px 10px;
+  border-radius: 6px;
+}
+
+.storeLink:hover {
+  text-decoration: underline;
+}
+
+.cartTrigger {
+  background: #0470b4;
+  color: #ffffff;
+  border: none;
+  border-radius: 7px;
+  padding: 8px 14px;
+  font-size: 13px;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  cursor: pointer;
+}
+
+.cartTrigger:hover {
+  background: #035b94;
+}
+
+.storeHero {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: #f3f8fc;
+  border: 1px solid #dbe7f2;
+  border-radius: 14px;
+  padding: 20px 22px;
+  margin-top: 16px;
+  gap: 16px;
+}
+
+.storeKicker {
+  display: block;
+  font-size: 11px;
+  font-weight: 700;
+  color: #0470b4;
+  letter-spacing: 0.05em;
+  margin-bottom: 4px;
+}
+
+.storeHero h2 {
+  font-size: 20px;
+  margin: 0 0 6px 0;
+  color: #142b44;
+}
+
+.storeHero p {
+  font-size: 13px;
+  margin: 0;
+  color: #506278;
+}
+
+.storeHeroArt {
+  flex: none;
+  width: 140px;
+  height: 100px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.storeFilter {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  margin-top: 16px;
+}
+
+.filterActive {
+  background: #142b44;
+  color: #ffffff;
+  border: 1px solid #142b44;
+  border-radius: 20px;
+  padding: 6px 14px;
+  font-size: 12px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.filterInactive {
+  background: #f1f5f9;
+  color: #506278;
+  border: 1px solid #dce4ed;
+  border-radius: 20px;
+  padding: 6px 14px;
+  font-size: 12px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.filterInactive:hover {
+  background: #e2e8f0;
+}
+
+.storeDetail {
+  background: #eff7fd;
+  border: 1px solid #b7d6ed;
+  border-radius: 10px;
+  padding: 12px 16px;
+  margin-top: 16px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 14px;
+}
+
+.detailMuted {
+  font-size: 12px;
+  color: #506278;
+  margin: 2px 0 0 0;
+}
+
+.storeGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(210px, 1fr));
+  gap: 16px;
+  margin-top: 18px;
+}
+
+.storeCard {
+  background: #ffffff;
+  border: 1px solid #e1e9f1;
+  border-radius: 12px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
+.storeCardArt {
+  background: #edf5fa;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 8px;
+}
+
+.storeProductSvg {
+  width: 100%;
+  height: auto;
+  max-height: 110px;
+  display: block;
+}
+
+.storeCardBody {
+  padding: 12px 14px;
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}
+
+.storeCardBody strong {
+  font-size: 14px;
+  color: #142b44;
+}
+
+.price {
+  font-size: 14px;
+  font-weight: 700;
+  color: #0470b4;
+  margin: 4px 0 10px 0;
+}
+
+.storeCardActions {
+  display: flex;
+  gap: 8px;
+  margin-top: auto;
+}
+
+.secondaryBtn {
+  background: #ffffff;
+  border: 1px solid #ccd9e6;
+  color: #142b44;
+  padding: 6px 12px;
+  border-radius: 6px;
+  font-size: 12px;
+  font-weight: 600;
+  cursor: pointer;
+  min-height: 34px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.secondaryBtn:hover {
+  background: #f1f5f9;
+}
+
+.primaryBtn {
+  background: #0470b4;
+  border: 1px solid #0470b4;
+  color: #ffffff;
+  padding: 6px 12px;
+  border-radius: 6px;
+  font-size: 12px;
+  font-weight: 600;
+  cursor: pointer;
+  min-height: 34px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.primaryBtn:hover {
+  background: #035b94;
+}
+
+.primaryBtn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.storeFootnote {
+  font-size: 12px;
+  color: #64748b;
+  margin-top: 20px;
+  font-style: italic;
+}
+
+.storeDrawerBackdrop {
+  position: absolute;
+  inset: 0;
+  background: rgba(14, 27, 45, 0.45);
+  z-index: 20;
+}
+
+.storeDrawer {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  width: min(340px, 100%);
+  background: #ffffff;
+  z-index: 21;
+  box-shadow: -6px 0 24px rgba(14, 27, 45, 0.15);
+  display: flex;
+  flex-direction: column;
+  box-sizing: border-box;
+}
+
+.drawerHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 14px 18px;
+  border-bottom: 1px solid #e2eaf3;
+}
+
+.drawerHeader h3 {
+  margin: 0;
+  font-size: 16px;
+  color: #142b44;
+}
+
+.drawerCloseBtn {
+  background: transparent;
+  border: none;
+  font-size: 16px;
+  cursor: pointer;
+  color: #506278;
+  padding: 6px 8px;
+  border-radius: 4px;
+}
+
+.drawerCloseBtn:hover {
+  background: #f1f5f9;
+  color: #0e1b2d;
+}
+
+.drawerMain {
+  flex: 1;
+  overflow-y: auto;
+  padding: 16px 18px;
+}
+
+.cartLines {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.cartLine {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid #f1f5f9;
+  padding-bottom: 12px;
+  gap: 10px;
+}
+
+.cartLine strong {
+  font-size: 13px;
+  color: #142b44;
+  display: block;
+}
+
+.mutedText {
+  font-size: 12px;
+  color: #64748b;
+  margin-top: 2px;
+}
+
+.linkBtn {
+  background: none;
+  border: none;
+  color: #c2410c;
+  font-size: 11px;
+  cursor: pointer;
+  padding: 0;
+  margin-top: 4px;
+  text-decoration: underline;
+}
+
+.cartQty {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.cartQty button {
+  width: 28px;
+  height: 28px;
+  border: 1px solid #ccd9e6;
+  background: #f8fafc;
+  border-radius: 6px;
+  font-weight: 700;
+  cursor: pointer;
+  display: grid;
+  place-items: center;
+}
+
+.cartQty button:hover {
+  background: #e2e8f0;
+}
+
+.cartQty b {
+  font-size: 13px;
+  min-width: 18px;
+  text-align: center;
+}
+
+.drawerFooter {
+  padding: 16px 18px;
+  border-top: 1px solid #e2eaf3;
+  background: #f8fafc;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.cartTotal {
+  display: flex;
+  justify-content: space-between;
+  font-weight: 700;
+  font-size: 14px;
+  color: #142b44;
+}
+
+.cartResult {
+  text-align: center;
+  padding: 24px 8px;
+  color: #142b44;
+  font-size: 13px;
+  line-height: 1.5;
+}
+
+.cartResult strong {
+  display: block;
+  font-size: 16px;
+  margin-bottom: 8px;
+  color: #0470b4;
+}
+
+/* ==========================================================================
+   Learning Platform (M08-D) Styles
+   ========================================================================== */
+.learnDevice {
+  width: min(100%, 1030px);
+  height: 604px;
+}
+
+.learnUi {
+  display: grid;
+  grid-template-columns: 194px minmax(0, 1fr);
+  height: 100%;
+  background: #f6f9fd;
+  box-sizing: border-box;
+}
+
+.learnSidebar {
+  background: #122a47;
+  color: #eaf2ff;
+  padding: 19px 14px;
+  display: flex;
+  flex-direction: column;
+  box-sizing: border-box;
+}
+
+.learnSidebar strong {
+  display: block;
+  font-size: 14px;
+  margin-bottom: 20px;
+  line-height: 1.3;
+}
+
+.learnSubhead {
+  opacity: 0.65;
+  font-size: 11px;
+  font-weight: 400;
+}
+
+.learnNavList {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.learnNavActive {
+  display: block;
+  width: 100%;
+  border: none;
+  background: #234669;
+  color: #ffffff;
+  padding: 10px 12px;
+  text-align: left;
+  border-radius: 8px;
+  font-size: 12px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.learnNavInactive {
+  display: block;
+  width: 100%;
+  border: none;
+  background: transparent;
+  color: #dae5f2;
+  padding: 10px 12px;
+  text-align: left;
+  border-radius: 8px;
+  font-size: 12px;
+  cursor: pointer;
+}
+
+.learnNavInactive:hover {
+  background: rgba(255, 255, 255, 0.08);
+}
+
+.learnMobileNav {
+  display: none;
+}
+
+.learnContent {
+  padding: 16px 20px 24px;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  box-sizing: border-box;
+}
+
+.learnTop {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid #dce6f0;
+  padding-bottom: 12px;
+  margin-bottom: 14px;
+  gap: 12px;
+}
+
+.learnTop h2 {
+  font-size: 18px;
+  margin: 0 0 2px 0;
+  color: #142b44;
+}
+
+.learnMuted {
+  font-size: 12px;
+  color: #64748b;
+}
+
+.learnMain {
+  display: flex;
+  flex-direction: column;
+}
+
+.learnCourse {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: #ffffff;
+  border: 1px solid #dce4ed;
+  border-radius: 12px;
+  padding: 16px 18px;
+  gap: 16px;
+}
+
+.learnKicker {
+  display: block;
+  font-size: 10px;
+  font-weight: 700;
+  color: #0470b4;
+  letter-spacing: 0.05em;
+  margin-bottom: 2px;
+}
+
+.learnCourse h3 {
+  font-size: 15px;
+  margin: 0 0 4px 0;
+  color: #142b44;
+}
+
+.learnCourse p {
+  font-size: 12px;
+  margin: 0;
+  color: #506278;
+}
+
+.learnCourseArt {
+  flex: none;
+  color: #0470b4;
+  opacity: 0.85;
+}
+
+.learnProgress {
+  margin-top: 14px;
+  background: #ffffff;
+  border: 1px solid #dce4ed;
+  border-radius: 10px;
+  padding: 12px 16px;
+}
+
+.learnProgress strong {
+  display: block;
+  font-size: 12px;
+  color: #142b44;
+  margin-bottom: 8px;
+}
+
+.learnProgressTrack {
+  height: 8px;
+  background: #e5edf5;
+  border-radius: 4px;
+  overflow: hidden;
+}
+
+.learnProgressTrack span {
+  display: block;
+  height: 100%;
+  background: #0470b4;
+  border-radius: 4px;
+  transition: width 0.3s ease;
+}
+
+.learnLessons {
+  display: grid;
+  grid-template-columns: 210px minmax(0, 1fr);
+  gap: 14px;
+  margin-top: 14px;
+}
+
+.learnList {
+  background: #ffffff;
+  border: 1px solid #dce4ed;
+  border-radius: 10px;
+  padding: 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.learnList h3 {
+  font-size: 13px;
+  margin: 0 0 8px 0;
+  color: #142b44;
+}
+
+.learnLessonBtn {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border: 1px solid #dce4ed;
+  background: #ffffff;
+  border-radius: 8px;
+  padding: 8px 10px;
+  font-size: 12px;
+  text-align: left;
+  cursor: pointer;
+  font-weight: 500;
+  color: #142b44;
+}
+
+.learnLessonBtn:hover {
+  background: #f8fafc;
+}
+
+.learnLessonBtn[aria-pressed="true"] {
+  border-color: #0470b4;
+  background: #edf6fd;
+  color: #0470b4;
+  font-weight: 600;
+}
+
+.learnLesson {
+  background: #ffffff;
+  border: 1px solid #dce4ed;
+  border-radius: 10px;
+  padding: 16px 18px;
+  display: flex;
+  flex-direction: column;
+}
+
+.learnLesson h3 {
+  font-size: 15px;
+  margin: 0 0 6px 0;
+  color: #142b44;
+}
+
+.learnLesson p {
+  font-size: 13px;
+  color: #506278;
+  line-height: 1.45;
+  margin: 0 0 12px 0;
+}
+
+.learnTipPanel {
+  background: #eff7fd;
+  border: 1px solid #c8e2f5;
+  border-radius: 8px;
+  padding: 10px 12px;
+  font-size: 12px;
+  color: #35536b;
+  margin-bottom: 14px;
+}
+
+.progressSummaryPanel {
+  background: #ffffff;
+  border: 1px solid #dce4ed;
+  border-radius: 10px;
+  padding: 16px;
+  margin-top: 14px;
+}
+
+.progressSummaryPanel h3 {
+  font-size: 14px;
+  margin: 0 0 6px 0;
+  color: #142b44;
+}
+
+.learnQuiz {
+  margin-top: 14px;
+  background: #ffffff;
+  border: 1px solid #dce4ed;
+  border-radius: 10px;
+  padding: 14px 16px;
+}
+
+.learnQuiz h3 {
+  font-size: 13px;
+  margin: 0 0 4px 0;
+  color: #142b44;
+}
+
+.quizRadioGroup {
+  display: flex;
+  gap: 16px;
+  flex-wrap: wrap;
+  margin-top: 8px;
+}
+
+.quizLabel {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 13px;
+  color: #142b44;
+  cursor: pointer;
+}
+
+.quizLabel input {
+  margin: 0;
+}
+
+.learnComplete {
+  margin-top: 14px;
+  background: #eefbf3;
+  border: 1px solid #a3e6be;
+  border-radius: 10px;
+  padding: 14px 16px;
+  color: #166534;
+  font-size: 13px;
+}
+
+.learnComplete strong {
+  display: block;
+  font-size: 14px;
+  color: #15803d;
+  margin-bottom: 4px;
+}
+
+.learnComplete p {
+  margin: 0;
+}
+
+/* Responsive adjustments for Store and Learning */
+@media (max-width: 768px) {
+  .storeHero {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .storeHeroArt {
+    display: none;
+  }
+
+  .storeGrid {
+    grid-template-columns: 1fr;
+  }
+
+  .learnUi {
+    grid-template-columns: 1fr;
+  }
+
+  .learnSidebar {
+    display: none;
+  }
+
+  .learnMobileNav {
+    display: flex;
+    background: #122a47;
+    padding: 8px 12px;
+    gap: 8px;
+  }
+
+  .learnMobileActive {
+    background: #234669;
+    color: #ffffff;
+    border: none;
+    border-radius: 6px;
+    padding: 6px 12px;
+    font-size: 12px;
+    font-weight: 600;
+  }
+
+  .learnMobileInactive {
+    background: transparent;
+    color: #dae5f2;
+    border: none;
+    border-radius: 6px;
+    padding: 6px 12px;
+    font-size: 12px;
+  }
+
+  .learnLessons {
+    grid-template-columns: 1fr;
+  }
+}
+

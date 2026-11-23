@@ -9,7 +9,7 @@ import crypto from 'crypto';
 const DEV_BASE_URL = process.env.PW_DEV_URL ?? 'http://127.0.0.1:3005';
 const SCREENSHOT_DIR = path.join(process.cwd(), 'test-results', 'm08-screenshots');
 
-const MODES = ['website', 'webapp', 'crm', 'automation'] as const;
+const MODES = ['website', 'webapp', 'crm', 'automation', 'store', 'learning'] as const;
 const VIEWPORTS = [
   { width: 320, height: 600 },
   { width: 375, height: 667 },
@@ -65,7 +65,7 @@ async function openDevPreview(
 test.describe('M08-B Showroom Demos Verification', () => {
   test.skip(!process.env.PW_DEV_URL, 'Runs against active local development preview server (PW_DEV_URL)');
 
-  test('captures complete 48-configuration screenshot matrix (4 demos × 6 viewports × 2 themes) with sanitized manifest', async ({
+  test('captures complete 72-configuration screenshot matrix (6 demos × 6 viewports × 2 themes) with sanitized manifest', async ({
     browser,
   }) => {
     fs.mkdirSync(SCREENSHOT_DIR, { recursive: true });
@@ -133,13 +133,13 @@ test.describe('M08-B Showroom Demos Verification', () => {
       }
     }
 
-    // Verify all 48 configurations were captured
-    expect(manifestEntries).toHaveLength(48);
+    // Verify all 72 configurations were captured (6 modes × 6 viewports × 2 themes)
+    expect(manifestEntries).toHaveLength(72);
 
     // Write sanitized manifest (no absolute workstation paths; only relative filenames)
     const manifestPath = path.join(SCREENSHOT_DIR, 'manifest.json');
     const manifestData = {
-      description: 'M08-C Showroom 48-Configuration Development Preview Matrix',
+      description: 'M08-D Showroom 72-Configuration Development Preview Matrix',
       source_pr_head_sha: process.env.PR_SOURCE_HEAD_SHA ?? process.env.GITHUB_SHA ?? 'local-run',
       tested_checkout_sha: process.env.TESTED_CHECKOUT_SHA ?? 'local-run',
       workflow_run_id: process.env.GITHUB_RUN_ID ?? 'local-run',
@@ -515,6 +515,337 @@ test.describe('M08-B Showroom Demos Verification', () => {
         await expect(item).toBeHidden();
       }
     }
+
+    await ctx.close();
+  });
+
+  test('verifies interactive behaviors in Online Store demo (filtering, details, cart drawer, checkout, and dialog a11y)', async ({
+    browser,
+  }) => {
+    const { ctx, page } = await openDevPreview(browser);
+
+    // Navigate to Store tab
+    const storeTab = page.locator('#tab-store');
+    await storeTab.click();
+    await expect(storeTab).toHaveAttribute('aria-selected', 'true');
+    const panel = page.locator('#panel-store');
+    await expect(panel).toBeVisible();
+
+    // Verify Brand and initial state
+    await expect(panel.locator('header')).toContainText('Example Home Supplies');
+    await expect(panel.locator('button[data-action="store-cart"]')).toContainText('Cart (0)');
+
+    // 1. Category Filtering
+    const plumbingFilter = panel.locator('nav[role="group"] button[data-action="store-filter"][data-filter="Plumbing"]');
+    await plumbingFilter.click();
+    await expect(plumbingFilter).toHaveAttribute('aria-pressed', 'true');
+    // Only Basin tap and Pipe tape pack should be visible
+    const visibleCards = panel.locator('article');
+    await expect(visibleCards).toHaveCount(2);
+    await expect(visibleCards.nth(0)).toContainText('Basin tap');
+    await expect(visibleCards.nth(1)).toContainText('Pipe tape pack');
+
+    // Reset filter to All
+    const allFilter = panel.locator('nav[role="group"] button[data-action="store-filter"][data-filter="All"]');
+    await allFilter.click();
+    await expect(visibleCards).toHaveCount(6);
+
+    // 2. Inline Product Detail Toggle
+    const viewTapBtn = panel.locator('button[data-action="store-view"][data-id="tap"]');
+    await viewTapBtn.click();
+    const detailBox = panel.locator('[class*="storeDetail"]');
+    await expect(detailBox).toBeVisible();
+    await expect(detailBox).toContainText('Basin tap');
+    await expect(detailBox).toContainText('Plumbing · Sample ₹450');
+
+    // Close detail box
+    const closeDetailBtn = panel.locator('button[data-action="store-close-detail"]');
+    await closeDetailBtn.click();
+    await expect(panel.locator('button[data-action="store-close-detail"]')).toHaveCount(0);
+
+    // 3. Cart Drawer, Initial Focus & Dialog Focus Trap
+    const addTapBtn = panel.locator('button[data-action="store-add"][data-id="tap"]');
+    await addTapBtn.click();
+
+    // Drawer should open automatically
+    const drawer = panel.locator('aside[role="dialog"]');
+    await expect(drawer).toBeVisible();
+    await expect(drawer.locator('#cart-title')).toHaveText('Your cart');
+    await expect(panel.locator('button[data-action="store-cart"]')).toContainText('Cart (1)');
+
+    // Initial focus must be on close button
+    const closeBtn = drawer.locator('#cart-close');
+    await expect(closeBtn).toBeFocused();
+
+    // Focus containment: Shift+Tab from first element wraps to last focusable (checkout button)
+    const checkoutBtn = drawer.locator('button[data-action="store-checkout"]');
+    await page.keyboard.press('Shift+Tab');
+    await expect(checkoutBtn).toBeFocused();
+
+    // Focus containment: Tab from last element wraps back to first element (close button)
+    await page.keyboard.press('Tab');
+    await expect(closeBtn).toBeFocused();
+
+    // Verify item and initial total
+    await expect(drawer).toContainText('Basin tap');
+    await expect(drawer).toContainText('₹450');
+
+    // Increase quantity (+)
+    const incBtn = drawer.locator('button[data-action="store-increase"][data-id="tap"]');
+    await incBtn.click();
+    await expect(drawer.locator('b')).toHaveText('2');
+    await expect(drawer).toContainText('₹900');
+    await expect(panel.locator('button[data-action="store-cart"]')).toContainText('Cart (2)');
+
+    // Decrease quantity (−)
+    const decBtn = drawer.locator('button[data-action="store-decrease"][data-id="tap"]');
+    await decBtn.click();
+    await expect(drawer.locator('b')).toHaveText('1');
+    await expect(drawer).toContainText('₹450');
+
+    // 4. Keyboard Escape dismisses drawer and restores focus to cart trigger
+    await page.keyboard.press('Escape');
+    await expect(drawer).toBeHidden();
+    await expect(panel.locator('button[data-action="store-cart"]')).toBeFocused();
+
+    // 5. Test item removal, empty-cart restriction, and ₹0 total calculation
+    await panel.locator('button[data-action="store-cart"]').click();
+    await expect(drawer).toBeVisible();
+
+    const removeBtn = drawer.locator('button[data-action="store-remove"][data-id="tap"]');
+    await removeBtn.click();
+
+    // Cart is now empty
+    await expect(drawer.locator('text=Your cart is empty.')).toBeVisible();
+    await expect(drawer.locator('[class*="cartTotal"]')).toContainText('₹0');
+    await expect(checkoutBtn).toBeDisabled();
+    await expect(panel.locator('button[data-action="store-cart"]')).toContainText('Cart (0)');
+
+    // Dismiss empty drawer via Escape and verify focus restoration
+    await page.keyboard.press('Escape');
+    await expect(drawer).toBeHidden();
+    await expect(panel.locator('button[data-action="store-cart"]')).toBeFocused();
+
+    // 6. Re-add item, checkout simulation, and completion state
+    await addTapBtn.click();
+    await expect(drawer).toBeVisible();
+    await expect(checkoutBtn).toBeEnabled();
+    await checkoutBtn.click();
+
+    // Verify Order Completion screen
+    await expect(drawer.locator('#cart-title')).toHaveText('Demo order');
+    await expect(drawer).toContainText('EXAMPLE-ORDER-001');
+    await expect(drawer).toContainText('Nothing was bought and no payment was taken.');
+
+    // Click "Keep browsing" to reset cart
+    const finishBtn = drawer.locator('button[data-action="store-finish"]');
+    await finishBtn.click();
+    await expect(drawer).toBeHidden();
+    await expect(panel.locator('button[data-action="store-cart"]')).toContainText('Cart (0)');
+
+    await ctx.close();
+  });
+
+  test('verifies interactive behaviors in Learning Platform demo (lessons, navigation, progress, quiz, and completion)', async ({
+    browser,
+  }) => {
+    const { ctx, page } = await openDevPreview(browser);
+
+    // Navigate to Learning tab
+    const learningTab = page.locator('#tab-learning');
+    await learningTab.click();
+    await expect(learningTab).toHaveAttribute('aria-selected', 'true');
+    const panel = page.locator('#panel-learning');
+    await expect(panel).toBeVisible();
+
+    // Verify Brand and initial state
+    await expect(panel).toContainText('Example Learning Hub');
+    await expect(panel).toContainText('0 of 3 lessons complete');
+
+    // 1. Select Lesson 2 ("Using a keyboard and mouse")
+    const lesson2Btn = panel.locator('button[data-action="learn-lesson"][data-index="1"]');
+    await lesson2Btn.click();
+    await expect(lesson2Btn).toHaveAttribute('aria-pressed', 'true');
+    await expect(panel.locator('h3:has-text("Using a keyboard and mouse")')).toBeVisible();
+
+    // 2. Mark Lesson 2 as complete
+    const completeBtn = panel.locator('button[data-action="learn-complete"]');
+    await expect(completeBtn).toHaveText('Mark lesson as complete');
+    await completeBtn.click();
+    await expect(completeBtn).toHaveText('Lesson completed ✓');
+    await expect(panel).toContainText('1 of 3 lessons complete');
+
+    // Mark Lesson 1 complete
+    await panel.locator('button[data-action="learn-lesson"][data-index="0"]').click();
+    await panel.locator('button[data-action="learn-complete"]').click();
+    await expect(panel).toContainText('2 of 3 lessons complete');
+
+    // Mark Lesson 3 complete
+    await panel.locator('button[data-action="learn-lesson"][data-index="2"]').click();
+    await panel.locator('button[data-action="learn-complete"]').click();
+    await expect(panel).toContainText('3 of 3 lessons complete');
+
+    // 3. Quiz Interaction
+    const checkQuizBtn = panel.locator('button[data-action="learn-quiz-check"]');
+    const quizResult = panel.locator('#learn-quiz-result');
+
+    // Unanswered check
+    await checkQuizBtn.click();
+    await expect(quizResult).toHaveText('Choose an answer.');
+
+    // Incorrect choice ("Enter")
+    await panel.locator('input[name="lesson-quiz"][value="Enter"]').check();
+    await checkQuizBtn.click();
+    await expect(quizResult).toHaveText('Not quite. Try again.');
+
+    // Course completion banner must NOT appear while quiz is incorrect
+    await expect(panel.locator('div[role="status"]:has-text("Course complete (sample)")')).toHaveCount(0);
+
+    // Correct choice ("Space bar")
+    await panel.locator('input[name="lesson-quiz"][value="Space bar"]').check();
+    await checkQuizBtn.click();
+    await expect(quizResult).toHaveText('Correct.');
+
+    // 4. Course Completion Banner should now appear!
+    const completeBanner = panel.locator('div[role="status"]:has-text("Course complete (sample)")');
+    await expect(completeBanner).toBeVisible();
+    await expect(completeBanner).toContainText('This is a sample record, not a real certificate or qualification.');
+
+    // 5. Quiz Validity Regression: Switching radio choice after a correct result must immediately
+    // invalidate correct status, clear outdated feedback, and hide the completion banner!
+    await panel.locator('input[name="lesson-quiz"][value="Shift"]').check();
+    await expect(quizResult).toHaveText('');
+    await expect(panel.locator('div[role="status"]:has-text("Course complete (sample)")')).toHaveCount(0);
+
+    // Checking the new choice confirms it is incorrect
+    await checkQuizBtn.click();
+    await expect(quizResult).toHaveText('Not quite. Try again.');
+    await expect(panel.locator('div[role="status"]:has-text("Course complete (sample)")')).toHaveCount(0);
+
+    // Selecting "Space bar" again: result is cleared until explicitly re-checked
+    await panel.locator('input[name="lesson-quiz"][value="Space bar"]').check();
+    await expect(quizResult).toHaveText('');
+    await expect(panel.locator('div[role="status"]:has-text("Course complete (sample)")')).toHaveCount(0);
+
+    // Explicitly re-check: becomes correct and restores completion banner
+    await checkQuizBtn.click();
+    await expect(quizResult).toHaveText('Correct.');
+    await expect(completeBanner).toBeVisible();
+
+    // 6. View Switch to Progress
+    const progressNavBtn = panel.locator('button[data-action="learn-view"][data-view="Progress"]').first();
+    await progressNavBtn.click();
+    await expect(panel).toContainText('3 completed sample lessons. Quiz: correct.');
+
+    // 7. Reset ("Start again")
+    const resetBtn = panel.locator('button[data-action="learn-reset"]');
+    await resetBtn.click();
+    await expect(panel).toContainText('0 of 3 lessons complete');
+    await expect(panel.locator('div[role="status"]:has-text("Course complete (sample)")')).toHaveCount(0);
+
+    await ctx.close();
+  });
+
+  test('verifies state preservation across all six showroom demonstration tabs', async ({ browser }) => {
+    const { ctx, page } = await openDevPreview(browser);
+
+    // 1. In Store: Add an item (LED bulb pack) to cart
+    await page.locator('#tab-store').click();
+    await page.locator('#panel-store button[data-action="store-add"][data-id="bulb"]').click();
+    await expect(page.locator('#panel-store button[data-action="store-cart"]')).toContainText('Cart (1)');
+    await page.keyboard.press('Escape'); // close drawer
+
+    // 2. In Learning: Mark Lesson 1 complete
+    await page.locator('#tab-learning').click();
+    await page.locator('#panel-learning button[data-action="learn-complete"]').click();
+    await expect(page.locator('#panel-learning')).toContainText('1 of 3 lessons complete');
+
+    // 3. Switch through Website, Web App, CRM, Automation
+    await page.locator('#tab-website').click();
+    await expect(page.locator('#panel-website')).toBeVisible();
+
+    await page.locator('#tab-webapp').click();
+    await expect(page.locator('#panel-webapp')).toBeVisible();
+
+    await page.locator('#tab-crm').click();
+    await expect(page.locator('#panel-crm')).toBeVisible();
+
+    await page.locator('#tab-automation').click();
+    await expect(page.locator('#panel-automation')).toBeVisible();
+
+    // 4. Switch back to Store: Verify cart still has 1 item!
+    await page.locator('#tab-store').click();
+    await expect(page.locator('#panel-store button[data-action="store-cart"]')).toContainText('Cart (1)');
+
+    // 5. Switch back to Learning: Verify 1 of 3 lessons complete is preserved!
+    await page.locator('#tab-learning').click();
+    await expect(page.locator('#panel-learning')).toContainText('1 of 3 lessons complete');
+
+    await ctx.close();
+  });
+
+  test('verifies cross-mode keyboard safety: hidden Store dialog does not intercept Escape and preserves cart state across mode switch', async ({
+    browser,
+  }) => {
+    const { ctx, page } = await openDevPreview(browser);
+
+    // 1. Navigate to Store tab
+    const storeTab = page.locator('#tab-store');
+    await storeTab.click();
+    await expect(storeTab).toHaveAttribute('aria-selected', 'true');
+    const storePanel = page.locator('#panel-store');
+    await expect(storePanel).toBeVisible();
+
+    // 2. Open Store cart with an item
+    const addTapBtn = storePanel.locator('button[data-action="store-add"][data-id="tap"]');
+    await addTapBtn.click();
+    const drawer = storePanel.locator('aside[role="dialog"]');
+    await expect(drawer).toBeVisible();
+    await expect(storePanel.locator('button[data-action="store-cart"]')).toContainText('Cart (1)');
+
+    // 3. Switch to Learning mode while cart dialog was open
+    const learningTab = page.locator('#tab-learning');
+    await learningTab.click();
+    await expect(learningTab).toHaveAttribute('aria-selected', 'true');
+    const learningPanel = page.locator('#panel-learning');
+    await expect(learningPanel).toBeVisible();
+    await expect(storePanel).toBeHidden();
+
+    // 4. In Learning, select a lesson and focus an interactive element
+    const lesson1Btn = learningPanel.locator('button[data-action="learn-lesson"][data-index="0"]');
+    await lesson1Btn.click();
+    await expect(lesson1Btn).toBeFocused();
+
+    // 5. Press Escape in Learning: verify Learning focus/interaction is unaffected
+    await page.keyboard.press('Escape');
+    await expect(lesson1Btn).toBeFocused();
+    await expect(learningPanel).toBeVisible();
+
+    // Interact with Learning quiz after Escape
+    const quizRadio = learningPanel.locator('input[name="lesson-quiz"][value="Enter"]');
+    await quizRadio.check();
+    await expect(quizRadio).toBeChecked();
+
+    // 6. Switch back to Store: verify cart contents are preserved and dialog keyboard behavior works normally
+    await storeTab.click();
+    await expect(storeTab).toHaveAttribute('aria-selected', 'true');
+    await expect(storePanel).toBeVisible();
+    await expect(storePanel.locator('button[data-action="store-cart"]')).toContainText('Cart (1)');
+
+    // Reopen cart dialog: verify item is intact
+    const cartBtn = storePanel.locator('button[data-action="store-cart"]');
+    await cartBtn.click();
+    await expect(drawer).toBeVisible();
+    await expect(drawer).toContainText('Basin tap');
+    await expect(drawer).toContainText('₹450');
+
+    // Verify dialog keyboard behavior (initial focus and Escape dismiss) works normally
+    const closeBtn = drawer.locator('#cart-close');
+    await expect(closeBtn).toBeFocused();
+
+    await page.keyboard.press('Escape');
+    await expect(drawer).toBeHidden();
+    await expect(cartBtn).toBeFocused();
 
     await ctx.close();
   });
