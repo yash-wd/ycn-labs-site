@@ -123,6 +123,7 @@ jobs:
           echo "Workflow Run Number: ${{ github.run_number }}"
           echo "Test Base URL: http://127.0.0.1:3005"
           echo "=========================="
+          echo "pr_head_sha=${PR_HEAD_SHA:-$CHECKOUT_SHA}" >> "$GITHUB_OUTPUT"
           echo "checkout_sha=${CHECKOUT_SHA}" >> "$GITHUB_OUTPUT"
 
       - name: Start temporary development server and run M08-B browser suite
@@ -158,8 +159,12 @@ jobs:
 
       - name: Verify 36 screenshots and sanitized manifest
         if: always()
+        env:
+          EXPECTED_PR_HEAD_SHA: ${{ steps.commit_identity.outputs.pr_head_sha }}
+          EXPECTED_CHECKOUT_SHA: ${{ steps.commit_identity.outputs.checkout_sha }}
+          EXPECTED_RUN_ID: ${{ github.run_id }}
+          MANIFEST: test-results/m08-screenshots/manifest.json
         run: |
-          MANIFEST="test-results/m08-screenshots/manifest.json"
           if [ -f "$MANIFEST" ]; then
             echo "Manifest found. Verifying 36 screenshots and commit identity..."
             COUNT=$(ls -1 test-results/m08-screenshots/*.png 2>/dev/null | wc -l)
@@ -173,11 +178,34 @@ jobs:
               echo "::error::Privacy violation: absolute workstation path or username found in manifest!"
               exit 1
             fi
-            # Identity audit: verify source_pr_head_sha and tested_checkout_sha are populated
-            if ! grep -q "source_pr_head_sha" "$MANIFEST" || ! grep -q "tested_checkout_sha" "$MANIFEST"; then
-              echo "::error::Manifest missing source_pr_head_sha or tested_checkout_sha!"
-              exit 1
-            fi
+
+            # Identity audit: validate exact values match GitHub environment
+            node -e '
+              const fs = require("fs");
+              const manifest = JSON.parse(fs.readFileSync(process.env.MANIFEST, "utf8"));
+              const expHead = process.env.EXPECTED_PR_HEAD_SHA;
+              const expCheckout = process.env.EXPECTED_CHECKOUT_SHA;
+              const expRunId = String(process.env.EXPECTED_RUN_ID || "");
+
+              console.log("Validating manifest identity values:");
+              console.log("  Manifest source_pr_head_sha:", manifest.source_pr_head_sha, "(expected:", expHead, ")");
+              console.log("  Manifest tested_checkout_sha:", manifest.tested_checkout_sha, "(expected:", expCheckout, ")");
+              console.log("  Manifest workflow_run_id:", manifest.workflow_run_id, "(expected:", expRunId, ")");
+
+              if (expHead && manifest.source_pr_head_sha !== expHead) {
+                console.error("::error::Manifest source_pr_head_sha mismatch! Got " + manifest.source_pr_head_sha + ", expected " + expHead);
+                process.exit(1);
+              }
+              if (expCheckout && manifest.tested_checkout_sha !== expCheckout) {
+                console.error("::error::Manifest tested_checkout_sha mismatch! Got " + manifest.tested_checkout_sha + ", expected " + expCheckout);
+                process.exit(1);
+              }
+              if (expRunId && String(manifest.workflow_run_id) !== expRunId) {
+                console.error("::error::Manifest workflow_run_id mismatch! Got " + manifest.workflow_run_id + ", expected " + expRunId);
+                process.exit(1);
+              }
+              console.log("Identity values validated successfully.");
+            '
             echo "Manifest, 36 screenshots, and commit identity verified successfully."
           else
             echo "No screenshot manifest generated (tests may have failed before capture)."
