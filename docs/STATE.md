@@ -17,24 +17,24 @@
 
 This block supersedes older current-status blocks below without erasing their historical records.
 
-- **Milestone: PR #46 (M08-B — `YCN-M08-B-SHOWROOM-DEMOS-01` Showroom Demonstration Interiors — Websites, Web apps, CRM & admin) merged into `main` on 23 Nov 2026; site remains unlaunched.**
-  - **Reviewed PR #46 Source Head:** `f3bb811b5e3754b69aec90e13a88331d4d5b0e33`.
-  - **Main Merge Commit:** `e7b35dbd77c69fd4d936b3ac8afb0bc78f67597c`.
-  - **Merge Tree SHA:** `b27fe769bb20040eedd8844462804bbab63626a1` (exact identity with source).
-  - **GitHub CI Verification:** PASSED on PR #46 (run 45103200511: 356 unit tests, 53 prod Chromium, 3 staging preview, 11 dev browser, 36 clean screenshots) and post-merge Gitleaks PASSED (run 45108204638).
+- **Milestone: PR #47 (M08-C — `YCN-M08-C-SHOWROOM-AUTOMATION-01` Interactive Automation Showroom Demonstration Interior) merged into `main` on 23 Nov 2026; site remains unlaunched.**
+  - **Reviewed PR #47 Source Head:** `7aecb565212f1bbcdf21714b00a4517d93caff1c`.
+  - **Main Merge Commit:** `bdcf0f504522e70b0e1a84b1bd4b585dd2d01721`.
+  - **Merge Tree SHA:** Exact identity with reviewed source tree.
+  - **GitHub CI Verification:** PASSED on PR #47 (run 45124931619: 367 unit tests, 53 prod Chromium, 3 staging preview, 13 dev browser, 48 clean screenshots) and post-merge Gitleaks PASSED (run 45124931765).
   - **Merged by:** Owner directly on GitHub.
-  - **Milestone M08-B:** `[VERIFIED]`. Interactive demonstration interiors for Websites, Web apps, and CRM & admin established with state preservation.
+  - **Milestone M08-C:** `[VERIFIED]`. Interactive Automation demonstration interior established with state preservation.
 
-- **Active Task: `YCN-M08-C-SHOWROOM-AUTOMATION-01` (Milestone M08-C: Interactive Automation Showroom Demonstration Interior).**
-  - **Branch:** `wip/YCN-M08-C-SHOWROOM-AUTOMATION-01`.
-  - **Base `main`:** `e7b35dbd77c69fd4d936b3ac8afb0bc78f67597c`.
-  - **Status:** `[LOCAL-WIP]` Implemented locally within the authorized 8-file scope; interactive Automation demonstration mounted inside `#panel-automation` with dual-device laptop frame and companion phone notifier; 6-stage workflow simulation with deliberate human confirmation gates (Confirm visit, Mark job done), failure/retry testing, recipient toggle, and execution history; expanded 48-configuration screenshot matrix (4 demos × 6 viewports × 2 themes) and CI workflow updated.
+- **Active Task: `YCN-M08-D-SHOWROOM-STORE-LEARNING-01` (Milestone M08-D: Online Store & Learning Platform Showroom Demonstration Interiors).**
+  - **Branch:** `wip/YCN-M08-D-SHOWROOM-STORE-LEARNING-01`.
+  - **Base `main`:** `bdcf0f504522e70b0e1a84b1bd4b585dd2d01721`.
+  - **Status:** `[LOCAL-WIP]` Implemented locally within the authorized 9-file scope; interactive Online Store (*Example Home Supplies*) mounted inside `#panel-store` in laptop frame with product catalog, category filters, inline detail box, and modal cart drawer; interactive Learning Platform (*Example Learning Hub*) mounted inside `#panel-learning` in tablet frame with dual views (My courses, Progress), 3 lesson units, lesson completion toggles, progress bar, interactive quiz, and sample course completion banner; expanded 72-configuration screenshot matrix (6 demos × 6 viewports × 2 themes) and CI workflow updated.
 
 - **Current Progress Metrics (23 November 2026):**
   - **Detailed Checklist Progress:** 33 / 143 items verified (23.1% recorded readiness; 110 unchecked, 24 Owner gates in `docs/YCN_READINESS_CHECKLIST.md`).
-  - **V1 Major Milestone Progress:** 7 / 15 accepted major milestones (46.7% milestone-count progress; M01–M07 accepted; M08 in progress with M08-A and M08-B merged, M08-C in progress, M08-D pending; 8 pending in `docs/BACKLOG.md`).
+  - **V1 Major Milestone Progress:** 7 / 15 accepted major milestones (46.7% milestone-count progress; M01–M07 accepted; M08 in progress with M08-A, M08-B, and M08-C merged, M08-D in progress; 8 pending in `docs/BACKLOG.md`).
 
-- **Next Delivery Milestones:** M08-D (`YCN-M08-D-SHOWROOM-STORE-LEARNING-01` — Online store and Learning platform demonstration interiors). Parallel track: `MEDIA-01`.
+- **Next Delivery Milestones:** Complete M08 Showroom Verification and Experience Gate; parallel tracks: `MEDIA-01`, content refinement, and staging readiness.
 
 ---
 

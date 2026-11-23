@@ -5,6 +5,8 @@ import { ExampleWebsite } from '@/components/m08/demos/ExampleWebsite';
 import { ExampleWebApp } from '@/components/m08/demos/ExampleWebApp';
 import { ExampleCrmAdmin } from '@/components/m08/demos/ExampleCrmAdmin';
 import { ExampleAutomation } from '@/components/m08/demos/ExampleAutomation';
+import { ExampleStore, STORE_PRODUCTS, STORE_CATEGORIES } from '@/components/m08/demos/ExampleStore';
+import { ExampleLearning, LEARNING_LESSONS, QUIZ_OPTIONS } from '@/components/m08/demos/ExampleLearning';
 import {
   ExampleTabletFrame,
   ExamplePhoneFrame,
@@ -244,6 +246,111 @@ describe('M08-B Showroom Demos: Component & Behavior Specification Tests', () =>
       expect(html).not.toContain('◉ ▰');
       expect(html).not.toContain('◉');
       expect(html).not.toContain('▰');
+    });
+  });
+
+  describe('Online Store Demo (ExampleStore - Section B & M08-D)', () => {
+    const html = renderToStaticMarkup(React.createElement(ExampleStore));
+
+    it('renders Example Home Supplies brand with accessible SVG house icon replacing bare ⌂ text symbol', () => {
+      expect(html).toContain('Example Home Supplies');
+      expect(html).not.toContain('⌂');
+      expect(html).toMatch(/<svg[^>]*aria-hidden="true"/);
+    });
+
+    it('renders hero banner with kicker, heading, and tool kit artwork', () => {
+      expect(html).toContain('HOME ESSENTIALS · EXAMPLE STORE');
+      expect(html).toContain('Small things. Better home.');
+      expect(html).toContain('Browse useful supplies and tools. All items and prices are fictional.');
+    });
+
+    it('renders all four shop category filters', () => {
+      expect(html).toContain('aria-label="Shop category"');
+      for (const cat of STORE_CATEGORIES) {
+        expect(html).toContain(`data-filter="${cat}"`);
+      }
+    });
+
+    it('renders all 6 catalog products with names, categories, and sample INR prices', () => {
+      for (const p of STORE_PRODUCTS) {
+        expect(html).toContain(p.name);
+        expect(html).toContain(`data-id="${p.id}"`);
+      }
+      expect(html).toContain('₹450');
+      expect(html).toContain('₹60');
+      expect(html).toContain('₹240');
+      expect(html).toContain('₹390');
+      expect(html).toContain('₹950');
+      expect(html).toContain('₹210');
+    });
+
+    it('renders cart button with initial zero count', () => {
+      expect(html).toContain('data-action="store-cart"');
+      expect(html).toContain('Cart (0)');
+    });
+
+    it('renders fictional store footnote disclosure', () => {
+      expect(html).toContain('Sample products and prices. This is a fictional online store.');
+    });
+  });
+
+  describe('Learning Platform Demo (ExampleLearning - Section C & M08-D)', () => {
+    const html = renderToStaticMarkup(React.createElement(ExampleLearning));
+
+    it('renders Example Learning Hub brand and student workspace subhead', () => {
+      expect(html).toContain('Example Learning Hub');
+      expect(html).toContain('Student workspace');
+      expect(html).toContain('Sample student · Fictional learning centre');
+    });
+
+    it('renders navigation views for desktop and mobile', () => {
+      expect(html).toContain('data-view="My courses"');
+      expect(html).toContain('data-view="Progress"');
+      expect(html).toContain('aria-label="Learning platform views"');
+    });
+
+    it('renders course overview card with kicker, heading, and book icon', () => {
+      expect(html).toContain('COURSE · COMPUTER BASICS');
+      expect(html).toContain('Learn everyday computer skills.');
+      expect(html).toContain('Three short sample lessons and a practice question.');
+    });
+
+    it('renders initial progress tracking bar at 0 of 3 lessons complete', () => {
+      expect(html).toContain('0 of 3 lessons complete');
+      expect(html).toContain('role="progressbar"');
+      expect(html).toContain('aria-label="Lesson progress 0 of 3"');
+    });
+
+    it('renders all 3 lessons in lesson list', () => {
+      for (let i = 0; i < LEARNING_LESSONS.length; i++) {
+        expect(html).toContain(LEARNING_LESSONS[i].title);
+        expect(html).toContain(`data-index="${i}"`);
+      }
+    });
+
+    it('renders initial lesson 1 reader content with tip callout and toggle button', () => {
+      expect(html).toContain('LESSON 1 OF 3');
+      expect(html).toContain(LEARNING_LESSONS[0].title);
+      expect(html).toContain(LEARNING_LESSONS[0].body);
+      expect(html).toContain(LEARNING_LESSONS[0].tip);
+      expect(html).toContain('data-action="learn-complete"');
+      expect(html).toContain('Mark lesson as complete');
+    });
+
+    it('renders short quiz with question and 3 radio choices', () => {
+      expect(html).toContain('Short quiz');
+      expect(html).toContain('Which key adds a space between words?');
+      expect(html).toContain('role="radiogroup"');
+      for (const opt of QUIZ_OPTIONS) {
+        expect(html).toContain(`value="${opt}"`);
+      }
+      expect(html).toContain('data-action="learn-quiz-check"');
+      expect(html).toContain('Check answer');
+    });
+
+    it('renders Start again reset control', () => {
+      expect(html).toContain('data-action="learn-reset"');
+      expect(html).toContain('Start again');
     });
   });
 });
