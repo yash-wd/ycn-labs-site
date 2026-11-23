@@ -1,0 +1,1170 @@
+/* ==========================================================================
+   ExampleDemos.module.css
+   M08-B Showroom Demos: Websites, Web apps, CRM & admin
+   Strict light-mode product screen tokens isolated from outer YCN theme.
+   ========================================================================== */
+
+/* Product screen tokens: fixed LIGHT isolated from outer YCN theme */
+.productScreen {
+  --screen-bg: #ffffff;
+  --screen-surface: #f2f6fa;
+  --screen-raised: #ffffff;
+  --screen-ink: #0e1b2d;
+  --screen-muted: #506278;
+  --screen-edge: #d1dce8;
+  --screen-hair: #e6edf4;
+  --screen-action: #0470b4;
+  --screen-hover: #035b94;
+  --screen-on: #ffffff;
+  --screen-glow: rgba(4, 112, 180, 0.1);
+
+  color-scheme: light;
+  color: var(--screen-ink);
+  background-color: var(--screen-bg);
+  height: 100%;
+  overflow-y: auto;
+  overflow-x: hidden;
+  min-height: 0;
+  scrollbar-color: #aec5d6 #f3f7fa;
+  scrollbar-width: thin;
+  font-family: inherit;
+  box-sizing: border-box;
+}
+
+.productScreen button:focus-visible,
+.productScreen a:focus-visible,
+.productScreen select:focus-visible,
+.productScreen input:focus-visible {
+  outline: 3px solid #0470b4;
+  outline-offset: 2px;
+}
+
+.productScreen button,
+.productScreen select,
+.productScreen input {
+  color: inherit;
+  font-family: inherit;
+}
+
+.productScreen h2,
+.productScreen h3 {
+  color: #142b44;
+}
+
+/* --------------------------------------------------------------------------
+   Hardware Device Frames
+   -------------------------------------------------------------------------- */
+.device {
+  width: min(100%, 1000px);
+  margin-inline: auto;
+  position: relative;
+  box-sizing: border-box;
+}
+
+.hardware {
+  background: linear-gradient(128deg, #99a4b1, #222e3c 6%, #111822 48%, #626e7c 92%, #263443);
+  padding: 13px;
+  border-radius: 24px;
+  box-shadow: 0 28px 44px -31px rgba(8, 27, 49, 0.7), inset 0 0 0 1px rgba(255, 255, 255, 0.5);
+  height: 100%;
+  overflow: hidden;
+  position: relative;
+  box-sizing: border-box;
+}
+
+.hardware::before {
+  content: "";
+  position: absolute;
+  inset: 3px;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  border-radius: 21px;
+  pointer-events: none;
+}
+
+.hardware > .productScreen {
+  border-radius: 10px;
+  border: 1px solid #1d2630;
+}
+
+/* Tablet Frame (Websites) */
+.tabletDevice {
+  width: min(100%, 1030px);
+  height: 604px;
+}
+
+.tabletDevice .hardware {
+  padding: 15px 24px;
+}
+
+.tabletDevice::before {
+  content: "";
+  position: absolute;
+  left: 10px;
+  top: 49%;
+  width: 6px;
+  height: 6px;
+  background: #577aa4;
+  border-radius: 50%;
+  z-index: 3;
+}
+
+/* Phone Frame (Web apps) */
+.phoneDevice {
+  width: 326px;
+  height: 670px;
+  margin-inline: auto;
+}
+
+.phoneDevice .hardware {
+  padding: 12px;
+  border-radius: 43px;
+}
+
+.phoneDevice .hardware::before {
+  border-radius: 40px;
+}
+
+.phoneDevice .productScreen {
+  border-radius: 31px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
+.phoneTop {
+  flex: none;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 7px 24px;
+  font-size: 10px;
+  font-weight: 700;
+  color: #2b4359;
+  background: #f8fbfd;
+  position: relative;
+  height: 34px;
+}
+
+.phoneTop::after {
+  content: "";
+  position: absolute;
+  width: 69px;
+  height: 14px;
+  background: #111d2a;
+  border-radius: 0 0 9px 9px;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.phoneStatusIcons {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.phoneContent {
+  flex: 1;
+  min-height: 0;
+  overflow-y: auto;
+  overflow-x: hidden;
+}
+
+.phoneBottom {
+  flex: none;
+  display: grid;
+  place-items: center;
+  height: 22px;
+  background: #fff;
+}
+
+.phoneBottom::before {
+  content: "";
+  width: 80px;
+  height: 4px;
+  background: #202f43;
+  border-radius: 8px;
+}
+
+/* Monitor Frame (CRM & Admin) */
+.monitorDevice {
+  width: min(100%, 1020px);
+}
+
+.monitorDevice .hardware {
+  height: 588px;
+  border-radius: 18px;
+}
+
+.monitorStand {
+  width: 13%;
+  height: 31px;
+  background: linear-gradient(90deg, #49586c, #8b9cad, #455366);
+  margin: auto;
+}
+
+.monitorFoot {
+  width: 32%;
+  height: 9px;
+  border-radius: 9px;
+  background: linear-gradient(180deg, #617286, #314254);
+  margin: auto;
+}
+
+/* --------------------------------------------------------------------------
+   Shared Sample UI Patterns (Light Theme)
+   -------------------------------------------------------------------------- */
+.pBar {
+  height: 54px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 10px 20px;
+  border-bottom: 1px solid #e3ebf3;
+  background: #fff;
+}
+
+.pBrand {
+  font-weight: 800;
+  letter-spacing: -0.015em;
+  font-size: 15px;
+  color: #142941;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.pNav {
+  display: flex;
+  gap: 7px;
+  align-items: center;
+}
+
+.pPrimary {
+  border: 0;
+  border-radius: 7px;
+  background-color: #0470b4 !important;
+  color: #fff !important;
+  padding: 10px 14px;
+  font-weight: 700;
+  font-size: 12px;
+  min-height: 38px;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  transition: background-color 0.15s ease;
+}
+
+.pPrimary:hover {
+  background-color: #035b94 !important;
+}
+
+.pSecondary {
+  border: 1px solid #cad7e3;
+  border-radius: 7px;
+  background-color: #fff;
+  color: #172b43;
+  padding: 9px 12px;
+  font-size: 12px;
+  font-weight: 650;
+  min-height: 37px;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  transition: background-color 0.15s ease;
+}
+
+.pSecondary:hover {
+  background-color: #eff6fd;
+}
+
+.pLink {
+  border: none;
+  background: transparent;
+  color: #0470b4 !important;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  font-size: 12px;
+  padding: 8px;
+  cursor: pointer;
+}
+
+.pKicker {
+  font-size: 10px;
+  font-weight: 750;
+  letter-spacing: 0.13em;
+  text-transform: uppercase;
+  color: #0470b4;
+  display: block;
+  margin-bottom: 4px;
+}
+
+.pChip {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 4px 8px;
+  border-radius: 999px;
+  border: 1px solid #d5e1ed;
+  background: #f8fafc;
+  color: #50657b;
+  font-size: 11px;
+  font-weight: 650;
+}
+
+.pStatusDot {
+  display: inline-block;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: currentColor;
+}
+
+.pBadgeNew {
+  color: #075985;
+  background-color: #eaf5ff;
+}
+
+.pBadgePlan {
+  color: #7a4e00;
+  background-color: #fff8e2;
+}
+
+.pBadgeDone {
+  color: #176747;
+  background-color: #eaf9f2;
+}
+
+.pFieldLabel {
+  font-size: 11px;
+  font-weight: 700;
+  color: #52627a;
+  display: block;
+  margin-bottom: 4px;
+}
+
+.pSelect,
+.pInput {
+  background: #fff;
+  border: 1px solid #cbd7e4;
+  border-radius: 7px;
+  padding: 9px 11px;
+  font-size: 13px;
+  color: #18334e;
+  min-height: 41px;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.pMuted {
+  color: #597088;
+  font-size: 12px;
+}
+
+.pResult {
+  border-left: 3px solid #0470b4;
+  background: #edf7ff;
+  color: #153b5c;
+  padding: 10px 12px;
+  border-radius: 5px;
+  font-size: 12px;
+  line-height: 1.55;
+}
+
+/* --------------------------------------------------------------------------
+   Website Demo Styles
+   -------------------------------------------------------------------------- */
+.website {
+  background: #fff;
+  min-height: 100%;
+}
+
+.webTopbar {
+  composes: pBar;
+}
+
+.webMenu {
+  display: flex;
+  align-items: center;
+  gap: 3px;
+}
+
+.webMenu button {
+  border: 0;
+  background: transparent;
+  color: #53657b;
+  padding: 8px 12px;
+  border-radius: 6px;
+  font-size: 12px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+
+.webMenu button:hover {
+  color: #035b94;
+  background: #eaf4fc;
+}
+
+.webResponsiveNav {
+  display: none;
+}
+
+.webMenuMobile {
+  display: none;
+}
+
+.webHero {
+  display: grid;
+  grid-template-columns: 1.08fr 0.92fr;
+  gap: 20px;
+  align-items: center;
+  padding: 40px 35px 24px;
+  min-height: 340px;
+  background: linear-gradient(115deg, #f8fcff, #ecf4fb);
+}
+
+.webHero h2 {
+  font-size: clamp(23px, 3.4vw, 38px);
+  line-height: 1.15;
+  letter-spacing: -0.035em;
+  max-width: 16ch;
+  margin: 6px 0 0;
+}
+
+.webHero p {
+  margin: 13px 0 19px;
+  font-size: clamp(12px, 1.7vw, 15px);
+  line-height: 1.7;
+  color: #50647e;
+}
+
+.webGraphic {
+  min-height: 232px;
+  height: 100%;
+  border-radius: 14px;
+  background: linear-gradient(135deg, #ddeaf5, #fff);
+  overflow: hidden;
+  box-shadow: 0 8px 20px -18px #234262;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.webGraphic svg {
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+.webSection {
+  padding: 24px 35px;
+}
+
+.webSection h3 {
+  font-size: 23px;
+  letter-spacing: -0.03em;
+  margin: 4px 0 0;
+}
+
+.webServices {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 10px;
+  margin-top: 14px;
+}
+
+.webService {
+  border: 1px solid #d7e4ee;
+  border-radius: 10px;
+  min-height: 106px;
+  text-align: left;
+  background: #fff;
+  padding: 14px;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+
+.webService strong {
+  font-size: 14px;
+  color: #142b44;
+}
+
+.webService small {
+  font-size: 11px;
+  color: #5c7183;
+  line-height: 1.45;
+}
+
+.webService[aria-pressed="true"] {
+  border-color: #0470b4;
+  background: #ecf6fd;
+}
+
+.webHighlight {
+  color: #095e96;
+  font-weight: 700;
+}
+
+.webAbout {
+  background: #f6f9fc;
+}
+
+.webContact {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  background: #eef7fd;
+}
+
+.webResult {
+  padding: 10px 35px 20px;
+  color: #06568b;
+  min-height: 40px;
+  font-size: 12px;
+  font-weight: 600;
+}
+
+/* --------------------------------------------------------------------------
+   Web App Demo Styles
+   -------------------------------------------------------------------------- */
+.appUi {
+  background: #f6f9fc;
+  min-height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.appHead {
+  padding: 18px 19px;
+  border-bottom: 1px solid #e2eaf3;
+  background: #fff;
+}
+
+.appHead strong {
+  display: block;
+  color: #15304b;
+  font-size: 15px;
+}
+
+.appHead small {
+  color: #64758b;
+  font-size: 11px;
+}
+
+.appProgress {
+  height: 4px;
+  background: #d9e4ef;
+  border-radius: 8px;
+  margin-top: 13px;
+  overflow: hidden;
+}
+
+.appProgressTrack {
+  display: block;
+  height: 100%;
+  background: #0470b4;
+  transition: width 0.18s ease;
+}
+
+.appMain {
+  flex: 1;
+  padding: 20px 17px;
+  overflow-y: auto;
+}
+
+.appMain h2 {
+  font-size: 23px;
+  line-height: 1.25;
+  letter-spacing: -0.03em;
+  margin: 4px 0 0;
+}
+
+.appMain p {
+  margin-top: 6px;
+  color: #586c83;
+  font-size: 12px;
+  line-height: 1.5;
+}
+
+.appChoice {
+  display: block;
+  width: 100%;
+  text-align: left;
+  margin-top: 10px;
+  background: #fff;
+  border: 1px solid #d8e3ee;
+  border-radius: 9px;
+  padding: 12px 13px;
+  font-size: 13px;
+  min-height: 45px;
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+
+.appChoice[aria-pressed="true"] {
+  border-color: #0470b4;
+  color: #035b94;
+  background: #eaf6fd;
+  font-weight: 650;
+}
+
+.appGrid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 9px;
+}
+
+.appGrid .appChoice {
+  margin-top: 9px;
+}
+
+.appActions {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 22px;
+}
+
+.appReview {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 11px;
+  padding-top: 15px;
+}
+
+.appReview div {
+  background: #fff;
+  padding: 11px;
+  border: 1px solid #dbe4ed;
+  border-radius: 8px;
+}
+
+.appReview dt {
+  color: #687b8f;
+  font-size: 10px;
+}
+
+.appReview dd {
+  margin: 3px 0 0;
+  font-weight: 700;
+  color: #1b334c;
+  font-size: 12px;
+}
+
+.appError {
+  color: #b91c1c !important;
+  margin-top: 9px;
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.appFooter {
+  padding: 10px 15px;
+  border-top: 1px solid #e2eaf3;
+  background: #fff;
+  color: #64748b;
+  font-size: 10px;
+}
+
+/* --------------------------------------------------------------------------
+   CRM & Admin Demo Styles
+   -------------------------------------------------------------------------- */
+.crmUi {
+  display: grid;
+  grid-template-columns: 169px minmax(0, 1fr);
+  height: 100%;
+  background: #f5f8fc;
+}
+
+.crmSidebar {
+  background: #122740;
+  color: #eaf3fc;
+  padding: 18px 12px;
+}
+
+.crmSidebar strong {
+  font-size: 14px;
+  display: block;
+  padding: 5px 10px 19px;
+}
+
+.crmSidebar button {
+  width: 100%;
+  text-align: left;
+  border: 0;
+  background: transparent;
+  color: #d4e4f1;
+  border-radius: 7px;
+  padding: 11px 10px;
+  font-size: 12px;
+  margin-bottom: 4px;
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+
+.crmSidebar button[aria-pressed="true"] {
+  background: #2a4b6a;
+  color: #fff;
+  font-weight: 650;
+}
+
+.crmMobileNav {
+  display: none;
+}
+
+.crmWork {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+}
+
+.crmTop {
+  padding: 15px 18px 12px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  background: #fff;
+  border-bottom: 1px solid #dfe8f1;
+}
+
+.crmTop h2 {
+  font-size: 21px;
+  letter-spacing: -0.02em;
+  margin: 0;
+}
+
+.crmTop small {
+  font-size: 10px;
+  color: #6d8090;
+}
+
+.crmSummary {
+  padding: 12px 18px;
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.crmCount {
+  background: #fff;
+  border: 1px solid #dce6ee;
+  border-radius: 9px;
+  padding: 9px 12px;
+  flex: 1;
+  min-width: 95px;
+}
+
+.crmCount small {
+  color: #526c83;
+  display: block;
+  font-size: 10px;
+}
+
+.crmCount strong {
+  font-size: 20px;
+  color: #143a58;
+}
+
+.crmToolbar {
+  padding: 0 18px 13px;
+  display: flex;
+  align-items: center;
+  gap: 9px;
+}
+
+.crmToolbar input {
+  min-width: 0;
+  flex: 1;
+}
+
+.crmToolbar select {
+  width: 146px;
+  max-width: 45%;
+}
+
+.crmContent {
+  display: grid;
+  grid-template-columns: minmax(0, 1.3fr) minmax(184px, 0.7fr);
+  gap: 0;
+  min-height: 0;
+  flex: 1;
+  overflow: auto;
+  padding: 0 18px 18px;
+}
+
+.crmList {
+  min-width: 0;
+  overflow: auto;
+  background: #fff;
+  border: 1px solid #dfe7ee;
+  border-radius: 10px 0 0 10px;
+}
+
+.crmTable {
+  width: 100%;
+  border-collapse: collapse;
+  text-align: left;
+  font-size: 11px;
+  min-width: 365px;
+}
+
+.crmTable th {
+  font-size: 10px;
+  color: #587188;
+  font-weight: 700;
+  background: #f9fbfd;
+  padding: 11px 9px;
+  border-bottom: 1px solid #e5edf5;
+}
+
+.crmTable td {
+  border-bottom: 1px solid #edf2f6;
+  padding: 10px 9px;
+  color: #1d3c58;
+}
+
+.crmTable tbody tr:hover {
+  background: #f4f9fd;
+}
+
+.crmTable tbody tr.selected {
+  background: #eef7ff;
+}
+
+.crmTable button {
+  border: 0;
+  background: transparent;
+  color: #145b93;
+  text-align: left;
+  font-weight: 650;
+  font-size: 11px;
+  padding: 2px;
+  cursor: pointer;
+}
+
+.crmDetail {
+  padding: 14px;
+  border: 1px solid #dfe7ee;
+  border-left: 0;
+  border-radius: 0 10px 10px 0;
+  background: #fcfdff;
+  overflow-y: auto;
+}
+
+.crmDetail h3 {
+  font-size: 14px;
+  margin: 0 0 8px;
+}
+
+.crmDetail p {
+  font-size: 11px;
+  color: #536b80;
+  line-height: 1.65;
+  margin: 4px 0 0;
+}
+
+.crmDetail dl {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px;
+  margin: 9px 0;
+}
+
+.crmDetail dt {
+  font-size: 10px;
+  color: #688198;
+}
+
+.crmDetail dd {
+  font-size: 11px;
+  color: #162f4a;
+  font-weight: 650;
+  margin: 3px 0 0;
+}
+
+.crmDetail h4 {
+  font-size: 11px;
+  margin: 12px 0 4px;
+  color: #254159;
+}
+
+.crmHistory {
+  margin: 5px 0;
+  padding-left: 18px;
+  color: #54728a;
+  font-size: 11px;
+}
+
+.crmHistory li {
+  margin-bottom: 4px;
+}
+
+.crmStack {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 8px;
+  margin-top: 8px;
+}
+
+.crmStack select {
+  width: 100%;
+  font-size: 12px;
+  padding: 8px;
+}
+
+.crmEmpty {
+  padding: 20px;
+  font-size: 12px;
+  color: #6c8196;
+  text-align: center;
+}
+
+.crmSchedule,
+.crmCustomers {
+  background: #fff;
+  border-radius: 9px;
+  padding: 15px;
+  grid-column: 1 / -1;
+  border: 1px solid #dae5ee;
+}
+
+.crmScheduleList {
+  display: grid;
+  gap: 8px;
+  margin-top: 13px;
+}
+
+.crmScheduleItem {
+  display: flex;
+  justify-content: space-between;
+  gap: 10px;
+  align-items: center;
+  padding: 12px;
+  border: 1px solid #e1eaf2;
+  border-radius: 7px;
+  font-size: 12px;
+}
+
+.crmChange {
+  padding: 6px 10px;
+  color: #176747;
+  font-size: 11px;
+  font-weight: 600;
+  margin-top: 8px;
+}
+
+/* --------------------------------------------------------------------------
+   Responsive Rules
+   -------------------------------------------------------------------------- */
+@media (max-width: 1120px) {
+  .crmUi {
+    grid-template-columns: 145px minmax(0, 1fr);
+  }
+}
+
+@media (max-width: 800px) {
+  .tabletDevice {
+    height: 550px;
+  }
+
+  .crmContent {
+    grid-template-columns: 1fr;
+  }
+
+  .crmList {
+    border-radius: 10px 10px 0 0;
+  }
+
+  .crmDetail {
+    border-left: 1px solid #dfe7ee;
+    border-top: 0;
+    border-radius: 0 0 10px 10px;
+  }
+}
+
+@media (max-width: 599px) {
+  .tabletDevice {
+    width: 100%;
+    height: 585px;
+  }
+
+  .tabletDevice .hardware {
+    padding: 0;
+    border: 1px solid #8496a8;
+    border-radius: 9px;
+    background: none;
+    box-shadow: 0 17px 23px -23px #24354f;
+  }
+
+  .tabletDevice::before,
+  .tabletDevice .hardware::before {
+    display: none;
+  }
+
+  .tabletDevice .hardware > .productScreen {
+    border-radius: 8px;
+  }
+
+  .phoneDevice {
+    height: 660px;
+    width: min(100%, 323px);
+  }
+
+  .monitorDevice {
+    width: 100%;
+  }
+
+  .monitorDevice .hardware {
+    border: 1px solid #8296aa;
+    padding: 0;
+    border-radius: 8px;
+    background: none;
+    box-shadow: none;
+    height: 650px;
+  }
+
+  .monitorDevice .hardware::before,
+  .monitorStand,
+  .monitorFoot {
+    display: none;
+  }
+
+  .monitorDevice .hardware > .productScreen {
+    border: 0;
+    border-radius: 7px;
+  }
+
+  /* Website mobile reflow */
+  .website .webMenu {
+    display: none;
+  }
+
+  .website .webResponsiveNav {
+    display: inline-flex;
+    font-size: 12px;
+    padding: 8px 10px;
+    min-height: 38px;
+  }
+
+  .website .webMenuMobile {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 5px;
+    padding: 8px 12px;
+    background: #edf5fb;
+  }
+
+  .webHero {
+    grid-template-columns: 1fr;
+    padding: 24px 18px;
+  }
+
+  .webServices {
+    grid-template-columns: 1fr;
+  }
+
+  .webSection {
+    padding: 20px 18px;
+  }
+
+  .webContact {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  /* CRM mobile reflow */
+  .crmUi {
+    display: block;
+    overflow: auto;
+  }
+
+  .crmSidebar {
+    display: none;
+  }
+
+  .crmMobileNav {
+    display: flex;
+    gap: 5px;
+    padding: 9px;
+    background: #112740;
+  }
+
+  .crmMobileNav button {
+    flex: 1;
+    color: white;
+    background: transparent;
+    border: 1px solid #45627e;
+    border-radius: 6px;
+    min-height: 42px;
+    font-size: 11px;
+    cursor: pointer;
+  }
+
+  .crmMobileNav button[aria-pressed="true"] {
+    background: #284b6c;
+  }
+
+  .crmTop {
+    padding: 11px;
+  }
+
+  .crmTop h2 {
+    font-size: 20px;
+  }
+
+  .crmSummary {
+    padding: 9px 11px;
+  }
+
+  .crmCount {
+    min-width: 67px;
+    padding: 8px;
+  }
+
+  .crmCount strong {
+    font-size: 18px;
+  }
+
+  .crmToolbar {
+    padding: 6px 10px 11px;
+  }
+
+  .crmContent {
+    padding: 0 10px 12px;
+  }
+
+  .crmTable {
+    min-width: 340px;
+  }
+}
+
+@media (max-width: 359px) {
+  .phoneDevice {
+    width: 100%;
+  }
+
+  .crmTable {
+    min-width: 300px;
+  }
+}
+
+/* Reduced motion compliance */
+@media (prefers-reduced-motion: reduce) {
+  .appProgressTrack,
+  .pPrimary,
+  .pSecondary,
+  .webService,
+  .appChoice,
+  .crmSidebar button {
+    transition: none !important;
+  }
+}

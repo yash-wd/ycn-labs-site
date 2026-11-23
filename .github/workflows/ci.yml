@@ -76,3 +76,147 @@ jobs:
         env:
           NEXT_PUBLIC_SITE_ENV: production
 
+  dev-preview-chromium:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4.4.0
+
+      - name: Install pnpm
+        uses: pnpm/action-setup@fc06bc1257f339d1d5d8b3a19a8cae5388b55320 # v4.4.0
+        with:
+          version: 11
+
+      - name: Setup Node.js
+        uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4.4.0
+        with:
+          node-version: 24
+
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+
+      - name: Generate Next.js TypeScript definitions
+        run: pnpm exec next typegen
+
+      - name: Assert credentials isolation
+        run: |
+          for var in DATABASE_URL RESEND_API_KEY LEAD_DESTINATION_EMAIL UPSTASH_REDIS_REST_URL UPSTASH_REDIS_REST_TOKEN RATE_LIMIT_HASH_SECRET SENTRY_DSN; do
+            if [ -n "${!var}" ]; then
+              echo "::error::Unexpected credential present in CI environment: $var"
+              exit 1
+            fi
+          done
+          echo "Credentials isolation verified: zero provider credentials present."
+
+      - name: Install Playwright Chromium
+        run: pnpm exec playwright install --with-deps chromium
+
+      - name: Record CI commit identity (Seat #5 R-01)
+        id: commit_identity
+        run: |
+          PR_HEAD_SHA="${{ github.event.pull_request.head.sha }}"
+          CHECKOUT_SHA="$(git rev-parse HEAD)"
+          echo "=== CI COMMIT IDENTITY ==="
+          echo "PR Source Head SHA: ${PR_HEAD_SHA:-N/A (push)}"
+          echo "Tested Checkout SHA: ${CHECKOUT_SHA}"
+          echo "Workflow Run ID: ${{ github.run_id }}"
+          echo "Workflow Run Number: ${{ github.run_number }}"
+          echo "Test Base URL: http://127.0.0.1:3005"
+          echo "=========================="
+          echo "pr_head_sha=${PR_HEAD_SHA:-$CHECKOUT_SHA}" >> "$GITHUB_OUTPUT"
+          echo "checkout_sha=${CHECKOUT_SHA}" >> "$GITHUB_OUTPUT"
+
+      - name: Start temporary development server and run M08-B browser suite
+        env:
+          PW_DEV_URL: "http://127.0.0.1:3005"
+          PR_SOURCE_HEAD_SHA: ${{ github.event.pull_request.head.sha || github.sha }}
+          TESTED_CHECKOUT_SHA: ${{ steps.commit_identity.outputs.checkout_sha }}
+          GITHUB_RUN_ID: ${{ github.run_id }}
+        run: |
+          pnpm exec next dev -H 127.0.0.1 -p 3005 &
+          DEV_PID=$!
+          echo "Started next dev on PID $DEV_PID, waiting for HTTP 200..."
+          for i in $(seq 1 45); do
+            STATUS=$(curl -s -o /dev/null -w "%{http_code}" http://127.0.0.1:3005/m08-preview || true)
+            if [ "$STATUS" = "200" ]; then
+              echo "Development server is ready (HTTP 200 after ${i}s)."
+              break
+            fi
+            sleep 1
+          done
+          if [ "$STATUS" != "200" ]; then
+            echo "::error::Development server failed to respond with HTTP 200 within 45s (last status: $STATUS)"
+            kill $DEV_PID || true
+            exit 1
+          fi
+
+          # Run dedicated development browser test suite and 36-screenshot matrix
+          pnpm exec playwright test --config=playwright.m08-dev.config.ts
+          TEST_EXIT=$?
+
+          kill $DEV_PID || true
+          exit $TEST_EXIT
+
+      - name: Verify 36 screenshots and sanitized manifest
+        if: always()
+        env:
+          EXPECTED_PR_HEAD_SHA: ${{ steps.commit_identity.outputs.pr_head_sha }}
+          EXPECTED_CHECKOUT_SHA: ${{ steps.commit_identity.outputs.checkout_sha }}
+          EXPECTED_RUN_ID: ${{ github.run_id }}
+          MANIFEST: test-results/m08-screenshots/manifest.json
+        run: |
+          if [ -f "$MANIFEST" ]; then
+            echo "Manifest found. Verifying 36 screenshots and commit identity..."
+            COUNT=$(ls -1 test-results/m08-screenshots/*.png 2>/dev/null | wc -l)
+            echo "Screenshot PNG count: $COUNT"
+            if [ "$COUNT" -ne 36 ]; then
+              echo "::error::Expected exactly 36 screenshots in test-results/m08-screenshots/, found $COUNT"
+              exit 1
+            fi
+            # Privacy audit: ensure no absolute workstation paths or usernames
+            if grep -q -E "(/home/|ycn-labs)" "$MANIFEST"; then
+              echo "::error::Privacy violation: absolute workstation path or username found in manifest!"
+              exit 1
+            fi
+
+            # Identity audit: validate exact values match GitHub environment
+            node -e '
+              const fs = require("fs");
+              const manifest = JSON.parse(fs.readFileSync(process.env.MANIFEST, "utf8"));
+              const expHead = process.env.EXPECTED_PR_HEAD_SHA;
+              const expCheckout = process.env.EXPECTED_CHECKOUT_SHA;
+              const expRunId = String(process.env.EXPECTED_RUN_ID || "");
+
+              console.log("Validating manifest identity values:");
+              console.log("  Manifest source_pr_head_sha:", manifest.source_pr_head_sha, "(expected:", expHead, ")");
+              console.log("  Manifest tested_checkout_sha:", manifest.tested_checkout_sha, "(expected:", expCheckout, ")");
+              console.log("  Manifest workflow_run_id:", manifest.workflow_run_id, "(expected:", expRunId, ")");
+
+              if (expHead && manifest.source_pr_head_sha !== expHead) {
+                console.error("::error::Manifest source_pr_head_sha mismatch! Got " + manifest.source_pr_head_sha + ", expected " + expHead);
+                process.exit(1);
+              }
+              if (expCheckout && manifest.tested_checkout_sha !== expCheckout) {
+                console.error("::error::Manifest tested_checkout_sha mismatch! Got " + manifest.tested_checkout_sha + ", expected " + expCheckout);
+                process.exit(1);
+              }
+              if (expRunId && String(manifest.workflow_run_id) !== expRunId) {
+                console.error("::error::Manifest workflow_run_id mismatch! Got " + manifest.workflow_run_id + ", expected " + expRunId);
+                process.exit(1);
+              }
+              console.log("Identity values validated successfully.");
+            '
+            echo "Manifest, 36 screenshots, and commit identity verified successfully."
+          else
+            echo "No screenshot manifest generated (tests may have failed before capture)."
+          fi
+
+      - name: Upload M08-B Showroom 36-Screenshot Matrix Artifact
+        if: always()
+        uses: actions/upload-artifact@4cec3d8aa04e39d1a68397de0c4cd6fb9dce8ec1 # v4.6.1
+        with:
+          name: m08-b-showroom-screenshots-${{ github.run_id }}
+          path: test-results/m08-screenshots/
+          if-no-files-found: warn
+
+

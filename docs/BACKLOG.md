@@ -23,7 +23,7 @@
 | **M05** | **Private staging deployed & verified** | **[VERIFIED — OWNER-ATTESTED]** | Netlify private staging (`ycn-labs-site-staging`) confirmed by Owner on 18 Nov 2026 deployed from `main@d9b1039`; fail-closed staging contact verified; robots disallowed; private logs; git-deploy locked; DECISION-058. |
 | **M06** | **NAV-07 mobile navigation accessibility** | **[VERIFIED]** | Merged PR #44 (commit `d47fe73`). `#mobile-nav-sheet` initial focus, tab containment, background inertness, WCAG keyboard pass (`YCN-NAV-07-A11Y-01`). |
 | **M07** | **Homepage hero visual prototype & wording** | **[VERIFIED — OWNER-ACCEPTED]** | Prototype `YCN_M07_Candidate_04_Hero_Polish.html` (SHA-256 `d779c92af7b339ec9146118c381e8c37d4219f9d86f561706e121852249e748f`) accepted by Owner on 20 Nov 2026. Ratified 6-capability showroom scope and lightweight two-device hero; DECISION-059. |
-| **M08** | **Six-mode hero & showroom implementation** | `[IN PROGRESS]` | Component implementation (M08-A Foundation `[LOCAL-WIP]` on `wip/YCN-M08-A-FOUNDATION-01`; M08-B interactive device interiors `[PENDING]`). |
+| **M08** | **Six-mode hero & showroom implementation** | `[IN PROGRESS]` | Component implementation (M08-A Foundation **[VERIFIED]** merged PR #45 at `cf6932c`; M08-B interactive device interiors Websites/Web-apps/CRM `[LOCAL-WIP]` on `wip/YCN-M08-B-SHOWROOM-DEMOS-01`; M08-C Automation `[PENDING]`; M08-D Online Store & Learning Hub `[PENDING]`). |
 | **M09** | **Responsive, accessibility & performance polish** | `[PENDING]` | 375/768/1024/1280/1440 px multi-viewport audit, color contrast min 4.5:1, reduced-motion pass. |
 | **M10** | **First approved blog publication & SEO** | `[PENDING]` | Editorial content approved by Owner, factual verification, structured metadata, sitemap check. |
 | **M11** | **Owner business inputs & estimate pilot** | `[PENDING]` | Attributable case details, pricing guidance, legal entity confirmation, enquiry handling test. |
@@ -37,7 +37,20 @@
 
 ---
 
-## 2. Current Work — 20 November 2026 (supersedes older ordering below)
+## 2. Current Work — 22 November 2026 (supersedes older ordering below)
+
+- [x] **M08-A Foundation (`YCN-M08-A-FOUNDATION-01`):** **[VERIFIED]** Merged PR #45 into `main` at `cf6932c4f3647a60331c0a207bd1e8864a1f5e22`. Modular hero & showroom foundation (`HeroSection.tsx`, `HeroDeviceVisual.tsx`, `ShowroomFoundation.tsx`, `showroomModes.ts`), dev-only preview route `app/m08-preview/page.tsx`, and 21 unit tests.
+- [ ] **M08-B Showroom Demos (`YCN-M08-B-SHOWROOM-DEMOS-01`) [LOCAL-WIP]:** Interactive demonstration interiors for Websites (`ExampleWebsite.tsx`), Web apps (`ExampleWebApp.tsx`), CRM & admin (`ExampleCrmAdmin.tsx`), and device shells (`ExampleDeviceFrames.tsx`). 40 Vitest unit tests passing across foundation and demos suites; dedicated `playwright.m08-dev.config.ts` running against local dev server capturing 36-screenshot matrix; isolated CI job `dev-preview-chromium` added to `.github/workflows/ci.yml`. Strictly bounded within 14 permitted files.
+- [ ] **M08-C Showroom Automation (`YCN-M08-C-SHOWROOM-AUTOMATION-01`) [PENDING]:** Interactive demonstration interior for Automation product type.
+- [ ] **M08-D Showroom Online Store & Learning Platform (`YCN-M08-D-SHOWROOM-STORE-LEARNING-01`) [PENDING]:** Interactive demonstration interiors for Online store and Learning platform product types.
+- [ ] **`MEDIA-01` [PENDING]:** Dedicated media / gallery page for client project screen recordings, educational videos on web development & apps for business owners, and social media channels; plus landing/homepage section routing to this page.
+- [ ] **Privacy, Terms & Legal Copy:** Complete legal review; resolve unsupported ContactForm statement `"We respect your privacy. No data is shared or sold."` in conjunction with Privacy policy (Task PR #35 / legal clearance).
+- [ ] **Pre-Launch Operational Verification:** Real database and email acceptance against configured staging service, operational monitoring alert check, durable backup & rollback dry-run, WebKit and physical device testing, and 5-person comprehension testing before public cutover.
+- [ ] **Owner Visual Refinements:** Consolidate Owner design suggestions and backlog enhancements into a single prioritized, bounded post-merge design task.
+
+---
+
+## 3. Current Work — 20 November 2026
 
 - [x] **M06 NAV-07 Mobile Navigation Accessibility Remediation (`YCN-NAV-07-A11Y-01`):** **[VERIFIED]** Merged PR #44 into `main` at `d47fe73cc1eabbfad74d599fe3a66e309418a985`. Remediated `#mobile-nav-sheet` focus management, tab containment, background inertness, and keyboard controls. Verified on GitHub Actions (`quality` and `gitleaks`).
 - [x] **M07 Homepage Hero Visual Prototype & Interactive Showroom Direction:** **[VERIFIED — OWNER-ACCEPTED]** Candidate 04 Hero Polish prototype (`YCN_M07_Candidate_04_Hero_Polish.html`, SHA-256 `d779c92af7b339ec9146118c381e8c37d4219f9d86f561706e121852249e748f`) formally accepted by Owner on 20 Nov 2026. Ratified 6-capability showroom scope and lightweight two-device hero (DECISION-059).
