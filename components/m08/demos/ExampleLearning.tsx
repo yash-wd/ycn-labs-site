@@ -53,6 +53,12 @@ export function ExampleLearning() {
     });
   };
 
+  const handleQuizChoiceChange = (opt: string) => {
+    setQuizChoice(opt);
+    setQuizResult('');
+    setQuizCorrect(false);
+  };
+
   const handleQuizCheck = () => {
     if (!quizChoice) {
       setQuizResult('Choose an answer.');
@@ -245,7 +251,7 @@ export function ExampleLearning() {
                           name="lesson-quiz"
                           value={opt}
                           checked={quizChoice === opt}
-                          onChange={() => setQuizChoice(opt)}
+                          onChange={() => handleQuizChoiceChange(opt)}
                         />
                         <span>{opt}</span>
                       </label>

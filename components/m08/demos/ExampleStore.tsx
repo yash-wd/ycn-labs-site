@@ -182,6 +182,7 @@ export function ExampleStore() {
     });
     const product = STORE_PRODUCTS.find((p) => p.id === id);
     setStatusMessage(`Removed ${product?.name || 'item'} from cart.`);
+    drawerCloseRef.current?.focus();
   };
 
   const handleCheckout = () => {
@@ -200,9 +201,17 @@ export function ExampleStore() {
 
   // Focus management & Trap when drawer opens
   useEffect(() => {
-    if (drawerOpen) {
-      drawerCloseRef.current?.focus();
-    }
+    if (!drawerOpen) return;
+    drawerCloseRef.current?.focus();
+
+    const handleGlobalKeyDown = (e: globalThis.KeyboardEvent) => {
+      if (e.key === 'Escape') {
+        e.preventDefault();
+        closeCart();
+      }
+    };
+    window.addEventListener('keydown', handleGlobalKeyDown);
+    return () => window.removeEventListener('keydown', handleGlobalKeyDown);
   }, [drawerOpen, completed]);
 
   const handleDialogKeyDown = (e: KeyboardEvent<HTMLElement>) => {

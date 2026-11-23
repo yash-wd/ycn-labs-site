@@ -563,7 +563,7 @@ test.describe('M08-B Showroom Demos Verification', () => {
     await closeDetailBtn.click();
     await expect(panel.locator('button[data-action="store-close-detail"]')).toHaveCount(0);
 
-    // 3. Cart Drawer & Quantity Controls
+    // 3. Cart Drawer, Initial Focus & Dialog Focus Trap
     const addTapBtn = panel.locator('button[data-action="store-add"][data-id="tap"]');
     await addTapBtn.click();
 
@@ -572,6 +572,19 @@ test.describe('M08-B Showroom Demos Verification', () => {
     await expect(drawer).toBeVisible();
     await expect(drawer.locator('#cart-title')).toHaveText('Your cart');
     await expect(panel.locator('button[data-action="store-cart"]')).toContainText('Cart (1)');
+
+    // Initial focus must be on close button
+    const closeBtn = drawer.locator('#cart-close');
+    await expect(closeBtn).toBeFocused();
+
+    // Focus containment: Shift+Tab from first element wraps to last focusable (checkout button)
+    const checkoutBtn = drawer.locator('button[data-action="store-checkout"]');
+    await page.keyboard.press('Shift+Tab');
+    await expect(checkoutBtn).toBeFocused();
+
+    // Focus containment: Tab from last element wraps back to first element (close button)
+    await page.keyboard.press('Tab');
+    await expect(closeBtn).toBeFocused();
 
     // Verify item and initial total
     await expect(drawer).toContainText('Basin tap');
@@ -590,16 +603,33 @@ test.describe('M08-B Showroom Demos Verification', () => {
     await expect(drawer.locator('b')).toHaveText('1');
     await expect(drawer).toContainText('₹450');
 
-    // 4. Keyboard Escape dismisses drawer and returns focus
+    // 4. Keyboard Escape dismisses drawer and restores focus to cart trigger
     await page.keyboard.press('Escape');
     await expect(drawer).toBeHidden();
     await expect(panel.locator('button[data-action="store-cart"]')).toBeFocused();
 
-    // 5. Reopen cart, checkout simulation, and completion state
+    // 5. Test item removal, empty-cart restriction, and ₹0 total calculation
     await panel.locator('button[data-action="store-cart"]').click();
     await expect(drawer).toBeVisible();
 
-    const checkoutBtn = drawer.locator('button[data-action="store-checkout"]');
+    const removeBtn = drawer.locator('button[data-action="store-remove"][data-id="tap"]');
+    await removeBtn.click();
+
+    // Cart is now empty
+    await expect(drawer.locator('text=Your cart is empty.')).toBeVisible();
+    await expect(drawer.locator('[class*="cartTotal"]')).toContainText('₹0');
+    await expect(checkoutBtn).toBeDisabled();
+    await expect(panel.locator('button[data-action="store-cart"]')).toContainText('Cart (0)');
+
+    // Dismiss empty drawer via Escape and verify focus restoration
+    await page.keyboard.press('Escape');
+    await expect(drawer).toBeHidden();
+    await expect(panel.locator('button[data-action="store-cart"]')).toBeFocused();
+
+    // 6. Re-add item, checkout simulation, and completion state
+    await addTapBtn.click();
+    await expect(drawer).toBeVisible();
+    await expect(checkoutBtn).toBeEnabled();
     await checkoutBtn.click();
 
     // Verify Order Completion screen
@@ -681,12 +711,33 @@ test.describe('M08-B Showroom Demos Verification', () => {
     await expect(completeBanner).toBeVisible();
     await expect(completeBanner).toContainText('This is a sample record, not a real certificate or qualification.');
 
-    // 5. View Switch to Progress
+    // 5. Quiz Validity Regression: Switching radio choice after a correct result must immediately
+    // invalidate correct status, clear outdated feedback, and hide the completion banner!
+    await panel.locator('input[name="lesson-quiz"][value="Shift"]').check();
+    await expect(quizResult).toHaveText('');
+    await expect(panel.locator('div[role="status"]:has-text("Course complete (sample)")')).toHaveCount(0);
+
+    // Checking the new choice confirms it is incorrect
+    await checkQuizBtn.click();
+    await expect(quizResult).toHaveText('Not quite. Try again.');
+    await expect(panel.locator('div[role="status"]:has-text("Course complete (sample)")')).toHaveCount(0);
+
+    // Selecting "Space bar" again: result is cleared until explicitly re-checked
+    await panel.locator('input[name="lesson-quiz"][value="Space bar"]').check();
+    await expect(quizResult).toHaveText('');
+    await expect(panel.locator('div[role="status"]:has-text("Course complete (sample)")')).toHaveCount(0);
+
+    // Explicitly re-check: becomes correct and restores completion banner
+    await checkQuizBtn.click();
+    await expect(quizResult).toHaveText('Correct.');
+    await expect(completeBanner).toBeVisible();
+
+    // 6. View Switch to Progress
     const progressNavBtn = panel.locator('button[data-action="learn-view"][data-view="Progress"]').first();
     await progressNavBtn.click();
     await expect(panel).toContainText('3 completed sample lessons. Quiz: correct.');
 
-    // 6. Reset ("Start again")
+    // 7. Reset ("Start again")
     const resetBtn = panel.locator('button[data-action="learn-reset"]');
     await resetBtn.click();
     await expect(panel).toContainText('0 of 3 lessons complete');
