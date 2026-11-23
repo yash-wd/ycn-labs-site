@@ -301,7 +301,7 @@ test.describe('M08-B Showroom Demos Verification', () => {
       page.locator('#panel-automation strong:has-text("Example Home Repairs · Workflows")')
     ).toBeVisible();
     await expect(
-      page.locator('#panel-automation small:has-text("Person steps need your click.")')
+      page.locator('#panel-automation small:has-text("Two steps wait for a person. You play both.")')
     ).toBeVisible();
 
     // 2. Run example -> progresses automatically through steps 0, 1, 2 until Human Gate 1 (step 3)
@@ -311,9 +311,9 @@ test.describe('M08-B Showroom Demos Verification', () => {
     const confirmBtn = page.locator('#panel-automation button[data-action="auto-confirm"]');
     await expect(confirmBtn).toBeVisible({ timeout: 5000 });
     await expect(confirmBtn).toHaveText('Confirm visit');
-    await expect(page.locator('#auto-status')).toHaveText('Waiting for owner to confirm the visit.');
+    await expect(page.locator('#auto-status')).toHaveText('Waiting for the owner to confirm the visit.');
     await expect(
-      page.locator('#panel-automation small:has-text("Owner action · not automatic")')
+      page.locator('#panel-automation small:has-text("The owner does this, not the system.")')
     ).toBeVisible();
 
     // Verify simulated owner notification appears on lockscreen
@@ -326,9 +326,9 @@ test.describe('M08-B Showroom Demos Verification', () => {
     const completeBtn = page.locator('#panel-automation button[data-action="auto-complete"]');
     await expect(completeBtn).toBeVisible({ timeout: 5000 });
     await expect(completeBtn).toHaveText('Mark job done');
-    await expect(page.locator('#auto-status')).toHaveText('Waiting for technician to finish the job.');
+    await expect(page.locator('#auto-status')).toHaveText('Waiting for the technician to mark the job done.');
     await expect(
-      page.locator('#panel-automation small:has-text("Technician action · not automatic")')
+      page.locator('#panel-automation small:has-text("The technician does this, not the system.")')
     ).toBeVisible();
 
     // 4. Technician clicks "Mark job done" -> executes step 4 and advances automatically to step 5 (done)
@@ -338,7 +338,7 @@ test.describe('M08-B Showroom Demos Verification', () => {
       { timeout: 5000 }
     );
     await expect(
-      page.locator('#panel-automation ul li:has-text("Sample customer completion update shown")')
+      page.locator('#panel-automation ul li:has-text("Customer told the job is done")')
     ).toBeVisible();
 
     // 5. Reset via "Start again"
@@ -362,7 +362,7 @@ test.describe('M08-B Showroom Demos Verification', () => {
     await expect(pauseBtn).toHaveText('Pause');
     // Progression continues and reaches the owner confirmation gate
     await expect(confirmBtn).toBeVisible({ timeout: 5000 });
-    await expect(page.locator('#auto-status')).toHaveText('Waiting for owner to confirm the visit.');
+    await expect(page.locator('#auto-status')).toHaveText('Waiting for the owner to confirm the visit.');
 
     // Reset again before failure test
     await page.locator('#panel-automation button[data-action="auto-reset"]').click();
@@ -381,13 +381,13 @@ test.describe('M08-B Showroom Demos Verification', () => {
     await expect(retryBtn).toHaveText('Try that step again');
     await expect(page.locator('#auto-status')).toHaveText('Owner alert failed. Try that step again.');
     await expect(
-      page.locator('#panel-automation small:has-text("No later steps run before retry.")')
+      page.locator('#panel-automation small:has-text("Nothing else runs until this step works.")')
     ).toBeVisible();
 
     // Click retry -> resumes and reaches owner confirmation gate
     await retryBtn.click();
     await expect(confirmBtn).toBeVisible({ timeout: 5000 });
-    await expect(page.locator('#auto-status')).toHaveText('Waiting for owner to confirm the visit.');
+    await expect(page.locator('#auto-status')).toHaveText('Waiting for the owner to confirm the visit.');
 
     // 7. Test Phone Recipient Switch
     const customerPhoneBtn = page
@@ -484,7 +484,7 @@ test.describe('M08-B Showroom Demos Verification', () => {
     await expect(
       page.locator('#panel-automation button[data-action="auto-confirm"]')
     ).toBeVisible();
-    await expect(page.locator('#auto-status')).toHaveText('Waiting for owner to confirm the visit.');
+    await expect(page.locator('#auto-status')).toHaveText('Waiting for the owner to confirm the visit.');
 
     await ctx.close();
   });
@@ -669,7 +669,7 @@ test.describe('M08-B Showroom Demos Verification', () => {
     const completeBtn = panel.locator('button[data-action="learn-complete"]');
     await expect(completeBtn).toHaveText('Mark lesson as complete');
     await completeBtn.click();
-    await expect(completeBtn).toHaveText('Lesson completed ✓');
+    await expect(completeBtn).toHaveText('Lesson complete');
     await expect(panel).toContainText('1 of 3 lessons complete');
 
     // Mark Lesson 1 complete
@@ -732,7 +732,7 @@ test.describe('M08-B Showroom Demos Verification', () => {
     // 6. View Switch to Progress
     const progressNavBtn = panel.locator('button[data-action="learn-view"][data-view="Progress"]').first();
     await progressNavBtn.click();
-    await expect(panel).toContainText('3 completed sample lessons. Quiz: correct.');
+    await expect(panel).toContainText('3 of 3 lessons complete. Quiz: answered correctly.');
 
     // 7. Reset ("Start again")
     const resetBtn = panel.locator('button[data-action="learn-reset"]');
@@ -847,6 +847,28 @@ test.describe('M08-B Showroom Demos Verification', () => {
     await ctx.close();
   });
 
+function parseRgb(colorStr: string): [number, number, number] {
+  const match = colorStr.match(/rgba?\((\d+),\s*(\d+),\s*(\d+)/);
+  if (!match) throw new Error(`Cannot parse color string: ${colorStr}`);
+  return [parseInt(match[1], 10), parseInt(match[2], 10), parseInt(match[3], 10)];
+}
+
+function getLuminance(r: number, g: number, b: number): number {
+  const a = [r, g, b].map((v) => {
+    const s = v / 255;
+    return s <= 0.03928 ? s / 12.92 : Math.pow((s + 0.055) / 1.055, 2.4);
+  });
+  return a[0] * 0.2126 + a[1] * 0.7152 + a[2] * 0.0722;
+}
+
+function getContrastRatio(rgb1: [number, number, number], rgb2: [number, number, number]): number {
+  const l1 = getLuminance(...rgb1);
+  const l2 = getLuminance(...rgb2);
+  const lighter = Math.max(l1, l2);
+  const darker = Math.min(l1, l2);
+  return (lighter + 0.05) / (darker + 0.05);
+}
+
   test('verifies WCAG AA button and filter text contrast in Store and Learning across themes', async ({
     browser,
   }) => {
@@ -858,25 +880,98 @@ test.describe('M08-B Showroom Demos Verification', () => {
       const storePanel = page.locator('#panel-store');
       await expect(storePanel).toBeVisible();
 
-      // Active category filter button (e.g. "All")
-      const activeFilter = storePanel.locator('nav[role="group"] button[data-action="store-filter"][data-filter="All"]');
-      const activeFilterColor = await activeFilter.evaluate((el) => window.getComputedStyle(el).color);
-      expect(activeFilterColor).toBe('rgb(255, 255, 255)');
+      // Sequential Category Filter Selection & Contrast Verification
+      const categories = ['All', 'Plumbing', 'Electrical', 'Tools and paint'] as const;
+      for (const cat of categories) {
+        const catBtn = storePanel.locator(`nav[role="group"] button[data-action="store-filter"][data-filter="${cat}"]`);
+        await catBtn.click();
 
-      // Inactive category filter button (e.g. "Plumbing")
+        // Selected button: white text on dark navy, contrast >= 4.5:1
+        const selStyles = await catBtn.evaluate((el) => {
+          const s = window.getComputedStyle(el);
+          return { color: s.color, bg: s.backgroundColor };
+        });
+        expect(selStyles.color).toBe('rgb(255, 255, 255)');
+        const selRatio = getContrastRatio(parseRgb(selStyles.color), parseRgb(selStyles.bg));
+        expect(selRatio).toBeGreaterThanOrEqual(4.5);
+
+        // All other categories: readable inactive style, contrast >= 4.5:1
+        for (const otherCat of categories) {
+          if (otherCat === cat) continue;
+          const otherBtn = storePanel.locator(`nav[role="group"] button[data-action="store-filter"][data-filter="${otherCat}"]`);
+          const otherStyles = await otherBtn.evaluate((el) => {
+            const s = window.getComputedStyle(el);
+            return { color: s.color, bg: s.backgroundColor };
+          });
+          expect(otherStyles.color).toBe('rgb(51, 65, 85)');
+          const otherRatio = getContrastRatio(parseRgb(otherStyles.color), parseRgb(otherStyles.bg));
+          expect(otherRatio).toBeGreaterThanOrEqual(4.5);
+        }
+      }
+
+      // Test hover on an inactive category filter
       const inactiveFilter = storePanel.locator('nav[role="group"] button[data-action="store-filter"][data-filter="Plumbing"]');
-      const inactiveFilterColor = await inactiveFilter.evaluate((el) => window.getComputedStyle(el).color);
-      expect(inactiveFilterColor).toBe('rgb(51, 65, 85)');
+      await inactiveFilter.hover();
+      const hoverFilterStyles = await inactiveFilter.evaluate((el) => {
+        const s = window.getComputedStyle(el);
+        return { color: s.color, bg: s.backgroundColor };
+      });
+      const hoverFilterRatio = getContrastRatio(parseRgb(hoverFilterStyles.color), parseRgb(hoverFilterStyles.bg));
+      expect(hoverFilterRatio).toBeGreaterThanOrEqual(4.5);
 
-      // Cart trigger button
+      // Cart trigger button (default and hover)
       const cartBtn = storePanel.locator('button[data-action="store-cart"]');
-      const cartBtnColor = await cartBtn.evaluate((el) => window.getComputedStyle(el).color);
-      expect(cartBtnColor).toBe('rgb(255, 255, 255)');
+      const cartBtnStyles = await cartBtn.evaluate((el) => {
+        const s = window.getComputedStyle(el);
+        return { color: s.color, bg: s.backgroundColor };
+      });
+      expect(cartBtnStyles.color).toBe('rgb(255, 255, 255)');
+      const cartRatio = getContrastRatio(parseRgb(cartBtnStyles.color), parseRgb(cartBtnStyles.bg));
+      expect(cartRatio).toBeGreaterThanOrEqual(4.5);
 
-      // Product "Add to cart" primary button
+      await cartBtn.hover();
+      const cartHoverStyles = await cartBtn.evaluate((el) => {
+        const s = window.getComputedStyle(el);
+        return { color: s.color, bg: s.backgroundColor };
+      });
+      const cartHoverRatio = getContrastRatio(parseRgb(cartHoverStyles.color), parseRgb(cartHoverStyles.bg));
+      expect(cartHoverRatio).toBeGreaterThanOrEqual(4.5);
+
+      // Reset filter to 'All' so that all products including 'tap' are visible
+      await storePanel.locator('nav[role="group"] button[data-action="store-filter"][data-filter="All"]').click();
+
+      // Product "Add to cart" primary button (default and hover)
       const addBtn = storePanel.locator('button[data-action="store-add"][data-id="tap"]');
-      const addBtnColor = await addBtn.evaluate((el) => window.getComputedStyle(el).color);
-      expect(addBtnColor).toBe('rgb(255, 255, 255)');
+      const addBtnStyles = await addBtn.evaluate((el) => {
+        const s = window.getComputedStyle(el);
+        return { color: s.color, bg: s.backgroundColor };
+      });
+      expect(addBtnStyles.color).toBe('rgb(255, 255, 255)');
+      const addRatio = getContrastRatio(parseRgb(addBtnStyles.color), parseRgb(addBtnStyles.bg));
+      expect(addRatio).toBeGreaterThanOrEqual(4.5);
+
+      await addBtn.hover();
+      const addHoverStyles = await addBtn.evaluate((el) => {
+        const s = window.getComputedStyle(el);
+        return { color: s.color, bg: s.backgroundColor };
+      });
+      const addHoverRatio = getContrastRatio(parseRgb(addHoverStyles.color), parseRgb(addHoverStyles.bg));
+      expect(addHoverRatio).toBeGreaterThanOrEqual(4.5);
+
+      // Cart drawer Place order button
+      await addBtn.click();
+      const drawer = storePanel.locator('aside[role="dialog"]');
+      await expect(drawer).toBeVisible();
+      const checkoutBtn = drawer.locator('button[data-action="store-checkout"]');
+      const checkoutStyles = await checkoutBtn.evaluate((el) => {
+        const s = window.getComputedStyle(el);
+        return { color: s.color, bg: s.backgroundColor };
+      });
+      expect(checkoutStyles.color).toBe('rgb(255, 255, 255)');
+      const checkoutRatio = getContrastRatio(parseRgb(checkoutStyles.color), parseRgb(checkoutStyles.bg));
+      expect(checkoutRatio).toBeGreaterThanOrEqual(4.5);
+      await page.keyboard.press('Escape');
+      await expect(drawer).toBeHidden();
 
       // 2. Learning tab contrast checks
       await page.locator('#tab-learning').click();
@@ -885,13 +980,125 @@ test.describe('M08-B Showroom Demos Verification', () => {
 
       // Primary action button ("Mark lesson as complete")
       const completeBtn = learnPanel.locator('button[data-action="learn-complete"]');
-      const completeBtnColor = await completeBtn.evaluate((el) => window.getComputedStyle(el).color);
-      expect(completeBtnColor).toBe('rgb(255, 255, 255)');
+      const completeStyles = await completeBtn.evaluate((el) => {
+        const s = window.getComputedStyle(el);
+        return { color: s.color, bg: s.backgroundColor };
+      });
+      expect(completeStyles.color).toBe('rgb(255, 255, 255)');
+      const completeRatio = getContrastRatio(parseRgb(completeStyles.color), parseRgb(completeStyles.bg));
+      expect(completeRatio).toBeGreaterThanOrEqual(4.5);
 
-      // Active navigation button ("My courses")
+      await completeBtn.hover();
+      const completeHoverStyles = await completeBtn.evaluate((el) => {
+        const s = window.getComputedStyle(el);
+        return { color: s.color, bg: s.backgroundColor };
+      });
+      const completeHoverRatio = getContrastRatio(parseRgb(completeHoverStyles.color), parseRgb(completeHoverStyles.bg));
+      expect(completeHoverRatio).toBeGreaterThanOrEqual(4.5);
+
+      // Active desktop navigation button ("My courses")
       const navBtn = learnPanel.locator('button[data-action="learn-view"][data-view="My courses"]').first();
-      const navBtnColor = await navBtn.evaluate((el) => window.getComputedStyle(el).color);
-      expect(navBtnColor).toBe('rgb(255, 255, 255)');
+      const navStyles = await navBtn.evaluate((el) => {
+        const s = window.getComputedStyle(el);
+        return { color: s.color, bg: s.backgroundColor };
+      });
+      expect(navStyles.color).toBe('rgb(255, 255, 255)');
+      const navRatio = getContrastRatio(parseRgb(navStyles.color), parseRgb(navStyles.bg));
+      expect(navRatio).toBeGreaterThanOrEqual(4.5);
+
+      await ctx.close();
+    }
+  });
+
+  test('verifies responsive layout, mobile navigation contrast, and zero clipping at 320px, 430px, and 1024px', async ({
+    browser,
+  }) => {
+    // 1. Viewport 320px verification (Store Cart clipping, CRM table scroll, Learning mobile nav)
+    {
+      const { ctx, page } = await openDevPreview(browser, { width: 320, height: 667 });
+
+      // Store at 320px: cart button must not be clipped at right edge
+      await page.locator('#tab-store').click();
+      const storePanel = page.locator('#panel-store');
+      await expect(storePanel).toBeVisible();
+      const cartBtn = storePanel.locator('button[data-action="store-cart"]');
+      await expect(cartBtn).toBeVisible();
+      const cartBox = await cartBtn.boundingBox();
+      expect(cartBox).not.toBeNull();
+      if (cartBox) {
+        expect(cartBox.x + cartBox.width).toBeLessThanOrEqual(320);
+        expect(cartBox.x).toBeGreaterThan(0);
+      }
+
+      // CRM at 320px: list must be horizontally scrollable/fluid, table visible without page overflow
+      await page.locator('#tab-crm').click();
+      const crmPanel = page.locator('#panel-crm');
+      await expect(crmPanel).toBeVisible();
+      const crmList = crmPanel.locator('[class*="crmList"]');
+      await expect(crmList).toBeVisible();
+      const crmScrollable = await crmList.evaluate((el) => {
+        const style = window.getComputedStyle(el);
+        return style.overflowX === 'auto' || style.overflow === 'auto';
+      });
+      expect(crmScrollable).toBe(true);
+
+      // Learning at 320px: mobile navigation tabs contrast check
+      await page.locator('#tab-learning').click();
+      const learnPanel = page.locator('#panel-learning');
+      await expect(learnPanel).toBeVisible();
+      const activeMobileTab = learnPanel.locator('[class*="learnMobileActive"]');
+      await expect(activeMobileTab).toBeVisible();
+      const activeTabStyles = await activeMobileTab.evaluate((el) => {
+        const s = window.getComputedStyle(el);
+        return { color: s.color, bg: s.backgroundColor };
+      });
+      expect(activeTabStyles.color).toBe('rgb(255, 255, 255)');
+      const activeTabRatio = getContrastRatio(parseRgb(activeTabStyles.color), parseRgb(activeTabStyles.bg));
+      expect(activeTabRatio).toBeGreaterThanOrEqual(4.5);
+
+      const inactiveMobileTab = learnPanel.locator('[class*="learnMobileInactive"]').first();
+      await expect(inactiveMobileTab).toBeVisible();
+      const inactiveTabStyles = await inactiveMobileTab.evaluate((el) => {
+        const s = window.getComputedStyle(el);
+        return { color: s.color };
+      });
+      // Inactive tab text on mobile nav dark blue background (#122a47 -> rgb(18, 42, 71))
+      const inactiveTabRatio = getContrastRatio(parseRgb(inactiveTabStyles.color), [18, 42, 71]);
+      expect(inactiveTabRatio).toBeGreaterThanOrEqual(4.5);
+
+      // Check zero horizontal overflow on page
+      const hasOverflow320 = await page.evaluate(() => document.documentElement.scrollWidth > document.documentElement.clientWidth);
+      expect(hasOverflow320).toBe(false);
+
+      await ctx.close();
+    }
+
+    // 2. Viewport 1024px verification (Automation phone switch clipping)
+    {
+      const { ctx, page } = await openDevPreview(browser, { width: 1024, height: 768 });
+
+      await page.locator('#tab-automation').click();
+      const autoPanel = page.locator('#panel-automation');
+      await expect(autoPanel).toBeVisible();
+
+      // "Customer's phone" switch button must be fully visible and contained within switch
+      const customerBtn = autoPanel.locator('button[data-action="auto-phone"][data-phone="customer"]:visible');
+      await expect(customerBtn).toBeVisible();
+      const phoneSwitch = autoPanel.locator('[class*="autoPhoneSwitch"]:visible');
+      await expect(phoneSwitch).toBeVisible();
+
+      const switchBox = await phoneSwitch.boundingBox();
+      const btnBox = await customerBtn.boundingBox();
+      expect(switchBox).not.toBeNull();
+      expect(btnBox).not.toBeNull();
+      if (switchBox && btnBox) {
+        expect(btnBox.x + btnBox.width).toBeLessThanOrEqual(switchBox.x + switchBox.width + 1.5);
+        expect(btnBox.x).toBeGreaterThanOrEqual(switchBox.x - 1);
+      }
+
+      // Check zero horizontal overflow on page
+      const hasOverflow1024 = await page.evaluate(() => document.documentElement.scrollWidth > document.documentElement.clientWidth);
+      expect(hasOverflow1024).toBe(false);
 
       await ctx.close();
     }

@@ -18,12 +18,12 @@ export const LEARNING_LESSONS: Lesson[] = [
   {
     title: 'Using a keyboard and mouse',
     body: 'Use the mouse to point and select. The keyboard lets you type letters, spaces and commands.',
-    tip: 'Practice typing a short sentence and adding spaces between words.',
+    tip: 'Try typing a short sentence and adding spaces between words.',
   },
   {
     title: 'Saving your work',
     body: 'Save a file with a clear name. Choose a folder you can find again and check the saved file.',
-    tip: 'Practice choosing a filename that describes its contents.',
+    tip: 'Try choosing a file name that says what is inside.',
   },
 ];
 
@@ -133,7 +133,7 @@ export function ExampleLearning() {
               <div className={styles.learnTop}>
                 <div>
                   <h2>{view}</h2>
-                  <span className={styles.learnMuted}>Sample student · Fictional learning centre</span>
+                  <span className={styles.learnMuted}>Sample student</span>
                 </div>
                 <button
                   type="button"
@@ -151,7 +151,7 @@ export function ExampleLearning() {
                   <div>
                     <span className={styles.learnKicker}>COURSE · COMPUTER BASICS</span>
                     <h3>Learn everyday computer skills.</h3>
-                    <p>Three short sample lessons and a practice question.</p>
+                    <p>Three short lessons and one practice question.</p>
                   </div>
                   <div className={styles.learnCourseArt} aria-hidden="true">
                     <svg
@@ -220,7 +220,7 @@ export function ExampleLearning() {
                         onClick={handleToggleComplete}
                       >
                         {completedLessons.has(selectedLesson)
-                          ? 'Lesson completed ✓'
+                          ? 'Lesson complete'
                           : 'Mark lesson as complete'}
                       </button>
                     </div>
@@ -229,8 +229,8 @@ export function ExampleLearning() {
                   <div className={styles.progressSummaryPanel}>
                     <h3>Progress</h3>
                     <p className={styles.learnMuted}>
-                      {completedCount} completed sample lessons. Quiz:{' '}
-                      {quizCorrect ? 'correct' : 'not completed'}.
+                      {completedCount} of 3 lessons complete. Quiz:{' '}
+                      {quizCorrect ? 'answered correctly.' : 'not done yet.'}
                     </p>
                   </div>
                 )}

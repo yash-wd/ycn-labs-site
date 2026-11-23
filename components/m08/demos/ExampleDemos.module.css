@@ -806,7 +806,10 @@
 
 .crmList {
   min-width: 0;
-  overflow: auto;
+  overflow-x: auto;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: thin;
   background: #fff;
   border: 1px solid #dfe7ee;
   border-radius: 10px 0 0 10px;
@@ -1146,7 +1149,19 @@
   }
 
   .crmTable {
-    min-width: 340px;
+    min-width: 310px;
+  }
+}
+
+@media (max-width: 480px) {
+  .crmTable {
+    min-width: 285px;
+  }
+
+  .crmTable th,
+  .crmTable td {
+    padding: 8px 6px;
+    white-space: nowrap;
   }
 }
 
@@ -1156,7 +1171,13 @@
   }
 
   .crmTable {
-    min-width: 300px;
+    min-width: 270px;
+  }
+
+  .crmTable th,
+  .crmTable td {
+    padding: 7px 4px;
+    font-size: 10px;
   }
 }
 
@@ -1663,12 +1684,28 @@
 /* Responsive adjustments for Automation */
 @media (max-width: 1120px) {
   .autoLayout {
-    grid-template-columns: minmax(0, 1fr) 175px;
-    gap: 14px;
+    grid-template-columns: minmax(0, 1fr) 195px;
+    gap: 16px;
+  }
+
+  .autoNotifier {
+    width: 195px;
   }
 
   .lockscreen {
-    width: 175px;
+    width: 195px;
+  }
+
+  .autoPhoneSwitch {
+    grid-template-columns: 1fr 1fr;
+    gap: 2px;
+    padding: 2px;
+  }
+
+  .autoPhoneSwitch button {
+    font-size: 9px;
+    padding: 5px 2px;
+    white-space: nowrap;
   }
 
   .autoMain {
@@ -1928,9 +1965,9 @@
 }
 
 .filterActive {
-  background: #142b44;
-  color: #ffffff !important;
-  border: 1px solid #142b44;
+  background: #145a84;
+  color: #ffffff;
+  border: 1px solid #145a84;
   border-radius: 20px;
   padding: 6px 14px;
   font-size: 12px;
@@ -2617,6 +2654,49 @@
 
   .learnLessons {
     grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 480px) {
+  .storeContent {
+    padding: 12px 12px 20px;
+  }
+
+  .storeHeader {
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+
+  .storeBrand {
+    min-width: 0;
+  }
+
+  .storeBrandName {
+    font-size: 13.5px;
+  }
+
+  .storeNav {
+    gap: 6px;
+  }
+
+  .storeLink {
+    padding: 5px 6px;
+    font-size: 12px;
+  }
+
+  .cartTrigger {
+    padding: 6px 10px;
+    font-size: 12px;
+    gap: 5px;
+    flex-shrink: 0;
+  }
+
+  .storeKicker {
+    font-size: 10px;
+  }
+
+  .storeHero h2 {
+    font-size: 17px;
   }
 }
 

@@ -32,37 +32,38 @@ export const AUTO_STEPS: AutoStep[] = [
   {
     title: 'A customer sends a request',
     kind: 'Starts it',
-    summary: 'Anita requests a tap repair, with Saturday morning preferred.',
+    summary: 'Anita asks for a tap repair and prefers Saturday morning.',
     iconName: 'send',
   },
   {
     title: 'The request is saved',
     kind: 'Happens by itself',
-    summary: 'A sample request record is created in this local demonstration.',
+    summary: 'The request is saved as a new record.',
     iconName: 'file',
   },
   {
     title: 'The owner gets an alert',
     kind: 'Happens by itself',
-    summary: 'A preview notification appears on the fictional business owner’s phone.',
+    summary: 'The owner sees an alert on their phone.',
     iconName: 'bell',
   },
   {
     title: 'The owner confirms the visit',
     kind: 'Needs a person',
-    summary: 'The owner explicitly confirms Saturday morning. Only then is a confirmation shown.',
+    summary:
+      'The owner confirms Saturday morning. Only then is the customer told the visit is confirmed.',
     iconName: 'calendar',
   },
   {
     title: 'The technician marks the job done',
     kind: 'Needs a person',
-    summary: 'A technician explicitly records that the sample repair is finished.',
+    summary: 'The technician marks the repair as finished.',
     iconName: 'wrench',
   },
   {
     title: 'The customer gets an update',
     kind: 'Happens by itself',
-    summary: 'A simulated job-completion message is shown on the customer’s phone.',
+    summary: 'The customer sees that the job is done.',
     iconName: 'check',
   },
 ];
@@ -95,9 +96,9 @@ export function formatAutoStatus(phase: AutoPhase, step: number): string {
     case 'failed':
       return 'Owner alert failed. Try that step again.';
     case 'await_confirm':
-      return 'Waiting for owner to confirm the visit.';
+      return 'Waiting for the owner to confirm the visit.';
     case 'await_complete':
-      return 'Waiting for technician to finish the job.';
+      return 'Waiting for the technician to mark the job done.';
     case 'done':
       return 'Example finished. No message was sent.';
     default:
@@ -264,7 +265,7 @@ export function ExampleAutomation() {
         failOnceRef.current = false;
         setEvents((prev) => [
           ...prev,
-          'Owner alert could not be displayed · sample failure',
+          'Owner alert failed',
         ]);
         return;
       }
@@ -276,7 +277,7 @@ export function ExampleAutomation() {
       });
 
       if (i === 0) {
-        setEvents((prev) => [...prev, 'Request received · Anita · Tap repair']);
+        setEvents((prev) => [...prev, 'Request received: Anita, tap repair']);
         setPhase('running');
         pendingStepRef.current = 1;
         timerRef.current = setTimeout(() => {
@@ -286,7 +287,7 @@ export function ExampleAutomation() {
       }
 
       if (i === 1) {
-        setEvents((prev) => [...prev, 'New sample request record created']);
+        setEvents((prev) => [...prev, 'Request saved']);
         setPhase('running');
         pendingStepRef.current = 2;
         timerRef.current = setTimeout(() => {
@@ -302,13 +303,13 @@ export function ExampleAutomation() {
             ...prev.owner,
             {
               title: 'New request',
-              text: 'Anita needs a tap repair. Preferred: Saturday morning.',
+              text: 'Anita needs a tap repair. She prefers Saturday morning.',
             },
           ],
         }));
         setEvents((prev) => [
           ...prev,
-          'Preview shown on owner phone · no real message',
+          'Owner alerted',
         ]);
         setPhone('owner');
         setPhase('await_confirm');
@@ -322,13 +323,13 @@ export function ExampleAutomation() {
             ...prev.customer,
             {
               title: 'Visit confirmed',
-              text: 'Your sample tap repair visit is confirmed for Saturday morning.',
+              text: 'Your tap repair visit is confirmed for Saturday morning.',
             },
           ],
         }));
         setEvents((prev) => [
           ...prev,
-          'Owner confirmed visit · customer preview shown',
+          'Owner confirmed the visit. Customer told.',
         ]);
         setPhone('customer');
         setPhase('await_complete');
@@ -348,7 +349,7 @@ export function ExampleAutomation() {
         }));
         setEvents((prev) => [
           ...prev,
-          'Technician marked sample job complete',
+          'Technician marked the job done',
         ]);
         setPhase('running');
         pendingStepRef.current = 5;
@@ -365,13 +366,13 @@ export function ExampleAutomation() {
             ...prev.customer,
             {
               title: 'Job done',
-              text: 'Your sample tap repair is marked as done. Thank you.',
+              text: 'Your tap repair is marked as done. Thank you.',
             },
           ],
         }));
         setEvents((prev) => [
           ...prev,
-          'Sample customer completion update shown',
+          'Customer told the job is done',
         ]);
         setPhone('customer');
         setPhase('done');
@@ -463,7 +464,7 @@ export function ExampleAutomation() {
                 <div>
                   <strong>Example Home Repairs · Workflows</strong>
                   <div className={styles.autoSubline}>
-                    Request handling · Sample execution
+                    What happens after a request
                   </div>
                 </div>
                 <span className={styles.pChip}>Simulated</span>
@@ -652,15 +653,15 @@ export function ExampleAutomation() {
                 </div>
 
                 {/* Execution History */}
-                <div className={styles.autoActivity} aria-label="Execution history">
-                  <h3>Execution history</h3>
+                <div className={styles.autoActivity} aria-label="History">
+                  <h3>History</h3>
                   <ul>
                     {events.length > 0 ? (
                       events.map((ev, idx) => (
                         <li key={`${idx}-${ev}`}>{ev}</li>
                       ))
                     ) : (
-                      <li>No steps have run.</li>
+                      <li>Nothing has run yet.</li>
                     )}
                   </ul>
                 </div>
@@ -678,7 +679,7 @@ export function ExampleAutomation() {
                     >
                       Confirm visit
                     </button>
-                    <small>Owner action · not automatic</small>
+                    <small>The owner does this, not the system.</small>
                   </>
                 )}
 
@@ -692,7 +693,7 @@ export function ExampleAutomation() {
                     >
                       Mark job done
                     </button>
-                    <small>Technician action · not automatic</small>
+                    <small>The technician does this, not the system.</small>
                   </>
                 )}
 
@@ -706,14 +707,14 @@ export function ExampleAutomation() {
                     >
                       Try that step again
                     </button>
-                    <small>No later steps run before retry.</small>
+                    <small>Nothing else runs until this step works.</small>
                   </>
                 )}
 
                 {phase !== 'await_confirm' &&
                   phase !== 'await_complete' &&
                   phase !== 'failed' && (
-                    <small>Person steps need your click.</small>
+                    <small>Two steps wait for a person. You play both.</small>
                   )}
 
                 <button
@@ -768,7 +769,7 @@ export function ExampleAutomation() {
         >
           <div className={styles.lockclock}>
             <strong>9:41</strong>
-            <small>Sample · Now</small>
+            <small>Now</small>
           </div>
 
           <div aria-live="polite" className={styles.notificationList}>
@@ -789,7 +790,7 @@ export function ExampleAutomation() {
               ))
             ) : (
               <p className={styles.lockempty}>
-                Notifications appear here as the sample workflow runs.
+                Alerts appear here as the example runs.
               </p>
             )}
           </div>
