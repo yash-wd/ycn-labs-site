@@ -23,8 +23,8 @@
 | **M05** | **Private staging deployed & verified** | **[VERIFIED — OWNER-ATTESTED]** | Netlify private staging (`ycn-labs-site-staging`) confirmed by Owner on 18 Nov 2026 deployed from `main@d9b1039`; fail-closed staging contact verified; robots disallowed; private logs; git-deploy locked; DECISION-058. |
 | **M06** | **NAV-07 mobile navigation accessibility** | **[VERIFIED]** | Merged PR #44 (commit `d47fe73`). `#mobile-nav-sheet` initial focus, tab containment, background inertness, WCAG keyboard pass (`YCN-NAV-07-A11Y-01`). |
 | **M07** | **Homepage hero visual prototype & wording** | **[VERIFIED — OWNER-ACCEPTED]** | Prototype `YCN_M07_Candidate_04_Hero_Polish.html` (SHA-256 `d779c92af7b339ec9146118c381e8c37d4219f9d86f561706e121852249e748f`) accepted by Owner on 20 Nov 2026. Ratified 6-capability showroom scope and lightweight two-device hero; DECISION-059. |
-| **M08** | **Six-mode hero & showroom implementation** | `[IN PROGRESS]` | Component implementation (M08-A Foundation **[VERIFIED]** merged PR #45 at `cf6932c`; M08-B Showroom Demos **[VERIFIED]** merged PR #46 at `e7b35db`; M08-C Automation **[VERIFIED]** merged PR #47 at `bdcf0f5`; M08-D Online Store & Learning Platform `[LOCAL-WIP]` on `wip/YCN-M08-D-SHOWROOM-STORE-LEARNING-01`). |
-| **M09** | **Responsive, accessibility & performance polish** | `[PENDING]` | 375/768/1024/1280/1440 px multi-viewport audit, color contrast min 4.5:1, reduced-motion pass. |
+| **M08** | **Six-mode hero & showroom implementation** | **[VERIFIED — OWNER-ACCEPTED]** | All six showroom demonstration interiors implemented and verified on `main`: M08-A Foundation (PR #45, `cf6932c`), M08-B Demos (PR #46, `e7b35db`), M08-C Automation (PR #47, `bdcf0f5`), M08-D Store & Learning (PR #48, `27d5e21`), M08 Gate A11y & Contrast Remediation (PR #49, `32da9f3`). Owner walkthrough, visual review, and post-merge CI green (runs 45335246709, 45335246787). |
+| **M09** | **Responsive, accessibility & performance polish** | `[IN PROGRESS]` | 320/375/390/430/768/1024/1280/1440/1920 px multi-viewport responsive reflow, typography polish (CRM 320px badge and Automation 1024px switch >= 10px), WCAG AA color contrast min 4.5:1, reduced-motion pass, performance baseline (`YCN-M09-A-RESPONSIVE-A11Y-PERF-01`). |
 | **M10** | **First approved blog publication & SEO** | `[PENDING]` | Editorial content approved by Owner, factual verification, structured metadata, sitemap check. |
 | **M11** | **Owner business inputs & estimate pilot** | `[PENDING]` | Attributable case details, pricing guidance, legal entity confirmation, enquiry handling test. |
 | **M12** | **Legal pages & privacy clearance** | `[PENDING]` | Privacy policy and Terms finalized from business facts; counsel review; privacy claims reconciled. |
@@ -37,7 +37,18 @@
 
 ---
 
-## 2. Current Work — 23 November 2026 (supersedes older ordering below)
+## 2. Current Work — 24 November 2026 (supersedes older ordering below)
+
+- [x] **M08 Six-Mode Hero & Showroom Implementation (`YCN-M08-D-SHOWROOM-STORE-LEARNING-01` & `YCN-M08-GATE-A11Y-CONTRAST-01`):** **[VERIFIED — OWNER-ACCEPTED]** PR #48 merged at `27d5e2150b78bb092482364dd3dc31c4e817ce4a`; PR #49 merged at `32da9f38ec6cb5a81d1d3c4b484828cbfbae9a26`. Post-merge CI runs 45335246709 & 45335246787 passed. Completed all 6 showroom demonstration interiors, resolved Store cart accessibility semantics, aligned approved v3 copy verbatim, restored store category color (`#145a84`), resolved CRM status badge truncation at 320px/375px via fluid layout, verified with 72-screenshot matrix and browser tests.
+- [ ] **M09 Responsive, Accessibility & Performance Polish (`YCN-M09-A-RESPONSIVE-A11Y-PERF-01`) [LOCAL-WIP]:** Responsive reflow across 320, 375, 390, 430, 768, 1024, 1280, 1440, 1920px; typography polish for CRM 320px status badge and Automation 1024px switch ($\ge 10\text{px}$); WCAG AA contrast $\ge 4.5:1$; reduced-motion compliance; performance audit.
+- [ ] **`MEDIA-01` [PENDING]:** Dedicated media / gallery page for client project screen recordings, educational videos on web development & apps for business owners, and social media channels; plus landing/homepage section routing to this page.
+- [ ] **Privacy, Terms & Legal Copy:** Complete legal review; resolve unsupported ContactForm statement `"We respect your privacy. No data is shared or sold."` in conjunction with Privacy policy (Task PR #35 / legal clearance).
+- [ ] **Pre-Launch Operational Verification:** Real database and email acceptance against configured staging service, operational monitoring alert check, durable backup & rollback dry-run, WebKit and physical device testing, and 5-person comprehension testing before public cutover.
+- [ ] **Owner Visual Refinements:** Consolidate Owner design suggestions and backlog enhancements into a single prioritized, bounded post-merge design task.
+
+---
+
+## 3. Current Work — 23 November 2026
 
 - [x] **M08-A Foundation (`YCN-M08-A-FOUNDATION-01`):** **[VERIFIED]** Merged PR #45 into `main` at `cf6932c4f3647a60331c0a207bd1e8864a1f5e22`. Modular hero & showroom foundation (`HeroSection.tsx`, `HeroDeviceVisual.tsx`, `ShowroomFoundation.tsx`, `showroomModes.ts`), dev-only preview route `app/m08-preview/page.tsx`, and 21 unit tests.
 - [x] **M08-B Showroom Demos (`YCN-M08-B-SHOWROOM-DEMOS-01`):** **[VERIFIED]** Merged PR #46 into `main` at `e7b35dbd77c69fd4d936b3ac8afb0bc78f67597c`. Interactive demonstration interiors for Websites (`ExampleWebsite.tsx`), Web apps (`ExampleWebApp.tsx`), CRM & admin (`ExampleCrmAdmin.tsx`), and device shells (`ExampleDeviceFrames.tsx`). 40 Vitest unit tests passing across foundation and demos suites; dedicated `playwright.m08-dev.config.ts` running against local dev server capturing 36-screenshot matrix; isolated CI job `dev-preview-chromium` passed (run 45103200511) and post-merge Gitleaks passed (run 45108204638).

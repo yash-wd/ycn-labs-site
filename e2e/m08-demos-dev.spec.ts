@@ -1052,6 +1052,10 @@ function getContrastRatio(rgb1: [number, number, number], rgb2: [number, number,
           expect(chipBox.x + chipBox.width).toBeLessThanOrEqual(crmListBox.x + crmListBox.width + 1.0);
           expect(chipBox.x).toBeGreaterThanOrEqual(crmListBox.x - 1.0);
         }
+
+        // M09 typography requirement: CRM status badge font-size must be at least 10px
+        const fontSize = await chip.evaluate((el) => parseFloat(window.getComputedStyle(el).fontSize));
+        expect(fontSize).toBeGreaterThanOrEqual(10.0);
       }
 
       // Learning at 320px: mobile navigation tabs contrast check
@@ -1107,6 +1111,10 @@ function getContrastRatio(rgb1: [number, number, number], rgb2: [number, number,
         expect(btnBox.x + btnBox.width).toBeLessThanOrEqual(switchBox.x + switchBox.width + 1.5);
         expect(btnBox.x).toBeGreaterThanOrEqual(switchBox.x - 1);
       }
+
+      // M09 typography requirement: Automation phone switch button font-size must be at least 10px
+      const btnFontSize = await customerBtn.evaluate((el) => parseFloat(window.getComputedStyle(el).fontSize));
+      expect(btnFontSize).toBeGreaterThanOrEqual(10.0);
 
       // Check zero horizontal overflow on page
       const hasOverflow1024 = await page.evaluate(() => document.documentElement.scrollWidth > document.documentElement.clientWidth);
@@ -1198,6 +1206,28 @@ function getContrastRatio(rgb1: [number, number, number], rgb2: [number, number,
 
         await ctx.close();
       }
+    }
+  });
+
+  test('verifies zero horizontal page overflow and visible showroom tabs across 9 standard viewports (320px to 1920px)', async ({
+    browser,
+  }) => {
+    const VIEWPORTS = [320, 375, 390, 430, 768, 1024, 1280, 1440, 1920];
+
+    for (const width of VIEWPORTS) {
+      const { ctx, page } = await openDevPreview(browser, { width, height: 900 });
+
+      // Verify showroom tablist is visible
+      const tablist = page.locator('[role="tablist"]');
+      await expect(tablist).toBeVisible();
+
+      // Check zero horizontal overflow on page
+      const hasOverflow = await page.evaluate(
+        () => document.documentElement.scrollWidth > document.documentElement.clientWidth
+      );
+      expect(hasOverflow, `Unexpected horizontal overflow detected at ${width}px viewport`).toBe(false);
+
+      await ctx.close();
     }
   });
 });
