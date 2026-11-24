@@ -1030,17 +1030,29 @@ function getContrastRatio(rgb1: [number, number, number], rgb2: [number, number,
         expect(cartBox.x).toBeGreaterThan(0);
       }
 
-      // CRM at 320px: list must be horizontally scrollable/fluid, table visible without page overflow
+      // CRM at 320px: visual geometry verification - all status badges must fit completely within table container without clipping
       await page.locator('#tab-crm').click();
       const crmPanel = page.locator('#panel-crm');
       await expect(crmPanel).toBeVisible();
       const crmList = crmPanel.locator('[class*="crmList"]');
       await expect(crmList).toBeVisible();
-      const crmScrollable = await crmList.evaluate((el) => {
-        const style = window.getComputedStyle(el);
-        return style.overflowX === 'auto' || style.overflow === 'auto';
-      });
-      expect(crmScrollable).toBe(true);
+      const crmListBox = await crmList.boundingBox();
+      expect(crmListBox).not.toBeNull();
+
+      const chips320 = crmPanel.locator('[class*="crmTable"] [class*="pChip"]');
+      const chipCount320 = await chips320.count();
+      expect(chipCount320).toBeGreaterThanOrEqual(5);
+
+      for (let i = 0; i < chipCount320; i++) {
+        const chip = chips320.nth(i);
+        await expect(chip).toBeVisible();
+        const chipBox = await chip.boundingBox();
+        expect(chipBox).not.toBeNull();
+        if (chipBox && crmListBox) {
+          expect(chipBox.x + chipBox.width).toBeLessThanOrEqual(crmListBox.x + crmListBox.width + 1.0);
+          expect(chipBox.x).toBeGreaterThanOrEqual(crmListBox.x - 1.0);
+        }
+      }
 
       // Learning at 320px: mobile navigation tabs contrast check
       await page.locator('#tab-learning').click();
@@ -1134,5 +1146,58 @@ function getContrastRatio(rgb1: [number, number, number], rgb2: [number, number,
     await expect(page.locator('#panel-webapp')).toBeVisible();
 
     await ctx.close();
+  });
+
+  test('verifies CRM status badges fit completely without clipping across 320px, 375px, and 430px in both themes', async ({
+    browser,
+  }) => {
+    for (const width of [320, 375, 430]) {
+      for (const theme of ['light', 'dark'] as const) {
+        const { ctx, page } = await openDevPreview(browser, { width, height: 750 });
+        if (theme === 'dark') {
+          await page.evaluate(() => document.documentElement.classList.add('dark'));
+        } else {
+          await page.evaluate(() => document.documentElement.classList.remove('dark'));
+        }
+
+        await page.locator('#tab-crm').click();
+        const crmPanel = page.locator('#panel-crm');
+        await expect(crmPanel).toBeVisible();
+
+        const crmList = crmPanel.locator('[class*="crmList"]');
+        await expect(crmList).toBeVisible();
+        const crmListBox = await crmList.boundingBox();
+        expect(crmListBox).not.toBeNull();
+
+        const chips = crmPanel.locator('[class*="crmTable"] [class*="pChip"]');
+        const count = await chips.count();
+        expect(count).toBeGreaterThanOrEqual(5);
+
+        for (let i = 0; i < count; i++) {
+          const chip = chips.nth(i);
+          await expect(chip).toBeVisible();
+          const text = (await chip.innerText()).trim();
+          const chipBox = await chip.boundingBox();
+          expect(chipBox).not.toBeNull();
+
+          if (chipBox && crmListBox) {
+            // Status badge must be completely within the visible table panel bounds
+            expect(chipBox.x + chipBox.width).toBeLessThanOrEqual(crmListBox.x + crmListBox.width + 1.0);
+            expect(chipBox.x).toBeGreaterThanOrEqual(crmListBox.x - 1.0);
+
+            // "Visit planned" badges must be fully rendered (width >= 80px)
+            if (text.includes('Visit planned')) {
+              expect(chipBox.width).toBeGreaterThanOrEqual(80);
+            }
+          }
+        }
+
+        // Verify zero horizontal page overflow
+        const hasOverflow = await page.evaluate(() => document.documentElement.scrollWidth > document.documentElement.clientWidth);
+        expect(hasOverflow).toBe(false);
+
+        await ctx.close();
+      }
+    }
   });
 });

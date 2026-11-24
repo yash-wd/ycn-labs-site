@@ -1149,18 +1149,37 @@
   }
 
   .crmTable {
-    min-width: 310px;
+    min-width: 100%;
+    width: 100%;
   }
 }
 
 @media (max-width: 480px) {
   .crmTable {
-    min-width: 285px;
+    min-width: 100%;
+    width: 100%;
   }
 
   .crmTable th,
   .crmTable td {
-    padding: 8px 6px;
+    padding: 6px 4px;
+    font-size: 10.5px;
+  }
+
+  .crmTable td:nth-child(2) {
+    white-space: normal;
+    word-break: normal;
+    line-height: 1.25;
+  }
+
+  .crmTable td:nth-child(4) {
+    white-space: nowrap;
+  }
+
+  .pChip {
+    padding: 3px 6px;
+    gap: 4px;
+    font-size: 10px;
     white-space: nowrap;
   }
 }
@@ -1171,13 +1190,32 @@
   }
 
   .crmTable {
-    min-width: 270px;
+    min-width: 100%;
+    width: 100%;
   }
 
   .crmTable th,
   .crmTable td {
-    padding: 7px 4px;
+    padding: 5px 3px;
     font-size: 10px;
+  }
+
+  .crmTable td:nth-child(2) {
+    white-space: normal;
+    word-break: normal;
+    line-height: 1.2;
+  }
+
+  .crmTable td:nth-child(4) {
+    white-space: nowrap;
+    padding-right: 4px;
+  }
+
+  .pChip {
+    padding: 2.5px 5px;
+    gap: 3.5px;
+    font-size: 9.5px;
+    white-space: nowrap;
   }
 }
 
