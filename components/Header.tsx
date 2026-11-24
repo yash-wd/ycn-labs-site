@@ -237,7 +237,7 @@ export function Header({ isTakeoverActive = false }: { isTakeoverActive?: boolea
 
     const backgroundElements: HTMLElement[] = [];
     const mainEl = document.querySelector<HTMLElement>("main");
-    const footerEl = document.querySelector<HTMLElement>("footer");
+    const footerEl = document.querySelector<HTMLElement>("footer:not(main footer), main ~ footer");
     const skipLink = document.querySelector<HTMLElement>("a[href='#main-content']");
     const logoSlot = document.getElementById("navbar-logo-slot");
     const rightCta = document.getElementById("navbar-right-cta");
