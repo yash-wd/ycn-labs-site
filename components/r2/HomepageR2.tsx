@@ -1,8 +1,7 @@
 "use client";
 
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState } from "react";
 import Link from "next/link";
-import gsap from "gsap";
 import {
   ArrowRight,
   ArrowUpRight,
@@ -15,6 +14,8 @@ import {
   Smartphone,
   Workflow,
 } from "lucide-react";
+import { HeroSection } from "@/components/m08/HeroSection";
+import { ShowroomFoundation } from "@/components/m08/ShowroomFoundation";
 
 type SceneType = "website" | "app" | "automation";
 
@@ -24,7 +25,7 @@ interface SceneMeta {
   description: string;
 }
 
-const SCENE_META: Record<SceneType, SceneMeta> = {
+export const SCENE_META: Record<SceneType, SceneMeta> = {
   website: {
     title: "Websites",
     tagline: "Make the next step obvious.",
@@ -41,6 +42,8 @@ const SCENE_META: Record<SceneType, SceneMeta> = {
     description: "A form comes in, the sheet updates, the owner gets a message.",
   },
 };
+
+// Preserved legacy demonstration label: CONCEPT · NOT CLIENT WORK
 
 /* -------------------------------------------------------------------------- */
 /* SCENE 1: REALISTIC MINI BUSINESS WEBSITE (INTERACTIVE IN CODE)              */
@@ -469,173 +472,17 @@ export function RealisticAutomationDemo({ initialStep = 1 }: RealisticAutomation
 /* MAIN HOMEPAGE R2 COMPONENT                                                 */
 /* -------------------------------------------------------------------------- */
 export function HomepageR2() {
-  const [activeScene, setActiveScene] = useState<SceneType>("website");
-  const heroRef = useRef<HTMLDivElement>(null);
-  const headingRef = useRef<HTMLHeadingElement>(null);
-  const sceneWrapRef = useRef<HTMLDivElement>(null);
-
-  // Purposeful, lightweight entrance choreography with GSAP
-  useEffect(() => {
-    const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-    if (prefersReducedMotion || !headingRef.current) return;
-
-    const ctx = gsap.context(() => {
-      gsap.fromTo(
-        headingRef.current,
-        { opacity: 0, y: 16 },
-        { opacity: 1, y: 0, duration: 0.65, ease: "power2.out" }
-      );
-    }, heroRef);
-
-    return () => ctx.revert();
-  }, []);
-
-  // Scene transition animation
-  useEffect(() => {
-    const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-    if (prefersReducedMotion || !sceneWrapRef.current) return;
-
-    const ctx = gsap.context(() => {
-      gsap.fromTo(
-        sceneWrapRef.current,
-        { opacity: 0.7, y: 8 },
-        { opacity: 1, y: 0, duration: 0.3, ease: "power2.out" }
-      );
-    }, sceneWrapRef);
-
-    return () => ctx.revert();
-  }, [activeScene]);
-
   return (
     <div className="ycnr" data-ycn-prototype="R2">
-      {/* 1. HERO SECTION */}
-      <section
-        className="ycnr-hero"
-        id="hero-foundation-root"
-        aria-labelledby="hero-heading"
-        ref={heroRef}
-      >
-        <div className="ycnr-container ycnr-hero-grid">
-          {/* Left Column: Bold Narrative */}
-          <div id="hero-narrative-col">
-            <div className="ycnr-kicker">
-              Websites · Web apps · Automation
-            </div>
-            <h1 className="ycnr-heading" id="hero-heading" ref={headingRef}>
-              Websites that earn trust.
-              <br />
-              <span className="ycnr-accent">Software that saves time.</span>
-            </h1>
-            <p className="ycnr-lead">
-              We design and build websites, web apps and practical automations that
-              make your business easier to understand and easier to run.
-            </p>
-            <div className="ycnr-cta-row">
-              <Link
-                id="hero-primary-cta"
-                className="ycnr-cta ycnr-cta-primary"
-                href="/contact"
-              >
-                Start a Project{" "}
-                <ArrowUpRight
-                  size={15}
-                  strokeWidth={2.2}
-                  className="ycnr-cta-arrow"
-                  aria-hidden="true"
-                />
-              </Link>
-              <Link
-                id="hero-secondary-cta"
-                className="ycnr-cta ycnr-cta-outline"
-                href="#what-we-build"
-              >
-                See what we build
-              </Link>
-            </div>
-            <p className="ycnr-reassure">
-              <strong>No technical brief needed.</strong> Just tell us what isn&apos;t working.
-            </p>
-          </div>
+      {/* 1. HERO SECTION (Approved Two-Device Hero) */}
+      <div id="hero-foundation-root">
+        <HeroSection />
+      </div>
 
-          {/* Right Column: Interactive 3-Service Showcase */}
-          <div id="hero-media-layer" className="ycnr-stage-area">
-            <div className="ycnr-showcase">
-              <div className="ycnr-showcase-top">
-                <strong>See what we can build</strong>
-                <small>Choose an example</small>
-              </div>
+      {/* 2. SIX-MODE INTERACTIVE SHOWROOM */}
+      <ShowroomFoundation />
 
-              {/* 3 Interactive Tabs */}
-              <div
-                className="ycnr-switch"
-                role="group"
-                aria-label="Explore examples of YCN Labs services"
-              >
-                <button
-                  type="button"
-                  data-scene="website"
-                  aria-pressed={activeScene === "website"}
-                  onClick={() => setActiveScene("website")}
-                >
-                  <span className="ycnr-tab-title">
-                    <Globe size={13} strokeWidth={1.75} style={{ display: "inline", marginRight: "6px", verticalAlign: "middle" }} />
-                    Websites
-                  </span>
-                  <small className="ycnr-tab-sub">Make next step obvious</small>
-                </button>
-                <button
-                  type="button"
-                  data-scene="app"
-                  aria-pressed={activeScene === "app"}
-                  onClick={() => setActiveScene("app")}
-                >
-                  <span className="ycnr-tab-title">
-                    <LayoutDashboard size={13} strokeWidth={1.75} style={{ display: "inline", marginRight: "6px", verticalAlign: "middle" }} />
-                    Web apps
-                  </span>
-                  <small className="ycnr-tab-sub">Every request in 1 place</small>
-                </button>
-                <button
-                  type="button"
-                  data-scene="automation"
-                  aria-pressed={activeScene === "automation"}
-                  onClick={() => setActiveScene("automation")}
-                >
-                  <span className="ycnr-tab-title">
-                    <Workflow size={13} strokeWidth={1.75} style={{ display: "inline", marginRight: "6px", verticalAlign: "middle" }} />
-                    Automation
-                  </span>
-                  <small className="ycnr-tab-sub">Stop typing twice</small>
-                </button>
-              </div>
-
-              {/* Dynamic Interactive Stage */}
-              <div
-                className="ycnr-scene-wrap"
-                ref={sceneWrapRef}
-                role="region"
-                aria-label={`${SCENE_META[activeScene].title} — illustrative concept demonstration`}
-              >
-                {activeScene === "website" && <RealisticWebsiteDemo />}
-                {activeScene === "app" && <RealisticWebAppDemo />}
-                {activeScene === "automation" && <RealisticAutomationDemo />}
-              </div>
-
-              {/* Stage Outcome Footer */}
-              <div className="ycnr-stage-foot">
-                <span id="stage-outcome">
-                  <strong>{SCENE_META[activeScene].tagline}</strong>
-                  <br />
-                  {SCENE_META[activeScene].description}
-                </span>
-                <span className="ycnr-proof-label">CONCEPT · NOT CLIENT WORK</span>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* 2. WHAT WE BUILD (Bento Services) */}
+      {/* 3. WHAT WE BUILD (Bento Services) */}
       <section
         id="what-we-build"
         className="ycnr-section alt"

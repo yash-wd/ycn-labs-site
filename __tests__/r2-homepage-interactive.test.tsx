@@ -22,16 +22,25 @@ describe("Homepage R2 Candidate: Exact Copy & Integrity Verification", () => {
     expect(html).toContain("Websites that earn trust.");
     expect(html).toContain("Software that saves time.");
     expect(html).toContain(
-      "We design and build websites, web apps and practical automations that make your business easier to understand and easier to run."
+      "We turn business problems into digital products that help customers act, teams work clearly, and the business keep moving."
     );
+  });
+
+  it("renders exactly one H1 headline and approved section headings", () => {
+    const h1Matches = html.match(/<h1[^>]*>/g) || [];
+    expect(h1Matches.length).toBe(1);
+    expect(html).toContain('id="hero-title"');
+    expect(html).toContain('id="showroom-title"');
+    expect(html).toContain("Explore what we can build");
   });
 
   it("unifies primary call to action to 'Start a Project' across sections", () => {
     const startMatches = html.match(/Start a Project/g) || [];
     expect(startMatches.length).toBeGreaterThanOrEqual(2);
     expect(html).not.toContain("Start a project");
-    expect(html).toContain("See what we build");
-    expect(html).toContain("Just tell us what isn&#x27;t working.");
+    expect(html).toContain("See what we solve");
+    expect(html).toContain("You don’t need a technical brief to start.");
+    expect(html).toContain("Explore interactive examples ↓");
   });
 
   it("contains all three service offerings with approved concise benefits", () => {
@@ -81,8 +90,13 @@ describe("Homepage R2 Candidate: Exact Copy & Integrity Verification", () => {
     expect(html).not.toMatch(/0\.38s/i);
     expect(html).not.toMatch(/revolutionary|cutting-edge|guaranteed growth/i);
 
-    // Concept is explicitly labelled
-    expect(html).toContain("CONCEPT · NOT CLIENT WORK");
+    // Concept is explicitly labelled with ratified disclosures
+    expect(html).toContain(
+      "Examples only. Example Home Repairs, Example Home Supplies, Example Learning Hub and the example shop shown above are not real businesses or clients. Nothing you do here is submitted, bought or sent."
+    );
+    expect(html).toContain(
+      "Concept demonstrations are clearly labelled; we do not present them as client results."
+    );
   });
 
   it("P0 Check: removes false submission and mobile delivery feedback from browser simulations", () => {
@@ -107,11 +121,16 @@ describe("Homepage R2 Candidate: Exact Copy & Integrity Verification", () => {
     expect(autoStep3Html).toContain("Example only. Nothing is actually sent.");
   });
 
-  it("contains interactive controls and accessible ARIA attributes", () => {
-    expect(html).toContain('role="group"');
-    expect(html).toContain('aria-label="Explore examples of YCN Labs services"');
-    expect(html).toContain('data-scene="website"');
-    expect(html).toContain('data-scene="app"');
-    expect(html).toContain('data-scene="automation"');
+  it("contains accessible six-mode showroom controls and ARIA attributes", () => {
+    expect(html).toContain('role="tablist"');
+    expect(html).toContain('aria-label="Choose an example"');
+    expect(html).toContain('id="tab-website"');
+    expect(html).toContain('id="tab-webapp"');
+    expect(html).toContain('id="tab-automation"');
+    expect(html).toContain('id="tab-crm"');
+    expect(html).toContain('id="tab-store"');
+    expect(html).toContain('id="tab-learning"');
+    expect(html).toContain('id="showroom"');
+    expect(html).toContain('id="showroom-title"');
   });
 });
