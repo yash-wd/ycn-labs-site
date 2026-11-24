@@ -1778,6 +1778,11 @@
     width: 100%;
   }
 
+  .laptopDevice::after {
+    width: 100%;
+    margin-left: 0;
+  }
+
   .autoNotifier {
     flex-direction: row;
     align-items: center;

@@ -6,6 +6,7 @@
   padding: 64px 0 88px;
   border-top: 1px solid var(--r-line, #D7E1EB);
   background: linear-gradient(180deg, var(--r-section, #EDF3F8), var(--r-canvas, #F7FAFC) 210px);
+  overflow-x: clip;
 }
 
 :global(.dark) .showroom {

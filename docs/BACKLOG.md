@@ -4,14 +4,14 @@
 **Operating Principle:** Raw command evidence strictly outranks narrative summaries.  
 **Governing Execution Order:** Master Plan §14.7 (`docs/YCN_MASTER_PLAN.md`).  
 **Master Readiness Tracker:** [`docs/YCN_READINESS_CHECKLIST.md`](YCN_READINESS_CHECKLIST.md) (143-point control ledger; recorded status: 33/143 = 23.1%).  
-**V1 Milestone Progress:** 7 / 15 accepted major milestones (46.7% milestone-count progress; baseline v1.1 adopted 18 Nov 2026 under DECISION-057 Clarification, updated 20 Nov 2026).
+**V1 Milestone Progress:** 8 / 15 accepted major milestones (53.3% milestone-count progress; baseline v1.1 adopted 18 Nov 2026 under DECISION-057 Clarification, updated 24 Nov 2026).
 
 ---
 
-## 1. V1 Release Major-Milestone Baseline (Version 1.1 — 18 Nov 2026, updated 20 Nov 2026)
+## 1. V1 Release Major-Milestone Baseline (Version 1.1 — 18 Nov 2026, updated 24 Nov 2026)
 
 > **Measurement Formula:**  
-> $$\text{Milestone Progress \%} = \frac{\text{Accepted Major Milestones}}{\text{Total Baseline Milestones (15)}} \times 100 = \frac{7}{15} \times 100 = 46.7\%$$  
+> $$\text{Milestone Progress \%} = \frac{\text{Accepted Major Milestones}}{\text{Total Baseline Milestones (15)}} \times 100 = \frac{8}{15} \times 100 = 53.3\%$$  
 > *Note: This represents milestone-count progress across agreed deliverables, NOT elapsed engineering hours, remaining effort, or audited launch readiness.* The denominator is fixed at 15 and may only be revised with explicit Owner approval and a versioned record. (Note on history: An earlier draft proposed 14 milestones at 28.6%, which bundled release operations into M13 and included video-dependent media; superseded before merge by this 15-milestone baseline).
 
 | ID | Major Deliverable | Status | Acceptance Evidence / Prerequisite |
