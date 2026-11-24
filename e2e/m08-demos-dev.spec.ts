@@ -1052,6 +1052,10 @@ function getContrastRatio(rgb1: [number, number, number], rgb2: [number, number,
           expect(chipBox.x + chipBox.width).toBeLessThanOrEqual(crmListBox.x + crmListBox.width + 1.0);
           expect(chipBox.x).toBeGreaterThanOrEqual(crmListBox.x - 1.0);
         }
+
+        // M09 typography requirement: CRM status badge font-size must be at least 10px
+        const fontSize = await chip.evaluate((el) => parseFloat(window.getComputedStyle(el).fontSize));
+        expect(fontSize).toBeGreaterThanOrEqual(10.0);
       }
 
       // Learning at 320px: mobile navigation tabs contrast check
@@ -1107,6 +1111,10 @@ function getContrastRatio(rgb1: [number, number, number], rgb2: [number, number,
         expect(btnBox.x + btnBox.width).toBeLessThanOrEqual(switchBox.x + switchBox.width + 1.5);
         expect(btnBox.x).toBeGreaterThanOrEqual(switchBox.x - 1);
       }
+
+      // M09 typography requirement: Automation phone switch button font-size must be at least 10px
+      const btnFontSize = await customerBtn.evaluate((el) => parseFloat(window.getComputedStyle(el).fontSize));
+      expect(btnFontSize).toBeGreaterThanOrEqual(10.0);
 
       // Check zero horizontal overflow on page
       const hasOverflow1024 = await page.evaluate(() => document.documentElement.scrollWidth > document.documentElement.clientWidth);
@@ -1195,6 +1203,116 @@ function getContrastRatio(rgb1: [number, number, number], rgb2: [number, number,
         // Verify zero horizontal page overflow
         const hasOverflow = await page.evaluate(() => document.documentElement.scrollWidth > document.documentElement.clientWidth);
         expect(hasOverflow).toBe(false);
+
+        await ctx.close();
+      }
+    }
+  });
+
+  test('verifies visible geometry, text clipping, and zero overflow across 9 viewports, both themes, and all six showroom modes', async ({
+    browser,
+  }) => {
+    test.setTimeout(180000); // 3 minutes timeout for comprehensive multi-viewport/multi-mode matrix
+    const VIEWPORTS = [320, 375, 390, 430, 768, 1024, 1280, 1440, 1920];
+    const THEMES: ('light' | 'dark')[] = ['light', 'dark'];
+    const MODES = ['website', 'webapp', 'automation', 'crm', 'store', 'learning'] as const;
+
+    for (const theme of THEMES) {
+      for (const width of VIEWPORTS) {
+        const { ctx, page } = await openDevPreview(browser, { width, height: 900, theme });
+
+        // Ensure theme class applied to root
+        if (theme === 'dark') {
+          await page.evaluate(() => document.documentElement.classList.add('dark'));
+        } else {
+          await page.evaluate(() => document.documentElement.classList.remove('dark'));
+        }
+
+        // Verify showroom tablist is visible
+        const tablist = page.locator('[role="tablist"]');
+        await expect(tablist).toBeVisible();
+
+        for (const mode of MODES) {
+          const tab = page.locator(`#tab-${mode}`);
+          await expect(tab).toBeVisible();
+          await tab.click();
+          await expect(tab).toHaveAttribute('aria-selected', 'true');
+
+          const panel = page.locator(`#panel-${mode}`);
+          await expect(panel).toBeVisible();
+
+          // Check panel bounding box is within viewport horizontally
+          const panelBox = await panel.boundingBox();
+          expect(panelBox).not.toBeNull();
+          if (panelBox) {
+            expect(panelBox.x).toBeGreaterThanOrEqual(-1.0);
+            expect(panelBox.x + panelBox.width).toBeLessThanOrEqual(width + 2.0);
+          }
+
+          // Specific geometric assertions per mode
+          if (mode === 'crm') {
+            const chips = panel.locator('[class*="crmTable"] [class*="pChip"]');
+            const count = await chips.count();
+            expect(count).toBeGreaterThanOrEqual(5);
+
+            const crmList = panel.locator('[class*="crmList"]');
+            const listBox = await crmList.boundingBox();
+            expect(listBox).not.toBeNull();
+
+            for (let i = 0; i < count; i++) {
+              const chip = chips.nth(i);
+              await expect(chip).toBeVisible();
+              const chipBox = await chip.boundingBox();
+              expect(chipBox).not.toBeNull();
+              if (chipBox && listBox) {
+                // Must remain within table container bounds without clipping
+                expect(chipBox.x + chipBox.width).toBeLessThanOrEqual(listBox.x + listBox.width + 2.0);
+                expect(chipBox.x).toBeGreaterThanOrEqual(listBox.x - 2.0);
+
+                // M09 typography requirement: font-size must be at least 10px
+                const fontSize = await chip.evaluate((el) => parseFloat(window.getComputedStyle(el).fontSize));
+                expect(fontSize).toBeGreaterThanOrEqual(10.0);
+              }
+            }
+          } else if (mode === 'automation') {
+            // Check visible phone switch buttons if displayed
+            const autoButtons = panel.locator('button[data-action="auto-phone"]:visible');
+            const btnCount = await autoButtons.count();
+            if (btnCount > 0) {
+              for (let b = 0; b < btnCount; b++) {
+                const btn = autoButtons.nth(b);
+                await expect(btn).toBeVisible();
+                const btnBox = await btn.boundingBox();
+                expect(btnBox).not.toBeNull();
+
+                // Typography requirement at >= 1024px: font-size >= 10px
+                if (width >= 1024) {
+                  const fontSize = await btn.evaluate((el) => parseFloat(window.getComputedStyle(el).fontSize));
+                  expect(fontSize).toBeGreaterThanOrEqual(10.0);
+                }
+              }
+            }
+          } else if (mode === 'store') {
+            const cartBtn = panel.locator('button[data-action="store-cart"]');
+            if (await cartBtn.count() > 0) {
+              const cartBox = await cartBtn.boundingBox();
+              expect(cartBox).not.toBeNull();
+              if (cartBox) {
+                expect(cartBox.x + cartBox.width).toBeLessThanOrEqual(width + 1.0);
+                expect(cartBox.x).toBeGreaterThan(0);
+              }
+            }
+          }
+
+          // Check zero horizontal overflow on page in each mode
+          const hasOverflow = await page.evaluate(
+            () => document.documentElement.scrollWidth > document.documentElement.clientWidth
+          );
+          expect(
+            hasOverflow,
+            `Unexpected horizontal overflow detected in mode '${mode}' at ${width}px (${theme} theme)`
+          ).toBe(false);
+        }
 
         await ctx.close();
       }

@@ -1196,7 +1196,7 @@
 
   .crmTable th,
   .crmTable td {
-    padding: 5px 3px;
+    padding: 5px 2px;
     font-size: 10px;
   }
 
@@ -1208,13 +1208,13 @@
 
   .crmTable td:nth-child(4) {
     white-space: nowrap;
-    padding-right: 4px;
+    padding-right: 2px;
   }
 
   .pChip {
-    padding: 2.5px 5px;
-    gap: 3.5px;
-    font-size: 9.5px;
+    padding: 2.5px 4.5px;
+    gap: 3px;
+    font-size: 10px;
     white-space: nowrap;
   }
 }
@@ -1617,8 +1617,8 @@
 
 .notification small {
   display: block;
-  font-size: 9px;
-  color: #677d94;
+  font-size: 10px;
+  color: #475e74;
   margin-bottom: 2px;
   font-weight: 600;
 }
@@ -1722,27 +1722,27 @@
 /* Responsive adjustments for Automation */
 @media (max-width: 1120px) {
   .autoLayout {
-    grid-template-columns: minmax(0, 1fr) 195px;
-    gap: 16px;
+    grid-template-columns: minmax(0, 1fr) 206px;
+    gap: 14px;
   }
 
   .autoNotifier {
-    width: 195px;
+    width: 206px;
   }
 
   .lockscreen {
-    width: 195px;
+    width: 206px;
   }
 
   .autoPhoneSwitch {
     grid-template-columns: 1fr 1fr;
     gap: 2px;
-    padding: 2px;
+    padding: 2.5px;
   }
 
   .autoPhoneSwitch button {
-    font-size: 9px;
-    padding: 5px 2px;
+    font-size: 10px;
+    padding: 5.5px 3px;
     white-space: nowrap;
   }
 
@@ -1776,6 +1776,11 @@
 
   .autoLayout .laptopDevice {
     width: 100%;
+  }
+
+  .laptopDevice::after {
+    width: 100%;
+    margin-left: 0;
   }
 
   .autoNotifier {
