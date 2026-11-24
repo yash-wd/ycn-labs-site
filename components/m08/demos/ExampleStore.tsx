@@ -25,12 +25,13 @@ export function formatINR(n: number): string {
   return '₹' + Number(n).toLocaleString('en-IN');
 }
 
-export function ProductArt({ id }: { id: string }) {
+export function ProductArt({ id, name }: { id: string; name?: string }) {
+  const displayName = name || STORE_PRODUCTS.find((p) => p.id === id)?.name || id;
   return (
     <svg
       viewBox="0 0 180 130"
       role="img"
-      aria-label={`Illustration of ${id}`}
+      aria-label={`Illustration of ${displayName}`}
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
       className={styles.storeProductSvg}
@@ -245,22 +246,6 @@ export function ExampleStore({ isActive = true }: ExampleStoreProps = {}) {
       closeCart();
       return;
     }
-    if (e.key === 'Tab' && dialogRef.current) {
-      const focusables = dialogRef.current.querySelectorAll<HTMLElement>(
-        'button:not([disabled]), input:not([disabled]), a:not([disabled])'
-      );
-      if (focusables.length === 0) return;
-      const first = focusables[0];
-      const last = focusables[focusables.length - 1];
-
-      if (e.shiftKey && document.activeElement === first) {
-        e.preventDefault();
-        last.focus();
-      } else if (!e.shiftKey && document.activeElement === last) {
-        e.preventDefault();
-        first.focus();
-      }
-    }
   };
 
   return (
@@ -332,7 +317,7 @@ export function ExampleStore({ isActive = true }: ExampleStoreProps = {}) {
                 <div>
                   <span className={styles.storeKicker}>HOME ESSENTIALS · EXAMPLE STORE</span>
                   <h2>Small things. Better home.</h2>
-                  <p>Browse useful supplies and tools. All items and prices are fictional.</p>
+                  <p>Useful supplies and tools for small jobs at home.</p>
                 </div>
                 <div className={styles.storeHeroArt} aria-hidden="true">
                   <ProductArt id="kit" />
@@ -416,7 +401,7 @@ export function ExampleStore({ isActive = true }: ExampleStoreProps = {}) {
 
               {/* Footnote disclosure */}
               <p className={styles.storeFootnote}>
-                Sample products and prices. This is a fictional online store.
+                Sample products and prices. Not a real shop.
               </p>
 
               {/* Polite status live region */}
@@ -425,7 +410,7 @@ export function ExampleStore({ isActive = true }: ExampleStoreProps = {}) {
               </p>
             </div>
 
-            {/* Cart Slide-out Drawer */}
+            {/* Cart Slide-out Drawer (Accessible Non-Modal Slide-out Dialog) */}
             {drawerOpen && (
               <>
                 <div
@@ -438,7 +423,6 @@ export function ExampleStore({ isActive = true }: ExampleStoreProps = {}) {
                   ref={dialogRef}
                   className={styles.storeDrawer}
                   role="dialog"
-                  aria-modal="true"
                   aria-labelledby="cart-title"
                   onKeyDown={handleDialogKeyDown}
                 >
@@ -457,7 +441,7 @@ export function ExampleStore({ isActive = true }: ExampleStoreProps = {}) {
                     </button>
                   </header>
 
-                  <main className={styles.drawerMain}>
+                  <div className={styles.drawerMain}>
                     {completed ? (
                       <div className={styles.cartResult}>
                         <strong>Demo order</strong>
@@ -521,7 +505,7 @@ export function ExampleStore({ isActive = true }: ExampleStoreProps = {}) {
                     ) : (
                       <p className={styles.mutedText}>Your cart is empty.</p>
                     )}
-                  </main>
+                  </div>
 
                   {!completed && (
                     <footer className={styles.drawerFooter}>

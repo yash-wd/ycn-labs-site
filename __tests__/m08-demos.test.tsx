@@ -181,7 +181,7 @@ describe('M08-B Showroom Demos: Component & Behavior Specification Tests', () =>
 
     it('renders header "Example Home Repairs · Workflows", subline, and "Simulated" chip', () => {
       expect(html).toContain('Example Home Repairs · Workflows');
-      expect(html).toContain('Request handling · Sample execution');
+      expect(html).toContain('What happens after a request');
       expect(html).toContain('Simulated');
     });
 
@@ -213,27 +213,27 @@ describe('M08-B Showroom Demos: Component & Behavior Specification Tests', () =>
     it('renders detail inspection card with initial step 1 information', () => {
       expect(html).toContain('id="auto-detail"');
       expect(html).toContain('Starts it');
-      expect(html).toContain('Anita requests a tap repair, with Saturday morning preferred.');
+      expect(html).toContain('Anita asks for a tap repair and prefers Saturday morning.');
     });
 
-    it('renders Execution history section with initial empty state "No steps have run."', () => {
-      expect(html).toContain('Execution history');
-      expect(html).toContain('No steps have run.');
+    it('renders History section with initial empty state "Nothing has run yet."', () => {
+      expect(html).toContain('History');
+      expect(html).toContain('Nothing has run yet.');
     });
 
     it('renders human action bar with initial idle prompt and failure simulation toggle', () => {
-      expect(html).toContain('Person steps need your click.');
+      expect(html).toContain('Two steps wait for a person. You play both.');
       expect(html).toContain('data-action="auto-fail"');
       expect(html).toContain('Show what happens when a step fails');
     });
 
     it('renders companion phone shell with 9:41 lock clock and notification stream switch', () => {
       expect(html).toContain('9:41');
-      expect(html).toContain('Sample · Now');
+      expect(html).toContain('Now');
       expect(html).toContain('data-action="auto-phone"');
       expect(html).toContain('data-phone="owner"');
       expect(html).toContain('data-phone="customer');
-      expect(html).toContain('Notifications appear here as the sample workflow runs.');
+      expect(html).toContain('Alerts appear here as the example runs.');
     });
 
     it('renders mobile notification fallback with proper accessible attributes', () => {
@@ -261,7 +261,7 @@ describe('M08-B Showroom Demos: Component & Behavior Specification Tests', () =>
     it('renders hero banner with kicker, heading, and tool kit artwork', () => {
       expect(html).toContain('HOME ESSENTIALS · EXAMPLE STORE');
       expect(html).toContain('Small things. Better home.');
-      expect(html).toContain('Browse useful supplies and tools. All items and prices are fictional.');
+      expect(html).toContain('Useful supplies and tools for small jobs at home.');
     });
 
     it('renders all four shop category filters', () => {
@@ -290,7 +290,7 @@ describe('M08-B Showroom Demos: Component & Behavior Specification Tests', () =>
     });
 
     it('renders fictional store footnote disclosure', () => {
-      expect(html).toContain('Sample products and prices. This is a fictional online store.');
+      expect(html).toContain('Sample products and prices. Not a real shop.');
     });
   });
 
@@ -300,7 +300,7 @@ describe('M08-B Showroom Demos: Component & Behavior Specification Tests', () =>
     it('renders Example Learning Hub brand and student workspace subhead', () => {
       expect(html).toContain('Example Learning Hub');
       expect(html).toContain('Student workspace');
-      expect(html).toContain('Sample student · Fictional learning centre');
+      expect(html).toContain('Sample student');
     });
 
     it('renders navigation views for desktop and mobile', () => {
@@ -312,7 +312,7 @@ describe('M08-B Showroom Demos: Component & Behavior Specification Tests', () =>
     it('renders course overview card with kicker, heading, and book icon', () => {
       expect(html).toContain('COURSE · COMPUTER BASICS');
       expect(html).toContain('Learn everyday computer skills.');
-      expect(html).toContain('Three short sample lessons and a practice question.');
+      expect(html).toContain('Three short lessons and one practice question.');
     });
 
     it('renders initial progress tracking bar at 0 of 3 lessons complete', () => {
