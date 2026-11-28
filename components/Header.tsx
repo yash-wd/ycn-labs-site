@@ -48,6 +48,7 @@ export function Header({ isTakeoverActive = false }: { isTakeoverActive?: boolea
   const mobileSheetRef = useRef<HTMLDivElement>(null);
   const desktopRailRef = useRef<HTMLDivElement>(null);
   const desktopShellRef = useRef<HTMLDivElement>(null);
+  const shellViewportRef = useRef<HTMLDivElement>(null);
   const hasDesktopOpenedRef = useRef(false);
   const isNavigatingFromMenuRef = useRef(false);
 
@@ -237,7 +238,7 @@ export function Header({ isTakeoverActive = false }: { isTakeoverActive?: boolea
 
     const backgroundElements: HTMLElement[] = [];
     const mainEl = document.querySelector<HTMLElement>("main");
-    const footerEl = document.querySelector<HTMLElement>("footer");
+    const footerEl = document.querySelector<HTMLElement>("footer:not(main footer), main ~ footer");
     const skipLink = document.querySelector<HTMLElement>("a[href='#main-content']");
     const logoSlot = document.getElementById("navbar-logo-slot");
     const rightCta = document.getElementById("navbar-right-cta");
@@ -308,6 +309,7 @@ export function Header({ isTakeoverActive = false }: { isTakeoverActive?: boolea
         gsap.set(shell, { width: 484 });
       } else {
         setIsRailVisible(false);
+        if (shellViewportRef.current) shellViewportRef.current.scrollLeft = 0;
         gsap.set(trigger, { opacity: 1, pointerEvents: "auto" });
         gsap.set(rail, { opacity: 0, pointerEvents: "none" });
         gsap.set(shell, { width: 104 });
@@ -318,12 +320,14 @@ export function Header({ isTakeoverActive = false }: { isTakeoverActive?: boolea
     const items = rail.querySelectorAll("nav > a, button, #navbar-close-button");
     if (isDesktopExpanded) {
       hasDesktopOpenedRef.current = true;
+      setIsRailVisible(true);
       gsap.killTweensOf([shell, trigger, rail, items]);
 
       // Calculate required expanded width dynamically from rail's scrollWidth
       const targetExpandedWidth = Math.max(484, Math.ceil(rail.scrollWidth) + 4);
       const collapsedWidth = 104;
 
+      if (shellViewportRef.current) shellViewportRef.current.scrollLeft = 0;
       gsap.set(rail, { opacity: 1, pointerEvents: "auto" });
       gsap.set(items, { opacity: 0, x: -8 });
 
@@ -372,6 +376,7 @@ export function Header({ isTakeoverActive = false }: { isTakeoverActive?: boolea
       const tl = gsap.timeline({
         onComplete: () => {
           setIsRailVisible(false);
+          if (shellViewportRef.current) shellViewportRef.current.scrollLeft = 0;
           gsap.set(rail, { opacity: 0, pointerEvents: "none" });
           gsap.set(shell, { width: collapsedWidth });
         },
@@ -431,7 +436,7 @@ export function Header({ isTakeoverActive = false }: { isTakeoverActive?: boolea
       return;
     }
 
-    const items = sheet.querySelectorAll("nav > a, #mobile-menu-cta-button");
+    const items = sheet.querySelectorAll("nav > a, #mobile-menu-cta-wrapper");
 
     if (isMenuOpen) {
       setIsSheetVisible(true);
@@ -600,13 +605,18 @@ export function Header({ isTakeoverActive = false }: { isTakeoverActive?: boolea
               }}
             >
               <YcnSignalBorder mode="continuous" active={isExpandedAny} borderRadius={999}>
-                <div className="relative w-full h-full min-h-[44px] flex items-center rounded-full border border-[var(--border-subtle)] bg-[var(--bg-surface)]/90 backdrop-blur-md shadow-xs overflow-hidden pointer-events-auto">
+                <div
+                  ref={shellViewportRef}
+                  className="relative w-full h-full min-h-[44px] flex items-center rounded-full border border-[var(--border-subtle)] bg-[var(--bg-surface)]/90 backdrop-blur-md shadow-xs overflow-hidden pointer-events-auto"
+                >
                   {/* Trigger Button: Menu Capsule (Visible when collapsed on desktop, and on mobile) */}
                   <button
                     id="navbar-menu-capsule-button"
                     ref={desktopMenuTriggerRef}
                     type="button"
                     onClick={handleMenuToggle}
+                    tabIndex={isDesktopExpanded ? -1 : undefined}
+                    aria-hidden={isDesktopExpanded ? true : undefined}
                     aria-label={isMenuOpen ? "Close navigation menu" : "Open navigation menu"}
                     aria-expanded={isExpandedAny}
                     aria-controls={isDesktopExpanded ? "desktop-nav-expanded" : "mobile-nav-sheet"}
@@ -636,6 +646,8 @@ export function Header({ isTakeoverActive = false }: { isTakeoverActive?: boolea
                     ref={desktopRailRef}
                     role="region"
                     aria-label="Expanded Navigation"
+                    aria-hidden={!isDesktopExpanded ? true : undefined}
+                    inert={!isDesktopExpanded ? true : undefined}
                     className="hidden lg:flex items-center gap-1.5 px-3 py-1 whitespace-nowrap min-w-max absolute left-0 top-0 bottom-0 pointer-events-none"
                     style={{
                       opacity: 0,
@@ -837,26 +849,28 @@ export function Header({ isTakeoverActive = false }: { isTakeoverActive?: boolea
 
               {/* Canonical Start a Project CTA inside opened mobile menu (Owner Ruling 28 Sep NAV-04) */}
               <div className="pt-2 border-t border-[var(--border-subtle)]">
-                <YcnSignalBorder mode="accent" borderRadius={8} className="w-full">
-                  <YcnFlowButton
-                    id="mobile-menu-cta-button"
-                    href="/contact"
-                    variant="primary"
-                    size="md"
-                    className="w-full min-h-[44px] justify-center text-xs font-semibold tracking-wider whitespace-nowrap"
-                    onClick={() => {
-                      if (pathname === "/contact") {
-                        setIsMenuOpen(false);
-                        desktopMenuTriggerRef.current?.focus();
-                      } else {
-                        isNavigatingFromMenuRef.current = true;
-                        setIsMenuOpen(false);
-                      }
-                    }}
-                  >
-                    Start a Project
-                  </YcnFlowButton>
-                </YcnSignalBorder>
+                <div id="mobile-menu-cta-wrapper" className="w-full">
+                  <YcnSignalBorder mode="accent" borderRadius={8} className="w-full">
+                    <YcnFlowButton
+                      id="mobile-menu-cta-button"
+                      href="/contact"
+                      variant="primary"
+                      size="md"
+                      className="w-full min-h-[44px] justify-center text-xs font-semibold tracking-wider whitespace-nowrap"
+                      onClick={() => {
+                        if (pathname === "/contact") {
+                          setIsMenuOpen(false);
+                          desktopMenuTriggerRef.current?.focus();
+                        } else {
+                          isNavigatingFromMenuRef.current = true;
+                          setIsMenuOpen(false);
+                        }
+                      }}
+                    >
+                      Start a Project
+                    </YcnFlowButton>
+                  </YcnSignalBorder>
+                </div>
               </div>
             </div>
           </div>

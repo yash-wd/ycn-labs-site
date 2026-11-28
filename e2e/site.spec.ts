@@ -169,8 +169,9 @@ test.describe("M06 NAV-07 Mobile Navigation Accessibility", () => {
     expect(mainInert).not.toBeNull();
     expect(mainHidden).toBe("true");
 
-    const footerInert = await page.locator("footer").getAttribute("inert");
-    const footerHidden = await page.locator("footer").getAttribute("aria-hidden");
+    const siteFooter = page.locator("footer:not(main footer)");
+    const footerInert = await siteFooter.getAttribute("inert");
+    const footerHidden = await siteFooter.getAttribute("aria-hidden");
     expect(footerInert).not.toBeNull();
     expect(footerHidden).toBe("true");
 
@@ -184,6 +185,8 @@ test.describe("M06 NAV-07 Mobile Navigation Accessibility", () => {
 
     const mainCleared = await page.locator("main").getAttribute("inert");
     expect(mainCleared).toBeNull();
+    const siteFooterCleared = await siteFooter.getAttribute("inert");
+    expect(siteFooterCleared).toBeNull();
     await ctx.close();
   });
 
@@ -248,8 +251,10 @@ test.describe("M06 NAV-07 Mobile Navigation Accessibility", () => {
     // Logical focus destination on new page is main-content
     await expect(page.locator("#main-content")).toBeFocused();
 
-    // Inertness removed from main
+    // Inertness removed from main and actual site footer
     await expect(page.locator("main")).not.toHaveAttribute("inert");
+    await expect(page.locator("footer:not(main footer)")).not.toHaveAttribute("inert");
+    await expect(page.locator("footer:not(main footer)")).not.toHaveAttribute("aria-hidden");
     await ctx.close();
   });
 
@@ -258,6 +263,8 @@ test.describe("M06 NAV-07 Mobile Navigation Accessibility", () => {
     const trigger = page.locator("#navbar-menu-capsule-button");
     await trigger.click();
     await expect(page.locator("#mobile-nav-sheet")).toBeVisible();
+    await expect(page.locator("footer:not(main footer)")).toHaveAttribute("inert");
+    await expect(page.locator("footer:not(main footer)")).toHaveAttribute("aria-hidden", "true");
 
     // Resize across 1024px desktop breakpoint
     await page.setViewportSize({ width: 1024, height: 800 });
@@ -265,6 +272,8 @@ test.describe("M06 NAV-07 Mobile Navigation Accessibility", () => {
     await expect(trigger).toBeFocused();
 
     await expect(page.locator("main")).not.toHaveAttribute("inert");
+    await expect(page.locator("footer:not(main footer)")).not.toHaveAttribute("inert");
+    await expect(page.locator("footer:not(main footer)")).not.toHaveAttribute("aria-hidden");
     await ctx.close();
   });
 
@@ -314,13 +323,11 @@ test.describe("M06 NAV-07 Mobile Navigation Accessibility", () => {
     await expect(sheet).toBeVisible();
 
     // 2. Observable action: Clicking on background content outside the menu sheet hits #mobile-nav-backdrop
-    // Click at coordinates of an interactive link inside main
-    const heroLink = page.locator("main a[href]").first();
-    const heroBox = await heroLink.boundingBox();
-    expect(heroBox).not.toBeNull();
-    if (heroBox) {
-      // Backdrop at z-30 intercepts pointer event over main content
-      await page.mouse.click(heroBox.x + heroBox.width / 2, heroBox.y + heroBox.height / 2);
+    const sheetBox = await sheet.boundingBox();
+    expect(sheetBox).not.toBeNull();
+    if (sheetBox) {
+      // Backdrop at z-30 intercepts pointer event below the menu sheet
+      await page.mouse.click(sheetBox.x + sheetBox.width / 2, sheetBox.y + sheetBox.height + 40);
     }
 
     // Modal dismisses via backdrop interaction
@@ -382,8 +389,8 @@ test.describe("M06 NAV-07 Mobile Navigation Accessibility", () => {
     // Confirm all background elements have inertness removed completely
     await expect(page.locator("main")).not.toHaveAttribute("inert");
     await expect(page.locator("main")).not.toHaveAttribute("aria-hidden");
-    await expect(page.locator("footer")).not.toHaveAttribute("inert");
-    await expect(page.locator("footer")).not.toHaveAttribute("aria-hidden");
+    await expect(page.locator("footer:not(main footer)")).not.toHaveAttribute("inert");
+    await expect(page.locator("footer:not(main footer)")).not.toHaveAttribute("aria-hidden");
     await expect(page.locator("#navbar-theme-toggle-wrapper")).not.toHaveAttribute("inert");
 
     await ctx.close();
@@ -404,98 +411,276 @@ test.describe("M06 NAV-07 Mobile Navigation Accessibility", () => {
   });
 });
 
-test.describe("Homepage R2 Interactive Demonstrations", () => {
-  test("scene switching: Websites, Web apps, Automation tabs switch cleanly", async ({ browser }) => {
+test.describe("Integrated Homepage Hero & Six-Mode Showroom", () => {
+  test("integrated homepage structure: exactly one H1, main landmark, hero CTAs, and showroom anchor", async ({ browser }) => {
     const { ctx, page } = await open(browser, "/");
-    await expect(page.locator("#scene-website")).toBeVisible();
+    const h1 = page.locator("h1");
+    await expect(h1).toHaveCount(1);
+    await expect(h1).toContainText("Websites that earn trust.");
+    await expect(h1).toContainText("Software that saves time.");
 
-    // Switch to Web apps
-    await page.locator('button[data-scene="app"]').click();
-    await expect(page.locator("#scene-app")).toBeVisible();
-    await expect(page.locator("#scene-website")).toBeHidden();
+    const main = page.locator("main");
+    await expect(main).toHaveCount(1);
 
-    // Switch to Automation
-    await page.locator('button[data-scene="automation"]').click();
-    await expect(page.locator("#scene-automation")).toBeVisible();
-    await expect(page.locator("#scene-app")).toBeHidden();
+    await expect(page.locator('a[href="/contact"]').first()).toBeVisible();
+    await expect(page.locator('a[href="/what-we-solve"]').first()).toBeVisible();
+    await expect(page.locator('a[href="#showroom"]').first()).toBeVisible();
+    await expect(page.locator("#showroom")).toBeVisible();
+    await expect(page.locator("#showroom-title")).toHaveText("Explore what we can build");
 
-    // Switch back to Websites
-    await page.locator('button[data-scene="website"]').click();
-    await expect(page.locator("#scene-website")).toBeVisible();
     await ctx.close();
   });
 
-  test("Websites scene: service selection and simulated preview flow", async ({ browser }) => {
+  test("showroom switching: all six demonstration tabs switch cleanly and inactive panels are hidden", async ({ browser }) => {
     const { ctx, page } = await open(browser, "/");
-    const serviceButtons = page.locator(".ycnr-service-card");
-    await expect(serviceButtons).toHaveCount(2);
+    await expect(page.locator("#panel-website")).toBeVisible();
 
-    // Select second service
-    await serviceButtons.nth(1).click();
-    await expect(serviceButtons.nth(1)).toHaveClass(/active/);
+    const modes = ["webapp", "automation", "crm", "store", "learning", "website"];
+    for (const mode of modes) {
+      const tab = page.locator(`#tab-${mode}`);
+      await expect(tab).toBeVisible();
+      await tab.click();
+      await expect(tab).toHaveAttribute("aria-selected", "true");
+      await expect(page.locator(`#panel-${mode}`)).toBeVisible();
 
-    // Click preview action
-    const bookBtn = page.locator(".ycnr-demo-action-btn");
-    await expect(bookBtn).toContainText("Request a visit");
-    await bookBtn.click();
+      // Inactive panels must be hidden
+      for (const other of modes) {
+        if (other !== mode) {
+          await expect(page.locator(`#panel-${other}`)).toBeHidden();
+        }
+      }
+    }
 
-    // Notice appears with reset button
-    const notice = page.locator(".ycnr-booked-notice");
-    await expect(notice).toBeVisible();
-    await expect(notice).toContainText("Example only. On a real site, the clinic would receive this request.");
-
-    // Reset button resets state
-    await page.locator(".ycnr-reset-demo-btn").click();
-    await expect(page.locator(".ycnr-demo-action-btn")).toBeVisible();
     await ctx.close();
   });
 
-  test("Web apps scene: status advancement and terminal Replied state until reset", async ({ browser }) => {
+  test("CRM demo on homepage: search, filtering, and 10px status badges", async ({ browser }) => {
     const { ctx, page } = await open(browser, "/");
-    await page.locator('button[data-scene="app"]').click();
+    await page.locator("#tab-crm").click();
+    await expect(page.locator("#panel-crm")).toBeVisible();
 
-    const rowBadge = page.locator(".ycnr-table-row").first().locator("button");
-    await expect(rowBadge).toContainText("NEW");
+    const searchInput = page.locator('#panel-crm input[placeholder*="Search by customer"]');
+    await expect(searchInput).toBeVisible();
+    await searchInput.fill("Anita");
+    await expect(page.locator('#panel-crm td:has-text("Tap repair")')).toBeVisible();
 
-    // Advance to Assigned
-    await rowBadge.click();
-    await expect(rowBadge).toContainText("ASSIGNED");
+    // Reset filter
+    await page.locator('#panel-crm button:has-text("Reset sample records")').click();
+    await expect(page.locator('#panel-crm td:has-text("Wiring check")')).toBeVisible();
 
-    // Advance to Replied (terminal)
-    await rowBadge.click();
-    await expect(rowBadge).toContainText("REPLIED");
-    await expect(rowBadge).toBeDisabled();
+    // Verify status badge text size is at least 10px
+    const badge = page.locator('#panel-crm [class*="pChip"]').first();
+    const fontSize = await badge.evaluate((el) => window.getComputedStyle(el).fontSize);
+    expect(parseFloat(fontSize)).toBeGreaterThanOrEqual(10);
 
-    // Clicking does not wrap around
-    await rowBadge.click({ force: true });
-    await expect(rowBadge).toContainText("REPLIED");
-
-    // Reset queue restores initial status
-    await page.locator("button", { hasText: "Reset example" }).click();
-    await expect(rowBadge).toContainText("NEW");
-    await expect(rowBadge).toBeEnabled();
     await ctx.close();
   });
 
-  test("Automation scene: step advancement and simulation replay", async ({ browser }) => {
+  test("Automation demo on homepage: complete flow through human gates, failure toggle, and retry", async ({ browser }) => {
     const { ctx, page } = await open(browser, "/");
-    await page.locator('button[data-scene="automation"]').click();
+    await page.locator("#tab-automation").click();
+    await expect(page.locator("#panel-automation")).toBeVisible();
 
-    const runBtn = page.locator(".ycnr-run-flow-btn");
-    const indicator = page.locator(".ycnr-flow-indicator");
+    // 1. Run example -> progresses to Human Gate 1 (Confirm visit)
+    const runBtn = page.locator('#panel-automation button[data-action="auto-run"]');
+    await expect(runBtn).toBeVisible();
+    await runBtn.click();
 
-    await expect(indicator).toContainText("1 of 3");
-    await runBtn.click();
-    await expect(indicator).toContainText("2 of 3");
-    await runBtn.click();
-    await expect(indicator).toContainText("3 of 3");
-    await expect(page.locator(".ycnr-whatsapp-bubble")).toBeVisible();
-    await expect(page.locator(".ycnr-whatsapp-bubble")).toContainText("Example only. Nothing is actually sent.");
+    // Human Gate 1: Waiting for owner to confirm the visit
+    const confirmBtn = page.locator('#panel-automation button[data-action="auto-confirm"]');
+    await expect(confirmBtn).toBeVisible({ timeout: 5000 });
+    await expect(confirmBtn).toHaveText("Confirm visit");
+    await confirmBtn.click();
 
-    // Reset restarts
+    // Human Gate 2: Waiting for technician to mark job done
+    const completeBtn = page.locator('#panel-automation button[data-action="auto-complete"]');
+    await expect(completeBtn).toBeVisible({ timeout: 5000 });
+    await expect(completeBtn).toHaveText("Mark job done");
+    await completeBtn.click();
+
+    // Finishes flow
+    await expect(page.locator("#panel-automation #auto-status")).toHaveText(
+      "Example finished. No message was sent.",
+      { timeout: 5000 }
+    );
+
+    // Reset flow
+    const resetBtn = page.locator('#panel-automation button[data-action="auto-reset"]');
+    await resetBtn.click();
+    await expect(page.locator("#panel-automation #auto-status")).toHaveText("Ready. Press Run example.");
+
+    // Failure toggle & retry flow
+    const failToggle = page.locator('#panel-automation button[data-action="auto-fail"]');
+    await failToggle.click();
+    await expect(failToggle).toHaveAttribute("aria-pressed", "true");
+
     await runBtn.click();
-    await expect(indicator).toContainText("1 of 3");
+    const retryBtn = page.locator('#panel-automation button[data-action="auto-retry"]');
+    await expect(retryBtn).toBeVisible({ timeout: 5000 });
+    await expect(retryBtn).toHaveText("Try that step again");
+
     await ctx.close();
+  });
+
+  test("Store demo on homepage: all four category controls, cart drawer, and cross-mode state preservation", async ({ browser }) => {
+    const { ctx, page } = await open(browser, "/");
+    await page.locator("#tab-store").click();
+    await expect(page.locator("#panel-store")).toBeVisible();
+
+    const panel = page.locator("#panel-store");
+
+    // 1. Test all four category filters scoped to category navigation group
+    const filterAll = panel.locator('nav[role="group"] button[data-action="store-filter"][data-filter="All"]');
+    const filterPlumbing = panel.locator('nav[role="group"] button[data-action="store-filter"][data-filter="Plumbing"]');
+    const filterElectrical = panel.locator('nav[role="group"] button[data-action="store-filter"][data-filter="Electrical"]');
+    const filterTools = panel.locator('nav[role="group"] button[data-action="store-filter"][data-filter="Tools and paint"]');
+
+    // Plumbing: Basin tap, Pipe tape pack (2 items)
+    await filterPlumbing.click();
+    await expect(filterPlumbing).toHaveAttribute("aria-pressed", "true");
+    await expect(panel.locator("article")).toHaveCount(2);
+    await expect(panel.locator('article:has-text("Basin tap")')).toBeVisible();
+
+    // Electrical: LED bulb pack, Extension board (2 items)
+    await filterElectrical.click();
+    await expect(filterElectrical).toHaveAttribute("aria-pressed", "true");
+    await expect(panel.locator("article")).toHaveCount(2);
+    await expect(panel.locator('article:has-text("LED bulb pack")')).toBeVisible();
+
+    // Tools and paint: Tool kit, Paint brush set (2 items)
+    await filterTools.click();
+    await expect(filterTools).toHaveAttribute("aria-pressed", "true");
+    await expect(panel.locator("article")).toHaveCount(2);
+    await expect(panel.locator('article:has-text("Tool kit")')).toBeVisible();
+
+    // All: 6 items
+    await filterAll.click();
+    await expect(filterAll).toHaveAttribute("aria-pressed", "true");
+    await expect(panel.locator("article")).toHaveCount(6);
+
+    // 2. Add to cart & open cart drawer
+    const addTapBtn = panel.locator('button[data-action="store-add"][data-id="tap"]');
+    await addTapBtn.click();
+
+    const drawer = panel.locator('aside[role="dialog"]');
+    await expect(drawer).toBeVisible();
+    await expect(drawer.locator("#cart-title")).toHaveText("Your cart");
+    await expect(panel.locator('button[data-action="store-cart"]')).toContainText("Cart (1)");
+
+    // Close drawer via Escape key
+    await page.keyboard.press("Escape");
+    await expect(drawer).toBeHidden();
+
+    // 3. Cross-mode state preservation: switch away to CRM, then back to Store
+    await page.locator("#tab-crm").click();
+    await expect(page.locator("#panel-crm")).toBeVisible();
+    await expect(panel).toBeHidden();
+
+    // Return to Store: cart retains item
+    await page.locator("#tab-store").click();
+    await expect(panel).toBeVisible();
+    await expect(panel.locator('button[data-action="store-cart"]')).toContainText("Cart (1)");
+
+    await ctx.close();
+  });
+
+  test("Websites, Web apps, and Learning platform demonstrations interact correctly", async ({ browser }) => {
+    const { ctx, page } = await open(browser, "/");
+
+    // 1. Websites interaction: select service and request visit
+    await page.locator("#tab-website").click();
+    const websitePanel = page.locator("#panel-website");
+    await expect(websitePanel).toBeVisible();
+
+    const electricalService = websitePanel.locator('button:has-text("Electrical")').first();
+    await electricalService.click();
+    await expect(websitePanel.locator('text=Selected: Electrical')).toBeVisible();
+
+    const submitVisitBtn = websitePanel.locator('button:has-text("Request a visit")').last();
+    await submitVisitBtn.click();
+    await expect(websitePanel.locator('[role="status"]')).toContainText("Demo only. Nothing was submitted.");
+
+    // 2. Web apps interaction: 3-step booking flow
+    await page.locator("#tab-webapp").click();
+    const webappPanel = page.locator("#panel-webapp");
+    await expect(webappPanel).toBeVisible();
+
+    // Step 1: select service
+    await webappPanel.locator('button:has-text("Tap repair")').click();
+    await webappPanel.locator('button:has-text("Continue")').click();
+
+    // Step 2: select day & time
+    await webappPanel.locator('button:has-text("Saturday")').click();
+    await webappPanel.locator('button:has-text("Morning")').click();
+    await webappPanel.locator('button:has-text("Continue")').click();
+
+    // Step 3: review request and send
+    await expect(webappPanel.locator("h2")).toHaveText("Check your request");
+    await webappPanel.locator('button:has-text("Send request (demo)")').click();
+
+    // Step 4: confirmation screen
+    await expect(webappPanel.locator("h2")).toHaveText("Demo result");
+    await expect(webappPanel.locator("text=EXAMPLE-001")).toBeVisible();
+
+    // Reset webapp
+    await webappPanel.locator('button:has-text("Start again")').click();
+    await expect(webappPanel.locator("h2")).toHaveText("What do you need?");
+
+    // 3. Learning platform interaction: lesson selection, quiz answer, and view toggle
+    await page.locator("#tab-learning").click();
+    const learningPanel = page.locator("#panel-learning");
+    await expect(learningPanel).toBeVisible();
+
+    // Select second lesson
+    await learningPanel.locator('button[data-action="learn-lesson"][data-index="1"]').click();
+    await expect(learningPanel.locator("h3:has-text('Using a keyboard and mouse')")).toBeVisible();
+
+    // Quiz radio selection
+    const spaceBarRadio = learningPanel.locator('input[type="radio"][value="Space bar"]');
+    await spaceBarRadio.check();
+    await learningPanel.locator('button:has-text("Check answer")').click();
+    await expect(learningPanel.locator('#learn-quiz-result')).toHaveText("Correct.");
+
+    // Toggle view to Progress
+    await learningPanel.locator('button[data-action="learn-view"][data-view="Progress"]').first().click();
+    await expect(learningPanel.locator("text=answered correctly.")).toBeVisible();
+
+    await ctx.close();
+  });
+
+  test("Hero CTA button contrast and focus indicators across light and dark themes", async ({ browser }) => {
+    for (const theme of ["light", "dark"] as const) {
+      const { ctx, page } = await open(browser, "/", { theme });
+      const primaryCta = page.locator('#hero-foundation-root a[href="/contact"]');
+      const secondaryCta = page.locator('#hero-foundation-root a[href="/what-we-solve"]');
+
+      await expect(primaryCta).toBeVisible();
+      await expect(secondaryCta).toBeVisible();
+
+      // Check computed styles
+      const primaryStyles = await primaryCta.evaluate((el) => {
+        const cs = window.getComputedStyle(el);
+        return { color: cs.color, backgroundColor: cs.backgroundColor };
+      });
+
+      if (theme === "light") {
+        // Light theme primary CTA: white text (rgb(255, 255, 255)) on blue background (rgb(4, 112, 180))
+        expect(primaryStyles.color).toBe("rgb(255, 255, 255)");
+        expect(primaryStyles.backgroundColor).toBe("rgb(4, 112, 180)");
+      } else {
+        // Dark theme primary CTA: dark text (rgb(7, 16, 24)) on bright cyan background (rgb(2, 193, 247))
+        expect(primaryStyles.color).toBe("rgb(7, 16, 24)");
+        expect(primaryStyles.backgroundColor).toBe("rgb(2, 193, 247)");
+      }
+
+      // Check focus visibility
+      await primaryCta.focus();
+      await expect(primaryCta).toBeFocused();
+      const outline = await primaryCta.evaluate((el) => window.getComputedStyle(el).outlineStyle);
+      expect(outline).toBe("solid");
+
+      await ctx.close();
+    }
   });
 
   test("narrow mobile reflow (320px): all key routes render without horizontal overflow", async ({ browser }) => {
@@ -507,21 +692,86 @@ test.describe("Homepage R2 Interactive Demonstrations", () => {
     }
   });
 
-  test("Keyboard navigation and reduced motion compliance", async ({ browser }) => {
+  test("Keyboard navigation and reduced motion compliance on integrated homepage", async ({ browser }) => {
     const { ctx, page } = await open(browser, "/", { reduced: true });
-    const tab = page.locator('button[data-scene="website"]');
-    await tab.focus();
-    await expect(tab).toBeFocused();
+    const tabWebsite = page.locator("#tab-website");
+    await tabWebsite.focus();
+    await expect(tabWebsite).toBeFocused();
 
-    // Arrow or Tab focus to next button
-    await page.keyboard.press("Tab");
-    await expect(page.locator('button[data-scene="app"]')).toBeFocused();
-    await page.keyboard.press("Enter");
-    await expect(page.locator("#scene-app")).toBeVisible();
+    // Arrow navigation across tabs
+    await page.keyboard.press("ArrowRight");
+    await expect(page.locator("#tab-webapp")).toBeFocused();
+    await expect(page.locator("#panel-webapp")).toBeVisible();
 
-    // Reduced motion maintains full visibility and no layout breaks
+    // Reduced motion maintains full visibility and zero horizontal overflow
     expect(await page.evaluate(() => document.documentElement.scrollWidth <= window.innerWidth)).toBe(true);
     await ctx.close();
+  });
+
+  test("M09-B visual regressions: hero clears fixed navbar across all target widths and desktop Menu capsule stays visible during Tab navigation", async ({ browser }) => {
+    for (const theme of ["light", "dark"] as const) {
+      for (const width of [320, 375, 390, 430, 768, 1024, 1440]) {
+        const { ctx, page } = await open(browser, "/", { width, height: 900, theme });
+        const geometry = await page.evaluate(() => {
+          const hdr = document.querySelector("header")?.getBoundingClientRect();
+          const h1 = document.getElementById("hero-title")?.getBoundingClientRect();
+          const trigger = document.getElementById("navbar-menu-capsule-button");
+          const labelSpan = trigger?.querySelector("span");
+          const shellBox = trigger?.parentElement?.getBoundingClientRect();
+          const labelBox = labelSpan?.getBoundingClientRect();
+          return {
+            headerBottom: hdr ? hdr.bottom : 0,
+            h1Top: h1 ? h1.top : 0,
+            overflow: document.documentElement.scrollWidth > window.innerWidth,
+            labelInsideCapsule: Boolean(
+              shellBox &&
+                labelBox &&
+                labelBox.width > 0 &&
+                labelBox.left >= shellBox.left &&
+                labelBox.right <= shellBox.right
+            ),
+          };
+        });
+        expect(geometry.h1Top, `${theme} ${width} hero h1 top >= header bottom`).toBeGreaterThanOrEqual(
+          geometry.headerBottom
+        );
+        expect(geometry.overflow, `${theme} ${width} horizontal overflow`).toBe(false);
+        expect(geometry.labelInsideCapsule, `${theme} ${width} capsule label visible`).toBe(true);
+        await ctx.close();
+      }
+    }
+
+    // Desktop Tab navigation skips collapsed #desktop-nav-expanded and preserves capsule scrollLeft = 0
+    for (const reduced of [false, true]) {
+      const { ctx, page } = await open(browser, "/", { width: 1440, height: 900, reduced });
+      const rail = page.locator("#desktop-nav-expanded");
+      await expect(rail).toHaveAttribute("inert", "");
+      await expect(rail).toHaveAttribute("aria-hidden", "true");
+
+      for (let i = 0; i < 8; i++) {
+        await page.keyboard.press("Tab");
+        const inCollapsedRail = await page.evaluate(() => {
+          const r = document.getElementById("desktop-nav-expanded");
+          return Boolean(r && r.contains(document.activeElement));
+        });
+        expect(inCollapsedRail).toBe(false);
+      }
+
+      const afterTab = await page.evaluate(() => {
+        const trigger = document.getElementById("navbar-menu-capsule-button");
+        const shellBox = trigger?.parentElement?.getBoundingClientRect();
+        const labelBox = trigger?.querySelector("span")?.getBoundingClientRect();
+        return {
+          scrollLeft: trigger?.parentElement?.scrollLeft ?? -1,
+          labelInside: Boolean(
+            shellBox && labelBox && labelBox.left >= shellBox.left && labelBox.right <= shellBox.right
+          ),
+        };
+      });
+      expect(afterTab.scrollLeft).toBe(0);
+      expect(afterTab.labelInside).toBe(true);
+      await ctx.close();
+    }
   });
 });
 
