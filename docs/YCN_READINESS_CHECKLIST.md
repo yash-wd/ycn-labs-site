@@ -4,7 +4,7 @@
 **Effective Date:** 2026-10-17  
 **Controlling Authority:** Standing Owner Directive (Owner alone authorizes; AI seats advise and review)  
 **Total Checkpoints:** 143 Discrete Verification Items (`CHK-001` through `CHK-143`)  
-**Current Recorded Status (24 Nov 2026):** 33 / 143 items verified (23.1% recorded readiness; 110 unchecked, including 24 Owner gates). *Note: This represents recorded checklist state; only updated with direct verifiable evidence, not an audited launch-readiness estimate.*  
+**Current Recorded Status (28 Nov 2026):** 47 / 143 items verified (32.9% recorded readiness; 96 unchecked, including 25 Owner gates). *Note: This represents recorded checklist state; only updated with direct verifiable evidence, not an audited launch-readiness estimate.*  
 **Permanent Rule:** Every project requirement, architectural decision, development change, design token, test, bug fix, migration step, and Owner instruction must be tracked through this checklist. Nothing is marked completed without reproducible evidence (Git commit SHA, automated test output, or preserved hash).
 
 ---
@@ -122,24 +122,24 @@
 
 ## Section 6: 5-Viewport Homepage Component Audit (18 items)
 
-- [ ] **[PENDING]** `CHK-079`: Verify WCAG AA contrast compliance (minimum 4.5:1 body text) in Dark Theme.
-- [ ] **[PENDING]** `CHK-080`: Verify WCAG AA contrast compliance (minimum 4.5:1 body text) in Light Theme.
-- [ ] **[PENDING]** `CHK-081`: Verify graphical and large text contrast compliance (minimum 3:1) in both themes.
-- [ ] **[PENDING]** `CHK-082`: Homepage Component Audit at 375px (Mobile Small) in Dark Theme.
-- [ ] **[PENDING]** `CHK-083`: Homepage Component Audit at 375px (Mobile Small) in Light Theme.
-- [ ] **[PENDING]** `CHK-084`: Homepage Component Audit at 768px (Tablet) in Dark Theme.
-- [ ] **[PENDING]** `CHK-085`: Homepage Component Audit at 768px (Tablet) in Light Theme.
-- [ ] **[PENDING]** `CHK-086`: Homepage Component Audit at 1024px (Laptop/Desktop Small) in Dark Theme.
-- [ ] **[PENDING]** `CHK-087`: Homepage Component Audit at 1024px (Laptop/Desktop Small) in Light Theme.
-- [ ] **[PENDING]** `CHK-088`: Homepage Component Audit at 1280px (Desktop) in Dark Theme.
-- [ ] **[PENDING]** `CHK-089`: Homepage Component Audit at 1280px (Desktop) in Light Theme.
-- [ ] **[PENDING]** `CHK-090`: Homepage Component Audit at 1440px (Wide Desktop) in Dark Theme.
-- [ ] **[PENDING]** `CHK-091`: Homepage Component Audit at 1440px (Wide Desktop) in Light Theme.
-- [ ] **[PENDING]** `CHK-092`: Verify `prefers-reduced-motion` compliance across all animated homepage sections.
-- [ ] **[PENDING]** `CHK-093`: Compile Homepage Discrepancy Matrix classifying findings (Task 09, exception, out-of-scope).
-- [ ] **[OWNER-GATE]** `CHK-094`: Owner ruling on frozen system collisions identified during homepage audit.
-- [ ] **[PENDING]** `CHK-095`: Capture and hash baseline screenshots for all 10 viewport/theme permutations.
-- [ ] **[PENDING]** `CHK-096`: Review header and footer component heights against responsive specs.
+- [ ] **[LOCAL-WIP]** `CHK-079`: Verify WCAG AA contrast compliance (minimum 4.5:1 body text) in Dark Theme (M09-C Automation/CRM fixes implemented in `wip/YCN-M09-C-INTEGRATED-A11Y-PERF-01`; awaiting CI & PR verification).
+- [ ] **[LOCAL-WIP]** `CHK-080`: Verify WCAG AA contrast compliance (minimum 4.5:1 body text) in Light Theme (M09-C Automation/CRM fixes implemented in `wip/YCN-M09-C-INTEGRATED-A11Y-PERF-01`; awaiting CI & PR verification).
+- [ ] **[LOCAL-WIP]** `CHK-081`: Verify graphical and large text contrast compliance (minimum 3:1) in both themes (opaque dark-mode `#navbar-theme-toggle` fix `D-02` implemented in `wip/YCN-M09-C-INTEGRATED-A11Y-PERF-01`; awaiting CI & PR verification).
+- [x] **[VERIFIED]** `CHK-082`: Homepage Component Audit at 375px (Mobile Small) in Dark Theme (evidenced on `68405777` & post-fix vault manifest `SHA256SUMS.txt`).
+- [x] **[VERIFIED]** `CHK-083`: Homepage Component Audit at 375px (Mobile Small) in Light Theme (evidenced on `68405777` & post-fix vault manifest `SHA256SUMS.txt`).
+- [x] **[VERIFIED]** `CHK-084`: Homepage Component Audit at 768px (Tablet) in Dark Theme (evidenced on `68405777` & post-fix vault manifest `SHA256SUMS.txt`).
+- [x] **[VERIFIED]** `CHK-085`: Homepage Component Audit at 768px (Tablet) in Light Theme (evidenced on `68405777` & post-fix vault manifest `SHA256SUMS.txt`).
+- [x] **[VERIFIED]** `CHK-086`: Homepage Component Audit at 1024px (Laptop/Desktop Small) in Dark Theme (evidenced on `68405777` & post-fix vault manifest `SHA256SUMS.txt`).
+- [x] **[VERIFIED]** `CHK-087`: Homepage Component Audit at 1024px (Laptop/Desktop Small) in Light Theme (evidenced on `68405777` & post-fix vault manifest `SHA256SUMS.txt`).
+- [x] **[VERIFIED]** `CHK-088`: Homepage Component Audit at 1280px (Desktop) in Dark Theme (evidenced on `68405777` & post-fix vault manifest `SHA256SUMS.txt`).
+- [x] **[VERIFIED]** `CHK-089`: Homepage Component Audit at 1280px (Desktop) in Light Theme (evidenced on `68405777` & post-fix vault manifest `SHA256SUMS.txt`).
+- [x] **[VERIFIED]** `CHK-090`: Homepage Component Audit at 1440px (Wide Desktop) in Dark Theme (evidenced on `68405777` & post-fix vault manifest `SHA256SUMS.txt`).
+- [x] **[VERIFIED]** `CHK-091`: Homepage Component Audit at 1440px (Wide Desktop) in Light Theme (evidenced on `68405777` & post-fix vault manifest `SHA256SUMS.txt`).
+- [x] **[VERIFIED]** `CHK-092`: Verify `prefers-reduced-motion` compliance across all animated homepage sections (`reducedMotionAnimations` + `e2e/site.spec.ts` on `68405777`).
+- [x] **[VERIFIED]** `CHK-093`: Compile Homepage Discrepancy Matrix classifying findings (`D-01`–`D-06` in M09-C audit report & vault JSON reports on `68405777`).
+- [ ] **[OWNER-GATE]** `CHK-094`: Owner ruling on frozen system collisions identified during homepage audit (Owner deferred `D-06` hero wrapping & logo geometry on 28 Nov 2026; full M09 acceptance remains pending).
+- [x] **[VERIFIED]** `CHK-095`: Capture and hash baseline screenshots for all 10 viewport/theme permutations (`SHA256SUMS.txt` in `/home/ycn-labs/Desktop/YCN_LABS_MASTER/proof/YCN-M09-C-INTEGRATED-A11Y-PERF-01/`).
+- [x] **[VERIFIED]** `CHK-096`: Review header and footer component heights against responsive specs (`64px` fixed header; `784px` mobile / `454px` desktop footer verified across all 18 `/` sweeps).
 
 ---
 

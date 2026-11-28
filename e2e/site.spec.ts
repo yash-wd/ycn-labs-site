@@ -773,6 +773,141 @@ test.describe("Integrated Homepage Hero & Six-Mode Showroom", () => {
       await ctx.close();
     }
   });
+
+  test("M09-C regressions: D-01 process cards, D-02 opaque theme toggle contrast, and D-03 automation/CRM contrast", async ({ browser }) => {
+    for (const theme of ["dark", "light"] as const) {
+      const { ctx, page } = await open(browser, "/", { theme, width: 1440, height: 900 });
+
+      // D-01: .ycnr-numbergrid > li receives padding, surface background, and horizontal divider
+      const n2 = await page.evaluate(() => {
+        const items = Array.from(document.querySelectorAll(".ycnr-numbergrid > li"));
+        if (items.length < 2) return null;
+        const cs0 = getComputedStyle(items[0]);
+        const cs1 = getComputedStyle(items[1]);
+        return {
+          count: items.length,
+          padTop: parseFloat(cs0.paddingTop),
+          padLeft: parseFloat(cs0.paddingLeft),
+          bg: cs0.backgroundColor,
+          secondBorderLeft: parseFloat(cs1.borderLeftWidth),
+        };
+      });
+      expect(n2).not.toBeNull();
+      expect(n2!.count).toBe(3);
+      expect(n2!.padTop).toBeGreaterThanOrEqual(20);
+      expect(n2!.padLeft).toBeGreaterThanOrEqual(20);
+      expect(n2!.bg).not.toBe("rgba(0, 0, 0, 0)");
+      expect(n2!.secondBorderLeft).toBeGreaterThanOrEqual(1);
+
+      // D-02: #navbar-theme-toggle uses opaque control background and >= 3:1 icon contrast over white surfaces
+      const toggleContrast = await page.evaluate(() => {
+        const btn = document.getElementById("navbar-theme-toggle");
+        if (!btn) return null;
+        const canvas = document.createElement("canvas");
+        canvas.width = 1;
+        canvas.height = 1;
+        const c = canvas.getContext("2d", { willReadFrequently: true })!;
+        const toRgba = (css: string) => {
+          c.fillStyle = "#000000";
+          c.fillRect(0, 0, 1, 1);
+          c.fillStyle = css;
+          c.fillRect(0, 0, 1, 1);
+          const ob = c.getImageData(0, 0, 1, 1).data;
+          c.fillStyle = "#ffffff";
+          c.fillRect(0, 0, 1, 1);
+          c.fillStyle = css;
+          c.fillRect(0, 0, 1, 1);
+          const ow = c.getImageData(0, 0, 1, 1).data;
+          const a = Math.max(0, Math.min(1, (1 - (ow[0] - ob[0]) / 255 + 1 - (ow[1] - ob[1]) / 255 + 1 - (ow[2] - ob[2]) / 255) / 3));
+          return a <= 0.005 ? [0, 0, 0, 0] : [Math.round(ob[0] / a), Math.round(ob[1] / a), Math.round(ob[2] / a), a];
+        };
+        const lum = ([r, g, b]: number[]) => {
+          const f = (x: number) => {
+            const s = x / 255;
+            return s <= 0.03928 ? s / 12.92 : ((s + 0.055) / 1.055) ** 2.4;
+          };
+          return 0.2126 * f(r) + 0.7152 * f(g) + 0.0722 * f(b);
+        };
+        const cs = getComputedStyle(btn);
+        const bg = toRgba(cs.backgroundColor);
+        const fg = toRgba(cs.color);
+        const l1 = lum(fg);
+        const l2 = lum(bg);
+        const ratio = (Math.max(l1, l2) + 0.05) / (Math.min(l1, l2) + 0.05);
+        return { alpha: Number(bg[3].toFixed(2)), ratio: Number(ratio.toFixed(2)) };
+      });
+      expect(toggleContrast).not.toBeNull();
+      expect(toggleContrast!.alpha).toBeGreaterThanOrEqual(0.99);
+      expect(toggleContrast!.ratio).toBeGreaterThanOrEqual(3.0);
+
+      // D-03: Automation & CRM muted labels clear 4.5:1 contrast
+      const minRatioFor = async (selector: string) =>
+        page.evaluate((sel) => {
+          const canvas = document.createElement("canvas");
+          canvas.width = 1;
+          canvas.height = 1;
+          const c = canvas.getContext("2d", { willReadFrequently: true })!;
+          const toRgba = (css: string) => {
+            c.fillStyle = "#000000";
+            c.fillRect(0, 0, 1, 1);
+            c.fillStyle = css;
+            c.fillRect(0, 0, 1, 1);
+            const ob = c.getImageData(0, 0, 1, 1).data;
+            c.fillStyle = "#ffffff";
+            c.fillRect(0, 0, 1, 1);
+            c.fillStyle = css;
+            c.fillRect(0, 0, 1, 1);
+            const ow = c.getImageData(0, 0, 1, 1).data;
+            const a = Math.max(0, Math.min(1, (1 - (ow[0] - ob[0]) / 255 + 1 - (ow[1] - ob[1]) / 255 + 1 - (ow[2] - ob[2]) / 255) / 3));
+            return a <= 0.005 ? [0, 0, 0, 0] : [ob[0] / a, ob[1] / a, ob[2] / a, a];
+          };
+          const blend = (fg: number[], bg: number[]) => [
+            fg[0] * fg[3] + bg[0] * (1 - fg[3]),
+            fg[1] * fg[3] + bg[1] * (1 - fg[3]),
+            fg[2] * fg[3] + bg[2] * (1 - fg[3]),
+            1,
+          ];
+          const lum = ([r, g, b]: number[]) => {
+            const f = (x: number) => {
+              const s = x / 255;
+              return s <= 0.03928 ? s / 12.92 : ((s + 0.055) / 1.055) ** 2.4;
+            };
+            return 0.2126 * f(r) + 0.7152 * f(g) + 0.0722 * f(b);
+          };
+          const els = Array.from(document.querySelectorAll(sel));
+          if (!els.length) return 0;
+          let min = Infinity;
+          for (const el of els) {
+            const chain: Element[] = [];
+            let cur: Element | null = el;
+            while (cur) {
+              chain.unshift(cur);
+              cur = cur.parentElement;
+            }
+            let bg = document.documentElement.classList.contains("dark") ? [10, 14, 23, 1] : [255, 255, 255, 1];
+            for (const n of chain) {
+              const r = toRgba(getComputedStyle(n).backgroundColor);
+              if (r[3] > 0.01) bg = blend(r, bg);
+            }
+            const fg = blend(toRgba(getComputedStyle(el).color), bg);
+            const l1 = lum(fg);
+            const l2 = lum(bg);
+            min = Math.min(min, (Math.max(l1, l2) + 0.05) / (Math.min(l1, l2) + 0.05));
+          }
+          return Number(min.toFixed(2));
+        }, selector);
+
+      await page.locator("#tab-automation").click();
+      expect(await minRatioFor("#panel-automation [class*='autoNode'] small")).toBeGreaterThanOrEqual(4.5);
+      expect(await minRatioFor("#panel-automation [class*='lockempty']")).toBeGreaterThanOrEqual(4.5);
+
+      await page.locator("#tab-crm").click();
+      expect(await minRatioFor("#panel-crm [class*='crmTop'] small")).toBeGreaterThanOrEqual(4.5);
+      expect(await minRatioFor("#panel-crm [class*='crmDetail'] dt")).toBeGreaterThanOrEqual(4.5);
+
+      await ctx.close();
+    }
+  });
 });
 
 test.describe("Work portfolio and case studies", () => {
@@ -881,6 +1016,35 @@ test.describe("inner pages integrity & accessibility", () => {
     await page.locator('button:has-text("Database down")').click();
     await expect(page.locator('div[role="status"]')).toContainText("No enquiry is saved, and the visitor is told so. No false thank-you.");
     await ctx.close();
+  });
+
+  test("M09-C inner regressions: /how-we-work heading hierarchy (D-04) and 44px situation buttons (D-05)", async ({ browser }) => {
+    for (const width of [375, 1440]) {
+      const hww = await open(browser, "/how-we-work", { width, height: 900 });
+      const levels = await hww.page.evaluate(() =>
+        Array.from(document.querySelectorAll("h1, h2, h3, h4, h5, h6")).map((el) =>
+          Number(el.tagName.slice(1))
+        )
+      );
+      expect(levels[0]).toBe(1);
+      for (let i = 1; i < levels.length; i++) {
+        expect(levels[i], `heading level jump ${levels[i - 1]} -> ${levels[i]}`).toBeLessThanOrEqual(levels[i - 1] + 1);
+      }
+      await hww.ctx.close();
+
+      const wws = await open(browser, "/what-we-solve", { width, height: 900 });
+      const btnHeights = await wws.page.evaluate(() =>
+        Array.from(document.querySelectorAll('button[aria-label*="Highlight situation"]')).map((el) =>
+          el.getBoundingClientRect().height
+        )
+      );
+      expect(btnHeights.length).toBeGreaterThan(0);
+      for (const h of btnHeights) {
+        expect(h).toBeGreaterThanOrEqual(44);
+      }
+      expect(await wws.page.evaluate(() => document.documentElement.scrollWidth <= window.innerWidth)).toBe(true);
+      await wws.ctx.close();
+    }
   });
 });
 

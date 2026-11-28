@@ -80,7 +80,7 @@ export default function HowWeWorkPage() {
                   <span className={styles.stepNum}>{s.num} / STEP</span>
                   <Icon size={18} strokeWidth={1.8} style={{ color: "var(--action-blue)" }} aria-hidden="true" />
                 </div>
-                <h3>{s.title}</h3>
+                <h2>{s.title}</h2>
                 <p>{s.desc}</p>
                 <div className={styles.stepGet}>
                   <strong>You get:</strong> {s.get}
@@ -93,13 +93,13 @@ export default function HowWeWorkPage() {
         {/* Expectation Panels */}
         <section className={styles.splitPanels} aria-label="Expectations and adjustments">
           <div className={styles.infoBox}>
-            <h3>What we need from you</h3>
+            <h2>What we need from you</h2>
             <p>
               Your content and photos, one person who decides, and feedback within the agreed time. Clear inputs keep projects moving without surprise delays.
             </p>
           </div>
           <div className={styles.infoBox}>
-            <h3>What if the plan changes?</h3>
+            <h2>What if the plan changes?</h2>
             <p>
               New work is quoted in writing before we start it. Nothing is added silently, and you always decide whether an addition is worth the extra scope.
             </p>

@@ -13,7 +13,28 @@
 
 ---
 
-## CURRENT STATUS — 24 November 2026 (read this first)
+## CURRENT STATUS — 28 November 2026 (read this first)
+
+This block supersedes older current-status blocks below without erasing their historical records.
+
+- **Milestone: PR #51 (M09-B — `YCN-M09-B-HOMEPAGE-INTEGRATION-01` Full Homepage Hero & Six-Mode Showroom Integration) merged into `main` on 28 Nov 2026; site remains unlaunched.**
+  - **Main Merge Commit:** `6840577752b96a3243323a99eb6a8bb3cdd8b376`.
+  - **GitHub CI Verification:** Post-merge CI run `46160715730` PASSED and post-merge Gitleaks run `46160715764` PASSED.
+  - **Milestone M09-B:** `[VERIFIED]`.
+
+- **Active Task: `YCN-M09-C-INTEGRATED-A11Y-PERF-01` (Milestone M09-C: Final Accessibility, Contrast, Hierarchy & Performance Verification).**
+  - **Branch:** `wip/YCN-M09-C-INTEGRATED-A11Y-PERF-01` (branched from `6840577752b96a3243323a99eb6a8bb3cdd8b376`).
+  - **Status:** `[LOCAL-WIP]` Baseline read-only production audit completed on `68405777` across 9 viewports × 2 themes, 6 showroom modes, 9 inner pages, 200% zoom, 400% reflow, reduced motion, keyboard focus, and lab performance metrics (`LCP 0.984s`, `CLS 0.0002`, `423.3 KiB` / `33` requests on throttled mobile Playwright Chromium; not a Lighthouse score or field CrUX data), with 10 `CHK-095` screenshots and JSON reports hashed in the private vault. Bounded Owner-authorized corrections implemented for `D-01` (`.ycnr-numbergrid > li` selectors in `app/ycn-r2.css`), `D-02` (opaque `#navbar-theme-toggle` surface in `components/ui/ycn-theme-toggle.tsx`), `D-03` (Automation & CRM showroom contrast in `components/m08/demos/ExampleDemos.module.css`), `D-04` (`/how-we-work` `H2` hierarchy in `app/how-we-work/page.tsx` & `components/inner/inner-pages.module.css`), and `D-05` (`.situationToggleBtn` `44px` min-height), with `D-06` hero wrapping (verified 1:1 against Owner-accepted `YCN_M07_Candidate_04_Hero_Polish.html`) and header/footer logo geometry deferred by Owner decision. Owner Mobile Lighthouse (`>= 95` target), GitHub PR/CI, and final M09 acceptance remain pending.
+
+- **Current Progress Metrics (28 November 2026):**
+  - **Detailed Checklist Progress:** 47 / 143 items verified (32.9% recorded readiness; 96 unchecked, 25 Owner gates in `docs/YCN_READINESS_CHECKLIST.md`).
+  - **V1 Major Milestone Progress:** 8 / 15 accepted major milestones (53.3% milestone-count progress; M01–M08 accepted; M09 `[IN PROGRESS]` with M09-A & M09-B verified on `main`, M09-C in `[LOCAL-WIP]`; 7 pending in `docs/BACKLOG.md`).
+
+- **Next Delivery Milestones:** Complete M09-C PR/CI & Owner Mobile Lighthouse acceptance to close M09 (60% milestone target); proceed to M10 (First approved blog publication & SEO + `#what-we-build` six-card reshape per Owner decision); parallel tracks: `MEDIA-01`, content refinement, and staging readiness.
+
+---
+
+## CURRENT STATUS — 24 November 2026
 
 This block supersedes older current-status blocks below without erasing their historical records.
 

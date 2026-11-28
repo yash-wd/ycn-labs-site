@@ -118,7 +118,7 @@
   display: inline-flex;
   align-items: center;
   gap: 6px;
-  min-height: 32px;
+  min-height: 44px;
   transition: background-color 0.15s ease, color 0.15s ease, border-color 0.15s ease;
 }
 
@@ -318,6 +318,7 @@
   color: var(--action-blue, #02C1F7);
 }
 
+.stepCard h2,
 .stepCard h3 {
   font-family: var(--font-space-grotesk, 'Space Grotesk'), system-ui, sans-serif;
   font-size: 1.25rem;
@@ -379,6 +380,7 @@
   background: var(--bg-surface, #0D1522);
 }
 
+.infoBox h2,
 .infoBox h3 {
   font-family: var(--font-space-grotesk, 'Space Grotesk'), system-ui, sans-serif;
   font-size: 1.2rem;
@@ -386,6 +388,7 @@
   color: var(--action-blue, #0470B4);
 }
 
+:global(.dark) .infoBox h2,
 :global(.dark) .infoBox h3 {
   color: var(--action-blue, #02C1F7);
 }

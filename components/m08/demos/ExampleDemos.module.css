@@ -747,7 +747,7 @@
 
 .crmTop small {
   font-size: 10px;
-  color: #6d8090;
+  color: #48647a;
 }
 
 .crmSummary {
@@ -887,7 +887,7 @@
 
 .crmDetail dt {
   font-size: 10px;
-  color: #688198;
+  color: #48647a;
 }
 
 .crmDetail dd {
@@ -1399,7 +1399,7 @@
 
 .autoNode small {
   font-size: 10px;
-  color: #718295;
+  color: #48647a;
   font-weight: 600;
   margin-top: auto;
 }
@@ -1640,7 +1640,7 @@
 
 .lockempty {
   font-size: 11px;
-  color: #6d849a;
+  color: #879cb0;
   text-align: center;
   padding: 40px 10px;
   line-height: 1.4;

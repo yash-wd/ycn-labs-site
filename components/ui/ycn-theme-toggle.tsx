@@ -140,7 +140,7 @@ export function YcnThemeToggle({ className = "", size = "md" }: YcnThemeTogglePr
       onClick={toggleTheme}
       aria-label={actionLabel}
       title={actionLabel}
-      className={`group relative inline-flex items-center justify-center rounded-[8px] border border-[var(--border-subtle)] bg-[var(--bg-surface)]/60 hover:bg-[var(--bg-surface)] text-[var(--text-secondary)] hover:text-[var(--text-primary)] hover:border-[var(--action-blue)] transition-all duration-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-[var(--focus-ring)] cursor-pointer ${targetSizeClasses} ${className}`}
+      className={`group relative inline-flex items-center justify-center rounded-[8px] border border-[var(--border-subtle)] bg-[var(--bg-surface)] hover:bg-[var(--bg-surface-elevated)] text-[var(--text-primary)] hover:border-[var(--action-blue)] transition-all duration-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-[var(--focus-ring)] cursor-pointer ${targetSizeClasses} ${className}`}
     >
       <span className="relative flex items-center justify-center w-full h-full">
         {/* Sun Icon (shown in dark mode) */}
