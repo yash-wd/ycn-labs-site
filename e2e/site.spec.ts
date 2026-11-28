@@ -251,8 +251,10 @@ test.describe("M06 NAV-07 Mobile Navigation Accessibility", () => {
     // Logical focus destination on new page is main-content
     await expect(page.locator("#main-content")).toBeFocused();
 
-    // Inertness removed from main
+    // Inertness removed from main and actual site footer
     await expect(page.locator("main")).not.toHaveAttribute("inert");
+    await expect(page.locator("footer:not(main footer)")).not.toHaveAttribute("inert");
+    await expect(page.locator("footer:not(main footer)")).not.toHaveAttribute("aria-hidden");
     await ctx.close();
   });
 
@@ -261,6 +263,8 @@ test.describe("M06 NAV-07 Mobile Navigation Accessibility", () => {
     const trigger = page.locator("#navbar-menu-capsule-button");
     await trigger.click();
     await expect(page.locator("#mobile-nav-sheet")).toBeVisible();
+    await expect(page.locator("footer:not(main footer)")).toHaveAttribute("inert");
+    await expect(page.locator("footer:not(main footer)")).toHaveAttribute("aria-hidden", "true");
 
     // Resize across 1024px desktop breakpoint
     await page.setViewportSize({ width: 1024, height: 800 });
@@ -268,6 +272,8 @@ test.describe("M06 NAV-07 Mobile Navigation Accessibility", () => {
     await expect(trigger).toBeFocused();
 
     await expect(page.locator("main")).not.toHaveAttribute("inert");
+    await expect(page.locator("footer:not(main footer)")).not.toHaveAttribute("inert");
+    await expect(page.locator("footer:not(main footer)")).not.toHaveAttribute("aria-hidden");
     await ctx.close();
   });
 
@@ -700,6 +706,72 @@ test.describe("Integrated Homepage Hero & Six-Mode Showroom", () => {
     // Reduced motion maintains full visibility and zero horizontal overflow
     expect(await page.evaluate(() => document.documentElement.scrollWidth <= window.innerWidth)).toBe(true);
     await ctx.close();
+  });
+
+  test("M09-B visual regressions: hero clears fixed navbar across all target widths and desktop Menu capsule stays visible during Tab navigation", async ({ browser }) => {
+    for (const theme of ["light", "dark"] as const) {
+      for (const width of [320, 375, 390, 430, 768, 1024, 1440]) {
+        const { ctx, page } = await open(browser, "/", { width, height: 900, theme });
+        const geometry = await page.evaluate(() => {
+          const hdr = document.querySelector("header")?.getBoundingClientRect();
+          const h1 = document.getElementById("hero-title")?.getBoundingClientRect();
+          const trigger = document.getElementById("navbar-menu-capsule-button");
+          const labelSpan = trigger?.querySelector("span");
+          const shellBox = trigger?.parentElement?.getBoundingClientRect();
+          const labelBox = labelSpan?.getBoundingClientRect();
+          return {
+            headerBottom: hdr ? hdr.bottom : 0,
+            h1Top: h1 ? h1.top : 0,
+            overflow: document.documentElement.scrollWidth > window.innerWidth,
+            labelInsideCapsule: Boolean(
+              shellBox &&
+                labelBox &&
+                labelBox.width > 0 &&
+                labelBox.left >= shellBox.left &&
+                labelBox.right <= shellBox.right
+            ),
+          };
+        });
+        expect(geometry.h1Top, `${theme} ${width} hero h1 top >= header bottom`).toBeGreaterThanOrEqual(
+          geometry.headerBottom
+        );
+        expect(geometry.overflow, `${theme} ${width} horizontal overflow`).toBe(false);
+        expect(geometry.labelInsideCapsule, `${theme} ${width} capsule label visible`).toBe(true);
+        await ctx.close();
+      }
+    }
+
+    // Desktop Tab navigation skips collapsed #desktop-nav-expanded and preserves capsule scrollLeft = 0
+    for (const reduced of [false, true]) {
+      const { ctx, page } = await open(browser, "/", { width: 1440, height: 900, reduced });
+      const rail = page.locator("#desktop-nav-expanded");
+      await expect(rail).toHaveAttribute("inert", "");
+      await expect(rail).toHaveAttribute("aria-hidden", "true");
+
+      for (let i = 0; i < 8; i++) {
+        await page.keyboard.press("Tab");
+        const inCollapsedRail = await page.evaluate(() => {
+          const r = document.getElementById("desktop-nav-expanded");
+          return Boolean(r && r.contains(document.activeElement));
+        });
+        expect(inCollapsedRail).toBe(false);
+      }
+
+      const afterTab = await page.evaluate(() => {
+        const trigger = document.getElementById("navbar-menu-capsule-button");
+        const shellBox = trigger?.parentElement?.getBoundingClientRect();
+        const labelBox = trigger?.querySelector("span")?.getBoundingClientRect();
+        return {
+          scrollLeft: trigger?.parentElement?.scrollLeft ?? -1,
+          labelInside: Boolean(
+            shellBox && labelBox && labelBox.left >= shellBox.left && labelBox.right <= shellBox.right
+          ),
+        };
+      });
+      expect(afterTab.scrollLeft).toBe(0);
+      expect(afterTab.labelInside).toBe(true);
+      await ctx.close();
+    }
   });
 });
 
